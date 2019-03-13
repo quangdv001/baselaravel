@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::namespace('Admin')->name('admin.')->group(function () {
+    require_once('admin.php');
+});
