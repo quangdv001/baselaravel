@@ -67,6 +67,22 @@
                 </div>
             </li>
         @endcan
+        @can('admin-pms', 'admin.category.getList')
+            <li class="nav-item @if(in_array($currentRoute,['admin.category.getList'])) active @endif">
+                <a class="nav-link" data-toggle="collapse" href="#ui-basic3" aria-expanded="false" aria-controls="ui-basic">
+                    <i class="menu-icon mdi mdi-view-list"></i>
+                    <span class="menu-title">Quản lý danh mục</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse @if(in_array($currentRoute,['admin.category.getList'])) show @endif" id="ui-basic3">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item">
+                            <a class="nav-link @if(in_array($currentRoute,['admin.category.getList'])) active @endif" href="{{ route('admin.category.getList') }}">Danh sách danh mục</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        @endcan
 
 
     </ul>
