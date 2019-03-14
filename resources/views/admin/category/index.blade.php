@@ -119,7 +119,7 @@ Danh sách danh mục
 
 </script>
 @endsection
-@section('custome_css')
+@section('custom_css')
 <style>
     .cf:after {
         visibility: hidden;
