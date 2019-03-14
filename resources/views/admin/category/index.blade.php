@@ -67,7 +67,7 @@ Danh sách danh mục
 </div>
 @endsection
 @section('lib_js')
-<script src="{{ asset('assets/admin/plugins/Nestable/jquery.nestable.js') }}"></script>
+<script src="{{ asset('assets/admin/plugins/nestable/jquery.nestable.js') }}"></script>
 @endsection
 @section('custom_js')
 <script>
