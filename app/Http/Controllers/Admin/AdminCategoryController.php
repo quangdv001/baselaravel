@@ -23,4 +23,64 @@ class AdminCategoryController extends AdminBaseController
         return view('admin.category.index');
     }
 
+    public function create(Request $request){
+        $data['name'] = 'New Category';
+        $category = $this->category->create($data);
+        $res['success'] = 0;
+        $res['mess'] = 'Có lỗi xảy ra!';
+        if($category){
+            $res['success'] = 1;
+            $res['mess'] = 'Tạo thành công.';
+            $res['data'] = $category;
+        }
+        return response()->json($res);
+    }
+
+    public function update(Request $request, $id){
+        $data = $request->only('name', 'img', 'description', 'url', 'status');
+        $category = $this->category->getById($id);
+        $res['success'] = 0;
+        $res['mess'] = 'Có lỗi xảy ra!';
+        if($category){
+            $response = $this->category->update($category, $data);
+            if($response){
+                $res['success'] = 1;
+                $res['mess'] = 'Cập nhật thành công.';
+                $res['data'] = $response;
+            }
+        }
+        return response()->json($res); 
+    }
+
+    public function showCategories($categories, $parent_id = 0, $char = '')
+    {
+        // BƯỚC 2.1: LẤY DANH SÁCH CATE CON
+        $cate_child = array();
+        foreach ($categories as $key => $item)
+        {
+            // Nếu là chuyên mục con thì hiển thị
+            if ($item['parent_id'] == $parent_id)
+            {
+                $cate_child[] = $item;
+                unset($categories[$key]);
+            }
+        }
+         
+        // BƯỚC 2.2: HIỂN THỊ DANH SÁCH CHUYÊN MỤC CON NẾU CÓ
+        if ($cate_child)
+        {
+            echo '<ul>';
+            foreach ($cate_child as $key => $item)
+            {
+                // Hiển thị tiêu đề chuyên mục
+                echo '<li>'.$item['title'];
+                 
+                // Tiếp tục đệ quy để tìm chuyên mục con của chuyên mục đang lặp
+                showCategories($categories, $item['id'], $char.'|---');
+                echo '</li>';
+            }
+            echo '</ul>';
+        }
+    }
+
 }

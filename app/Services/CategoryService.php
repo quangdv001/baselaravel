@@ -42,7 +42,7 @@ class CategoryService
     {
         try {
             DB::beginTransaction();
-            $admin = $this->admin;
+            $admin = $this->category;
             foreach ($data as $key => $value) {
                 $admin->$key = $value;
             }
@@ -72,11 +72,11 @@ class CategoryService
     }
 
     public function getById($id){
-        return $this->admin->find($id);
+        return $this->category->find($id);
     }
 
     public function getAll(){
-        return $this->admin->orderBy('id', 'DESC')->get();
+        return $this->category->orderBy('id', 'ASC')->get();
     }
 
 }
