@@ -19,9 +19,9 @@ class CreateCategoriesTable extends Migration
             $table->string('url')->nullable();
             $table->string('img')->nullable();
             $table->text('description')->nullable();
-            $table->integer('status')->nullable();
-            $table->integer('parent_id')->nullable();
-            $table->integer('position')->nullable();
+            $table->integer('status')->nullable()->default(1);
+            $table->integer('parent_id')->nullable()->default(0);
+            $table->integer('position')->nullable()->default(0);
             $table->timestamps();
         });
     }
@@ -33,6 +33,6 @@ class CreateCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('category');
     }
 }

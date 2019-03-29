@@ -5,6 +5,7 @@
 <script src="{{ asset('assets/admin/plugins/notyv2/jquery.noty.packaged.js') }}"></script>
 <script src="{{ asset('assets/admin/plugins/buttonloader/jquery.buttonLoader.min.js') }}"></script>
 <script src="{{ asset('assets/admin/plugins/preloader/jquery.preloader.min.js') }}"></script>
+<script src="{{ asset('assets/admin/plugins/waitme/waitMe.min.js') }}"></script>
 
 <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 @yield('lib_js')

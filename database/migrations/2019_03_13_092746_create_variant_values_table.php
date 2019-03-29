@@ -28,6 +28,6 @@ class CreateVariantValuesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('variant_values');
+        Schema::dropIfExists('variant_value');
     }
 }

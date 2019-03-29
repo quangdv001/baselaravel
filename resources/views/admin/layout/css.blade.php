@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="{{ asset('assets/admin/themes/vendors/iconfonts/font-awesome/css/font-awesome.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/admin/plugins/buttonloader/buttonLoader.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/admin/plugins/preloader/preloader.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/admin/plugins/waitme/waitMe.min.css') }}">
 
 @yield('lib_css')
 <link rel="stylesheet" href="{{ asset('assets/admin/themes/css/style.css') }}">

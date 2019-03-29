@@ -245,7 +245,7 @@ p {
 
     .dd {
         float: left;
-        width: 48%;
+        width: 100%;
     }
 
     .dd+.dd {
@@ -281,7 +281,7 @@ p {
     -moz-box-sizing: border-box;
 }
 
-.dd3-content:hover {
+.dd3-content:hover, .dd3-content.active {
     color: #2ea8e5;
     background: #fff;
 }

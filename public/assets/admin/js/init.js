@@ -102,13 +102,17 @@ var init = {
             type: type // success, error, warning, information, notification
         });
     },
-    showLoader: function () {
-        $('#loader-wrapper, #loader').show();
-        $('.container-scroller').hide();
+    showLoader: function (obj) {
+        $(obj).waitMe({
+            effect: 'bounce',
+            text: '',
+            bg: 'rgba(255,255,255,0.7)',
+            color:'#000'
+        })
+
     },
-    hideLoader: function () {
-        $('#loader-wrapper, #loader').hide();
-        $('.container-scroller').show();
+    hideLoader: function (obj) {
+        $(obj).waitMe('hide');
     }
 
 };

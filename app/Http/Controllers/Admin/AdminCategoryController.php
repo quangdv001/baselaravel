@@ -20,11 +20,16 @@ class AdminCategoryController extends AdminBaseController
         if (Gate::denies('admin-pms', $this->currentRoute)) {
             return redirect()->route('admin.home.dashboard')->with('error_message','Bạn không có quyền vào trang này!');
         }
-        return view('admin.category.index');
+        $category = $this->category->getAll();
+        $html = $this->showCategories($category, 0, '');
+        return view('admin.category.index')
+            ->with('html', $html);
     }
 
     public function create(Request $request){
         $data['name'] = 'New Category';
+        $data['status'] = 1;
+        $data['position'] = 0;
         $category = $this->category->create($data);
         $res['success'] = 0;
         $res['mess'] = 'Có lỗi xảy ra!';
@@ -52,8 +57,21 @@ class AdminCategoryController extends AdminBaseController
         return response()->json($res); 
     }
 
+    public function show($id){
+        $category = $this->category->getById($id);
+        $res['success'] = 0;
+        $res['mess'] = 'Có lỗi xảy ra!';
+        if($category){
+            $res['success'] = 1;
+            $res['mess'] = 'Cập nhật thành công.';
+            $res['data'] = $category;
+        }
+        return response()->json($res);
+    }
+
     public function showCategories($categories, $parent_id = 0, $char = '')
     {
+        $html = '';
         // BƯỚC 2.1: LẤY DANH SÁCH CATE CON
         $cate_child = array();
         foreach ($categories as $key => $item)
@@ -69,18 +87,33 @@ class AdminCategoryController extends AdminBaseController
         // BƯỚC 2.2: HIỂN THỊ DANH SÁCH CHUYÊN MỤC CON NẾU CÓ
         if ($cate_child)
         {
-            echo '<ul>';
+            $html .= '<ol class="dd-list">';
             foreach ($cate_child as $key => $item)
             {
                 // Hiển thị tiêu đề chuyên mục
-                echo '<li>'.$item['title'];
+                $html .= '<li class="dd-item dd3-item" data-id="'.$item['id'].'"><div class="dd-handle dd3-handle"></div>
+                <div class="dd3-content">
+                    <div class="pull-left">
+                        <span class="text-category">'.$item['name'].'-'.$item['id'].'</span>
+                    </div>
+                    <div class="pull-right">
+                        <a href="javascript:void(0);" class="text-warning mr-2 btn-edit" data-id="'.$item['id'].'"><i class="fa fa-pencil-square-o icon-sm" aria-hidden="true"></i></a>
+                        <a href="javascript:void(0);" class="text-danger rm_group_btn btn-rm" data-id="'.$item['id'].'"><i class="fa fa-trash icon-sm" aria-hidden="true"></i></a>
+                    </div>
+                </div>';
                  
                 // Tiếp tục đệ quy để tìm chuyên mục con của chuyên mục đang lặp
-                showCategories($categories, $item['id'], $char.'|---');
-                echo '</li>';
+                $html .= $this->showCategories($categories, $item['id'], $char.'|---');
+                $html .= '</li>';
             }
-            echo '</ul>';
+            $html .= '</ol>';
+        } else {
+            if($parent_id == 0){
+                $html .= '<ol class="dd-list">';
+                $html .= '</ol>';
+            }
         }
+        return $html;
     }
 
 }

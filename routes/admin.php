@@ -22,5 +22,6 @@ Route::middleware(['auth.admin'])->prefix('admin')->group(function () {
     Route::get('category', 'AdminCategoryController@index')->name('category.getList');
     Route::post('category/create', 'AdminCategoryController@create')->name('category.create');
     Route::post('category/update/{id}', 'AdminCategoryController@update')->name('category.update');
+    Route::get('category/{id}', 'AdminCategoryController@show')->name('category.show');
 });
 

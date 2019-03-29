@@ -14,7 +14,8 @@ Danh sách danh mục
                 </div>
                 <div class="cf nestable-lists">
                     <div class="dd" id="nestable">
-                        <ol class="dd-list">
+                        {!! $html !!}
+                        {{-- <ol class="dd-list">
                             <li class="dd-item dd3-item" data-id="13">
                                 <div class="dd-handle dd3-handle"></div>
                                 <div class="dd3-content">
@@ -44,7 +45,7 @@ Danh sách danh mục
                                     </li>
                                 </ol>
                             </li>
-                        </ol>
+                        </ol> --}}
                     </div>
                 </div>
                 <p><strong>Serialised Output (per list)</strong></p>
@@ -53,7 +54,7 @@ Danh sách danh mục
         </div>
     </div>
     <div class="col-lg-6 grid-margin stretch-card">
-        <div class="card">
+        <div class="card bl-form">
             <div class="card-body">
                 <h4 class="card-title">Chi tiết danh mục - <span class="category-id">0</span></h4>
                 <input type="hidden" name="id" class="id" value="0">
@@ -114,10 +115,19 @@ Danh sách danh mục
             $.post(url, function(res){
                 console.log(res);
                 if(res.success == 1){
-                    var newCategory = '<li class="dd-item" data-id="'+ res.data.id +'">' +
-                                '<div class="dd-handle">'+ res.data.name +'</div>' +
-                              '</li>';
-                    $('.dd-list').closest('#nestable').append(newCategory);
+                    var newCategory = '<li class="dd-item dd3-item" data-id="'+ res.data.id +'">'+
+                                '<div class="dd-handle dd3-handle"></div>'+
+                                '<div class="dd3-content">'+
+                                    '<div class="pull-left">'+
+                                        '<span class="text-category">'+ res.data.name + '-' + res.data.id +'</span>'+
+                                    '</div>'+
+                                    '<div class="pull-right">'+
+                                        '<a href="javascript:void(0);" class="text-warning mr-2 btn-edit" data-id="'+ res.data.id +'"><i class="fa fa-pencil-square-o icon-sm" aria-hidden="true"></i></a>'+
+                                        '<a href="javascript:void(0);" class="text-danger rm_group_btn btn-rm" data-id="'+ res.data.id +'"><i class="fa fa-trash icon-sm" aria-hidden="true"></i></a>'+
+                                    '</div>'+
+                                '</div>'+
+                            '</li>';
+                    $('.dd-list').closest('#nestable').prepend(newCategory);
                     $('.id').val(res.data.id);
                     $('.category-id').text(res.data.id);
                     $('.name').val(res.data.name);
@@ -136,12 +146,34 @@ Danh sách danh mục
             var url = BASE_URL + '/admin/category/update/' + id;
             var data = {id:id, name:name, description:description, status:status, url:urll};
             $.post(url, data, function(res){
-                console.log(res);
+                if(res.success == 1){
+                    init.notyPopup(res.mess, 'success');
+                } else {
+                    init.notyPopup(res.mess, 'error');
+                }
             });
         });
 
         $(document).on('click', '.btn-edit', function(e){
-            console.log(1);
+            $('.dd3-content').removeClass('active');
+            $(this).parent().parent().addClass('active');
+            var obj = $('.bl-form');
+            var id = $(this).data('id');
+            var url = BASE_URL + '/admin/category/' + id;
+            init.showLoader(obj);
+            $.get(url, function(res){
+                init.hideLoader(obj);
+                if(res.success == 1){
+                    $('.id').val(res.data.id);
+                    $('.category-id').text(res.data.id);
+                    $('.name').val(res.data.name);
+                    $('.url').val(res.data.url);
+                    $('.description').val(res.data.description);
+                    $('.status').val(res.data.status);
+                } else {
+                    init.notyPopup(res.mess, 'error');
+                }
+            });
         })
         $(document).on('click', '.btn-rm', function(e){
             console.log(2);
