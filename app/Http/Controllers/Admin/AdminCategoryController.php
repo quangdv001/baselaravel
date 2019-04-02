@@ -34,15 +34,17 @@ class AdminCategoryController extends AdminBaseController
         $res['success'] = 0;
         $res['mess'] = 'Có lỗi xảy ra!';
         if($category){
+            $list = $this->category->getAll();
             $res['success'] = 1;
             $res['mess'] = 'Tạo thành công.';
             $res['data'] = $category;
+            $res['html'] = $this->showCategories($list, 0, '');
         }
         return response()->json($res);
     }
 
     public function update(Request $request, $id){
-        $data = $request->only('name', 'img', 'description', 'url', 'status');
+        $data = $request->only('name', 'img', 'description', 'url', 'status', 'type');
         $category = $this->category->getById($id);
         $res['success'] = 0;
         $res['mess'] = 'Có lỗi xảy ra!';
@@ -57,6 +59,19 @@ class AdminCategoryController extends AdminBaseController
         return response()->json($res); 
     }
 
+    public function updatePosition(Request $request){
+        $data = $request->input('data');
+        $category = $this->generateCategory($data, 0);
+        $response = $this->category->updatePosition($category);
+        $res['success'] = 0;
+        $res['mess'] = 'Có lỗi xảy ra!';
+        if($response){
+            $res['success'] = 1;
+            $res['mess'] = 'Cập nhật thành công.';
+        }
+        return response()->json($res);
+    }
+
     public function show($id){
         $category = $this->category->getById($id);
         $res['success'] = 0;
@@ -64,6 +79,18 @@ class AdminCategoryController extends AdminBaseController
         if($category){
             $res['success'] = 1;
             $res['mess'] = 'Cập nhật thành công.';
+            $res['data'] = $category;
+        }
+        return response()->json($res);
+    }
+
+    public function remove($id){
+        $category = $this->category->delete($id);
+        $res['success'] = 0;
+        $res['mess'] = 'Mời xóa hoặc di chuyển danh mục con trước!';
+        if($category){
+            $res['success'] = 1;
+            $res['mess'] = 'Xóa thành công.';
             $res['data'] = $category;
         }
         return response()->json($res);
@@ -94,7 +121,7 @@ class AdminCategoryController extends AdminBaseController
                 $html .= '<li class="dd-item dd3-item" data-id="'.$item['id'].'"><div class="dd-handle dd3-handle"></div>
                 <div class="dd3-content">
                     <div class="pull-left">
-                        <span class="text-category">'.$item['name'].'-'.$item['id'].'</span>
+                        <span class="text-category">'.$item['id'].'-'.$item['name'].'</span>
                     </div>
                     <div class="pull-right">
                         <a href="javascript:void(0);" class="text-warning mr-2 btn-edit" data-id="'.$item['id'].'"><i class="fa fa-pencil-square-o icon-sm" aria-hidden="true"></i></a>
@@ -114,6 +141,22 @@ class AdminCategoryController extends AdminBaseController
             }
         }
         return $html;
+    }
+
+    public function generateCategory($arr, $parent = 0){
+        $data = $temp = [];
+        if(sizeof($arr) > 0){
+            foreach($arr as $k => $v){
+                $temp['id'] = $v['id'];
+                $temp['position'] = $k;
+                $temp['parent_id'] = $parent;
+                $data[] = $temp;
+                if(isset($v['children']) && sizeof($v['children']) > 0){
+                    $data = array_merge($data,$this->generateCategory($v['children'], $v['id']));
+                }
+            }
+        }
+        return $data;
     }
 
 }

@@ -23,5 +23,7 @@ Route::middleware(['auth.admin'])->prefix('admin')->group(function () {
     Route::post('category/create', 'AdminCategoryController@create')->name('category.create');
     Route::post('category/update/{id}', 'AdminCategoryController@update')->name('category.update');
     Route::get('category/{id}', 'AdminCategoryController@show')->name('category.show');
+    Route::get('category/remove/{id}', 'AdminCategoryController@remove')->name('category.remove');
+    Route::post('category/updatePosition', 'AdminCategoryController@updatePosition')->name('category.updatePosition');
 });
 

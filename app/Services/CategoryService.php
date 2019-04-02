@@ -71,12 +71,37 @@ class CategoryService
         }
     }
 
+    public function delete($id){
+        $child = $this->category->where('parent_id', $id)->get();
+        if(sizeof($child) > 0){
+            return false;
+        } else {
+            return $this->category->find($id)->delete();
+        }
+    }
+
+    public function updatePosition($data){
+        try {
+            DB::beginTransaction();
+            foreach ($data as $key => $value) {
+                DB::table('category')
+                ->where('id', $value['id'])
+                ->update(['position' => $value['position'], 'parent_id' => $value['parent_id']]);
+            }
+            DB::commit();
+            return true;
+        } catch (Exception  $e) {
+            DB::rollBack();
+            throw $e;
+        }
+    }
+
     public function getById($id){
         return $this->category->find($id);
     }
 
     public function getAll(){
-        return $this->category->orderBy('id', 'ASC')->get();
+        return $this->category->orderBy('position', 'ASC')->orderBy('id', 'ASC')->get();
     }
 
 }

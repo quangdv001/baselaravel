@@ -19,6 +19,7 @@ class CreateCategoriesTable extends Migration
             $table->string('url')->nullable();
             $table->string('img')->nullable();
             $table->text('description')->nullable();
+            $table->integer('type')->nullable()->default(0);
             $table->integer('status')->nullable()->default(1);
             $table->integer('parent_id')->nullable()->default(0);
             $table->integer('position')->nullable()->default(0);
