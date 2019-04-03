@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProductVariantsTable extends Migration
+class CreateDistrictTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateProductVariantsTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_variant', function (Blueprint $table) {
+        Schema::create('district', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('product_id');
-            $table->string('sku');
-            $table->string('name');
+            $table->integer('code')->nullable()->default(0);
+            $table->string('name')->nullable();
+            $table->integer('province_id')->nullable()->default(0);
+            $table->integer('province_code')->nullable()->default(0);
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateProductVariantsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_variant');
+        Schema::dropIfExists('district');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProductVariantValuesTable extends Migration
+class CreateArticleTagTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateProductVariantValuesTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_variant_value', function (Blueprint $table) {
+        Schema::create('article_tag', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('product_variant_id');
-            $table->integer('variant_value_id');
+            $table->integer('article_id');
+            $table->integer('tag_id');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateProductVariantValuesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_variant_value');
+        Schema::dropIfExists('article_tag');
     }
 }
