@@ -27,5 +27,7 @@ Route::middleware(['auth.admin'])->prefix('admin')->group(function () {
     Route::post('category/updatePosition', 'AdminCategoryController@updatePosition')->name('category.updatePosition');
 
     Route::get('province', 'AdminProvinceController@index')->name('province.getList');
+    Route::get('province/district', 'AdminProvinceController@listDistrict')->name('district.getList');
+    Route::get('province/ward', 'AdminProvinceController@listWard')->name('ward.getList');
 });
 

@@ -79,4 +79,16 @@ class ProvinceService
         return $this->ward->all()->count();
     }
 
+    public function getProvince(){
+        return $this->province->all();
+    }
+
+    public function getDistrict(){
+        return $this->district->all();
+    }
+
+    public function getWard(){
+        return $this->ward->all();
+    }
+
 }

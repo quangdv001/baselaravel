@@ -16,16 +16,37 @@ class AdminProvinceController extends AdminBaseController
     {
         parent::__construct();
         $this->province = $province;
+        $count = $this->province->countProvince();
+        if($count == 0){
+            $this->getImport();
+        }
     }
 
-    public function index(Request $request){
+    public function index(){
         if (Gate::denies('admin-pms', $this->currentRoute)) {
             return redirect()->route('admin.home.dashboard')->with('error_message','Bạn không có quyền vào trang này!');
         }
-        $this->getImport();
-        return 1;
-        // return view('admin.category.index')
-        //     ->with('html', $html);
+        $province = $this->province->getProvince();
+        return view('admin.province.listProvince')
+            ->with('data', $province);
+    }
+
+    public function listDistrict(){
+        if (Gate::denies('admin-pms', $this->currentRoute)) {
+            return redirect()->route('admin.home.dashboard')->with('error_message','Bạn không có quyền vào trang này!');
+        }
+        $district = $this->province->getDistrict();
+        return view('admin.province.listDistrict')
+            ->with('data', $district);
+    }
+
+    public function listWard(){
+        if (Gate::denies('admin-pms', $this->currentRoute)) {
+            return redirect()->route('admin.home.dashboard')->with('error_message','Bạn không có quyền vào trang này!');
+        }
+        $ward = $this->province->getWard();
+        return view('admin.province.listWard')
+            ->with('data', $ward);
     }
 
     public function getImport(){

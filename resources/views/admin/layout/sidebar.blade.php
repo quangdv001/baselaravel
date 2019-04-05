@@ -90,10 +90,16 @@
                     <span class="menu-title">Quản lý tỉnh thành</span>
                     <i class="menu-arrow"></i>
                 </a>
-                <div class="collapse @if(in_array($currentRoute,['admin.province.getList'])) show @endif" id="ui-basic4">
+                <div class="collapse @if(in_array($currentRoute,['admin.province.getList', 'admin.district.getList', 'admin.ward.getList'])) show @endif" id="ui-basic4">
                     <ul class="nav flex-column sub-menu">
                         <li class="nav-item">
                             <a class="nav-link @if(in_array($currentRoute,['admin.province.getList'])) active @endif" href="{{ route('admin.province.getList') }}">Danh sách tỉnh thành</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @if(in_array($currentRoute,['admin.district.getList'])) active @endif" href="{{ route('admin.district.getList') }}">Danh sách quận huyện</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @if(in_array($currentRoute,['admin.ward.getList'])) active @endif" href="{{ route('admin.ward.getList') }}">Danh sách phường xã</a>
                         </li>
                     </ul>
                 </div>
