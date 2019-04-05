@@ -13,6 +13,7 @@ use Exception;
 use Illuminate\Support\Facades\DB;
 use App\Models\Province;
 use App\Models\District;
+use App\Models\Ward;
 
 class ProvinceService
 {
@@ -64,6 +65,18 @@ class ProvinceService
             DB::rollBack();
             throw $e;
         }
+    }
+
+    public function countProvince(){
+        return $this->province->all()->count();
+    }
+
+    public function countDistrict(){
+        return $this->district->all()->count();
+    }
+
+    public function countWard(){
+        return $this->ward->all()->count();
     }
 
 }

@@ -15,10 +15,9 @@ class CreateDistrictTable extends Migration
     {
         Schema::create('district', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('code')->nullable()->default(0);
             $table->string('name')->nullable();
+            $table->string('district_id')->nullable();
             $table->integer('province_id')->nullable()->default(0);
-            $table->integer('province_code')->nullable()->default(0);
             $table->timestamps();
         });
     }

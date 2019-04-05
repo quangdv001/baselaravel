@@ -83,6 +83,22 @@
                 </div>
             </li>
         @endcan
+        @can('admin-pms', 'admin.province.getList')
+            <li class="nav-item @if(in_array($currentRoute,['admin.province.getList'])) active @endif">
+                <a class="nav-link" data-toggle="collapse" href="#ui-basic4" aria-expanded="false" aria-controls="ui-basic">
+                    <i class="menu-icon mdi mdi-map-marker-radius"></i>
+                    <span class="menu-title">Quản lý tỉnh thành</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse @if(in_array($currentRoute,['admin.province.getList'])) show @endif" id="ui-basic4">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item">
+                            <a class="nav-link @if(in_array($currentRoute,['admin.province.getList'])) active @endif" href="{{ route('admin.province.getList') }}">Danh sách tỉnh thành</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        @endcan
 
 
     </ul>

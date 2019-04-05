@@ -9,6 +9,6 @@ class Ward extends Model
 {
     protected $table = 'ward';
     protected $fillable = [
-        'name', 'code', 'province_id', 'province_code', 'district_id', 'district_code'
+        'name', 'ward_id', 'district_id',
     ];
 }

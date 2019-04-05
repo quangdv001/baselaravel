@@ -15,12 +15,9 @@ class CreateWardTable extends Migration
     {
         Schema::create('ward', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('code')->nullable()->default(0);
             $table->string('name')->nullable();
+            $table->string('ward_id')->nullable();
             $table->integer('district_id')->nullable()->default(0);
-            $table->integer('district_code')->nullable()->default(0);
-            $table->integer('province_id')->nullable()->default(0);
-            $table->integer('province_code')->nullable()->default(0);
             $table->timestamps();
         });
     }

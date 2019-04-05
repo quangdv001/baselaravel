@@ -9,6 +9,6 @@ class District extends Model
 {
     protected $table = 'district';
     protected $fillable = [
-        'name', 'code', 'province_id', 'province_code'
+        'name', 'district_id', 'province_id'
     ];
 }
