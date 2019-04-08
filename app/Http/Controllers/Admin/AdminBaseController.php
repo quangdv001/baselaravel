@@ -15,6 +15,7 @@ class AdminBaseController extends Controller
     {
         $this->user = auth()->user();
         $this->currentRoute = Route::current()->getName();
+        // dd($this->currentRoute);
         View::share('currentRoute', $this->currentRoute);
         View::share('user', $this->user);
     }

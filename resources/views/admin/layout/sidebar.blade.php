@@ -105,6 +105,25 @@
                 </div>
             </li>
         @endcan
+        @can('admin-pms', 'admin.article.getList')
+            <li class="nav-item @if(in_array($currentRoute,['admin.article.getList'])) active @endif">
+                <a class="nav-link" data-toggle="collapse" href="#ui-basic5" aria-expanded="false" aria-controls="ui-basic">
+                    <i class="menu-icon mdi mdi-book-multiple"></i>
+                    <span class="menu-title">Quản lý Bài viết</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse @if(in_array($currentRoute,['admin.article.getList','admin.article.getCreate'])) show @endif" id="ui-basic5">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item">
+                            <a class="nav-link @if(in_array($currentRoute,['admin.article.getList'])) active @endif" href="{{ route('admin.article.getList') }}">Danh sách bài viết</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @if(in_array($currentRoute,['admin.article.getCreate'])) active @endif" href="{{ route('admin.article.getCreate') }}">Tạo bài viết mới</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        @endcan
 
 
     </ul>
