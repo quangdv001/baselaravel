@@ -25,16 +25,36 @@
                             @endif
                         </div>
                         <div class="form-group">
+                            <label for="exampleFormControlSelect2">Chọn danh mục</label>
+                            <select class="form-control" name="category_id" id="exampleFormControlSelect2">
+                                {!! $html !!}
+                            </select>
+                            @if($errors->has('category_id'))
+                                <p class="text-danger">{{ $errors->first('category_id') }}</p>
+                            @endif
+                        </div>
+
+                        <div class="form-group">
+                            <label>File upload</label>
+                            <input type="file" name="img" class="file-upload-default" id="file-img">
+                            <div class="input-group col-xs-4 col-sm-4">
+                                <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
+                                <span class="input-group-append">
+                                <button class="file-upload-browse btn btn-info" type="button" id="upload-file">Upload</button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label for="exampleTextarea1">Meta</label>
-                            <textarea class="form-control" name="meta" id="exampleTextarea1" rows="2"></textarea>
+                            <textarea class="form-control" name="meta" id="exampleTextarea1" rows="2">{{ isset($data->meta) ? $data->meta : old('meta') }}</textarea>
                         </div>
                         <div class="form-group">
-                            <label for="exampleTextarea2">Mô tả ngắn</label>
-                            <textarea class="form-control" name="short_description" id="exampleTextarea2" rows="2"></textarea>
+                            <label for="editor1">Mô tả ngắn</label>
+                            <textarea class="form-control ckeditor" name="short_description" id="editor1" rows="2">{{ isset($data->short_description) ? $data->short_description : old('short_description') }}</textarea>
                         </div>
                         <div class="form-group">
-                            <label for="exampleTextarea3">Mô tả</label>
-                            <textarea class="form-control" name="description" id="exampleTextarea3" rows="2"></textarea>
+                            <label for="editor2">Mô tả</label>
+                            <textarea class="form-control ckeditor" name="description" id="editor2" rows="5">{{ isset($data->description) ? $data->description : old('description') }}</textarea>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlSelect2">Loại bài viết</label>

@@ -33,5 +33,6 @@ Route::middleware(['auth.admin'])->prefix('admin')->group(function () {
     Route::get('article', 'AdminArticleController@index')->name('article.getList');
     Route::get('article/getCreate/{id?}', 'AdminArticleController@getCreate')->name('article.getCreate');
     Route::post('article/getCreate/{id?}', 'AdminArticleController@postCreate')->name('article.postCreate');
+    Route::get('article/remove/{id?}', 'AdminArticleController@remove')->name('article.remove');
 });
 

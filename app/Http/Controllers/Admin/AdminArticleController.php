@@ -7,14 +7,17 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 use App\Services\ArticleService;
 use App\Http\Requests\Admin\ArticleRequest;
+use App\Services\CategoryService;
 
 class AdminArticleController extends AdminBaseController
 {
     protected $article;
-    public function __construct(ArticleService $article)
+    protected $category;
+    public function __construct(ArticleService $article, CategoryService $category)
     {
         parent::__construct();
         $this->article = $article;
+        $this->category = $category;
     }
 
     public function index(Request $request){
@@ -23,25 +26,37 @@ class AdminArticleController extends AdminBaseController
         }
         $request->flash();
         $dataS = $request->only('title','type','status','user_name_c','admin_name_c');
-        $dataS['limit'] = 1;
+        $dataS['limit'] = 10;
         $article = $this->article->search($dataS);
+        $listCategories = $this->category->listPluck();
+
         return view('admin.article.index')
-            ->with('data', $article);
+            ->with('data', $article)
+            ->with('listCategories', $listCategories);
     }
 
     public function getCreate($id = 0){
         if (Gate::denies('admin-pms', $this->currentRoute)) {
             return redirect()->route('admin.home.dashboard')->with('error_message','Bạn không có quyền vào trang này!');
         }
+        $response = [];
+        if($id > 0){
+            $response = $this->article->getById($id);
+        }
+
+        $category = $this->category->getAll();
+        $html = $this->category->generateOptionSelect($category, 0, $response ? $response->category_id : 0, '');
         return view('admin.article.edit')
-            ->with('id', $id);
+            ->with('id', $id)
+            ->with('html', $html)
+            ->with('data', $response);
     }
 
     public function postCreate(ArticleRequest $request, $id = 0){
         if (Gate::denies('admin-pms', $this->currentRoute)) {
             return redirect()->route('admin.home.dashboard')->with('error_message','Bạn không có quyền vào trang này!');
         }
-        $data = $request->only('title', 'slug', 'meta', 'type', 'short_description', 'description', 'status');
+        $data = $request->only('title', 'slug', 'meta', 'type', 'short_description', 'description', 'status', 'category_id');
         $mess = '';
         if($id == 0){
             $data['admin_id_c'] = $this->user->id;
@@ -59,6 +74,15 @@ class AdminArticleController extends AdminBaseController
                 $mess = 'Cập nhật bài viết thành công';
             }
         }
+        return redirect()->route('admin.article.getList')->with('success_message', $mess);
+    }
+
+    public function remove($id = 0){
+        if (Gate::denies('admin-pms', $this->currentRoute)) {
+            return redirect()->route('admin.home.dashboard')->with('error_message','Bạn không có quyền xóa bài viết này!');
+        }
+        $this->article->remove($id);
+        $mess = 'Xóa bài viết thành công';
         return redirect()->route('admin.article.getList')->with('success_message', $mess);
     }
 

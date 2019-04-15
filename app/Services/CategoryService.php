@@ -104,4 +104,28 @@ class CategoryService
         return $this->category->orderBy('position', 'ASC')->orderBy('id', 'ASC')->get();
     }
 
+    public function listPluck(){
+        return $this->category->pluck('name','id')->toArray();
+    }
+
+    public function generateOptionSelect($listCategories, $parent_id = 0, $cate_id, $char = ''){
+        $html = '';
+        
+        foreach ($listCategories as $key => $item){
+            // Nếu là chuyên mục con thì hiển thị
+            if ($item['parent_id'] == $parent_id){
+                $selected = $cate_id == $item['id'] ? 'selected' : '';
+                $html.= '<option value="'.$item['id'].'" '. $selected .'>';
+                    $html.= $char.$item['name'];
+                $html.= '</option>';
+                
+                // Xóa chuyên mục đã lặp
+                unset($listCategories[$key]);
+                // Tiếp tục đệ quy để tìm chuyên mục con của chuyên mục đang lặp
+                $html.= $this->generateOptionSelect($listCategories, $item['id'], $cate_id, $char.'|---');
+            }
+        }
+        return $html;
+    }
+
 }

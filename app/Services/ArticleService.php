@@ -33,7 +33,7 @@ class ArticleService
             $query = $query->where('admin_name_c', 'like', '%' . $data['admin_name_c'] . '%');
         }
         if (isset($data['status']) && $data['status'] > -1) {
-            $query = $query->where('active', $data['active']);
+            $query = $query->where('status', $data['status']);
         }
         if (isset($data['type']) && $data['type'] > -1) {
             $query = $query->where('type', $data['type']);
@@ -78,6 +78,11 @@ class ArticleService
             DB::rollBack();
             throw $e;
         }
+    }
+
+    public function remove($id){
+        $article = $this->article->find($id);
+        $article->delete();
     }
 
     public function getById($id){

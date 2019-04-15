@@ -42,9 +42,9 @@ Danh sách bài viết
                             <div class="form-group">
                                 <label for="exampleFormControlSelect3">Trạng thái</label>
                                 <select class="form-control" name="status" id="exampleFormControlSelect3">
-                                    <option @if(old('type') == -1) selected @endif value="-1">Mời chọn</option>
-                                    <option @if(old('type') == 0) selected @endif value="0">Ngừng hoạt động</option>
-                                    <option @if(old('type') == 1) selected @endif value="1">Hoạt động</option>
+                                    <option @if(old('status') == -1) selected @endif value="-1">Mời chọn</option>
+                                    <option @if(old('status') == 1) selected @endif value="1">Hoạt động</option>
+                                    <option @if(old('status') == 0) selected @endif value="0">Ngừng hoạt động</option>
                                 </select>
                             </div>
                         </div>
@@ -82,6 +82,9 @@ Danh sách bài viết
                                     Title
                                 </th>
                                 <th>
+                                    Danh mục
+                                </th>
+                                <th>
                                     Trạng thái
                                 </th>
                                 <th>
@@ -114,10 +117,13 @@ Danh sách bài viết
                                     {{ $v->title }}
                                 </td>
                                 <td>
-                                    {{ $v->status }}
+                                    {{ isset($listCategories[$v->category_id]) ? $listCategories[$v->category_id] : 'Chưa chọn danh mục'  }}
                                 </td>
                                 <td>
-                                    {{ $v->type }}
+                                    {{ $v->status == 1 ? 'Hoạt động' : 'Không hoạt động' }}
+                                </td>
+                                <td>
+                                    {{ $v->type == 1 ? 'Tin tức' : 'Luật pháp' }}
                                 </td>
                                 <td>
                                     {{ $v->admin_name_c }}
@@ -131,6 +137,10 @@ Danh sách bài viết
                                 <td>
                                     <a href="{{ route('admin.article.getCreate', ['id' => $v->id]) }}"
                                         class="text-warning"><i class="fa fa-pencil-square-o icon-sm"
+                                            aria-hidden="true"></i></a>
+                                    -
+                                    <a href="{{ route('admin.article.remove', ['id' => $v->id]) }}"
+                                        class="text-warning"><i class="fa fa-trash-o icon-sm"
                                             aria-hidden="true"></i></a>
                                 </td>
                             </tr>

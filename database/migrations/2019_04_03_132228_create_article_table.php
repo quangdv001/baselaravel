@@ -21,8 +21,10 @@ class CreateArticleTable extends Migration
             $table->string('img')->nullable();
             $table->text('short_description')->nullable();
             $table->text('description')->nullable();
+            $table->text('file_path')->nullable();
             $table->smallInteger('type')->nullable()->default(0);
             $table->smallInteger('status')->nullable()->default(1);
+            $table->integer('category_id')->nullable()->default(0);
             $table->integer('user_id_c')->nullable()->default(0);
             $table->string('user_name_c')->nullable();
             $table->integer('user_id_u')->nullable()->default(0);
