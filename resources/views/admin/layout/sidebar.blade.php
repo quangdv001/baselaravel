@@ -105,6 +105,22 @@
                 </div>
             </li>
         @endcan
+        @can('admin-pms', 'admin.file.getList')
+            <li class="nav-item @if(in_array($currentRoute,['admin.file.getList'])) active @endif">
+                <a class="nav-link" data-toggle="collapse" href="#ui-basic6" aria-expanded="false" aria-controls="ui-basic">
+                    <i class="menu-icon mdi mdi-folder-multiple-image"></i>
+                    <span class="menu-title">Quản lý Media Library</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse @if(in_array($currentRoute,['admin.file.getList'])) show @endif" id="ui-basic6">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item">
+                            <a class="nav-link @if(in_array($currentRoute,['admin.file.getList'])) active @endif" href="{{ route('admin.file.getList') }}">Media library</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        @endcan
         @can('admin-pms', 'admin.article.getList')
             <li class="nav-item @if(in_array($currentRoute,['admin.article.getList'])) active @endif">
                 <a class="nav-link" data-toggle="collapse" href="#ui-basic5" aria-expanded="false" aria-controls="ui-basic">

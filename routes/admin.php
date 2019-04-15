@@ -34,5 +34,11 @@ Route::middleware(['auth.admin'])->prefix('admin')->group(function () {
     Route::get('article/getCreate/{id?}', 'AdminArticleController@getCreate')->name('article.getCreate');
     Route::post('article/getCreate/{id?}', 'AdminArticleController@postCreate')->name('article.postCreate');
     Route::get('article/remove/{id?}', 'AdminArticleController@remove')->name('article.remove');
+
+    Route::get('file', 'AdminFileController@index')->name('file.getList');
+    Route::post('file/uploadFile', 'AdminFileController@uploadFile')->name('file.uploadFile');
+    Route::post('file/removeFile/{id}', 'AdminFileController@removeFile')->name('file.removeFile');
+    Route::get('file/downloadFile/{id}', 'AdminFileController@downloadFile')->name('file.downloadFile');
+    Route::get('file/openFileModal', 'AdminFileController@openFileModal')->name('file.openFileModal');
 });
 

@@ -15,7 +15,8 @@ class CreateFolderTable extends Migration
     {
         Schema::create('folder', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name')->nullable();
+            $table->string('name')->nullable()->default('New Folder');
+            $table->integer('parent_id')->nullable()->default(0);
             $table->integer('user_id_c')->nullable()->default(0);
             $table->string('user_name_c')->nullable();
             $table->integer('user_id_u')->nullable()->default(0);

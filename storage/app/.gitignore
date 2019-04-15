@@ -1,5 +1,6 @@
-# *
-# !import/
-# !public/
-# !.gitignore
+*
+!import/
+!public/
+!.gitignore
+
 
