@@ -19,6 +19,8 @@ class CreateFileTable extends Migration
             $table->string('name');
             $table->string('type');
             $table->string('path');
+            $table->string('url');
+            $table->integer('position')->nullable()->default(0);
             $table->integer('user_id_c')->nullable()->default(0);
             $table->string('user_name_c')->nullable();
             $table->integer('user_id_u')->nullable()->default(0);

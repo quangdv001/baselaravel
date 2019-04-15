@@ -84,6 +84,27 @@ $(document).ready(function () {
             init.notyPopup(error_message, 'error');
         }, 1500);
     }
+
+    //FILE
+    $(document).on('click', '.btn-rm-img', function () {
+        var li = $(this).parent().parent();
+        var id = $(this).data('id');
+        var url = BASE_URL + '/admin/file/removeFile/' + id;
+        if (confirm('Bạn có chắc muốn xóa file?')) {
+            $.post(url, function (res) {
+                if (res.success == 1) {
+                    li.remove();
+                    init.notyPopup('Xóa thành công.', 'success');
+                } else {
+                    init.notyPopup('Xóa thất bại!', 'error');
+                }
+            });
+        }
+    });
+
+    $(document).on('hidden.bs.modal', "#fileModal" , function(){
+        $(this).remove();
+    });
 });
 
 var init = {
@@ -114,37 +135,60 @@ var init = {
     hideLoader: function (obj) {
         $(obj).waitMe('hide');
     },
-    handleImage: function(file, obj) {
-        $('.'+ obj).val(file[0].name);
+    handleFile: function(file){
         var file_data = file[0];
+        //lấy ra kiểu file
         var type = file_data.type;
+        console.log(type);
         //Xét kiểu file được upload
-        var match = ["image/gif", "image/png", "image/jpg",];
+        var match = ["image/gif", "image/png", "image/jpg", "application/x-zip-compressed"];
         //kiểm tra kiểu file
-        if (type == match[0] || type == match[1] || type == match[2]) {
+        if (type == match[0] || type == match[1] || type == match[2] || type == match[3]) {
             //khởi tạo đối tượng form data
             var form_data = new FormData();
             //thêm files vào trong form data
             form_data.append('file', file_data);
             //sử dụng ajax post
             $.ajax({
-                url: 'upload.php', // gửi đến file upload.php 
-                dataType: 'text',
+                url: BASE_URL + '/admin/file/uploadFile', // gửi đến file upload.php 
                 cache: false,
                 contentType: false,
                 processData: false,
                 data: form_data,
                 type: 'post',
                 success: function (res) {
-                    $('.status').text(res);
-                    $('#file').val('');
+                    if (res.success == 1) {
+                        $('.list-img').append(res.html);
+                        init.notyPopup('Upload thành công.', 'success');
+                    } else {
+                        init.notyPopup('Upload thất bại!', 'error');
+                    }
                 }
             });
         } else {
-            $('.status').text('Chỉ được upload file ảnh');
-            $('#file').val('');
+            init.notyPopup('Sai định dạng file!', 'error');
         }
         return false;
-    }
-
+    },
+    openFileModal: function(callback){
+        var url = BASE_URL + '/admin/file/openFileModal';
+        $.get(url, function(res){
+            if(res.success == 1){
+                $('body').append(res.html);
+                $("#fileModal").modal();
+                var url = '';
+                $('.img-item').click(function(){
+                    $('.img-item').removeClass('active');
+                    $(this).addClass('active');
+                    path = $(this).data('url');
+                });
+                $('.btn-choose-file').click(function(){
+                    callback(path);
+                    $("#fileModal").modal("hide");
+                });
+            } else {
+                init.notyPopup('Có lỗi xảy ra!', 'error');
+            }
+        });
+    },
 };

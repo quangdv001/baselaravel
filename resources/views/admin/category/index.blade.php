@@ -63,7 +63,7 @@ Danh sách danh mục
             <div class="card-body">
                 <h4 class="card-title">Chi tiết danh mục - <span class="category-id">0</span></h4>
                 <form action="" enctype="multipart/form-data">
-                
+
                     <input type="hidden" name="id" class="id" value="0">
                     <div class="form-group">
                         <label>Tên danh mục</label>
@@ -74,6 +74,15 @@ Danh sách danh mục
                         <input type="text" class="form-control url" name="url" placeholder="URL" value="">
                     </div>
                     <div class="form-group">
+                        <label>Ảnh</label>
+                        <input type="hidden" name="img" class="img" value="">
+                        <br>
+                        <a href="javascript:void(0)" class="btn btn-info btn-select-file">Chọn ảnh</a>
+                        <div class="bl-img-show mt-4">
+                            <img src="" class="img-show" width="90" height="90" alt="">
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label>Mô tả</label>
                         <textarea class="form-control description" name="description" id="exampleTextarea1"
                             rows="2"></textarea>
@@ -81,13 +90,14 @@ Danh sách danh mục
                     <div class="form-group">
                         <label for="exampleFormControlSelect3">Loại</label>
                         <select class="form-control type" id="exampleFormControlSelect3">
-                            <option value="0">Tin tức</option>
-                            <option value="1">Luật</option>
-                            <option value="2">Nhà đất</option>
-                            <option value="3">Cho thuê</option>
+                            <option value="0">Mời chọn</option>
+                            <option value="1">Tin tức</option>
+                            <option value="2">Luật</option>
+                            <option value="3">Nhà đất</option>
+                            <option value="4">Cho thuê</option>
                         </select>
                     </div>
-    
+
                     <div class="form-group">
                         <label for="exampleFormControlSelect2">Trạng thái</label>
                         <select class="form-control status" id="exampleFormControlSelect2">
@@ -117,8 +127,8 @@ Danh sách danh mục
 <script>
     $(document).ready(function () {
         // $('.bl-form').hide();
-        $('.file-upload-browse').click(function(){ 
-            $('.file-upload-default').trigger('click'); 
+        $('.file-upload-browse').click(function () {
+            $('.file-upload-default').trigger('click');
         });
         var updateOutput = function (e) {
             var list = e.length ? e : $(e.target),
@@ -170,6 +180,7 @@ Danh sách danh mục
         $('.btn-update').click(function () {
             var id = $('.id').val();
             var name = $('.name').val();
+            var img = $('.img').val();
             var description = $('.description').val();
             var status = $('.status').val();
             var type = $('.type').val();
@@ -178,6 +189,7 @@ Danh sách danh mục
             var data = {
                 id: id,
                 name: name,
+                img: img,
                 description: description,
                 status: status,
                 type: type,
@@ -208,6 +220,8 @@ Danh sách danh mục
                     $('.id').val(res.data.id);
                     $('.category-id').text(res.data.id);
                     $('.name').val(res.data.name);
+                    $('.img').val(res.data.img);
+                    $('.img-show').attr('src', res.data.img);
                     $('.url').val(res.data.url);
                     $('.description').val(res.data.description);
                     $('.status').val(res.data.status);
@@ -249,7 +263,15 @@ Danh sách danh mục
                 }
             });
         })
+
+        $(document).on('click', '.btn-select-file', function () {
+            init.openFileModal(callback);
+        });
     });
+    var callback = function (a) {
+        $('.img').val(a);
+        $('.img-show').attr('src', a);
+    }
 
 </script>
 @endsection
