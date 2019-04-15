@@ -141,9 +141,9 @@ var init = {
         var type = file_data.type;
         console.log(type);
         //Xét kiểu file được upload
-        var match = ["image/gif", "image/png", "image/jpg", "application/x-zip-compressed"];
+        var match = ["image/gif", "image/png", "image/jpg", "image/jpeg", "application/x-zip-compressed"];
         //kiểm tra kiểu file
-        if (type == match[0] || type == match[1] || type == match[2] || type == match[3]) {
+        if (type == match[0] || type == match[1] || type == match[2] || type == match[3] || type == match[4]) {
             //khởi tạo đối tượng form data
             var form_data = new FormData();
             //thêm files vào trong form data
@@ -176,7 +176,7 @@ var init = {
             if(res.success == 1){
                 $('body').append(res.html);
                 $("#fileModal").modal();
-                var url = '';
+                var path = '';
                 $('.img-item').click(function(){
                     $('.img-item').removeClass('active');
                     $(this).addClass('active');

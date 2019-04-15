@@ -33,15 +33,13 @@
                                 <p class="text-danger">{{ $errors->first('category_id') }}</p>
                             @endif
                         </div>
-
                         <div class="form-group">
-                            <label>File upload</label>
-                            <input type="file" name="img" class="file-upload-default" id="file-img">
-                            <div class="input-group col-xs-4 col-sm-4">
-                                <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
-                                <span class="input-group-append">
-                                <button class="file-upload-browse btn btn-info" type="button" id="upload-file">Upload</button>
-                                </span>
+                            <label>Ảnh</label>
+                            <input type="hidden" name="img" class="img" value="{{isset($data->img) ? $data->img : old('img')}}">
+                            <br>
+                            <a href="javascript:void(0)" class="btn btn-info btn-select-file">Chọn ảnh</a>
+                            <div class="bl-img-show mt-4">
+                                <img src="{{ isset($data->img) ? $data->img : old('img') }}" class="img-show" width="90" height="90" alt="">
                             </div>
                         </div>
                         <div class="form-group">
@@ -55,6 +53,10 @@
                         <div class="form-group">
                             <label for="editor2">Mô tả</label>
                             <textarea class="form-control ckeditor" name="description" id="editor2" rows="5">{{ isset($data->description) ? $data->description : old('description') }}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="tag">TAG</label>
+                            <input type="text" name="tag" class="form-control form-control-lg" id="tag" placeholder="tag" value="{{ isset($data->listTags) ? $data->listTags : old('listTags') }}" >
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlSelect2">Loại bài viết</label>
@@ -81,7 +83,25 @@
 @section('custom_js')
     <script>
         $(document).ready(function(){
-            //
-        })
+            $('#tag').selectize({
+                plugins: ['remove_button'],
+                delimiter: ',',
+                persist: false,
+                create: function(input) {
+                    return {
+                        value: input,
+                        text: input
+                    }
+                }
+            });
+
+            $(document).on('click', '.btn-select-file', function () {
+                init.openFileModal(callback);
+            });
+        });
+        var callback = function (a) {
+            $('.img').val(a);
+            $('.img-show').attr('src', a);
+        }
     </script>
 @endsection

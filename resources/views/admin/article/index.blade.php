@@ -111,7 +111,7 @@ Danh sách bài viết
                                     {{ $v->id }}
                                 </td>
                                 <td>
-                                    {{ $v->img }}
+                                    <img class="img-show" style="width:60px !important; height:60px !important; border-radius:0 !important;"  src="{{ $v->img }}" />
                                 </td>
                                 <td>
                                     {{ $v->title }}

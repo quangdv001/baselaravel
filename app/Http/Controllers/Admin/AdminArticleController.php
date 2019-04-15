@@ -8,16 +8,18 @@ use Illuminate\Support\Facades\Gate;
 use App\Services\ArticleService;
 use App\Http\Requests\Admin\ArticleRequest;
 use App\Services\CategoryService;
+use App\Services\TagService;
 
 class AdminArticleController extends AdminBaseController
 {
     protected $article;
     protected $category;
-    public function __construct(ArticleService $article, CategoryService $category)
+    public function __construct(ArticleService $article, CategoryService $category, TagService $tagService)
     {
         parent::__construct();
         $this->article = $article;
         $this->category = $category;
+        $this->tagService = $tagService;
     }
 
     public function index(Request $request){
@@ -42,6 +44,10 @@ class AdminArticleController extends AdminBaseController
         $response = [];
         if($id > 0){
             $response = $this->article->getById($id);
+            $articleTag = $this->tagService->getArticleTagByArticleId($id);
+            $tag = $this->tagService->getListTagByArticleTagId($articleTag['tag_id']);
+            
+            $response['listTags'] = $tag['name'];
         }
 
         $category = $this->category->getAll();
@@ -56,13 +62,24 @@ class AdminArticleController extends AdminBaseController
         if (Gate::denies('admin-pms', $this->currentRoute)) {
             return redirect()->route('admin.home.dashboard')->with('error_message','Bạn không có quyền vào trang này!');
         }
-        $data = $request->only('title', 'slug', 'meta', 'type', 'short_description', 'description', 'status', 'category_id');
+        $data = $request->only('title', 'slug', 'meta', 'type', 'short_description', 'description', 'status', 'category_id', 'img', 'tag');
+        $listTags = $data['tag'];
+        unset($data['tag']);
         $mess = '';
         if($id == 0){
             $data['admin_id_c'] = $this->user->id;
             $data['admin_name_c'] = $this->user->username;
+            
             $res = $this->article->create($data);
             if($res){
+                $tag = $this->tagService->createTag($listTags);
+                if ($tag) {
+                    $payload = array(
+                        'article_id'=> $res['id'],
+                        'tag_id'=> $tag['id']
+                    );
+                    $response = $this->tagService->createArticleTag($payload);
+                }
                 $mess = 'Tạo bài viết thành công';
             }
         } else {
@@ -71,6 +88,9 @@ class AdminArticleController extends AdminBaseController
             $data['admin_name_u'] = $this->user->username;
             $res = $this->article->update($admin, $data);
             if($res){
+                $articleTag = $this->tagService->getArticleTagByArticleId($id);
+                $tag = $this->tagService->getListTagByArticleTagId($articleTag['tag_id']);
+                $this->tagService->updateTag($tag, $listTags);
                 $mess = 'Cập nhật bài viết thành công';
             }
         }

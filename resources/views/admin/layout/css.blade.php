@@ -11,6 +11,6 @@
 @yield('lib_css')
 <link rel="stylesheet" href="{{ asset('assets/admin/themes/css/style.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/admin/css/custom.css') }}">
-{{-- <link rel="stylesheet" href="{{ asset('css/admin.css') }}"> --}}
+<link rel="stylesheet" href="{{ asset('css/selectize.default.css') }}"> 
 
 @yield('custom_css')

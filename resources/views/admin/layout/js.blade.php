@@ -29,5 +29,6 @@
 @yield('lib_js')
 <script src="{{ asset('assets/admin/js/init.js') }}"></script>
 <script src="{{ asset('js/admin.js') }}"></script>
+<script src="{{ asset('js/selectize.js') }}"></script>
 
 @yield('custom_js')
