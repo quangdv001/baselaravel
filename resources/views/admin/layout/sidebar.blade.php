@@ -25,7 +25,7 @@
                 <span class="menu-title">Dashboard</span>
             </a>
         </li>
-        @can('admin-pms', 'admin.account.getList')
+        @if(auth('admin')->user()->can('admin-pms', 'admin.account.getList'))
             <li class="nav-item @if(in_array($currentRoute,['admin.account.getList', 'admin.account.getCreate'])) active @endif">
                 <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
                     <i class="menu-icon mdi mdi-account"></i>
@@ -37,16 +37,16 @@
                         <li class="nav-item">
                             <a class="nav-link @if(in_array($currentRoute,['admin.account.getList'])) active @endif" href="{{ route('admin.account.getList') }}">Danh sách tài khoản</a>
                         </li>
-                        @can('admin-pms', 'admin.account.getCreate')
+                        @if(auth('admin')->user()->can('admin-pms', 'admin.account.getCreate'))
                             <li class="nav-item">
                                 <a class="nav-link @if(in_array($currentRoute,['admin.account.getCreate'])) active @endif" href="{{ route('admin.account.getCreate') }}">Tạo tài khoản mới</a>
                             </li>
-                        @endcan
+                        @endif
                     </ul>
                 </div>
             </li>
-        @endcan
-        @can('admin-pms', 'admin.permission.getList')
+        @endif
+        @if(auth('admin')->user()->can('admin-pms', 'admin.permission.getList'))
             <li class="nav-item @if(in_array($currentRoute,['admin.permission.getList', 'admin.permission.getCreate'])) active @endif">
                 <a class="nav-link" data-toggle="collapse" href="#ui-basic2" aria-expanded="false" aria-controls="ui-basic">
                     <i class="menu-icon mdi mdi-alert"></i>
@@ -58,16 +58,16 @@
                         <li class="nav-item">
                             <a class="nav-link @if(in_array($currentRoute,['admin.permission.getList'])) active @endif" href="{{ route('admin.permission.getList') }}">Danh sách nhóm quyền</a>
                         </li>
-                        @can('admin-pms', 'admin.permission.getCreate')
+                        @if(auth('admin')->user()->can('admin-pms', 'admin.permission.getCreate'))
                             <li class="nav-item">
                                 <a class="nav-link @if(in_array($currentRoute,['admin.permission.getCreate'])) active @endif" href="{{ route('admin.permission.getCreate') }}">Tạo nhóm quyền mới</a>
                             </li>
-                        @endcan
+                        @endif
                     </ul>
                 </div>
             </li>
-        @endcan
-        @can('admin-pms', 'admin.category.getList')
+        @endif
+        @if(auth('admin')->user()->can('admin-pms', 'admin.category.getList'))
             <li class="nav-item @if(in_array($currentRoute,['admin.category.getList'])) active @endif">
                 <a class="nav-link" data-toggle="collapse" href="#ui-basic3" aria-expanded="false" aria-controls="ui-basic">
                     <i class="menu-icon mdi mdi-view-list"></i>
@@ -82,8 +82,8 @@
                     </ul>
                 </div>
             </li>
-        @endcan
-        @can('admin-pms', 'admin.province.getList')
+        @endif
+        @if(auth('admin')->user()->can('admin-pms', 'admin.province.getList'))
             <li class="nav-item @if(in_array($currentRoute,['admin.province.getList'])) active @endif">
                 <a class="nav-link" data-toggle="collapse" href="#ui-basic4" aria-expanded="false" aria-controls="ui-basic">
                     <i class="menu-icon mdi mdi-map-marker-radius"></i>
@@ -104,8 +104,8 @@
                     </ul>
                 </div>
             </li>
-        @endcan
-        @can('admin-pms', 'admin.file.getList')
+        @endif
+        @if(auth('admin')->user()->can('admin-pms', 'admin.file.getList'))
             <li class="nav-item @if(in_array($currentRoute,['admin.file.getList'])) active @endif">
                 <a class="nav-link" data-toggle="collapse" href="#ui-basic6" aria-expanded="false" aria-controls="ui-basic">
                     <i class="menu-icon mdi mdi-folder-multiple-image"></i>
@@ -120,8 +120,8 @@
                     </ul>
                 </div>
             </li>
-        @endcan
-        @can('admin-pms', 'admin.article.getList')
+        @endif
+        @if(auth('admin')->user()->can('admin-pms', 'admin.article.getList'))
             <li class="nav-item @if(in_array($currentRoute,['admin.article.getList'])) active @endif">
                 <a class="nav-link" data-toggle="collapse" href="#ui-basic5" aria-expanded="false" aria-controls="ui-basic">
                     <i class="menu-icon mdi mdi-book-multiple"></i>
@@ -139,7 +139,7 @@
                     </ul>
                 </div>
             </li>
-        @endcan
+        @endif
 
 
     </ul>

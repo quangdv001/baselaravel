@@ -1,6 +1,6 @@
 <?php
 
-Route::get('admin/login', 'AdminAuthController@getLogin')->name('getLogin')->middleware('guest');
+Route::get('admin/login', 'AdminAuthController@getLogin')->name('getLogin');
 Route::post('admin/login', 'AdminAuthController@postLogin')->name('postLogin');
 Route::get('admin/logout', 'AdminAuthController@logout')->name('logout');
 

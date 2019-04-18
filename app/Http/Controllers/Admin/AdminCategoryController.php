@@ -17,7 +17,7 @@ class AdminCategoryController extends AdminBaseController
     }
 
     public function index(Request $request){
-        if (Gate::denies('admin-pms', $this->currentRoute)) {
+        if (Gate::forUser($this->user)->denies('admin-pms', $this->currentRoute)) {
             return redirect()->route('admin.home.dashboard')->with('error_message','Bạn không có quyền vào trang này!');
         }
         $category = $this->category->getAll();

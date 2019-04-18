@@ -25,6 +25,7 @@ class ArticleRequest extends FormRequest
     {
         return [
             'title' => 'required',
+            'slug' => 'required|unique:article',
         ];
     }
 
@@ -37,6 +38,7 @@ class ArticleRequest extends FormRequest
     {
         return [
             'title.required' => 'Tên bài viết không được rỗng',
+            'slug.unique' => 'Slug đã tồn tại',
         ];
     }
 }

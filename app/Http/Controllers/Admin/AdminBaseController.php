@@ -13,7 +13,7 @@ class AdminBaseController extends Controller
     protected $user;
     public function __construct()
     {
-        $this->user = auth()->user();
+        $this->user = auth('admin')->user();
         $this->currentRoute = Route::current()->getName();
         // dd($this->currentRoute);
         View::share('currentRoute', $this->currentRoute);

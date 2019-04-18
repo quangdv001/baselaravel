@@ -7,6 +7,10 @@ use App\Http\Controllers\Controller;
 
 class AdminAuthController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('guest.admin')->except('logout');
+    }
 
     public function getLogin(){
         return view('admin.auth.login');
@@ -14,7 +18,7 @@ class AdminAuthController extends Controller
 
     public function postLogin(Request $request){
         $credentials = $request->only('username', 'password');
-        if (auth()->attempt($credentials)) {
+        if (auth('admin')->attempt($credentials)) {
             // Authentication passed...
             return redirect()->intended('admin/');
         }
@@ -22,7 +26,7 @@ class AdminAuthController extends Controller
     }
 
     public function logout(){
-        auth()->logout();
+        auth('admin')->logout();
         return redirect()->route('admin.getLogin');
     }
 }

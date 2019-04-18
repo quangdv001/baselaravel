@@ -268,9 +268,9 @@ Danh sách danh mục
             init.openFileModal(callback);
         });
     });
-    var callback = function (a) {
-        $('.img').val(a);
-        $('.img-show').attr('src', a);
+    var callback = function (data) {
+        $('.img').val(data.url);
+        $('.img-show').attr('src', data.url);
     }
 
 </script>

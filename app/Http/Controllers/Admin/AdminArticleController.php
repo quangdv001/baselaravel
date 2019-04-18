@@ -23,7 +23,7 @@ class AdminArticleController extends AdminBaseController
     }
 
     public function index(Request $request){
-        if (Gate::denies('admin-pms', $this->currentRoute)) {
+        if (Gate::forUser($this->user)->denies('admin-pms', $this->currentRoute)) {
             return redirect()->route('admin.home.dashboard')->with('error_message','Bạn không có quyền vào trang này!');
         }
         $request->flash();
@@ -38,28 +38,34 @@ class AdminArticleController extends AdminBaseController
     }
 
     public function getCreate($id = 0){
-        if (Gate::denies('admin-pms', $this->currentRoute)) {
+        if (Gate::forUser($this->user)->denies('admin-pms', $this->currentRoute)) {
             return redirect()->route('admin.home.dashboard')->with('error_message','Bạn không có quyền vào trang này!');
         }
-        $response = [];
+        $article = $tagItem = [];
+        $listTag = '';
         if($id > 0){
-            $response = $this->article->getById($id);
-            $articleTag = $this->tagService->getArticleTagByArticleId($id);
-            $tag = $this->tagService->getListTagByArticleTagId($articleTag['tag_id']);
-            
-            $response['listTags'] = $tag['name'];
+            $article = $this->article->getById($id);
+            $tag = $article->tag;
+
+            if(sizeof($tag) > 0){
+                foreach($tag as $v){
+                    $tagItem[] = $v->name;
+                }
+                $listTag = implode(',', $tagItem);
+            }
         }
 
         $category = $this->category->getAll();
-        $html = $this->category->generateOptionSelect($category, 0, $response ? $response->category_id : 0, '');
+        $html = $this->category->generateOptionSelect($category, 0, $article ? $article->category_id : 0, '');
         return view('admin.article.edit')
             ->with('id', $id)
             ->with('html', $html)
-            ->with('data', $response);
+            ->with('listTag', $listTag)
+            ->with('data', $article);
     }
 
     public function postCreate(ArticleRequest $request, $id = 0){
-        if (Gate::denies('admin-pms', $this->currentRoute)) {
+        if (Gate::forUser($this->user)->denies('admin-pms', $this->currentRoute)) {
             return redirect()->route('admin.home.dashboard')->with('error_message','Bạn không có quyền vào trang này!');
         }
         $data = $request->only('title', 'slug', 'meta', 'type', 'short_description', 'description', 'status', 'category_id', 'img', 'tag');
@@ -72,25 +78,42 @@ class AdminArticleController extends AdminBaseController
             
             $res = $this->article->create($data);
             if($res){
-                $tag = $this->tagService->createTag($listTags);
-                if ($tag) {
-                    $payload = array(
-                        'article_id'=> $res['id'],
-                        'tag_id'=> $tag['id']
-                    );
-                    $response = $this->tagService->createArticleTag($payload);
+                $arrTag = explode(',', $listTags);
+                if(sizeof($arrTag) > 0){
+                    foreach($arrTag as $v){
+                        $tag = $this->tagService->getCreateTagByName($v);
+                        if($tag){
+                            $payload = array(
+                                'article_id'=> $res->id,
+                                'tag_id'=> $tag->id
+                            );
+                            $this->tagService->createArticleTag($payload);
+                        }
+                    }
+                    
                 }
                 $mess = 'Tạo bài viết thành công';
             }
         } else {
-            $admin = $this->article->getById($id);
+            $article = $this->article->getById($id);
             $data['admin_id_u'] = $this->user->id;
             $data['admin_name_u'] = $this->user->username;
-            $res = $this->article->update($admin, $data);
+            $res = $this->article->update($article, $data);
             if($res){
-                $articleTag = $this->tagService->getArticleTagByArticleId($id);
-                $tag = $this->tagService->getListTagByArticleTagId($articleTag['tag_id']);
-                $this->tagService->updateTag($tag, $listTags);
+                $this->tagService->removeArticleTag($id);
+                $arrTag = explode(',', $listTags);
+                if(sizeof($arrTag) > 0){
+                    foreach($arrTag as $v){
+                        $tag = $this->tagService->getCreateTagByName($v);
+                        if($tag){
+                            $payload = array(
+                                'article_id'=> $res->id,
+                                'tag_id'=> $tag->id
+                            );
+                            $this->tagService->createArticleTag($payload);
+                        }
+                    }
+                }
                 $mess = 'Cập nhật bài viết thành công';
             }
         }
@@ -98,7 +121,7 @@ class AdminArticleController extends AdminBaseController
     }
 
     public function remove($id = 0){
-        if (Gate::denies('admin-pms', $this->currentRoute)) {
+        if (Gate::forUser($this->user)->denies('admin-pms', $this->currentRoute)) {
             return redirect()->route('admin.home.dashboard')->with('error_message','Bạn không có quyền xóa bài viết này!');
         }
         $this->article->remove($id);

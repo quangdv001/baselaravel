@@ -21,7 +21,7 @@ class AdminPermissionController extends AdminBaseController
     }
 
     public function index(Request $request){
-        if (Gate::denies('admin-pms', $this->currentRoute)) {
+        if (Gate::forUser($this->user)->denies('admin-pms', $this->currentRoute)) {
             return redirect()->route('admin.home.dashboard')->with('error_message','Bạn không có quyền vào trang này!');
         }
         $data = $this->permission->getAll();
@@ -30,7 +30,7 @@ class AdminPermissionController extends AdminBaseController
     }
 
     public function getCreate($id = 0){
-        if (Gate::denies('admin-pms', $this->currentRoute)) {
+        if (Gate::forUser($this->user)->denies('admin-pms', $this->currentRoute)) {
             return redirect()->route('admin.home.dashboard')->with('error_message','Bạn không có quyền vào trang này!');
         }
         $data = [];
@@ -43,7 +43,7 @@ class AdminPermissionController extends AdminBaseController
     }
 
     public function postCreate(PermissionRequest $request, $id = 0){
-        if (Gate::denies('admin-pms', $this->currentRoute)) {
+        if (Gate::forUser($this->user)->denies('admin-pms', $this->currentRoute)) {
             return redirect()->route('admin.home.dashboard')->with('error_message','Bạn không có quyền vào trang này!');
         }
         $data = $request->all();

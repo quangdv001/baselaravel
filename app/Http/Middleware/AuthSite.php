@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class AuthAdmin
+class AuthSite
 {
     /**
      * Handle an incoming request.
@@ -15,9 +15,9 @@ class AuthAdmin
      */
     public function handle($request, Closure $next)
     {
-        if(auth('admin')->check()){
+        if(auth('web')->check()){
             return $next($request);
         }
-        return redirect()->route('admin.getLogin');
+        return redirect()->route('site.auth.getLogin');
     }
 }

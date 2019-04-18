@@ -20,7 +20,7 @@
                         @if(sizeof($data) > 0)
                         @foreach($data as $v)
                         @if(file_exists('storage/upload/files/'.$v->path))
-                    <li class="img-item" data-id="{{ $v->id }}" data-url="{{ $v->url }}">
+                    <li class="img-item" data-id="{{ $v->id }}" data-url="{{ $v->url }}" data-path="{{ $v->path }}">
                             <img width="196" height="196" @if($v->type == 'zip')
                             src="http://thuthuatphanmem.vn/uploads/2014/11/17/winrar_103356.png" @else
                             src="{{ $v->url }}" @endif alt="">

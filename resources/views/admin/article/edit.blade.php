@@ -20,8 +20,8 @@
                         <div class="form-group">
                             <label>Slug</label>
                             <input type="text" class="form-control" name="slug" placeholder="Slug" value="{{ isset($data->slug) ? $data->slug : old('slug') }}">
-                            @if($errors->has('name'))
-                                <p class="text-danger">{{ $errors->first('name') }}</p>
+                            @if($errors->has('slug'))
+                                <p class="text-danger">{{ $errors->first('slug') }}</p>
                             @endif
                         </div>
                         <div class="form-group">
@@ -43,6 +43,11 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label>Tài liệu</label><br>
+                            <a href="javascript:void(0)" class="btn btn-info btn-select-file-path">Chọn File</a><br><br>
+                            <input type="text" readonly name="file_path" class="file_path form-control" value="{{isset($data->file_path) ? $data->file_path : old('file_path')}}">
+                        </div>
+                        <div class="form-group">
                             <label for="exampleTextarea1">Meta</label>
                             <textarea class="form-control" name="meta" id="exampleTextarea1" rows="2">{{ isset($data->meta) ? $data->meta : old('meta') }}</textarea>
                         </div>
@@ -56,13 +61,14 @@
                         </div>
                         <div class="form-group">
                             <label for="tag">TAG</label>
-                            <input type="text" name="tag" class="form-control form-control-lg" id="tag" placeholder="tag" value="{{ isset($data->listTags) ? $data->listTags : old('listTags') }}" >
+                            <input type="text" name="tag" class="form-control form-control-lg" id="tag" placeholder="tag" value="{{ $listTag ? $listTag : old('tag') }}" >
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlSelect2">Loại bài viết</label>
                             <select class="form-control" name="type" id="exampleFormControlSelect2">
                                 <option value="0" @if(isset($data->status) && $data->status == 0) selected @endif>Tin tức</option>
                                 <option value="1" @if(isset($data->status) && $data->status == 1) selected @endif>Luật pháp</option>
+                                <option value="2" @if(isset($data->status) && $data->status == 2) selected @endif>Dự án nhà đất</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -98,10 +104,17 @@
             $(document).on('click', '.btn-select-file', function () {
                 init.openFileModal(callback);
             });
+
+            $(document).on('click', '.btn-select-file-path', function () {
+                init.openFileModal(callbackFile);
+            });
         });
-        var callback = function (a) {
-            $('.img').val(a);
-            $('.img-show').attr('src', a);
+        var callback = function (data) {
+            $('.img').val(data.url);
+            $('.img-show').attr('src', data.url);
+        }
+        var callbackFile = function (data) {
+            $('.file_path').val(data.path);
         }
     </script>
 @endsection

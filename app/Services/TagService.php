@@ -42,7 +42,7 @@ class TagService
     {
         try {
             DB::beginTransaction();
-            $articleTag = $this->article_tag;
+            $articleTag = new ArticleTag();
             foreach ($data as $key => $value) {
                 $articleTag->$key = $value;
             }
@@ -70,11 +70,41 @@ class TagService
     }
 
     public function getArticleTagByArticleId($id){
-        return $this->article_tag->where('article_id', $id)->first();
+        return $this->article_tag->where('article_id', $id)->get();
     }
 
     public function getListTagByArticleTagId($id){
         return $this->tag->find($id);
+    }
+
+    public function getCreateTagByName($name){
+        try {
+            DB::beginTransaction();
+            $tag = $this->tag->where('name', $name)->first();
+            if($tag){
+                DB::commit();
+                return $tag;
+            } else {
+                $newTag = $this->createTag($name);
+                DB::commit();
+                return $newTag;
+            }
+        } catch (Exception  $e) {
+            DB::rollBack();
+            throw $e;
+        }
+    }
+
+    public function removeArticleTag($id){
+        try {
+            DB::beginTransaction();
+            $articleTag = $this->article_tag->where('article_id', $id)->delete();
+            DB::commit();
+            return $articleTag;
+        } catch (Exception  $e) {
+            DB::rollBack();
+            throw $e;
+        }
     }
 
 }

@@ -23,7 +23,7 @@ class AdminProvinceController extends AdminBaseController
     }
 
     public function index(){
-        if (Gate::denies('admin-pms', $this->currentRoute)) {
+        if (Gate::forUser($this->user)->denies('admin-pms', $this->currentRoute)) {
             return redirect()->route('admin.home.dashboard')->with('error_message','Bạn không có quyền vào trang này!');
         }
         $province = $this->province->getProvince();
@@ -32,7 +32,7 @@ class AdminProvinceController extends AdminBaseController
     }
 
     public function listDistrict(){
-        if (Gate::denies('admin-pms', $this->currentRoute)) {
+        if (Gate::forUser($this->user)->denies('admin-pms', $this->currentRoute)) {
             return redirect()->route('admin.home.dashboard')->with('error_message','Bạn không có quyền vào trang này!');
         }
         $district = $this->province->getDistrict();
@@ -41,7 +41,7 @@ class AdminProvinceController extends AdminBaseController
     }
 
     public function listWard(){
-        if (Gate::denies('admin-pms', $this->currentRoute)) {
+        if (Gate::forUser($this->user)->denies('admin-pms', $this->currentRoute)) {
             return redirect()->route('admin.home.dashboard')->with('error_message','Bạn không có quyền vào trang này!');
         }
         $ward = $this->province->getWard();

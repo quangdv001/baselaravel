@@ -176,14 +176,17 @@ var init = {
             if(res.success == 1){
                 $('body').append(res.html);
                 $("#fileModal").modal();
-                var path = '';
+                var data = {};
                 $('.img-item').click(function(){
                     $('.img-item').removeClass('active');
                     $(this).addClass('active');
-                    path = $(this).data('url');
+                    
+                    data.url = $(this).data('url');
+                    data.id = $(this).data('id');
+                    data.path = $(this).data('path');
                 });
                 $('.btn-choose-file').click(function(){
-                    callback(path);
+                    callback(data);
                     $("#fileModal").modal("hide");
                 });
             } else {
