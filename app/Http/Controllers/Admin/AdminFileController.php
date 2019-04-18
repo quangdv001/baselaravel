@@ -62,7 +62,7 @@ class AdminFileController extends AdminBaseController
 
     public function downloadFile($id){
         $file = $this->file->getFileById($id);
-        return Storage::download('upload/files/'.$file->path);
+        return Storage::download('upload/files/'.$file->path, $file->name);
     }
 
     public function openFileModal(){

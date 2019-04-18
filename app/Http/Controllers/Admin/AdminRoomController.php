@@ -10,9 +10,9 @@ use App\Http\Requests\Admin\ArticleRequest;
 use App\Services\CategoryService;
 use App\Services\TagService;
 
-class AdminArticleController extends AdminBaseController
+class AdminRoomController extends AdminBaseController
 {
-    protected $article;
+    protected $room;
     protected $category;
     public function __construct(ArticleService $article, CategoryService $category, TagService $tagService)
     {

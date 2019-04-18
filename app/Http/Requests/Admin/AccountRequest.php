@@ -14,7 +14,7 @@ class AccountRequest extends FormRequest
      */
     public function authorize()
     {
-        return auth()->check();
+        return auth('admin')->check();
     }
 
     /**

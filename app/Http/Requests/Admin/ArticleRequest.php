@@ -13,7 +13,7 @@ class ArticleRequest extends FormRequest
      */
     public function authorize()
     {
-        return auth()->check();
+        return auth('admin')->check();
     }
 
     /**
@@ -25,7 +25,7 @@ class ArticleRequest extends FormRequest
     {
         return [
             'title' => 'required',
-            'slug' => 'required|unique:article',
+            'slug' => 'required|unique:article,slug,'.$this->id,
         ];
     }
 

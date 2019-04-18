@@ -123,7 +123,7 @@ Danh sách bài viết
                                     {{ $v->status == 1 ? 'Hoạt động' : 'Không hoạt động' }}
                                 </td>
                                 <td>
-                                    {{ $v->type == 1 ? 'Tin tức' : 'Luật pháp' }}
+                                    {{ $v->type == 0 ? 'Tin tức' : ($v->type == 1 ? 'Luật pháp' : 'Dự án nhà đất') }}
                                 </td>
                                 <td>
                                     {{ $v->admin_name_c }}
