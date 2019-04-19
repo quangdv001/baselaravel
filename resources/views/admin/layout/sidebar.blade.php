@@ -140,6 +140,25 @@
                 </div>
             </li>
         @endif
+        @if(auth('admin')->user()->can('admin-pms', 'admin.room.getList'))
+            <li class="nav-item @if(in_array($currentRoute,['admin.room.getList'])) active @endif">
+                <a class="nav-link" data-toggle="collapse" href="#ui-basic7" aria-expanded="false" aria-controls="ui-basic">
+                    <i class="menu-icon mdi mdi-home-variant"></i>
+                    <span class="menu-title">Quản lý phòng trọ</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse @if(in_array($currentRoute,['admin.room.getList','admin.room.getCreate'])) show @endif" id="ui-basic7">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item">
+                            <a class="nav-link @if(in_array($currentRoute,['admin.room.getList'])) active @endif" href="{{ route('admin.room.getList') }}">Danh sách phòng trọ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @if(in_array($currentRoute,['admin.room.getCreate'])) active @endif" href="{{ route('admin.room.getCreate') }}">Tạo bài phòng trọ</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        @endif
 
 
     </ul>

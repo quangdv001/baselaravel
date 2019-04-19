@@ -64,8 +64,6 @@
                     </div>
                     <div class="form-group">
                         <label for="editor2">Mô tả</label>
-                        <br>
-                        <a href="javascript:void(0)" class="btn btn-info btn-append-img">Chèn ảnh</a>
                         <textarea class="form-control ckeditor" name="description" id="editor2"
                             rows="5">{{ isset($data->description) ? $data->description : old('description') }}</textarea>
                     </div>
@@ -125,10 +123,6 @@
             init.openFileModal(callbackFile);
         });
 
-        $(document).on('click', '.btn-append-img', function () {
-            init.openFileModal(callbackCkeditor);
-        });
-
         $('.title').keyup(function () {
             var val = $(this).val();
             var slug = init.makeSlug(val);
@@ -141,11 +135,6 @@
     }
     var callbackFile = function (data) {
         $('.file_path').val(data.path);
-    }
-
-    var callbackCkeditor = function (data) {
-        img = "<img src='"+ data.url +"'/>";
-        CKEDITOR.instances.editor2.insertHtml(img);
     }
 
 </script>

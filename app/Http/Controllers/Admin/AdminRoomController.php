@@ -9,15 +9,16 @@ use App\Services\ArticleService;
 use App\Http\Requests\Admin\ArticleRequest;
 use App\Services\CategoryService;
 use App\Services\TagService;
+use App\Services\RoomService;
 
 class AdminRoomController extends AdminBaseController
 {
-    protected $room;
-    protected $category;
-    public function __construct(ArticleService $article, CategoryService $category, TagService $tagService)
+    private $room;
+    private $category;
+    public function __construct(RoomService $room, CategoryService $category, TagService $tagService)
     {
         parent::__construct();
-        $this->article = $article;
+        $this->room = $room;
         $this->category = $category;
         $this->tagService = $tagService;
     }
@@ -29,11 +30,11 @@ class AdminRoomController extends AdminBaseController
         $request->flash();
         $dataS = $request->only('title','type','status','user_name_c','admin_name_c');
         $dataS['limit'] = 10;
-        $article = $this->article->search($dataS);
+        $room = $this->room->search($dataS);
         $listCategories = $this->category->listPluck();
 
-        return view('admin.article.index')
-            ->with('data', $article)
+        return view('admin.room.index')
+            ->with('data', $room)
             ->with('listCategories', $listCategories);
     }
 

@@ -11,18 +11,18 @@ namespace App\Services;
 
 use Exception;
 use Illuminate\Support\Facades\DB;
-use App\Models\Article;
+use App\Models\Room;
 
 class RoomService
 {
-    private $article;
-    public function __construct(Article $article)
+    private $room;
+    public function __construct(Room $room)
     {
-        $this->article = $article;
+        $this->room = $room;
     }
 
     public function search($data){
-        $query = $this->article;
+        $query = $this->room;
         if (isset($data['title']) && $data['title'] != '') {
             $query = $query->where('title', 'like', '%' . $data['title'] . '%');
         }
@@ -34,9 +34,6 @@ class RoomService
         }
         if (isset($data['status']) && $data['status'] > -1) {
             $query = $query->where('status', $data['status']);
-        }
-        if (isset($data['type']) && $data['type'] > -1) {
-            $query = $query->where('type', $data['type']);
         }
         if (isset($data['sortBy']) && $data['sortBy'] != '') {
             $query = $query->orderBy($data['sortBy'], isset($data['sortOrder']) ? $data['sortOrder'] : 'DESC');
@@ -51,7 +48,7 @@ class RoomService
     {
         try {
             DB::beginTransaction();
-            $admin = $this->article;
+            $admin = $this->room;
             foreach ($data as $key => $value) {
                 $admin->$key = $value;
             }
@@ -81,16 +78,16 @@ class RoomService
     }
 
     public function remove($id){
-        $article = $this->article->find($id);
+        $article = $this->room->find($id);
         $article->delete();
     }
 
     public function getById($id){
-        return $this->article->find($id);
+        return $this->room->find($id);
     }
 
     public function getAll(){
-        return $this->article->orderBy('id', 'DESC')->get();
+        return $this->room->orderBy('id', 'DESC')->get();
     }
 
 }

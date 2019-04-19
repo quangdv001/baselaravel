@@ -50,7 +50,7 @@ class AdminProvinceController extends AdminBaseController
     }
 
     public function getImport(){
-        Excel::import(new ProvinceImport($this->province), storage_path('app/import/Province-District-Ward.xls'));
+        Excel::import(new ProvinceImport($this->province), 'import/location.xls', 'local');
     }
 
 }

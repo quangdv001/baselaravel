@@ -1,13 +1,13 @@
 @extends('admin.layout.main')
 @section('title')
-Danh sách bài viết
+Danh sách phòng trọ
 @endsection
 @section('content')
 <div class="row">
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Danh sách bài viết</h4>
+                <h4 class="card-title">Danh sách phòng trọ</h4>
                 <form class="forms-sample" action="">
                     <div class="row">
                         <div class="col-md-4">
@@ -28,7 +28,7 @@ Danh sách bài viết
                                 <input type="text" class="form-control" id="exampleInputName1" placeholder="Tên user" name="user_name_c" value="{{ old('user_name_c') }}">
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        {{-- <div class="col-md-4">
                             <div class="form-group">
                                 <label for="exampleFormControlSelect2">Loại bài viết</label>
                                 <select class="form-control" name="type" id="exampleFormControlSelect2">
@@ -37,7 +37,7 @@ Danh sách bài viết
                                     <option @if(old('type') == 1) selected @endif value="1">Luật pháp</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="exampleFormControlSelect3">Trạng thái</label>
@@ -88,9 +88,6 @@ Danh sách bài viết
                                     Trạng thái
                                 </th>
                                 <th>
-                                    Loại bài viết
-                                </th>
-                                <th>
                                     Admin
                                 </th>
                                 <th>
@@ -123,9 +120,6 @@ Danh sách bài viết
                                     {{ $v->status == 1 ? 'Hoạt động' : 'Không hoạt động' }}
                                 </td>
                                 <td>
-                                    {{ $v->type == 0 ? 'Tin tức' : ($v->type == 1 ? 'Luật pháp' : 'Dự án nhà đất') }}
-                                </td>
-                                <td>
                                     {{ $v->admin_name_c }}
                                 </td>
                                 <td>
@@ -135,11 +129,11 @@ Danh sách bài viết
                                     {{ $v->created_at->format('H:i:s d/m/Y') }}
                                 </td>
                                 <td>
-                                    <a href="{{ route('admin.article.getCreate', ['id' => $v->id]) }}"
+                                    <a href="{{ route('admin.room.getCreate', ['id' => $v->id]) }}"
                                         class="text-warning"><i class="fa fa-pencil-square-o icon-sm"
                                             aria-hidden="true"></i></a>
                                     -
-                                    <a href="{{ route('admin.article.remove', ['id' => $v->id]) }}"
+                                    <a href="{{ route('admin.room.remove', ['id' => $v->id]) }}"
                                         class="text-warning"><i class="fa fa-trash-o icon-sm"
                                             aria-hidden="true"></i></a>
                                 </td>
