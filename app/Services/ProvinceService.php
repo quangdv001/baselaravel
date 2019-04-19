@@ -91,4 +91,16 @@ class ProvinceService
         return $this->ward->all();
     }
 
+    public function getProvincePluck(){
+        return $this->province->pluck('name', 'province_id');
+    }
+
+    public function getDistrictByProvince($id){
+        return $this->district->where('province_id', $id)->pluck('name', 'district_id');
+    }
+
+    public function getWardByDistrict($id){
+        return $this->ward->where('district_id', $id)->pluck('name', 'ward_id');
+    }
+
 }

@@ -16,4 +16,9 @@ class Tag extends Model
         return $this->belongsToMany('App\Models\Article', 'article_tag');
     }
 
+    public function room()
+    {
+        return $this->belongsToMany('App\Models\Room', 'room_tag');
+    }
+
 }

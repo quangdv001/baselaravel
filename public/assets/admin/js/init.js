@@ -177,7 +177,7 @@ var init = {
                 $('body').append(res.html);
                 $("#fileModal").modal();
                 var data = {};
-                $('.img-item').click(function(){
+                $(document).on('click','.img-item',function(){
                     $('.img-item').removeClass('active');
                     $(this).addClass('active');
                     

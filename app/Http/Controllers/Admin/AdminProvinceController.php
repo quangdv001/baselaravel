@@ -53,4 +53,28 @@ class AdminProvinceController extends AdminBaseController
         Excel::import(new ProvinceImport($this->province), 'import/location.xls', 'local');
     }
 
+    public function loadProvince($select = 0){
+        $province = $this->province->getProvincePluck();
+        $res['success'] = 1;
+        $res['mess'] = 'Lấy dữ liệu thành công!';
+        $res['html'] = view('admin.province.optionProvince')->with('province', $province)->with('select', $select)->render();
+        return response()->json($res);
+    }
+
+    public function loadDistrict($id, $select = 0){
+        $district = $this->province->getDistrictByProvince($id);
+        $res['success'] = 1;
+        $res['mess'] = 'Lấy dữ liệu thành công!';
+        $res['html'] = view('admin.province.optionDistrict')->with('district', $district)->with('select', $select)->render();
+        return response()->json($res);
+    }
+
+    public function loadWard($id, $select = 0){
+        $ward = $this->province->getWardByDistrict($id);
+        $res['success'] = 1;
+        $res['mess'] = 'Lấy dữ liệu thành công!';
+        $res['html'] = view('admin.province.optionWard')->with('ward', $ward)->with('select', $select)->render();
+        return response()->json($res);
+    }
+
 }

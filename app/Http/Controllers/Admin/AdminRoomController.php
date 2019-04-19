@@ -10,6 +10,7 @@ use App\Http\Requests\Admin\ArticleRequest;
 use App\Services\CategoryService;
 use App\Services\TagService;
 use App\Services\RoomService;
+use App\Http\Requests\Admin\RoomRequest;
 
 class AdminRoomController extends AdminBaseController
 {
@@ -45,7 +46,7 @@ class AdminRoomController extends AdminBaseController
         $article = $tagItem = [];
         $listTag = '';
         if($id > 0){
-            $article = $this->article->getById($id);
+            $article = $this->room->getById($id);
             $tag = $article->tag;
 
             if(sizeof($tag) > 0){
@@ -58,18 +59,19 @@ class AdminRoomController extends AdminBaseController
 
         $category = $this->category->getAll();
         $html = $this->category->generateOptionSelect($category, 0, $article ? $article->category_id : 0, '');
-        return view('admin.article.edit')
+        return view('admin.room.edit')
             ->with('id', $id)
             ->with('html', $html)
             ->with('listTag', $listTag)
             ->with('data', $article);
     }
 
-    public function postCreate(ArticleRequest $request, $id = 0){
+    public function postCreate(RoomRequest $request, $id = 0){
         if (Gate::forUser($this->user)->denies('admin-pms', $this->currentRoute)) {
             return redirect()->route('admin.home.dashboard')->with('error_message','Bạn không có quyền vào trang này!');
         }
-        $data = $request->only('title', 'slug', 'meta', 'type', 'short_description', 'description', 'status', 'category_id', 'img', 'tag', 'file_path');
+        $data = $request->only('title', 'slug', 'meta', 'type_name', 'short_description', 'description', 'price', 'acreage', 'direction', 'province_id', 
+                                'district_id', 'ward_id', 'address', 'status', 'category_id', 'img', 'tag', 'file_path');
         $listTags = $data['tag'];
         unset($data['tag']);
         $mess = '';
@@ -77,7 +79,7 @@ class AdminRoomController extends AdminBaseController
             $data['admin_id_c'] = $this->user->id;
             $data['admin_name_c'] = $this->user->username;
             
-            $res = $this->article->create($data);
+            $res = $this->room->create($data);
             if($res){
                 $arrTag = explode(',', $listTags);
                 if(sizeof($arrTag) > 0){
@@ -85,49 +87,49 @@ class AdminRoomController extends AdminBaseController
                         $tag = $this->tagService->getCreateTagByName($v);
                         if($tag){
                             $payload = array(
-                                'article_id'=> $res->id,
+                                'room_id'=> $res->id,
                                 'tag_id'=> $tag->id
                             );
-                            $this->tagService->createArticleTag($payload);
+                            $this->tagService->createRoomTag($payload);
                         }
                     }
                     
                 }
-                $mess = 'Tạo bài viết thành công';
+                $mess = 'Tạo phòng trọ thành công';
             }
         } else {
-            $article = $this->article->getById($id);
+            $article = $this->room->getById($id);
             $data['admin_id_u'] = $this->user->id;
             $data['admin_name_u'] = $this->user->username;
-            $res = $this->article->update($article, $data);
+            $res = $this->room->update($article, $data);
             if($res){
-                $this->tagService->removeArticleTag($id);
+                $this->tagService->removeRoomTag($id);
                 $arrTag = explode(',', $listTags);
                 if(sizeof($arrTag) > 0){
                     foreach($arrTag as $v){
                         $tag = $this->tagService->getCreateTagByName($v);
                         if($tag){
                             $payload = array(
-                                'article_id'=> $res->id,
+                                'room_id'=> $res->id,
                                 'tag_id'=> $tag->id
                             );
-                            $this->tagService->createArticleTag($payload);
+                            $this->tagService->createRoomTag($payload);
                         }
                     }
                 }
-                $mess = 'Cập nhật bài viết thành công';
+                $mess = 'Cập nhật phòng trọ thành công';
             }
         }
-        return redirect()->route('admin.article.getList')->with('success_message', $mess);
+        return redirect()->route('admin.room.getList')->with('success_message', $mess);
     }
 
     public function remove($id = 0){
         if (Gate::forUser($this->user)->denies('admin-pms', $this->currentRoute)) {
             return redirect()->route('admin.home.dashboard')->with('error_message','Bạn không có quyền xóa bài viết này!');
         }
-        $this->article->remove($id);
+        $this->room->remove($id);
         $mess = 'Xóa bài viết thành công';
-        return redirect()->route('admin.article.getList')->with('success_message', $mess);
+        return redirect()->route('admin.room.getList')->with('success_message', $mess);
     }
 
 

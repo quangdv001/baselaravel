@@ -13,14 +13,18 @@ use Exception;
 use Illuminate\Support\Facades\DB;
 use App\Models\ArticleTag;
 use App\Models\Tag;
+use App\Models\RoomTag;
 
 class TagService
 {
-    private $article;
-    public function __construct(ArticleTag $article_tag, Tag $tag)
+    private $roomTag;
+    private $tag;
+    private $article_tag;
+    public function __construct(ArticleTag $article_tag, Tag $tag, RoomTag $roomTag)
     {
         $this->article_tag = $article_tag;
         $this->tag = $tag;
+        $this->roomTag = $roomTag;
     }
 
     public function createTag($listTag)
@@ -43,6 +47,23 @@ class TagService
         try {
             DB::beginTransaction();
             $articleTag = new ArticleTag();
+            foreach ($data as $key => $value) {
+                $articleTag->$key = $value;
+            }
+            $articleTag->save();
+            DB::commit();
+            return $articleTag;
+        } catch (Exception  $e) {
+            DB::rollBack();
+            throw $e;
+        }
+    }
+
+    public function createRoomTag($data)
+    {
+        try {
+            DB::beginTransaction();
+            $articleTag = new RoomTag();
             foreach ($data as $key => $value) {
                 $articleTag->$key = $value;
             }
@@ -96,6 +117,18 @@ class TagService
     }
 
     public function removeArticleTag($id){
+        try {
+            DB::beginTransaction();
+            $articleTag = $this->article_tag->where('article_id', $id)->delete();
+            DB::commit();
+            return $articleTag;
+        } catch (Exception  $e) {
+            DB::rollBack();
+            throw $e;
+        }
+    }
+
+    public function removeRoomTag($id){
         try {
             DB::beginTransaction();
             $articleTag = $this->article_tag->where('article_id', $id)->delete();
