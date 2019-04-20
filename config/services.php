@@ -43,5 +43,17 @@ return [
             'tolerance' => env('STRIPE_WEBHOOK_TOLERANCE', 300),
         ],
     ],
+    
+    'google' => [
+        'client_id' => env('GOOGLE_CLIENT_ID', '175320168871-ck5mtv2igkvcgrrfli8oi0og96qijgi5.apps.googleusercontent.com'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET', 'jOQGyIehAwS2GR3Ib4vI7Q30'),
+        'redirect' => env('GOOGLE_REDIRECT', 'http://base.vn/login/google/callback'),
+    ],
+
+    'facebook' => [
+        'client_id' => env('FACEBOOK_CLIENT_ID', '2718091718206751'),
+        'client_secret' => env('FACEBOOK_CLIENT_SECRET', '7600a2340340acc58ff2ffaed44dcedb'),
+        'redirect' => env('FACEBOOK_REDIRECT', 'http://base.vn/login/facebook/callback'),
+    ],
 
 ];

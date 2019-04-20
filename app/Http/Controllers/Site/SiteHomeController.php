@@ -21,9 +21,6 @@ class SiteHomeController extends Controller
     }
 
     public function index(){
-        // $article = $this->article->getAll();
-        // $room = $this->room->getAll();
-        // $project = $this->project->getAll();
         return view('welcome');
     }
 }

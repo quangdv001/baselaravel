@@ -15,7 +15,7 @@ class GuestSite
      */
     public function handle($request, Closure $next)
     {
-        if (auth('web')->check()) {
+        if (auth()->check()) {
             return redirect('/');
         }
         return $next($request);

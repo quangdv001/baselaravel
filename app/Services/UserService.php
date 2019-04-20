@@ -88,4 +88,8 @@ class UserService
         return $this->user->orderBy('id', 'DESC')->get();
     }
 
+    public function getByEmail($email){
+        return $this->user->where('email', $email)->first();
+    }
+
 }
