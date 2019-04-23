@@ -16,7 +16,10 @@
             <div class="col align-self-center">
             <!-- NAVIGATION -->
             <div class="navigation nav-top">
-                <ul>
+                    @if ($headerCenterMenu)
+                        @include('site.layouts.nav.index', ['menu'=>$headerCenterMenu])
+                    @endif
+                {{-- <ul>
                 <li><a href="./category.html">Khuyến mãi</a>
                 </li>
                 <li><a href="./category.html">Tin tức</a>
@@ -25,7 +28,7 @@
                 </li>
                 <li><a href="./index.html"><i class="fas fa-award"></i><span class="isMobile">&nbsp;Giỏ hàng</span></a>
                 </li>
-                </ul>
+                </ul> --}}
             </div>
             </div>
         </div>
@@ -38,7 +41,9 @@
             <div class="row">
                 <!-- NAVIGATION -->
                 <div class="navigation nav-left">
-                    @include('site.layouts.nav', ['categories'=>$categories])
+                    @if ($mainMenu)
+                        @include('site.layouts.nav.index', ['menu'=>$mainMenu])
+                    @endif
                 </div>
             </div>
             </div>

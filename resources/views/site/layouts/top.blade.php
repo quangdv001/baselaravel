@@ -4,9 +4,9 @@
         <div class="row">
         <div class="top">
             <div class="top-element">
-                    @if ($topMenu)
-                        @include('site.layouts.nav', ['categories'=>$topMenu])
-                    @endif
+                @if ($topMenu)
+                    @include('site.layouts.nav.index', ['menu'=>$topMenu])
+                @endif
             {{-- <ul>
                 <li><span><strong> <i class="material-icons">phone_in_talk</i>&nbsp;</strong><a href="#link">Liên hệ quảng cáo&nbsp;</a></span></li>
                 <li><span class="separate"></span></li>
@@ -14,7 +14,12 @@
             </ul> --}}
             </div>
             <div class="pull-right">
-            <ul>
+                <div class="navigation nav-left">
+                    @if ($socialMenu)
+                        @include('site.layouts.nav.index', ['menu'=>$socialMenu])
+                    @endif
+                </div>
+            {{-- <ul>
                 <li>
                 <div class="social-icon"><a><i class="fab fa-facebook-f"></i></a>
                 </div>
@@ -31,7 +36,7 @@
                 <div class="social-icon"><a><i class="fab fa-twitter"></i></a>
                 </div>
                 </li>
-            </ul>
+            </ul> --}}
             </div>
         </div>
         </div>

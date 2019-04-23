@@ -16,13 +16,17 @@ class SiteHomeController extends Controller
         $this->category = $category;
         $this->article = $article;
         $categories = $this->category->getAll();
-        $menu = $this->category->getMenu($categories, 1);
+        $mainMenu = $this->category->getMenu($categories, 1);
         $topMenu = $this->category->getMenu($categories, 10);
+        $socialMenu = $this->category->getMenu($categories, 13);
+        $headerCenterMenu = $this->category->getMenu($categories, 16);
         // $menu = $this->category->genMenu($categories, 1);
         // dd($categories);
         View::share('categories', $categories);
-        View::share('menu', $menu);
+        View::share('mainMenu', $mainMenu);
         View::share('topMenu', $topMenu);
+        View::share('socialMenu', $socialMenu);
+        View::share('headerCenterMenu', $headerCenterMenu);
     }
 
     public function index(){
