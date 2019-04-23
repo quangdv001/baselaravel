@@ -38,7 +38,7 @@
             <div class="row">
                 <!-- NAVIGATION -->
                 <div class="navigation nav-left">
-                    @include('site.layouts.nav')
+                    @include('site.layouts.nav', ['categories'=>$categories])
                 </div>
             </div>
             </div>
