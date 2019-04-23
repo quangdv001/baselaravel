@@ -14,7 +14,7 @@
             </ul> --}}
             </div>
             <div class="pull-right">
-                <div class="navigation nav-left">
+                <div class="navigation nav-top">
                     @if ($socialMenu)
                         @include('site.layouts.nav.index', ['menu'=>$socialMenu])
                     @endif

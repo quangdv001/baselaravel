@@ -15,7 +15,7 @@
                 </form></span></div>
             <div class="col align-self-center">
             <!-- NAVIGATION -->
-            <div class="navigation nav-top">
+            <div class="navigation nav-header">
                     @if ($headerCenterMenu)
                         @include('site.layouts.nav.index', ['menu'=>$headerCenterMenu])
                     @endif
