@@ -1,5 +1,5 @@
 @if ($menu)
-    <ul class="navigation">
+    <ul>
         @foreach ($menu as $item)
             @include('site.layouts.nav.menuItem', ['item'=>$item])
         @endforeach
