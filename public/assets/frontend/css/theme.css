@@ -1345,6 +1345,10 @@ a:hover {
   background: #f7f8f9;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
+.top-layout .nav-social-top > ul > li > a,
+.top-layout .nav-social-top > ul > li > span {
+  padding: 0;
+}
 .logo {
   margin: 8px 0;
   padding: 0;
