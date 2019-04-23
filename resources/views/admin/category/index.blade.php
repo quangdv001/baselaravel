@@ -74,6 +74,10 @@ Danh sách danh mục
                         <input type="text" class="form-control url" name="url" placeholder="URL" value="">
                     </div>
                     <div class="form-group">
+                        <label>Class name</label>
+                        <input type="text" class="form-control class_name" name="class_name" placeholder="Tên Class" value="">
+                    </div>
+                    <div class="form-group">
                         <label>Ảnh</label>
                         <input type="hidden" name="img" class="img" value="">
                         <br>
@@ -185,6 +189,7 @@ Danh sách danh mục
             var status = $('.status').val();
             var type = $('.type').val();
             var urll = $('.url').val();
+            var class_name = $('.class_name').val();
             var url = BASE_URL + '/admin/category/update/' + id;
             var data = {
                 id: id,
@@ -194,6 +199,7 @@ Danh sách danh mục
                 status: status,
                 type: type,
                 url: urll,
+                class_name: class_name,
             };
             var obj = $(this);
             obj.buttonLoader('start');

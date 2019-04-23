@@ -16,11 +16,14 @@ class SiteHomeController extends Controller
         $this->category = $category;
         $this->article = $article;
         $categories = $this->category->getAll();
-        // $htmlCategory = $this->category->genMenu($categories);
-        // View::share('categories', $htmlCategory);
+        $menu = $this->category->getMenu($categories, 1);
+        // $menu = $this->category->genMenu($categories, 1);
+        View::share('categories', $categories);
+        View::share('menu', $menu);
     }
 
     public function index(){
-        return view('welcome');
+        
+        return view('site.home.index');
     }
 }

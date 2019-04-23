@@ -128,4 +128,34 @@ class CategoryService
         return $html;
     }
 
+    public function genMenu($category, $parentId = 0, $char = ''){
+        $html = '<ol>';
+        foreach($category as $k => $v){
+            if($v['parent_id'] == $parentId){
+                $html .= '<li><a href="#">' . $v['name'] . '</a></li>';
+                unset($category[$k]);
+                $html.= $this->genMenu($category, $v['id'], $char.'|-');
+            }
+        }
+        $html .= '</ol>';
+        return $html;
+    }
+
+    public function getMenu($category, $parentId = 0){
+        $menu = [];
+        $index = 0;
+        foreach($category as $k => $v){
+            if($v['parent_id'] == $parentId){
+                unset($category[$k]);
+                $submenu = $this->getMenu($category, $v['id']);
+                if ($submenu) {
+                    $v->submenu = $submenu;
+                }
+                $menu[] = $v;
+                $index++;
+            }
+        }
+        return $menu;        
+    }
+
 }

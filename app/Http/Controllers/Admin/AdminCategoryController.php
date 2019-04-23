@@ -44,7 +44,7 @@ class AdminCategoryController extends AdminBaseController
     }
 
     public function update(Request $request, $id){
-        $data = $request->only('name', 'img', 'description', 'url', 'status', 'type');
+        $data = $request->only('name', 'img', 'description', 'url', 'status', 'type', 'class_name');
         $category = $this->category->getById($id);
         $res['success'] = 0;
         $res['mess'] = 'Có lỗi xảy ra!';
