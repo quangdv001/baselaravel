@@ -185,7 +185,7 @@ var init = {
                     data.id = $(this).data('id');
                     data.path = $(this).data('path');
                 });
-                $('.btn-choose-file').click(function(){
+                $(document).on('click','.btn-choose-file',function(){
                     callback(data);
                     $("#fileModal").modal("hide");
                 });

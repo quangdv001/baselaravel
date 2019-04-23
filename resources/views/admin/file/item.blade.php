@@ -1,4 +1,4 @@
-<li class="img-item" data-id="{{ $data->id }}">
+<li class="img-item" data-id="{{ $data->id }}" data-url="{{ $data->url }}" data-path="{{ $data->path }}">
     <img width="196" height="196" @if($data->type == 'zip') src="http://thuthuatphanmem.vn/uploads/2014/11/17/winrar_103356.png" @else src="{{ $data->url }}" @endif alt="">
     <div class="img-bot clearfix">
         <span class="img-name pull-left">{{ $data->name }}</span>
