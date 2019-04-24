@@ -43,7 +43,13 @@ class AdminAdvertiseController extends AdminBaseController
         if (Gate::forUser($this->user)->denies('admin-pms', $this->currentRoute)) {
             return redirect()->route('admin.home.dashboard')->with('error_message','Bạn không có quyền vào trang này!');
         }
-        $data = $request->only('name', 'img' , 'content', 'url', 'position', 'status', 'start_time', 'end_time');
+        $data = $request->except(['time', '_token']);
+        $time = $request->input('time','');
+        if($time != ''){
+            $arrTime = explode(' - ', $time);
+            $data['start_time'] = strtotime(str_replace('/', '-', $arrTime[0]));
+            $data['end_time'] = strtotime(str_replace('/', '-', $arrTime[1]));
+        }
         if($id == 0){
             $res = $this->advertise->create($data);
             if($res){

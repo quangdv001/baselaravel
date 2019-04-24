@@ -62,10 +62,10 @@ Danh sách quảng cáo
                                     @endif
                                 </td>
                                 <td>
-                                    {{ date('H:i:s d/m/Y', $v->start_time) }}
+                                    {{ date('d/m/Y', $v->start_time) }}
                                 </td>
                                 <td>
-                                    {{ date('H:i:s d/m/Y', $v->end_time) }}
+                                    {{ date('d/m/Y', $v->end_time) }}
                                 </td>
                                 <td>
                                     <a href="{{ route('admin.advertise.getCreate', ['id' => $v->id]) }}"

@@ -26,37 +26,30 @@
                         <p class="text-danger">{{ $errors->first('url') }}</p>
                         @endif
                     </div>
-                    <div class="form-group">
-                        <label>Từ</label>
-                        <div class='input-group date ' id='datetimepicker6'>
-                            <input type='text' class="form-control start_time" name="start_time"
-                                value="{{ isset($data->start_time) ? date('H:i:s d/m/Y', $data->start_time) : old('start_time') }}" />
-                            <span class="input-group-addon">
-                                <span class="fa fa-calendar"></span>
-                            </span>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Thời gian chạy</label>
+                                <input type='text' class="form-control time" name="time"
+                                    value="{{ isset($data->start_time) ? (date('d/m/Y', $data->start_time) . ' - '. date('d/m/Y', $data->end_time)) : old('time') }}" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Ảnh</label>
+                                <input type="hidden" name="img" class="img"
+                                    value="{{isset($data->img) ? $data->img : old('img')}}">
+                                <br>
+                                <a href="javascript:void(0)" class="btn btn-info btn-select-file">Chọn ảnh</a>
+                                <div class="bl-img-show mt-4">
+                                    <img src="{{ isset($data->img) ? $data->img : old('img') }}" class="img-show"
+                                        width="90" height="90" alt="">
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label>Đến</label>
-                        <div class='input-group date ' id='datetimepicker7'>
-                            <input type='text' class="form-control end_time" name="end_time"
-                                value="{{ isset($data->end_time) ? date('H:i:s d/m/Y', $data->end_time) : old('end_time') }}" />
-                            <span class="input-group-addon">
-                                <span class="fa fa-calendar"></span>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Ảnh</label>
-                        <input type="hidden" name="img" class="img"
-                            value="{{isset($data->img) ? $data->img : old('img')}}">
-                        <br>
-                        <a href="javascript:void(0)" class="btn btn-info btn-select-file">Chọn ảnh</a>
-                        <div class="bl-img-show mt-4">
-                            <img src="{{ isset($data->img) ? $data->img : old('img') }}" class="img-show" width="90"
-                                height="90" alt="">
-                        </div>
-                    </div>
+
+
                     <div class="form-group">
                         <label for="editor2">Mô tả</label>
                         <textarea class="form-control" name="content"
@@ -85,20 +78,16 @@
         $(document).on('click', '.btn-select-file', function () {
             init.openFileModal(callback);
         });
+        $('.time').daterangepicker({
+            opens: 'left',
+            locale: {
+                format: 'DD/MM/YYYY'
+            }
+        }, function (start, end, label) {
+            console.log("A new date selection was made: " + start.format('DD/MM/YYYY') + ' to ' + end
+                .format('DD/MM/YYYY'));
+        });
 
-        $('#datetimepicker6').datetimepicker({
-            format: 'HH:mm:ss DD/MM/YYYY'
-        });
-        $('#datetimepicker7').datetimepicker({
-            format: 'HH:mm:ss DD/MM/YYYY',
-            useCurrent: false //Important! See issue #1075
-        });
-        $("#datetimepicker6").on("dp.change", function (e) {
-            $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
-        });
-        $("#datetimepicker7").on("dp.change", function (e) {
-            $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
-        });
     });
     var callback = function (data) {
         $('.img').val(data.url);
