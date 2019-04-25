@@ -51,20 +51,27 @@
             <div class="pull-right">
                 <!-- NAVIGATION -->
                 <div class="navigation nav-right">
-                <ul>
-                    <li><a href="./">Tài khoản</a>
+                @guest
                     <ul>
-                        <li><a href="./category.html">Thông tin</a>
-                        </li>
-                        <li><a href="./category.html">Cá nhân</a>
-                        </li>
-                        <li><a href="./category.html">Tài khoản</a>
-                        </li>
-                        <li><a href="./single.html">Thoát</a>
-                        </li>
+                        <li><a href="/login">Đăng nhập</a></li>
+                        <li><a href="/register">Đăng ký</a></li>
                     </ul>
-                    </li>
-                </ul>
+                @else
+                    <ul>
+                        <li><a href="./">Tài khoản</a>
+                        <ul>
+                            <li><a href="./category.html">Thông tin</a>
+                            </li>
+                            <li><a href="./category.html">Cá nhân</a>
+                            </li>
+                            <li><a href="./category.html">Tài khoản</a>
+                            </li>
+                            <li><a href="/logout">Thoát</a>
+                            </li>
+                        </ul>
+                        </li>
+                    </ul>                    
+                @endguest
                 </div>
             </div>
             </div>

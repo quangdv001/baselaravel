@@ -129,5 +129,9 @@ class AdminArticleController extends AdminBaseController
         return redirect()->route('admin.article.getList')->with('success_message', $mess);
     }
 
-
+    public function getByType($type = null) {
+        if ($type === null) {
+            return $this->all();
+        }
+    }
 }

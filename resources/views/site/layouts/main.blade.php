@@ -41,17 +41,7 @@
               <div class="col-sm-9 border-sm-right">
                 <div class="row main-head">
                   <div class="col-sm-3 border-sm-right">
-                    <div class="block-title underline">
-                      <h2 class="title solid-color text-uppercase"><span>Tư vấn luật</span></h2>
-                    </div>
-                    <div class="row">
-                      <ul class="list-head">
-                        <li><a class="title" href="#"><span><i class="far fa-clock"></i></span><span>&nbsp;Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào năm kế tiếp</span></a></li>
-                        <li><a class="title" href="#"><span><i class="far fa-clock"></i></span><span>&nbsp;Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào năm kế tiếp</span></a></li>
-                        <li><a class="title" href="#"><span><i class="far fa-clock"></i></span><span>&nbsp;Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào năm kế tiếp</span></a></li>
-                        <li><a class="title" href="#"><span><i class="far fa-clock"></i></span><span>&nbsp;Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào năm kế tiếp</span></a></li>
-                      </ul>
-                    </div>
+                    @include('site.components.latestLaws')
                   </div>
                   <div class="col-sm-9">
                     <div class="row">
@@ -331,78 +321,8 @@
                 </div>
               </div>
               <div class="col-sm-3 sidebar">
-                <div class="list-post-aside sticky-top" style="top: 60px;"><a href="#" style="display:block">
-                    <div class="row"><img src="https://file4.batdongsan.com.vn/2019/03/12/RUFz0fap/20190312163851-0eab.jpg" alt="" width="100%" height="369px"/></div></a>
-                  <h3 class="module-title"><a href="#">Tin nổi bật</a></h3>
-                  <div class="news-post line-bottom  small-post"><a class="news-post-image-link" href="/single.html">
-                      <figure class="image-container">
-                        <div class="featured-image-overlay"><span class="featured-image-icon"><i class="fa fa-camera"></i></span></div><img class="img-responsive" src="https://bit.ly/2ESxuyd" alt="title alt"/>
-                      </figure></a>
-                    <div class="news-post-content">
-                      <h3 class="post-title title"><a class="news-post-link" href="/single.html">Lorem Ipsum là gì, Tại sao lại sử dụng nó?</a></h3>
-                      <div class="post-meta-container"><span class="post-meta-item"><i class="far fa-clock"></i> Th3-27/10/2015</span><span class="post-meta-item"><i class="fa fa-user-check"></i><a href="#admin"> Admin</a></span></div>
-                    </div>
-                  </div>
-                  <div class="news-post line-bottom list-style-post small-post">
-                    <div class="news-post-content">
-                      <div class="post-title title"><i class="list-icon fas fa-circle"></i><a class="news-post-link" href="/single.html">Lorem Ipsum là gì, Tại sao lại sử dụng nó?</a></div>
-                    </div>
-                  </div>
-                  <div class="news-post line-bottom list-style-post small-post">
-                    <div class="news-post-content">
-                      <div class="post-title title"><i class="list-icon fas fa-circle"></i><a class="news-post-link" href="/single.html">Lorem Ipsum là gì, Tại sao lại sử dụng nó?</a></div>
-                    </div>
-                  </div>
-                  <div class="news-post line-bottom list-style-post small-post">
-                    <div class="news-post-content">
-                      <div class="post-title title"><i class="list-icon fas fa-circle"></i><a class="news-post-link" href="/single.html">Lorem Ipsum là gì, Tại sao lại sử dụng nó?</a></div>
-                    </div>
-                  </div>
-                  <div class="news-post line-bottom list-style-post small-post">
-                    <div class="news-post-content">
-                      <div class="post-title title"><i class="list-icon fas fa-circle"></i><a class="news-post-link" href="/single.html">Lorem Ipsum là gì, Tại sao lại sử dụng nó?</a></div>
-                    </div>
-                  </div>
-                </div>
-                <h3 class="module-title"><a href="#">Dự án nổi bật</a></h3>
-                <div class="list-course">
-                  <div class="row">
-                    <div class="col">
-                      <div class="block gray-block">
-                        <div class="cover-image"><img src="./assets/images/services_02.png" alt=""/>
-                        </div>
-                        <div class="title">
-                          <h3><a href="project-detail.html">Dự án title 2</a></h3>
-                          <div class="meta-info"><a class="meta-info-item" href="#0">Dự án</a><span class="meta-info-item">22 Dự án</span></div>
-                        </div><a class="btn btn-raised btn-md btn-brand" href="#0"><i class="inc-icon inc-play"> </i><span>Xem chi tiết</span></a>
-                        <div class="block-info"><a class="meta-info-item" href="project.html">Dự án</a><span class="meta-info-item">22 Dự án</span></div>
-                      </div>
-                    </div>
-                    <div class="col">
-                      <div class="block gray-block">
-                        <div class="cover-image"><img src="./assets/images/services_03.png" alt=""/>
-                        </div>
-                        <div class="title">
-                          <h3><a href="project-detail.html">Dự án title 3</a></h3>
-                          <div class="meta-info"><a class="meta-info-item" href="#0">Dự án</a><span class="meta-info-item">22 Dự án</span></div>
-                        </div><a class="btn btn-raised btn-md btn-brand" href="#0"><i class="inc-icon inc-play"> </i><span>Xem chi tiết</span></a>
-                        <div class="block-info"><a class="meta-info-item" href="project.html">Dự án</a><span class="meta-info-item">22 Dự án</span></div>
-                      </div>
-                    </div>
-                    <div class="col">
-                      <div class="block gray-block">
-                        <div class="cover-image"><img src="./assets/images/services_02.png" alt=""/>
-                        </div>
-                        <div class="title">
-                          <h3><a href="project-detail.html">Dự án title 3</a></h3>
-                          <div class="meta-info"><a class="meta-info-item" href="#0">Dự án</a><span class="meta-info-item">22 Dự án</span></div>
-                        </div><a class="btn btn-raised btn-md btn-brand" href="#0"><i class="inc-icon inc-play"> </i><span>Xem chi tiết</span></a>
-                        <div class="block-info"><a class="meta-info-item" href="project.html">Dự án</a><span class="meta-info-item">22 Dự án</span></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                @include('site.layouts.sidebar')
+              </div> <!-- sidebar -->
             </div>
           </div>
         </div>

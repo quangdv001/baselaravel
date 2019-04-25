@@ -25,5 +25,20 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+        view()->composer('site.components.latestLaws', function ($view) {
+            $latestLaws = \App\Models\Article::latestByType(1);
+            return $view
+                ->with('latestLaws', $latestLaws);
+        });
+        view()->composer('site.components.latestNews', function ($view) {
+            $latestNews = \App\Models\Article::latestByType(0);
+            return $view
+                ->with('latestNews', $latestNews);
+        });
+        view()->composer('site.components.latestProjects', function ($view) {
+            $latestProjects = \App\Models\Article::latestByType(2);
+            return $view
+                ->with('latestProjects', $latestProjects);
+        });
     }
 }
