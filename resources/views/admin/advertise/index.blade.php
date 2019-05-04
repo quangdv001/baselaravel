@@ -27,6 +27,9 @@ Danh sách quảng cáo
                                     Tên
                                 </th>
                                 <th>
+                                    Vị trí
+                                </th>
+                                <th>
                                     Trạng thái
                                 </th>
                                 <th>
@@ -51,6 +54,9 @@ Danh sách quảng cáo
                                 </td>
                                 <td>
                                     {{ $v->name }}
+                                </td>
+                                <td>
+                                    {{ $v->position }}
                                 </td>
                                 <td class="text-center">
                                     @if($v->status == 1)

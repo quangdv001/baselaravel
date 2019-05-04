@@ -44,42 +44,7 @@
                     @include('site.components.latestLaws')
                   </div>
                   <div class="col-sm-9">
-                    <div class="row">
-                      <div class="slide-owl-carousel owl-carousel owl-theme"><a class="block" href="#item">
-                          <div class="cover-item">
-                            <div class="landscape_image"><img src="./assets/images/slide_01.jpg" alt="Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào năm kế tiếp"/></div>
-                          </div>
-                          <div class="detail-item">
-                            <div class="title">Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào năm kế tiếp</div>
-                            <div class="meta-info"><span class="meta-info-item">Tin tức</span><span class="meta-info-item"><i class="far fa-clock"></i> Th3-27/10/2015</span></div>
-                            <div class="short-description">Cột giá nhà phố tăng cao ngất ngưỡng không chỉ do tình trạng sốt đất dẫn đến giá ảo.</div>
-                          </div></a><a class="block" href="#item">
-                          <div class="cover-item">
-                            <div class="landscape_image"><img src="./assets/images/slide_01.jpg" alt="Tin 2 Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào năm kế tiếp"/></div>
-                          </div>
-                          <div class="detail-item">
-                            <div class="title">Tin 2 Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào năm kế tiếp</div>
-                            <div class="meta-info"><span class="meta-info-item">Tin tức</span><span class="meta-info-item"><i class="far fa-clock"></i> Th3-27/10/2015</span></div>
-                            <div class="short-description">Cột giá nhà phố tăng cao ngất ngưỡng không chỉ do tình trạng sốt đất dẫn đến giá ảo.</div>
-                          </div></a><a class="block" href="#item">
-                          <div class="cover-item">
-                            <div class="landscape_image"><img src="./assets/images/slide_01.jpg" alt="Tin 3 Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào năm kế tiếp"/></div>
-                          </div>
-                          <div class="detail-item">
-                            <div class="title">Tin 3 Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào năm kế tiếp</div>
-                            <div class="meta-info"><span class="meta-info-item">Tin tức</span><span class="meta-info-item"><i class="far fa-clock"></i> Th3-27/10/2015</span></div>
-                            <div class="short-description">Cột giá nhà phố tăng cao ngất ngưỡng không chỉ do tình trạng sốt đất dẫn đến giá ảo.</div>
-                          </div></a>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <ul class="list-head">
-                        <li><a class="title" href="#">Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào năm kế tiếp</a><span class="meta-info-item"> <i class="far fa-clock"></i> Th3-27/10/2015</span></li>
-                        <li><a class="title" href="#">Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào năm kế tiếp</a><span class="meta-info-item"> <i class="far fa-clock"></i> Th3-27/10/2015</span></li>
-                        <li><a class="title" href="#">Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào năm kế tiếp</a><span class="meta-info-item"> <i class="far fa-clock"></i> Th3-27/10/2015</span></li>
-                        <li><a class="title" href="#">Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào năm kế tiếp</a><span class="meta-info-item"> <i class="far fa-clock"></i> Th3-27/10/2015</span></li>
-                      </ul>
-                    </div>
+                    @include('site.components.headerNews')
                   </div>
                 </div>
                 <div class="row">
@@ -251,48 +216,10 @@
                     </div>
                   </div>
                   <div class="col-sm-4">
-                    <div class="block">
-                      <div class="block-title">
-                        <div class="module-title solid-color"><a href="#">Tiêu điểm</a></div>
-                        <div class="news-post line-bottom small-post"><a class="news-post-image-link" href="./single.html">
-                            <figure class="image-container">
-                              <div class="featured-image-overlay"><span class="featured-image-icon"><i class="fa fa-camera"></i></span></div><img class="img-responsive" src="./assets/images/services_02.png" alt="title alt"/>
-                            </figure></a>
-                          <div class="news-post-content">
-                            <h3 class="post-title title"><a class="news-post-link" href="./single.html">Lorem Ipsum là gì, Tại sao lại sử dụng nó?</a></h3>
-                            <div class="post-meta-container"><span class="post-meta-item"><i class="far fa-clock"></i> Th3-27/10/2015</span><span class="post-meta-item"><i class="fa fa-user-check"></i><a href="#admin"> Admin</a></span></div>
-                          </div>
-                        </div>
-                        <div class="news-post line-bottom small-post"><a class="news-post-image-link" href="./single.html">
-                            <figure class="image-container">
-                              <div class="featured-image-overlay"><span class="featured-image-icon"><i class="fa fa-camera"></i></span></div><img class="img-responsive" src="./assets/images/services_02.png" alt="title alt"/>
-                            </figure></a>
-                          <div class="news-post-content">
-                            <h3 class="post-title title"><a class="news-post-link" href="./single.html">Lorem Ipsum là gì, Tại sao lại sử dụng nó?</a></h3>
-                            <div class="post-meta-container"><span class="post-meta-item"><i class="far fa-clock"></i> Th3-27/10/2015</span><span class="post-meta-item"><i class="fa fa-user-check"></i><a href="#admin"> Admin</a></span></div>
-                          </div>
-                        </div>
-                        <div class="news-post line-bottom small-post"><a class="news-post-image-link" href="./single.html">
-                            <figure class="image-container">
-                              <div class="featured-image-overlay"><span class="featured-image-icon"><i class="fa fa-camera"></i></span></div><img class="img-responsive" src="./assets/images/services_02.png" alt="title alt"/>
-                            </figure></a>
-                          <div class="news-post-content">
-                            <h3 class="post-title title"><a class="news-post-link" href="./single.html">Lorem Ipsum là gì, Tại sao lại sử dụng nó?</a></h3>
-                            <div class="post-meta-container"><span class="post-meta-item"><i class="far fa-clock"></i> Th3-27/10/2015</span><span class="post-meta-item"><i class="fa fa-user-check"></i><a href="#admin"> Admin</a></span></div>
-                          </div>
-                        </div>
-                        <div class="news-post line-bottom small-post"><a class="news-post-image-link" href="./single.html">
-                            <figure class="image-container">
-                              <div class="featured-image-overlay"><span class="featured-image-icon"><i class="fa fa-camera"></i></span></div><img class="img-responsive" src="./assets/images/services_02.png" alt="title alt"/>
-                            </figure></a>
-                          <div class="news-post-content">
-                            <h3 class="post-title title"><a class="news-post-link" href="./single.html">Lorem Ipsum là gì, Tại sao lại sử dụng nó?</a></h3>
-                            <div class="post-meta-container"><span class="post-meta-item"><i class="far fa-clock"></i> Th3-27/10/2015</span><span class="post-meta-item"><i class="fa fa-user-check"></i><a href="#admin"> Admin</a></span></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="block">
+                    @include('site.components.latestBlock', ['moduleTitle'=>'Tiêu điểm', 'type'=>'thumb', 'news'=>$promotionNews])
+                    @include('site.components.latestBlock', ['moduleTitle'=>'Khác', 'type'=>'null', 'news'=>$promotionNews])
+                    
+                    {{-- <div class="block">
                       <div class="block-title">
                         <div class="module-title solid-color"><a href="#">Khác</a></div>
                         <div class="news-post line-bottom list-style-post small-post">
@@ -316,7 +243,8 @@
                           </div>
                         </div>
                       </div>
-                    </div><a href="#" style="display:block"><img src="https://file4.batdongsan.com.vn/2019/03/18/RUFz0fap/20190318111542-274f.jpg" alt="" width="100%" height="630px"></a>
+                    </div> --}}
+                    <a href="#" style="display:block"><img src="https://file4.batdongsan.com.vn/2019/03/18/RUFz0fap/20190318111542-274f.jpg" alt="" width="100%" height="630px"></a>
                   </div>
                 </div>
               </div>

@@ -35,6 +35,8 @@ Danh sách bài viết
                                     <option @if(old('type') == -1) selected @endif value="-1">Mời chọn</option>
                                     <option @if(old('type') == 0) selected @endif value="0">Tin tức</option>
                                     <option @if(old('type') == 1) selected @endif value="1">Luật pháp</option>
+                                    <option @if(old('type') == 1) selected @endif value="2">Dự án</option>
+                                    <option @if(old('type') == 1) selected @endif value="3">Đối tác</option>
                                 </select>
                             </div>
                         </div>
@@ -123,7 +125,7 @@ Danh sách bài viết
                                     {{ $v->status == 1 ? 'Hoạt động' : 'Không hoạt động' }}
                                 </td>
                                 <td>
-                                    {{ $v->type == 0 ? 'Tin tức' : ($v->type == 1 ? 'Luật pháp' : 'Dự án nhà đất') }}
+                                    {{ $v->type == 0 ? 'Tin tức' : ($v->type == 1 ? 'Luật pháp' :  ($v->type == 2 ? 'Dự án nhà đất' : 'Đối tác')) }}
                                 </td>
                                 <td>
                                     {{ $v->admin_name_c }}

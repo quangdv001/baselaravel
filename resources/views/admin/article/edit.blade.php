@@ -83,6 +83,7 @@
                             </option>
                             <option value="2" @if(isset($data->type) && $data->type == 2) selected @endif>Dự án nhà
                                 đất</option>
+                            <option value="3" @if(isset($data->type) && $data->type == 3) selected @endif>Đối tác</option>
                         </select>
                     </div>
                     <div class="form-group">

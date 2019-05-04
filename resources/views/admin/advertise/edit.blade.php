@@ -26,6 +26,11 @@
                         <p class="text-danger">{{ $errors->first('url') }}</p>
                         @endif
                     </div>
+                    <div class="form-group">
+                        <label>Position</label>
+                        <input type="text" class="form-control position" name="position" placeholder="position"
+                            value="{{ isset($data->position) ? $data->position : old('position') }}">
+                    </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">

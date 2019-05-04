@@ -29,6 +29,12 @@ class AppServiceProvider extends ServiceProvider
             $latestLaws = \App\Models\Article::latestByType(1);
             return $view
                 ->with('latestLaws', $latestLaws);
+        });        
+        view()->composer('site.components.headerNews', function ($view) {
+            $headerNews = \App\Models\Article::latestByType(0);
+            // dd($headerNews);
+            return $view
+                ->with('headerNews', $headerNews);
         });
         view()->composer('site.components.latestNews', function ($view) {
             $latestNews = \App\Models\Article::latestByType(0);
@@ -39,6 +45,11 @@ class AppServiceProvider extends ServiceProvider
             $latestProjects = \App\Models\Article::latestByType(2);
             return $view
                 ->with('latestProjects', $latestProjects);
+        });  
+        view()->composer('site.layouts.main', function ($view) {
+            $promotionNews = \App\Models\Article::latestByType(0);
+            return $view
+                ->with('promotionNews', $promotionNews);
         });
     }
 }
