@@ -9,7 +9,7 @@
                         </div>
                         <div class="detail-item">
                         <div class="title">{{ $item->title }}</div>
-                            <div class="meta-info"><span class="meta-info-item"><i class="far fa-clock"></i> {{$item->created_at->toFormattedDateString() }}</span></div>
+                            <div class="meta-info"><span class="meta-info-item"><i class="far fa-clock"></i> {{$item->created_at->diffForHumans() }}</span></div>
                             <div class="short-description">{!! $item->short_description !!}</div>
                         </div>
                     </a>
@@ -21,7 +21,7 @@
         <ul class="list-head">
             @foreach ($headerNews as $key=>$item)
                 @if ($key > 2)
-                    <li><a class="title" href="/posts/{{ $item->slug}}">{{ $item->title }}</a><span class="meta-info-item"> <i class="far fa-clock"></i> {{$item->created_at->toFormattedDateString() }}</span></li>
+                    <li><a class="title" href="/posts/{{ $item->slug}}">{{ $item->title }}</a><span class="meta-info-item"> <i class="far fa-clock"></i> {{$item->created_at->diffForHumans() }}</span></li>
                 @endif
             @endforeach
         </ul>

@@ -7,12 +7,14 @@ use App\Http\Controllers\Controller;
 use App\Services\CategoryService;
 use Illuminate\Support\Facades\View;
 use App\Services\ArticleService;
+use App\Services\RoomService;
 
 class SiteHomeController extends Controller
 {
     private $category;
     private $article;
-    public function __construct(CategoryService $category, ArticleService $article){
+    private $roomService;
+    public function __construct(CategoryService $category, ArticleService $article, RoomService $roomService){
         $this->category = $category;
         $this->article = $article;
         $categories = $this->category->getAll();
@@ -20,8 +22,6 @@ class SiteHomeController extends Controller
         $topMenu = $this->category->getMenu($categories, 10);
         $socialMenu = $this->category->getMenu($categories, 13);
         $headerCenterMenu = $this->category->getMenu($categories, 16);
-        // $menu = $this->category->genMenu($categories, 1);
-        // dd($categories);
         View::share('categories', $categories);
         View::share('mainMenu', $mainMenu);
         View::share('topMenu', $topMenu);
@@ -30,7 +30,9 @@ class SiteHomeController extends Controller
     }
 
     public function index(){
-        
-        return view('site.home.index');
+        $forRents = $this->roomService ? $this->roomService->getAll() : [];
+        dd($forRents);
+        return view('site.home.index')
+            ->with(['forRents'=>$forRents]);
     }
 }

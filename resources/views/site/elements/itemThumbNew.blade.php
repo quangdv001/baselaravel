@@ -13,7 +13,7 @@
       <div class="news-post-content">
         <h3 class="post-title title"><a class="news-post-link" href="/posts/{{ $item->slug}}">{{ $item->title }}</a></h3>
         <div class="post-meta-container">
-            <span class="post-meta-item"><i class="far fa-clock"></i> {{$item->created_at->toFormattedDateString() }}</span>
+            <span class="post-meta-item"><i class="far fa-clock"></i> {{$item->created_at->diffForHumans() }}</span>
             <span class="post-meta-item"><i class="fa fa-user-check"></i><a href="#admin"> {{ $item->admin_name_c }}</a></span>
         </div>
       </div>

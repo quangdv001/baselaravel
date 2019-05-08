@@ -255,7 +255,7 @@
           </div>
         </div>
       {{-- PARTNERS --}}
-      @include('site.layouts.partners')
+      @include('site.layouts.partners', ['partners'=>$partners])
       {{-- END PARTNERS --}}
         <div class="section-gap banner-text" style="    background: #ccc url(https://syntec-numerique.fr/sites/default/files/styles/medium/public/Image/finance-syntec-02-02-2017-2.jpg?itok=sXt3wLLF) no-repeat center top / 100% 600%;">
           <div class="container">

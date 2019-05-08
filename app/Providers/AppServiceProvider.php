@@ -43,6 +43,7 @@ class AppServiceProvider extends ServiceProvider
         });
         view()->composer('site.components.latestProjects', function ($view) {
             $latestProjects = \App\Models\Article::latestByType(2);
+            // dd($latestProjects);
             return $view
                 ->with('latestProjects', $latestProjects);
         });  
@@ -50,6 +51,12 @@ class AppServiceProvider extends ServiceProvider
             $promotionNews = \App\Models\Article::latestByType(0);
             return $view
                 ->with('promotionNews', $promotionNews);
+        });
+        
+        view()->composer('site.layouts.main', function ($view) {
+            $partners = \App\Models\Article::latestByType(3);
+            return $view
+                ->with('partners', $partners);
         });
     }
 }
