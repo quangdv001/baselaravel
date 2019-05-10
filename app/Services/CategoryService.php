@@ -158,4 +158,8 @@ class CategoryService
         return $menu;        
     }
 
+    public function getBySlug($slug){
+        return $this->category->where('slug',$slug)->first();
+    }
+
 }

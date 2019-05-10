@@ -10,6 +10,7 @@ Route::get('login/facebook/callback', 'SiteAuthController@loginFacebookCallback'
 Route::get('logout', 'SiteAuthController@logout')->name('auth.logout');
 
 Route::get('/', 'SiteHomeController@index')->name('home.index');
-Route::get('/category/{slug?}', 'SiteHomeController@showCategory')->name('home.category');
-Route::get('/posts/{slug?}', 'SiteHomeController@show')->name('home.show');
-Route::get('/for-rents/{slug?}', 'SiteHomeController@showForRent')->name('home.showForRent');
+Route::get('{slug}', 'SiteHomeController@showList')->name('home.category');
+// Route::get('/posts/{slug?}', 'SiteHomeController@show')->name('home.show');
+// Route::get('/for-rents/{slug?}', 'SiteHomeController@showForRent')->name('home.showForRent');
+Route::get('{slugCategpry}/{slugDetail}', 'SiteHomeController@showDetail')->name('home.showDetail');

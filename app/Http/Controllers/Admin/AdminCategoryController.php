@@ -28,6 +28,7 @@ class AdminCategoryController extends AdminBaseController
 
     public function create(Request $request){
         $data['name'] = 'New Category';
+        $data['slug'] = str_random(10);
         $data['status'] = 1;
         $data['position'] = 0;
         $category = $this->category->create($data);
@@ -44,7 +45,7 @@ class AdminCategoryController extends AdminBaseController
     }
 
     public function update(Request $request, $id){
-        $data = $request->only('name', 'img', 'description', 'url', 'status', 'type', 'class_name');
+        $data = $request->only('name', 'img', 'description', 'url', 'status', 'type', 'class_name', 'slug');
         $category = $this->category->getById($id);
         $res['success'] = 0;
         $res['mess'] = 'Có lỗi xảy ra!';

@@ -77,13 +77,13 @@
                     <div class="form-group">
                         <label for="exampleFormControlSelect2">Loại bài viết</label>
                         <select class="form-control" name="type" id="exampleFormControlSelect2">
-                            <option value="0" @if(isset($data->type) && $data->type == 0) selected @endif>Tin tức
+                            <option value="1" @if(isset($data->type) && $data->type == 1) selected @endif>Tin tức
                             </option>
-                            <option value="1" @if(isset($data->type) && $data->type == 1) selected @endif>Luật pháp
+                            <option value="2" @if(isset($data->type) && $data->type == 2) selected @endif>Luật pháp
                             </option>
-                            <option value="2" @if(isset($data->type) && $data->type == 2) selected @endif>Dự án nhà
+                            <option value="3" @if(isset($data->type) && $data->type == 3) selected @endif>Dự án nhà
                                 đất</option>
-                            <option value="3" @if(isset($data->type) && $data->type == 3) selected @endif>Đối tác</option>
+                            <option value="4" @if(isset($data->type) && $data->type == 4) selected @endif>Đối tác</option>
                         </select>
                     </div>
                     <div class="form-group">

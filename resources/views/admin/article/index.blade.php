@@ -33,10 +33,10 @@ Danh sách bài viết
                                 <label for="exampleFormControlSelect2">Loại bài viết</label>
                                 <select class="form-control" name="type" id="exampleFormControlSelect2">
                                     <option @if(old('type') == -1) selected @endif value="-1">Mời chọn</option>
-                                    <option @if(old('type') == 0) selected @endif value="0">Tin tức</option>
-                                    <option @if(old('type') == 1) selected @endif value="1">Luật pháp</option>
-                                    <option @if(old('type') == 1) selected @endif value="2">Dự án</option>
-                                    <option @if(old('type') == 1) selected @endif value="3">Đối tác</option>
+                                    <option @if(old('type') == 1) selected @endif value="0">Tin tức</option>
+                                    <option @if(old('type') == 2) selected @endif value="1">Luật pháp</option>
+                                    <option @if(old('type') == 3) selected @endif value="2">Dự án</option>
+                                    <option @if(old('type') == 4) selected @endif value="3">Đối tác</option>
                                 </select>
                             </div>
                         </div>
@@ -125,7 +125,7 @@ Danh sách bài viết
                                     {{ $v->status == 1 ? 'Hoạt động' : 'Không hoạt động' }}
                                 </td>
                                 <td>
-                                    {{ $v->type == 0 ? 'Tin tức' : ($v->type == 1 ? 'Luật pháp' :  ($v->type == 2 ? 'Dự án nhà đất' : 'Đối tác')) }}
+                                    {{ $v->type == 1 ? 'Tin tức' : ($v->type == 2 ? 'Luật pháp' :  ($v->type == 3 ? 'Dự án nhà đất' : 'Đối tác')) }}
                                 </td>
                                 <td>
                                     {{ $v->admin_name_c }}

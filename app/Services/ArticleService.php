@@ -113,4 +113,12 @@ class ArticleService
     public function test(){
         return 1;
     }
+
+    public function getBySlug($slug){
+        return $this->article->where('slug',$slug)->first();
+    }
+
+    public function getListByCategory($category, $limit = 10){
+        return $this->article->where('category_id', $category->id)->where('type', $category->type)->where('status',1)->orderBy('id','DESC')->paginate($limit);
+    }
 }

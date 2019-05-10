@@ -8,11 +8,13 @@ use App\Services\CategoryService;
 use Illuminate\Support\Facades\View;
 use App\Services\ArticleService;
 use App\Services\RoomService; 
+use Illuminate\Support\Facades\Route;
 
 class SiteHomeController extends Controller
 {
     private $category;
     private $article;
+    protected $currentRoute;
     // For only this view
     private $roomService;
     public function __construct(CategoryService $category, ArticleService $article, RoomService $roomService){
@@ -31,6 +33,8 @@ class SiteHomeController extends Controller
         $latestProjects = $this->article->latestByType(2);
         $promotionNews = $this->article->latestByType(0);
         $partners = $this->article->latestByType(3);
+        
+        $this->currentRoute = Route::current()->getName();
         // Menu views
         View::share('categories', $categories);
         View::share('mainMenu', $mainMenu);
@@ -80,5 +84,24 @@ class SiteHomeController extends Controller
         return view('site.home.single-forRent')
             ->with('slug', $slug)
             ->with('post', $article);
+    }
+
+    public function showList($slug){
+        $category = $this->category->getBySlug($slug);
+        if(in_array($category->type, [1,2,3])){
+            $article = $this->article->getListByCategory($category, 10);
+            
+        }
+        return view('site.category.index')
+            ->with('category', $category)
+            ->with('data', $article);
+    }
+
+    public function showDetail($slugCategory, $slugDetail){
+        $category = $this->category->getBySlug($slugCategory);
+        if($category->type == 1){
+            $article = $this->article->getBySlug($slugDetail);
+            
+        }
     }
 }
