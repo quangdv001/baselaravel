@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Services\CategoryService;
 use Illuminate\Support\Facades\View;
 use App\Services\ArticleService;
-use App\Services\RoomService;
+use App\Services\RoomService; 
 
 class SiteHomeController extends Controller
 {
@@ -54,5 +54,31 @@ class SiteHomeController extends Controller
             ->with('promotionNews', $promotionNews)
             ->with('partners', $partners)
             ->with('forRents', $forRents);
+    }
+
+    public function show($slug){
+        $article = $this->article->findArticleBySlug($slug);
+        // dd($article);
+        return view('site.home.single')
+            ->with('slug', $slug)
+            ->with('post', $article);
+    }
+    
+    public function showCategory($slug){
+        $articles = null;
+        if (isset($slug) && $slug == 'for-rent')
+        $articles = $this->roomService->getAll();
+        // dd($article);
+        return view('site.home.category')
+            ->with('slug', $slug)
+            ->with('posts', $articles);
+    }
+    public function showForRent($slug){
+        if (isset($slug) && $slug != '')
+        $article = $this->roomService->findBySlug($slug);
+        // dd($article);
+        return view('site.home.single-forRent')
+            ->with('slug', $slug)
+            ->with('post', $article);
     }
 }

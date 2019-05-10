@@ -1,5 +1,5 @@
 <li class="{{ $item->class_name }}">
-    <a href="#">{!! $item->name !!}</a>
+    <a href="{{ $item->url }}">{!! $item->name !!}</a>
     @if ($item->submenu)
         <ul>
             @foreach ($item->submenu as $sub)

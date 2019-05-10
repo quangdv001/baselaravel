@@ -47,6 +47,24 @@ class ArticleService
         return $admin;
     }
 
+    // NA
+    public function latestByType($typeId = 0) {
+        $article = $this->article;
+        return $article->select()
+            ->where('type', '=', $typeId )
+            ->orderBy('created_at', 'desc')
+            ->get();
+    }
+
+    public function findArticleBySlug($slug){
+        $query = null;
+        if (isset($slug) && $slug != '') {
+            $query = $this->article->where('slug', $slug)->first();
+        }
+        return $query;
+    }
+    // END NA
+
     public function create($data)
     {
         try {
@@ -95,12 +113,4 @@ class ArticleService
     public function test(){
         return 1;
     }
-    public function latestByType($typeId = 0) {
-        $article = $this->article;
-        return $article->select()
-            ->where('type', '=', $typeId )
-            ->orderBy('created_at', 'desc')
-            ->get();
-    }
-
 }

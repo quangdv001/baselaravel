@@ -44,6 +44,16 @@ class RoomService
         return $admin;
     }
 
+    // NA
+    public function findBySlug($slug){
+        $query = null;
+        if (isset($slug) && $slug != '') {
+            $query = $this->room->where('slug', $slug)->first();
+        }
+        return $query;
+    }
+    // End NA
+
     public function create($data)
     {
         try {

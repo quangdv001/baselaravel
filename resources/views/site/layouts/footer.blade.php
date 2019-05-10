@@ -3,7 +3,7 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-4">
-            <div><a class="title"><img src="./assets/images/logo-white.png" alt="Kênh thông tin dự án, giao dịch bất động sản trên toàn quốc." style="max-width: 175px;"/></a></div><br/>
+            <div><a class="title"><img src="{{ asset('assets/images/logo-white.png') }}" alt="Kênh thông tin dự án, giao dịch bất động sản trên toàn quốc." style="max-width: 175px;"/></a></div><br/>
             <div>
               <p>Kênh thông tin dự án, giao dịch bất động sản trên toàn quốc.</p>
             </div>
@@ -52,6 +52,6 @@
       </div>
     </div>
     <div class="container">
-      <div class="copyright">&copy; Copyright 2019. TYGIA.VN - Website thông tin dự án, giao dịch bất động sản.</div>
+      <div class="copyright">&copy; Copyright 2019. CHK.VN - Website thông tin dự án, giao dịch bất động sản.</div>
     </div>
   </footer>
