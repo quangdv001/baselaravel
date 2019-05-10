@@ -18,7 +18,7 @@ class ArticleService
     private $article;
     public function __construct(Article $article)
     {
-        $this->article = $article;
+        $this->article = $article ? $article : new Article;
     }
 
     public function search($data){
@@ -91,6 +91,16 @@ class ArticleService
 
     public function getAll(){
         return $this->article->orderBy('id', 'DESC')->get();
+    }
+    public function test(){
+        return 1;
+    }
+    public function latestByType($typeId = 0) {
+        $article = $this->article;
+        return $article->select()
+            ->where('type', '=', $typeId )
+            ->orderBy('created_at', 'desc')
+            ->get();
     }
 
 }
