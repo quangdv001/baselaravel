@@ -92,6 +92,7 @@ class SiteHomeController extends Controller
             $article = $this->article->getListByCategory($category, 10);
             
         }
+        // dd($article);
         return view('site.category.index')
             ->with('category', $category)
             ->with('data', $article);
@@ -99,9 +100,24 @@ class SiteHomeController extends Controller
 
     public function showDetail($slugCategory, $slugDetail){
         $category = $this->category->getBySlug($slugCategory);
-        if($category->type == 1){
+        if(in_array($category->type, [1,2,3])){
             $article = $this->article->getBySlug($slugDetail);
-            
+            switch($category->type) {
+                case 1: return view('site.category.detail_bds')
+                            ->with('category', $category)
+                            ->with('data', $article);
+                        break;
+                case 2: return view('site.category.detail_blog')
+                            ->with('category', $category)
+                            ->with('data', $article);
+                        break;
+                case 3: return view('site.category.detail_lord')
+                            ->with('category', $category)
+                            ->with('data', $article);
+                        break;
+                default:
+                        break;
+            }
         }
     }
 }
