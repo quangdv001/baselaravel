@@ -27,12 +27,12 @@ class SiteHomeController extends Controller
         $socialMenu = $this->category->getMenu($categories, 13);
         $headerCenterMenu = $this->category->getMenu($categories, 16);
 
-        $latestLaws = $this->article->latestByType(1);
-        $headerNews = $this->article->latestByType(0);
-        $latestNews = $this->article->latestByType(0);
-        $latestProjects = $this->article->latestByType(2);
-        $promotionNews = $this->article->latestByType(0);
-        $partners = $this->article->latestByType(3);
+        $latestLaws = $this->article->latestByType(2);
+        $headerNews = $this->article->latestByType(1);
+        $latestNews = $this->article->latestByType(1);
+        $latestProjects = $this->article->latestByType(3);
+        $promotionNews = $this->article->latestByType(1);
+        $partners = $this->article->latestByType(4);
         
         $this->currentRoute = Route::current()->getName();
         // Menu views
@@ -51,12 +51,10 @@ class SiteHomeController extends Controller
     }
 
     public function index(){
-        $forRents = $this->roomService->getAll();
+        $forRents = $this->roomService->search(['limit'=>5]);
         $promotionNews = $this->article->latestByType(0);
-        $partners = $this->article->latestByType(3);
         return view('site.home.index')
             ->with('promotionNews', $promotionNews)
-            ->with('partners', $partners)
             ->with('forRents', $forRents);
     }
 
@@ -87,10 +85,18 @@ class SiteHomeController extends Controller
     }
 
     public function showList($slug){
+        // dd($slug);
+        if ($slug == 'for-rents') {
+            $article = $this->roomService->search(['limit'=>10]);
+            return view('site.category.index')
+                ->with('category', (object)['type'=>4,'slug'=>'for-rents', 'name'=>'Cho thuê'])
+                ->with('data', $article);
+        }
         $category = $this->category->getBySlug($slug);
+        $article = [];
+        // dd($category);
         if(in_array($category->type, [1,2,3])){
             $article = $this->article->getListByCategory($category, 10);
-            
         }
         // dd($article);
         return view('site.category.index')
@@ -99,6 +105,12 @@ class SiteHomeController extends Controller
     }
 
     public function showDetail($slugCategory, $slugDetail){
+        if ($slugCategory === 'for-rents') {
+            $article = $this->roomService->getBySlug($slugDetail);
+            return view('site.category.detail_lord')
+                ->with('category', (object)['type'=>4,'slug'=>'for-rents', 'name'=>'Cho thuê'])
+                ->with('data', $article);
+        }
         $category = $this->category->getBySlug($slugCategory);
         if(in_array($category->type, [1,2,3])){
             $article = $this->article->getBySlug($slugDetail);

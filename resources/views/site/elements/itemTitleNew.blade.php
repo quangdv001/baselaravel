@@ -3,7 +3,7 @@
         <div class="news-post-content">
         <div class="post-title title">
             <i class="list-icon fas fa-circle"></i>
-            <a class="news-post-link" href="/posts/{{ $item->slug}}">{{ $item->title }}</a></div>
+            <a class="news-post-link" href="{{ route('site.home.showDetail',['slugCategory' => $category->slug, 'slugDetail' => $item->slug]) }}">{{ $item->title }}</a></div>
         </div>
     </div>
 @endif

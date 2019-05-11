@@ -45,10 +45,10 @@ class RoomService
     }
 
     // NA
-    public function findBySlug($slug){
+    public function getBySlug($slug){
         $query = null;
         if (isset($slug) && $slug != '') {
-            $query = $this->room->where('slug', $slug)->first();
+            $query = $this->room->where('slug', $slug)->where('status',1)->first();
         }
         return $query;
     }
