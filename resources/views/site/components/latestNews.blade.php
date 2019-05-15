@@ -1,4 +1,7 @@
 @if (count($latestNews) > 0)
+<?php
+//   dd($categories);
+?>
     <h3 class="module-title"><a href="#">Tin mới nhất</a></h3>
     @foreach ($latestNews as $key=>$item)
         @if ($key === 0)

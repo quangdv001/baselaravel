@@ -6,13 +6,16 @@
         <div class="container">
         <div class="row">
             <div class="col-sm-auto col-12">
-            <h3 class="logo" id="logo"><a href="index.html"><img src="{{ asset('assets/images/logo.png') }}"></a></h3>
+            <h3 class="logo" id="logo"><a href="/"><img src="{{ asset('assets/images/logo.png') }}"></a></h3>
             </div>
-            <div class="col align-self-center"><span class="search-form">
-                <form class="form">
-                <input class="search-input" type="text" placeholder="Nhập từ khóa...">
-                <button class="search-button"><i class="fas fa-search"></i></button>
-                </form></span></div>
+            <div class="col align-self-center">
+                <span class="search-form">
+                    <form class="form">
+                    <input class="search-input" type="text" placeholder="Nhập từ khóa...">
+                    <button class="search-button"><i class="fas fa-search"></i></button>
+                    </form>
+                </span>
+            </div>
             <div class="col align-self-center">
             <!-- NAVIGATION -->
             <div class="navigation nav-header">
