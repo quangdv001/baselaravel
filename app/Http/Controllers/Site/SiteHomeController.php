@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\View;
 use App\Services\ArticleService;
 use App\Services\RoomService; 
 use Illuminate\Support\Facades\Route;
+use App\Services\ProvinceService;
 
 class SiteHomeController extends Controller
 {
@@ -17,15 +18,17 @@ class SiteHomeController extends Controller
     protected $currentRoute;
     // For only this view
     private $roomService;
-    public function __construct(CategoryService $category, ArticleService $article, RoomService $roomService){
+    private $province;
+    public function __construct(CategoryService $category, ArticleService $article, RoomService $roomService, ProvinceService $province){
         $this->category = $category;
         $this->article = $article;
         $this->roomService = $roomService;
+        $this->province = $province;
         $categories = $this->category->getAll();
         $mainMenu = $this->category->getMenu($categories, 1);
-        $topMenu = $this->category->getMenu($categories, 10);
-        $socialMenu = $this->category->getMenu($categories, 13);
-        $headerCenterMenu = $this->category->getMenu($categories, 16);
+        $topMenu = $this->category->getMenu($categories, 2);
+        $socialMenu = $this->category->getMenu($categories, 3);
+        $headerCenterMenu = $this->category->getMenu($categories, 4);
 
         $latestLaws = $this->article->latestByType(2);
         $headerNews = $this->article->latestByType(1);
@@ -93,15 +96,31 @@ class SiteHomeController extends Controller
                 ->with('data', $article);
         }
         $category = $this->category->getBySlug($slug);
-        $article = [];
+        $arrDistrict = [];
+        // dd($arrDistrict);
+        $data = [];
         // dd($category);
+        $view = '';
         if(in_array($category->type, [1,2,3])){
-            $article = $this->article->getListByCategory($category, 10);
+            $params['status'] = 1;
+            $params['type'] = $category->type;
+            $params['orderBy'] = 'id';
+            $params['limit'] = 10;
+            $data = $this->article->search($params);
+            $view = 'site.category.article';
+        } elseif($category->type == 4){
+            $arrDistrict = $this->province->getDistrictPluck()->toArray();
+            $params['status'] = 1;
+            $params['orderBy'] = 'id';
+            $params['limit'] = 10;
+            $data = $this->roomService->search($params);
+            $view = 'site.category.room';
         }
-        // dd($article);
-        return view('site.category.index')
+        // dd($arrDistrict);
+        return view($view)
             ->with('category', $category)
-            ->with('data', $article);
+            ->with('arrDistrict', $arrDistrict)
+            ->with('data', $data);
     }
 
     public function showDetail($slugCategory, $slugDetail){

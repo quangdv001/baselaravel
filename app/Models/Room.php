@@ -16,4 +16,8 @@ class Room extends Model
     {
         return $this->belongsToMany('App\Models\Tag', 'room_tag');
     }
+
+    public function category(){
+        return $this->belongsTo('App\Models\Category');
+    }
 }

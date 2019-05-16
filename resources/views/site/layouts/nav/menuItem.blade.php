@@ -1,5 +1,5 @@
 <li class="{{ $item->class_name }}">
-    <a href="{{ route('site.home.category',$item->slug) }}">{!! $item->name !!}</a>
+    <a href="{{ $item->type == 0 ? url(strval($item->url) != '' ? strval($item->url) : '#') : route('site.home.category',$item->slug) }}">{!! $item->name !!}</a>
     @if ($item->submenu)
         <ul>
             @foreach ($item->submenu as $sub)

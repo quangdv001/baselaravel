@@ -1,12 +1,12 @@
 @if($item) 
     <div class="forrent-post line-bottom">
-        <div class="post-content"><a class="news-post-image-link" href="{{ route('site.home.showDetail',['slugCategory' => $category->slug, 'slugDetail' => $item->slug]) }}">
+        <div class="post-content"><a class="news-post-image-link" href="{{ route('site.home.showDetail',['slugCategory' => $item->category->slug, 'slugDetail' => $item->slug]) }}">
             @if ($item->img)
                 <figure class="image-container">
                     <div class="featured-image-overlay"><span class="featured-image-icon"><i class="fa fa-camera"></i></span></div><img class="img-responsive" src="{{ $item->img }}" alt="title alt"/>
                 </figure></a>
             @endif
-            <h3 class="post-title title"><a class="news-post-link" href="{{ route('site.home.showDetail',['slugCategory' => $category->slug, 'slugDetail' => $item->slug]) }}">{{ $item->title }}</a></h3>
+            <h3 class="post-title title"><a class="news-post-link" href="{{ route('site.home.showDetail',['slugCategory' => $item->category->slug, 'slugDetail' => $item->slug]) }}">{{ $item->title }}</a></h3>
             <div class="row">
             <div class="col rent-attribute"><strong>Giá :</strong><span> {{ $item->price }} triệu</span></div>
             <div class="col rent-attribute"><strong>Diện tích :</strong><span> {{ $item->acreage }} m²</span></div>

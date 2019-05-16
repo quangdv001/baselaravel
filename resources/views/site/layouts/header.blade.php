@@ -16,19 +16,9 @@
             <div class="col align-self-center">
             <!-- NAVIGATION -->
             <div class="navigation nav-header">
-                    @if ($headerCenterMenu)
-                        @include('site.layouts.nav.index', ['menu'=>$headerCenterMenu])
-                    @endif
-                {{-- <ul>
-                <li><a href="./category.html">Khuyến mãi</a>
-                </li>
-                <li><a href="./category.html">Tin tức</a>
-                </li>
-                <li><a href="./single.html">Liên hệ</a>
-                </li>
-                <li><a href="./index.html"><i class="fas fa-award"></i><span class="isMobile">&nbsp;Giỏ hàng</span></a>
-                </li>
-                </ul> --}}
+                @if ($headerCenterMenu)
+                    @include('site.layouts.nav.index', ['menu'=>$headerCenterMenu])
+                @endif
             </div>
             </div>
         </div>

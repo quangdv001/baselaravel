@@ -1,18 +1,3 @@
-{{-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    @include('site.layouts.header')
-    @yield('content')
-    @include('site.layouts.footer')
-</body>
-</html> --}}
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -21,13 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>@yield('title')</title>
     <!-- Bootstrap fonts and icons-->
-    <link rel="stylesheet" href="{{ asset('assets/frontend/libs/font-roboto/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/frontend/libs/material-design-icons/css/material-icons.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/frontend/libs/fontawesome5/css/all.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/frontend/libs/bootstrap-material/css/bootstrap-material-design.min.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('assets/frontend/libs/owlcarousel2/assets/owl.carousel.min.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('assets/frontend/libs/owlcarousel2/assets/owl.theme.default.min.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('assets/frontend/css/theme.css') }}" type="text/css">
+    @include('site.layouts.css')
   </head>
   <body>       
     <div class="page home">
@@ -52,11 +31,6 @@
       @include('site.layouts.footer')
       {{-- END FOOTER --}}
     </div>
-    <script src="{{ asset('assets/frontend/libs/jquery/jquery-3.2.1.min.js') }}"></script>
-    <script src="{{ asset('assets/frontend/libs/popper/umd/popper.js') }}"></script>
-    <script src="{{ asset('assets/frontend/libs/bootstrap-material/js/bootstrap-material-design.min.js') }}"></script>
-    <script src="{{ asset('assets/frontend/libs/owlcarousel2/owl.carousel.min.js') }}"></script>
-    <script src="{{ asset('assets/frontend/libs/slimScroll/jquery.slimscroll.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('assets/frontend/js/main.js') }}"></script>
+    @include('site.layouts.js')
   </body>
 </html>

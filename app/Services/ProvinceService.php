@@ -103,4 +103,8 @@ class ProvinceService
         return $this->ward->where('district_id', $id)->pluck('name', 'ward_id');
     }
 
+    public function getDistrictPluck(){
+        return $this->district->pluck('name', 'district_id');
+    }
+
 }
