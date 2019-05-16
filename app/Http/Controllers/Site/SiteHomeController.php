@@ -36,7 +36,7 @@ class SiteHomeController extends Controller
         $latestProjects = $this->article->latestByType(3);
         $promotionNews = $this->article->latestByType(1);
         $partners = $this->article->latestByType(4);
-        
+        // dd($latestNews);
         $this->currentRoute = Route::current()->getName();
         // Menu views
         View::share('categories', $categories);
@@ -78,6 +78,7 @@ class SiteHomeController extends Controller
             ->with('slug', $slug)
             ->with('posts', $articles);
     }
+
     public function showForRent($slug){
         if (isset($slug) && $slug != '')
         $article = $this->roomService->findBySlug($slug);
@@ -88,7 +89,6 @@ class SiteHomeController extends Controller
     }
 
     public function showList($slug){
-        // dd($slug);
         if ($slug == 'for-rents') {
             $article = $this->roomService->search(['limit'=>10]);
             return view('site.category.index')
