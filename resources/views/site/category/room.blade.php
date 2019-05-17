@@ -31,8 +31,8 @@
                             </a>
                             <h3 class="post-title title"><a class="news-post-link" href="{{ route('site.home.showDetail',['slugCategory' => $category->slug, 'slugDetail' => $v->slug]) }}">{{ $v->title }}</a></h3>
                             <div class="row">
-                                <div class="col rent-attribute"><strong>Giá :</strong><span> {{ $v->price }} triệu</span></div>
-                                <div class="col rent-attribute"><strong>Diện tích :</strong><span> {{ $v->acreage }} m²</span></div>
+                                <div class="col rent-attribute"><strong>Giá :</strong><span> {{ number_format($v->price, 0,",",".") }} triệu</span></div>
+                                <div class="col rent-attribute"><strong>Diện tích :</strong><span> {{ number_format($v->acreage, 0,",",".") }} m²</span></div>
                                 <div class="col rent-attribute"><strong>Quận/huyện :</strong><span> {{ isset($arrDistrict[$v->district_id]) ? $arrDistrict[$v->district_id] : '--'  }}</span>
                                 </div>
                             </div>

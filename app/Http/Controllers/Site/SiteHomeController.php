@@ -124,31 +124,27 @@ class SiteHomeController extends Controller
     }
 
     public function showDetail($slugCategory, $slugDetail){
-        if ($slugCategory === 'for-rents') {
-            $article = $this->roomService->getBySlug($slugDetail);
-            return view('site.category.detail_lord')
-                ->with('category', (object)['type'=>4,'slug'=>'for-rents', 'name'=>'Cho thuê'])
-                ->with('data', $article);
-        }
         $category = $this->category->getBySlug($slugCategory);
+        $view = '';
+        $arrDistrict = $arrProvince = $arrWard = [];
         if(in_array($category->type, [1,2,3])){
-            $article = $this->article->getBySlug($slugDetail);
-            switch($category->type) {
-                case 1: return view('site.category.detail_bds')
-                            ->with('category', $category)
-                            ->with('data', $article);
-                        break;
-                case 2: return view('site.category.detail_blog')
-                            ->with('category', $category)
-                            ->with('data', $article);
-                        break;
-                case 3: return view('site.category.detail_lord')
-                            ->with('category', $category)
-                            ->with('data', $article);
-                        break;
-                default:
-                        break;
-            }
+            $data = $this->article->getBySlug($slugDetail);
+            $relate = $this->article->getRelate($category->id, $slugDetail, 5);
+            $view = 'site.details.article';
+        } else {
+            $arrProvince = $this->province->getProvincePluck()->toArray();
+            $arrDistrict = $this->province->getDistrictPluck()->toArray();
+            $arrWard = $this->province->getWardPluck()->toArray();
+            $data = $this->roomService->getBySlug($slugDetail);
+            $relate = $this->roomService->getRelate($category->id, $slugDetail, 5);
+            $view = 'site.details.room';
         }
+        return view($view)
+            ->with('arrProvince', $arrProvince)
+            ->with('arrDistrict', $arrDistrict)
+            ->with('arrWard', $arrWard)
+            ->with('category', $category)
+            ->with('relate', $relate)
+            ->with('data', $data);
     }
 }

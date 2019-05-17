@@ -115,10 +115,14 @@ class ArticleService
     }
 
     public function getBySlug($slug){
-        return $this->article->where('slug',$slug)->first();
+        return $this->article->where('slug',$slug)->where('status', 1)->first();
     }
 
     public function getListByCategory($category, $limit = 10){
         return $this->article->where('category_id', $category->id)->where('type', $category->type)->where('status',1)->orderBy('id','DESC')->paginate($limit);
+    }
+
+    public function getRelate($categoryId, $slug, $limit){
+        return $this->article->where('category_id', $categoryId)->where('slug', '!=', $slug)->where('status',1)->orderBy('id','DESC')->paginate($limit);
     }
 }

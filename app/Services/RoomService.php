@@ -46,11 +46,7 @@ class RoomService
 
     // NA
     public function getBySlug($slug){
-        $query = null;
-        if (isset($slug) && $slug != '') {
-            $query = $this->room->where('slug', $slug)->where('status',1)->first();
-        }
-        return $query;
+        return $this->room->where('slug', $slug)->where('status',1)->first();
     }
     // End NA
 
@@ -100,4 +96,7 @@ class RoomService
         return $this->room->orderBy('id', 'DESC')->get();
     }
 
+    public function getRelate($categoryId, $slug, $limit){
+        return $this->room->where('category_id', $categoryId)->where('slug', '!=', $slug)->where('status',1)->orderBy('id','DESC')->paginate($limit);
+    }
 }
