@@ -1,5 +1,5 @@
 
-<div class="block">
+<!-- <div class="block">
     <div class="block-title underline">
         <h2 class="title text-uppercase">Dự án mới</h2>
     </div>
@@ -40,4 +40,4 @@
         </div>
         </div>
     </div>
-</div>
+</div> -->

@@ -3,7 +3,7 @@
         <div class="slide-owl-carousel owl-carousel owl-theme">            
             @foreach ($headerNews as $key=>$item)
                 @if ($key <= 2)
-                    <a class="block" href="/posts/{{ $item->slug}}">
+                    <a class="block" href="{{ route('site.home.showDetail', ['slugCategory' => $item->category->slug, 'slugDetail' => $item->slug]) }}">
                         <div class="cover-item">
                             <div class="landscape_image"><img src="{{ $item->img}}" alt="Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào năm kế tiếp"/></div>
                         </div>
@@ -21,7 +21,7 @@
         <ul class="list-head">
             @foreach ($headerNews as $key=>$item)
                 @if ($key > 2)
-                    <li><a class="title" href="/posts/{{ $item->slug}}">{{ $item->title }}</a><span class="meta-info-item"> <i class="far fa-clock"></i> {{$item->created_at->diffForHumans() }}</span></li>
+                    <li><a class="title" href="{{ route('site.home.showDetail', ['slugCategory' => $item->category->slug, 'slugDetail' => $item->slug]) }}">{{ $item->title }}</a><span class="meta-info-item"> <i class="far fa-clock"></i> {{$item->created_at->diffForHumans() }}</span></li>
                 @endif
             @endforeach
         </ul>
