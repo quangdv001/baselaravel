@@ -4,7 +4,7 @@
 <div class="row">
     <ul class="list-head">
         @foreach ($latestLaws as $key=>$item)
-            <li><a class="title" href="/posts/{{ $item->slug}}"><span><i class="far fa-clock"></i></span><span>&nbsp;{{ $item->title }}</span></a></li>
+            <li><a class="title" href="{{ route('site.home.showDetail', ['slugCategory' => $item->category->slug, 'slugDetail' => $item->slug]) }}"><span><i class="far fa-clock"></i></span><span>&nbsp;{{ $item->title }}</span></a></li>
         @endforeach
     </ul>
     
