@@ -29,6 +29,9 @@ class AdminArticleController extends AdminBaseController
         $request->flash();
         $dataS = $request->only('title','type','status','user_name_c','admin_name_c');
         $dataS['limit'] = 10;
+        if (!isset($dataS['type'])) {
+            $dataS['type'] = [1,4];
+        }
         $article = $this->article->search($dataS);
         $listCategories = $this->category->listPluck();
 

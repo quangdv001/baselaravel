@@ -107,12 +107,12 @@
         @endif
         @if(auth('admin')->user()->can('admin-pms', 'admin.file.getList'))
             <li class="nav-item @if(in_array($currentRoute,['admin.file.getList'])) active @endif">
-                <a class="nav-link" data-toggle="collapse" href="#ui-basic6" aria-expanded="false" aria-controls="ui-basic">
+                <a class="nav-link" data-toggle="collapse" href="#ui-basic10" aria-expanded="false" aria-controls="ui-basic">
                     <i class="menu-icon mdi mdi-folder-multiple-image"></i>
                     <span class="menu-title">Quản lý Media Library</span>
                     <i class="menu-arrow"></i>
                 </a>
-                <div class="collapse @if(in_array($currentRoute,['admin.file.getList'])) show @endif" id="ui-basic6">
+                <div class="collapse @if(in_array($currentRoute,['admin.file.getList'])) show @endif" id="ui-basic10">
                     <ul class="nav flex-column sub-menu">
                         <li class="nav-item">
                             <a class="nav-link @if(in_array($currentRoute,['admin.file.getList'])) active @endif" href="{{ route('admin.file.getList') }}">Media library</a>
@@ -140,14 +140,52 @@
                 </div>
             </li>
         @endif
+        @if(auth('admin')->user()->can('admin-pms', 'admin.law.getList'))
+            <li class="nav-item @if(in_array($currentRoute,['admin.law.getList'])) active @endif">
+                <a class="nav-link" data-toggle="collapse" href="#ui-basic6" aria-expanded="false" aria-controls="ui-basic">
+                    <i class="menu-icon mdi mdi-book-multiple"></i>
+                    <span class="menu-title">Quản lý Luật</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse @if(in_array($currentRoute,['admin.law.getList','admin.law.getCreate'])) show @endif" id="ui-basic6">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item">
+                            <a class="nav-link @if(in_array($currentRoute,['admin.law.getList'])) active @endif" href="{{ route('admin.law.getList') }}">Danh sách bài viết</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @if(in_array($currentRoute,['admin.law.getCreate'])) active @endif" href="{{ route('admin.law.getCreate') }}">Tạo bài viết mới</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        @endif
+        @if(auth('admin')->user()->can('admin-pms', 'admin.project.getList'))
+            <li class="nav-item @if(in_array($currentRoute,['admin.project.getList'])) active @endif">
+                <a class="nav-link" data-toggle="collapse" href="#ui-basic7" aria-expanded="false" aria-controls="ui-basic">
+                    <i class="menu-icon mdi mdi-book-multiple"></i>
+                    <span class="menu-title">Quản lý Dự Án</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse @if(in_array($currentRoute,['admin.project.getList','admin.project.getCreate'])) show @endif" id="ui-basic7">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item">
+                            <a class="nav-link @if(in_array($currentRoute,['admin.project.getList'])) active @endif" href="{{ route('admin.project.getList') }}">Danh sách bài viết</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @if(in_array($currentRoute,['admin.project.getCreate'])) active @endif" href="{{ route('admin.project.getCreate') }}">Tạo bài viết mới</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        @endif
         @if(auth('admin')->user()->can('admin-pms', 'admin.room.getList'))
             <li class="nav-item @if(in_array($currentRoute,['admin.room.getList','admin.room.getCreate'])) active @endif">
-                <a class="nav-link" data-toggle="collapse" href="#ui-basic7" aria-expanded="false" aria-controls="ui-basic">
+                <a class="nav-link" data-toggle="collapse" href="#ui-basic8" aria-expanded="false" aria-controls="ui-basic">
                     <i class="menu-icon mdi mdi-home-variant"></i>
                     <span class="menu-title">Quản lý phòng trọ</span>
                     <i class="menu-arrow"></i>
                 </a>
-                <div class="collapse @if(in_array($currentRoute,['admin.room.getList','admin.room.getCreate'])) show @endif" id="ui-basic7">
+                <div class="collapse @if(in_array($currentRoute,['admin.room.getList','admin.room.getCreate'])) show @endif" id="ui-basic8">
                     <ul class="nav flex-column sub-menu">
                         <li class="nav-item">
                             <a class="nav-link @if(in_array($currentRoute,['admin.room.getList'])) active @endif" href="{{ route('admin.room.getList') }}">Danh sách phòng trọ</a>
@@ -161,12 +199,12 @@
         @endif
         @if(auth('admin')->user()->can('admin-pms', 'admin.advertise.getList'))
             <li class="nav-item @if(in_array($currentRoute,['admin.advertise.getList','admin.advertise.getCreate'])) active @endif">
-                <a class="nav-link" data-toggle="collapse" href="#ui-basic8" aria-expanded="false" aria-controls="ui-basic">
+                <a class="nav-link" data-toggle="collapse" href="#ui-basic9" aria-expanded="false" aria-controls="ui-basic">
                     <i class="menu-icon mdi mdi-home-variant"></i>
                     <span class="menu-title">Quản lý quảng cáo</span>
                     <i class="menu-arrow"></i>
                 </a>
-                <div class="collapse @if(in_array($currentRoute,['admin.advertise.getList','admin.advertise.getCreate'])) show @endif" id="ui-basic8">
+                <div class="collapse @if(in_array($currentRoute,['admin.advertise.getList','admin.advertise.getCreate'])) show @endif" id="ui-basic9">
                     <ul class="nav flex-column sub-menu">
                         <li class="nav-item">
                             <a class="nav-link @if(in_array($currentRoute,['admin.advertise.getList'])) active @endif" href="{{ route('admin.advertise.getList') }}">Danh sách quảng cáo</a>

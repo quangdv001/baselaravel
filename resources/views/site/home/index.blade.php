@@ -21,7 +21,7 @@
               <div class="list-post">
                   @if (count($forRents) > 0)
                       @foreach ($forRents as $item)
-                          @include('site.elements.forRentListItem', ['item'=>$item])                            
+                          @include('site.elements.forRentListItem', ['item'=>$item, 'districts'=>$districts])                            
                       @endforeach
                   @else
                       <p style="padding: 15px;">Không có nội dung</p>

@@ -33,10 +33,8 @@ Danh sách bài viết
                                 <label for="exampleFormControlSelect2">Loại bài viết</label>
                                 <select class="form-control" name="type" id="exampleFormControlSelect2">
                                     <option @if(old('type') == -1) selected @endif value="-1">Mời chọn</option>
-                                    <option @if(old('type') == 1) selected @endif value="0">Tin tức</option>
-                                    <option @if(old('type') == 2) selected @endif value="1">Luật pháp</option>
-                                    <option @if(old('type') == 3) selected @endif value="2">Dự án</option>
-                                    <option @if(old('type') == 4) selected @endif value="3">Đối tác</option>
+                                    <option @if(old('type') == 1) selected @endif value="1">Tin tức</option>
+                                    <option @if(old('type') == 4) selected @endif value="4">Đối tác</option>
                                 </select>
                             </div>
                         </div>
@@ -64,11 +62,6 @@ Danh sách bài viết
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                {{-- <h4 class="card-title">Danh sách tài khoản</h4> --}}
-                {{--<p class="card-description">--}}
-                {{--Add class--}}
-                {{--<code>.table-bordered</code>--}}
-                {{--</p>--}}
                 <div class="table-responsive">
                     @if($data)
                     <table class="table table-bordered myTable1">

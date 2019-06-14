@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Services\CategoryService;
 use Illuminate\Support\Facades\View;
 use App\Services\ArticleService;
+use App\Services\LawService;
+use App\Services\ProjectService;
 use App\Services\RoomService; 
 use Illuminate\Support\Facades\Route;
 use App\Services\ProvinceService;
@@ -15,13 +17,17 @@ class SiteHomeController extends Controller
 {
     private $category;
     private $article;
+    private $law;
+    private $project;
     protected $currentRoute;
     // For only this view
     private $roomService;
     private $province;
-    public function __construct(CategoryService $category, ArticleService $article, RoomService $roomService, ProvinceService $province){
+    public function __construct(CategoryService $category, ArticleService $article, RoomService $roomService, ProvinceService $province, LawService $law, ProjectService $project){
         $this->category = $category;
         $this->article = $article;
+        $this->law = $law;
+        $this->project = $project;
         $this->roomService = $roomService;
         $this->province = $province;
         $categories = $this->category->getAll();
@@ -30,12 +36,13 @@ class SiteHomeController extends Controller
         $socialMenu = $this->category->getMenu($categories, 3);
         $headerCenterMenu = $this->category->getMenu($categories, 4);
 
-        $latestLaws = $this->article->latestByType(2);
+        $latestLaws = $this->law->getAll();
         $headerNews = $this->article->latestByType(1);
         $latestNews = $this->article->latestByType(1);
-        $latestProjects = $this->article->latestByType(3);
+        $latestProjects = $this->project->getAll();
         $promotionNews = $this->article->latestByType(1);
         $partners = $this->article->latestByType(4);
+        $districts = $this->roomService->listPluck();
         // dd($latestNews);
         $this->currentRoute = Route::current()->getName();
         // Menu views
@@ -51,6 +58,7 @@ class SiteHomeController extends Controller
         View::share('latestProjects', $latestProjects);
         View::share('promotionNews', $promotionNews);
         View::share('partners', $partners);
+        View::share('districts', $districts);
     }
 
     public function index(){

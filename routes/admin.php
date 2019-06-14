@@ -38,6 +38,16 @@ Route::middleware(['auth.admin'])->prefix('admin')->group(function () {
     Route::post('article/getCreate/{id?}', 'AdminArticleController@postCreate')->name('article.postCreate');
     Route::get('article/remove/{id?}', 'AdminArticleController@remove')->name('article.remove');
 
+    Route::get('law', 'AdminLawController@index')->name('law.getList');
+    Route::get('law/getCreate/{id?}', 'AdminLawController@getCreate')->name('law.getCreate');
+    Route::post('law/getCreate/{id?}', 'AdminLawController@postCreate')->name('law.postCreate');
+    Route::get('law/remove/{id?}', 'AdminLawController@remove')->name('law.remove');
+
+    Route::get('project', 'AdminProjectController@index')->name('project.getList');
+    Route::get('project/getCreate/{id?}', 'AdminProjectController@getCreate')->name('project.getCreate');
+    Route::post('project/getCreate/{id?}', 'AdminProjectController@postCreate')->name('project.postCreate');
+    Route::get('project/remove/{id?}', 'AdminProjectController@remove')->name('project.remove');
+
     Route::get('room', 'AdminRoomController@index')->name('room.getList');
     Route::get('room/getCreate/{id?}', 'AdminRoomController@getCreate')->name('room.getCreate');
     Route::post('room/getCreate/{id?}', 'AdminRoomController@postCreate')->name('room.postCreate');

@@ -12,13 +12,16 @@ namespace App\Services;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use App\Models\Room;
+use App\Models\District;
 
 class RoomService
 {
     private $room;
-    public function __construct(Room $room)
+    private $district;
+    public function __construct(Room $room, District $district)
     {
         $this->room = $room;
+        $this->district = $district;
     }
 
     public function search($data){
@@ -86,6 +89,10 @@ class RoomService
     public function remove($id){
         $article = $this->room->find($id);
         $article->delete();
+    }
+
+    public function listPluck(){
+        return $this->district->pluck('name','district_id')->toArray();
     }
 
     public function getById($id){

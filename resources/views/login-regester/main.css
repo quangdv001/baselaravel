@@ -1,0 +1,233 @@
+.form__login {
+  background: #fff;
+  box-shadow: rgba(0, 0, 0, 0.99) 0 1px 0;
+  width: 30%;
+  overflow: hidden;
+  float: right;
+  clear: both;
+  margin: 78px;
+  padding: 35px;
+}
+
+.form__login h1 {
+  text-align: center;
+}
+
+.form__login a {
+  text-decoration: none;
+  color: #1d68a7 !important;
+  font-size: 15px;
+}
+
+.form__login__group {
+  margin-top: 25px;
+}
+
+.form__login__group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form__login__group .error__question {
+  font-size: 15px;
+}
+
+.form__login__control {
+  font-size: 14px;
+  width: 100%;
+  display: block;
+  background: #fafafa;
+  border: none;
+  border-radius: 2px;
+  box-shadow: inset 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+  outline: none;
+  padding: 8px;
+}
+
+.form__login__control:focus {
+  background: rgba(255, 245, 254, 0.31);
+}
+
+.form__login__control__confimr {
+  font-size: 14px;
+}
+
+.form__login__qty {
+  width: 45%;
+  margin: 0px 10px;
+}
+
+.form__login__margin {
+  margin-bottom: 10px;
+}
+
+.form__login__description {
+  height: 152px;
+}
+
+.form {
+  background: #fff;
+  box-shadow: rgba(0, 0, 0, 0.99) 0 1px 0;
+  width: 50%;
+  overflow: hidden;
+  clear: both;
+  margin: 35px auto;
+  padding: 35px;
+}
+
+.form h1 {
+  text-align: center;
+}
+
+.form a {
+  text-decoration: none;
+  color: #1d68a7 !important;
+}
+
+.form span {
+  font-size: 15px;
+  display: inherit;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.form__group {
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.form__group label {
+  display: inline-block;
+  margin-bottom: 15px;
+}
+
+.form__group .error__question {
+  font-size: 15px;
+}
+
+.form__control {
+  font-size: 14px;
+  width: 100%;
+  display: block;
+  background: #fafafa;
+  border: none;
+  border-radius: 2px;
+  box-shadow: inset 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+  outline: none;
+  padding: 8px;
+}
+
+.form__control:focus {
+  background: rgba(255, 245, 254, 0.31);
+}
+
+.form__control__confimr {
+  font-size: 14px;
+}
+
+.form__qty {
+  width: 45%;
+  margin: 0px 10px;
+}
+
+.form__margin {
+  margin-bottom: 10px;
+}
+
+.form__description {
+  height: 152px;
+}
+
+.btn {
+  border: none;
+  border-radius: 2px;
+  font-size: 13px;
+  height: 30px;
+  width: 100%;
+  padding: 8px 16px;
+  cursor: pointer;
+  background: #3aa3e3;
+  color: #484746;
+  box-shadow: 0 1px #d3d3d3;
+  outline: none;
+  text-decoration: none;
+  display: inline-block;
+  line-height: 1.15em;
+}
+
+.btn:active {
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+
+.btn[disabled] {
+  opacity: 0.75;
+  cursor: not-allowed;
+}
+
+.btn__primary {
+  background: #3aa3e3;
+  color: #fff;
+  box-shadow: 0 1px #1b81bf;
+}
+
+.btn__danger {
+  background: #e75650;
+  color: #fff;
+  box-shadow: 0 1px #d7251e;
+}
+
+.error__control {
+  color: #e53935;
+}
+
+.error__bg {
+  background: #ffcdd2 !important;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-size: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+  background: url('../login-regester/login_and_register.png') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  color: #616161;
+}
+
+a {
+  text-decoration: none;
+  color: #616161;
+}
+
+image {
+  display: block;
+  width: 100%;
+}
+
+.container {
+  margin-bottom: 50px;
+}
+
+.navbar {
+  background: #fff;
+  padding: 15px 25px;
+  box-shadow: rgba(0, 0, 0, 0.99) 0 2px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.checkDone {
+  margin-bottom: 30px;
+}
+
+input[type="checkbox" i] {
+  margin: 0px 3px 0px 4px;
+  transform: translateY(2px);
+}

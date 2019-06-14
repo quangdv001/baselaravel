@@ -14,17 +14,23 @@ use Illuminate\Support\Facades\DB;
 use App\Models\ArticleTag;
 use App\Models\Tag;
 use App\Models\RoomTag;
+use App\Models\LawTag;
+use App\Models\ProjectTag;
 
 class TagService
 {
     private $roomTag;
     private $tag;
     private $article_tag;
-    public function __construct(ArticleTag $article_tag, Tag $tag, RoomTag $roomTag)
+    private $law_tag;
+    private $project_tag;
+    public function __construct(ArticleTag $article_tag, Tag $tag, RoomTag $roomTag, LawTag $law_tag, ProjectTag $project_tag)
     {
         $this->article_tag = $article_tag;
         $this->tag = $tag;
         $this->roomTag = $roomTag;
+        $this->law_tag = $law_tag;
+        $this->project_tag = $project_tag;
     }
 
     public function createTag($listTag)
@@ -53,6 +59,40 @@ class TagService
             $articleTag->save();
             DB::commit();
             return $articleTag;
+        } catch (Exception  $e) {
+            DB::rollBack();
+            throw $e;
+        }
+    }
+
+    public function createLawTag($data)
+    {
+        try {
+            DB::beginTransaction();
+            $lawTag = new LawTag();
+            foreach ($data as $key => $value) {
+                $lawTag->$key = $value;
+            }
+            $lawTag->save();
+            DB::commit();
+            return $lawTag;
+        } catch (Exception  $e) {
+            DB::rollBack();
+            throw $e;
+        }
+    }
+
+    public function createProjectTag($data)
+    {
+        try {
+            DB::beginTransaction();
+            $projectTag = new ProjectTag();
+            foreach ($data as $key => $value) {
+                $projectTag->$key = $value;
+            }
+            $projectTag->save();
+            DB::commit();
+            return $projectTag;
         } catch (Exception  $e) {
             DB::rollBack();
             throw $e;
@@ -94,6 +134,14 @@ class TagService
         return $this->article_tag->where('article_id', $id)->get();
     }
 
+    public function getLawTagByLawId($id){
+        return $this->law_tag->where('article_id', $id)->get();
+    }
+
+    public function getProjectTagByProjectId($id){
+        return $this->project_tag->where('article_id', $id)->get();
+    }
+
     public function getListTagByArticleTagId($id){
         return $this->tag->find($id);
     }
@@ -122,6 +170,30 @@ class TagService
             $articleTag = $this->article_tag->where('article_id', $id)->delete();
             DB::commit();
             return $articleTag;
+        } catch (Exception  $e) {
+            DB::rollBack();
+            throw $e;
+        }
+    }
+
+    public function removeLawTag($id){
+        try {
+            DB::beginTransaction();
+            $lawTag = $this->law_tag->where('article_id', $id)->delete();
+            DB::commit();
+            return $lawTag;
+        } catch (Exception  $e) {
+            DB::rollBack();
+            throw $e;
+        }
+    }
+
+    public function removeProjectTag($id){
+        try {
+            DB::beginTransaction();
+            $projectTag = $this->project_tag->where('article_id', $id)->delete();
+            DB::commit();
+            return $projectTag;
         } catch (Exception  $e) {
             DB::rollBack();
             throw $e;

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 use App\Services\CategoryService;
+use Illuminate\Support\Facades\Log;
 
 class AdminCategoryController extends AdminBaseController
 {
@@ -31,6 +32,7 @@ class AdminCategoryController extends AdminBaseController
         $data['slug'] = str_random(10);
         $data['status'] = 1;
         $data['position'] = 0;
+        Log::info($data);
         $category = $this->category->create($data);
         $res['success'] = 0;
         $res['mess'] = 'Có lỗi xảy ra!';
