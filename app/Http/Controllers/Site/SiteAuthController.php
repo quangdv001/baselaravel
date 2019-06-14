@@ -83,17 +83,17 @@ class SiteAuthController extends Controller
 
     public function loginFacebookCallback(){
         $user = Socialite::driver('facebook')->user();
-        try {
-            $user = Socialite::driver('facebook')->user();
-        } catch (\Exception $e) {
-            return redirect('/login');
-        }
+        // try {
+        //     $user = Socialite::driver('facebook')->user();
+        // } catch (\Exception $e) {
+        //     return redirect('/login');
+        // }
         $existingUser = $this->user->getByEmail($user->email);
         if($existingUser){
             auth()->login($existingUser, true);
         } else {
             $data['name'] = $user->name;
-            $data['avatar'] = $user->avatar;
+            // $data['avatar'] = $user->avatar;
             $data['uid'] = $user->id;
             $data['email'] = $user->email;
             $newUser = $this->user->create($data);

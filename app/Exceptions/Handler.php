@@ -4,7 +4,8 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-
+use App\Service\Extend\TelegramService;
+use Illuminate\Validation\ValidationException;
 class Handler extends ExceptionHandler
 {
     /**
@@ -34,7 +35,18 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
-        parent::report($exception);
+        // parent::report($exception);
+        if ($exception instanceof ValidationException) {
+
+        }else{
+        //    parent::report($exception);
+            $html = '<b>[Lỗi] : </b><code>' . $exception->getMessage() . '</code>';
+            $html .= '<b>[File] : </b><code>' . $exception->getFile() . '</code>';
+            $html .= '<b>[Line] : </b><code>' . $exception->getLine() . '</code>';
+            $html .= '<b>[Request] : </b><code>' . json_encode(request()->all()) . '</code>';
+            $html .= '<b>[URL] : </b><a href="'. url()->full() .'">' . url()->full() . '</a>';
+            TelegramService::sendMessage($html);
+        }
     }
 
     /**
