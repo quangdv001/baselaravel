@@ -1378,7 +1378,7 @@ a:hover {
   text-transform: uppercase;
   font-weight: bold;
   font-size: 13px;
-  padding: 9px 15px;
+  padding: 9px 10px;
 }
 @media (min-width: 768px) {
   .navi-layout {
