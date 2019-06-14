@@ -36,6 +36,10 @@
         <!-- <a class="error__confimr" href="/register.html">Quên mật khẩu ?</a> -->
         <p class="error__question">Bạn chưa có tài khoản?  <a href="{{ route('site.auth.getRegister') }}" class="error__active">Đăng ký</a></p>
     </div>
+    <div class="form__group">
+    <a href="{{ route('site.auth.getLoginGG') }}" class="btn login-google">Login Google</a>
+      <a href="{{ route('site.auth.getLoginFB') }}" class="btn login-fb">Login Facebook</a>
+  </div>
   </form>
 </body>
 </html>

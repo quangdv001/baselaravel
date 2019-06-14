@@ -12,6 +12,7 @@ use App\Services\ProjectService;
 use App\Services\RoomService; 
 use Illuminate\Support\Facades\Route;
 use App\Services\ProvinceService;
+use App\Service\Extend\TelegramService;
 
 class SiteHomeController extends Controller
 {
