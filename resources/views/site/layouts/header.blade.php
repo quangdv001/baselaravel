@@ -10,9 +10,15 @@
             </div>
             <div class="col align-self-center">
                 <span class="search-form">
-                    <form class="form">
-                    <input class="search-input" type="text" placeholder="Nhập từ khóa...">
-                    <button class="search-button"><i class="fas fa-search"></i></button>
+                    <form class="form" method="GET" action="{{ route('site.home.search') }}">
+                        <select name="t">
+                            <option value="tin-tuc">Tin Tức</option>
+                            <option value="phat-luat">Pháp Luật</option>
+                            <option value="nha-dat">Dự án nhà đát</option>
+                            <option value="cho-thue">Cho Thuê</option>
+                        </select>
+                        <input class="search-input" type="text" placeholder="Nhập từ khóa..." name="q">
+                        <button class="search-button"><i class="fas fa-search"></i></button>
                     </form>
                 </span>
             </div>

@@ -1378,7 +1378,7 @@ a:hover {
   text-transform: uppercase;
   font-weight: bold;
   font-size: 13px;
-  padding: 9px 15px;
+  padding: 9px 10px;
 }
 @media (min-width: 768px) {
   .navi-layout {
@@ -1689,11 +1689,25 @@ ul.list-head > li > span.meta-info-item {
   width: 100%;
   margin-bottom: 0;
 }
+.search-form select:active,
+.search-form select:focus {
+  outline: none;
+}
+.search-form select {
+  position: absolute;
+  height: 100%;
+  background: transparent;
+  border: none;
+  padding: 0 15px;
+  width: 120px;
+  border-right: 2px solid #016833;
+}
 .search-form .search-input {
   background: #fff;
   border: 2px solid #016833;
   min-height: 32px;
   padding: 0 10px;
+  padding-left:135px;
   line-height: 30px;
   width: 100%;
   border-radius: 6px;

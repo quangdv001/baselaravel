@@ -63,9 +63,9 @@ class SiteHomeController extends Controller
 
     public function index(){
         $forRents = $this->roomService->search(['limit'=>5]);
-        $promotionNews = $this->article->latestByType(0);
+        // $promotionNews = $this->article->latestByType(1);
         return view('site.home.index')
-            ->with('promotionNews', $promotionNews)
+            // ->with('promotionNews', $promotionNews)
             ->with('forRents', $forRents);
     }
 
@@ -90,7 +90,7 @@ class SiteHomeController extends Controller
     public function showForRent($slug){
         if (isset($slug) && $slug != '')
         $article = $this->roomService->findBySlug($slug);
-        // dd($article);
+
         return view('site.home.single-forRent')
             ->with('slug', $slug)
             ->with('post', $article);
@@ -105,9 +105,7 @@ class SiteHomeController extends Controller
         }
         $category = $this->category->getBySlug($slug);
         $arrDistrict = [];
-        // dd($arrDistrict);
         $data = [];
-        // dd($category);
         $view = '';
         if(in_array($category->type, [1,2,3])){
             $params['status'] = 1;
@@ -124,7 +122,7 @@ class SiteHomeController extends Controller
             $data = $this->roomService->search($params);
             $view = 'site.category.room';
         }
-        // dd($arrDistrict);
+
         return view($view)
             ->with('category', $category)
             ->with('arrDistrict', $arrDistrict)
@@ -154,5 +152,34 @@ class SiteHomeController extends Controller
             ->with('category', $category)
             ->with('relate', $relate)
             ->with('data', $data);
+    }
+
+    public function search(Request $request){
+        $params = $request->only('t', 'q');
+        $category = $this->category->getBySlug($params['t']);
+        $arrDistrict = [];
+        $response = [];
+        $dataSearch = [
+            'type'=> $params['t'],
+            'title'=> $params['q'],
+            'status'=> 1,
+            'orderBy'=>'id'
+        ];
+
+        if (in_array($params['t'], ['tin_tuc', 'nha_dat', 'phap_luat'])){
+            $response = $this->article->search($dataSearch);
+            $view = 'site.category.search_article';
+        } else {
+            $arrDistrict = $this->province->getDistrictPluck()->toArray();
+            $response = $this->roomService->search($dataSearch);
+            $view = 'site.category.search_room';
+        }
+
+        return view($view)
+        ->with('category', $category)
+        ->with('arrDistrict', $arrDistrict)
+        ->with('data', $response)
+        ->with('keyword', $params['q']);
+
     }
 }
