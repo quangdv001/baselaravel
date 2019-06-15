@@ -24,7 +24,8 @@ class SiteHomeController extends Controller
     // For only this view
     private $roomService;
     private $province;
-    public function __construct(CategoryService $category, ArticleService $article, RoomService $roomService, ProvinceService $province, LawService $law, ProjectService $project){
+    public function __construct(CategoryService $category, ArticleService $article, RoomService $roomService, 
+    ProvinceService $province, LawService $law, ProjectService $project){
         $this->category = $category;
         $this->article = $article;
         $this->law = $law;
@@ -157,18 +158,21 @@ class SiteHomeController extends Controller
 
     public function search(Request $request){
         $params = $request->only('t', 'q');
-        $category = $this->category->getBySlug($params['t']);
         $arrDistrict = [];
         $response = [];
+        // dd($params);
         $dataSearch = [
-            'type'=> $params['t'],
             'title'=> $params['q'],
-            'status'=> 1,
-            'orderBy'=>'id'
+            'status'=> 1
         ];
-
-        if (in_array($params['t'], ['tin_tuc', 'nha_dat', 'phap_luat'])){
+        if ((int) $params['t'] == 1){
             $response = $this->article->search($dataSearch);
+            $view = 'site.category.search_article';
+        } elseif((int) $params['t'] == 2){
+            $response = $this->law->search($dataSearch);
+            $view = 'site.category.search_article';
+        } elseif((int) $params['t'] == 3){
+            $response = $this->project->search($dataSearch);
             $view = 'site.category.search_article';
         } else {
             $arrDistrict = $this->province->getDistrictPluck()->toArray();
@@ -177,10 +181,9 @@ class SiteHomeController extends Controller
         }
 
         return view($view)
-        ->with('category', $category)
         ->with('arrDistrict', $arrDistrict)
         ->with('data', $response)
-        ->with('keyword', $params['q']);
+        ->with('params', $params);
 
     }
 }

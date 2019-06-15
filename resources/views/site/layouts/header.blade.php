@@ -12,10 +12,10 @@
                 <span class="search-form">
                     <form class="form" method="GET" action="{{ route('site.home.search') }}">
                         <select name="t">
-                            <option value="tin-tuc">Tin Tức</option>
-                            <option value="phat-luat">Pháp Luật</option>
-                            <option value="nha-dat">Dự án nhà đát</option>
-                            <option value="cho-thue">Cho Thuê</option>
+                            <option value="1">Tin Tức</option>
+                            <option value="2">Pháp Luật</option>
+                            <option value="3">Dự án nhà đát</option>
+                            <option value="4">Cho Thuê</option>
                         </select>
                         <input class="search-input" type="text" placeholder="Nhập từ khóa..." name="q">
                         <button class="search-button"><i class="fas fa-search"></i></button>

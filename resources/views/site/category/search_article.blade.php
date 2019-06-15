@@ -7,21 +7,21 @@
             <ol class="breadcrumb breadcrumb-dot">
                 <li class="breadcrumb-item"><i class="material-icons">home</i><a href="{{ route('site.home.index') }}"
                         title="Trang chủ">Trang chủ</a></li>
-                <li class="breadcrumb-item active"><span>Tìm kiếm: {{ $keyword }}</span></li>
+                <li class="breadcrumb-item active"><span>Tìm kiếm: {{ $params['q'] }}</span></li>
             </ol>
         </div>
     </div>
 </div>
 <div class="section-main">
     <div class="container main-wrapper">
-        <h1 class="page-title"><a href="#">{{ $category->name }}</a></h1>
+        <h1 class="page-title"><a href="#">{{ $params['q'] }}</a></h1>
         <div class="row">
             <div class="col-sm-9 border-sm-right">
                 @if(sizeof($data) > 0)
                 <div class="list-post">
                     @foreach($data as $v)
                     <div class="news-post line-bottom"><a class="news-post-image-link"
-                            href="{{ route('site.home.showDetail',['slugCategory' => $category->slug, 'slugDetail' => $v->slug]) }}">
+                            href="{{ route('site.home.showDetail',['slugCategory' => $v->category->slug, 'slugDetail' => $v->slug]) }}">
                             <figure class="image-container">
                                 <div class="featured-image-overlay"><span class="featured-image-icon"><i
                                             class="fa fa-camera"></i></span></div><img class="img-responsive"
@@ -30,7 +30,7 @@
                         </a>
                         <div class="news-post-content">
                             <h2 class="post-title title"><a class="news-post-link"
-                                    href="{{ route('site.home.showDetail',['slugCategory' => $category->slug, 'slugDetail' => $v->slug]) }}">{{ $v->title }}</a>
+                                    href="{{ route('site.home.showDetail',['slugCategory' => $v->category->slug, 'slugDetail' => $v->slug]) }}">{{ $v->title }}</a>
                             </h2>
                             <div class="post-meta-container"><span class="post-meta-item"><i
                                         class="far fa-clock"></i>{{ $v->created_at->format('d/m/Y') }}
@@ -39,7 +39,7 @@
                             </div>
                             <p class="post-desc">{!! $v->short_description !!}
                             </p><span class="read-more-button"><a
-                                    href="{{ route('site.home.showDetail',['slugCategory' => $category->slug, 'slugDetail' => $v->slug]) }}">Xem
+                                    href="{{ route('site.home.showDetail',['slugCategory' => $v->category->slug, 'slugDetail' => $v->slug]) }}">Xem
                                     tiếp...</a></span>
                         </div>
                     </div>
