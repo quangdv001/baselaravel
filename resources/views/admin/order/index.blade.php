@@ -83,6 +83,9 @@ Danh sách đơn hàng
                                             SĐT
                                         </th>
                                         <th>
+                                            Tổng tiền
+                                        </th>
+                                        <th>
                                             Trạng thái
                                         </th>
                                         <th>
@@ -104,6 +107,9 @@ Danh sách đơn hàng
                                         </td>
                                         <td>
                                             {{ $v->phone }}
+                                        </td>
+                                        <td>
+                                            {{ number_format($v->total, 0,",",".") }}đ
                                         </td>
                                         <td>
                                             <span class="{{ isset($orderBadge[$v->status]) ? $orderBadge[$v->status] : 'badge badge-primary' }}">{{ isset($orderStatus[$v->status]) ? $orderStatus[$v->status] : '--' }}</span>
