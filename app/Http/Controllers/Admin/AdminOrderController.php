@@ -38,7 +38,7 @@ class AdminOrderController extends AdminBaseController
             return redirect()->route('admin.home.dashboard')->with('error_message','Bạn không có quyền vào trang này!');
         }
         $request->flash();
-        $dataS = $request->only('name','phone','status', 'ids');
+        $dataS = $request->only('name','phone', 'ids', 'status');
         $dataS['limit'] = 10;
         $dataS['sortBy'] = 'id';
         $order = $this->order->search($dataS);

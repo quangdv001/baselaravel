@@ -32,11 +32,8 @@ class UserService
         if (isset($data['name']) && $data['name'] != '') {
             $query = $query->where('name', 'like', '%' . $data['name'] . '%');
         }
-        if (isset($data['username']) && $data['username'] != '') {
-            $query = $query->where('username', 'like', '%' . $data['username'] . '%');
-        }
-        if (isset($data['active']) && $data['active'] > -1) {
-            $query = $query->where('active', $data['active']);
+        if (isset($data['status']) && $data['status'] > -1) {
+            $query = $query->where('status', $data['status']);
         }
         if (isset($data['sortBy']) && $data['sortBy'] != '') {
             $query = $query->orderBy($data['sortBy'], isset($data['sortOrder']) ? $data['sortOrder'] : 'DESC');

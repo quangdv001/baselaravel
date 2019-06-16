@@ -118,6 +118,18 @@
                 </ul>
             </li>
             @endif
+            @if(auth('admin')->user()->can('admin-pms', 'admin.user.getList'))
+            <li class="nav-item nav-dropdown @if(in_array($currentRoute,['admin.user.getList'])) open @endif">
+                <a class="nav-link nav-dropdown-toggle" href="#">
+                    <i class="nav-icon icon-people"></i>Khách hàng</a>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a class="nav-link @if(in_array($currentRoute,['admin.user.getList'])) active @endif" href="{{ route('admin.user.getList') }}">
+                            <i class="nav-icon "></i> Danh sách</a>
+                    </li>
+                </ul>
+            </li>
+            @endif
         </ul>
     </nav>
     <button class="sidebar-minimizer brand-minimizer" type="button"></button>

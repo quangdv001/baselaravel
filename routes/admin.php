@@ -57,5 +57,8 @@ Route::middleware(['auth.admin'])->prefix('admin')->group(function () {
     Route::get('order', 'AdminOrderController@index')->name('order.getList');
     Route::get('order/{id}', 'AdminOrderController@show')->name('order.show');
     Route::post('order/{id}', 'AdminOrderController@updateStatus')->name('order.updateStatus');
+
+    Route::get('user', 'AdminUserController@index')->name('user.getList');
+    Route::post('user/updateStatus/{id}', 'AdminUserController@updateStatus')->name('user.updateStatus');
 });
 
