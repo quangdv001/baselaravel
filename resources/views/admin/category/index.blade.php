@@ -85,8 +85,9 @@ Danh sách danh mục
                             <label class="col-md-3 col-form-label" for="select1">Loại</label>
                             <div class="col-md-9">
                                 <select class="form-control type" id="exampleFormControlSelect3">
-                                    <option value="0">Mời chọn</option>
+                                    <option value="0">Theo url</option>
                                     <option value="1">Tin tức</option>
+                                    <option value="2">Sản phẩm</option>
                                 </select>
                             </div>
                         </div>

@@ -41,10 +41,12 @@ class AdminArticleController extends AdminBaseController
         if (Gate::forUser($this->user)->denies('admin-pms', $this->currentRoute)) {
             return redirect()->route('admin.home.dashboard')->with('error_message','Bạn không có quyền vào trang này!');
         }
-        $article = $tagItem = [];
+        $article = $tagItem = $articleImg = [];
         $listTag = '';
         if($id > 0){
             $article = $this->article->getById($id);
+            $articleImg = $this->article->getArticleImg($id);
+            // dd($articleImg);
             $tag = $article->tag;
 
             if(sizeof($tag) > 0){
@@ -61,6 +63,7 @@ class AdminArticleController extends AdminBaseController
             ->with('id', $id)
             ->with('html', $html)
             ->with('listTag', $listTag)
+            ->with('articleImg', $articleImg)
             ->with('data', $article);
     }
 
@@ -69,6 +72,7 @@ class AdminArticleController extends AdminBaseController
             return redirect()->route('admin.home.dashboard')->with('error_message','Bạn không có quyền vào trang này!');
         }
         $data = $request->only('title', 'slug', 'meta', 'type', 'short_description', 'description', 'status', 'category_id', 'img', 'tag', 'file_path');
+        $articleImg = $request->input('article_img', []);
         $listTags = $data['tag'];
         unset($data['tag']);
         $mess = '';
@@ -78,6 +82,7 @@ class AdminArticleController extends AdminBaseController
             
             $res = $this->article->create($data);
             if($res){
+                $this->article->createArticleImg($res->id, $articleImg);
                 $arrTag = explode(',', $listTags);
                 if(sizeof($arrTag) > 0){
                     foreach($arrTag as $v){
@@ -100,6 +105,7 @@ class AdminArticleController extends AdminBaseController
             $data['admin_name_u'] = $this->user->username;
             $res = $this->article->update($article, $data);
             if($res){
+                $this->article->createArticleImg($res->id, $articleImg);
                 $this->tagService->removeArticleTag($id);
                 $arrTag = explode(',', $listTags);
                 if(sizeof($arrTag) > 0){

@@ -170,22 +170,37 @@ var init = {
         }
         return false;
     },
-    openFileModal: function(callback){
+    openFileModal: function(callback, multi = false){
         var url = BASE_URL + '/admin/file/openFileModal';
         $.get(url, function(res){
             if(res.success == 1){
                 $('body').append(res.html);
                 $("#fileModal").modal();
                 var data = {};
-                $(document).on('click','.img-item',function(){
-                    $('.img-item').removeClass('active');
-                    $(this).addClass('active');
-                    
-                    data.url = $(this).data('url');
-                    data.id = $(this).data('id');
-                    data.path = $(this).data('path');
-                });
-                $(document).on('click','.btn-choose-file',function(){
+                $(document).off('click', '.img-item').on('click', '.img-item', function(){
+                    if(multi == false){
+                        $('.img-item').removeClass('active');
+                        $(this).addClass('active');
+                        
+                        data.url = $(this).data('url');
+                        data.id = $(this).data('id');
+                        data.path = $(this).data('path');
+                    } else {
+                        if($(this).hasClass('active')){
+                            $(this).removeClass('active');
+                        } else {
+                            $(this).addClass('active');
+                        }
+                        data = [];
+                        $(".img-item").each(function(){
+                            if($(this).hasClass('active')){
+                                data.push($(this).data('url'));
+                            }
+                        });
+                    }
+                })
+                
+                $(document).off('click', '.btn-choose-file').on('click', '.btn-choose-file', function(){
                     callback(data);
                     $("#fileModal").modal("hide");
                 });

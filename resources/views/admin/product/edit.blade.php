@@ -1,14 +1,14 @@
 @extends('admin.layout.main')
 @section('title')
-{{ $id > 0 ? 'Cập nhật bài viết' : 'Tạo bài viết' }}
+{{ $id > 0 ? 'Cập nhật sản phẩm' : 'Tạo sản phẩm' }}
 @endsection
 @section('content')
 <ol class="breadcrumb">
     <li class="breadcrumb-item">Home</li>
-    <li class="breadcrumb-item">
+    {{-- <li class="breadcrumb-item">
         <a href="#">Admin</a>
-    </li>
-    <li class="breadcrumb-item active">Dashboard</li>
+    </li> --}}
+    <li class="breadcrumb-item active">Product</li>
 </ol>
 
 <form class="forms-sample" action="" method="post">
@@ -38,29 +38,86 @@
                                 @endif
                             </div>
                             <div class="form-group">
-                                <label for="tag">TAG</label>
-                                <input type="text" name="tag" class="" id="tag" placeholder="tag"
-                                    value="{{ $listTag ? $listTag : old('tag') }}">
-                            </div>
-                            <div class="form-group">
                                 <label for="exampleTextarea1">Meta</label>
                                 <textarea class="form-control" name="meta" id="exampleTextarea1"
                                     rows="2">{{ isset($data->meta) ? $data->meta : old('meta') }}</textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect2">Chọn danh mục</label>
-                                <select class="form-control" name="category_id" id="exampleFormControlSelect2">
-                                    <option value="0">Mời chọn</option>
-                                    {!! $html !!}
-                                </select>
-                                @if($errors->has('category_id'))
-                                <p class="text-danger">{{ $errors->first('category_id') }}</p>
-                                @endif
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect2">Trạng thái</label>
+                                        <select class="form-control" name="status" id="exampleFormControlSelect2">
+                                            <option value="1">Hoạt động</option>
+                                            <option value="0" @if(isset($data->status) && $data->status == 0) selected
+                                                @endif>Ngừng
+                                                hoạt
+                                                động</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect2">Loại</label>
+                                        <select class="form-control" name="type" id="exampleFormControlSelect2">
+                                            <option value="1">m3</option>
+                                            <option value="2" @if(isset($data->type) && $data->type == 2) selected
+                                                @endif>m2</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect2">Chọn danh mục</label>
+                                        <select class="form-control" name="category_id" id="exampleFormControlSelect2">
+                                            <option value="0">Mời chọn</option>
+                                            {!! $html !!}
+                                        </select>
+                                        @if($errors->has('category_id'))
+                                        <p class="text-danger">{{ $errors->first('category_id') }}</p>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Giá</label>
+                                        <input type="number" class="form-control price" name="price" placeholder="Giá"
+                                            maxlength="10"
+                                            value="{{ isset($data->price) ? $data->price : old('price') }}">
+                                        @if($errors->has('price'))
+                                        <p class="text-danger">{{ $errors->first('price') }}</p>
+                                        @endif
+                                    </div>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Ảnh</label>
+                                        <label>Màu sắc</label>
+                                        <input type="text" class="form-control color" name="color" placeholder="Màu sắc"
+                                            value="{{ isset($data->color) ? $data->color : old('color') }}">
+                                        @if($errors->has('color'))
+                                        <p class="text-danger">{{ $errors->first('color') }}</p>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label>Vật liệu</label>
+                                        <input type="text" class="form-control material" name="material"
+                                            placeholder="Vật liệu"
+                                            value="{{ isset($data->material) ? $data->material : old('material') }}">
+                                        @if($errors->has('material'))
+                                        <p class="text-danger">{{ $errors->first('material') }}</p>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Ảnh đại diện</label>
                                         <input type="hidden" name="img" class="img"
                                             value="{{isset($data->img) ? $data->img : old('img')}}">
                                         <br>
@@ -69,6 +126,9 @@
                                             <img src="{{ isset($data->img) ? $data->img : old('img') }}"
                                                 class="img-show" width="90" height="90" alt="">
                                         </div>
+                                        @if($errors->has('img'))
+                                        <p class="text-danger">{{ $errors->first('img') }}</p>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-md-8">
@@ -79,14 +139,14 @@
                                             ảnh</a>
                                         <div class="bl-img-show mt-4">
                                             <ul class="list-inline list-img-article">
-                                                @if(sizeof($articleImg) > 0)
-                                                @foreach($articleImg as $v)
+                                                @if(sizeof($productImg) > 0)
+                                                @foreach($productImg as $v)
                                                 <li class="list-inline-item mb-2 position-relative">
                                                     <a href="javascript:void(0)"
                                                         class="btn-rm-img-item position-absolute" style="right: 0"><i
                                                             class="fa fa-times text-danger" aria-hidden="true"></i></a>
                                                     <img src="{{ $v }}" width="90" height="90" alt="">
-                                                    <input type="hidden" name="article_img[]" class="article_img"
+                                                    <input type="hidden" name="product_img[]" class="product_img"
                                                         value="{{ $v }}">
                                                 </li>
                                                 @endforeach
@@ -97,11 +157,6 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="editor1">Mô tả ngắn</label>
-                                <textarea class="form-control ckeditor" name="short_description" id="editor1"
-                                    rows="2">{{ isset($data->short_description) ? $data->short_description : old('short_description') }}</textarea>
-                            </div>
-                            <div class="form-group">
                                 <label for="editor2">Mô tả</label>
                                 <br>
                                 <a href="javascript:void(0)" class="btn btn-info btn-append-img">Chèn ảnh</a>
@@ -109,16 +164,7 @@
                                     rows="5">{{ isset($data->description) ? $data->description : old('description') }}</textarea>
                             </div>
 
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect2">Trạng thái</label>
-                                <select class="form-control" name="status" id="exampleFormControlSelect2">
-                                    <option value="1">Hoạt động</option>
-                                    <option value="0" @if(isset($data->status) && $data->status == 0) selected
-                                        @endif>Ngừng
-                                        hoạt
-                                        động</option>
-                                </select>
-                            </div>
+
                         </div>
                         <div class="card-footer">
                             <button class="btn btn-sm btn-primary has-spinner" type="submit">
@@ -187,11 +233,12 @@
     var callbackMultiple = function (data) {
         html = '';
         if (data.length > 0) {
+            console.log(data);
             data.forEach(function (value, index) {
                 html +=
                     '<li class="list-inline-item mb-2 position-relative"><a href="javascript:void(0)" class="btn-rm-img-item position-absolute" style="right: 0"><i class="fa fa-times text-danger" aria-hidden="true"></i></a><img src="' +
                     value +
-                    '" width="90" height="90" alt=""><input type="hidden" name="article_img[]" class="article_img" value="' +
+                    '" width="90" height="90" alt=""><input type="hidden" name="product_img[]" class="product_img" value="' +
                     value + '"></li>'
             })
         }

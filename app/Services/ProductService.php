@@ -11,29 +11,26 @@ namespace App\Services;
 
 use Exception;
 use Illuminate\Support\Facades\DB;
-use App\Models\Article;
-use App\Models\ArticleImg;
+use App\Models\Product;
+use App\Models\ProductImg;
 
-class ArticleService
+class ProductService
 {
-    private $article;
-    private $articleImg;
-    public function __construct(Article $article, ArticleImg $articleImg)
+    private $product;
+    private $productImg;
+    public function __construct(Product $product, ProductImg $productImg)
     {
-        $this->article = $article;
-        $this->articleImg = $articleImg;
+        $this->product = $product;
+        $this->productImg = $productImg;
     }
 
     public function search($data){
-        $query = $this->article;
+        $query = $this->product;
+        if (isset($data['ids']) && $data['ids'] != '') {
+            $query = $query->whereIn('id', explode(',', $data['ids']));
+        }
         if (isset($data['title']) && $data['title'] != '') {
             $query = $query->where('title', 'like', '%' . $data['title'] . '%');
-        }
-        if (isset($data['user_name_c']) && $data['user_name_c'] != '') {
-            $query = $query->where('user_name_c', 'like', '%' . $data['user_name_c'] . '%');
-        }
-        if (isset($data['admin_name_c']) && $data['admin_name_c'] != '') {
-            $query = $query->where('admin_name_c', 'like', '%' . $data['admin_name_c'] . '%');
         }
         if (isset($data['status']) && $data['status'] > -1) {
             $query = $query->where('status', $data['status']);
@@ -50,29 +47,12 @@ class ArticleService
         return $admin;
     }
 
-    // NA
-    public function latestByType($typeId = 0) {
-        $article = $this->article;
-        return $article->select()
-            ->where('type', '=', $typeId )
-            ->orderBy('created_at', 'desc')
-            ->get();
-    }
-
-    public function findArticleBySlug($slug){
-        $query = null;
-        if (isset($slug) && $slug != '') {
-            $query = $this->article->where('slug', $slug)->first();
-        }
-        return $query;
-    }
-    // END NA
 
     public function create($data)
     {
         try {
             DB::beginTransaction();
-            $admin = $this->article;
+            $admin = $this->product;
             foreach ($data as $key => $value) {
                 $admin->$key = $value;
             }
@@ -102,46 +82,31 @@ class ArticleService
     }
 
     public function remove($id){
-        $article = $this->article->find($id);
+        $article = $this->product->find($id);
         $article->delete();
     }
 
     public function getById($id){
-        return $this->article->find($id);
+        return $this->product->find($id);
     }
 
     public function getAll(){
-        return $this->article->orderBy('id', 'DESC')->get();
-    }
-    public function test(){
-        return 1;
+        return $this->product->orderBy('id', 'DESC')->get();
     }
 
-    public function getBySlug($slug){
-        return $this->article->where('slug',$slug)->where('status', 1)->first();
-    }
-
-    public function getListByCategory($category, $limit = 10){
-        return $this->article->where('category_id', $category->id)->where('type', $category->type)->where('status',1)->orderBy('id','DESC')->paginate($limit);
-    }
-
-    public function getRelate($categoryId, $slug, $limit){
-        return $this->article->where('category_id', $categoryId)->where('slug', '!=', $slug)->where('status',1)->orderBy('id','DESC')->paginate($limit);
-    }
-
-    public function createArticleImg($id, $data){
+    public function createImg($id, $data){
         
         try {
             DB::beginTransaction();
-            $this->articleImg->where('article_id', $id)->delete();
+            $this->productImg->where('product_id', $id)->delete();
             $dataImg = [];
             if(sizeof($data) > 0){
                 foreach($data as $k => $v){
-                    $dataImg[$k]['article_id'] = $id;
+                    $dataImg[$k]['product_id'] = $id;
                     $dataImg[$k]['img'] = $v;
                 }
             }
-            $this->articleImg->insert($dataImg);
+            $this->productImg->insert($dataImg);
             DB::commit();
             return true;
         } catch (Exception  $e) {
@@ -150,7 +115,7 @@ class ArticleService
         }
     }
 
-    public function getArticleImg($id){
-        return $this->articleImg->where('article_id', $id)->pluck('img');
+    public function getImg($id){
+        return $this->productImg->where('product_id', $id)->pluck('img');
     }
 }

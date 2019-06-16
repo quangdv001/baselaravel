@@ -136,7 +136,7 @@ class FileService
     }
 
     public function getFileByFolder($folder = 0){
-        return $this->file->where('folder_id', $folder)->orderBy('position', 'ASC')->orderBy('id', 'ASC')->get();
+        return $this->file->where('folder_id', $folder)->orderBy('position', 'ASC')->orderBy('id', 'DESC')->get();
     }
 
 }
