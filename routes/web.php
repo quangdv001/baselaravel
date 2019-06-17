@@ -1,4 +1,7 @@
 <?php
+use App\Models\Order;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderNew;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +25,11 @@ Route::namespace('Admin')->name('admin.')->group(function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/testMail', function(){
+    $order = Order::find(1);
+    $user = App\User::find(2);
+    // return (new OrderNew($order))->render();
+    // Mail::to('quangdv001@gmail.com')->send(new OrderNew($order));
+    Mail::to($user)->send(new OrderNew($order));
+});
