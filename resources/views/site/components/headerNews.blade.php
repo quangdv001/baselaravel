@@ -1,8 +1,8 @@
-@if (count($headerNews) > 0)
+@if (count($latestLaws) > 0)
     <div class="row">                      
         <div class="slide-owl-carousel owl-carousel owl-theme"> 
                   
-            @foreach ($headerNews as $key=>$item)
+            @foreach ($latestLaws as $key=>$item)
                 @if ($key <= 2)
                     <a class="block" href="{{ route('site.home.showDetail', ['slugCategory' => $item->category->slug, 'slugDetail' => $item->slug]) }}">
                         <div class="cover-item">
