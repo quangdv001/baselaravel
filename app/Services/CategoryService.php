@@ -100,8 +100,15 @@ class CategoryService
         return $this->category->find($id);
     }
 
+    public function getByParentId($id){
+        return $this->category->where('parent_id', $id)->get();
+    }
+
     public function getAll(){
-        return $this->category->orderBy('position', 'ASC')->orderBy('id', 'ASC')->get();
+        return $this->category
+                    ->orderBy('position', 'ASC')
+                    ->orderBy('id', 'ASC')
+                    ->get();
     }
 
     public function listPluck(){
