@@ -30,11 +30,12 @@ Danh sách danh mục
                 <div class="card">
                     <div class="card-header">
                         <strong class="float-left">Danh sách danh mục</strong>
-                        <div class="float-right"><button type="button" class="btn btn-sm btn-primary btn-add-category">Tạo
+                        <div class="float-right"><button type="button"
+                                class="btn btn-sm btn-primary btn-add-category">Tạo
                                 danh mục</button>
                         </div>
                     </div>
-                        
+
                     <div class="card-body">
                         <div class="cf nestable-lists">
                             <div class="dd" id="nestable">
@@ -100,11 +101,22 @@ Danh sách danh mục
                                 </select>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="select1">Ảnh</label>
+                            <div class="col-md-9">
+                                <input type="hidden" name="img" class="img" value="">
+                                <br>
+                                <a href="javascript:void(0)" class="btn btn-info btn-select-file">Chọn ảnh</a>
+                                <div class="bl-img-show mt-4">
+                                    <img src="" class="img-show" width="90" height="90" alt="">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-footer">
                         <button class="btn btn-sm btn-primary has-spinner btn-update" type="button">
-                                <i class="fa fa-dot-circle-o"></i> Submit</button>
-                            {{-- <button class="btn btn-sm btn-danger" type="reset">
+                            <i class="fa fa-dot-circle-o"></i> Submit</button>
+                        {{-- <button class="btn btn-sm btn-danger" type="reset">
                                 <i class="fa fa-ban"></i> Reset</button> --}}
                     </div>
                 </div>
@@ -188,7 +200,7 @@ Danh sách danh mục
                 status: status,
                 type: type,
                 url: urll,
-                slug:slug,
+                slug: slug,
                 class_name: class_name,
             };
             var obj = $(this);
@@ -264,7 +276,7 @@ Danh sách danh mục
         $(document).on('click', '.btn-select-file', function () {
             init.openFileModal(callback);
         });
-        
+
         $('.name').keyup(function () {
             var val = $(this).val();
             var slug = init.makeSlug(val);
@@ -275,6 +287,6 @@ Danh sách danh mục
         $('.img').val(data.url);
         $('.img-show').attr('src', data.url);
     }
-    
+
 </script>
 @endsection
