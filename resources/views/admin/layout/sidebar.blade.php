@@ -3,7 +3,7 @@
         <ul class="nav">
             <li class="nav-item">
                 <a class="nav-link @if(in_array($currentRoute,['admin.home.dashboard'])) active @endif"
-                    href="index.html">
+                    href="{{ route('admin.home.dashboard') }}">
                     <i class="nav-icon icon-speedometer"></i> Dashboard
                     {{-- <span class="badge badge-primary">NEW</span> --}}
                 </a>
