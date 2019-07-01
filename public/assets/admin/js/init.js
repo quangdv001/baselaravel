@@ -158,7 +158,7 @@ var init = {
                 type: 'post',
                 success: function (res) {
                     if (res.success == 1) {
-                        $('.list-img').append(res.html);
+                        $('.list-img').prepend(res.html);
                         init.notyPopup('Upload thành công.', 'success');
                     } else {
                         init.notyPopup('Upload thất bại!', 'error');

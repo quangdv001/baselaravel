@@ -19,9 +19,10 @@ class SiteHomeController extends SiteBaseController
     
     // For only this view
     public function __construct(CategoryService $category, ArticleService $article){
+        parent::__construct();
         $this->category = $category;
         $this->article = $article;
-        $category = $this->category->getAll();
+        $category = $this->category->getByParentId(0);
         View::share('category', $category);
     }
 

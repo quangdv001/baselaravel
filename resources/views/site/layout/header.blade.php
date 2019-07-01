@@ -16,7 +16,7 @@
                     </div>
                 </div>
                 <div class="col-sm-auto col-12">
-                    <h3 class="logo" id="logo"><a href="index.html"><img
+                    <h3 class="logo" id="logo"><a href="{{ route('site.home.index') }}"><img
                                 src="{{ asset('public/assets/site/themes/assets/images/logo2.png') }}"></a></h3>
                 </div>
                 <div class="col align-self-center text-right zero-height-sx">
@@ -25,7 +25,7 @@
                         <ul>
                             @auth
                             <li><a href="./index.html"><span class="user-avatar"><img
-                                            src="http://endlesstheme.com/Endless1.5.1/img/user2.jpg" /></span><span
+                                            src="https://png.pngtree.com/svg/20170920/4ff36bf59e.svg" /></span><span
                                         class="_isMobile">&nbsp;{{ $user->name ? $user->name : $user->email }}</span></a>
                                 <ul>
                                     <li><a href="#"><i class="material-icons">account_circle</i><span
@@ -34,7 +34,7 @@
                                     <li><a href="#"><i class="material-icons">message</i><span
                                                 class="_isMobile">&nbsp;Thông báo</span></a>
                                     </li>
-                                    <li><a href="#"><i class="material-icons">power_settings_new</i><span
+                                    <li><a href="{{ route('site.auth.logout') }}"><i class="material-icons">power_settings_new</i><span
                                                 class="_isMobile">&nbsp;Thoát</span></a>
                                     </li>
                                 </ul>
@@ -48,32 +48,31 @@
                                         class="material-icons _isMobile">person_add</span><span>&nbsp;Đăng ký</span></a>
                             </li>
                             @endguest
-                            <li class="cart-product"><a href="#"><i
-                                        class="material-icons">shopping_cart</i>&nbsp;&nbsp;<span
-                                        class="cart-count">3</span><span class="isMobile">&nbsp;Giỏ hàng</span></a>
+                            <li class="cart-product">
+                                <a href="#"><i
+                                        class="material-icons">shopping_cart</i>&nbsp;&nbsp;
+                                        {{-- <span
+                                        class="cart-count">{{ Cart::content()->count() }}</span> --}}
+                                        <span class="isMobile">&nbsp;Giỏ hàng</span></a>
                                 <ul>
-                                    <li><span>
-                                            <div class="cart-product-thumb"><img
-                                                    src="https://afrafurniture.com/wp-content/uploads/2019/02/toli-2-chair-1-550x550.jpg" />
-                                            </div>
-                                            <div class="cart-product-title">Sản phẩm ghế thiết kế đặc biệt</div>
-                                            <div class="cart-product-price">336.000 đ</div>
-                                        </span>
-                                    </li>
-                                    <li><span>
-                                            <div class="cart-product-thumb"><img
-                                                    src="https://afrafurniture.com/wp-content/uploads/2019/02/toli-2-armchair-1-80x80.jpg" />
-                                            </div>
-                                            <div class="cart-product-title">Ghế</div>
-                                            <div class="cart-product-price">16.000 đ</div>
-                                        </span>
-                                    </li>
+                                    @if(sizeof(Cart::content()) > 0)
+                                        @foreach(Cart::content() as $v)
+                                        <li><span>
+                                                <div class="cart-product-thumb"><img
+                                                src="{{ $v->options->img }}" />
+                                                </div>
+                                                <div class="cart-product-title">{{ $v->name }}</div>
+                                                <div class="cart-product-price">{{ number_format($v->price,0,",",".") }} đ</div>
+                                            </span>
+                                        </li>
+                                        @endforeach
+                                    @endif
                                     <li class="cart-total-row"><span>
                                             <div class="cart-product-total">TỔNG: </div>
-                                            <div class="cart-product-price">16.000 đ</div>
+                                            <div class="cart-product-price">{{ Cart::subtotal() }} đ</div>
                                         </span>
                                     </li>
-                                    <li class="text-center btn btn-primary"><a href="#"><i
+                                    <li class="text-center btn btn-primary"><a href="{{ route('site.cart.index') }}"><i
                                                 class="material-icons">local_grocery_store</i><span
                                                 class="_isMobile">&nbsp;Thanh toán</span></a>
                                     </li>

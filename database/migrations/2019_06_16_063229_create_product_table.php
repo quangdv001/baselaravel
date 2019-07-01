@@ -20,11 +20,17 @@ class CreateProductTable extends Migration
             $table->string('meta')->nullable();
             $table->string('img')->nullable();
             $table->integer('category_id')->nullable();
-            $table->integer('price')->nullable();
+            $table->integer('price')->nullable()->default(0);
             $table->smallInteger('type')->default(1);
             $table->smallInteger('status')->default(1);
             $table->string('color')->nullable();
+            $table->string('material_id')->default(0);
             $table->string('material')->nullable();
+            $table->string('guarantee')->nullable();
+            $table->string('style')->nullable();
+            $table->integer('width')->nullable()->default(0);
+            $table->integer('height')->nullable()->default(0);
+            $table->integer('depth')->nullable()->default(0);
             $table->text('description')->nullable();
             $table->timestamps();
         });

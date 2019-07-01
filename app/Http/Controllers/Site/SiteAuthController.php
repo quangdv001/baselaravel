@@ -30,7 +30,7 @@ class SiteAuthController extends Controller
             auth()->login($res, true);
             return redirect()->intended('/');
         }
-        return redirect()->back()->with('error','Có lỗi xảy ra!');
+        return redirect()->back()->with('error_message','Có lỗi xảy ra!');
     }
 
     public function getLogin(){
@@ -43,7 +43,7 @@ class SiteAuthController extends Controller
             // Authentication passed...
             return redirect()->intended('/');
         }
-        return redirect()->back()->with('error','Tài khoản hoặc mật khẩu sai!');
+        return redirect()->back()->with('error_message','Tài khoản hoặc mật khẩu sai!');
     }
 
     public function logout(){

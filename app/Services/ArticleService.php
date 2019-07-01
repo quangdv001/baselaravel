@@ -41,6 +41,9 @@ class ArticleService
         if (isset($data['category_id']) && $data['category_id'] > -1) {
             $query = $query->where('category_id', $data['category_id']);
         }
+        if (isset($data['except']) && $data['except'] > 0) {
+            $query = $query->where('id', '<>' ,$data['except']);
+        }
         if (isset($data['type']) && $data['type'] > -1) {
             $query = $query->where('type', $data['type']);
         }

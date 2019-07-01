@@ -19,12 +19,12 @@ class CreateOrderDetailTable extends Migration
             $table->string('product_id');
             $table->string('title');
             $table->string('img');
-            $table->integer('qty');
+            $table->float('qty');
             $table->integer('price');
             $table->integer('total');
-            $table->float('width', 4, 2);
-            $table->float('height', 4, 2);
-            $table->float('depth', 4, 2);
+            $table->integer('width')->nullable()->default(0);
+            $table->integer('height')->nullable()->default(0);
+            $table->integer('depth')->nullable()->default(0);
             $table->timestamps();
         });
     }
