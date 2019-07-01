@@ -242,14 +242,10 @@ Bảng dự trù
         })
 
         $(".submit-order").submit(function (e) {
-            
-            //prevent Default functionality
             e.preventDefault();
-
-            //get the action-url of the form
+            
             var actionurl = BASE_URL + '/cart/submitOrder';
-
-            //do your own request an handle the results
+            var obj = $('body');
             $.ajax({
                 url: actionurl,
                 type: 'post',
@@ -257,12 +253,14 @@ Bảng dự trù
                 data: $(".submit-order").serialize(),
                 beforeSend: function() {
                     $('.has-spinner').buttonLoader('start');
+                    init.showLoader(obj);
                 },
                 success: function (res) {
                     $('.has-spinner').buttonLoader('stop');
+                    init.hideLoader(obj);
+                    $('#formContact').modal('hide');
                     if(res.success == 1){
                         init.notyPopup(res.mess, 'success');
-                        $('#formContact').modal('hide');
                         setTimeout(function(){
                             window.location.href = BASE_URL;
                         }, 3000);
@@ -272,6 +270,8 @@ Bảng dự trù
                 },
                 error: function(res){
                     $('.has-spinner').buttonLoader('stop');
+                    init.hideLoader(obj);
+                    $('#formContact').modal('hide');
                     init.notyPopup('Có lỗi xảy ra', 'error');
                 }
             });

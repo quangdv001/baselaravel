@@ -9,10 +9,12 @@ use App\Services\CategoryService;
 use App\Services\ProductService;
 use App\Http\Requests\Admin\ProductRequest;
 use App\Services\OrderService;
+use App\Services\UserService;
 
 class AdminOrderController extends AdminBaseController
 {
     private $order;
+    private $customer;
     private $orderStatus = [
         1 => 'Mới tạo',
         2 => 'Xác nhận',
@@ -27,10 +29,12 @@ class AdminOrderController extends AdminBaseController
         4 => 'badge badge-success',
         5 => 'badge badge-danger'
     ];
-    public function __construct(OrderService $order)
+    public function __construct(OrderService $order, UserService $customer)
     {
         parent::__construct();
         $this->order = $order;
+        $this->customer = $customer;
+
     }
 
     public function index(Request $request){
@@ -51,13 +55,15 @@ class AdminOrderController extends AdminBaseController
 
     public function show($id){
         $order = $this->order->getById($id);
-        $orderInfo = $order->orderInfo;
-        $orderDetail = $order->orderDetail;
+        $order->orderInfo;
+        $order->orderDetail;
+        $customer = $this->customer->getById($order->orderInfo->users_id);
         // dd($order);
 
         return view('admin.order.show')
             ->with('orderStatus', $this->orderStatus)
             ->with('orderBadge', $this->orderBadge)
+            ->with('customer', $customer)
             ->with('data', $order);
     }
 

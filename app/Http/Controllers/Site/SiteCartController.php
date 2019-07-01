@@ -14,6 +14,7 @@ use App\Services\ProductService;
 use Cart;
 use App\Services\OrderService;
 use Illuminate\Support\Carbon;
+use App\Mail\OrderNew;
 
 class SiteCartController extends SiteBaseController
 {
@@ -171,6 +172,8 @@ class SiteCartController extends SiteBaseController
             $resDetail = $this->order->createOrderDetail(array_values($orderDetail));
         }
         Cart::destroy();
+        $newOrder = $this->order->getById($resOrder->id);
+        Mail::to($data['email'])->send(new OrderNew($newOrder));
         $res['success'] = 1;
         $res['mess'] = 'Tạo đơn hàng thành công';
         return response()->json($res);
