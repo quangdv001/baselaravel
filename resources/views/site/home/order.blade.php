@@ -88,35 +88,7 @@ style="background: #ccc url({{ asset('public/assets/site/themes/assets/images/sl
                 </div>
               </div>
               <div class="col-12">
-                <div class="tracking-panel row">
-                  <div class="col-md-4">
-                    <div class="row">
-                      <div class="tracking-item-wrapper">
-                        <div class="tracking-item "><img class="tracking-item-img" src="{{ asset('public/assets/site/themes/assets/images/tracking-1_active.png') }}" alt="">
-                          <div class="tracking-item-content">Bắt đầu thực hiện hợp đồng</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="row">
-                      <div class="tracking-item-wrapper">
-                        <div class="tracking-item "><img class="tracking-item-img" src="{{ asset('public/assets/site/themes/assets/images/tracking-2.png') }}" alt="">
-                          <div class="tracking-item-content">Đơn hàng đang trong quá trình sản xuất</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="row">
-                      <div class="tracking-item-wrapper">
-                        <div class="tracking-item "><img class="tracking-item-img" src="{{ asset('public/assets/site/themes/assets/images/tracking-3.png') }}" alt="">
-                          <div class="tracking-item-content">Đơn hàng đang giao đến quý khách</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <div class="tracking-panel row"><img style="max-width:560px;margin:auto;" src="{{ asset('public/assets/site/themes/assets/images/building-bg.png') }}" alt=""></div>
               </div>
             </div>
           </div>
