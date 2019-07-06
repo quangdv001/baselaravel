@@ -9,7 +9,9 @@ use Illuminate\Support\Facades\View;
 use App\Services\ArticleService;
 use App\Services\LawService;
 use App\Services\ProjectService;
-use App\Services\RoomService; 
+use App\Services\RoomService;
+use App\Services\ManagerService;
+use App\Services\FooterService;
 use Illuminate\Support\Facades\Route;
 use App\Services\ProvinceService;
 use App\Service\Extend\TelegramService;
@@ -24,14 +26,18 @@ class SiteHomeController extends Controller
     // For only this view
     private $roomService;
     private $province;
+    private $manager;
+    private $footer;
     public function __construct(CategoryService $category, ArticleService $article, RoomService $roomService, 
-    ProvinceService $province, LawService $law, ProjectService $project){
+    ProvinceService $province, LawService $law, ProjectService $project, ManagerService $manager, FooterService $footer){
         $this->category = $category;
         $this->article = $article;
         $this->law = $law;
         $this->project = $project;
         $this->roomService = $roomService;
         $this->province = $province;
+        $this->manager = $manager;
+        $this->footer = $footer;
         $categories = $this->category->getAll();
         $mainMenu = $this->category->getMenu($categories, 1);
         $topMenu = $this->category->getMenu($categories, 2);
@@ -45,8 +51,14 @@ class SiteHomeController extends Controller
         $promotionNews = $this->article->latestByType(1);
         $partners = $this->article->latestByType(4);
         $districts = $this->roomService->listPluck();
-        // dd($latestNews);
+        $pagesFooter = $this->manager->getAll();
+        $socialFooter = $this->footer->getAll();
         $this->currentRoute = Route::current()->getName();
+        $listSocial = [];
+        foreach($socialFooter as $v) {
+            $listSocial[$v->code] = $v->value;
+        }
+
         // Menu views
         View::share('categories', $categories);
         View::share('mainMenu', $mainMenu);
@@ -61,6 +73,9 @@ class SiteHomeController extends Controller
         View::share('promotionNews', $promotionNews);
         View::share('partners', $partners);
         View::share('districts', $districts);
+        //Footer
+        View::share('pagesFooter', $pagesFooter);
+        View::share('listSocial', $listSocial);
     }
 
     public function index(){
@@ -82,7 +97,7 @@ class SiteHomeController extends Controller
     public function showCategory($slug){
         $articles = null;
         if (isset($slug) && $slug == 'for-rent')
-        $articles = $this->roomService->getAll();
+            $articles = $this->roomService->getAll();
         // dd($article);
         return view('site.home.category')
             ->with('slug', $slug)
@@ -103,6 +118,10 @@ class SiteHomeController extends Controller
             $article = $this->roomService->search(['limit'=>10]);
             return view('site.category.index')
                 ->with('category', (object)['type'=>4,'slug'=>'for-rents', 'name'=>'Cho thuê'])
+                ->with('data', $article);
+        } elseif (in_array($slug, ['huong-dan', 'tai-lieu', 'chinh-sach', 'ho-tro'])) {
+            $article = $this->manager->getBySlug($slug);
+            return view('site.managerpage.index')
                 ->with('data', $article);
         }
         $category = $this->category->getBySlug($slug);

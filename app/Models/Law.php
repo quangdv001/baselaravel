@@ -14,7 +14,7 @@ class Law extends Model
 
     public function tag()
     {
-        return $this->belongsToMany('App\Models\Tag', 'law_tag');
+        return $this->belongsToMany('App\Models\Tag', 'law_tag', 'article_id');
     }
 
     public function category(){

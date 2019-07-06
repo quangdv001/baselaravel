@@ -63,5 +63,15 @@ Route::middleware(['auth.admin'])->prefix('admin')->group(function () {
     Route::post('file/removeFile/{id}', 'AdminFileController@removeFile')->name('file.removeFile');
     Route::get('file/downloadFile/{id}', 'AdminFileController@downloadFile')->name('file.downloadFile');
     Route::get('file/openFileModal', 'AdminFileController@openFileModal')->name('file.openFileModal');
+
+    Route::get('footerSocial', 'AdminFooterController@index')->name('footerSocial.getList');
+    Route::get('footerSocial/getCreate/{id?}', 'AdminFooterController@getCreate')->name('footerSocial.getCreate');
+    Route::post('footerSocial/getCreate/{id?}', 'AdminFooterController@postCreate')->name('footerSocial.postCreate');
+    Route::get('footerSocial/remove/{id?}', 'AdminFooterController@remove')->name('footerSocial.remove');
+
+    Route::get('manager', 'AdminManagerController@index')->name('manager.getList');
+    Route::get('manager/getCreate/{id?}', 'AdminManagerController@getCreate')->name('manager.getCreate');
+    Route::post('manager/getCreate/{id?}', 'AdminManagerController@postCreate')->name('manager.postCreate');
+    Route::get('manager/remove/{id?}', 'AdminManagerController@remove')->name('manager.remove');
 });
 

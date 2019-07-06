@@ -19,12 +19,12 @@
                 {{--</button>--}}
             {{--</div>--}}
         {{--</li>--}}
-        <li class="nav-item @if(in_array($currentRoute,['admin.home.dashboard'])) active @endif">
+        <!-- <li class="nav-item @if(in_array($currentRoute,['admin.home.dashboard'])) active @endif">
             <a class="nav-link" href="{{ route('admin.home.dashboard') }}">
                 <i class="menu-icon mdi mdi-television"></i>
                 <span class="menu-title">Dashboard</span>
             </a>
-        </li>
+        </li> -->
         @if(auth('admin')->user()->can('admin-pms', 'admin.account.getList'))
             <li class="nav-item @if(in_array($currentRoute,['admin.account.getList', 'admin.account.getCreate'])) active @endif">
                 <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
@@ -49,7 +49,7 @@
         @if(auth('admin')->user()->can('admin-pms', 'admin.permission.getList'))
             <li class="nav-item @if(in_array($currentRoute,['admin.permission.getList', 'admin.permission.getCreate'])) active @endif">
                 <a class="nav-link" data-toggle="collapse" href="#ui-basic2" aria-expanded="false" aria-controls="ui-basic">
-                    <i class="menu-icon mdi mdi-alert"></i>
+                    <i class="menu-icon mdi mdi-account-multiple"></i>
                     <span class="menu-title">Quản lý nhóm quyền</span>
                     <i class="menu-arrow"></i>
                 </a>
@@ -162,7 +162,7 @@
         @if(auth('admin')->user()->can('admin-pms', 'admin.project.getList'))
             <li class="nav-item @if(in_array($currentRoute,['admin.project.getList'])) active @endif">
                 <a class="nav-link" data-toggle="collapse" href="#ui-basic7" aria-expanded="false" aria-controls="ui-basic">
-                    <i class="menu-icon mdi mdi-book-multiple"></i>
+                    <i class="menu-icon mdi mdi-google-maps"></i>
                     <span class="menu-title">Quản lý Dự Án</span>
                     <i class="menu-arrow"></i>
                 </a>
@@ -200,7 +200,7 @@
         @if(auth('admin')->user()->can('admin-pms', 'admin.advertise.getList'))
             <li class="nav-item @if(in_array($currentRoute,['admin.advertise.getList','admin.advertise.getCreate'])) active @endif">
                 <a class="nav-link" data-toggle="collapse" href="#ui-basic9" aria-expanded="false" aria-controls="ui-basic">
-                    <i class="menu-icon mdi mdi-home-variant"></i>
+                    <i class="menu-icon mdi mdi-bullhorn"></i>
                     <span class="menu-title">Quản lý quảng cáo</span>
                     <i class="menu-arrow"></i>
                 </a>
@@ -216,7 +216,28 @@
                 </div>
             </li>
         @endif
-
+        @if(auth('admin')->user()->can('admin-pms', 'admin.manager.getList'))
+            <li class="nav-item @if(in_array($currentRoute,['admin.footerSocial.getList','admin.manager.getList'])) active @endif">
+                <a class="nav-link" data-toggle="collapse" href="#ui-basic11" aria-expanded="false" aria-controls="ui-basic">
+                    <i class="menu-icon mdi mdi-page-layout-footer"></i>
+                    <span class="menu-title">Quản lý chân trang</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse @if(in_array($currentRoute,['admin.footerSocial.getList','admin.manager.getList'])) show @endif" id="ui-basic11">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item">
+                            <a class="nav-link @if(in_array($currentRoute,['admin.footerSocial.getList'])) active @endif" href="{{ route('admin.footerSocial.getList') }}">quản lý liên kết</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @if(in_array($currentRoute,['admin.manager.getList'])) active @endif" href="{{ route('admin.manager.getList') }}">Quản lý trang footer</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @if(in_array($currentRoute,['admin.manager.getCreate'])) active @endif" href="{{ route('admin.manager.getCreate') }}">Tạo trang footer</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        @endif
 
     </ul>
 </nav>

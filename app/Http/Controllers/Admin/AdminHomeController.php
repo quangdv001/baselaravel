@@ -13,7 +13,8 @@ class AdminHomeController extends AdminBaseController
     }
 
     public function index(){
-        return view('admin.home.dashboard');
+        // return view('admin.home.dashboard');
+        return redirect()->route('admin.account.getList');
     }
 
 }
