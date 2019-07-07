@@ -26,8 +26,11 @@ class CategoryService
         if (isset($data['name']) && $data['name'] != '') {
             $query = $query->where('name', 'like', '%' . $data['name'] . '%');
         }
-        if (isset($data['active']) && $data['active'] > -1) {
-            $query = $query->where('active', $data['active']);
+        if (isset($data['status']) && $data['status'] > -1) {
+            $query = $query->where('status', $data['status']);
+        }
+        if (isset($data['type']) && $data['type'] > -1) {
+            $query = $query->where('type', $data['type']);
         }
         if (isset($data['sortBy']) && $data['sortBy'] != '') {
             $query = $query->orderBy($data['sortBy'], isset($data['sortOrder']) ? $data['sortOrder'] : 'DESC');
@@ -100,8 +103,15 @@ class CategoryService
         return $this->category->find($id);
     }
 
+    public function getByParentId($id){
+        return $this->category->where('parent_id', $id)->get();
+    }
+
     public function getAll(){
-        return $this->category->orderBy('position', 'ASC')->orderBy('id', 'ASC')->get();
+        return $this->category
+                    ->orderBy('position', 'ASC')
+                    ->orderBy('id', 'ASC')
+                    ->get();
     }
 
     public function listPluck(){
@@ -126,36 +136,6 @@ class CategoryService
             }
         }
         return $html;
-    }
-
-    public function genMenu($category, $parentId = 0, $char = ''){
-        $html = '<ol>';
-        foreach($category as $k => $v){
-            if($v['parent_id'] == $parentId){
-                $html .= '<li><a href="#">' . $v['name'] . '</a></li>';
-                unset($category[$k]);
-                $html.= $this->genMenu($category, $v['id'], $char.'|-');
-            }
-        }
-        $html .= '</ol>';
-        return $html;
-    }
-
-    public function getMenu($category, $parentId = 0){
-        $menu = [];
-        $index = 0;
-        foreach($category as $k => $v){
-            if($v['parent_id'] == $parentId){
-                unset($category[$k]);
-                $submenu = $this->getMenu($category, $v['id']);
-                if ($submenu) {
-                    $v->submenu = $submenu;
-                }
-                $menu[] = $v;
-                $index++;
-            }
-        }
-        return $menu;        
     }
 
     public function getBySlug($slug){

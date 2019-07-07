@@ -6,10 +6,10 @@ Danh sách Bài viết
 <!-- Breadcrumb-->
 <ol class="breadcrumb">
     <li class="breadcrumb-item">Home</li>
-    <li class="breadcrumb-item">
+    {{-- <li class="breadcrumb-item">
         <a href="#">Admin</a>
-    </li>
-    <li class="breadcrumb-item active">Dashboard</li>
+    </li> --}}
+    <li class="breadcrumb-item active">Article</li>
 </ol>
 <div class="container-fluid">
     <div class="animated fadeIn">
@@ -78,7 +78,7 @@ Danh sách Bài viết
                 </div>
                 <div class="card">
                     <div class="card-header">
-                        <i class="fa fa-align-justify"></i> Danh sách tài khoản</div>
+                        <i class="fa fa-align-justify"></i> Danh sách bài viết</div>
                     <div class="card-body">
                         <div class="table-responsive">
                             @if($data)

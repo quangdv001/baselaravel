@@ -43,15 +43,27 @@ Route::middleware(['auth.admin'])->prefix('admin')->group(function () {
     Route::post('room/getCreate/{id?}', 'AdminRoomController@postCreate')->name('room.postCreate');
     Route::get('room/remove/{id?}', 'AdminRoomController@remove')->name('room.remove');
 
-    Route::get('advertise', 'AdminAdvertiseController@index')->name('advertise.getList');
-    Route::get('advertise/getCreate/{id?}', 'AdminAdvertiseController@getCreate')->name('advertise.getCreate');
-    Route::post('advertise/getCreate/{id?}', 'AdminAdvertiseController@postCreate')->name('advertise.postCreate');
-    Route::get('advertise/remove/{id?}', 'AdminAdvertiseController@remove')->name('advertise.remove');
-
     Route::get('file', 'AdminFileController@index')->name('file.getList');
     Route::post('file/uploadFile', 'AdminFileController@uploadFile')->name('file.uploadFile');
     Route::post('file/removeFile/{id}', 'AdminFileController@removeFile')->name('file.removeFile');
     Route::get('file/downloadFile/{id}', 'AdminFileController@downloadFile')->name('file.downloadFile');
     Route::get('file/openFileModal', 'AdminFileController@openFileModal')->name('file.openFileModal');
+
+    Route::get('product', 'AdminProductController@index')->name('product.getList');
+    Route::get('product/getCreate/{id?}', 'AdminProductController@getCreate')->name('product.getCreate');
+    Route::post('product/getCreate/{id?}', 'AdminProductController@postCreate')->name('product.postCreate');
+    Route::get('product/remove/{id?}', 'AdminProductController@remove')->name('product.remove');
+
+    Route::get('material', 'AdminMaterialController@index')->name('material.getList');
+    Route::get('material/getCreate/{id?}', 'AdminMaterialController@getCreate')->name('material.getCreate');
+    Route::post('material/getCreate/{id?}', 'AdminMaterialController@postCreate')->name('material.postCreate');
+    Route::get('material/remove/{id?}', 'AdminMaterialController@remove')->name('material.remove');
+
+    Route::get('order', 'AdminOrderController@index')->name('order.getList');
+    Route::get('order/{id}', 'AdminOrderController@show')->name('order.show');
+    Route::post('order/{id}', 'AdminOrderController@updateStatus')->name('order.updateStatus');
+
+    Route::get('user', 'AdminUserController@index')->name('user.getList');
+    Route::post('user/updateStatus/{id}', 'AdminUserController@updateStatus')->name('user.updateStatus');
 });
 

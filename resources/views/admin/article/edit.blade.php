@@ -50,77 +50,88 @@
                             <div class="form-group">
                                 <label for="exampleFormControlSelect2">Chọn danh mục</label>
                                 <select class="form-control" name="category_id" id="exampleFormControlSelect2">
+                                    <option value="0">Mời chọn</option>
                                     {!! $html !!}
                                 </select>
                                 @if($errors->has('category_id'))
                                 <p class="text-danger">{{ $errors->first('category_id') }}</p>
                                 @endif
                             </div>
-                            <div class="form-group">
-                                <label>Ảnh</label>
-                                <input type="hidden" name="img" class="img"
-                                    value="{{isset($data->img) ? $data->img : old('img')}}">
-                                <br>
-                                <a href="javascript:void(0)" class="btn btn-info btn-select-file">Chọn ảnh</a>
-                                <div class="bl-img-show mt-4">
-                                    <img src="{{ isset($data->img) ? $data->img : old('img') }}" class="img-show"
-                                        width="90" height="90" alt="">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Ảnh</label>
+                                        <input type="hidden" name="img" class="img"
+                                            value="{{isset($data->img) ? $data->img : old('img')}}">
+                                        <br>
+                                        <a href="javascript:void(0)" class="btn btn-info btn-select-file">Chọn ảnh</a>
+                                        <div class="bl-img-show mt-4">
+                                            <img src="{{ isset($data->img) ? $data->img : old('img') }}"
+                                                class="img-show" width="90" height="90" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label>Ảnh thêm</label>
+                                        <br>
+                                        <a href="javascript:void(0)" class="btn btn-info btn-select-multi-file">Chọn
+                                            ảnh</a>
+                                        <div class="bl-img-show mt-4">
+                                            <ul class="list-inline list-img-article">
+                                                @if(sizeof($articleImg) > 0)
+                                                @foreach($articleImg as $v)
+                                                <li class="list-inline-item mb-2 position-relative">
+                                                    <a href="javascript:void(0)"
+                                                        class="btn-rm-img-item position-absolute" style="right: 0"><i
+                                                            class="fa fa-times text-danger" aria-hidden="true"></i></a>
+                                                    <img src="{{ $v }}" width="90" height="90" alt="">
+                                                    <input type="hidden" name="article_img[]" class="article_img"
+                                                        value="{{ $v }}">
+                                                </li>
+                                                @endforeach
+                                                @endif
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            {{-- <div class="form-group">
-                                        <label>Tài liệu</label><br>
-                                        <a href="javascript:void(0)" class="btn btn-info btn-select-file-path">Chọn File</a><br><br>
-                                        <input type="text" readonly name="file_path" class="file_path form-control"
-                                            value="{{isset($data->file_path) ? $data->file_path : old('file_path')}}">
-                        </div> --}}
+                            <div class="form-group">
+                                <label for="editor1">Mô tả ngắn</label>
+                                <textarea class="form-control ckeditor" name="short_description" id="editor1"
+                                    rows="2">{{ isset($data->short_description) ? $data->short_description : old('short_description') }}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="editor2">Mô tả</label>
+                                <br>
+                                <a href="javascript:void(0)" class="btn btn-info btn-append-img">Chèn ảnh</a>
+                                <textarea class="form-control ckeditor" name="description" id="editor2"
+                                    rows="5">{{ isset($data->description) ? $data->description : old('description') }}</textarea>
+                            </div>
 
-                        <div class="form-group">
-                            <label for="editor1">Mô tả ngắn</label>
-                            <textarea class="form-control ckeditor" name="short_description" id="editor1"
-                                rows="2">{{ isset($data->short_description) ? $data->short_description : old('short_description') }}</textarea>
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect2">Trạng thái</label>
+                                <select class="form-control" name="status" id="exampleFormControlSelect2">
+                                    <option value="1">Hoạt động</option>
+                                    <option value="0" @if(isset($data->status) && $data->status == 0) selected
+                                        @endif>Ngừng
+                                        hoạt
+                                        động</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="editor2">Mô tả</label>
-                            <br>
-                            <a href="javascript:void(0)" class="btn btn-info btn-append-img">Chèn ảnh</a>
-                            <textarea class="form-control ckeditor" name="description" id="editor2"
-                                rows="5">{{ isset($data->description) ? $data->description : old('description') }}</textarea>
+                        <div class="card-footer">
+                            <button class="btn btn-sm btn-primary has-spinner" type="submit">
+                                <i class="fa fa-dot-circle-o"></i> {{ $id > 0 ? 'Cập nhật' : 'Tạo mới' }}</button>
+                            <button class="btn btn-sm btn-danger" type="reset">
+                                <i class="fa fa-ban"></i> Reset</button>
                         </div>
-
-                        {{-- <div class="form-group">
-                                        <label for="exampleFormControlSelect2">Loại bài viết</label>
-                                        <select class="form-control" name="type" id="exampleFormControlSelect2">
-                                            <option value="1" @if(isset($data->type) && $data->type == 1) selected @endif>Tin tức
-                                            </option>
-                                            <option value="2" @if(isset($data->type) && $data->type == 2) selected @endif>Luật pháp
-                                            </option>
-                                            <option value="3" @if(isset($data->type) && $data->type == 3) selected @endif>Dự án nhà
-                                                đất</option>
-                                            <option value="4" @if(isset($data->type) && $data->type == 4) selected @endif>Đối tác</option>
-                                        </select>
-                                    </div> --}}
-                        <div class="form-group">
-                            <label for="exampleFormControlSelect2">Trạng thái</label>
-                            <select class="form-control" name="status" id="exampleFormControlSelect2">
-                                <option value="1">Hoạt động</option>
-                                <option value="0" @if(isset($data->status) && $data->status == 0) selected @endif>Ngừng
-                                    hoạt
-                                    động</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <button class="btn btn-sm btn-primary has-spinner" type="submit">
-                            <i class="fa fa-dot-circle-o"></i> {{ $id > 0 ? 'Cập nhật' : 'Tạo mới' }}</button>
-                        <button class="btn btn-sm btn-danger" type="reset">
-                            <i class="fa fa-ban"></i> Reset</button>
                     </div>
                 </div>
+                <!-- /.col-->
             </div>
-            <!-- /.col-->
+            <!-- /.row-->
         </div>
-        <!-- /.row-->
-    </div>
     </div>
 </form>
 @endsection
@@ -143,9 +154,10 @@
             init.openFileModal(callback);
         });
 
-        $(document).on('click', '.btn-select-file-path', function () {
-            init.openFileModal(callbackFile);
+        $(document).on('click', '.btn-select-multi-file', function () {
+            init.openFileModal(callbackMultiple, true);
         });
+
 
         $(document).on('click', '.btn-append-img', function () {
             init.openFileModal(callbackCkeditor);
@@ -156,18 +168,34 @@
             var slug = init.makeSlug(val);
             $('.slug').val(slug);
         })
+
+        $(document).on('click', '.btn-rm-img-item', function () {
+            console.log(1);
+            $(this).parent().remove();
+        })
     });
     var callback = function (data) {
         $('.img').val(data.url);
         $('.img-show').attr('src', data.url);
     }
-    var callbackFile = function (data) {
-        $('.file_path').val(data.path);
-    }
 
     var callbackCkeditor = function (data) {
         img = "<img src='" + data.url + "'/>";
         CKEDITOR.instances.editor2.insertHtml(img);
+    }
+
+    var callbackMultiple = function (data) {
+        html = '';
+        if (data.length > 0) {
+            data.forEach(function (value, index) {
+                html +=
+                    '<li class="list-inline-item mb-2 position-relative"><a href="javascript:void(0)" class="btn-rm-img-item position-absolute" style="right: 0"><i class="fa fa-times text-danger" aria-hidden="true"></i></a><img src="' +
+                    value +
+                    '" width="90" height="90" alt=""><input type="hidden" name="article_img[]" class="article_img" value="' +
+                    value + '"></li>'
+            })
+        }
+        $('.list-img-article').append(html);
     }
 
 </script>

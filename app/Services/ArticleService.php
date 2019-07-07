@@ -12,13 +12,16 @@ namespace App\Services;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use App\Models\Article;
+use App\Models\ArticleImg;
 
 class ArticleService
 {
     private $article;
-    public function __construct(Article $article)
+    private $articleImg;
+    public function __construct(Article $article, ArticleImg $articleImg)
     {
-        $this->article = $article ? $article : new Article;
+        $this->article = $article;
+        $this->articleImg = $articleImg;
     }
 
     public function search($data){
@@ -35,6 +38,12 @@ class ArticleService
         if (isset($data['status']) && $data['status'] > -1) {
             $query = $query->where('status', $data['status']);
         }
+        if (isset($data['category_id']) && $data['category_id'] > -1) {
+            $query = $query->where('category_id', $data['category_id']);
+        }
+        if (isset($data['except']) && $data['except'] > 0) {
+            $query = $query->where('id', '<>' ,$data['except']);
+        }
         if (isset($data['type']) && $data['type'] > -1) {
             $query = $query->where('type', $data['type']);
         }
@@ -48,14 +57,6 @@ class ArticleService
     }
 
     // NA
-    public function latestByType($typeId = 0) {
-        $article = $this->article;
-        return $article->select()
-            ->where('type', '=', $typeId )
-            ->orderBy('created_at', 'desc')
-            ->get();
-    }
-
     public function findArticleBySlug($slug){
         $query = null;
         if (isset($slug) && $slug != '') {
@@ -124,5 +125,30 @@ class ArticleService
 
     public function getRelate($categoryId, $slug, $limit){
         return $this->article->where('category_id', $categoryId)->where('slug', '!=', $slug)->where('status',1)->orderBy('id','DESC')->paginate($limit);
+    }
+
+    public function createArticleImg($id, $data){
+        
+        try {
+            DB::beginTransaction();
+            $this->articleImg->where('article_id', $id)->delete();
+            $dataImg = [];
+            if(sizeof($data) > 0){
+                foreach($data as $k => $v){
+                    $dataImg[$k]['article_id'] = $id;
+                    $dataImg[$k]['img'] = $v;
+                }
+            }
+            $this->articleImg->insert($dataImg);
+            DB::commit();
+            return true;
+        } catch (Exception  $e) {
+            DB::rollBack();
+            throw $e;
+        }
+    }
+
+    public function getArticleImg($id){
+        return $this->articleImg->where('article_id', $id)->pluck('img');
     }
 }

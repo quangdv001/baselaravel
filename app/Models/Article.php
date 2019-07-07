@@ -21,24 +21,8 @@ class Article extends Model
         return $this->belongsTo('App\Models\Category');
     }
 
-    // public function scopeFilter($query, $filters)
-    // {
-    //     if ($type = $filters['type']) {
-    //         $query->where('type', $type);
-    //     }
-
-    //     if ($month = $filters['month']) {
-    //         $query->whereMonth('created_at', Carbon::parse($month)->month);
-    //     }
-
-    //     if ($year = $filters['year']) {
-    //         $query->whereYear('created_at', $year);
-    //     }
-    // }
-    public static function latestByType($typeId = 0) {
-        return static::select()
-            ->where('type', '=', $typeId )
-            ->orderBy('created_at', 'desc')
-            ->get();
+    public function images()
+    {
+        return $this->hasMany('App\Models\ArticleImg');
     }
 }
