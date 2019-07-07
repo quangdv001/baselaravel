@@ -16,7 +16,7 @@ class CreateOrderTable extends Migration
         Schema::create('order', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('status')->default(1);
-            $table->integer('total')->default(0);
+            // $table->integer('total')->default(0);
             $table->timestamps();
         });
     }

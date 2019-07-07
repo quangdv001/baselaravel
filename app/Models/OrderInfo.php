@@ -8,8 +8,7 @@ class OrderInfo extends Model
 {
     protected $table = 'order_info';
     protected $fillable = [
-        'order_id', 'users_id', 'email', 'name', 'phone'
-        
+        'order_id', 'email', 'name', 'phone', 'address', 'note'
     ];
 
 }

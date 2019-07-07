@@ -1,19 +1,26 @@
 @extends('admin.layout.main')
 @section('title')
-    Danh sách tỉnh thành
+Danh sách Tỉnh Thành
 @endsection
 @section('content')
-    <div class="row">
-        <div class="col-lg-12 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Danh sách tỉnh thành</h4>
-                    {{--<p class="card-description">--}}
-                        {{--Add class--}}
-                        {{--<code>.table-bordered</code>--}}
-                    {{--</p>--}}
-                    <div class="table-responsive">
-                        @if($data)
+<!-- Breadcrumb-->
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">Home</li>
+    <li class="breadcrumb-item">
+        <a href="#">Admin</a>
+    </li>
+    <li class="breadcrumb-item active">Tỉnh Thành</li>
+</ol>
+<div class="container-fluid">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fa fa-align-justify"></i> Danh sách Tỉnh Thành</div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            @if($data)
                             <table class="table table-bordered myTable">
                                 <thead>
                                 <tr>
@@ -44,11 +51,15 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                        @endif
+                            @endif
 
+                        </div>
                     </div>
                 </div>
             </div>
+            <!-- /.col-->
         </div>
+        <!-- /.row-->
     </div>
+</div>
 @endsection

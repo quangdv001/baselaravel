@@ -8,8 +8,7 @@ class OrderDetail extends Model
 {
     protected $table = 'order_detail';
     protected $fillable = [
-        'order_id', 'product_id', 'title', 'img', 'qty', 'price', 'total', 'width', 'height', 'depth'
-        
+        'order_id', 'start_name', 'start_id', 'end_name', 'end_id', 'qty', 'start_time', 'end_time'
     ];
 
 }

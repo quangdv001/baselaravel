@@ -24,25 +24,18 @@ class SiteHomeController extends SiteBaseController
         $this->category = $category;
         $this->article = $article;
         $this->order = $order;
-        $category = $this->category->getByParentId(0);
-        View::share('category', $category);
     }
 
     public function index(){
-        $params['status'] = 1;
-        $params['type'] = 1;
-        $params['sortBy'] = 'id';
-        $params['sortOrder'] = 'ASC';
-        $category = $this->category->search($params);
-        if(sizeof($category) > 0){
-            foreach($category as $v){
-                $param['category_id'] = $v->id;
-                $param['limit'] = 10;
-                $param['sortBy'] = 'id';
-                $v->article = $this->article->search($param);
-            }
-        }
-        return view('site.home.index')->with('cate', $category);
+        $paramTour['limit'] = 10;
+        $paramTour['category_id'] = 2;
+        $paramTour['status'] = 1;
+        $tour = $this->article->search($paramTour);
+        $paramArticle['limit'] = 4;
+        $paramArticle['category_id'] = 1;
+        $paramArticle['status'] = 1;
+        $article = $this->article->search($paramArticle);
+        return view('site.home.index')->with('tour', $tour)->with('article', $article);
     }
 
     public function sendContact(Request $request){
@@ -55,16 +48,4 @@ class SiteHomeController extends SiteBaseController
         return response()->json($res);
     }
 
-    public function order(){
-        return view('site.home.order');
-    }
-
-    public function orderDetail(Request $request){
-        $id = $request->input('id', 0);
-        $order = $this->order->getById($id);
-        // dd($order);
-        return view('site.home.orderDetail')
-        ->with('id', $id)
-        ->with('data', $order);
-    }
 }

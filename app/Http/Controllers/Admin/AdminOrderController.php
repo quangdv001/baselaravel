@@ -18,9 +18,9 @@ class AdminOrderController extends AdminBaseController
     private $orderStatus = [
         1 => 'Mới tạo',
         2 => 'Xác nhận',
-        3 => 'Đang giao hàng',
+        // 3 => 'Đang giao hàng',
         4 => 'Hoàn Thành',
-        5 => 'Hủy'
+        // 5 => 'Hủy'
     ];
     private $orderBadge = [
         1 => 'badge badge-primary',

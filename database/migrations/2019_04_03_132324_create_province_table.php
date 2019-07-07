@@ -17,6 +17,7 @@ class CreateProvinceTable extends Migration
             $table->bigIncrements('id');
             $table->string('name')->nullable();
             $table->string('province_id')->nullable();
+            $table->smallInteger('status')->default(1);
             $table->timestamps();
         });
     }

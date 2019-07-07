@@ -16,10 +16,12 @@ class CreateOrderInfoTable extends Migration
         Schema::create('order_info', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('order_id');
-            $table->integer('users_id')->default(0);
+            // $table->integer('users_id')->default(0);
             $table->string('email')->nullable();
             $table->string('name')->nullable();
             $table->string('phone')->nullable();
+            $table->string('address')->nullable();
+            $table->string('note')->nullable();
             $table->timestamps();
         });
     }

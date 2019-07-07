@@ -58,6 +58,26 @@
                 </ul>
             </li>
             @endif
+            @if(auth('admin')->user()->can('admin-pms', 'admin.province.getList'))
+            <li class="nav-item nav-dropdown @if(in_array($currentRoute,['admin.province.getList', 'admin.district.getList', 'admin.ward.getList'])) open @endif">
+                <a class="nav-link nav-dropdown-toggle" href="#">
+                    <i class="nav-icon icon-location-pin"></i>Tỉnh thành</a>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a class="nav-link @if(in_array($currentRoute,['admin.province.getList'])) active @endif" href="{{ route('admin.province.getList') }}">
+                            <i class="nav-icon "></i> Tỉnh/Thành</a>
+                    </li>
+                    {{-- <li class="nav-item">
+                        <a class="nav-link @if(in_array($currentRoute,['admin.district.getList'])) active @endif" href="{{ route('admin.district.getList') }}">
+                            <i class="nav-icon "></i> Quận/Huyện</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @if(in_array($currentRoute,['admin.ward.getList'])) active @endif" href="{{ route('admin.ward.getList') }}">
+                            <i class="nav-icon "></i> Phường/Xã</a>
+                    </li> --}}
+                </ul>
+            </li>
+            @endif
             @if(auth('admin')->user()->can('admin-pms', 'admin.file.getList'))
             <li class="nav-item nav-dropdown @if(in_array($currentRoute,['admin.file.getList'])) open @endif">
                 <a class="nav-link nav-dropdown-toggle" href="#">
@@ -88,24 +108,6 @@
                 </ul>
             </li>
             @endif
-            @if(auth('admin')->user()->can('admin-pms', 'admin.product.getList'))
-            <li class="nav-item nav-dropdown @if(in_array($currentRoute,['admin.product.getList','admin.product.getCreate'])) open @endif">
-                <a class="nav-link nav-dropdown-toggle" href="#">
-                    <i class="nav-icon icon-trophy"></i>Sản phẩm</a>
-                <ul class="nav-dropdown-items">
-                    <li class="nav-item">
-                        <a class="nav-link @if(in_array($currentRoute,['admin.product.getList'])) active @endif" href="{{ route('admin.product.getList') }}">
-                            <i class="nav-icon "></i> Danh sách</a>
-                    </li>
-                    @if(auth('admin')->user()->can('admin-pms', 'admin.product.getCreate'))
-                    <li class="nav-item">
-                        <a class="nav-link @if(in_array($currentRoute,['admin.product.getCreate'])) active @endif" href="{{ route('admin.product.getCreate') }}">
-                            <i class="nav-icon "></i> Thêm mới</a>
-                    </li>
-                    @endif
-                </ul>
-            </li>
-            @endif
             @if(auth('admin')->user()->can('admin-pms', 'admin.order.getList'))
             <li class="nav-item nav-dropdown @if(in_array($currentRoute,['admin.order.getList'])) open @endif">
                 <a class="nav-link nav-dropdown-toggle" href="#">
@@ -118,36 +120,6 @@
                 </ul>
             </li>
             @endif
-            @if(auth('admin')->user()->can('admin-pms', 'admin.user.getList'))
-            <li class="nav-item nav-dropdown @if(in_array($currentRoute,['admin.user.getList'])) open @endif">
-                <a class="nav-link nav-dropdown-toggle" href="#">
-                    <i class="nav-icon icon-people"></i>Khách hàng</a>
-                <ul class="nav-dropdown-items">
-                    <li class="nav-item">
-                        <a class="nav-link @if(in_array($currentRoute,['admin.user.getList'])) active @endif" href="{{ route('admin.user.getList') }}">
-                            <i class="nav-icon "></i> Danh sách</a>
-                    </li>
-                </ul>
-            </li>
-            @endif
-            {{-- @if(auth('admin')->user()->can('admin-pms', 'admin.user.getList'))
-            <li class="nav-item nav-dropdown @if(in_array($currentRoute,['admin.material.getList'])) open @endif">
-                <a class="nav-link nav-dropdown-toggle" href="#">
-                    <i class="nav-icon icon-people"></i>Loại vật liệu</a>
-                <ul class="nav-dropdown-items">
-                    <li class="nav-item">
-                        <a class="nav-link @if(in_array($currentRoute,['admin.material.getList'])) active @endif" href="{{ route('admin.material.getList') }}">
-                            <i class="nav-icon "></i> Danh sách</a>
-                    </li>
-                    @if(auth('admin')->user()->can('admin-pms', 'admin.material.getCreate'))
-                    <li class="nav-item">
-                        <a class="nav-link @if(in_array($currentRoute,['admin.material.getCreate'])) active @endif" href="{{ route('admin.material.getCreate') }}">
-                            <i class="nav-icon "></i> Thêm mới</a>
-                    </li>
-                    @endif
-                </ul>
-            </li>
-            @endif --}}
         </ul>
     </nav>
     <button class="sidebar-minimizer brand-minimizer" type="button"></button>

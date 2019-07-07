@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>@yield('title', 'Homefun')</title>
-    <link rel="shortcut icon" type="image/png" href="{{ asset('public/assets/site/themes/assets/images/logo2.png') }}"/>
+    <title>@yield('title', 'Livitrans')</title>
+    <link rel="shortcut icon" type="image/png" href="{{ asset('public/assets/site/themes/assets/images/logo.png') }}"/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Bootstrap fonts and icons-->
     @include('site.layout.css')

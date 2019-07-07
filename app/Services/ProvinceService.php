@@ -80,7 +80,7 @@ class ProvinceService
     }
 
     public function getProvince(){
-        return $this->province->all();
+        return $this->province->where('status', 1)->get();
     }
 
     public function getDistrict(){

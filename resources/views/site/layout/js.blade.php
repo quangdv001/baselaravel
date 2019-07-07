@@ -4,6 +4,7 @@
 <script src="{{ asset('public/assets/site/themes/assets/libs/owlcarousel2/owl.carousel.min.js') }}"></script>
 <script src="{{ asset('public/assets/site/themes/assets/libs/slimScroll/jquery.slimscroll.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('public/assets/admin/plugins/notyv2/jquery.noty.packaged.js') }}"></script>
+<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js"> </script>
 <script src="{{ asset('public/assets/admin/plugins/buttonloader/jquery.buttonLoader.min.js') }}"></script>
 <script src="{{ asset('public/assets/admin/plugins/waitme/waitMe.min.js') }}"></script>
 <script src="{{ asset('public/assets/site/themes/js/main.js') }}"></script>

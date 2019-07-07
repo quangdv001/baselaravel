@@ -88,8 +88,7 @@ Danh sách danh mục
                                 <select class="form-control type" id="exampleFormControlSelect3">
                                     <option value="0">Theo url</option>
                                     <option value="1">Tin tức</option>
-                                    <option value="2">Sản phẩm</option>
-                                    <option value="3">Danh mục</option>
+                                    <option value="2">Tour</option>
                                 </select>
                             </div>
                         </div>
