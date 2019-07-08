@@ -2,6 +2,7 @@
 use App\Models\Order;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OrderNew;
+use Illuminate\Support\Facades\App;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,4 +36,15 @@ Route::get('/testMail', function(){
     // return (new OrderNew($order))->render();
     // Mail::to('quangdv001@gmail.com')->send(new OrderNew($order));
     Mail::to($user)->send(new OrderNew($order));
+});
+
+Route::get('setLocale/{locale}', function($locale){
+    App::setLocale($locale);
+    $locale = App::getLocale();
+    dd($locale);
+});
+Route::get('getLocale', function(){
+    dd(session()->all());
+    $locale = App::getLocale();
+    dd($locale);
 });

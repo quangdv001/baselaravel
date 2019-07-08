@@ -17,6 +17,15 @@
         <div class="animated fadeIn">
             <div class="row">
                 <div class="col-md-12">
+                    @if(sizeof($listLocales) > 0)
+                    <ul class="nav nav-tabs">
+                        @foreach($listLocales as $v)
+                            <li class="nav-item">
+                                <a class="nav-link  @if($locale == $v) active @endif" href="{{ route('admin.article.getCreate', ['locale' => $v, 'id' => $id]) }}">{{ $v }}</a>
+                            </li>
+                        @endforeach
+                    </ul>
+                    @endif
                     <div class="card">
                         <div class="card-header">
                             <strong>Thông tin cơ bản</strong></div>
@@ -170,7 +179,6 @@
         })
 
         $(document).on('click', '.btn-rm-img-item', function () {
-            console.log(1);
             $(this).parent().remove();
         })
     });

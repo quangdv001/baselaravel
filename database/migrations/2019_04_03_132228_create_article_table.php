@@ -15,27 +15,29 @@ class CreateArticleTable extends Migration
     {
         Schema::create('article', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('title');
-            $table->string('slug')->unique();
-            $table->string('meta')->nullable();
             $table->string('img')->nullable();
-            $table->text('short_description')->nullable();
-            $table->text('description')->nullable();
-            $table->string('file_path')->nullable();
-            $table->smallInteger('type')->nullable()->default(0);
             $table->smallInteger('status')->nullable()->default(1);
             $table->integer('category_id')->nullable()->default(0);
-            $table->integer('user_id_c')->nullable()->default(0);
-            $table->string('user_name_c')->nullable();
-            $table->integer('user_id_u')->nullable()->default(0);
-            $table->string('user_name_u')->nullable();
             $table->integer('admin_id_c')->nullable()->default(0);
             $table->string('admin_name_c')->nullable();
             $table->integer('admin_id_u')->nullable()->default(0);
             $table->string('admin_name_u')->nullable();
-            $table->softDeletes();
             $table->timestamps();
         });
+        // Schema::disableForeignKeyConstraints();
+        Schema::create('article_translation', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->bigInteger('article_id')->unsigned();
+            $table->string('locale')->index();
+            $table->string('title');
+            // $table->string('slug')->nullable();
+            $table->string('meta')->nullable();
+            $table->text('short_description')->nullable();
+            $table->text('description')->nullable();
+            $table->unique(['article_id', 'locale']);
+            $table->foreign('article_id')->references('id')->on('article')->onDelete('cascade');
+        });
+        // Schema::enableForeignKeyConstraints();
     }
 
     /**
@@ -45,6 +47,9 @@ class CreateArticleTable extends Migration
      */
     public function down()
     {
+        // Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('article');
+        Schema::dropIfExists('article_translation');
+        // Schema::enableForeignKeyConstraints();
     }
 }

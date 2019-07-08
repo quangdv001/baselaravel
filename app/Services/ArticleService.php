@@ -13,15 +13,18 @@ use Exception;
 use Illuminate\Support\Facades\DB;
 use App\Models\Article;
 use App\Models\ArticleImg;
+use App\Models\ArticleTranslation;
 
 class ArticleService
 {
     private $article;
     private $articleImg;
-    public function __construct(Article $article, ArticleImg $articleImg)
+    private $articleTrans;
+    public function __construct(Article $article, ArticleImg $articleImg, ArticleTranslation $articleTrans)
     {
         $this->article = $article;
         $this->articleImg = $articleImg;
+        $this->articleTrans = $articleTrans;
     }
 
     public function search($data){
@@ -66,17 +69,21 @@ class ArticleService
     }
     // END NA
 
-    public function create($data)
+    public function create($data, $dataTrans, $locale)
     {
         try {
             DB::beginTransaction();
-            $admin = $this->article;
+            $article = $this->article;
             foreach ($data as $key => $value) {
-                $admin->$key = $value;
+                $article->$key = $value;
             }
-            $admin->save();
+            $article->save();
+            foreach($dataTrans as $k => $v){
+                $article->translate($locale)->$k = $v;
+            }
+            $article->save();
             DB::commit();
-            return $admin;
+            return $article;
         } catch (Exception  $e) {
             DB::rollBack();
             throw $e;

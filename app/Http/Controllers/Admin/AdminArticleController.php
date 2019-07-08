@@ -9,17 +9,21 @@ use App\Services\ArticleService;
 use App\Http\Requests\Admin\ArticleRequest;
 use App\Services\CategoryService;
 use App\Services\TagService;
+use Astrotomic\Translatable\Locales;
+use Illuminate\Support\Facades\App;
 
 class AdminArticleController extends AdminBaseController
 {
     protected $article;
     protected $category;
-    public function __construct(ArticleService $article, CategoryService $category, TagService $tagService)
+    protected $locales;
+    public function __construct(ArticleService $article, CategoryService $category, TagService $tagService, Locales $locales)
     {
         parent::__construct();
         $this->article = $article;
         $this->category = $category;
         $this->tagService = $tagService;
+        $this->locales = $locales;
     }
 
     public function index(Request $request){
@@ -37,13 +41,14 @@ class AdminArticleController extends AdminBaseController
             ->with('listCategories', $listCategories);
     }
 
-    public function getCreate($id = 0){
+    public function getCreate($locale = 'vi', $id = 0){
         if (Gate::forUser($this->user)->denies('admin-pms', $this->currentRoute)) {
             return redirect()->route('admin.home.dashboard')->with('error_message','Bạn không có quyền vào trang này!');
         }
         $article = $tagItem = $articleImg = [];
         $listTag = '';
         if($id > 0){
+            App::setLocale($locale);
             $article = $this->article->getById($id);
             $articleImg = $this->article->getArticleImg($id);
             // dd($articleImg);
@@ -56,22 +61,27 @@ class AdminArticleController extends AdminBaseController
                 $listTag = implode(',', $tagItem);
             }
         }
-
+        $listLocales = $this->locales->all();
+        // dd($locale);
         $category = $this->category->getAll();
         $html = $this->category->generateOptionSelect($category, 0, $article ? $article->category_id : 0, '');
         return view('admin.article.edit')
             ->with('id', $id)
+            ->with('locale', $locale)
+            ->with('listLocales', $listLocales)
             ->with('html', $html)
             ->with('listTag', $listTag)
             ->with('articleImg', $articleImg)
             ->with('data', $article);
     }
 
-    public function postCreate(ArticleRequest $request, $id = 0){
+    public function postCreate(ArticleRequest $request, $locale = 'vi', $id = 0){
         if (Gate::forUser($this->user)->denies('admin-pms', $this->currentRoute)) {
             return redirect()->route('admin.home.dashboard')->with('error_message','Bạn không có quyền vào trang này!');
         }
-        $data = $request->only('title', 'slug', 'meta', 'type', 'short_description', 'description', 'status', 'category_id', 'img', 'tag', 'file_path');
+        $data = $request->only('status', 'category_id', 'img', 'tag');
+        $dataTrans = $request->only('title', 'meta', 'short_description', 'description');
+        dd($data);
         $articleImg = $request->input('article_img', []);
         $listTags = $data['tag'];
         unset($data['tag']);
@@ -79,8 +89,7 @@ class AdminArticleController extends AdminBaseController
         if($id == 0){
             $data['admin_id_c'] = $this->user->id;
             $data['admin_name_c'] = $this->user->username;
-            
-            $res = $this->article->create($data);
+            $res = $this->article->create($data, $dataTrans, $locale);
             if($res){
                 $this->article->createArticleImg($res->id, $articleImg);
                 $arrTag = explode(',', $listTags);
@@ -123,7 +132,8 @@ class AdminArticleController extends AdminBaseController
                 $mess = 'Cập nhật bài viết thành công';
             }
         }
-        return redirect()->route('admin.article.getList')->with('success_message', $mess);
+        // return redirect()->route('admin.article.getList')->with('success_message', $mess);
+        return redirect()->back()->with('success_message', $mess);
     }
 
     public function remove($id = 0){

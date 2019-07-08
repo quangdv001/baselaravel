@@ -8,18 +8,20 @@ use App\Services\CategoryService;
 use App\Services\ArticleService;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
+use Astrotomic\Translatable\Locales;
 
 class SiteArticleController extends SiteBaseController
 {
     private $category;
     private $article;
-    protected $currentRoute;
+    protected $locales;
     
     // For only this view
-    public function __construct(CategoryService $category, ArticleService $article){
+    public function __construct(CategoryService $category, ArticleService $article, Locales $locales){
         parent::__construct();
         $this->category = $category;
         $this->article = $article;
+        $this->locales = $locales;
         $category = $this->category->getByParentId(0);
         View::share('category', $category);
     }
@@ -55,5 +57,9 @@ class SiteArticleController extends SiteBaseController
         return view('site.article.list')
         ->with('cate', $cate)
         ->with('data', $category);
+    }
+
+    public function currentLang(){
+        return $this->locales->current();
     }
 }

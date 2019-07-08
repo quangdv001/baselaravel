@@ -33,9 +33,9 @@ Route::middleware(['auth.admin'])->prefix('admin')->group(function () {
     Route::get('province/loadDistrict/{id}/{select?}', 'AdminProvinceController@loadDistrict')->name('ward.loadDistrict');
     Route::get('province/loadWard/{id}/{select?}', 'AdminProvinceController@loadWard')->name('ward.loadWard');
 
-    Route::get('article', 'AdminArticleController@index')->name('article.getList');
-    Route::get('article/getCreate/{id?}', 'AdminArticleController@getCreate')->name('article.getCreate');
-    Route::post('article/getCreate/{id?}', 'AdminArticleController@postCreate')->name('article.postCreate');
+    Route::get('article/{locale?}', 'AdminArticleController@index')->name('article.getList');
+    Route::get('article/getCreate/{locale?}/{id?}', 'AdminArticleController@getCreate')->name('article.getCreate');
+    Route::post('article/getCreate/{locale?}/{id?}', 'AdminArticleController@postCreate')->name('article.postCreate');
     Route::get('article/remove/{id?}', 'AdminArticleController@remove')->name('article.remove');
 
     Route::get('room', 'AdminRoomController@index')->name('room.getList');

@@ -3,13 +3,17 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
+use Astrotomic\Translatable\Translatable;
 
-class Article extends Model
+class Article extends Model implements TranslatableContract
 {
+    use Translatable;
     protected $table = 'article';
+    public $translatedAttributes = ['title', 'slug', 'meta', 'short_description', 'description'];
     protected $fillable = [
-        'title', 'slug', 'meta', 'img' , 'short_description', 'description', 'type', 'status', 'category_id', 
-        'file_path', 'user_id_c', 'user_name_c', 'user_id_u', 'user_name_u', 'admin_id_c', 'admin_name_c', 'admin_id_u', 'admin_name_u'
+        'img', 'status', 'category_id', 
+        'admin_id_c', 'admin_name_c', 'admin_id_u', 'admin_name_u'
     ];
 
     public function tag()

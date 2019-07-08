@@ -101,7 +101,7 @@
                     </li>
                     @if(auth('admin')->user()->can('admin-pms', 'admin.article.getCreate'))
                     <li class="nav-item">
-                        <a class="nav-link @if(in_array($currentRoute,['admin.article.getCreate'])) active @endif" href="{{ route('admin.article.getCreate') }}">
+                        <a class="nav-link @if(in_array($currentRoute,['admin.article.getCreate'])) active @endif" href="{{ route('admin.article.getCreate', ['locale' => 'vi']) }}">
                             <i class="nav-icon "></i> Thêm mới</a>
                     </li>
                     @endif

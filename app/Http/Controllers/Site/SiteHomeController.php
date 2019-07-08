@@ -11,19 +11,23 @@ use Illuminate\Support\Facades\Route;
 use App\Mail\Contact;
 use Illuminate\Support\Facades\Mail;
 use App\Services\OrderService;
+use Illuminate\Support\Facades\App;
+use Astrotomic\Translatable\Locales;
 
 class SiteHomeController extends SiteBaseController
 {
     private $category;
     private $article;
     private $order;
+    private $locales;
     
     // For only this view
-    public function __construct(CategoryService $category, ArticleService $article, OrderService $order){
+    public function __construct(CategoryService $category, ArticleService $article, OrderService $order, Locales $locales){
         parent::__construct();
         $this->category = $category;
         $this->article = $article;
         $this->order = $order;
+        $this->locales = $locales;
     }
 
     public function index(){
@@ -47,5 +51,19 @@ class SiteHomeController extends SiteBaseController
         $res['mess'] = 'Gửi thành công';
         return response()->json($res);
     }
+
+    public function lang($locale)
+    {
+        App::setLocale($locale);
+        session(['locale' => $locale]);
+        return $this->locales->current();
+        // return redirect()->back();
+        dd(session()->all());
+    }
+
+    public function currentLang(){
+        return $this->locales->current();
+    }
+    
 
 }
