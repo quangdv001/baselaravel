@@ -9,6 +9,7 @@ Route::get('/', 'SiteHomeController@index')->name('home.index');
 Route::get('lang/{locale}', 'SiteHomeController@lang')->name('home.setLocale');
 Route::get('currentLang', 'SiteArticleController@currentLang')->name('home.sendContact');
 Route::post('sendContact', 'SiteHomeController@sendContact')->name('home.sendContact');
+
 Route::get('about', 'SiteArticleController@about')->name('home.about');
 Route::get('price', 'SiteArticleController@price')->name('home.price');
 Route::get('livitrans', 'SiteArticleController@livitrans')->name('home.livitrans');
