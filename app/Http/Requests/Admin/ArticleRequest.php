@@ -24,8 +24,8 @@ class ArticleRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required',
-            'slug' => 'required|unique:article,slug,'.$this->id,
+            // 'title' => 'required',
+            // 'slug' => 'required|unique:article,slug,'.$this->id,
         ];
     }
 
@@ -37,8 +37,8 @@ class ArticleRequest extends FormRequest
     public function messages()
     {
         return [
-            'title.required' => 'Tên bài viết không được rỗng',
-            'slug.unique' => 'Slug đã tồn tại',
+            // 'title.required' => 'Tên bài viết không được rỗng',
+            // 'slug.unique' => 'Slug đã tồn tại',
         ];
     }
 }

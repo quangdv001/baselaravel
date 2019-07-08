@@ -79,7 +79,7 @@ class ArticleService
             }
             $article->save();
             foreach($dataTrans as $k => $v){
-                $article->translate($locale)->$k = $v;
+                $article->translateOrNew($locale)->$k = $v;
             }
             $article->save();
             DB::commit();
@@ -90,16 +90,20 @@ class ArticleService
         }
     }
 
-    public function update($admin, $data)
+    public function update($article, $data, $dataTrans, $locale)
     {
         try {
             DB::beginTransaction();
             foreach ($data as $key => $value) {
-                $admin->$key = $value;
+                $article->$key = $value;
             }
-            $admin->save();
+            $article->save();
+            foreach($dataTrans as $k => $v){
+                $article->translateOrNew($locale)->$k = $v;
+            }
+            $article->save();
             DB::commit();
-            return $admin;
+            return $article;
         } catch (Exception  $e) {
             DB::rollBack();
             throw $e;

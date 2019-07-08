@@ -80,8 +80,8 @@ class AdminArticleController extends AdminBaseController
             return redirect()->route('admin.home.dashboard')->with('error_message','Bạn không có quyền vào trang này!');
         }
         $data = $request->only('status', 'category_id', 'img', 'tag');
-        $dataTrans = $request->only('title', 'meta', 'short_description', 'description');
-        dd($data);
+        $dataTrans = $request->only('title', 'meta', 'short_description', 'description', 'slug');
+        // dd($dataTrans);
         $articleImg = $request->input('article_img', []);
         $listTags = $data['tag'];
         unset($data['tag']);
@@ -112,7 +112,7 @@ class AdminArticleController extends AdminBaseController
             $article = $this->article->getById($id);
             $data['admin_id_u'] = $this->user->id;
             $data['admin_name_u'] = $this->user->username;
-            $res = $this->article->update($article, $data);
+            $res = $this->article->update($article, $data, $dataTrans, $locale);
             if($res){
                 $this->article->createArticleImg($res->id, $articleImg);
                 $this->tagService->removeArticleTag($id);
@@ -132,8 +132,7 @@ class AdminArticleController extends AdminBaseController
                 $mess = 'Cập nhật bài viết thành công';
             }
         }
-        // return redirect()->route('admin.article.getList')->with('success_message', $mess);
-        return redirect()->back()->with('success_message', $mess);
+        return redirect()->route('admin.article.getCreate', ['locale' => $locale, 'id' => $res])->with('success_message', $mess);
     }
 
     public function remove($id = 0){

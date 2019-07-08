@@ -30,7 +30,7 @@ class CreateArticleTable extends Migration
             $table->bigInteger('article_id')->unsigned();
             $table->string('locale')->index();
             $table->string('title');
-            // $table->string('slug')->nullable();
+            $table->string('slug')->nullable();
             $table->string('meta')->nullable();
             $table->text('short_description')->nullable();
             $table->text('description')->nullable();

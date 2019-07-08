@@ -9,24 +9,35 @@
                                     href="#link">Hotline:&nbsp;</a><span>- &nbsp;</span><a
                                     href="#link">0123.456.798&nbsp;</a></span></li>
                         <li><span class="separate"></span></li>
-                        <li><span><strong><i class="material-icons">send</i>&nbsp;</strong><a href="#link">Liên hệ
+                        <li><span><strong><i class="material-icons">send</i>&nbsp;</strong><a href="#link">@lang('header.contact')
                                     &nbsp;</a></span></li>
                     </ul>
                 </div>
+                <?php 
+                    $locale = App::getLocale();
+                ?>
                 <div class="pull-right">
                     <div class="language-wrapper">
                         <div class="dropdown">
                             <button class="dropdown-toggle language_bar_button" type="button" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false"><img src="{{ asset('public/assets/site/themes/assets/images/flags/vn.png') }}"
-                                    title="Tiếng Việt" alt="Tiếng Việt" /> Tiếng Việt<span
-                                    class="caret"></span></button>
+                                aria-haspopup="true" aria-expanded="false">
+                                @if($locale == 'vi')
+                                <img src="{{ asset('public/assets/site/themes/assets/images/flags/vn.png') }}"
+                                    title="Tiếng Việt" alt="Tiếng Việt" /> @lang('header.lang_vi')<span
+                                    class="caret"></span>
+                                @else    
+                                <img src="{{ asset('public/assets/site/themes/assets/images/flags/us.png') }}"
+                                    title="Tiếng Việt" alt="Tiếng Việt" /> @lang('header.lang_en')<span
+                                    class="caret"></span>
+                                @endif
+                                </button>
                             <ul class="dropdown-menu dropdown-menu-right language_bar_chooser">
-                                <li><a rel="alternate" hreflang="en" href="./en"><img
+                            <li><a rel="alternate" hreflang="en" href="{{ route('site.home.setLocale', 'en') }}"><img
                                             src="{{ asset('public/assets/site/themes/assets/images/flags/us.png') }}"
-                                            title="English" alt="English" /><span>English</span></a></li>
-                                <li class="active"><a rel="alternate" hreflang="vi" href="./vi"><img
+                                            title="English" alt="English" /><span>@lang('header.lang_en')</span></a></li>
+                                <li class="active"><a rel="alternate" hreflang="vi" href="{{ route('site.home.setLocale', 'vi') }}"><img
                                             src="{{ asset('public/assets/site/themes/assets/images/flags/vn.png') }}"
-                                            title="Tiếng Việt" alt="Tiếng Việt" /><span>Tiếng Việt</span></a></li>
+                                            title="Tiếng Việt" alt="Tiếng Việt" /><span>@lang('header.lang_vi')</span></a></li>
                             </ul>
                         </div>
                     </div>
@@ -45,19 +56,19 @@
                     <!-- NAVIGATION -->
                     <div class="navigation nav-left">
                         <ul>
-                            <li class="active"><a href="./index.html">Trang chủ</a>
+                            <li class="active"><a href="./index.html">@lang('header.home')</a>
                             </li>
-                            <li><a href="./about-page.html">Giới thiệu</a>
+                            <li><a href="./about-page.html">@lang('header.about')</a>
                             </li>
-                            <li><a href="./price-page.html">Giờ tàu| Giá vé</a>
+                            <li><a href="./price-page.html">@lang('header.train')</a>
                             </li>
-                            <li><a href="./category.html">Tour</a>
+                            <li><a href="./category.html">@lang('header.tour')</a>
                             </li>
-                            <li><a href="./media-page.html">Hình ảnh về tàu Livitrans</a>
+                            <li><a href="./media-page.html">@lang('header.image')</a>
                             </li>
-                            <li><a href="./category.html">Tin tức</a>
+                            <li><a href="./category.html">@lang('header.article')</a>
                             </li>
-                            <li><a href="./contact-page.html">Liên hệ</a>
+                            <li><a href="./contact-page.html">@lang('header.contact')</a>
                             </li>
                         </ul>
                     </div>

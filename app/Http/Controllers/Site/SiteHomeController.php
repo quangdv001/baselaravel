@@ -34,10 +34,12 @@ class SiteHomeController extends SiteBaseController
         $paramTour['limit'] = 10;
         $paramTour['category_id'] = 2;
         $paramTour['status'] = 1;
+        $paramTour['orderBy'] = 'id';
         $tour = $this->article->search($paramTour);
         $paramArticle['limit'] = 4;
         $paramArticle['category_id'] = 1;
         $paramArticle['status'] = 1;
+        $paramArticle['orderBy'] = 'id';
         $article = $this->article->search($paramArticle);
         return view('site.home.index')->with('tour', $tour)->with('article', $article);
     }
@@ -56,9 +58,7 @@ class SiteHomeController extends SiteBaseController
     {
         App::setLocale($locale);
         session(['locale' => $locale]);
-        return $this->locales->current();
-        // return redirect()->back();
-        dd(session()->all());
+        return redirect()->back();
     }
 
     public function currentLang(){
