@@ -1,5 +1,5 @@
 <div class="header-layout"
-    style="background:#fff url({{ asset('public/assets/site/themes/assets/images/slide-bg.jpg') }}) no-repeat center top / 100% auto;min-height: 80vh;">
+@if($currentRoute == 'site.home.index') style="background:#fff url({{ asset('public/assets/site/themes/assets/images/slide-bg.jpg') }}) no-repeat center top / 100% auto;min-height: 80vh;" @endif>
     <div class="top-layout light-text section-dark">
         <div class="container">
             <div class="top">
@@ -56,19 +56,19 @@
                     <!-- NAVIGATION -->
                     <div class="navigation nav-left">
                         <ul>
-                            <li class="active"><a href="./index.html">@lang('header.home')</a>
+                        <li class="active"><a href="{{ route('site.home.index') }}">@lang('header.home')</a>
                             </li>
-                            <li><a href="./about-page.html">@lang('header.about')</a>
+                            <li><a href="{{ route('site.home.about') }}">@lang('header.about')</a>
                             </li>
-                            <li><a href="./price-page.html">@lang('header.train')</a>
+                            <li><a href="{{ route('site.home.price') }}">@lang('header.train')</a>
                             </li>
-                            <li><a href="./category.html">@lang('header.tour')</a>
+                            <li><a href="{{ route('site.article.index',['id' => 2, 'slug' => 'tour']) }}">@lang('header.tour')</a>
                             </li>
-                            <li><a href="./media-page.html">@lang('header.image')</a>
+                            <li><a href="{{ route('site.home.livitrans') }}">@lang('header.image')</a>
                             </li>
-                            <li><a href="./category.html">@lang('header.article')</a>
+                            <li><a href="{{ route('site.article.index',['id' => 1, 'slug' => 'article']) }}">@lang('header.article')</a>
                             </li>
-                            <li><a href="./contact-page.html">@lang('header.contact')</a>
+                            <li><a href="{{ route('site.home.contact') }}">@lang('header.contact')</a>
                             </li>
                         </ul>
                     </div>

@@ -18,7 +18,7 @@ Route::get('contact', 'SiteArticleController@contact')->name('home.contact');
 
 
 Route::get('article/i-{id}/{slug}', 'SiteArticleController@index')->name('article.index');
-Route::get('article/l-{id}/{slug}', 'SiteArticleController@list')->name('article.list');
+// Route::get('article/l-{id}/{slug}', 'SiteArticleController@list')->name('article.list');
 Route::get('article/d-{id}/{slug}', 'SiteArticleController@detail')->name('article.detail');
 
 

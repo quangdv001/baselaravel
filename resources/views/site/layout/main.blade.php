@@ -11,7 +11,7 @@
     @include('site.layout.css')
   </head>
   <body>       
-    <div class="page home">
+  <div class="page {{ $pageClass }}">
       @include('site.layout.header')
       @yield('content')
       @include('site.layout.footer')

@@ -28,7 +28,7 @@ class SiteArticleController extends SiteBaseController
 
     public function index($id, $slug){
         $param['category_id'] = $id;
-        $param['limit'] = 6;
+        $param['limit'] = 10;
         $param['sortBy'] = 'id';
         $article = $this->article->search($param);
         $cate = $this->category->getById($id);
@@ -51,15 +51,4 @@ class SiteArticleController extends SiteBaseController
         ->with('data', $article);
     }
 
-    public function list($id, $slug){
-        $cate = $this->category->getById($id);
-        $category = $this->category->getByParentId($id);
-        return view('site.article.list')
-        ->with('cate', $cate)
-        ->with('data', $category);
-    }
-
-    public function currentLang(){
-        return $this->locales->current();
-    }
 }
