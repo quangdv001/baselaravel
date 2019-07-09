@@ -6,8 +6,7 @@
                     <div class="clearfix"><a class="title f-logo"><img
                                 src="{{ asset('public/assets/site/themes/assets/images/logo-white.png') }}"
                                 alt="CÔNG TY CP VẬN TẢI VÀ THƯƠNG MẠI LIVITRANS ( LIVITRANS JSC,..)." /></a>
-                        <div class="f-slogan"><strong>CÔNG TY CP VẬN TẢI VÀ THƯƠNG MẠI LIVITRANS ( LIVITRANS
-                                JSC,..).</strong></div>
+                        <div class="f-slogan"><strong>@lang('footer.livi_name')</strong></div>
                     </div>
                     <div>
                         <p></p>
@@ -22,20 +21,18 @@
                     </div>
                     <div>
                         <ul class="list-group list-group-flush">
-                            <li><a href="#address:"><i class="material-icons list-style">fiber_manual_record</i>Phòng
-                                    tiễn khách: Khách sạn Cây Xoài 118 Lê Duẩn - Hoàn Kiếm - Hà Nội</a></li>
-                            <li><a><i class="material-icons list-style">fiber_manual_record</i>Địa chỉ Phòng vé: Số 1
-                                    Trần Quý Cáp - Phường Văn Miếu - Quận Đống Đa - Hà nội</a></li>
+                            <li><a href="#address:"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.footer_1')</a></li>
+                            <li><a><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.footer_2')</a></li>
                             <li><a href="tell:0243.9429918"><i
                                         class="material-icons list-style">fiber_manual_record</i><i
-                                        class="material-icons">phone_in_talk</i> Hotline: 0243.9429918</a></li>
+                                        class="material-icons">phone_in_talk</i> @lang('footer.footer_3')</a></li>
                             <li><a href="tell: 0904.101.488"><i
                                         class="material-icons list-style">fiber_manual_record</i><i
-                                        class="material-icons">phone_in_talk</i> Điện thoại phòng vé: 0904.101.488</a>
+                                        class="material-icons">phone_in_talk</i> @lang('footer.footer_4')</a>
                             </li>
                             <li><a href="mailto:booking@livitrans.com"><i
                                         class="material-icons list-style">fiber_manual_record</i><i
-                                        class="material-icons">mail_outline</i> Email: booking@livitrans.com</a></li>
+                                        class="material-icons">mail_outline</i> @lang('footer.footer_5')</a></li>
                         </ul>
                     </div>
                 </div>
@@ -43,36 +40,26 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div>
-                                <h3 class="title divider-bottom">Liên hệ</h3>
+                                <h3 class="title divider-bottom">@lang('footer.contact')</h3>
                             </div>
                             <ul class="list-group list-group-flush">
-                                <li><a href="#link"><i class="material-icons list-style">fiber_manual_record</i>FAQs -
-                                        Hỏi đáp</a></li>
-                                <li><a href="#link"><i class="material-icons list-style">fiber_manual_record</i>Chính
-                                        sách vận chuyển</a></li>
-                                <li><a href="#link"><i class="material-icons list-style">fiber_manual_record</i>Hướng
-                                        dẫn thanh toán</a></li>
-                                <li><a href="#link"><i class="material-icons list-style">fiber_manual_record</i>Quy
-                                        định</a></li>
-                                <li><a href="#link"><i class="material-icons list-style">fiber_manual_record</i>Chăm sóc
-                                        KH</a></li>
+                                <li><a href="#link"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.contact_1')</a></li>
+                                <li><a href="#link"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.contact_2')</a></li>
+                                <li><a href="#link"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.contact_3')</a></li>
+                                <li><a href="#link"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.contact_4')</a></li>
+                                <li><a href="#link"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.contact_5')</a></li>
                             </ul>
                         </div>
                         <div class="col-sm-6">
                             <div>
-                                <h3 class="title divider-bottom">Sitemap</h3>
+                                <h3 class="title divider-bottom">@lang('footer.sitemap')</h3>
                             </div>
                             <ul class="list-group list-group-flush">
-                                <li><a href="#link"><i class="material-icons list-style">fiber_manual_record</i>Đặt
-                                        vé</a></li>
-                                <li><a href="#link"><i class="material-icons list-style">fiber_manual_record</i>Du
-                                        lịch</a></li>
-                                <li><a href="#link"><i class="material-icons list-style">fiber_manual_record</i>Hủy
-                                        chuyến</a></li>
-                                <li><a href="#link"><i class="material-icons list-style">fiber_manual_record</i>Gửi hành
-                                        lý</a></li>
-                                <li><a href="#link"><i class="material-icons list-style">fiber_manual_record</i>Ký
-                                        gửi</a></li>
+                                <li><a href="#link"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.sitemap_1')</a></li>
+                                <li><a href="#link"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.sitemap_2')</a></li>
+                                <li><a href="#link"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.sitemap_3')</a></li>
+                                <li><a href="#link"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.sitemap_4')</a></li>
+                                <li><a href="#link"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.sitemap_5')</a></li>
                             </ul>
                         </div>
                         <div class="col-sm-3"></div>

@@ -49,7 +49,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-auto col-12">
-                    <h3 class="logo" id="logo"><a href="index.html"><img
+                    <h3 class="logo" id="logo"><a href="{{ route('site.home.index') }}"><img
                                 src="{{ asset('public/assets/site/themes/assets/images/logo.png') }}"></a></h3>
                 </div>
                 <div class="col align-self-center text-right zero-height-sx">

@@ -10,7 +10,7 @@ Trang chủ
             <div class="col-sm-12">
                 <div class="text-left">
                     <div class="block-title underline">
-                        <h2 class="title solid-color"><span>Địa điểm du lịch</span></h2>
+                        <h2 class="title solid-color"><span>@lang('home.place')</span></h2>
                     </div>
                 </div>
                 <div class="slide-posts">
@@ -42,9 +42,9 @@ Trang chủ
             <div class="col-sm-12">
                 <div class="text-center">
                     <div class="block-title underline">
-                        <h2 class="title solid-color text-uppercase"><span>Giới thiệu</span></h2>
+                        <h2 class="title solid-color text-uppercase"><span>@lang('home.about')</span></h2>
                     </div>
-                    <div class="subtitle">về Livitrans</div>
+                    <div class="subtitle">@lang('home.livi')</div>
                 </div>
                 <div class="row align-items-center">
                     <div class="col-sm-6">
@@ -54,10 +54,8 @@ Trang chủ
                                     <div class="icons icon-diamond"></div>
                                 </div>
                                 <div class="feature-box-info">
-                                    <h4 class="feature-title">Giới thiệu</h4>
-                                    <p class="mb-4">Với bề dầy hoạt động 10 năm, Livitrans luôn là sự tin cậy của mọi
-                                        khách hàng và đối tác. Bởi lẽ, dịch vụ không ngừng hoàn thiện để hài lòng khách
-                                        hàng là con đường thành công của chúng tôi.</p>
+                                    <h4 class="feature-title">@lang('home.about')</h4>
+                                    <p class="mb-4">@lang('home.about_content_1')</p>
                                 </div>
                             </div>
                             <div class="feature-box">
@@ -65,10 +63,8 @@ Trang chủ
                                     <div class="icons icon-share"></div>
                                 </div>
                                 <div class="feature-box-info">
-                                    <h4 class="feature-title">Phương trâm</h4>
-                                    <p class="mb-4">Sau thời gian nâng cấp dịch vụ, hoàn chỉnh các quy trình phục vụ và
-                                        đầu tư mới cơ sở vật chất, chúng tôi tự tin trở lại với quý khách hàng yêu quý
-                                        với một diện mạo mới.</p>
+                                    <h4 class="feature-title">@lang('home.about_title_2')</h4>
+                                    <p class="mb-4">@lang('home.about_content_2')</p>
                                 </div>
                             </div>
                             <div class="feature-box">
@@ -76,12 +72,8 @@ Trang chủ
                                     <div class="icons icon-mission"></div>
                                 </div>
                                 <div class="feature-box-info">
-                                    <h4 class="feature-title">Mong muốn</h4>
-                                    <p class="mb-4">Và chính thức từ tháng 10 năm 2017, chúng tôi sẵn sàng đưa vào hoạt
-                                        động đoàn tàu Du lịch chất lượng 4 sao với chất lượng vượt trội dành cho quý
-                                        khách.</p>
-                                    <p class="mb-4">Ban điều hành Công ty chúng tôi xin trân trọng gửi tới quý khách
-                                        hàng và đối tác lời chúc tốt đẹp nhất thông qua chất lượng dịch vụ của mình.</p>
+                                    <h4 class="feature-title">@lang('home.about_title_3')</h4>
+                                    <p class="mb-4">@lang('home.about_content_3')</p>
                                 </div>
                             </div>
                         </div>
@@ -103,7 +95,7 @@ Trang chủ
             <div class="col-sm-12">
                 <div class="text-center">
                     <div class="block-title underline">
-                        <h2 class="title"><span>Dịch vụ</span></h2>
+                        <h2 class="title"><span>@lang('home.service')</span></h2>
                     </div>
                 </div>
                 <div class="row services-blog">
@@ -111,33 +103,27 @@ Trang chủ
                             <div class="cover-icon"><i class="flaticon-train-1"></i>
                             </div>
                             <div class="title">
-                                <h3><span>ĐẶT VÉ</span></h3>
+                                <h3><span>@lang('home.service_title_1')</span></h3>
                             </div>
-                            <p>Lorem Ipsum chỉ đơn giản là một đoạn văn bản giả, được dùng vào việc trình bày và dàn
-                                trang phục vụ cho in ấn.</p><span class="readmore" href="#0"> <span>Xem chi
-                                    tiết</span></span>
+                            <p>@lang('home.service_content_1')</p>
                         </a>
                     </div>
                     <div class="col-12 col-sm-4"><a class="block service-blog text-center" href="./single.html">
                             <div class="cover-icon"><i class="flaticon-travel"></i>
                             </div>
                             <div class="title">
-                                <h3><span>KÝ GỬI</span></h3>
+                                <h3><span>@lang('home.service_title_2')</span></h3>
                             </div>
-                            <p>Lorem Ipsum chỉ đơn giản là một đoạn văn bản giả, được dùng vào việc trình bày và dàn
-                                trang phục vụ cho in ấn.</p><span class="readmore" href="#0"> <span>Xem chi
-                                    tiết</span></span>
+                            <p>@lang('home.service_content_2')</p></span>
                         </a>
                     </div>
                     <div class="col-12 col-sm-4"><a class="block service-blog text-center" href="./single.html">
                             <div class="cover-icon"><i class="flaticon-tram"></i>
                             </div>
                             <div class="title">
-                                <h3><span>CÁP TREO</span></h3>
+                                <h3><span>@lang('home.service_title_3')</span></h3>
                             </div>
-                            <p>Lorem Ipsum chỉ đơn giản là một đoạn văn bản giả, được dùng vào việc trình bày và dàn
-                                trang phục vụ cho in ấn.</p><span class="readmore" href="#0"> <span>Xem chi
-                                    tiết</span></span>
+                            <p>@lang('home.service_content_3')</p>
                         </a>
                     </div>
                 </div>
