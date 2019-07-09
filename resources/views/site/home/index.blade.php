@@ -163,7 +163,7 @@ Trang chủ
             @foreach($article as $v)
               @if($v->title)
               <div class="col-12 col-sm-6 grid-news">
-                  <div class="news-post"><a class="news-post-image-link" href="./single.html">
+                  <div class="news-post"><a class="news-post-image-link" href="{{ route('site.article.detail', ['id' => $v->id, 'slug' => $v->slug]) }}">
                           <figure class="image-container rectangle-image">
                               <div class="featured-image-overlay"><span class="featured-image-icon"><i
                                           class="fa fa-camera"></i></span></div><img class="img-responsive"

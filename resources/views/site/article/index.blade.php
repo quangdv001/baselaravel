@@ -5,8 +5,8 @@
 @section('content')
 <div class="main">
     <div class="subpage-cover"
-        style="background: #2d71a2 url(./assets/images/subpage-cover.jpg) no-repeat center top/ auto 100%">
-        <div class="page-title d-flex align-items-center justify-content-center"><span>{{ $cate->description }}</span>
+        style="background: #2d71a2 url({{ asset('public/assets/site/themes/assets/images/subpage-cover.jpg') }}) no-repeat center top/ auto 100%">
+        <div class="page-title d-flex align-items-center justify-content-center"><span>{{ $cate->name }}</span>
         </div>
     </div>
     <div class="breadcrumb-wrapper">

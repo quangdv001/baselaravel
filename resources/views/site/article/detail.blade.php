@@ -3,149 +3,104 @@
 {{ $data->title }}
 @endsection
 @section('content')
-<div class="section-dark"
-    style="background: #ccc url({{ asset('public/assets/site/themes/assets/images/slide-bg.png') }}) center top /auto 100%;margin-bottom: 15px;">
-    <div class="container">
-        <div class="row align-items-center cover-slide justify-content-md-center">
-            <div class="col-sm-12">
-                <div class="text-center">
-                    <div class="block-title">
-                        <h2 class="title sevices-title-nomarl"><span>KHÔNG GIAN SỐNG LÀ ĐẦU TƯ NỀN TẢNG</span></h2>
-                    </div>
-                    <div class="sevices-title-large">CHO NHỮNG THÀNH CÔNG NỐI TIẾP VỀ SAU</div>
-                </div>
-                @if(sizeof($category) > 0)
-                <div class="row services-blog">
-                    @foreach($category as $v)
-                    @if($v->type == 0)
-                    <div class="col-12 col-sm-3">
-                        <a class="block service-blog text-center @if($cate->id == $v->id) active @endif"
-                            href="{{ strval($v->url) != '' ? url(strval($v->url)) : '#' }}">
-                            <div class="cover-icon"><img src="{{ $v->img }}" alt="" />
-                            </div>
-                            <div class="title">
-                                <h3><span>{{ $v->name }}</span></h3>
-                            </div>
-                        </a>
-                    </div>
-                    @elseif($v->type == 1)
-                    <div class="col-12 col-sm-3">
-                        <a class="block service-blog text-center @if($cate->id == $v->id) active @endif"
-                            href="{{ route('site.article.index',['id' => $v->id, 'slug' => $v->slug]) }}">
-                            <div class="cover-icon"><img src="{{ $v->img }}" alt="" />
-                            </div>
-                            <div class="title">
-                                <h3><span>{{ $v->name }}</span></h3>
-                            </div>
-                        </a>
-                    </div>
-                    @elseif($v->type == 2)
-                    <div class="col-12 col-sm-3">
-                        <a class="block service-blog text-center @if($cate->id == $v->id) active @endif"
-                            href="{{ route('site.product.list',['id' => $v->id, 'slug' => $v->slug]) }}">
-                            <div class="cover-icon"><img src="{{ $v->img }}" alt="" />
-                            </div>
-                            <div class="title">
-                                <h3><span>{{ $v->name }}</span></h3>
-                            </div>
-                        </a>
-                    </div>
-                    @elseif($v->type == 3)
-                    <div class="col-12 col-sm-3">
-                        <a class="block service-blog text-center @if($cate->id == $v->id) active @endif"
-                            href="{{ route('site.article.list',['id' => $v->id, 'slug' => $v->slug]) }}">
-                            <div class="cover-icon"><img src="{{ $v->img }}" alt="" />
-                            </div>
-                            <div class="title">
-                                <h3><span>{{ $v->name }}</span></h3>
-                            </div>
-                        </a>
-                    </div>
-                    @endif
-
-                    @endforeach
-                </div>
-                @endif
-            </div>
-        </div>
-    </div>
-</div>
 <div class="main">
-    <div class="section section-subpage">
-        <div class="container">
-            <div class="text-center">
-                <div class="block-title">
-                    <h1 class="title solid-color text-uppercase"><span>{{ $data->title }}</span></h1>
-                </div>
-                {!! $data->description !!}
-            </div>
-        </div>
+    <div class="subpage-cover" style="background: #2d71a2 url({{ asset('public/assets/site/themes/assets/images/subpage-cover.jpg') }}) no-repeat center top/ auto 100%">
+      <div class="page-title d-flex align-items-center justify-content-center"><span>{{ $data->title }}?</span></div>
     </div>
-    <div class="section section-gellary">
-        <div class="container text-center">
-            <div class="main-carousel owl-carousel owl-theme">
-                <a class="item" href="#"><img src="{{ $data->img }}" alt=""></a>
-                @if(sizeof($data->images) > 0)
-                @foreach($data->images as $v)
-                <a class="item" href="#"><img src="{{ $v->img }}" alt=""></a>
-                @endforeach
-                @endif
-
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-md-6 thumb-panel">
-                    <div class="thumb-carousel owl-carousel owl-theme">
-                        <a class="item item-border" href="#"><img src="{{ $data->img }}" alt=""></a>
-                        @if(sizeof($data->images) > 0)
-                        @foreach($data->images as $v)
-                        <a class="item item-border" href="#"><img src="{{ $v->img }}" alt=""></a>
-                        @endforeach
-                        @endif
+    <div class="breadcrumb-wrapper">
+      <div class="container">
+        <div class="row">
+          <ol class="breadcrumb breadcrumb-dot">
+            <li class="breadcrumb-item"><i class="material-icons">home</i><a href="index.html" title="Trang chủ">Trang chủ</a></li>
+          <li class="breadcrumb-item"><a href="{{ route('site.article.index', ['id' => $cate->id, 'slug' => $cate->slug]) }}" title="Title link">{{ $cate->name }}</a></li>
+            <li class="breadcrumb-item active"><span>{{ $data->title }}</span></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <div class="section-main">
+      <div class="container">           
+        <div class="row">
+          <div class="col col-sm-9 border-sm-right">
+            <div class="row">
+              <div class="col">
+                <div class="detail-post">
+                  <h1 class="page-title"><a href="#">{{ $data->title }}</a></h1>
+                  <div class="news-post">
+                    <div class="post-meta-container"><span class="post-meta-item"><i class="far fa-clock"></i> {{ $data->created_at->format('d/m/Y') }}</span><span class="post-meta-item"><i class="fa fa-user-check"></i><a href="#admin"> Admin</a></span></div>
+                    <div class="post-sapo">{!! $data->short_description !!}</div>
+                    <div class="news-post-content">
+                      {!! $data->description !!}
+                      <div class="pull-right"><strong>Admin</strong></div>
                     </div>
+                  </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    @if(sizeof($relateArticle) > 0)
-    <div class="section">
-        <div class="container">
-            <div class="text-center">
-                <div class="block-title underline">
-                    <h1 class="title solid-color text-uppercase"><span>Dự án đã {{ $cate->name }} khác</span></h1>
-                </div>
-            </div>
-            <div class="row slide-posts">
-                @foreach($relateArticle as $v)
-
-                <div class="col-12 col-sm-3">
-                    <div class="block gray-block">
-                        <div class="cover-image square-image"><img src="{{ $v->img }}" alt="" />
-                        </div>
-                        <div class="title">
-                            <h3><a
-                                    href="{{ route('site.article.detail',['id' => $v->id, 'slug' => $v->slug]) }}">{{ $v->title }}</a>
-                            </h3>
-                        </div>
+                {{-- <div class="list-post-aside">
+                  <h3 class="module-title"><a href="#">Tin Liên quan</a></h3>
+                  <div class="news-post line-bottom list-style-post small-post">
+                    <div class="news-post-content">
+                      <div class="post-title title"><i class="list-icon fas fa-circle"></i><a class="news-post-link" href="/single.html">Lorem Ipsum là gì, Tại sao lại sử dụng nó?</a></div>
                     </div>
-                </div>
-                @endforeach
+                  </div>
+                  <div class="news-post line-bottom list-style-post small-post">
+                    <div class="news-post-content">
+                      <div class="post-title title"><i class="list-icon fas fa-circle"></i><a class="news-post-link" href="/single.html">Lorem Ipsum là gì, Tại sao lại sử dụng nó?</a></div>
+                    </div>
+                  </div>
+                  <div class="news-post line-bottom list-style-post small-post">
+                    <div class="news-post-content">
+                      <div class="post-title title"><i class="list-icon fas fa-circle"></i><a class="news-post-link" href="/single.html">Lorem Ipsum là gì, Tại sao lại sử dụng nó?</a></div>
+                    </div>
+                  </div>
+                  <div class="news-post line-bottom list-style-post small-post">
+                    <div class="news-post-content">
+                      <div class="post-title title"><i class="list-icon fas fa-circle"></i><a class="news-post-link" href="/single.html">Lorem Ipsum là gì, Tại sao lại sử dụng nó?</a></div>
+                    </div>
+                  </div>
+                  <div class="news-post line-bottom list-style-post small-post">
+                    <div class="news-post-content">
+                      <div class="post-title title"><i class="list-icon fas fa-circle"></i><a class="news-post-link" href="/single.html">Lorem Ipsum là gì, Tại sao lại sử dụng nó?</a></div>
+                    </div>
+                  </div>
+                </div> --}}
+              </div>
             </div>
-            <nav aria-label="Page navigation">
-                <div class="d-flex justify-content-center">
-                    {{ $relateArticle->links() }}
+          </div>
+          <div class="col-sm-3 sidebar">
+            {{-- <div class="list-post-aside">
+              <h3 class="module-title"><a href="#">Danh mục</a></h3>
+              <ul class="list-categories">
+                <li><a href="#link"><i class="material-icons list-style">chevron_right</i>Đặt vé</a></li>
+                <li><a href="#link"><i class="material-icons list-style">chevron_right</i>Du lịch</a></li>
+                <li><a href="#link"><i class="material-icons list-style">chevron_right</i>Hủy chuyến</a></li>
+                <li><a href="#link"><i class="material-icons list-style">chevron_right</i>Gửi hành lý</a></li>
+                <li><a href="#link"><i class="material-icons list-style">chevron_right</i>Ký gửi</a></li>
+              </ul>
+            </div> --}}
+            @if(sizeof($relateArticle) > 0)
+            <div class="list-post-aside">
+              <h3 class="module-title"><a href="#">{{ $cate->name }} nổi bật</a></h3>
+              @foreach($relateArticle as $v)
+              @if($v->title)
+              <div class="news-post line-bottom small-post"><a class="news-post-image-link" href="{{ route('site.article.detail', ['id' => $v->id, 'slug' => $v->slug]) }}">
+                  <figure class="image-container rectangle-image">
+                    <div class="featured-image-overlay"><span class="featured-image-icon"><i class="fa fa-camera"></i></span></div><img class="img-responsive" src="{{ $v->img }}" alt="title alt"/>
+                  </figure></a>
+                <div class="news-post-content">
+                  <h3 class="post-title title"><a class="news-post-link" href="{{ route('site.article.detail', ['id' => $v->id, 'slug' => $v->slug]) }}">{{ $v->title }}</a></h3>
+                  <div class="post-meta-container"><span class="post-meta-item"><i class="far fa-clock"></i> {{ $v->created_at->format('d/m/Y') }}</span><span class="post-meta-item"><i class="fa fa-user-check"></i><a href="#admin"> Admin</a></span></div>
                 </div>
-                {{-- <ul class="pagination justify-content-center">
-                <li class="page-item"><a class="page-link" href="#">Trước</a></li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">Tiếp</a></li>
-              </ul> --}}
-            </nav>
+              </div>
+              @endif
+              @endforeach
+            </div>
+            @endif
+            {{-- <a class="banner-add" href="#banner"><img src="http://adi.admicro.vn/adt/adn/2018/10/300x2-adx5bd33c405c632.jpg" alt="banner title"/></a><a class="banner-add" href="#banner"><img src="http://adi.admicro.vn/adt/adn/2018/10/300x2-adx5bb48fba328c6.jpg" alt="banner title"/></a> --}}
+          </div>
         </div>
+      </div>
     </div>
-    @endif
-</div>
+  </div>
 @endsection
 @section('custom_js')
 @endsection
