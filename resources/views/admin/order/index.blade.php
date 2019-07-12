@@ -82,9 +82,9 @@ Danh sách đơn hàng
                                         <th>
                                             SĐT
                                         </th>
-                                        {{-- <th>
-                                            Tổng tiền
-                                        </th> --}}
+                                        <th>
+                                            Thanh toán
+                                        </th>
                                         <th>
                                             Trạng thái
                                         </th>
@@ -108,9 +108,9 @@ Danh sách đơn hàng
                                         <td>
                                             {{ $v->phone }}
                                         </td>
-                                        {{-- <td>
-                                            {{ number_format($v->total, 0,",",".") }}đ
-                                        </td> --}}
+                                        <td>
+                                            {{ $v->payment_method == 0 ? 'Thẻ tín dụng' : ($v->payment_method == 1 ? 'Chuyển khoản' : 'Trực tiếp') }}
+                                        </td>
                                         <td>
                                             <span class="{{ isset($orderBadge[$v->status]) ? $orderBadge[$v->status] : 'badge badge-primary' }}">{{ isset($orderStatus[$v->status]) ? $orderStatus[$v->status] : '--' }}</span>
                                         </td>

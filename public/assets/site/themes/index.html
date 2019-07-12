@@ -130,7 +130,7 @@
           <div class="container">
             <div class="row justify-content-center">
               <div class="col-sm-10">
-                <div class="form-services-layout">
+                <form class="form-services-layout" action="booking-page.html">
                   <div class="form-header">
                     <div class="title">Đặt vé trực tuyến</div>
                     <div class="subtitle">Liên hệ trước với chũng tôi</div>
@@ -152,27 +152,37 @@
                         </div>
                         <div class="form-group col-md-4">
                           <label class="bmd-label-floating" for="item-form-0">Điểm đi</label>
-                          <input class="form-control" type="text" value="Hà nội" id="item-form-0"><span class="float-icon"><i class="material-icons">room</i></span>
+                          <select class="form-control">
+                            <option>Hà nội</option>
+                            <option>Sài gòn</option>
+                          </select><span class="float-icon"><i class="material-icons">room</i></span>
                         </div>
                         <div class="form-group col-md-4">
                           <label class="bmd-label-floating" for="item-form-1">Điểm đến</label>
-                          <input class="form-control" type="text" value="Sài gòn" id="item-form-1"><span class="float-icon"><i class="material-icons">room</i></span>
+                          <select class="form-control">
+                            <option>Hà nội</option>
+                            <option>Sài gòn</option>
+                          </select><span class="float-icon"><i class="material-icons">room</i></span>
                         </div>
-                        <div class="form-group col-md-4">
-                          <label class="bmd-label-floating" for="item-form-2">Số lượng</label>
-                          <input class="form-control" type="text" value="2 người lớn 1 trẻ em" id="item-form-2"><span class="float-icon"><i class="material-icons">supervisor_account</i></span>
+                        <div class="form-group col-md-2">
+                          <label class="bmd-label-floating" for="item-form-2">Số gười lớn</label>
+                          <input class="form-control" type="number" id="item-form-2"/><span class="float-icon"><i class="material-icons">supervisor_account</i></span>
+                        </div>
+                        <div class="form-group col-md-2">
+                          <label class="bmd-label-floating" for="item-form-3">Số trẻ em</label>
+                          <input class="form-control" type="number" id="item-form-3"/><span class="float-icon"><i class="material-icons">supervisor_account</i></span>
                         </div>
                         <div class="form-group col-md-4">
                           <label class="bmd-label-floating" for="start-date">Ngày đi</label>
-                          <input class="form-control datepicker" type="text" value="12/12/2019" id="start-date" data-date-format="DD, MM d">
+                          <input class="form-control datepicker" type="text" id="start-date" data-date-format="DD, MM d"/>
                         </div>
                         <div class="form-group col-md-4">
                           <label class="bmd-label-floating" for="end-date">Ngày về</label>
-                          <input class="form-control datepicker" type="text" value="12/12/2019" id="end-date" data-date-format="DD, MM d">
+                          <input class="form-control datepicker" type="text" id="end-date" data-date-format="DD, MM d"/>
                         </div>
                         <div class="form-group col-md-4">
-                          <label class="bmd-label-floating" for="item-form-5">Loại</label>
-                          <input class="form-control" type="text" value="Mền điều hòa" id="item-form-5"><span class="float-icon"><i class="material-icons">event_seat</i></span>
+                          <label class="bmd-label-floating" for="item-form-6">Thông tin</label>
+                          <input class="form-control" type="text" id="item-form-6"/><span class="float-icon"><i class="material-icons">event_seat</i></span>
                         </div>
                         <div class="col-12 text-right">
                           <button class="btn btn-primary text-uppercase" type="submit">Tìm kiếm</button>
@@ -180,7 +190,7 @@
                       </div>
                     </div>
                   </form>
-                </div>
+                </form>
               </div>
             </div>
           </div>

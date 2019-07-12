@@ -1,5 +1,6 @@
-<div class="header-layout"
-@if($currentRoute == 'site.home.index') style="background:#fff url({{ asset('public/assets/site/themes/assets/images/slide-bg.jpg') }}) no-repeat center top / 100% auto;min-height: 80vh;" @endif>
+<div class="header-layout" @if($currentRoute=='site.home.index' )
+    style="background:#fff url({{ asset('public/assets/site/themes/assets/images/slide-bg.jpg') }}) no-repeat center top / 100% auto;min-height: 80vh;"
+    @endif>
     <div class="top-layout light-text section-dark">
         <div class="container">
             <div class="top">
@@ -9,7 +10,8 @@
                                     href="#link">Hotline:&nbsp;</a><span>- &nbsp;</span><a
                                     href="#link">0123.456.798&nbsp;</a></span></li>
                         <li><span class="separate"></span></li>
-                        <li><span><strong><i class="material-icons">send</i>&nbsp;</strong><a href="#link">@lang('header.contact')
+                        <li><span><strong><i class="material-icons">send</i>&nbsp;</strong><a
+                                    href="#link">@lang('header.contact')
                                     &nbsp;</a></span></li>
                     </ul>
                 </div>
@@ -25,19 +27,23 @@
                                 <img src="{{ asset('public/assets/site/themes/assets/images/flags/vn.png') }}"
                                     title="Tiếng Việt" alt="Tiếng Việt" /> @lang('header.lang_vi')<span
                                     class="caret"></span>
-                                @else    
+                                @else
                                 <img src="{{ asset('public/assets/site/themes/assets/images/flags/us.png') }}"
                                     title="Tiếng Việt" alt="Tiếng Việt" /> @lang('header.lang_en')<span
                                     class="caret"></span>
                                 @endif
-                                </button>
+                            </button>
                             <ul class="dropdown-menu dropdown-menu-right language_bar_chooser">
-                            <li><a rel="alternate" hreflang="en" href="{{ route('site.home.setLocale', 'en') }}"><img
+                                <li><a rel="alternate" hreflang="en"
+                                        href="{{ route('site.home.setLocale', 'en') }}"><img
                                             src="{{ asset('public/assets/site/themes/assets/images/flags/us.png') }}"
-                                            title="English" alt="English" /><span>@lang('header.lang_en')</span></a></li>
-                                <li class="active"><a rel="alternate" hreflang="vi" href="{{ route('site.home.setLocale', 'vi') }}"><img
+                                            title="English" alt="English" /><span>@lang('header.lang_en')</span></a>
+                                </li>
+                                <li class="active"><a rel="alternate" hreflang="vi"
+                                        href="{{ route('site.home.setLocale', 'vi') }}"><img
                                             src="{{ asset('public/assets/site/themes/assets/images/flags/vn.png') }}"
-                                            title="Tiếng Việt" alt="Tiếng Việt" /><span>@lang('header.lang_vi')</span></a></li>
+                                            title="Tiếng Việt"
+                                            alt="Tiếng Việt" /><span>@lang('header.lang_vi')</span></a></li>
                             </ul>
                         </div>
                     </div>
@@ -56,17 +62,19 @@
                     <!-- NAVIGATION -->
                     <div class="navigation nav-left">
                         <ul>
-                        <li class="active"><a href="{{ route('site.home.index') }}">@lang('header.home')</a>
+                            <li class="active"><a href="{{ route('site.home.index') }}">@lang('header.home')</a>
                             </li>
                             <li><a href="{{ route('site.home.about') }}">@lang('header.about')</a>
                             </li>
                             <li><a href="{{ route('site.home.price') }}">@lang('header.train')</a>
                             </li>
-                            <li><a href="{{ route('site.article.index',['id' => 2, 'slug' => 'tour']) }}">@lang('header.tour')</a>
+                            <li><a
+                                    href="{{ route('site.article.index',['id' => 2, 'slug' => 'tour']) }}">@lang('header.tour')</a>
                             </li>
                             <li><a href="{{ route('site.home.livitrans') }}">@lang('header.image')</a>
                             </li>
-                            <li><a href="{{ route('site.article.index',['id' => 1, 'slug' => 'article']) }}">@lang('header.article')</a>
+                            <li><a
+                                    href="{{ route('site.article.index',['id' => 1, 'slug' => 'article']) }}">@lang('header.article')</a>
                             </li>
                             <li><a href="{{ route('site.home.contact') }}">@lang('header.contact')</a>
                             </li>
@@ -153,7 +161,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-sm-10">
-                    <div class="form-services-layout">
+                  <form class="form-services-layout" action="{{ route('site.home.booking') }}">
                         <div class="form-header">
                             <div class="title">Đặt vé trực tuyến</div>
                             <div class="subtitle">Liên hệ trước với chũng tôi</div>
@@ -163,7 +171,7 @@
                                 <div class="row">
                                     <div class="col-md-10 form-group">
                                         <div class="toggle-switch">
-                                            <input class="switch-toggle" id="khuhoi" type="checkbox">
+                                            <input class="switch-toggle" id="khuhoi" type="checkbox" name="is_round_trip" value="1">
                                             <label class="switch-viewport" for="khuhoi">
                                                 <div class="switch-slider">
                                                     <div class="switch-button"> </div>
@@ -175,35 +183,43 @@
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label class="bmd-label-floating" for="item-form-0">Điểm đi</label>
-                                        <input class="form-control" type="text" value="Hà nội" id="item-form-0"><span
-                                            class="float-icon"><i class="material-icons">room</i></span>
+                                        <select class="form-control" name="start_id">
+                                            @if(sizeof($province) > 0)
+                                              @foreach($province as $k => $v)
+                                                <option value="{{ $k }}">{{ $v }}</option>
+                                              @endforeach
+                                            @endif
+                                        </select><span class="float-icon"><i class="material-icons">room</i></span>
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label class="bmd-label-floating" for="item-form-1">Điểm đến</label>
-                                        <input class="form-control" type="text" value="Sài gòn" id="item-form-1"><span
-                                            class="float-icon"><i class="material-icons">room</i></span>
+                                        <select class="form-control" name="end_id">
+                                          @if(sizeof($province) > 0)
+                                            @foreach($province as $k => $v)
+                                              <option value="{{ $k }}">{{ $v }}</option>
+                                            @endforeach
+                                          @endif
+                                        </select><span class="float-icon"><i class="material-icons">room</i></span>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label class="bmd-label-floating" for="item-form-2">Số lượng</label>
-                                        <input class="form-control" type="text" value="2 người lớn 1 trẻ em"
-                                            id="item-form-2"><span class="float-icon"><i
-                                                class="material-icons">supervisor_account</i></span>
+                                        <label class="bmd-label-floating" for="item-form-2">Số người</label>
+                                        <input class="form-control" type="text" id="item-form-2" name="qty"/><span
+                                            class="float-icon"><i class="material-icons">supervisor_account</i></span>
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label class="bmd-label-floating" for="start-date">Ngày đi</label>
-                                        <input class="form-control datepicker" type="text" value="12/12/2019"
-                                            id="start-date" data-date-format="DD, MM d">
+                                        <input class="form-control datepicker" type="text" id="start-date" name="start_time"
+                                            data-date-format="DD, MM d" />
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label class="bmd-label-floating" for="end-date">Ngày về</label>
-                                        <input class="form-control datepicker" type="text" value="12/12/2019"
-                                            id="end-date" data-date-format="DD, MM d">
+                                        <label class="bmd-label-floating" for="end-date" >Ngày về</label>
+                                        <input class="form-control datepicker" type="text" id="end-date" name="end_time"
+                                            data-date-format="DD, MM d" />
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label class="bmd-label-floating" for="item-form-5">Loại</label>
-                                        <input class="form-control" type="text" value="Mền điều hòa"
-                                            id="item-form-5"><span class="float-icon"><i
-                                                class="material-icons">event_seat</i></span>
+                                        <label class="bmd-label-floating" for="item-form-6" >Thông tin</label>
+                                        <input class="form-control" type="text" id="item-form-6" name="note"/><span
+                                            class="float-icon"><i class="material-icons">event_seat</i></span>
                                     </div>
                                     <div class="col-12 text-right">
                                         <button class="btn btn-primary text-uppercase" type="submit">Tìm kiếm</button>
@@ -211,7 +227,7 @@
                                 </div>
                             </div>
                         </form>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>

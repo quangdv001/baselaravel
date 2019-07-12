@@ -21,6 +21,8 @@ class SiteBaseController extends Controller
             $pageClass = 'category';
         } elseif($this->currentRoute == 'site.article.detail'){
             $pageClass = 'single';
+        } elseif($this->currentRoute == 'site.home.booking'){
+            $pageClass = 'price-page';
         }
         // dd($this->currentRoute);
         View::share('currentRoute', $this->currentRoute);

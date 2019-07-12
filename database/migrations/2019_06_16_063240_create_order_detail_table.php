@@ -16,6 +16,7 @@ class CreateOrderDetailTable extends Migration
         Schema::create('order_detail', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('order_id');
+            $table->smallInteger('is_round_trip')->default(0);
             $table->string('start_name')->nullable();
             $table->string('start_id')->nullable();
             $table->string('end_name')->nullable();

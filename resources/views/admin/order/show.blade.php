@@ -50,7 +50,8 @@ Chi tiết đơn hàng
                                     <p>{{ $data->orderInfo->name }}</p>
                                     <p>{{ $data->orderInfo->email }}</p>
                                     <p>{{ $data->orderInfo->phone }}</p>
-                                    <p>@if($customer && $customer->status == 1) <span class="badge badge-success">Đã kích hoạt</span> @else <span class="badge badge-danger">Chưa kích hoạt</span> @endif</p>
+                                    <p>{{ $data->orderInfo->address }}</p>
+                                    {{-- <p>@if($customer && $customer->status == 1) <span class="badge badge-success">Đã kích hoạt</span> @else <span class="badge badge-danger">Chưa kích hoạt</span> @endif</p> --}}
                                 </div>
                             </div>
                         </div>
@@ -69,25 +70,19 @@ Chi tiết đơn hàng
                                             Id
                                         </th>
                                         <th>
-                                            Id sản phẩm
+                                            Điểm đi
                                         </th>
                                         <th>
-                                            Tên sản phẩm
+                                            Điểm đến
                                         </th>
                                         <th>
-                                            Ảnh
+                                            Số người
                                         </th>
                                         <th>
-                                            Số lượng
+                                            Ngày đi
                                         </th>
                                         <th>
-                                            Kích thước (dài x rộng x cao)
-                                        </th>
-                                        <th>
-                                            Đơn giá
-                                        </th>
-                                        <th>
-                                            Tổng tiền
+                                            Ngày về
                                         </th>
                                     </tr>
                                 </thead>
@@ -98,34 +93,28 @@ Chi tiết đơn hàng
                                             {{ $v->id }}
                                         </td>
                                         <td>
-                                            {{ $v->product_id }}
+                                            {{ $v->start_name }}
                                         </td>
                                         <td>
-                                            {{ $v->title }}
-                                        </td>
-                                        <td>
-                                            {{ $v->img }}
+                                            {{ $v->end_name }}
                                         </td>
                                         <td>
                                             {{ $v->qty }}
                                         </td>
                                         <td>
-                                            {{ $v->width }}x{{ $v->depth }}x{{ $v->height }}
+                                            {{ date('d-m-Y', $v->start_time) }}
                                         </td>
                                         <td>
-                                            {{ number_format($v->price, 0,",",".") }}đ
-                                        </td>
-                                        <td>
-                                            {{ number_format($v->total, 0,",",".") }}đ
+                                            {{ date('d-m-Y', $v->end_time) }}
                                         </td>
                                     </tr>
                                     @endforeach
-                                    <tr>
+                                    {{-- <tr>
                                         <td colspan="7" class="ml-auto">
                                             <span class="float-right">Tổng</span>
                                         </td>
                                         <td>{{ number_format($data->total, 0,",",".") }}đ</td>
-                                    </tr>
+                                    </tr> --}}
                                 </tbody>
                             </table>
 

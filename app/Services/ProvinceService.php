@@ -92,7 +92,7 @@ class ProvinceService
     }
 
     public function getProvincePluck(){
-        return $this->province->pluck('name', 'province_id');
+        return $this->province->where('status', 1)->pluck('name', 'province_id');
     }
 
     public function getDistrictByProvince($id){

@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Mail;
 use App\Services\OrderService;
 use Illuminate\Support\Facades\App;
 use Astrotomic\Translatable\Locales;
+use App\Services\ProvinceService;
+use App\Http\Requests\Site\BookingRequest;
 
 class SiteHomeController extends SiteBaseController
 {
@@ -20,14 +22,16 @@ class SiteHomeController extends SiteBaseController
     private $article;
     private $order;
     private $locales;
+    private $province;
     
     // For only this view
-    public function __construct(CategoryService $category, ArticleService $article, OrderService $order, Locales $locales){
+    public function __construct(CategoryService $category, ArticleService $article, OrderService $order, Locales $locales, ProvinceService $province){
         parent::__construct();
         $this->category = $category;
         $this->article = $article;
         $this->order = $order;
         $this->locales = $locales;
+        $this->province = $province;
     }
 
     public function index(){
@@ -41,7 +45,8 @@ class SiteHomeController extends SiteBaseController
         $paramArticle['status'] = 1;
         $paramArticle['orderBy'] = 'id';
         $article = $this->article->search($paramArticle);
-        return view('site.home.index')->with('tour', $tour)->with('article', $article);
+        $province = $this->province->getProvincePluck();
+        return view('site.home.index')->with('tour', $tour)->with('article', $article)->with('province', $province);
     }
 
     public function sendContact(Request $request){
@@ -63,6 +68,38 @@ class SiteHomeController extends SiteBaseController
 
     public function currentLang(){
         return $this->locales->current();
+    }
+
+    public function booking(Request $request){
+        // dd($request->all());
+        $data = $request->only('start_id', 'end_id', 'qty', 'start_time', 'end_time', 'note', 'is_round_trip');
+        // $data['is_round_trip'] = (int) $request->input('is_round_trip', 0);
+        $province = $this->province->getProvincePluck();
+        $paramArticle['limit'] = 6;
+        $paramArticle['category_id'] = 1;
+        $paramArticle['status'] = 1;
+        $paramArticle['orderBy'] = 'id';
+        $article = $this->article->search($paramArticle);
+        return view('site.home.booking')->with('data', $data)->with('article', $article)->with('province', $province);
+    }
+
+    public function postBooking(BookingRequest $request){
+        $province = $this->province->getProvincePluck()->toArray();
+        $order = $request->only('payment_method');
+        $orderDetail = $request->only('start_id', 'end_id', 'qty', 'start_time', 'end_time');
+        $orderInfo = $request->only('note', 'name', 'email', 'phone', 'address');
+        $orderDetail['is_round_trip'] = (int) $request->input('is_round_trip', 0);
+        $orderDetail['start_name'] = $province[$orderDetail['start_id']];
+        $orderDetail['end_name'] = $province[$orderDetail['end_id']];
+        $orderDetail['start_time'] = strtotime($orderDetail['start_time']);
+        $orderDetail['end_time'] = strtotime($orderDetail['end_time']);
+        $resOrder = $this->order->create($order);
+        if($resOrder){
+            $orderDetail['order_id'] = $orderInfo['order_id'] = $resOrder->id;
+            $resOrderDetail = $this->order->createOrderDetail($orderDetail);
+            $resOrderInfo = $this->order->createOrderInfo($orderInfo);
+        }
+        return redirect()->route('site.home.index')->with('success_message', 'Đặt vé thành công!');
     }
     
 
