@@ -102,5 +102,12 @@ class SiteHomeController extends SiteBaseController
         return redirect()->route('site.home.index')->with('success_message', 'Đặt vé thành công!');
     }
     
+    public function about(){
+        $param['category_id'] = 1;
+        $param['limit'] = 10;
+        $param['sortBy'] = 'id';
+        $article = $this->article->search($param);
+        return view('site.home.about')->with('data', $article);
+    }
 
 }

@@ -11,8 +11,10 @@ Route::get('currentLang', 'SiteArticleController@currentLang')->name('home.sendC
 Route::post('sendContact', 'SiteHomeController@sendContact')->name('home.sendContact');
 Route::get('booking', 'SiteHomeController@booking')->name('home.booking');
 Route::post('booking', 'SiteHomeController@postBooking')->name('home.postBooking');
+Route::get('about', 'SiteHomeController@about')->name('home.about');
+Route::get('regulations', 'SiteHomeController@regulations')->name('home.regulations');
 
-Route::get('about', 'SiteArticleController@about')->name('home.about');
+
 Route::get('price', 'SiteArticleController@price')->name('home.price');
 Route::get('livitrans', 'SiteArticleController@livitrans')->name('home.livitrans');
 Route::get('contact', 'SiteArticleController@contact')->name('home.contact');

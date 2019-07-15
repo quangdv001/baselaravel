@@ -159,8 +159,7 @@ Trang chủ
                       <div class="news-post-content">
                           <h2 class="post-title title"><a class="news-post-link" href="{{ route('site.article.detail', ['id' => $v->id, 'slug' => $v->slug]) }}">{{ $v->title }}</a></h2>
                           <div class="post-meta-container"><span class="post-meta-item"><i class="far fa-clock"></i>
-                                  {{ $v->created_at->format('d/m/Y') }}</span><span class="post-meta-item"><i class="fa fa-user-check"></i><a
-                                      href="#admin"> Admin</a></span></div>
+                                  {{ $v->created_at->format('d/m/Y') }}</span></div>
                           <p class="post-desc">{!! $v->short_description !!}
                           </p><a class="read-more-button" href="{{ route('site.article.detail', ['id' => $v->id, 'slug' => $v->slug]) }}">Xem tiếp...</a>
                       </div>

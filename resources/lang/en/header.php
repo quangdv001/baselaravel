@@ -6,8 +6,9 @@ return [
     'contact' => 'Contact',
     'home' => 'Home',
     'about' => 'About',
-    'train' => 'Time|Price',
-    'tour' => 'Tour',
-    'image' => 'Livitrans images',
-    'article' => 'Article'
+    'booking' => 'Booking',
+    'regulations' => 'Regulations',
+    'sale' => 'Sales',
+    'article' => 'Article',
+    'about_us' => 'About Us'
 ];

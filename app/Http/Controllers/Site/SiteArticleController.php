@@ -51,4 +51,8 @@ class SiteArticleController extends SiteBaseController
         ->with('data', $article);
     }
 
+    public function price(){
+        return view('site.artice.price');
+    }
+
 }

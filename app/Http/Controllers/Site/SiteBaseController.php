@@ -19,10 +19,12 @@ class SiteBaseController extends Controller
         $pageClass = 'home';
         if($this->currentRoute == 'site.article.index'){
             $pageClass = 'category';
-        } elseif($this->currentRoute == 'site.article.detail'){
+        } elseif(in_array($this->currentRoute, ['site.article.detail', 'site.home.price'])){
             $pageClass = 'single';
         } elseif($this->currentRoute == 'site.home.booking'){
             $pageClass = 'price-page';
+        } elseif($this->currentRoute == 'site.home.about'){
+            $pageClass = 'about-page';
         }
         // dd($this->currentRoute);
         View::share('currentRoute', $this->currentRoute);

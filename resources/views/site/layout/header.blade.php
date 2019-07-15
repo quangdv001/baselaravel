@@ -66,15 +66,13 @@
                             </li>
                             <li><a href="{{ route('site.home.about') }}">@lang('header.about')</a>
                             </li>
-                            <li><a href="{{ route('site.home.price') }}">@lang('header.train')</a>
+                            <li><a href="{{ route('site.home.booking') }}">@lang('header.booking')</a>
                             </li>
-                            <li><a
-                                    href="{{ route('site.article.index',['id' => 2, 'slug' => 'tour']) }}">@lang('header.tour')</a>
+                            <li><a href="{{ route('site.article.index',['id' => 2, 'slug' => 'article']) }}">@lang('header.sale')</a>
                             </li>
-                            <li><a href="{{ route('site.home.livitrans') }}">@lang('header.image')</a>
+                            <li><a href="{{ route('site.article.index',['id' => 1, 'slug' => 'article']) }}">@lang('header.article')</a>
                             </li>
-                            <li><a
-                                    href="{{ route('site.article.index',['id' => 1, 'slug' => 'article']) }}">@lang('header.article')</a>
+                            <li><a href="{{ route('site.home.regulations') }}">@lang('header.regulations')</a>
                             </li>
                             <li><a href="{{ route('site.home.contact') }}">@lang('header.contact')</a>
                             </li>

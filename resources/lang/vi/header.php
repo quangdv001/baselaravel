@@ -6,8 +6,9 @@ return [
     'contact' => 'Liên hệ',
     'home' => 'Trang chủ',
     'about' => 'Giới thiệu',
-    'train' => 'Giờ tàu|Giá vé',
-    'tour' => 'Tour',
-    'image' => 'Hình ảnh về tàu Livitrans',
-    'article' => 'Tin tức'
+    'booking' => 'Đặt vé',
+    'regulations' => 'Quy định',
+    'sale' => 'Khuyến mãi',
+    'article' => 'Tin tức',
+    'about_us' => 'Về chúng tôi'
 ];
