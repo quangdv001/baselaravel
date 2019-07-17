@@ -24,7 +24,7 @@ Trang chủ
                             <div class="title">
                                 <h3><a href="{{ route('site.article.detail', ['id' => $v->id, 'slug' => $v->slug]) }}">{{ $v->title }}</a></h3>
                             </div>
-                            <p>{!! $v->short_description !!}</p><a
+                            <p>{!! strip_tags($v->short_description) !!}</p><a
                           class="readmore" href="{{ route('site.article.detail', ['id' => $v->id, 'slug' => $v->slug]) }}"> <span>Xem chi tiết</span></a>
                         </div>
                         @endif
