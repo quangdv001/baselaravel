@@ -10,5 +10,7 @@ return [
     'regulations' => 'Quy định',
     'sale' => 'Khuyến mãi',
     'article' => 'Tin tức',
-    'about_us' => 'Về chúng tôi'
+    'about_us' => 'Về chúng tôi',
+    'gastation' => 'Đại lý vé tàu',
+    'ticket_location' => 'Điểm bán vé'
 ];

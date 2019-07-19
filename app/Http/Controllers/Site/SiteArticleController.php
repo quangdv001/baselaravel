@@ -52,7 +52,11 @@ class SiteArticleController extends SiteBaseController
     }
 
     public function price(){
-        return view('site.artice.price');
+        return view('site.article.price');
+    }
+
+    public function contact(){
+        return view('site.article.contact');
     }
 
 }

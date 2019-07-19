@@ -24,7 +24,7 @@ Trang chủ
                             <div class="title">
                                 <h3><a href="{{ route('site.article.detail', ['id' => $v->id, 'slug' => $v->slug]) }}">{{ $v->title }}</a></h3>
                             </div>
-                            <p>{!! strip_tags($v->short_description) !!}</p><a
+                            <p>{!! str_limit(strip_tags($v->short_description), $limit = 120, $end = '...') !!}</p><a
                           class="readmore" href="{{ route('site.article.detail', ['id' => $v->id, 'slug' => $v->slug]) }}"> <span>Xem chi tiết</span></a>
                         </div>
                         @endif
@@ -138,9 +138,9 @@ Trang chủ
             <div class="col-sm-12">
                 <div class="text-left">
                     <div class="block-title underline">
-                        <h2 class="title solid-color text-uppercase"><span>Tin mới</span></h2>
+                        <h2 class="title solid-color text-uppercase"><span>@lang('home.news')</span></h2>
                     </div>
-                    <div class="block-view-more pull-right"><a class="view-more" href="#">Xem thêm <i
+                    <div class="block-view-more pull-right"><a class="view-more" href="#">@lang('home.read_more')<i
                                 class="fa fa-angle-double-right"></i></a></div>
                 </div>
             </div>
@@ -160,8 +160,8 @@ Trang chủ
                           <h2 class="post-title title"><a class="news-post-link" href="{{ route('site.article.detail', ['id' => $v->id, 'slug' => $v->slug]) }}">{{ $v->title }}</a></h2>
                           <div class="post-meta-container"><span class="post-meta-item"><i class="far fa-clock"></i>
                                   {{ $v->created_at->format('d/m/Y') }}</span></div>
-                          <p class="post-desc">{!! $v->short_description !!}
-                          </p><a class="read-more-button" href="{{ route('site.article.detail', ['id' => $v->id, 'slug' => $v->slug]) }}">Xem tiếp...</a>
+                          <p class="post-desc">{!! str_limit(strip_tags($v->short_description), $limit = 120, $end = '...') !!}
+                          </p><a class="read-more-button" href="{{ route('site.article.detail', ['id' => $v->id, 'slug' => $v->slug]) }}">@lang('home.read_more')...</a>
                       </div>
                   </div>
               </div>

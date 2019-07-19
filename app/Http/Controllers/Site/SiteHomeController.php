@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\App;
 use Astrotomic\Translatable\Locales;
 use App\Services\ProvinceService;
 use App\Http\Requests\Site\BookingRequest;
+use Illuminate\Support\Facades\Storage;
 
 class SiteHomeController extends SiteBaseController
 {
@@ -32,6 +33,12 @@ class SiteHomeController extends SiteBaseController
         $this->order = $order;
         $this->locales = $locales;
         $this->province = $province;
+        $paramArticle['limit'] = 4;
+        $paramArticle['category_id'] = 1;
+        $paramArticle['status'] = 1;
+        $paramArticle['orderBy'] = 'id';
+        $special_article = $this->article->search($paramArticle);
+        View::share('special_article', $special_article);
     }
 
     public function index(){
@@ -40,13 +47,8 @@ class SiteHomeController extends SiteBaseController
         $paramTour['status'] = 1;
         $paramTour['orderBy'] = 'id';
         $tour = $this->article->search($paramTour);
-        $paramArticle['limit'] = 4;
-        $paramArticle['category_id'] = 1;
-        $paramArticle['status'] = 1;
-        $paramArticle['orderBy'] = 'id';
-        $article = $this->article->search($paramArticle);
         $province = $this->province->getProvincePluck();
-        return view('site.home.index')->with('tour', $tour)->with('article', $article)->with('province', $province);
+        return view('site.home.index')->with('tour', $tour)->with('province', $province);
     }
 
     public function sendContact(Request $request){
@@ -108,6 +110,26 @@ class SiteHomeController extends SiteBaseController
         $param['sortBy'] = 'id';
         $article = $this->article->search($param);
         return view('site.home.about')->with('data', $article);
+    }
+
+    public function regulations(){
+        $param['category_id'] = 1;
+        $param['limit'] = 10;
+        $param['sortBy'] = 'id';
+        $article = $this->article->search($param);
+        return view('site.home.regulations')->with('data', $article);
+    }
+
+    public function downloadFile($name){
+        return Storage::download('upload/pdf/'.$name, $name);
+    }
+
+    public function gastation(){
+        return view('site.home.gastation');
+    }
+
+    public function ticketLocation(){
+        return view('site.home.ticket_location');
     }
 
 }

@@ -13,7 +13,9 @@ Route::get('booking', 'SiteHomeController@booking')->name('home.booking');
 Route::post('booking', 'SiteHomeController@postBooking')->name('home.postBooking');
 Route::get('about', 'SiteHomeController@about')->name('home.about');
 Route::get('regulations', 'SiteHomeController@regulations')->name('home.regulations');
-
+Route::get('regulations/download/{name}', 'SiteHomeController@downloadFile')->name('home.downloadFile');
+Route::get('gastation', 'SiteHomeController@gastation')->name('home.gastation');
+Route::get('ticketLocation', 'SiteHomeController@ticketLocation')->name('home.ticketLocation');
 
 Route::get('price', 'SiteArticleController@price')->name('home.price');
 Route::get('livitrans', 'SiteArticleController@livitrans')->name('home.livitrans');

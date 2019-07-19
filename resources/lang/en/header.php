@@ -10,5 +10,7 @@ return [
     'regulations' => 'Regulations',
     'sale' => 'Sales',
     'article' => 'Article',
-    'about_us' => 'About Us'
+    'about_us' => 'About Us',
+    'gastation' => 'Gastation',
+    'ticket_location' => 'Ticket Location'
 ];
