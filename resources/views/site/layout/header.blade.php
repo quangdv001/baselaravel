@@ -60,21 +60,22 @@
                 </div>
                 <div class="col align-self-center text-right zero-height-sx">
                     <!-- NAVIGATION -->
+
                     <div class="navigation nav-left">
                         <ul>
-                            <li class="active"><a href="{{ route('site.home.index') }}">@lang('header.home')</a>
+                            <li @if($currentRoute == 'site.home.index') class="active" @endif><a href="{{ route('site.home.index') }}">@lang('header.home')</a>
                             </li>
-                            <li><a href="{{ route('site.home.about') }}">@lang('header.about')</a>
+                            <li @if($currentRoute == 'site.home.about') class="active" @endif><a href="{{ route('site.home.about') }}">@lang('header.about')</a>
                             </li>
-                            <li><a href="{{ route('site.home.booking') }}">@lang('header.booking')</a>
+                            <li @if($currentRoute == 'site.home.booking') class="active" @endif><a href="{{ route('site.home.booking') }}">@lang('header.booking')</a>
                             </li>
-                            <li><a href="{{ route('site.article.index',['id' => 3, 'slug' => 'article']) }}">@lang('header.sale')</a>
+                            <li @if(strpos($_SERVER['REQUEST_URI'], "i-3") !== false) !== false class="active" @endif><a href="{{ route('site.article.index',['id' => 3, 'slug' => 'article']) }}">@lang('header.sale')</a>
                             </li>
-                            <li><a href="{{ route('site.article.index',['id' => 1, 'slug' => 'article']) }}">@lang('header.article')</a>
+                            <li @if(strpos($_SERVER['REQUEST_URI'], "i-1") !== false) class="active" @endif><a href="{{ route('site.article.index',['id' => 1, 'slug' => 'article']) }}">@lang('header.article')</a>
                             </li>
-                            <li><a href="{{ route('site.home.regulations') }}">@lang('header.regulations')</a>
+                            <li @if($currentRoute == 'site.home.regulations') class="active" @endif><a href="{{ route('site.home.regulations') }}">@lang('header.regulations')</a>
                             </li>
-                            <li><a href="{{ route('site.home.contact') }}">@lang('header.contact')</a>
+                            <li @if($currentRoute == 'site.home.contact') class="active" @endif><a href="{{ route('site.home.contact') }}">@lang('header.contact')</a>
                             </li>
                         </ul>
                     </div>

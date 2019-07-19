@@ -69,6 +69,6 @@
         </div>
     </div>
     <div class="container">
-        <div class="copyright">&copy; Copyright 2019. - LIVITRANS.COM.</div>
+        <div class="copyright">&copy;LIVITRANS.COM</div>
     </div>
 </footer>
