@@ -131,7 +131,7 @@ Trang chủ
         </div>
     </div>
 </div>
-@if(sizeof($article) > 0)
+@if(sizeof($special_article) > 0)
 <div class="section section-hotnews">
     <div class="container">
         <div class="row justify-content-md-center">
@@ -146,7 +146,7 @@ Trang chủ
             </div>
         </div>
         <div class="row">
-            @foreach($article as $v)
+            @foreach($special_article as $v)
               @if($v->title)
               <div class="col-12 col-sm-6 grid-news">
                   <div class="news-post"><a class="news-post-image-link" href="{{ route('site.article.detail', ['id' => $v->id, 'slug' => $v->slug]) }}">

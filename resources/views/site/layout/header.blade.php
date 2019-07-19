@@ -68,7 +68,7 @@
                             </li>
                             <li><a href="{{ route('site.home.booking') }}">@lang('header.booking')</a>
                             </li>
-                            <li><a href="{{ route('site.article.index',['id' => 2, 'slug' => 'article']) }}">@lang('header.sale')</a>
+                            <li><a href="{{ route('site.article.index',['id' => 3, 'slug' => 'article']) }}">@lang('header.sale')</a>
                             </li>
                             <li><a href="{{ route('site.article.index',['id' => 1, 'slug' => 'article']) }}">@lang('header.article')</a>
                             </li>
