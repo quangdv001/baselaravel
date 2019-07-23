@@ -136,38 +136,44 @@ var init = {
         $(obj).waitMe('hide');
     },
     handleFile: function(file){
-        var file_data = file[0];
-        //lấy ra kiểu file
-        var type = file_data.type;
-        console.log(type);
-        //Xét kiểu file được upload
-        var match = ["image/gif", "image/png", "image/jpg", "image/jpeg", "application/x-zip-compressed"];
-        //kiểm tra kiểu file
-        if (type == match[0] || type == match[1] || type == match[2] || type == match[3] || type == match[4]) {
-            //khởi tạo đối tượng form data
-            var form_data = new FormData();
-            //thêm files vào trong form data
-            form_data.append('file', file_data);
-            //sử dụng ajax post
-            $.ajax({
-                url: BASE_URL + '/admin/file/uploadFile', // gửi đến file upload.php 
-                cache: false,
-                contentType: false,
-                processData: false,
-                data: form_data,
-                type: 'post',
-                success: function (res) {
-                    if (res.success == 1) {
-                        $('.list-img').prepend(res.html);
-                        init.notyPopup('Upload thành công.', 'success');
-                    } else {
-                        init.notyPopup('Upload thất bại!', 'error');
+        // var file_data = file;
+        // console.log(file_data);
+        $.each(file, function(index, file_data){
+            console.log(file_data);
+            //lấy ra kiểu file
+            var type = file_data.type;
+            console.log(type);
+            //Xét kiểu file được upload
+            var match = ["image/gif", "image/png", "image/jpg", "image/jpeg", "application/x-zip-compressed"];
+            //kiểm tra kiểu file
+            if (type == match[0] || type == match[1] || type == match[2] || type == match[3] || type == match[4]) {
+                //khởi tạo đối tượng form data
+                var form_data = new FormData();
+                //thêm files vào trong form data
+                form_data.append('file', file_data);
+                //sử dụng ajax post
+                $.ajax({
+                    url: BASE_URL + '/admin/file/uploadFile', // gửi đến file upload.php 
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    data: form_data,
+                    type: 'post',
+                    success: function (res) {
+                        if (res.success == 1) {
+                            $('.list-img').prepend(res.html);
+                            init.notyPopup('Upload thành công.', 'success');
+                        } else {
+                            init.notyPopup('Upload thất bại!', 'error');
+                        }
                     }
-                }
-            });
-        } else {
-            init.notyPopup('Sai định dạng file!', 'error');
-        }
+                });
+            } else {
+                init.notyPopup('Sai định dạng file!', 'error');
+                return false;
+            }
+        })
+        
         return false;
     },
     openFileModal: function(callback, multi = false){

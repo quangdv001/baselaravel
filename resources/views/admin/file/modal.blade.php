@@ -1,5 +1,5 @@
-<div class="modal fade" id="fileModal" role="dialog">
-    <div class="modal-dialog modal-lg">
+<div class="modal fade" id="fileModal">
+    <div class="modal-dialog modal-xl">
 
         <!-- Modal content-->
         <div class="modal-content">
@@ -13,7 +13,7 @@
                         <label for="file-input">
                             <i class="mdi mdi-upload icon-picture"></i>
                         </label>
-                        <input id="file-input" type="file" onchange="init.handleFile(this.files)" />
+                        <input id="file-input" type="file" multiple onchange="init.handleFile(this.files)" />
                     </div>
                     <ul class="list-img">
                         @if(sizeof($data) > 0)
