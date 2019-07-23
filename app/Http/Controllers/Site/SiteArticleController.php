@@ -23,6 +23,12 @@ class SiteArticleController extends SiteBaseController
         $this->article = $article;
         $this->locales = $locales;
         $category = $this->category->getByParentId(0);
+        $paramArticle['limit'] = 4;
+        $paramArticle['category_id'] = 1;
+        $paramArticle['status'] = 1;
+        $paramArticle['orderBy'] = 'id';
+        $special_article = $this->article->search($paramArticle);
+        View::share('special_article', $special_article);
         View::share('category', $category);
     }
 

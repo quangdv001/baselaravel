@@ -2449,13 +2449,6 @@ footer.dark .copyright,
   padding: 6px 0;
   position: relative;
 }
-.page-title > a:hover,
-.module-title > a:hover,
-.page-title span:hover,
-.module-title span:hover {
-  text-decoration: none;
-  color: #095892;
-}
 .module-title {
   margin-bottom: 0;
 }
