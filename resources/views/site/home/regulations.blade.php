@@ -1,12 +1,12 @@
 @extends('site.layout.main')
 @section('title')
-@lang('header.about')
+@lang('header.regulations')
 @endsection
 @section('content')
 <div class="main">
     <div class="subpage-cover"
         style="background: #2d71a2 url({{ asset('public/assets/site/themes/assets/images/subpage-cover.jpg') }}) no-repeat center top/ auto 100%">
-        <div class="page-title d-flex align-items-center justify-content-center"><span>@lang('header.about_us')</span>
+        <div class="page-title d-flex align-items-center justify-content-center"><span>@lang('header.regulations')</span>
         </div>
     </div>
     <div class="breadcrumb-wrapper">
@@ -15,7 +15,7 @@
                 <ol class="breadcrumb breadcrumb-dot">
                     <li class="breadcrumb-item"><i class="material-icons">home</i><a
                             href="{{ route('site.home.index' )}}" title="Trang chủ">Trang chủ</a></li>
-                    <li class="breadcrumb-item active"><span>@lang('header.about')</span></li>
+                    <li class="breadcrumb-item active"><span>@lang('header.regulations')</span></li>
                 </ol>
             </div>
         </div>
@@ -23,10 +23,10 @@
     <div class="section-main">
         <div class="container">
             <div class="row">
-                <div class="col col-sm-9 border-sm-right">
+                <div class="col col-sm-9">
                     <div class="row">
                         <div class="col">
-                            <h1 class="page-title"><a href="#">Tin tức</a></h1>
+                            <h1 class="page-title"><a href="#">@lang('header.regulations')</a></h1>
                             <div class="col">
                                 <div class="list-post row">
                                     <div class="news-post line-bottom download-item">
@@ -37,23 +37,16 @@
                                             <div class="post-meta-container">
                                                 <div class="span post-meta-item"><i class="far fa-clock"></i>
                                                     Th3-27/10/2015</div>
-                                            </div><a class="download-icon pull-right"
+                                            </div>
+                                            <a class="download-icon pull-right"
                                                 href="{{ route('site.home.downloadFile', 'Ky-thuat-dong-hang-Container.pdf')  }}"><i
                                                     class="fa fa-download" aria-hidden="true"></i><span>Tải
-                                                    file</span></a>
+                                                    file</span>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <!-- <nav aria-label="Page navigation">
-                      <ul class="pagination">
-                        <li class="page-item"><a class="page-link" href="#">Trước</a></li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Tiếp</a></li>
-                      </ul>
-                    </nav> -->
                         </div>
                     </div>
                 </div>

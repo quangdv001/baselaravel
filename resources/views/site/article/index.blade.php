@@ -15,7 +15,6 @@
                 <ol class="breadcrumb breadcrumb-dot">
                     <li class="breadcrumb-item"><i class="material-icons">home</i><a href="index.html"
                             title="Trang chủ">@lang('header.home')</a></li>
-                    {{-- <li class="breadcrumb-item"><a href="#sublink" title="Title link">Sub page</a></li> --}}
                     <li class="breadcrumb-item active"><span>{{ $cate->name }}</span></li>
                 </ol>
             </div>
@@ -24,7 +23,7 @@
     <div class="section-main">
         <div class="container">
             <div class="row">
-                <div class="col col-sm-9 border-sm-right">
+                <div class="col col-sm-9">
                     <div class="row">
                         <div class="col">
                             <h1 class="page-title"><a href="#">{{ $cate->name }}</a></h1>
@@ -61,13 +60,6 @@
                             @endif
                             <nav aria-label="Page navigation">
                                 {{ $data->links() }}
-                                {{-- <ul class="pagination">
-                                    <li class="page-item"><a class="page-link" href="#">Trước</a></li>
-                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">Tiếp</a></li>
-                                </ul> --}}
                             </nav>
                         </div>
                     </div>
