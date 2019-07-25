@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\CategoryService;
 use App\Services\ArticleService;
+use App\Services\SocialsService;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
 use Astrotomic\Translatable\Locales;
@@ -14,21 +15,29 @@ class SiteArticleController extends SiteBaseController
 {
     private $category;
     private $article;
+    private $socials;
     protected $locales;
     
     // For only this view
-    public function __construct(CategoryService $category, ArticleService $article, Locales $locales){
+    public function __construct(CategoryService $category, ArticleService $article, Locales $locales, SocialsService $socials){
         parent::__construct();
         $this->category = $category;
         $this->article = $article;
         $this->locales = $locales;
+        $this->socials = $socials;
         $category = $this->category->getByParentId(0);
         $paramArticle['limit'] = 4;
         $paramArticle['category_id'] = 1;
         $paramArticle['status'] = 1;
         $paramArticle['orderBy'] = 'id';
         $special_article = $this->article->search($paramArticle);
+        $social_links = $this->socials->getAll();
+        $social = [];
+        foreach ($social_links as $v) {
+            $social['$v->slug'] = $v->value;
+        }
         View::share('special_article', $special_article);
+        View::share('social', $social);
         View::share('category', $category);
     }
 

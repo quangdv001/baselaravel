@@ -65,5 +65,9 @@ Route::middleware(['auth.admin'])->prefix('admin')->group(function () {
 
     Route::get('user', 'AdminUserController@index')->name('user.getList');
     Route::post('user/updateStatus/{id}', 'AdminUserController@updateStatus')->name('user.updateStatus');
+
+    Route::get('socials', 'AdminSocialsController@index')->name('socials.getList');
+    Route::get('socials/getCreate/{id?}', 'AdminSocialsController@getCreate')->name('socials.getCreate');
+    Route::post('socials/getCreate/{id?}', 'AdminSocialsController@postCreate')->name('socials.postCreate');
 });
 

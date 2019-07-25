@@ -2,11 +2,11 @@
 
 return [
     'livi_name' => 'LIVITRANS JSC',
-    'footer_1' => 'Guest room: Hotel Cây Xoài 118 Lê Duẩn - Hoàn Kiếm - Hà Nội',
-    'footer_2' => 'Ticket office address: 1 Trần Quý Cáp - Phường Văn Miếu - Quận Đống Đa - Hà nội',
-    'footer_3' => 'Hotline: 0243.9429918',
-    'footer_4' => 'Telephone ticket office: 0904.101.488',
-    'footer_5' => 'Email: booking@livitrans.com',
+    'footer_1' => 'Guest room: ',
+    'footer_2' => 'Ticket office address: ',
+    'footer_3' => 'Hotline: ',
+    'footer_4' => 'Telephone ticket office: ',
+    'footer_5' => 'Email: ',
     'contact' => 'Contact',
     'contact_1' => 'FAQs',
     'contact_2' => 'Shipping policy',

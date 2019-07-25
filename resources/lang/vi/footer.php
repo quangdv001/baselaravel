@@ -2,11 +2,11 @@
 
 return [
     'livi_name' => 'CÔNG TY CP VẬN TẢI VÀ THƯƠNG MẠI LIVITRANS ( LIVITRANS JSC,..).',
-    'footer_1' => 'Phòng tiễn khách: Khách sạn Cây Xoài 118 Lê Duẩn - Hoàn Kiếm - Hà Nội',
-    'footer_2' => 'Địa chỉ Phòng vé: Số 1 Trần Quý Cáp - Phường Văn Miếu - Quận Đống Đa - Hà nội',
-    'footer_3' => 'Hotline: 0243.9429918',
-    'footer_4' => 'Điện thoại phòng vé: 0904.101.488',
-    'footer_5' => 'Email: booking@livitrans.com',
+    'footer_1' => 'Phòng tiễn khách: ',
+    'footer_2' => 'Địa chỉ Phòng vé: ',
+    'footer_3' => 'Hotline: ',
+    'footer_4' => 'Điện thoại phòng vé: ',
+    'footer_5' => 'Email: ',
     'contact' => 'Liên hệ',
     'contact_1' => 'FAQs - Hỏi đáp',
     'contact_2' => 'Chính sách vận chuyển',

@@ -120,6 +120,18 @@
                 </ul>
             </li>
             @endif
+            @if(auth('admin')->user()->can('admin-pms', 'admin.socials.getList'))
+            <li class="nav-item nav-dropdown @if(in_array($currentRoute,['admin.socials.getList'])) open @endif">
+                <a class="nav-link nav-dropdown-toggle" href="#">
+                    <i class="nav-icon icon-present"></i>Thông tin liên kết</a>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a class="nav-link @if(in_array($currentRoute,['admin.socials.getList'])) active @endif" href="{{ route('admin.socials.getList') }}">
+                            <i class="nav-icon "></i> Danh sách</a>
+                    </li>
+                </ul>
+            </li>
+            @endif
         </ul>
     </nav>
     <button class="sidebar-minimizer brand-minimizer" type="button"></button>

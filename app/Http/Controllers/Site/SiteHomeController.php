@@ -14,6 +14,7 @@ use App\Services\OrderService;
 use Illuminate\Support\Facades\App;
 use Astrotomic\Translatable\Locales;
 use App\Services\ProvinceService;
+use App\Services\SocialsService;
 use App\Http\Requests\Site\BookingRequest;
 use Illuminate\Support\Facades\Storage;
 
@@ -24,21 +25,29 @@ class SiteHomeController extends SiteBaseController
     private $order;
     private $locales;
     private $province;
+    private $socials;
     
     // For only this view
-    public function __construct(CategoryService $category, ArticleService $article, OrderService $order, Locales $locales, ProvinceService $province){
+    public function __construct(CategoryService $category, ArticleService $article, OrderService $order, Locales $locales, ProvinceService $province, SocialsService $socials){
         parent::__construct();
         $this->category = $category;
         $this->article = $article;
         $this->order = $order;
         $this->locales = $locales;
         $this->province = $province;
+        $this->socials = $socials;
         $paramArticle['limit'] = 4;
         $paramArticle['category_id'] = 1;
         $paramArticle['status'] = 1;
         $paramArticle['orderBy'] = 'id';
         $special_article = $this->article->search($paramArticle);
+        $social_links = $this->socials->getAll();
+        $social = [];
+        foreach ($social_links as $v) {
+            $social[$v->slug] = $v->value;
+        }
         View::share('special_article', $special_article);
+        View::share('social', $social);
     }
 
     public function index(){
