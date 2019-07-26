@@ -14,9 +14,8 @@ return [
     'contact_4' => 'Quy định',
     'contact_5' => 'CSKH',
     'sitemap' => 'SITEMAP',
-    'sitemap_1' => 'Đặt vé',
-    'sitemap_2' => 'Du lịch',
-    'sitemap_3' => 'Hủy chuyến',
-    'sitemap_4' => 'Gửi hành lý',
-    'sitemap_5' => 'Ký gửi',
+    'sitemap_1' => 'Về chúng tôi',
+    'sitemap_2' => 'Đặt vé',
+    'sitemap_3' => 'Khuyến mãi',
+    'sitemap_4' => 'Tin tức',
 ];

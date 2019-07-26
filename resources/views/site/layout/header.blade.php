@@ -1,5 +1,5 @@
 <div class="header-layout" @if($currentRoute=='site.home.index')
-    style="background:#fff @if(sizeof($list_sliders) > 0) url({{ $list_sliders[0]['img'] }}) @endif no-repeat center top / 100% auto;min-height: 80vh;"
+    style="background:#fff @if(sizeof($list_sliders) > 0) url({{ $list_sliders[0]['img'] }}) @endif no-repeat center top / 100% 100%;min-height: 80vh;"
     @endif>
     <div class="top-layout light-text section-dark">
         <div class="container">

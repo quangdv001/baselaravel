@@ -24,10 +24,10 @@
                         <ul class="list-group list-group-flush">
                             <li><a href="#address:"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.footer_1') @if(isset($social['phong-don-tien'])) {{ $social['phong-don-tien'] }} @endif </a></li>
                             <li><a><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.footer_2') @if(isset($social['dia-chi-phong-ve'])) {{ $social['dia-chi-phong-ve'] }} @endif</a></li>
-                            <li><a href="@if(isset($social['hotline'])) tell:$social['hotline'] @else # @endif"><i
+                            <li><a href="@if(isset($social['hotline'])) tell:{{$social['hotline']}} @else # @endif"><i
                                         class="material-icons list-style">fiber_manual_record</i><i
                                         class="material-icons">phone_in_talk</i> @lang('footer.footer_3') @if(isset($social['hotline'])) {{ $social['hotline'] }} @endif</a></li>
-                            <li><a href="@if(isset($social['dien-thoai-phong-ve'])) tell:$social['dien-thoai-phong-ve'] @else # @endif"><i
+                            <li><a href="@if(isset($social['dien-thoai-phong-ve'])) tell:{{$social['dien-thoai-phong-ve']}} @else # @endif"><i
                                         class="material-icons list-style">fiber_manual_record</i><i
                                         class="material-icons">phone_in_talk</i> @lang('footer.footer_4') @if(isset($social['dien-thoai-phong-ve'])) {{ $social['dien-thoai-phong-ve'] }} @endif</a>
                             </li>
@@ -56,7 +56,7 @@
                                 <h3 class="title divider-bottom">@lang('footer.sitemap')</h3>
                             </div>
                             <ul class="list-group list-group-flush">
-                                <li><a href="#link"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.sitemap_1')</a></li>
+                                <li><a href="{{ route('site.home.about') }}"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.sitemap_1')</a></li>
                                 <li><a href="#link"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.sitemap_2')</a></li>
                                 <li><a href="#link"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.sitemap_3')</a></li>
                                 <li><a href="#link"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.sitemap_4')</a></li>
@@ -70,6 +70,6 @@
         </div>
     </div>
     <div class="container">
-        <div class="copyright">&copy;LIVITRANS.COM</div>
+        <div class="copyright">&copy;@if(isset($social['copyright'])) {{ $social['copyright'] }} @endif</div>
     </div>
 </footer>

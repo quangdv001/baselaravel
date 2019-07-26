@@ -14,9 +14,8 @@ return [
     'contact_4' => 'Regulations',
     'contact_5' => 'customer care',
     'sitemap' => 'SITEMAP',
-    'sitemap_1' => 'Booking tickets',
-    'sitemap_2' => 'Travel',
-    'sitemap_3' => 'Cancel the trip',
-    'sitemap_4' => 'Send luggage',
-    'sitemap_5' => 'Deposit',
+    'sitemap_1' => 'About Us',
+    'sitemap_2' => 'Booking Tickets',
+    'sitemap_3' => 'Sales',
+    'sitemap_4' => 'Article'
 ];
