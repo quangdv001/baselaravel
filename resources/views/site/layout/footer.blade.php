@@ -47,7 +47,7 @@
                                 <li><a href="#link"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.contact_1')</a></li>
                                 <li><a href="#link"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.contact_2')</a></li>
                                 <li><a href="#link"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.contact_3')</a></li>
-                                <li><a href="#link"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.contact_4')</a></li>
+                                <li><a href="{{ route('site.home.regulations') }}"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.contact_4')</a></li>
                                 <li><a href="#link"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.contact_5')</a></li>
                             </ul>
                         </div>
@@ -57,10 +57,9 @@
                             </div>
                             <ul class="list-group list-group-flush">
                                 <li><a href="{{ route('site.home.about') }}"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.sitemap_1')</a></li>
-                                <li><a href="#link"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.sitemap_2')</a></li>
-                                <li><a href="#link"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.sitemap_3')</a></li>
-                                <li><a href="#link"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.sitemap_4')</a></li>
-                                <li><a href="#link"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.sitemap_5')</a></li>
+                                <li><a href="{{ route('site.home.booking') }}"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.sitemap_2')</a></li>
+                                <li><a href="{{ route('site.article.index',['id' => 3, 'slug' => 'article']) }}"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.sitemap_3')</a></li>
+                                <li><a href="{{ route('site.article.index',['id' => 1, 'slug' => 'article']) }}"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.sitemap_4')</a></li>
                             </ul>
                         </div>
                         <div class="col-sm-3"></div>
