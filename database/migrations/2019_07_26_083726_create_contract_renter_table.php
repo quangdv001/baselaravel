@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateServiceFormulaTable extends Migration
+class CreateContractRenterTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,14 @@ class CreateServiceFormulaTable extends Migration
      */
     public function up()
     {
-        Schema::create('service_formula', function (Blueprint $table) {
+        Schema::create('contract_renter', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name');
+            $table->string('phone');
+            $table->string('email');
+            $table->bigInteger('user_id');
+            $table->bigInteger('renter_id');
+            $table->smallInteger('status')->default(1);
             $table->timestamps();
         });
     }
@@ -26,6 +32,6 @@ class CreateServiceFormulaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('service_formula');
+        Schema::dropIfExists('contract_renter');
     }
 }

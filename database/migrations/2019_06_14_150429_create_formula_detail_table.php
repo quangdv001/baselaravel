@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateServiceTable extends Migration
+class CreateServiceFormulaDetailTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,15 @@ class CreateServiceTable extends Migration
      */
     public function up()
     {
-        Schema::create('service', function (Blueprint $table) {
+        Schema::create('formula_detail', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('title');
-            $table->string('unit');
-            $table->integer('price');
-            $table->integer('fixed_price');
-            $table->smallInteger('status')->default(1);
-            $table->smallInteger('has_formula')->default(1);
+            $table->bigInteger('formula_id');
+            $table->string('name');
+            $table->bigInteger('start')->nullable();
+            $table->bigInteger('end')->nullable();
+            $table->smallInteger('type')->default(1);
+            $table->integer('price')->unsigned();
             $table->text('description')->nullable();
-            $table->bigInteger('user_id');
             $table->timestamps();
         });
     }
@@ -34,6 +33,6 @@ class CreateServiceTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('service');
+        Schema::dropIfExists('service_formula_detail');
     }
 }

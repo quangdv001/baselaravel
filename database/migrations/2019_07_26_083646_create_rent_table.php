@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateServiceTable extends Migration
+class CreateRentTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,16 @@ class CreateServiceTable extends Migration
      */
     public function up()
     {
-        Schema::create('service', function (Blueprint $table) {
+        Schema::create('rent', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('title');
-            $table->string('unit');
-            $table->integer('price');
-            $table->integer('fixed_price');
-            $table->smallInteger('status')->default(1);
-            $table->smallInteger('has_formula')->default(1);
-            $table->text('description')->nullable();
+            $table->string('name');
+            $table->string('floor');
+            $table->string('max');
+            $table->bigInteger('motel_id');
             $table->bigInteger('user_id');
+            $table->integer('price');
+            $table->text('description')->nullable();
+            $table->smallInteger('status')->default(1);
             $table->timestamps();
         });
     }
@@ -34,6 +34,6 @@ class CreateServiceTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('service');
+        Schema::dropIfExists('rent');
     }
 }

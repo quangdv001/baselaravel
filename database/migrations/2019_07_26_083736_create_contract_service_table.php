@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMotelTable extends Migration
+class CreateContractServiceTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateMotelTable extends Migration
      */
     public function up()
     {
-        Schema::create('motel', function (Blueprint $table) {
+        Schema::create('contract_service', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('address');
-            $table->text('description')->nullable();
+            $table->bigInteger('contract_id');
+            $table->bigInteger('service_id');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateMotelTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('motel');
+        Schema::dropIfExists('contract_service');
     }
 }

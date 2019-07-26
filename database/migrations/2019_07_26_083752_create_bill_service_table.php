@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateServiceTable extends Migration
+class CreateBillServiceTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,16 @@ class CreateServiceTable extends Migration
      */
     public function up()
     {
-        Schema::create('service', function (Blueprint $table) {
+        Schema::create('bill_service', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('title');
             $table->string('unit');
+            $table->integer('qty');
             $table->integer('price');
-            $table->integer('fixed_price');
+            $table->integer('total');
             $table->smallInteger('status')->default(1);
-            $table->smallInteger('has_formula')->default(1);
-            $table->text('description')->nullable();
-            $table->bigInteger('user_id');
+            $table->bigInteger('bill_id');
+            $table->bigInteger('service_id');
+            $table->bigInteger('motel_id');
             $table->timestamps();
         });
     }
@@ -34,6 +34,6 @@ class CreateServiceTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('service');
+        Schema::dropIfExists('bill_service');
     }
 }
