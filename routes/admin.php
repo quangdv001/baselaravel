@@ -69,5 +69,10 @@ Route::middleware(['auth.admin'])->prefix('admin')->group(function () {
     Route::get('socials', 'AdminSocialsController@index')->name('socials.getList');
     Route::get('socials/getCreate/{id?}', 'AdminSocialsController@getCreate')->name('socials.getCreate');
     Route::post('socials/getCreate/{id?}', 'AdminSocialsController@postCreate')->name('socials.postCreate');
+
+    Route::get('slider', 'AdminSliderController@index')->name('slider.getList');
+    Route::get('slider/getCreate/{id?}', 'AdminSliderController@getCreate')->name('slider.getCreate');
+    Route::post('slider/getCreate/{id?}', 'AdminSliderController@postCreate')->name('slider.postCreate');
+    Route::get('slider/remove/{id?}', 'AdminSliderController@remove')->name('slider.remove');
 });
 

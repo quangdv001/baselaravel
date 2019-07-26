@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\App;
 use Astrotomic\Translatable\Locales;
 use App\Services\ProvinceService;
 use App\Services\SocialsService;
+use App\Services\SliderService;
 use App\Http\Requests\Site\BookingRequest;
 use Illuminate\Support\Facades\Storage;
 
@@ -26,9 +27,11 @@ class SiteHomeController extends SiteBaseController
     private $locales;
     private $province;
     private $socials;
+    private $sliders;
     
     // For only this view
-    public function __construct(CategoryService $category, ArticleService $article, OrderService $order, Locales $locales, ProvinceService $province, SocialsService $socials){
+    public function __construct(CategoryService $category, ArticleService $article, OrderService $order,
+                                Locales $locales, ProvinceService $province, SocialsService $socials, SliderService $sliders){
         parent::__construct();
         $this->category = $category;
         $this->article = $article;
@@ -36,11 +39,13 @@ class SiteHomeController extends SiteBaseController
         $this->locales = $locales;
         $this->province = $province;
         $this->socials = $socials;
+        $this->sliders = $sliders;
         $paramArticle['limit'] = 4;
         $paramArticle['category_id'] = 1;
         $paramArticle['status'] = 1;
         $paramArticle['orderBy'] = 'id';
         $special_article = $this->article->search($paramArticle);
+        $list_sliders = $this->sliders->getAll();
         $social_links = $this->socials->getAll();
         $social = [];
         foreach ($social_links as $v) {
@@ -48,6 +53,7 @@ class SiteHomeController extends SiteBaseController
         }
         View::share('special_article', $special_article);
         View::share('social', $social);
+        View::share('list_sliders', $list_sliders);
     }
 
     public function index(){

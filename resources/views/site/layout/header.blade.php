@@ -1,5 +1,5 @@
-<div class="header-layout" @if($currentRoute=='site.home.index' )
-    style="background:#fff url({{ asset('public/assets/site/themes/assets/images/slide-bg.jpg') }}) no-repeat center top / 100% auto;min-height: 80vh;"
+<div class="header-layout" @if($currentRoute=='site.home.index')
+    style="background:#fff @if(sizeof($list_sliders) > 0) url({{ $list_sliders[0]['img'] }}) @endif no-repeat center top / 100% auto;min-height: 80vh;"
     @endif>
     <div class="top-layout light-text section-dark">
         <div class="container">
@@ -89,15 +89,19 @@
             <div class="row justify-content-center">
                 <div class="col-sm-10">
                     <div id="carouselSlider" class="carousel slide" data-ride="carousel">
+                        @if(sizeof($list_sliders) > 0)
                         <ol class="carousel-indicators">
-                            <li data-target="#carouselSlider" data-slide-to="0" class="active"></li>
-                            <li data-target="#carouselSlider" data-slide-to="1"></li>
-                            <li data-target="#carouselSlider" data-slide-to="2"></li>
+                            @foreach($list_sliders as $key => $slider)
+                            <li data-target="#carouselSlider" data-slide-to="{{ $key }}" class="@if($key==0) active @endif"></li>
+                            @endforeach
                         </ol>
+                        @endif
                         <div class="carousel-inner">
-                            <div class="carousel-item active" data-node=".header-layout" data-repeat="no-repeat"
-                                data-size="100% auto" data-position="center top"
-                                data-image="{{ asset('public/assets/site/themes/assets/images/slide-bg.jpg') }}">
+                        @if(sizeof($list_sliders) > 0)
+                            @foreach($list_sliders as $key => $slider)
+                            <div class="carousel-item @if($key==0) active @endif" data-node=".header-layout" data-repeat="no-repeat"
+                                data-size="100% 100%" data-position="center top"
+                                data-image="{{ $slider->img }}">
                                 <div class="row">
                                     <div class="col-sm order-last text-center"><img
                                             src="{{ asset('public/assets/site/themes/assets/images/slide-img.png') }}"
@@ -108,40 +112,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="carousel-item" data-node=".header-layout" data-repeat="no-repeat"
-                                data-size="100% auto" data-position="center top"
-                                data-image="https://homevhp.com/wp-content/uploads/2019/06/bg-home.jpg">
-                                <div class="row">
-                                    <div class="col-sm order-last text-center"><img
-                                            src="{{ asset('public/assets/site/themes/assets/images/slide-img.png') }}"
-                                            alt="" /></div>
-                                    <div class="col-sm slide-caption align-self-center">
-                                        <h3><strong>NỤ CƯỜI RẠNG RỠ</strong></h3>
-                                        <h4>TRÊN MỌI NẺO ĐƯỜNG</h4>
-                                        <p>Lorem Ipsum chỉ đơn giản là một đoạn văn bản giả, được dùng vào việc trình
-                                            bày và dàn trang phục vụ cho in ấn.</p><a
-                                            class="btn btn-raised btn-md btn-primary" href="#0"><span>Xem
-                                                thêm</span></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item" data-node=".header-layout" data-repeat="no-repeat"
-                                data-size="100% auto" data-position="center top"
-                                data-image="http://www.livitrans.com/upload/images/hue1.jpg">
-                                <div class="row">
-                                    <div class="col-sm order-last text-center"><img
-                                            src="{{ asset('public/assets/site/themes/assets/images/slide-img.png') }}"
-                                            alt="" /></div>
-                                    <div class="col-sm slide-caption align-self-center">
-                                        <h3><strong>NỤ CƯỜI RẠNG RỠ</strong></h3>
-                                        <h4>TRÊN MỌI NẺO ĐƯỜNG</h4>
-                                        <p>Lorem Ipsum chỉ đơn giản là một đoạn văn bản giả, được dùng vào việc trình
-                                            bày và dàn trang phục vụ cho in ấn.</p><a
-                                            class="btn btn-raised btn-md btn-primary" href="#0"><span>Xem
-                                                thêm</span></a>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
+                        @endif    
                         </div>
                         <a class="carousel-control-prev" href="#carouselSlider" role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
