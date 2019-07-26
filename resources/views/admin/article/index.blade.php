@@ -155,7 +155,7 @@ Danh sách Bài viết
                                                     aria-hidden="true"></i></a>
                                             -
                                             <a href="{{ route('admin.article.remove', ['id' => $v->id]) }}" onclick="return confirm('Bạn chắc muốn xóa chứ?')"
-                                                class="text-warning"><i class="fa fa-trash-o icon-sm"
+                                                class="text-danger"><i class="fa fa-trash-o icon-sm"
                                                     aria-hidden="true"></i></a>
                                         </td>
                                     </tr>

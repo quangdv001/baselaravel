@@ -120,10 +120,10 @@ Danh sách đơn hàng
                                         <td>
                                             <a href="{{ route('admin.order.show', $v->id) }}" class="text-warning"><i
                                                     class="fa fa-pencil-square-o icon-sm" aria-hidden="true"></i></a>
-                                            {{-- -
-                                            <a href="{{ route('admin.product.remove', ['id' => $v->id]) }}"
-                                            class="text-warning"><i class="fa fa-trash-o icon-sm"
-                                                aria-hidden="true"></i></a> --}}
+                                             -
+                                            <a href="{{ route('admin.order.remove', $v->id) }}" onclick="return confirm('Bạn chắc muốn xóa chứ?')"
+                                            class="text-danger"><i class="fa fa-trash-o icon-sm"
+                                                aria-hidden="true"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach

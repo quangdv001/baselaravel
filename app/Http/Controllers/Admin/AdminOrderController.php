@@ -79,4 +79,13 @@ class AdminOrderController extends AdminBaseController
         return redirect()->route('admin.order.show', $id)->with('error_message', 'Cập nhật trạng thái thất bại.');
     }
 
+    public function remove($id = 0){
+        if (Gate::forUser($this->user)->denies('admin-pms', $this->currentRoute)) {
+            return redirect()->route('admin.home.dashboard')->with('error_message','Bạn không có quyền xóa đơn hàng này!');
+        }
+        $this->order->remove($id);
+        $mess = 'Xóa đơn hàng thành công';
+        return redirect()->route('admin.order.getList')->with('success_message', $mess);
+    }
+
 }
