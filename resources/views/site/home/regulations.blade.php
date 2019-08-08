@@ -37,16 +37,23 @@
                                             <div class="post-meta-container">
                                                 <div class="span post-meta-item"><i class="far fa-clock"></i>
                                                     Th3-27/10/2015</div>
-                                            </div>
-                                            <a class="download-icon pull-right"
+                                            </div><a class="download-icon pull-right"
                                                 href="{{ route('site.home.downloadFile', 'Ky-thuat-dong-hang-Container.pdf')  }}"><i
                                                     class="fa fa-download" aria-hidden="true"></i><span>Tải
-                                                    file</span>
-                                            </a>
+                                                    file</span></a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <!-- <nav aria-label="Page navigation">
+                      <ul class="pagination">
+                        <li class="page-item"><a class="page-link" href="#">Trước</a></li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">Tiếp</a></li>
+                      </ul>
+                    </nav> -->
                         </div>
                     </div>
                 </div>

@@ -26,7 +26,6 @@ class SiteBaseController extends Controller
         } elseif($this->currentRoute == 'site.home.about'){
             $pageClass = 'about-page';
         }
-        
         // dd($this->currentRoute);
         View::share('currentRoute', $this->currentRoute);
         View::share('pageClass', $pageClass);

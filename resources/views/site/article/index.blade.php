@@ -15,6 +15,7 @@
                 <ol class="breadcrumb breadcrumb-dot">
                     <li class="breadcrumb-item"><i class="material-icons">home</i><a href="index.html"
                             title="Trang chủ">@lang('header.home')</a></li>
+                    {{-- <li class="breadcrumb-item"><a href="#sublink" title="Title link">Sub page</a></li> --}}
                     <li class="breadcrumb-item active"><span>{{ $cate->name }}</span></li>
                 </ol>
             </div>

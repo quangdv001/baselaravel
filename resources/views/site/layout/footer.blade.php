@@ -22,8 +22,8 @@
                     </div>
                     <div>
                         <ul class="list-group list-group-flush">
-                            <li><a href="#address:"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.footer_1') @if(isset($social['phong-don-tien'])) {{ $social['phong-don-tien'] }} @endif </a></li>
-                            <li><a><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.footer_2') @if(isset($social['dia-chi-phong-ve'])) {{ $social['dia-chi-phong-ve'] }} @endif</a></li>
+                            <li><a href="#address:"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.footer_1') @if(isset($social['phong-don-tien'])) @lang('home.address_1') @endif </a></li>
+                            <li><a><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.footer_2') @if(isset($social['dia-chi-phong-ve'])) @lang('home.address_2') @endif</a></li>
                             <li><a href="@if(isset($social['hotline'])) tell:{{$social['hotline']}} @else # @endif"><i
                                         class="material-icons list-style">fiber_manual_record</i><i
                                         class="material-icons">phone_in_talk</i> @lang('footer.footer_3') @if(isset($social['hotline'])) {{ $social['hotline'] }} @endif</a></li>
@@ -44,11 +44,11 @@
                                 <h3 class="title divider-bottom">@lang('footer.contact')</h3>
                             </div>
                             <ul class="list-group list-group-flush">
-                                <li><a href="#link"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.contact_1')</a></li>
-                                <li><a href="#link"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.contact_2')</a></li>
-                                <li><a href="#link"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.contact_3')</a></li>
+                                <li><a href="{{ route('site.home.faqs') }}"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.contact_1')</a></li>
+                                <li><a href="{{ route('site.home.shipping_policy') }}"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.contact_2')</a></li>
+                                <li><a href="{{ route('site.home.payment_guide') }}"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.contact_3')</a></li>
                                 <li><a href="{{ route('site.home.regulations') }}"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.contact_4')</a></li>
-                                <li><a href="#link"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.contact_5')</a></li>
+                                <li><a href="{{ route('site.home.customer_care') }}"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.contact_5')</a></li>
                             </ul>
                         </div>
                         <div class="col-sm-6">

@@ -37,7 +37,7 @@
                                 <label class="col-md-3 col-form-label" for="password-input">Mật khẩu</label>
                                 <div class="col-md-9">
                                     <input type="password" class="form-control" name="password" placeholder="*********"
-                                        value="{{ old('password') }}">
+                                        value="{{ isset($data->password) ? $data->password : old('password') }}">
                                     @if($errors->has('password'))
                                     <span class="help-block text-danger">{{ $errors->first('password') }}</span>
                                     @endif

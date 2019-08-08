@@ -1,0 +1,31 @@
+footer.dark, .footer.dark {
+    background-color: #084471;
+}
+footer .title.divider-bottom::before, .footer .title.divider-bottom::before {
+    background: #d31114;
+}
+.dropdown-menu.dropdown-menu-right.show, .dropdown-menu[x-placement="bottom-end"].show {
+    visibility: visible;
+    opacity: 1;
+}
+.hideSubIcon .sub-icon{
+    display: none;
+}
+@media (min-width: 769px) {
+    .hideSubIcon {
+        display: none!important;
+    }
+}
+@media (max-width: 768px) {
+    .dropdown-menu.dropdown-menu-right.show::before, .dropdown-menu[x-placement="bottom-end"].show::before  {
+        display: none;
+    }
+    .dropdown-menu.dropdown-menu-right.show, .dropdown-menu[x-placement="bottom-end"].show {
+        width: 220px;
+        left: 0 !important;
+    }
+}
+.dropdown-menu.dropdown-menu-right.show::before, .dropdown-menu[x-placement="bottom-end"].show::before {
+    left: auto;
+    right: 20px;
+}

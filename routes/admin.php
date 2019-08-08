@@ -75,5 +75,10 @@ Route::middleware(['auth.admin'])->prefix('admin')->group(function () {
     Route::get('slider/getCreate/{id?}', 'AdminSliderController@getCreate')->name('slider.getCreate');
     Route::post('slider/getCreate/{id?}', 'AdminSliderController@postCreate')->name('slider.postCreate');
     Route::get('slider/remove/{id?}', 'AdminSliderController@remove')->name('slider.remove');
+
+    Route::get('page', 'AdminPageController@index')->name('page.getList');
+    Route::get('page/getCreate/{locale?}/{id?}', 'AdminPageController@getCreate')->name('page.getCreate');
+    Route::post('page/getCreate/{locale?}/{id?}', 'AdminPageController@postCreate')->name('page.postCreate');
+    Route::get('page/remove/{id?}', 'AdminPageController@remove')->name('page.remove');
 });
 

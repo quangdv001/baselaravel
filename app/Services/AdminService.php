@@ -88,4 +88,12 @@ class AdminService
         return $this->admin->orderBy('id', 'DESC')->get();
     }
 
+    public function checkExistsPassword($password) {
+        if ($this->admin->where('password', $password)->exists()) {
+            return True;
+        } else {
+            return False;
+        }
+    }
+
 }

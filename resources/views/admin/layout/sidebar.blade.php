@@ -120,7 +120,7 @@
                 </ul>
             </li>
             @endif
-            @if(auth('admin')->user()->can('admin-pms', 'admin.slider.getList'))
+            @if(auth('admin')->user()->can('admin-pms', 'admin.article.getList'))
             <li class="nav-item nav-dropdown @if(in_array($currentRoute,['admin.article.getList','admin.article.getCreate'])) open @endif">
                 <a class="nav-link nav-dropdown-toggle" href="#">
                     <i class="nav-icon icon-book-open"></i>Bài viết</a>
@@ -147,6 +147,24 @@
                         <a class="nav-link @if(in_array($currentRoute,['admin.socials.getList'])) active @endif" href="{{ route('admin.socials.getList') }}">
                             <i class="nav-icon "></i> Danh sách</a>
                     </li>
+                </ul>
+            </li>
+            @endif
+            @if(auth('admin')->user()->can('admin-pms', 'admin.page.getList'))
+            <li class="nav-item nav-dropdown @if(in_array($currentRoute,['admin.page.getList'])) open @endif">
+                <a class="nav-link nav-dropdown-toggle" href="#">
+                    <i class="nav-icon icon-present"></i>Quản lý trang</a>
+                <ul class="nav-dropdown-items"age>
+                    <li class="nav-item">
+                        <a class="nav-link @if(in_array($currentRoute,['admin.page.getList'])) active @endif" href="{{ route('admin.page.getList') }}">
+                            <i class="nav-icon "></i> Danh sách</a>
+                    </li>
+                    @if(auth('admin')->user()->can('admin-pms', 'admin.page.getCreate'))
+                    <li class="nav-item">
+                        <a class="nav-link @if(in_array($currentRoute,['admin.page.getCreate'])) active @endif" href="{{ route('admin.page.getCreate', ['locale' => 'vi']) }}">
+                            <i class="nav-icon "></i> Thêm mới</a>
+                    </li>
+                    @endif
                 </ul>
             </li>
             @endif

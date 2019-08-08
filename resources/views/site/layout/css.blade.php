@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="{{ asset('public/assets/site/themes/assets/libs/owlcarousel2/assets/owl.carousel.min.css') }}" type="text/css">
 <link rel="stylesheet" href="{{ asset('public/assets/site/themes/assets/libs/owlcarousel2/assets/owl.theme.default.min.css') }}" type="text/css">
 <link rel="stylesheet" href="{{ asset('public/assets/site/themes/assets/css/theme.css') }}" type="text/css">
+<link rel="stylesheet" href="{{ asset('public/assets/site/themes/assets/css/custom.css') }}" type="text/css">
 <link rel="stylesheet" href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css">
 <link rel="stylesheet" href="{{ asset('public/assets/admin/plugins/buttonloader/buttonLoader.css') }}">
 <link rel="stylesheet" href="{{ asset('public/assets/admin/plugins/waitme/waitMe.min.css') }}">

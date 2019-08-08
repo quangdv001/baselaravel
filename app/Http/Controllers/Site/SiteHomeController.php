@@ -16,6 +16,7 @@ use Astrotomic\Translatable\Locales;
 use App\Services\ProvinceService;
 use App\Services\SocialsService;
 use App\Services\SliderService;
+use App\Services\PageService;
 use App\Http\Requests\Site\BookingRequest;
 use Illuminate\Support\Facades\Storage;
 
@@ -28,9 +29,10 @@ class SiteHomeController extends SiteBaseController
     private $province;
     private $socials;
     private $sliders;
+    private $page;
     
     // For only this view
-    public function __construct(CategoryService $category, ArticleService $article, OrderService $order,
+    public function __construct(CategoryService $category, ArticleService $article, OrderService $order, PageService $page,
                                 Locales $locales, ProvinceService $province, SocialsService $socials, SliderService $sliders){
         parent::__construct();
         $this->category = $category;
@@ -40,6 +42,7 @@ class SiteHomeController extends SiteBaseController
         $this->province = $province;
         $this->socials = $socials;
         $this->sliders = $sliders;
+        $this->page = $page;
         $paramArticle['limit'] = 4;
         $paramArticle['category_id'] = 1;
         $paramArticle['status'] = 1;
@@ -51,9 +54,12 @@ class SiteHomeController extends SiteBaseController
         foreach ($social_links as $v) {
             $social[$v->slug] = $v->value;
         }
+        $locale = $this->locales->current();
+        $list_page = $this->page->getAllByLocale($locale);
         View::share('special_article', $special_article);
         View::share('social', $social);
         View::share('list_sliders', $list_sliders);
+        View::share('list_page', $list_page);
     }
 
     public function index(){
@@ -121,17 +127,85 @@ class SiteHomeController extends SiteBaseController
     
     public function about(){
         $param['category_id'] = 1;
-        $param['limit'] = 10;
+        $param['limit'] = 5;
         $param['sortBy'] = 'id';
+        if($this->locales->current() == 'en') {
+            $data = $this->page->getBySlug('about-us');
+        } else{
+            $data = $this->page->getBySlug('ve-chung-toi');
+        }
+        
         $article = $this->article->search($param);
-        return view('site.home.about')->with('data', $article);
+
+        return view('site.home.about')->with('article', $article)->with('data', $data);
+    }
+
+    public function customer_care(){
+        $param['category_id'] = 1;
+        $param['limit'] = 5;
+        $param['sortBy'] = 'id';
+        if($this->locales->current() == 'en') {
+            $data = $this->page->getBySlug('customer-care');
+        } else{
+            $data = $this->page->getBySlug('cham-soc-khac-hang');
+        }
+        
+        $article = $this->article->search($param);
+
+        return view('site.home.customer_care')->with('article', $article)->with('data', $data);
+    }
+
+    public function faqs(){
+        $param['category_id'] = 1;
+        $param['limit'] = 5;
+        $param['sortBy'] = 'id';
+        if($this->locales->current() == 'en') {
+            $data = $this->page->getBySlug('faqs');
+        } else{
+            $data = $this->page->getBySlug('hoi-dap');
+        }
+        
+        $article = $this->article->search($param);
+
+        return view('site.home.faqs')->with('article', $article)->with('data', $data);
+    }
+
+    public function shipping_policy(){
+        $param['category_id'] = 1;
+        $param['limit'] = 5;
+        $param['sortBy'] = 'id';
+        if($this->locales->current() == 'en') {
+            $data = $this->page->getBySlug('shipping-policy');
+        } else{
+            $data = $this->page->getBySlug('chinh-sach-van-chuyen');
+        }
+        
+        $article = $this->article->search($param);
+
+        return view('site.home.shipping_policy')->with('article', $article)->with('data', $data);
+    }
+
+    public function payment_guide(){
+        $param['category_id'] = 1;
+        $param['limit'] = 5;
+        $param['sortBy'] = 'id';
+        if($this->locales->current() == 'en') {
+            $data = $this->page->getBySlug('payment-guide');
+        } else{
+            $data = $this->page->getBySlug('huong-dan-thanh-toan');
+        }
+        
+        $article = $this->article->search($param);
+
+        return view('site.home.payment_guide')->with('article', $article)->with('data', $data);
     }
 
     public function regulations(){
         $param['category_id'] = 1;
-        $param['limit'] = 10;
+        $param['limit'] = 5;
         $param['sortBy'] = 'id';
         $article = $this->article->search($param);
+        
         return view('site.home.regulations')->with('data', $article);
     }
 

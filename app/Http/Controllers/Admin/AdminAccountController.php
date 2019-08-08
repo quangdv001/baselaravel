@@ -51,18 +51,27 @@ class AdminAccountController extends AdminBaseController
         }
         $data = $request->only('username', 'email', 'phone', 'name', 'active');
         $mess = '';
-        if($request->filled('password')){
-            $data['password'] = bcrypt($request->input('password'));
-        }
+        
         if($request->has('permission')){
             $data['permissions'] = implode(',',$request->input('permission'));
         }
         if($id == 0){
+            if($request->filled('password')){
+                $data['password'] = bcrypt($request->input('password'));
+            }
             $res = $this->admin->create($data);
             if($res){
                 $mess = 'Tạo tài khoản thành công';
             }
         } else {
+            $password = $request->input('password');
+            
+            if($this->admin->checkExistsPassword($password)) {
+                $data['password'] = $password;
+            } else {
+                $data['password'] = bcrypt($request->input('password'));
+            }
+            
             $admin = $this->admin->getById($id);
             $res = $this->admin->update($admin, $data);
             if($res){

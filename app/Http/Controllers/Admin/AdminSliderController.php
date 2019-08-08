@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Gate;
 use Astrotomic\Translatable\Locales;
 use Illuminate\Support\Facades\App;
 use App\Services\SliderService;
+use App\Http\Requests\Admin\SliderRequest;
 
 class AdminSliderController extends AdminBaseController
 {
@@ -41,7 +42,7 @@ class AdminSliderController extends AdminBaseController
             ->with('data', $slider);
     }
 
-    public function postCreate(Request $request, $id = 0){
+    public function postCreate(SliderRequest $request, $id = 0){
         if (Gate::forUser($this->user)->denies('admin-pms', $this->currentRoute)) {
             return redirect()->route('admin.home.dashboard')->with('error_message','Bạn không có quyền vào trang này!');
         }
@@ -60,6 +61,15 @@ class AdminSliderController extends AdminBaseController
                 $mess = 'Cập nhật slide thành công';
 
         }
+        return redirect()->route('admin.slider.getList')->with('success_message', $mess);
+    }
+
+    public function remove($id = 0){
+        if (Gate::forUser($this->user)->denies('admin-pms', $this->currentRoute)) {
+            return redirect()->route('admin.home.dashboard')->with('error_message','Bạn không có quyền xóa bài viết này!');
+        }
+        $this->slider->remove($id);
+        $mess = 'Xóa slide thành công';
         return redirect()->route('admin.slider.getList')->with('success_message', $mess);
     }
 }

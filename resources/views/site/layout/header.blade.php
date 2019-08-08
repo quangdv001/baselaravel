@@ -77,6 +77,38 @@
                             </li>
                             <li @if($currentRoute == 'site.home.contact') class="active" @endif><a href="{{ route('site.home.contact') }}">@lang('header.contact')</a>
                             </li>
+                            <li class="hideSubIcon">
+                                <!-- language -->
+                                <div class="language-wrapper">
+                                    <div class="dropdown">
+                                        <button class="dropdown-toggle language_bar_button" type="button" data-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false">
+                                            @if($locale == 'vi')
+                                            <img src="{{ asset('public/assets/site/themes/assets/images/flags/vn.png') }}"
+                                                title="Tiếng Việt" alt="Tiếng Việt" /> @lang('header.lang_vi')<span
+                                                class="caret"></span>
+                                            @else
+                                            <img src="{{ asset('public/assets/site/themes/assets/images/flags/us.png') }}"
+                                                title="Tiếng Việt" alt="Tiếng Việt" /> @lang('header.lang_en')<span
+                                                class="caret"></span>
+                                            @endif
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-right language_bar_chooser">
+                                            <li><a rel="alternate" hreflang="en"
+                                                    href="{{ route('site.home.setLocale', 'en') }}"><img
+                                                        src="{{ asset('public/assets/site/themes/assets/images/flags/us.png') }}"
+                                                        title="English" alt="English" /><span>@lang('header.lang_en')</span></a>
+                                            </li>
+                                            <li class="active"><a rel="alternate" hreflang="vi"
+                                                    href="{{ route('site.home.setLocale', 'vi') }}"><img
+                                                        src="{{ asset('public/assets/site/themes/assets/images/flags/vn.png') }}"
+                                                        title="Tiếng Việt"
+                                                        alt="Tiếng Việt" /><span>@lang('header.lang_vi')</span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- end language -->
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -107,8 +139,8 @@
                                             src="{{ asset('public/assets/site/themes/assets/images/slide-img.png') }}"
                                             alt="" /></div>
                                     <div class="col-sm slide-caption align-self-center">
-                                        <h3><strong>NỤ CƯỜI RẠNG RỠ</strong></h3>
-                                        <h4>TRÊN MỌI NẺO ĐƯỜNG</h4>
+                                        <h3><strong>@lang('home.title_slide_company_1')</strong></h3>
+                                        <h4>@lang('home.title_slide_company_2')</h4>
                                     </div>
                                 </div>
                             </div>
@@ -134,8 +166,8 @@
                 <div class="col-sm-10">
                   <form class="form-services-layout" action="{{ route('site.home.booking') }}">
                         <div class="form-header">
-                            <div class="title">Đặt vé trực tuyến</div>
-                            <div class="subtitle">Liên hệ trước với chũng tôi</div>
+                            <div class="title">@lang('home.booking_online')</div>
+                            <div class="subtitle">@lang('home.contact_us_first')</div>
                         </div>
                         <form class="form form-services" id="bookingform">
                             <div class="container">
@@ -146,14 +178,14 @@
                                             <label class="switch-viewport" for="khuhoi">
                                                 <div class="switch-slider">
                                                     <div class="switch-button"> </div>
-                                                    <div class="switch-content left"><span>Một chiều</span></div>
-                                                    <div class="switch-content right"><span>Khứ hồi</span></div>
+                                                    <div class="switch-content left"><span>@lang('home.one_way')</span></div>
+                                                    <div class="switch-content right"><span>@lang('home.round_trip')</span></div>
                                                 </div>
                                             </label>
                                         </div>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label class="bmd-label-floating" for="item-form-0">Điểm đi</label>
+                                        <label class="bmd-label-floating" for="item-form-0">@lang('home.from')</label>
                                         <select class="form-control" name="start_id">
                                             @if(sizeof($province) > 0)
                                               @foreach($province as $k => $v)
@@ -163,7 +195,7 @@
                                         </select><span class="float-icon"><i class="material-icons">room</i></span>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label class="bmd-label-floating" for="item-form-1">Điểm đến</label>
+                                        <label class="bmd-label-floating" for="item-form-1">@lang('home.to')</label>
                                         <select class="form-control" name="end_id">
                                           @if(sizeof($province) > 0)
                                             @foreach($province as $k => $v)
@@ -173,27 +205,27 @@
                                         </select><span class="float-icon"><i class="material-icons">room</i></span>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label class="bmd-label-floating" for="item-form-2">Số người</label>
+                                        <label class="bmd-label-floating" for="item-form-2">@lang('home.number')</label>
                                         <input class="form-control" type="text" id="item-form-2" name="qty"/><span
                                             class="float-icon"><i class="material-icons">supervisor_account</i></span>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label class="bmd-label-floating" for="start-date">Ngày đi</label>
+                                        <label class="bmd-label-floating" for="start-date">@lang('home.departure_date')</label>
                                         <input class="form-control datepicker" type="text" id="start-date" name="start_time"
                                             data-date-format="DD, MM d" />
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label class="bmd-label-floating" for="end-date" >Ngày về</label>
+                                        <label class="bmd-label-floating" for="end-date" >@lang('home.return_date')</label>
                                         <input class="form-control datepicker" type="text" id="end-date" name="end_time"
                                             data-date-format="DD, MM d" />
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label class="bmd-label-floating" for="item-form-6" >Thông tin</label>
+                                        <label class="bmd-label-floating" for="item-form-6" >@lang('home.note')</label>
                                         <input class="form-control" type="text" id="item-form-6" name="note"/><span
                                             class="float-icon"><i class="material-icons">event_seat</i></span>
                                     </div>
                                     <div class="col-12 text-right">
-                                        <button class="btn btn-primary text-uppercase" type="submit">Tìm kiếm</button>
+                                        <button class="btn btn-primary text-uppercase" type="submit">@lang('home.search')</button>
                                     </div>
                                 </div>
                             </div>
