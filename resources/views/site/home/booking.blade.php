@@ -64,7 +64,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-md-4">
-                                                    <label class="bmd-label-floating" for="item-form-0">@lang('booking.from')</label>
+                                                    <label class="bmd-label-floating" for="item-form-0">@lang('home.from')</label>
                                                     <select class="form-control" name="start_id">
                                                         @if(sizeof($province) > 0)
                                                         @foreach($province as $k => $v)
@@ -76,7 +76,7 @@
                                                             class="material-icons">room</i></span>
                                                 </div>
                                                 <div class="form-group col-md-4">
-                                                    <label class="bmd-label-floating" for="item-form-1">@lang('booking.to')</label>
+                                                    <label class="bmd-label-floating" for="item-form-1">@lang('home.to')</label>
                                                     <select class="form-control" name="end_id">
                                                         @if(sizeof($province) > 0)
                                                         @foreach($province as $k => $v)
@@ -88,26 +88,26 @@
                                                             class="material-icons">room</i></span>
                                                 </div>
                                                 <div class="form-group col-md-4">
-                                                    <label class="bmd-label-floating" for="item-form-2">@lang('booking.amount')</label>
+                                                    <label class="bmd-label-floating" for="item-form-2">@lang('home.number')</label>
                                                     <input class="form-control" type="text" id="item-form-2" name="qty"
                                                         value="{{ isset($data['qty']) ? $data['qty'] : old('qty') }}" /><span
                                                         class="float-icon"><i
                                                             class="material-icons">supervisor_account</i></span>
                                                 </div>
                                                 <div class="form-group col-md-4">
-                                                    <label class="bmd-label-floating" for="start-date">@lang('booking.start')</label>
+                                                    <label class="bmd-label-floating" for="start-date">@lang('home.departure_date')</label>
                                                     <input class="form-control datepicker" type="text" id="start-date"
                                                         name="start_time" data-date-format="DD, MM d"
                                                         value="{{ isset($data['start_time']) ? $data['start_time'] : old('start_time') }}" />
                                                 </div>
                                                 <div class="form-group col-md-4">
-                                                    <label class="bmd-label-floating" for="end-date">@lang('booking.end')</label>
+                                                    <label class="bmd-label-floating" for="end-date">@lang('home.return_date')</label>
                                                     <input class="form-control datepicker" type="text" id="end-date"
                                                         name="end_time" data-date-format="DD, MM d"
                                                         value="{{ isset($data['end_time']) ? $data['end_time'] : old('end_time') }}" />
                                                 </div>
                                                 <div class="form-group col-md-4">
-                                                    <label class="bmd-label-floating" for="item-form-6">@lang('booking.note')</label>
+                                                    <label class="bmd-label-floating" for="item-form-6">@lang('home.note')</label>
                                                     <input class="form-control" type="text" id="item-form-6" name="note"
                                                         value="{{ isset($data['note']) ? $data['note'] : old('note') }}" /><span
                                                         class="float-icon"><i
