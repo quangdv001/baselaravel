@@ -30,7 +30,7 @@
                                 </h1>
                                 <div class="news-post">
                                     <div class="post-sapo">@lang('home.livitrans_about')</div>
-                                    {!! strip_tags($data->content) !!}
+                                    {!! $data->content !!}
                                 </div>
                             </div>
                         </div>

@@ -29,7 +29,7 @@
                                 <h1 class="page-title"><a href="#">@lang('home.livitrans_company')</a>
                                 </h1>
                                 <div class="news-post">
-                                {!! strip_tags($data->content) !!}
+                                    {!! $data->content !!}
                                 </div>
                             </div>
                         </div>
