@@ -36,5 +36,8 @@ return [
     'see_detail' => 'See Detail',
     'livitrans_company' => 'Livitrans Transportation and Trading Joint Stock Company',
     'livitrans_about' => 'With 10 years of operation, Livitrans is always the trust of all customers and partners. Because the service is constantly improving to satisfy customers is our success path.',
-
+    'category' => 'Category',
+    'gastation' => 'Gastation',
+    'ticket_location' => 'Ticket Location',
+    'site_links' => 'Site Links',
 ];

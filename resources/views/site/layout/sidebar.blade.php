@@ -1,11 +1,10 @@
 <div class="col-sm-3 sidebar">
     <div class="list-post-aside">
-        <h3 class="module-title solid-color"><a href="#">Danh mục</a></h3>
+        <h3 class="module-title solid-color"><a href="#">@lang('home.category')</a></h3>
         <ul class="list-categories">
-            <li><a href="{{ route('site.home.gastation' )}}"><i class="material-icons list-style">chevron_right</i>Điểm
-                    bán vé</a></li>
+            <li><a href="{{ route('site.home.gastation' )}}"><i class="material-icons list-style">chevron_right</i>@lang('home.gastation')</a></li>
             <li><a href="{{ route('site.home.ticketLocation' )}}"><i
-                        class="material-icons list-style">chevron_right</i>Đại lý bán vé</a></li>
+                        class="material-icons list-style">chevron_right</i>@lang('home.ticket_location')</a></li>
             <li><a href="#"><i class="material-icons list-style">chevron_right</i>Hủy chuyến</a></li>
             <li><a href="#"><i class="material-icons list-style">chevron_right</i>Gửi hành lý</a></li>
             <li><a href="#"><i class="material-icons list-style">chevron_right</i>Ký gửi</a></li>
@@ -38,7 +37,7 @@
 
 
     <div class="list-post-aside">
-        <h3 class="module-title solid-color"><a href="#">Liên kết website</a></h3>
+        <h3 class="module-title solid-color"><a href="#">@lang('home.site_links')</a></h3>
         <ul class="list-categories">
             <li><a href="https://vinacomin.vn"><i class="material-icons list-style">chevron_right</i>Tập Đoàn CN Than -
                     KSản VN</a></li>

@@ -38,5 +38,8 @@ return [
     'see_detail' => 'Xem chi tiết',
     'livitrans_company' => 'Công ty Cổ phần vận tải và thương mại Livitrans',
     'livitrans_about' => 'Với bề dầy hoạt động 10 năm, Livitrans luôn là sự tin cậy của mọi khách hàng và đối tác. Bởi lẽ, dịch vụ không ngừng hoàn thiện để hài lòng khách hàng là con đường thành công của chúng tôi.',
-
+    'category' => 'Danh mục',
+    'gastation' => 'Đại lý vé tàu',
+    'ticket_location' => 'Điểm bán vé',
+    'site_links' => 'Liên kết Website',
 ];
