@@ -10,6 +10,8 @@ use App\Services\SocialsService;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
 use Astrotomic\Translatable\Locales;
+use App\Services\PageService;
+use Illuminate\Support\Facades\App;
 
 class SiteArticleController extends SiteBaseController
 {
@@ -17,14 +19,23 @@ class SiteArticleController extends SiteBaseController
     private $article;
     private $socials;
     protected $locales;
+    private $page;
     
     // For only this view
-    public function __construct(CategoryService $category, ArticleService $article, Locales $locales, SocialsService $socials){
+    public function __construct(CategoryService $category, PageService $page, ArticleService $article, Locales $locales, SocialsService $socials){
         parent::__construct();
         $this->category = $category;
         $this->article = $article;
         $this->locales = $locales;
         $this->socials = $socials;
+        $this->page = $page;
+        $this->middleware(function($request,$next)
+        {
+            if (session()->has('locale')) {
+                App::setLocale(session()->get('locale'));
+            }
+            return $next($request);
+        });
         $category = $this->category->getByParentId(0);
         $paramArticle['limit'] = 4;
         $paramArticle['category_id'] = 1;
@@ -36,9 +47,21 @@ class SiteArticleController extends SiteBaseController
         foreach ($social_links as $v) {
             $social['$v->slug'] = $v->value;
         }
+        $locale = session('locale');
+        $list_page = $this->page->getAllByLocale($locale);
+        $social = [];
+        foreach ($social_links as $v) {
+            if($locale == 'vi') {
+                $social[$v->slug] = $v->value;    
+            } else {
+                $social[$v->slug] = $v->en_value;
+            }
+            
+        }
         View::share('special_article', $special_article);
         View::share('social', $social);
         View::share('category', $category);
+        View::share('list_page', $list_page);
     }
 
     public function index($id, $slug){

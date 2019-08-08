@@ -14,16 +14,20 @@
             </div>
         </div>
         <div class="col-md-6">
-            <p>CÔNG TY CP VẬN TẢI VÀ THƯƠNG MẠI LIVITRANS ( LIVITRANS JSC,..).</p>
+            <!-- <p>CÔNG TY CP VẬN TẢI VÀ THƯƠNG MẠI LIVITRANS ( LIVITRANS JSC,..).</p> -->
             <ul class="list-categories">
-                <li><a href="#address:"> Phòng tiễn khách: Khách sạn Cây Xoài 118 Lê Duẩn - Hoàn Kiếm - Hà Nội</a></li>
-                <li><a> Địa chỉ Phòng vé: Số 1 Trần Quý Cáp - Phường Văn Miếu - Quận Đống Đa - Hà nội</a></li>
-                <li><a href="tell:0243.9429918"> <i class="material-icons">phone_in_talk</i> Hotline: 0243.9429918</a>
-                </li>
-                <li><a href="tell: 0904.101.488"> <i class="material-icons">phone_in_talk</i> Điện thoại phòng vé:
-                        0904.101.488</a></li>
-                <li><a href="mailto:booking@livitrans.com"> <i class="material-icons">mail_outline</i> Email:
-                        booking@livitrans.com</a></li>
+            <li><a href="#"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.footer_1') @if(isset($social['phong-tien-khach'])) {!! $social['phong-tien-khach'] !!} @endif </a></li>
+                            <li><a><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.footer_2') @if(isset($social['dia-chi-phong-ve'])) {!! $social['dia-chi-phong-ve'] !!} @endif</a></li>
+                            <li><a href="@if(isset($social['hotline'])) tell:{!! $social['hotline'] !!} @else # @endif"><i
+                                        class="material-icons list-style">fiber_manual_record</i><i
+                                        class="material-icons">phone_in_talk</i> @lang('footer.footer_3') @if(isset($social['hotline'])) {!! $social['hotline'] !!} @endif</a></li>
+                            <li><a href="@if(isset($social['dien-thoai-phong-ve'])) tell:{!! $social['dien-thoai-phong-ve'] !!} @else # @endif"><i
+                                        class="material-icons list-style">fiber_manual_record</i><i
+                                        class="material-icons">phone_in_talk</i> @lang('footer.footer_4') @if(isset($social['dien-thoai-phong-ve'])) {!! $social['dien-thoai-phong-ve'] !!} @endif</a>
+                            </li>
+                            <li><a href="mailto:booking@livitrans.com"><i
+                                        class="material-icons list-style">fiber_manual_record</i><i
+                                        class="material-icons">mail_outline</i> @lang('footer.footer_5') @if(isset($social['email'])) {!! $social['email'] !!} @endif</a></li>
             </ul>
         </div>
     </div>

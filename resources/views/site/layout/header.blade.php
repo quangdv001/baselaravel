@@ -89,7 +89,7 @@
                                                 class="caret"></span>
                                             @else
                                             <img src="{{ asset('public/assets/site/themes/assets/images/flags/us.png') }}"
-                                                title="Tiếng Việt" alt="Tiếng Việt" /> @lang('header.lang_en')<span
+                                                title="Tiếng Anh" alt="Tiếng Anh" /> @lang('header.lang_en')<span
                                                 class="caret"></span>
                                             @endif
                                         </button>

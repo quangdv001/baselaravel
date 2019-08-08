@@ -46,6 +46,14 @@
                                 @endif
                             </div>
                             <div class="form-group">
+                                <label>Nội dung tiếng anh</label>
+                                <input type="text" class="form-control value" name="en_value" placeholder="nội dung tiếng anh"
+                                    value="{{ isset($data->en_value) ? $data->en_value : old('en_value') }}">
+                                @if($errors->has('en_value'))
+                                <p class="text-danger">{{ $errors->first('en_value') }}</p>
+                                @endif
+                            </div>
+                            <div class="form-group">
                                 <label for="exampleFormControlSelect2">Trạng thái</label>
                                 <select class="form-control" name="status" id="exampleFormControlSelect2">
                                     <option value="1">Hoạt động</option>

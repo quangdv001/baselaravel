@@ -8,6 +8,6 @@ class Socials extends Model
 {
     protected $table = 'social_links';
     protected $fillable = [
-        'title', 'slug', 'value'
+        'title', 'slug', 'value', 'en_value'
     ];
 }

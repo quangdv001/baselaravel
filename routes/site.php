@@ -1,4 +1,6 @@
 <?php
+
+use Illuminate\Support\Facades\App;
 Route::get('register', 'SiteAuthController@getRegister')->name('auth.getRegister');
 Route::post('register', 'SiteAuthController@postRegister')->name('auth.postRegister');
 Route::get('login', 'SiteAuthController@getLogin')->name('auth.getLogin');
@@ -6,7 +8,11 @@ Route::post('login', 'SiteAuthController@postLogin')->name('auth.postLogin');
 Route::get('logout', 'SiteAuthController@logout')->name('auth.logout');
 
 Route::get('/', 'SiteHomeController@index')->name('home.index');
-Route::get('lang/{locale}', 'SiteHomeController@lang')->name('home.setLocale');
+Route::get('lang/{locale}', function($locale){
+    App::setLocale($locale);
+        session(['locale' => $locale]);
+        return redirect()->back();
+})->name('home.setLocale');
 Route::get('currentLang', 'SiteArticleController@currentLang')->name('home.sendContact');
 Route::post('sendContact', 'SiteHomeController@sendContact')->name('home.sendContact');
 Route::get('booking', 'SiteHomeController@booking')->name('home.booking');

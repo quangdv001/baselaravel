@@ -45,7 +45,7 @@ class AdminSocialsController extends AdminBaseController
         if (Gate::forUser($this->user)->denies('admin-pms', $this->currentRoute)) {
             return redirect()->route('admin.home.dashboard')->with('error_message','Bạn không có quyền vào trang này!');
         }
-        $data = $request->only('title', 'slug', 'value');
+        $data = $request->only('title', 'slug', 'value', 'en_value');
         
         $mess = '';
         if($id == 0){
@@ -53,7 +53,7 @@ class AdminSocialsController extends AdminBaseController
             $data['admin_name_c'] = $this->user->username;
             $res = $this->socials->create($data);
             if($res)
-                $mess = 'Tạo bài viết thành công';
+                $mess = 'Tạo liên kết thành công';
 
         } else {
             $socials = $this->socials->getById($id);
@@ -61,7 +61,7 @@ class AdminSocialsController extends AdminBaseController
             $data['admin_name_u'] = $this->user->username;
             $res = $this->socials->update($socials, $data);
             if($res)
-                $mess = 'Cập nhật bài viết thành công';
+                $mess = 'Cập nhật liên kết thành công';
 
         }
         return redirect()->route('admin.socials.getList')->with('success_message', $mess);

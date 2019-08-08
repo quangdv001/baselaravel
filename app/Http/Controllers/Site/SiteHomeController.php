@@ -35,6 +35,13 @@ class SiteHomeController extends SiteBaseController
     public function __construct(CategoryService $category, ArticleService $article, OrderService $order, PageService $page,
                                 Locales $locales, ProvinceService $province, SocialsService $socials, SliderService $sliders){
         parent::__construct();
+        $this->middleware(function($request,$next)
+        {
+            if (session()->has('locale')) {
+                App::setLocale(session()->get('locale'));
+            }
+            return $next($request);
+        });
         $this->category = $category;
         $this->article = $article;
         $this->order = $order;
@@ -50,12 +57,18 @@ class SiteHomeController extends SiteBaseController
         $special_article = $this->article->search($paramArticle);
         $list_sliders = $this->sliders->getAll();
         $social_links = $this->socials->getAll();
+        $locale = session('locale');
+        $list_page = $this->page->getAllByLocale($locale);
         $social = [];
         foreach ($social_links as $v) {
-            $social[$v->slug] = $v->value;
+            if($locale == 'vi') {
+                $social[$v->slug] = $v->value;    
+            } else {
+                $social[$v->slug] = $v->en_value;
+            }
+            
         }
-        $locale = $this->locales->current();
-        $list_page = $this->page->getAllByLocale($locale);
+        
         View::share('special_article', $special_article);
         View::share('social', $social);
         View::share('list_sliders', $list_sliders);
@@ -63,6 +76,7 @@ class SiteHomeController extends SiteBaseController
     }
 
     public function index(){
+        
         $paramTour['limit'] = 10;
         $paramTour['category_id'] = 2;
         $paramTour['status'] = 1;
