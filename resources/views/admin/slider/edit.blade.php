@@ -1,6 +1,6 @@
 @extends('admin.layout.main')
 @section('title')
-{{ $id > 0 ? 'Cập nhật bài viết' : 'Tạo bài viết' }}
+{{ $id > 0 ? 'Cập nhật slide' : 'Tạo slide' }}
 @endsection
 @section('content')
 <ol class="breadcrumb">
@@ -32,7 +32,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label>Ảnh</label>
+                                        <label>Ảnh Nền</label>
                                         <input type="hidden" name="img" class="img"
                                             value="{{isset($data->img) ? $data->img : old('img')}}">
                                         <br>
@@ -40,6 +40,23 @@
                                         <div class="bl-img-show mt-4">
                                             <img src="{{ isset($data->img) ? $data->img : old('img') }}"
                                                 class="img-show" width="90" height="90" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Ảnh Trong</label>
+                                        <input type="hidden" name="img_inside" class="img-inside"
+                                            value="{{isset($data->img_inside) ? $data->img_inside : old('img_inside')}}">
+                                        <br>
+                                        <a href="javascript:void(0)" class="btn btn-info btn-select-file-inside">Chọn ảnh</a>
+                                        <div class="bl-img-show mt-4">
+                                            <img src="{{ isset($data->img_inside) ? $data->img_inside : asset('public/assets/site/themes/assets/images/slide-img.png') }}"
+                                                class="img-show-inside" width="90" height="90" alt="">
+                                            <a href="javascript:void(0)" class="text-danger "><i class="removeImgInside fa fa-trash-o icon-sm"
+                                                aria-hidden="true"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -93,12 +110,17 @@
             }
         });
 
+        $('.removeImgInside').click(function (){
+            $('.img-inside').val('');
+            $('.img-show-inside').attr('src', "{{ asset('public/assets/site/themes/assets/images/slide-img.png') }}");
+        })
+
         $(document).on('click', '.btn-select-file', function () {
             init.openFileModal(callback);
         });
 
-        $(document).on('click', '.btn-select-multi-file', function () {
-            init.openFileModal(callbackMultiple, true);
+        $(document).on('click', '.btn-select-file-inside', function () {
+            init.openFileModal(callbackImgInside);
         });
 
 
@@ -119,6 +141,11 @@
     var callback = function (data) {
         $('.img').val(data.url);
         $('.img-show').attr('src', data.url);
+    }
+
+    var callbackImgInside = function (data) {
+        $('.img-inside').val(data.url);
+        $('.img-show-inside').attr('src', data.url);
     }
 
     var callbackCkeditor = function (data) {

@@ -8,7 +8,7 @@
                     <ul>
                         <li><span><strong> <i class="material-icons">phone_in_talk</i>&nbsp;</strong><a
                                     href="#link">Hotline:&nbsp;</a><span>- &nbsp;</span><a
-                                    href="#link">0123.456.798&nbsp;</a></span></li>
+                                    href="#link">0901.792.566&nbsp;</a></span></li>
                         <li><span class="separate"></span></li>
                         <li><span><strong><i class="material-icons">send</i>&nbsp;</strong><a
                                     href="#link">@lang('header.contact')
@@ -136,7 +136,7 @@
                                 data-image="{{ $slider->img }}">
                                 <div class="row">
                                     <div class="col-sm order-last text-center"><img
-                                            src="{{ asset('public/assets/site/themes/assets/images/slide-img.png') }}"
+                                            src="@if(isset($slider->img_inside)) {{ $slider->img_inside }} @else {{ asset('public/assets/site/themes/assets/images/slide-img.png') }} @endif"
                                             alt="" /></div>
                                     <div class="col-sm slide-caption align-self-center">
                                         <h3><strong>@lang('home.title_slide_company_1')</strong></h3>

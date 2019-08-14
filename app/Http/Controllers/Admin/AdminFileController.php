@@ -32,8 +32,8 @@ class AdminFileController extends AdminBaseController
         $file = $request->file('file');
         $time = time();
         $data['folder_id'] = 0;
-        $data['name'] = $file->getClientOriginalName();
-        $data['path'] = $time.'-'.$file->getClientOriginalName();
+        $data['name'] = str_replace(" ", "", $file->getClientOriginalName());
+        $data['path'] = $time.'-'.str_replace(" ", "", $file->getClientOriginalName());
         $data['type'] = $file->getClientOriginalExtension();
         Storage::putFileAs(
             'upload/files', $file, $data['path']
