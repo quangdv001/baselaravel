@@ -26,15 +26,24 @@ class AdminProjectController extends AdminBaseController
         if (Gate::forUser($this->user)->denies('admin-pms', $this->currentRoute)) {
             return redirect()->route('admin.home.dashboard')->with('error_message','Bạn không có quyền vào trang này!');
         }
+        $firstCate = json_decode($this->category->getBySlug('do-thi'), TRUE);
         $request->flash();
-        $dataS = $request->only('title','type','status','user_name_c','admin_name_c');
+        $dataS = $request->only('title', 'category_id', 'status','user_name_c','admin_name_c');
         $dataS['limit'] = 10;
-        $dataS['type'] = 3;
+        if(isset($dataS['category_id']) && $dataS['category_id'] == $firstCate['id']) {
+            unset($dataS['category_id']);
+        }
+        $status = isset($dataS['status']) ? $dataS['status'] : 1;
+        $cateIdSearch = isset($dataS['category_id']) ? $dataS['category_id'] : $firstCate['id'];
         $project = $this->project->search($dataS);
-        $listCategories = $this->category->listPluck();
-
+        $categoriesSearch = $this->category->getChild($firstCate['id']);
+        array_unshift($categoriesSearch, $firstCate);
+        $listCategories = $this->category->listPluckByCategory($firstCate['id']);
         return view('admin.project.index')
             ->with('data', $project)
+            ->with('status', $status)
+            ->with('cateIdSearch', $cateIdSearch)
+            ->with('categoriesSearch', $categoriesSearch)
             ->with('listCategories', $listCategories);
     }
 
@@ -56,8 +65,10 @@ class AdminProjectController extends AdminBaseController
             }
         }
 
-        $category = $this->category->getAll();
-        $html = $this->category->generateOptionSelect($category, 0, $project ? $project->category_id : 0, '');
+        $firstCate = json_decode($this->category->getBySlug('do-thi'), TRUE);
+        $category = $this->category->getChild($firstCate['id']);
+        array_unshift($category, $firstCate);
+        $html = $this->category->generateOptionSelect($category, 1, $project ? $project->category_id : 0, '');
         return view('admin.project.edit')
             ->with('id', $id)
             ->with('html', $html)
@@ -69,14 +80,13 @@ class AdminProjectController extends AdminBaseController
         if (Gate::forUser($this->user)->denies('admin-pms', $this->currentRoute)) {
             return redirect()->route('admin.home.dashboard')->with('error_message','Bạn không có quyền vào trang này!');
         }
-        $data = $request->only('title', 'slug', 'meta', 'type', 'short_description', 'description', 'status', 'category_id', 'img', 'tag', 'file_path');
+        $data = $request->only('title', 'slug', 'meta', 'short_description', 'description', 'status', 'category_id', 'img', 'tag', 'file_path');
         $listTags = $data['tag'];
         unset($data['tag']);
         $mess = '';
         if($id == 0){
             $data['admin_id_c'] = $this->user->id;
             $data['admin_name_c'] = $this->user->username;
-            $data['type'] = 3;
             
             $res = $this->project->create($data);
             if($res){

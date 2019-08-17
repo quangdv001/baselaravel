@@ -6,10 +6,10 @@
       <div class="col-sm-9 border-sm-right">
         <div class="row main-head">
           <div class="col-sm-3 border-sm-right">
-            @include('site.components.latestLaws')
+            @include('site.components.lastestLand')
           </div>
           <div class="col-sm-9">
-            @include('site.components.headerNews')
+            @include('site.components.lastestLaw')
           </div>
         </div>
         <div class="row">
@@ -19,8 +19,8 @@
                 <h2 class="title solid-color text-uppercase"><span>Tin cho thuê</span></h2>
               </div>
               <div class="list-post">
-                  @if (count($forRents) > 0)
-                      @foreach ($forRents as $item)
+                  @if (count($latestRoom) > 0)
+                      @foreach ($latestRoom as $item)
                           @include('site.elements.forRentListItem', ['item'=>$item, 'districts'=>$districts])                            
                       @endforeach
                   @else
@@ -31,8 +31,7 @@
             @include('site.home.mainFooter')
           </div>
           <div class="col-sm-4">
-            @include('site.components.latestBlock', ['moduleTitle'=>'Tiêu điểm', 'type'=>'thumb', 'news'=>$promotionNews])
-            @include('site.components.latestBlock', ['moduleTitle'=>'Khác', 'type'=>'null', 'news'=>$promotionNews])
+            @include('site.components.latestBlock', ['moduleTitle'=>'Đô Thị', 'type'=>'thumb', 'news'=>$latestProjects])
             <a href="#" style="display:block"><img src="https://file4.batdongsan.com.vn/2019/03/18/RUFz0fap/20190318111542-274f.jpg" alt="" width="100%" height="630px"></a>
           </div>
         </div>

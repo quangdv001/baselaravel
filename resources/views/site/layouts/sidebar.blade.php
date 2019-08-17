@@ -1,7 +1,6 @@
 <div class="list-post-aside sticky-top" style="top: 60px;"><a href="#" style="display:block">
   <div class="row"><img src="https://file4.batdongsan.com.vn/2019/03/12/RUFz0fap/20190312163851-0eab.jpg" alt="" width="100%" height="369px"/></div></a>
   @include('site.components.latestNews')
-  @include('site.components.latestProjects')
 </div>
 {{-- <h3 class="module-title"><a href="#">Dự án nổi bật</a></h3>
 <div class="list-course">

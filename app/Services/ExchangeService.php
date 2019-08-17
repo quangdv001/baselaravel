@@ -11,18 +11,18 @@ namespace App\Services;
 
 use Exception;
 use Illuminate\Support\Facades\DB;
-use App\Models\Article;
+use App\Models\Exchange;
 
-class ArticleService
+class ExchangeService
 {
-    private $article;
-    public function __construct(Article $article)
+    private $exchange;
+    public function __construct(Exchange $exchange)
     {
-        $this->article = $article ? $article : new Article;
+        $this->exchange = $exchange ? $exchange : new Exchange;
     }
 
     public function search($data){
-        $query = $this->article;
+        $query = $this->exchange;
         if (isset($data['title']) && $data['title'] != '') {
             $query = $query->where('title', 'like', '%' . $data['title'] . '%');
         }
@@ -35,13 +35,6 @@ class ArticleService
         if (isset($data['status']) && $data['status'] > -1) {
             $query = $query->where('status', $data['status']);
         }
-        if (isset($data['type'])) {
-            if (is_array($data['type']) && count($data['type']) > 1) {
-                $query = $query->whereIn('type', $data['type']);
-            } else if (!is_array($data['type']) && $data['type'] > -1){
-                $query = $query->where('type', $data['type']);
-            }
-        }
         if (isset($data['sortBy']) && $data['sortBy'] != '') {
             $query = $query->orderBy($data['sortBy'], isset($data['sortOrder']) ? $data['sortOrder'] : 'DESC');
         } else {
@@ -52,18 +45,18 @@ class ArticleService
     }
 
     // NA
-    public function latestByType($typeId = 1, $limit = 30) {
-        $article = $this->article;
-        return $article->select()
+    public function latestByType($typeId = 0) {
+        $exchange = $this->exchange;
+        return $exchange->select()
             ->where('type', '=', $typeId )
             ->orderBy('created_at', 'desc')
-            ->paginate($limit);
+            ->get();
     }
 
-    public function findArticleBySlug($slug){
+    public function findExchangeBySlug($slug){
         $query = null;
         if (isset($slug) && $slug != '') {
-            $query = $this->article->where('slug', $slug)->first();
+            $query = $this->exchange->where('slug', $slug)->first();
         }
         return $query;
     }
@@ -73,7 +66,7 @@ class ArticleService
     {
         try {
             DB::beginTransaction();
-            $admin = $this->article;
+            $admin = $this->exchange;
             foreach ($data as $key => $value) {
                 $admin->$key = $value;
             }
@@ -103,30 +96,30 @@ class ArticleService
     }
 
     public function remove($id){
-        $article = $this->article->find($id);
-        $article->delete();
+        $exchange = $this->exchange->find($id);
+        $exchange->delete();
     }
 
     public function getById($id){
-        return $this->article->find($id);
+        return $this->exchange->find($id);
     }
 
-    public function getAll($limit = 30){
-        return $this->article->orderBy('id', 'DESC')->paginate($limit);
+    public function getAll(){
+        return $this->exchange->orderBy('id', 'DESC')->get();
     }
     public function test(){
         return 1;
     }
 
     public function getBySlug($slug){
-        return $this->article->where('slug',$slug)->where('status', 1)->first();
+        return $this->exchange->where('slug',$slug)->where('status', 1)->first();
     }
 
     public function getListByCategory($category, $limit = 10){
-        return $this->article->where('category_id', $category->id)->where('type', $category->type)->where('status',1)->orderBy('id','DESC')->paginate($limit);
+        return $this->exchange->where('category_id', $category->id)->where('type', $category->type)->where('status',1)->orderBy('id','DESC')->paginate($limit);
     }
 
     public function getRelate($categoryId, $slug, $limit){
-        return $this->article->where('category_id', $categoryId)->where('slug', '!=', $slug)->where('status',1)->orderBy('id','DESC')->paginate($limit);
+        return $this->exchange->where('category_id', $categoryId)->where('slug', '!=', $slug)->where('status',1)->orderBy('id','DESC')->paginate($limit);
     }
 }

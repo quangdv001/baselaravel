@@ -28,13 +28,25 @@ Danh sách bài viết
                                 <input type="text" class="form-control" id="exampleInputName1" placeholder="Tên user" name="user_name_c" value="{{ old('user_name_c') }}">
                             </div>
                         </div>
+                        @if(count($categoriesSearch) > 0)
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect2">Loại bài viết</label>
+                                <select class="form-control" name="category_id" id="exampleFormControlSelect2">
+                                @foreach($categoriesSearch as $item)
+                                    <option @if($cateIdSearch == $item['id']) selected @endif value="{{ $item['id'] }}">{{ $item['name'] }}</option>
+                                @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        @endif
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="exampleFormControlSelect3">Trạng thái</label>
                                 <select class="form-control" name="status" id="exampleFormControlSelect3">
-                                    <option @if(old('status') == -1) selected @endif value="-1">Mời chọn</option>
-                                    <option @if(old('status') == 1) selected @endif value="1">Hoạt động</option>
-                                    <option @if(old('status') == 0) selected @endif value="0">Ngừng hoạt động</option>
+                                    <option @if($status == -1) selected @endif value="-1">Mời chọn</option>
+                                    <option @if($status == 1) selected @endif value="1">Hoạt động</option>
+                                    <option @if($status == 0) selected @endif value="0">Ngừng hoạt động</option>
                                 </select>
                             </div>
                         </div>

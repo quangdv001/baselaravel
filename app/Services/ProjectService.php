@@ -35,8 +35,8 @@ class ProjectService
         if (isset($data['status']) && $data['status'] > -1) {
             $query = $query->where('status', $data['status']);
         }
-        if (isset($data['type']) && $data['type'] > -1) {
-            $query = $query->where('type', $data['type']);
+        if (isset($data['category_id']) && $data['category_id'] != '') {
+            $query = $query->where('category_id', $data['category_id']);
         }
         if (isset($data['sortBy']) && $data['sortBy'] != '') {
             $query = $query->orderBy($data['sortBy'], isset($data['sortOrder']) ? $data['sortOrder'] : 'DESC');

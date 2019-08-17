@@ -12,6 +12,8 @@ use App\Services\ProjectService;
 use App\Services\RoomService;
 use App\Services\ManagerService;
 use App\Services\FooterService;
+use App\Services\LandService;
+use App\Services\ExchangeService;
 use Illuminate\Support\Facades\Route;
 use App\Services\ProvinceService;
 use App\Service\Extend\TelegramService;
@@ -28,29 +30,40 @@ class SiteHomeController extends Controller
     private $province;
     private $manager;
     private $footer;
-    public function __construct(CategoryService $category, ArticleService $article, RoomService $roomService, 
-    ProvinceService $province, LawService $law, ProjectService $project, ManagerService $manager, FooterService $footer){
+    private $land;
+    private $exchange;
+    private $rental;
+    private $room;
+    public function __construct(CategoryService $category, ArticleService $article, RoomService $room, 
+    ProvinceService $province, LawService $law, ProjectService $project, ManagerService $manager, FooterService $footer,
+    LandService $land, ExchangeService $exchange){
         $this->category = $category;
         $this->article = $article;
         $this->law = $law;
         $this->project = $project;
-        $this->roomService = $roomService;
         $this->province = $province;
         $this->manager = $manager;
         $this->footer = $footer;
+        $this->land = $land;
+        $this->exchange = $exchange;
+        $this->room = $room;
         $categories = $this->category->getAll();
         $mainMenu = $this->category->getMenu($categories, 1);
         $topMenu = $this->category->getMenu($categories, 2);
         $socialMenu = $this->category->getMenu($categories, 3);
         $headerCenterMenu = $this->category->getMenu($categories, 4);
 
-        $latestLaws = $this->law->getAll();
-        $headerNews = $this->article->latestByType(1);
-        $latestNews = $this->article->latestByType(1);
-        $latestProjects = $this->project->getAll();
+        // 
+        $data = ['limit' => 10];
+        $lastestLaws = $this->law->search($data);
+        $lastestArticle = $this->article->latestByType(1, 10);
+        $lastestLand = $this->land->search($data);
+        $lastestExchange = $this->exchange->search($data);
+        $latestProjects = $this->project->search($data);
+        $latestRoom = $this->room->search($data);
         $promotionNews = $this->article->latestByType(1);
         $partners = $this->article->latestByType(4);
-        $districts = $this->roomService->listPluck();
+        $districts = $this->room->listPluck();
         $pagesFooter = $this->manager->getAll();
         $socialFooter = $this->footer->getAll();
         $this->currentRoute = Route::current()->getName();
@@ -66,10 +79,12 @@ class SiteHomeController extends Controller
         View::share('socialMenu', $socialMenu);
         View::share('headerCenterMenu', $headerCenterMenu);
         // Widget views
-        View::share('latestLaws', $latestLaws);
-        View::share('headerNews', $headerNews);
-        View::share('latestNews', $latestNews);
+        View::share('lastestLaws', $lastestLaws);
+        View::share('lastestLand', $lastestLand);
+        View::share('lastestArticle', $lastestArticle);
         View::share('latestProjects', $latestProjects);
+        View::share('lastestExchange', $lastestExchange);
+        View::share('latestRoom', $latestRoom);
         View::share('promotionNews', $promotionNews);
         View::share('partners', $partners);
         View::share('districts', $districts);
@@ -79,11 +94,7 @@ class SiteHomeController extends Controller
     }
 
     public function index(){
-        $forRents = $this->roomService->search(['limit'=>5]);
-        // $promotionNews = $this->article->latestByType(1);
-        return view('site.home.index')
-            // ->with('promotionNews', $promotionNews)
-            ->with('forRents', $forRents);
+        return view('site.home.index');
     }
 
     public function show($slug){
@@ -97,7 +108,7 @@ class SiteHomeController extends Controller
     public function showCategory($slug){
         $articles = null;
         if (isset($slug) && $slug == 'for-rent')
-            $articles = $this->roomService->getAll();
+            $articles = $this->room->getAll();
         // dd($article);
         return view('site.home.category')
             ->with('slug', $slug)
@@ -106,7 +117,7 @@ class SiteHomeController extends Controller
 
     public function showForRent($slug){
         if (isset($slug) && $slug != '')
-        $article = $this->roomService->findBySlug($slug);
+        $article = $this->room->findBySlug($slug);
 
         return view('site.home.single-forRent')
             ->with('slug', $slug)
@@ -115,11 +126,11 @@ class SiteHomeController extends Controller
 
     public function showList($slug){
         if ($slug == 'for-rents') {
-            $article = $this->roomService->search(['limit'=>10]);
+            $article = $this->room->search(['limit'=>10]);
             return view('site.category.index')
                 ->with('category', (object)['type'=>4,'slug'=>'for-rents', 'name'=>'Cho thuê'])
                 ->with('data', $article);
-        } elseif (in_array($slug, ['huong-dan', 'tai-lieu', 'chinh-sach', 'ho-tro'])) {
+        } elseif (in_array($slug, ['huong-dan', 'tai-lieu', 'chinh-sach', 'ho-tro', 'dieu-khoan-thoa-thuan'])) {
             $article = $this->manager->getBySlug($slug);
             return view('site.managerpage.index')
                 ->with('data', $article);
@@ -140,7 +151,7 @@ class SiteHomeController extends Controller
             $params['status'] = 1;
             $params['orderBy'] = 'id';
             $params['limit'] = 10;
-            $data = $this->roomService->search($params);
+            $data = $this->room->search($params);
             $view = 'site.category.room';
         }
 
@@ -162,8 +173,8 @@ class SiteHomeController extends Controller
             $arrProvince = $this->province->getProvincePluck()->toArray();
             $arrDistrict = $this->province->getDistrictPluck()->toArray();
             $arrWard = $this->province->getWardPluck()->toArray();
-            $data = $this->roomService->getBySlug($slugDetail);
-            $relate = $this->roomService->getRelate($category->id, $slugDetail, 5);
+            $data = $this->room->getBySlug($slugDetail);
+            $relate = $this->room->getRelate($category->id, $slugDetail, 5);
             $view = 'site.details.room';
         }
         return view($view)
@@ -195,7 +206,7 @@ class SiteHomeController extends Controller
             $view = 'site.category.search_article';
         } else {
             $arrDistrict = $this->province->getDistrictPluck()->toArray();
-            $response = $this->roomService->search($dataSearch);
+            $response = $this->room->search($dataSearch);
             $view = 'site.category.search_room';
         }
 

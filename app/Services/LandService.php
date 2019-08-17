@@ -11,18 +11,18 @@ namespace App\Services;
 
 use Exception;
 use Illuminate\Support\Facades\DB;
-use App\Models\Article;
+use App\Models\Land;
 
-class ArticleService
+class LandService
 {
-    private $article;
-    public function __construct(Article $article)
+    private $land;
+    public function __construct(Land $land)
     {
-        $this->article = $article ? $article : new Article;
+        $this->land = $land ? $land : new Land;
     }
 
     public function search($data){
-        $query = $this->article;
+        $query = $this->land;
         if (isset($data['title']) && $data['title'] != '') {
             $query = $query->where('title', 'like', '%' . $data['title'] . '%');
         }
@@ -35,12 +35,8 @@ class ArticleService
         if (isset($data['status']) && $data['status'] > -1) {
             $query = $query->where('status', $data['status']);
         }
-        if (isset($data['type'])) {
-            if (is_array($data['type']) && count($data['type']) > 1) {
-                $query = $query->whereIn('type', $data['type']);
-            } else if (!is_array($data['type']) && $data['type'] > -1){
-                $query = $query->where('type', $data['type']);
-            }
+        if (isset($data['category_id']) && $data['category_id'] != '') {
+            $query = $query->where('category_id', $data['category_id']);
         }
         if (isset($data['sortBy']) && $data['sortBy'] != '') {
             $query = $query->orderBy($data['sortBy'], isset($data['sortOrder']) ? $data['sortOrder'] : 'DESC');
@@ -52,18 +48,18 @@ class ArticleService
     }
 
     // NA
-    public function latestByType($typeId = 1, $limit = 30) {
-        $article = $this->article;
-        return $article->select()
+    public function latestByType($typeId = 0) {
+        $land = $this->land;
+        return $land->select()
             ->where('type', '=', $typeId )
             ->orderBy('created_at', 'desc')
-            ->paginate($limit);
+            ->get();
     }
 
-    public function findArticleBySlug($slug){
+    public function findLandBySlug($slug){
         $query = null;
         if (isset($slug) && $slug != '') {
-            $query = $this->article->where('slug', $slug)->first();
+            $query = $this->land->where('slug', $slug)->first();
         }
         return $query;
     }
@@ -73,7 +69,7 @@ class ArticleService
     {
         try {
             DB::beginTransaction();
-            $admin = $this->article;
+            $admin = $this->land;
             foreach ($data as $key => $value) {
                 $admin->$key = $value;
             }
@@ -103,30 +99,30 @@ class ArticleService
     }
 
     public function remove($id){
-        $article = $this->article->find($id);
-        $article->delete();
+        $land = $this->land->find($id);
+        $land->delete();
     }
 
     public function getById($id){
-        return $this->article->find($id);
+        return $this->land->find($id);
     }
 
-    public function getAll($limit = 30){
-        return $this->article->orderBy('id', 'DESC')->paginate($limit);
+    public function getAll(){
+        return $this->land->orderBy('id', 'DESC')->get();
     }
     public function test(){
         return 1;
     }
 
     public function getBySlug($slug){
-        return $this->article->where('slug',$slug)->where('status', 1)->first();
+        return $this->land->where('slug',$slug)->where('status', 1)->first();
     }
 
     public function getListByCategory($category, $limit = 10){
-        return $this->article->where('category_id', $category->id)->where('type', $category->type)->where('status',1)->orderBy('id','DESC')->paginate($limit);
+        return $this->land->where('category_id', $category->id)->where('type', $category->type)->where('status',1)->orderBy('id','DESC')->paginate($limit);
     }
 
     public function getRelate($categoryId, $slug, $limit){
-        return $this->article->where('category_id', $categoryId)->where('slug', '!=', $slug)->where('status',1)->orderBy('id','DESC')->paginate($limit);
+        return $this->land->where('category_id', $categoryId)->where('slug', '!=', $slug)->where('status',1)->orderBy('id','DESC')->paginate($limit);
     }
 }

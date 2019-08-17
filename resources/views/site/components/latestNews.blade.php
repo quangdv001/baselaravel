@@ -1,9 +1,9 @@
-@if (count($latestNews) > 0)
+@if (count($lastestArticle) > 0)
 <?php
 //   dd($categories);
 ?>
     <h3 class="module-title"><a href="#">Tin mới nhất</a></h3>
-    @foreach ($latestNews as $key=>$item)
+    @foreach ($lastestArticle as $key=>$item)
         @if ($key === 0)
             <div class="news-post line-bottom  small-post"><a class="news-post-image-link" href="{{ route('site.home.showDetail', ['slugCategory' => $item->category->slug, 'slugDetail' => $item->slug]) }}">
                 <figure class="image-container">

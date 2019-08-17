@@ -104,8 +104,16 @@ class CategoryService
         return $this->category->orderBy('position', 'ASC')->orderBy('id', 'ASC')->get();
     }
 
+    public function getChild($id){
+        return $this->category->where('parent_id', $id)->get()->toArray();
+    }
+
     public function listPluck(){
         return $this->category->pluck('name','id')->toArray();
+    }
+
+    public function listPluckByCategory($id){
+        return $this->category->where('parent_id', $id)->pluck('name', 'id')->toArray();
     }
 
     public function generateOptionSelect($listCategories, $parent_id = 0, $cate_id, $char = ''){

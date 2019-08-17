@@ -73,5 +73,15 @@ Route::middleware(['auth.admin'])->prefix('admin')->group(function () {
     Route::get('manager/getCreate/{id?}', 'AdminManagerController@getCreate')->name('manager.getCreate');
     Route::post('manager/getCreate/{id?}', 'AdminManagerController@postCreate')->name('manager.postCreate');
     Route::get('manager/remove/{id?}', 'AdminManagerController@remove')->name('manager.remove');
+
+    Route::get('land', 'AdminLandController@index')->name('land.getList');
+    Route::get('land/getCreate/{id?}', 'AdminLandController@getCreate')->name('land.getCreate');
+    Route::post('land/getCreate/{id?}', 'AdminLandController@postCreate')->name('land.postCreate');
+    Route::get('land/remove/{id?}', 'AdminLandController@remove')->name('land.remove');
+
+    Route::get('exchange', 'AdminExchangeController@index')->name('exchange.getList');
+    Route::get('exchange/getCreate/{id?}', 'AdminExchangeController@getCreate')->name('exchange.getCreate');
+    Route::post('exchange/getCreate/{id?}', 'AdminExchangeController@postCreate')->name('exchange.postCreate');
+    Route::get('exchange/remove/{id?}', 'AdminExchangeController@remove')->name('exchange.remove');
 });
 

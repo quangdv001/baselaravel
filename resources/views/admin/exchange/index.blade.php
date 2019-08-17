@@ -28,25 +28,13 @@ Danh sách bài viết
                                 <input type="text" class="form-control" id="exampleInputName1" placeholder="Tên user" name="user_name_c" value="{{ old('user_name_c') }}">
                             </div>
                         </div>
-                        @if(count($categoriesSearch) > 0)
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect2">Loại bài viết</label>
-                                <select class="form-control" name="category_id" id="exampleFormControlSelect2">
-                                @foreach($categoriesSearch as $item)
-                                    <option @if($cateIdSearch == $item['id']) selected @endif value="{{ $item['id'] }}">{{ $item['name'] }}</option>
-                                @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        @endif
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="exampleFormControlSelect3">Trạng thái</label>
                                 <select class="form-control" name="status" id="exampleFormControlSelect3">
-                                    <option @if($status == -1) selected @endif value="-1">Mời chọn</option>
-                                    <option @if($status == 1) selected @endif value="1">Hoạt động</option>
-                                    <option @if($status == 0) selected @endif value="0">Ngừng hoạt động</option>
+                                    <option @if(old('status') == -1) selected @endif value="-1">Mời chọn</option>
+                                    <option @if(old('status') == 1) selected @endif value="1">Hoạt động</option>
+                                    <option @if(old('status') == 0) selected @endif value="0">Ngừng hoạt động</option>
                                 </select>
                             </div>
                         </div>
@@ -64,11 +52,6 @@ Danh sách bài viết
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                {{-- <h4 class="card-title">Danh sách tài khoản</h4> --}}
-                {{--<p class="card-description">--}}
-                {{--Add class--}}
-                {{--<code>.table-bordered</code>--}}
-                {{--</p>--}}
                 <div class="table-responsive">
                     @if($data)
                     <table class="table table-bordered myTable1">
@@ -137,11 +120,11 @@ Danh sách bài viết
                                     {{ $v->created_at->format('H:i:s d/m/Y') }}
                                 </td>
                                 <td>
-                                    <a href="{{ route('admin.project.getCreate', ['id' => $v->id]) }}"
+                                    <a href="{{ route('admin.article.getCreate', ['id' => $v->id]) }}"
                                         class="text-warning"><i class="fa fa-pencil-square-o icon-sm"
                                             aria-hidden="true"></i></a>
                                     -
-                                    <a href="{{ route('admin.project.remove', ['id' => $v->id]) }}"
+                                    <a href="{{ route('admin.article.remove', ['id' => $v->id]) }}"
                                         class="text-warning"><i class="fa fa-trash-o icon-sm"
                                             aria-hidden="true"></i></a>
                                 </td>

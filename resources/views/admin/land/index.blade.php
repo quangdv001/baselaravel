@@ -64,11 +64,6 @@ Danh sách bài viết
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                {{-- <h4 class="card-title">Danh sách tài khoản</h4> --}}
-                {{--<p class="card-description">--}}
-                {{--Add class--}}
-                {{--<code>.table-bordered</code>--}}
-                {{--</p>--}}
                 <div class="table-responsive">
                     @if($data)
                     <table class="table table-bordered myTable1">
@@ -137,11 +132,11 @@ Danh sách bài viết
                                     {{ $v->created_at->format('H:i:s d/m/Y') }}
                                 </td>
                                 <td>
-                                    <a href="{{ route('admin.project.getCreate', ['id' => $v->id]) }}"
+                                    <a href="{{ route('admin.article.getCreate', ['id' => $v->id]) }}"
                                         class="text-warning"><i class="fa fa-pencil-square-o icon-sm"
                                             aria-hidden="true"></i></a>
                                     -
-                                    <a href="{{ route('admin.project.remove', ['id' => $v->id]) }}"
+                                    <a href="{{ route('admin.article.remove', ['id' => $v->id]) }}"
                                         class="text-warning"><i class="fa fa-trash-o icon-sm"
                                             aria-hidden="true"></i></a>
                                 </td>

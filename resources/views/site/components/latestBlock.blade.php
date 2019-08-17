@@ -1,9 +1,7 @@
 <div class="module-title">
     <div class="module-title solid-color"><a>{!! $moduleTitle ? $moduleTitle : 'Latest Block' !!}</a></div>
 </div>
-<?php
-    // dd($news);
-?>
+
 @if ($news && count($news) > 0)
     @foreach ($news as $key=>$item)
         @if ($type && $type === 'thumb')

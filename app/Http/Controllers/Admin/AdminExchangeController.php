@@ -5,19 +5,19 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
-use App\Services\LawService;
-use App\Http\Requests\Admin\LawRequest;
+use App\Services\ExchangeService;
+use App\Http\Requests\Admin\ExchangeRequest;
 use App\Services\CategoryService;
 use App\Services\TagService;
 
-class AdminLawController extends AdminBaseController
+class AdminExchangeController extends AdminBaseController
 {
-    protected $law;
+    protected $exchange;
     protected $category;
-    public function __construct(LawService $law, CategoryService $category, TagService $tagService)
+    public function __construct(ExchangeService $exchange, CategoryService $category, TagService $tagService)
     {
         parent::__construct();
-        $this->law = $law;
+        $this->exchange = $exchange;
         $this->category = $category;
         $this->tagService = $tagService;
     }
@@ -26,24 +26,14 @@ class AdminLawController extends AdminBaseController
         if (Gate::forUser($this->user)->denies('admin-pms', $this->currentRoute)) {
             return redirect()->route('admin.home.dashboard')->with('error_message','Bạn không có quyền vào trang này!');
         }
-        $firstCate = json_decode($this->category->getBySlug('tro-giup-phap-ly'), TRUE);
         $request->flash();
-        $dataS = $request->only('title', 'category_id', 'status','user_name_c','admin_name_c');
+        $dataS = $request->only('title', 'status', 'user_name_c', 'admin_name_c');
         $dataS['limit'] = 10;
-        if(isset($dataS['category_id']) && $dataS['category_id'] == $firstCate['id']) {
-            unset($dataS['category_id']);
-        }
-        $status = isset($dataS['status']) ? $dataS['status'] : 1;
-        $cateIdSearch = isset($dataS['category_id']) ? $dataS['category_id'] : $firstCate['id'];
-        $law = $this->law->search($dataS);
-        $categoriesSearch = $this->category->getChild($firstCate['id']);
-        array_unshift($categoriesSearch, $firstCate);
-        $listCategories = $this->category->listPluckByCategory($firstCate['id']);
-        return view('admin.law.index')
-            ->with('data', $law)
-            ->with('status', $status)
-            ->with('cateIdSearch', $cateIdSearch)
-            ->with('categoriesSearch', $categoriesSearch)
+        $exchange = $this->exchange->search($dataS);
+        $listCategories = $this->category->listPluck();
+
+        return view('admin.exchange.index')
+            ->with('data', $exchange)
             ->with('listCategories', $listCategories);
     }
 
@@ -51,11 +41,11 @@ class AdminLawController extends AdminBaseController
         if (Gate::forUser($this->user)->denies('admin-pms', $this->currentRoute)) {
             return redirect()->route('admin.home.dashboard')->with('error_message','Bạn không có quyền vào trang này!');
         }
-        $law = $tagItem = [];
+        $exchange = $tagItem = [];
         $listTag = '';
         if($id > 0){
-            $law = $this->law->getById($id);
-            $tag = $law->tag;
+            $exchange = $this->exchange->getById($id);
+            $tag = $exchange->tag;
 
             if(sizeof($tag) > 0){
                 foreach($tag as $v){
@@ -64,19 +54,17 @@ class AdminLawController extends AdminBaseController
                 $listTag = implode(',', $tagItem);
             }
         }
-
-        $firstCate = json_decode($this->category->getBySlug('tro-giup-phap-ly'), TRUE);
-        $category = $this->category->getChild($firstCate['id']);
-        array_unshift($category, $firstCate);
-        $html = $this->category->generateOptionSelect($category, 1, $law ? $law->category_id : 0, '');
-        return view('admin.law.edit')
+        $category = $this->category->getBySlug('moi-gioi-san-giao-dich');
+        $html = '<option value="'.$category->id.'" selected>'.$category->name.'</option>';
+        
+        return view('admin.exchange.edit')
             ->with('id', $id)
             ->with('html', $html)
             ->with('listTag', $listTag)
-            ->with('data', $law);
+            ->with('data', $exchange);
     }
 
-    public function postCreate(LawRequest $request, $id = 0){
+    public function postCreate(ExchangeRequest $request, $id = 0){
         if (Gate::forUser($this->user)->denies('admin-pms', $this->currentRoute)) {
             return redirect()->route('admin.home.dashboard')->with('error_message','Bạn không có quyền vào trang này!');
         }
@@ -87,8 +75,8 @@ class AdminLawController extends AdminBaseController
         if($id == 0){
             $data['admin_id_c'] = $this->user->id;
             $data['admin_name_c'] = $this->user->username;
-
-            $res = $this->law->create($data);
+            
+            $res = $this->exchange->create($data);
             if($res){
                 $arrTag = explode(',', $listTags);
                 if(sizeof($arrTag) > 0){
@@ -96,10 +84,10 @@ class AdminLawController extends AdminBaseController
                         $tag = $this->tagService->getCreateTagByName($v);
                         if($tag){
                             $payload = array(
-                                'article_id'=> $res->id,
+                                'exchange_id'=> $res->id,
                                 'tag_id'=> $tag->id
                             );
-                            $this->tagService->createLawTag($payload);
+                            $this->tagService->createExchangeTag($payload);
                         }
                     }
                     
@@ -107,38 +95,38 @@ class AdminLawController extends AdminBaseController
                 $mess = 'Tạo bài viết thành công';
             }
         } else {
-            $law = $this->law->getById($id);
+            $exchange = $this->exchange->getById($id);
             $data['admin_id_u'] = $this->user->id;
             $data['admin_name_u'] = $this->user->username;
-            $res = $this->law->update($law, $data);
+            $res = $this->exchange->update($exchange, $data);
             if($res){
-                $this->tagService->removeLawTag($id);
+                $this->tagService->removeExchangeTag($id);
                 $arrTag = explode(',', $listTags);
                 if(sizeof($arrTag) > 0){
                     foreach($arrTag as $v){
                         $tag = $this->tagService->getCreateTagByName($v);
                         if($tag){
                             $payload = array(
-                                'article_id'=> $res->id,
+                                'exchange_id'=> $res->id,
                                 'tag_id'=> $tag->id
                             );
-                            $this->tagService->createLawTag($payload);
+                            $this->tagService->createExchangeTag($payload);
                         }
                     }
                 }
                 $mess = 'Cập nhật bài viết thành công';
             }
         }
-        return redirect()->route('admin.law.getList')->with('success_message', $mess);
+        return redirect()->route('admin.exchange.getList')->with('success_message', $mess);
     }
 
     public function remove($id = 0){
         if (Gate::forUser($this->user)->denies('admin-pms', $this->currentRoute)) {
             return redirect()->route('admin.home.dashboard')->with('error_message','Bạn không có quyền xóa bài viết này!');
         }
-        $this->law->remove($id);
+        $this->exchange->remove($id);
         $mess = 'Xóa bài viết thành công';
-        return redirect()->route('admin.law.getList')->with('success_message', $mess);
+        return redirect()->route('admin.exchange.getList')->with('success_message', $mess);
     }
 
     public function getByType($type = null) {

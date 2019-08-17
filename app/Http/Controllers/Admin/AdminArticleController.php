@@ -57,9 +57,8 @@ class AdminArticleController extends AdminBaseController
                 $listTag = implode(',', $tagItem);
             }
         }
-
-        $category = $this->category->getAll();
-        $html = $this->category->generateOptionSelect($category, 0, $article ? $article->category_id : 0, '');
+        $category = $this->category->getBySlug('tin-tuc');
+        $html = '<option value="'.$category->id.'" selected>'.$category->name.'</option>';
         return view('admin.article.edit')
             ->with('id', $id)
             ->with('html', $html)
