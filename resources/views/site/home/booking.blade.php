@@ -126,7 +126,7 @@
                                                         <div class="form-group col-md-4">
                                                             <label class="bmd-label-floating" for="item-form-0">@lang('booking.name')</label>
                                                             <input class="form-control" type="text" name="name" value="{{ old('name') }}"
-                                                                placeholder="Nhập họ tên" id="item-form-0" /><span
+                                                                placeholder="@lang('booking.name')" id="item-form-0" /><span
                                                                 class="float-icon"><i
                                                                     class="material-icons">person</i></span>
                                                         </div>
@@ -134,30 +134,30 @@
                                                             <label class="bmd-label-floating"
                                                                 for="item-form-1">@lang('booking.email')</label>
                                                             <input class="form-control" type="text"
-                                                                placeholder="Nhâp email" name="email" value="{{ old('email') }}"
+                                                                placeholder="@lang('booking.email')" name="email" value="{{ old('email') }}"
                                                                 id="item-form-1" /><span class="float-icon"><i
                                                                     class="material-icons">mail</i></span>
                                                         </div>
                                                         <div class="form-group col-md-4">
                                                             <label class="bmd-label-floating" for="item-form-2">@lang('booking.phone')</label>
                                                             <input class="form-control" type="text" name="phone" value="{{ old('phone') }}"
-                                                                placeholder="Nhập số điện thoại"
+                                                                placeholder="@lang('booking.phone')"
                                                                 id="item-form-2" /><span class="float-icon"><i
                                                                     class="material-icons">phone</i></span>
                                                         </div>
                                                         <div class="form-group col-md-12">
                                                             <label class="bmd-label-floating" for="item-form-3">@lang('booking.address')</label>
                                                             <input class="form-control" type="text" name="address" value="{{ old('address') }}"
-                                                                placeholder="Nhập địa chỉ" id="item-form-3" /><span
+                                                                placeholder="@lang('booking.address')" id="item-form-3" /><span
                                                                 class="float-icon"><i
                                                                     class="material-icons">room</i></span>
                                                         </div>
-                                                        {{-- <div class="form-group col-md-12">
+                                                        <div class="form-group col-md-12">
                                                         <label class="bmd-label-floating" for="item-form-4">Thông
                                                             điệp</label>
                                                         <textarea class="form-control" type="textarea" rows="6"
                                                             placeholder="Nhập thông tin" id="item-form-4"></textarea>
-                                                    </div> --}}
+                                                    </div>
                                                     </div>
                                                 </div>
                                             </form>
@@ -193,7 +193,7 @@
                                     }
 
                                 </script>
-                                <ul class="list-categories">
+                                <!-- <ul class="list-categories">
                                     <li><a href="#address:"> @lang('footer.footer_1')</a></li>
                                     <li><a>  @lang('footer.footer_2')</a></li>
                                     <li><a href="tell:0243.9429918"> <i class="material-icons">phone_in_talk</i>
@@ -202,7 +202,7 @@
                                     <li><a href="mailto:booking@livitrans.com"> <i
                                                 class="material-icons">mail_outline</i>  @lang('footer.footer_5')</a>
                                     </li>
-                                </ul>
+                                </ul> -->
                             </div>
                         </div>
                     </div>

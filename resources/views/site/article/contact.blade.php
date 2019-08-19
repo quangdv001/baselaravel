@@ -16,7 +16,7 @@
         <div class="col-md-6">
             <!-- <p>CÔNG TY CP VẬN TẢI VÀ THƯƠNG MẠI LIVITRANS ( LIVITRANS JSC,..).</p> -->
             <ul class="list-categories">
-            <li><a href="#"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.footer_1') @if(isset($social['phong-tien-khach'])) {!! $social['phong-tien-khach'] !!} @endif </a></li>
+            <!-- <li><a href="#"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.footer_1') @if(isset($social['phong-tien-khach'])) {!! $social['phong-tien-khach'] !!} @endif </a></li>
                             <li><a><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.footer_2') @if(isset($social['dia-chi-phong-ve'])) {!! $social['dia-chi-phong-ve'] !!} @endif</a></li>
                             <li><a href="@if(isset($social['hotline'])) tell:{!! $social['hotline'] !!} @else # @endif"><i
                                         class="material-icons list-style">fiber_manual_record</i><i
@@ -27,7 +27,33 @@
                             </li>
                             <li><a href="mailto:booking@livitrans.com"><i
                                         class="material-icons list-style">fiber_manual_record</i><i
-                                        class="material-icons">mail_outline</i> @lang('footer.footer_5') @if(isset($social['email'])) {!! $social['email'] !!} @endif</a></li>
+                                        class="material-icons">mail_outline</i> @lang('footer.footer_5') @if(isset($social['email'])) {!! $social['email'] !!} @endif</a></li>-->
+                @if(isset($social['phong-tien-khach']))
+                    <li>
+                        <a href="#"><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.footer_1')  {!! $social['phong-tien-khach'] !!}  </a>
+                    </li>
+                    @endif
+                    @if(isset($social['dia-chi-phong-ve']))
+                    <li><a><i class="material-icons list-style">fiber_manual_record</i>@lang('footer.footer_2')  {!! $social['dia-chi-phong-ve'] !!} </a></li>
+                    @endif
+                    @if(isset($social['hotline']))
+                    <li><a href="@if(isset($social['hotline'])) tell:{!! $social['hotline'] !!} @else # @endif"><i
+                                class="material-icons list-style">fiber_manual_record</i><i
+                                class="material-icons">phone_in_talk</i> @lang('footer.footer_3')  {!! $social['hotline'] !!} </a>
+                    </li>
+                    @endif
+                    @if(isset($social['dien-thoai-phong-ve']))
+                    <li><a href="@if(isset($social['dien-thoai-phong-ve'])) tell:{!! $social['dien-thoai-phong-ve'] !!} @else # @endif"><i
+                                class="material-icons list-style">fiber_manual_record</i><i
+                                class="material-icons">phone_in_talk</i> @lang('footer.footer_4')  {!! $social['dien-thoai-phong-ve'] !!} </a>
+                    </li>
+                    @endif
+                    @if(isset($social['email']))
+                    <li><a href="mailto:booking@livitrans.com"><i
+                                class="material-icons list-style">fiber_manual_record</i><i
+                                class="material-icons">mail_outline</i> @lang('footer.footer_5') {!! $social['email'] !!} </a>
+                    </li>
+                @endif
             </ul>
         </div>
     </div>
@@ -52,7 +78,7 @@
                     </div>
                     <div class="form-group col-md-12">
                         <label class="bmd-label-floating" for="item-form-3">Thông điệp</label>
-                        <textarea class="form-control" type="textarea" rows="6" placeholder="Nhập thông tin"
+                        <textarea class="form-control" type="textarea" name="note" rows="6" placeholder="Nhập thông tin"
                             id="item-form-3"></textarea>
                     </div>
                     <div class="col-12">

@@ -29,3 +29,38 @@ footer .title.divider-bottom::before, .footer .title.divider-bottom::before {
     left: auto;
     right: 20px;
 }
+.slider-layout {
+    padding-top: 200px;
+}
+.form-slider-layout {
+    padding-bottom: 0;
+}
+
+
+
+@media (max-width: 768px) {
+    .slider-layout {
+      padding-top: 0px !important; 
+    }  
+  .header-layout {
+    background-size: 200% 120% !important;
+    min-height: 0 !important;
+  }
+  .slide-caption {
+    display: inline-block;
+    background-color: transparent !important;;
+    
+  }
+  .carousel img {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .carousel img {
+    max-width: 50%;
+  }
+  .slide-caption {
+    display: none;
+  }
+}
