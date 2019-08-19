@@ -1,12 +1,12 @@
 <div class="list-post-aside sticky-top" style="top: 60px;">
 
     <!-- categories scoped -->
+  @if (isset($categoryChild) && count($categoryChild) > 0)
   <h3 class="module-title"><a href="#">Danh mục</a></h3>
-  @if ($categories->count() > 0)
-      @foreach ($categories as $category)
+      @foreach ($categoryChild as $category)
         <div class="news-post line-bottom list-style-post small-post">
           <div class="news-post-content">
-            <div class="post-title title"><i class="list-icon fas fa-circle"></i><a class="news-post-link" href="#route"><b>{!! $category->name !!}</b></a></div>
+            <div class="post-title title"><i class="list-icon fas fa-circle"></i><a class="news-post-link" href="#route"><b>{{ $category['name'] }}</b></a></div>
           </div>
         </div>
       @endforeach

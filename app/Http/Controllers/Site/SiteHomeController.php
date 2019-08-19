@@ -139,26 +139,67 @@ class SiteHomeController extends Controller
         $arrDistrict = [];
         $data = [];
         $view = '';
-        if(in_array($category->type, [1,2,3])){
-            $params['status'] = 1;
-            $params['type'] = $category->type;
-            $params['orderBy'] = 'id';
-            $params['limit'] = 10;
-            $data = $this->article->search($params);
-            $view = 'site.category.article';
-        } elseif($category->type == 4){
-            $arrDistrict = $this->province->getDistrictPluck()->toArray();
-            $params['status'] = 1;
-            $params['orderBy'] = 'id';
-            $params['limit'] = 10;
-            $data = $this->room->search($params);
-            $view = 'site.category.room';
-        }
+        if($category->parent_id == 1) {
+            switch($category->slug)
+            {
+                case "du-an-ha-noi":
+                    $params['status'] = 1;
+                    $params['orderBy'] = 'id';
+                    $params['limit'] = 10;
+                    $data = $this->land->search($params);
+                    $view = 'site.category.article';
+                    break;
 
-        return view($view)
-            ->with('category', $category)
-            ->with('arrDistrict', $arrDistrict)
-            ->with('data', $data);
+                case "moi-gioi-san-giao-dich":
+                    $params['status'] = 1;
+                    $params['orderBy'] = 'id';
+                    $params['limit'] = 10;
+                    $data = $this->exchange->search($params);
+                    $view = 'site.category.article';
+                    break;
+
+                case "cho-thue":
+                    $arrDistrict = $this->province->getDistrictPluck()->toArray();
+                    $params['status'] = 1;
+                    $params['orderBy'] = 'id';
+                    $params['limit'] = 10;
+                    $data = $this->room->search($params);
+                    $view = 'site.category.room';
+                    break;
+                
+                case "tin-tuc":
+                    $params['status'] = 1;
+                    $params['orderBy'] = 'id';
+                    $params['limit'] = 10;
+                    $data = $this->article->search($params);
+                    $view = 'site.category.article';
+                    break;
+                case "do-thi":
+                    $params['status'] = 1;
+                    $params['orderBy'] = 'id';
+                    $params['limit'] = 10;
+                    $data = $this->project->search($params);
+                    $view = 'site.category.article';
+                    break;
+                case "tro-giup-phap-ly":
+                    $params['status'] = 1;
+                    $params['orderBy'] = 'id';
+                    $params['limit'] = 10;
+                    $data = $this->law->search($params);
+                    $view = 'site.category.article';
+                    break;
+                default:
+                    $view = 'site.category.article';
+                    break;
+            }
+            $categoryChild = $this->category->getChild($category->id);
+            return view($view)
+                ->with('category', $category)
+                ->with('categoryChild', $categoryChild)
+                ->with('arrDistrict', $arrDistrict)
+                ->with('data', $data);
+        }
+        
     }
 
     public function showDetail($slugCategory, $slugDetail){
