@@ -26,13 +26,18 @@ class TagService
     private $article_tag;
     private $law_tag;
     private $project_tag;
-    public function __construct(ArticleTag $article_tag, Tag $tag, RoomTag $roomTag, LawTag $law_tag, ProjectTag $project_tag)
+    private $land_tag;
+    private $exchange_tag;
+    public function __construct(ArticleTag $article_tag, Tag $tag, RoomTag $roomTag, LawTag $law_tag,
+                                ProjectTag $project_tag, LandTag $landTag, ExchangeTag $exchangeTag)
     {
         $this->article_tag = $article_tag;
         $this->tag = $tag;
         $this->roomTag = $roomTag;
         $this->law_tag = $law_tag;
         $this->project_tag = $project_tag;
+        $this->land_tag = $landTag;
+        $this->exchange_tag = $exchangeTag;
     }
 
     public function createTag($listTag)
@@ -242,6 +247,30 @@ class TagService
             $articleTag = $this->article_tag->where('article_id', $id)->delete();
             DB::commit();
             return $articleTag;
+        } catch (Exception  $e) {
+            DB::rollBack();
+            throw $e;
+        }
+    }
+
+    public function removeLandTag($id){
+        try {
+            DB::beginTransaction();
+            $landTag = $this->land_tag->where('land_id', $id)->delete();
+            DB::commit();
+            return $landTag;
+        } catch (Exception  $e) {
+            DB::rollBack();
+            throw $e;
+        }
+    }
+
+    public function removeExchangeTag($id){
+        try {
+            DB::beginTransaction();
+            $exchangeTag = $this->exchange_tag->where('exchange_id', $id)->delete();
+            DB::commit();
+            return $exchangeTag;
         } catch (Exception  $e) {
             DB::rollBack();
             throw $e;
