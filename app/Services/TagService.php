@@ -16,6 +16,8 @@ use App\Models\Tag;
 use App\Models\RoomTag;
 use App\Models\LawTag;
 use App\Models\ProjectTag;
+use App\Models\LandTag;
+use App\Models\ExchangeTag;
 
 class TagService
 {
@@ -59,6 +61,40 @@ class TagService
             $articleTag->save();
             DB::commit();
             return $articleTag;
+        } catch (Exception  $e) {
+            DB::rollBack();
+            throw $e;
+        }
+    }
+
+    public function createLandTag($data)
+    {
+        try {
+            DB::beginTransaction();
+            $landTag = new LandTag();
+            foreach ($data as $key => $value) {
+                $landTag->$key = $value;
+            }
+            $landTag->save();
+            DB::commit();
+            return $landTag;
+        } catch (Exception  $e) {
+            DB::rollBack();
+            throw $e;
+        }
+    }
+
+    public function createExchangeTag($data)
+    {
+        try {
+            DB::beginTransaction();
+            $exchangeTag = new ExchangeTag();
+            foreach ($data as $key => $value) {
+                $exchangeTag->$key = $value;
+            }
+            $exchangeTag->save();
+            DB::commit();
+            return $exchangeTag;
         } catch (Exception  $e) {
             DB::rollBack();
             throw $e;

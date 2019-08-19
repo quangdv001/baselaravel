@@ -79,7 +79,7 @@ class AdminLandController extends AdminBaseController
         if (Gate::forUser($this->user)->denies('admin-pms', $this->currentRoute)) {
             return redirect()->route('admin.home.dashboard')->with('error_message','Bạn không có quyền vào trang này!');
         }
-        $data = $request->only('title', 'slug', 'meta', 'type', 'short_description', 'description', 'status', 'category_id', 'img', 'tag', 'file_path');
+        $data = $request->only('title', 'slug', 'meta', 'short_description', 'description', 'status', 'category_id', 'img', 'tag', 'file_path');
         $listTags = $data['tag'];
         unset($data['tag']);
         $mess = '';

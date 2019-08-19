@@ -120,11 +120,11 @@ Danh sách bài viết
                                     {{ $v->created_at->format('H:i:s d/m/Y') }}
                                 </td>
                                 <td>
-                                    <a href="{{ route('admin.article.getCreate', ['id' => $v->id]) }}"
+                                    <a href="{{ route('admin.exchange.getCreate', ['id' => $v->id]) }}"
                                         class="text-warning"><i class="fa fa-pencil-square-o icon-sm"
                                             aria-hidden="true"></i></a>
                                     -
-                                    <a href="{{ route('admin.article.remove', ['id' => $v->id]) }}"
+                                    <a href="{{ route('admin.exchange.remove', ['id' => $v->id]) }}"
                                         class="text-warning"><i class="fa fa-trash-o icon-sm"
                                             aria-hidden="true"></i></a>
                                 </td>
