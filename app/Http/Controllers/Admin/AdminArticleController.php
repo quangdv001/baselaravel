@@ -33,11 +33,11 @@ class AdminArticleController extends AdminBaseController
             $dataS['type'] = [1,4];
         }
         $article = $this->article->search($dataS);
-        $listCategories = $this->category->listPluck();
+        $status = isset($dataS['status']) ? $dataS['status'] : 1;
 
         return view('admin.article.index')
             ->with('data', $article)
-            ->with('listCategories', $listCategories);
+            ->with('status', $status);
     }
 
     public function getCreate($id = 0){

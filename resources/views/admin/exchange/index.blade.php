@@ -32,9 +32,9 @@ Danh sách bài viết
                             <div class="form-group">
                                 <label for="exampleFormControlSelect3">Trạng thái</label>
                                 <select class="form-control" name="status" id="exampleFormControlSelect3">
-                                    <option @if(old('status') == -1) selected @endif value="-1">Mời chọn</option>
-                                    <option @if(old('status') == 1) selected @endif value="1">Hoạt động</option>
-                                    <option @if(old('status') == 0) selected @endif value="0">Ngừng hoạt động</option>
+                                    <option @if($status == -1) selected @endif value="-1">Mời chọn</option>
+                                    <option @if($status == 1) selected @endif value="1">Hoạt động</option>
+                                    <option @if($status == 0) selected @endif value="0">Ngừng hoạt động</option>
                                 </select>
                             </div>
                         </div>

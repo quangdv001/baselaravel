@@ -81,6 +81,16 @@
                             value="{{ $listTag ? $listTag : old('tag') }}">
                     </div>
                     <div class="form-group">
+                        <label for="exampleFormControlSelect3">Loại</label>
+                        @if($errors->has('type'))
+                        <p class="text-danger">{{ $errors->first('type') }}</p>
+                        @endif
+                        <select class="form-control" name="type" id="exampleFormControlSelect3">
+                            <option value="1"  @if(isset($data->type) && $data->type == 1) selected @endif>Tin tức</option>
+                            <option value="0" @if(isset($data->type) && $data->type == 0) selected @endif>Đối tác</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="exampleFormControlSelect2">Trạng thái</label>
                         <select class="form-control" name="status" id="exampleFormControlSelect2">
                             <option value="1">Hoạt động</option>

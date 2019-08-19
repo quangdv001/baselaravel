@@ -30,11 +30,11 @@ class AdminExchangeController extends AdminBaseController
         $dataS = $request->only('title', 'status', 'user_name_c', 'admin_name_c');
         $dataS['limit'] = 10;
         $exchange = $this->exchange->search($dataS);
-        $listCategories = $this->category->listPluck();
+        $status = isset($dataS['status']) ? $dataS['status'] : 1;
 
         return view('admin.exchange.index')
             ->with('data', $exchange)
-            ->with('listCategories', $listCategories);
+            ->with('status', $status);
     }
 
     public function getCreate($id = 0){

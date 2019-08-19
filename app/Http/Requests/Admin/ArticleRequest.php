@@ -27,6 +27,7 @@ class ArticleRequest extends FormRequest
             'title' => 'required',
             'short_description' => 'required',
             'description' => 'required',
+            'type' => 'required',
             'slug' => 'required|unique:article,slug,'.$this->id,
         ];
     }
@@ -42,6 +43,7 @@ class ArticleRequest extends FormRequest
             'title.required' => 'Tên bài viết không được rỗng',
             'short_description.required' => 'Mô tả ngắn của bài viết không được rỗng',
             'description.required' => 'Nội dung của bài viết không được rỗng',
+            'type.required' => 'Vui lòng chọn loại tin tức hoặc đối tác',
             'slug.unique' => 'Slug đã tồn tại',
         ];
     }
