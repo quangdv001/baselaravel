@@ -11,7 +11,7 @@
                         <div class="detail-item">
                         <div class="title">{{ $item->title }}</div>
                             <div class="meta-info"><span class="meta-info-item"><i class="far fa-clock"></i> {{$item->created_at->diffForHumans() }}</span></div>
-                            <div class="short-description">@if (strlen($item->short_description) > 50) {!! mb_substr($item->short_description, 0, mb_strpos($item->short_description, ' ', 50)) !!}... @else {!! $item->short_description !!} @endif</div>
+                            <div class="short-description">@if (strlen(strip_tags($item->short_description)) > 100) {!! mb_substr(strip_tags($item->short_description), 0, mb_strpos(strip_tags($item->short_description), ' ', 100)) !!}... @else {!! $item->short_description !!} @endif</div>
                         </div>
                     </a>
                 @endif
@@ -22,7 +22,7 @@
         <ul class="list-head">
             @foreach ($lastestLaws as $key=>$item)
                 @if ($key > 2)
-                    <li><a class="title" href="{{ route('site.home.showDetail', ['slugCategory' => $item->category->slug, 'slugDetail' => $item->slug]) }}">{{ $item->title }}</a><span class="meta-info-item"> <i class="far fa-clock"></i> {{$item->created_at->diffForHumans() }}</span></li>
+                    <li><a class="title" href="{{ route('site.home.showDetail', ['slugCategory' => $item->category->slug, 'slugDetail' => $item->slug]) }}">@if (strlen(strip_tags($item->title)) > 100) {!! mb_substr(strip_tags($item->title), 0, mb_strpos(strip_tags($item->title), ' ', 100)) !!}... @else {!! $item->title !!} @endif</a><span class="meta-info-item"> <i class="far fa-clock"></i> {{$item->created_at->diffForHumans() }}</span></li>
                 @endif
             @endforeach
         </ul>
