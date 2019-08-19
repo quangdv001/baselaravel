@@ -69,6 +69,8 @@
                             </li>
                             <li @if($currentRoute == 'site.home.booking') class="active" @endif><a href="{{ route('site.home.booking') }}">@lang('header.booking')</a>
                             </li>
+                            <li @if($currentRoute == 'site.home.journeys_fare ') class="active" @endif><a href="{{ route('site.home.journeys_fare') }}">@lang('home.journeys_fare')</a>
+                            </li>
                             <li @if(strpos($_SERVER['REQUEST_URI'], "i-3") !== false) !== false class="active" @endif><a href="{{ route('site.article.index',['id' => 3, 'slug' => 'article']) }}">@lang('header.sale')</a>
                             </li>
                             <li @if(strpos($_SERVER['REQUEST_URI'], "i-1") !== false) class="active" @endif><a href="{{ route('site.article.index',['id' => 1, 'slug' => 'article']) }}">@lang('header.article')</a>

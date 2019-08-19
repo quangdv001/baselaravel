@@ -154,6 +154,21 @@ class SiteHomeController extends SiteBaseController
         return view('site.home.about')->with('article', $article)->with('data', $data);
     }
 
+    public function journeysFare(){
+        $param['category_id'] = 1;
+        $param['limit'] = 5;
+        $param['sortBy'] = 'id';
+        if($this->locales->current() == 'en') {
+            $data = $this->page->getBySlug('journeys-fare');
+        } else{
+            $data = $this->page->getBySlug('hanh-trinh-gia-ve');
+        }
+        
+        $article = $this->article->search($param);
+
+        return view('site.home.journeys')->with('article', $article)->with('data', $data);
+    }
+
     public function customer_care(){
         $param['category_id'] = 1;
         $param['limit'] = 5;
