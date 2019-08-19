@@ -131,11 +131,11 @@ Danh sách bài viết
                                 </td>
                                 <td>
                                     <a href="{{ route('admin.article.getCreate', ['id' => $v->id]) }}"
-                                        class="text-warning"><i class="fa fa-pencil-square-o icon-sm"
+                                        class="text-warning" title="sửa"><i class="fa fa-pencil-square-o icon-sm"
                                             aria-hidden="true"></i></a>
                                     -
-                                    <a href="{{ route('admin.article.remove', ['id' => $v->id]) }}"
-                                        class="text-warning"><i class="fa fa-trash-o icon-sm"
+                                    <a href="{{ route('admin.article.remove', ['id' => $v->id]) }}" onclick="return confirm('Bạn chắc chắn muốn xóa chứ ?')"
+                                        class="text-danger" title="xóa"><i class="fa fa-trash-o icon-sm"
                                             aria-hidden="true"></i></a>
                                 </td>
                             </tr>
