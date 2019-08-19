@@ -151,11 +151,17 @@
 
                             <div class="form-group">
                                 <label for="editor1">Mô tả ngắn</label>
+                                @if($errors->has('short_description'))
+                                <p class="text-danger">{{ $errors->first('short_description') }}</p>
+                                @endif
                                 <textarea class="form-control ckeditor" name="short_description" id="editor1"
                                     rows="2">{{ isset($data->short_description) ? $data->short_description : old('short_description') }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="editor2">Mô tả</label>
+                                @if($errors->has('description'))
+                                <p class="text-danger">{{ $errors->first('description') }}</p>
+                                @endif
                                 <textarea class="form-control ckeditor" name="description" id="editor2"
                                     rows="5">{{ isset($data->description) ? $data->description : old('description') }}</textarea>
                             </div>
