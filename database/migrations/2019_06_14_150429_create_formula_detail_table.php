@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateServiceFormulaDetailTable extends Migration
+class CreateFormulaDetailTable extends Migration
 {
     /**
      * Run the migrations.
@@ -33,6 +33,6 @@ class CreateServiceFormulaDetailTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('service_formula_detail');
+        Schema::dropIfExists('formula_detail');
     }
 }
