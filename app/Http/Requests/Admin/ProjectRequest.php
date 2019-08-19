@@ -25,6 +25,8 @@ class ProjectRequest extends FormRequest
     {
         return [
             'title' => 'required',
+            'short_description' => 'required',
+            'description' => 'required',
             'slug' => 'required|unique:article,slug,'.$this->id,
         ];
     }
@@ -38,6 +40,8 @@ class ProjectRequest extends FormRequest
     {
         return [
             'title.required' => 'Tên bài viết không được rỗng',
+            'short_description.required' => 'Mô tả ngắn của bài viết không được rỗng',
+            'description.required' => 'Nội dung của bài viết không được rỗng',
             'slug.unique' => 'Slug đã tồn tại',
         ];
     }

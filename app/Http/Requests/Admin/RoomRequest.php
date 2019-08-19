@@ -25,6 +25,8 @@ class RoomRequest extends FormRequest
     {
         return [
             'title' => 'required',
+            'short_description' => 'required',
+            'description' => 'required',
             'price' => 'numeric',
             'acreage' => 'numeric',
             'slug' => 'required|unique:room,slug,'.$this->id,
@@ -40,6 +42,8 @@ class RoomRequest extends FormRequest
     {
         return [
             'title.required' => 'Tên bài viết không được rỗng',
+            'short_description.required' => 'Mô tả ngắn của bài viết không được rỗng',
+            'description.required' => 'Nội dung của bài viết không được rỗng',
             'slug.unique' => 'Slug đã tồn tại',
             'price.numeric' => 'Giá trị phải là số',
             'acreage.numeric' => 'Giá trị phải là số',
