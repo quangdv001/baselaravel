@@ -32,7 +32,6 @@
           </div>
           <div class="col-sm-4">
             @include('site.components.latestBlock', ['moduleTitle'=>'Đô Thị', 'type'=>'thumb', 'news'=>$latestProjects])
-            <a href="#" style="display:block"><img src="https://file4.batdongsan.com.vn/2019/03/18/RUFz0fap/20190318111542-274f.jpg" alt="" width="100%" height="630px"></a>
           </div>
         </div>
       </div>
