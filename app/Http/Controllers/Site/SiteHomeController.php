@@ -210,7 +210,7 @@ class SiteHomeController extends Controller
                     break;
             }
             $view = 'site.category.article';
-            $categoryChild = $this->category->getChild($category->id);
+            $categoryChild = $this->category->getChild($cate_parent->id);
             return view($view)
                 ->with('category', $category)
                 ->with('categoryChild', $categoryChild)

@@ -6,7 +6,7 @@
       @foreach ($categoryChild as $category)
         <div class="news-post line-bottom list-style-post small-post">
           <div class="news-post-content">
-            <div class="post-title title"><i class="list-icon fas fa-circle"></i><a class="news-post-link" href="#route"><b>{{ $category['name'] }}</b></a></div>
+            <div class="post-title title"><i class="list-icon fas fa-circle"></i><a class="news-post-link" href="{{ route('site.home.category', ['slug' => $category['slug']]) }}"><b>{{ $category['name'] }}</b></a></div>
           </div>
         </div>
       @endforeach
