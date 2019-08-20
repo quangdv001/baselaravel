@@ -224,17 +224,23 @@ class SiteHomeController extends Controller
         $category = $this->category->getBySlug($slugCategory);
         $view = '';
         $arrDistrict = $arrProvince = $arrWard = [];
-        if(in_array($category->type, [1,2,3])){
-            $data = $this->article->getBySlug($slugDetail);
-            $relate = $this->article->getRelate($category->id, $slugDetail, 5);
+        if($category->parent_id == 1) {
+            $data = self::detailFilter($slugCategory, $slugDetail);
+            if($data && $slugCategory == 'cho-thue') {
+                $arrProvince = $this->province->getProvincePluck()->toArray();
+                $arrDistrict = $this->province->getDistrictPluck()->toArray();
+                $arrWard = $this->province->getWardPluck()->toArray();
+                $relate = $this->room->getRelate($category->id, $slugDetail, 5);
+                $view = 'site.details.room';
+            } else {
+                $relate = self::relateFilter($slugCategory, $category->id, $slugDetail);
+                $view = 'site.details.article';
+            }
+        } elseif($category->parent_id > 1){
+            $cate_parent = $this->category->getById($category->parent_id);
+            $data = self::detailFilter($cate_parent->slug, $slugDetail);
+            $relate = self::relateFilter($slugCategory, $category->id, $slugDetail);
             $view = 'site.details.article';
-        } else {
-            $arrProvince = $this->province->getProvincePluck()->toArray();
-            $arrDistrict = $this->province->getDistrictPluck()->toArray();
-            $arrWard = $this->province->getWardPluck()->toArray();
-            $data = $this->room->getBySlug($slugDetail);
-            $relate = $this->room->getRelate($category->id, $slugDetail, 5);
-            $view = 'site.details.room';
         }
         return view($view)
             ->with('arrProvince', $arrProvince)
@@ -243,6 +249,59 @@ class SiteHomeController extends Controller
             ->with('category', $category)
             ->with('relate', $relate)
             ->with('data', $data);
+    }
+
+    public function detailFilter($slugCate, $slugArticle){
+        $data = '';
+        switch ($slugCate) {
+            case "nha-dat-ha-noi":
+                $data = $this->land->findLandBySlug($slugArticle);
+                break;
+            case "moi-gioi-san-giao-dich":
+                $data = $this->exchange->findExchangeBySlug($slugArticle);
+                break;
+            case "tin-tuc":
+                $data = $this->article->findArticleBySlug($slugArticle);
+                break;
+            case "do-thi":
+                $data = $this->project->findProjectBySlug($slugArticle);
+                break;
+            case "tro-giup-phap-ly":
+                $data = $this->law->findLawBySlug($slugArticle);
+                break;
+            case "cho-thue":
+                $data = $this->room->getBySlug($slugArticle);
+                break;
+            default:
+                break;
+        }
+
+        return $data;
+    }
+
+    public function relateFilter($slugCate, $cateId, $slugArticle, $limit=5){
+        $data = '';
+        switch ($slugCate) {
+            case "nha-dat-ha-noi":
+                $data = $this->land->getRelate($cateId, $slugArticle, $limit);
+                break;
+            case "moi-gioi-san-giao-dich":
+                $data = $this->exchange->getRelate($cateId, $slugArticle, $limit);
+                break;
+            case "tin-tuc":
+                $data = $this->article->getRelate($cateId, $slugArticle, $limit);
+                break;
+            case "do-thi":
+                $data = $this->project->getRelate($cateId, $slugArticle, $limit);
+                break;
+            case "tro-giup-phap-ly":
+                $data = $this->law->getRelate($cateId, $slugArticle, $limit);
+                break;
+            default:
+                break;
+        }
+
+        return $data;
     }
 
     public function search(Request $request){

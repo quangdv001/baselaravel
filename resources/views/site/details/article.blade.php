@@ -30,7 +30,7 @@
                     </div>
                 </div>
                 <div class="list-post-aside"></div>
-                @if(sizeof($relate) > 0)
+                @if(isset($relate) && $relate != '')
                 <h3 class="module-title"><a href="#">Tin Liên quan</a></h3>
                 @foreach($relate as $v)
                 <div class="news-post line-bottom list-style-post small-post">
