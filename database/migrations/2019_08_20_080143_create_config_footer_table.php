@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateManagerLinksFooterTable extends Migration
+class CreateConfigFooterTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateManagerLinksFooterTable extends Migration
      */
     public function up()
     {
-        Schema::create('manager_links_footer', function (Blueprint $table) {
+        Schema::create('config_footer', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('title');
-            $table->string('slug')->unique();
-            $table->string('meta')->nullable();
-            $table->text('content')->nullable();
-            $table->smallInteger('status')->nullable()->default(1);
+            $table->string('code');
+            $table->text('value')->nullable();
             $table->integer('user_id_c')->nullable()->default(0);
             $table->string('user_name_c')->nullable();
             $table->integer('user_id_u')->nullable()->default(0);
@@ -40,6 +37,6 @@ class CreateManagerLinksFooterTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('manager_links_footer');
+        Schema::dropIfExists('config_footer');
     }
 }
