@@ -138,53 +138,39 @@ class SiteHomeController extends Controller
         $category = $this->category->getBySlug($slug);
         $arrDistrict = [];
         $data = [];
+        $params = [];
         $view = '';
+        $params['status'] = 1;
+        $params['orderBy'] = 'id';
+        $params['limit'] = 10;
         if($category->parent_id == 1) {
             switch($category->slug)
             {
-                case "du-an-ha-noi":
-                    $params['status'] = 1;
-                    $params['orderBy'] = 'id';
-                    $params['limit'] = 10;
+                case "nha-dat-ha-noi":
                     $data = $this->land->search($params);
                     $view = 'site.category.article';
                     break;
 
                 case "moi-gioi-san-giao-dich":
-                    $params['status'] = 1;
-                    $params['orderBy'] = 'id';
-                    $params['limit'] = 10;
                     $data = $this->exchange->search($params);
                     $view = 'site.category.article';
                     break;
 
                 case "cho-thue":
                     $arrDistrict = $this->province->getDistrictPluck()->toArray();
-                    $params['status'] = 1;
-                    $params['orderBy'] = 'id';
-                    $params['limit'] = 10;
                     $data = $this->room->search($params);
                     $view = 'site.category.room';
                     break;
                 
                 case "tin-tuc":
-                    $params['status'] = 1;
-                    $params['orderBy'] = 'id';
-                    $params['limit'] = 10;
                     $data = $this->article->search($params);
                     $view = 'site.category.article';
                     break;
                 case "do-thi":
-                    $params['status'] = 1;
-                    $params['orderBy'] = 'id';
-                    $params['limit'] = 10;
                     $data = $this->project->search($params);
                     $view = 'site.category.article';
                     break;
                 case "tro-giup-phap-ly":
-                    $params['status'] = 1;
-                    $params['orderBy'] = 'id';
-                    $params['limit'] = 10;
                     $data = $this->law->search($params);
                     $view = 'site.category.article';
                     break;
@@ -192,6 +178,38 @@ class SiteHomeController extends Controller
                     $view = 'site.category.article';
                     break;
             }
+            $categoryChild = $this->category->getChild($category->id);
+            return view($view)
+                ->with('category', $category)
+                ->with('categoryChild', $categoryChild)
+                ->with('arrDistrict', $arrDistrict)
+                ->with('data', $data);
+        } elseif ($category->parent_id > 1) {
+            $params['category_id'] = $category->id;
+            $cate_parent = $this->category->getById($category->parent_id);
+            switch($cate_parent->slug)
+            {
+                case "nha-dat-ha-noi":
+                    $data = $this->land->search($params);
+                    break;
+
+                case "moi-gioi-san-giao-dich":
+                    $data = $this->exchange->search($params);
+                    break;
+                
+                case "tin-tuc":
+                    $data = $this->article->search($params);
+                    break;
+                case "do-thi":
+                    $data = $this->project->search($params);
+                    break;
+                case "tro-giup-phap-ly":
+                    $data = $this->law->search($params);
+                    break;
+                default:
+                    break;
+            }
+            $view = 'site.category.article';
             $categoryChild = $this->category->getChild($category->id);
             return view($view)
                 ->with('category', $category)
