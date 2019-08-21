@@ -14,6 +14,7 @@
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+Route::view('/manage/{any}', 'welcome')->where('any', '.*');
 
 Route::namespace('Admin')->name('admin.')->group(function () {
     require_once('admin.php');
@@ -22,3 +23,13 @@ Route::namespace('Admin')->name('admin.')->group(function () {
 Route::namespace('Site')->name('site.')->group(function () {
     require_once('site.php');
 });
+
+Route::namespace('My')->name('my.')->prefix('my')->group(function () {
+    require_once('my.php');
+});
+
+
+// Route::view('manage/{any}', function () {
+//     return view('welcome');
+// })->where('any', '.*');
+

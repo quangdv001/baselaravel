@@ -18,6 +18,7 @@ class CreateMotelTable extends Migration
             $table->string('name');
             $table->string('address');
             $table->text('description')->nullable();
+            $table->bigInteger('user_id');
             $table->timestamps();
         });
     }
