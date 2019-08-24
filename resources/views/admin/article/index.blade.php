@@ -34,7 +34,7 @@ Danh sách bài viết
                                 <select class="form-control" name="type" id="exampleFormControlSelect2">
                                     <option @if(old('type') == -1) selected @endif value="-1">Mời chọn</option>
                                     <option @if(old('type') == 1) selected @endif value="1">Tin tức</option>
-                                    <option @if(old('type') == 4) selected @endif value="4">Đối tác</option>
+                                    <option @if(old('type') == 2) selected @endif value="2">Đối tác</option>
                                 </select>
                             </div>
                         </div>

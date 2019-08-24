@@ -87,7 +87,7 @@
                         @endif
                         <select class="form-control" name="type" id="exampleFormControlSelect3">
                             <option value="1"  @if(isset($data->type) && $data->type == 1) selected @endif>Tin tức</option>
-                            <option value="0" @if(isset($data->type) && $data->type == 0) selected @endif>Đối tác</option>
+                            <option value="2" @if(isset($data->type) && $data->type == 2) selected @endif>Đối tác</option>
                         </select>
                     </div>
                     <div class="form-group">

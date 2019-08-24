@@ -35,12 +35,8 @@ class ArticleService
         if (isset($data['status']) && $data['status'] > -1) {
             $query = $query->where('status', $data['status']);
         }
-        if (isset($data['type'])) {
-            if (is_array($data['type']) && count($data['type']) > 1) {
-                $query = $query->whereIn('type', $data['type']);
-            } else if (!is_array($data['type']) && $data['type'] > -1){
-                $query = $query->where('type', $data['type']);
-            }
+        if (isset($data['type']) && $data['type'] > 0) {
+            $query = $query->where('type', $data['type']);
         }
         if (isset($data['sortBy']) && $data['sortBy'] != '') {
             $query = $query->orderBy($data['sortBy'], isset($data['sortOrder']) ? $data['sortOrder'] : 'DESC');
