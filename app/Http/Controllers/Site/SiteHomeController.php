@@ -14,6 +14,7 @@ use App\Services\ManagerService;
 use App\Services\FooterService;
 use App\Services\LandService;
 use App\Services\ExchangeService;
+use App\Services\AdvertiseService;
 use Illuminate\Support\Facades\Route;
 use App\Services\ProvinceService;
 use App\Service\Extend\TelegramService;
@@ -34,9 +35,10 @@ class SiteHomeController extends Controller
     private $exchange;
     private $rental;
     private $room;
+    private $advertise;
     public function __construct(CategoryService $category, ArticleService $article, RoomService $room, 
     ProvinceService $province, LawService $law, ProjectService $project, ManagerService $manager, FooterService $footer,
-    LandService $land, ExchangeService $exchange){
+    LandService $land, ExchangeService $exchange, AdvertiseService $advertise){
         $this->category = $category;
         $this->article = $article;
         $this->law = $law;
@@ -47,6 +49,7 @@ class SiteHomeController extends Controller
         $this->land = $land;
         $this->exchange = $exchange;
         $this->room = $room;
+        $this->advertise = $advertise;
         $categories = $this->category->getAll();
         $mainMenu = $this->category->getMenu($categories, 1);
         $topMenu = $this->category->getMenu($categories, 2);
@@ -66,6 +69,12 @@ class SiteHomeController extends Controller
         $districts = $this->room->listPluck();
         $pagesFooter = $this->manager->getAll();
         $socialFooter = $this->footer->getAll();
+        
+        $data['position'] = 1;
+        $verticalAdvertise = $this->advertise->search($data);
+        $data['position'] = 2;
+        $data['limit'] = 1;
+        $horizontalAdvertise = $this->advertise->search($data);
         $this->currentRoute = Route::current()->getName();
         $listSocial = [];
         foreach($socialFooter as $v) {
@@ -88,6 +97,8 @@ class SiteHomeController extends Controller
         View::share('promotionNews', $promotionNews);
         View::share('partners', $partners);
         View::share('districts', $districts);
+        View::share('verticalAdvertise', $verticalAdvertise);
+        View::share('horizontalAdvertise', $horizontalAdvertise);
         //Footer
         View::share('pagesFooter', $pagesFooter);
         View::share('listSocial', $listSocial);

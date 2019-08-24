@@ -53,13 +53,13 @@ class AdminAdvertiseController extends AdminBaseController
         if($id == 0){
             $res = $this->advertise->create($data);
             if($res){
-                $mess = 'Tạo bài viết thành công';
+                $mess = 'Tạo quảng cáo thành công';
             }
         } else {
             $advertise = $this->advertise->getById($id);
             $res = $this->advertise->update($advertise, $data);
             if($res){
-                $mess = 'Cập nhật bài viết thành công';
+                $mess = 'Cập nhật quảng cáo thành công';
             }
         }
         return redirect()->route('admin.advertise.getList')->with('success_message', $mess);
@@ -67,10 +67,10 @@ class AdminAdvertiseController extends AdminBaseController
 
     public function remove($id = 0){
         if (Gate::forUser($this->user)->denies('admin-pms', $this->currentRoute)) {
-            return redirect()->route('admin.home.dashboard')->with('error_message','Bạn không có quyền xóa bài viết này!');
+            return redirect()->route('admin.home.dashboard')->with('error_message','Bạn không có quyền xóa quảng cáo này!');
         }
         $this->advertise->remove($id);
-        $mess = 'Xóa bài viết thành công';
+        $mess = 'Xóa quảng cáo thành công';
         return redirect()->route('admin.advertise.getList')->with('success_message', $mess);
     }
 

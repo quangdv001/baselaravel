@@ -5,3 +5,4 @@
 <link rel="stylesheet" href="{{ asset('assets/frontend/libs/owlcarousel2/assets/owl.carousel.min.css') }}" type="text/css">
 <link rel="stylesheet" href="{{ asset('assets/frontend/libs/owlcarousel2/assets/owl.theme.default.min.css') }}" type="text/css">
 <link rel="stylesheet" href="{{ asset('assets/frontend/css/theme.css') }}" type="text/css">
+<link rel="stylesheet" href="{{ asset('assets/frontend/css/custom.css') }}" type="text/css">

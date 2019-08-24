@@ -15,6 +15,9 @@
     <!-- categories scoped -->
 
     @include('site.components.latestNews')
-    <div class="row"><img src="https://file4.batdongsan.com.vn/2019/03/12/RUFz0fap/20190312163851-0eab.jpg" alt="" width="100%" height="369px" /></div>
-
+    @if (isset($verticalAdvertise) && count($verticalAdvertise) > 0)
+      @foreach ($verticalAdvertise as $advertise)
+        <div class="row"><img src="{{ $advertise['img'] }}" alt="" width="100%" height="369px" /></div>
+      @endforeach
+    @endif
 </div>

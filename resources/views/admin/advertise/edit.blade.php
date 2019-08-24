@@ -28,8 +28,12 @@
                     </div>
                     <div class="form-group">
                         <label>Position</label>
-                        <input type="text" class="form-control position" name="position" placeholder="position"
-                            value="{{ isset($data->position) ? $data->position : old('position') }}">
+                        <select class="form-control position" name="position" id="exampleFormControlSelect3">
+                            <option value="1" @if(isset($data->position) && $data->position == 1) selected @endif>Dọc</option>
+                            <option value="2" @if(isset($data->position) && $data->position == 2) selected @endif>Ngang</option>
+                        </select>
+                        {{-- <input type="text" class="form-control position" name="position" placeholder="position"
+                            value="{{ isset($data->position) ? $data->position : old('position') }}"> --}}
                     </div>
                     <div class="row">
                         <div class="col-md-6">
@@ -92,12 +96,15 @@
             console.log("A new date selection was made: " + start.format('DD/MM/YYYY') + ' to ' + end
                 .format('DD/MM/YYYY'));
         });
+        
 
     });
     var callback = function (data) {
         $('.img').val(data.url);
         $('.img-show').attr('src', data.url);
     }
-
+    var callbackFile = function (data) {
+        $('.file_path').val(data.path);
+    }
 </script>
 @endsection
