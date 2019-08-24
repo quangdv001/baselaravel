@@ -12,5 +12,6 @@ return [
     'article' => 'Article',
     'about_us' => 'About Us',
     'gastation' => 'Gastation',
-    'ticket_location' => 'Ticket Location'
+    'ticket_location' => 'Ticket Location',
+    'album_image' => 'Album Images'
 ];

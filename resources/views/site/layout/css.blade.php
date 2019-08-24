@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="{{ asset('public/assets/site/themes/assets/libs/bootstrap-material/css/bootstrap-material-design.min.css') }}" type="text/css">
 <link rel="stylesheet" href="{{ asset('public/assets/site/themes/assets/libs/owlcarousel2/assets/owl.carousel.min.css') }}" type="text/css">
 <link rel="stylesheet" href="{{ asset('public/assets/site/themes/assets/libs/owlcarousel2/assets/owl.theme.default.min.css') }}" type="text/css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.css">
 <link rel="stylesheet" href="{{ asset('public/assets/site/themes/assets/css/theme.css') }}" type="text/css">
 <link rel="stylesheet" href="{{ asset('public/assets/site/themes/assets/css/custom.css') }}" type="text/css">
 <link rel="stylesheet" href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css">

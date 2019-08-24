@@ -80,5 +80,10 @@ Route::middleware(['auth.admin'])->prefix('admin')->group(function () {
     Route::get('page/getCreate/{locale?}/{id?}', 'AdminPageController@getCreate')->name('page.getCreate');
     Route::post('page/getCreate/{locale?}/{id?}', 'AdminPageController@postCreate')->name('page.postCreate');
     Route::get('page/remove/{id?}', 'AdminPageController@remove')->name('page.remove');
+
+    Route::get('image', 'AdminImageController@index')->name('image.getList');
+    Route::get('image/getCreate/{id?}', 'AdminImageController@getCreate')->name('image.getCreate');
+    Route::post('image/getCreate/{id?}', 'AdminImageController@postCreate')->name('image.postCreate');
+    Route::get('image/remove/{id?}', 'AdminImageController@remove')->name('image.remove');
 });
 

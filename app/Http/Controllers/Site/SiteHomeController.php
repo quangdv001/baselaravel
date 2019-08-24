@@ -17,6 +17,7 @@ use App\Services\ProvinceService;
 use App\Services\SocialsService;
 use App\Services\SliderService;
 use App\Services\PageService;
+use App\Services\ImageService;
 use App\Http\Requests\Site\BookingRequest;
 use Illuminate\Support\Facades\Storage;
 
@@ -30,10 +31,11 @@ class SiteHomeController extends SiteBaseController
     private $socials;
     private $sliders;
     private $page;
+    private $image;
     
     // For only this view
     public function __construct(CategoryService $category, ArticleService $article, OrderService $order, PageService $page,
-                                Locales $locales, ProvinceService $province, SocialsService $socials, SliderService $sliders){
+                                Locales $locales, ProvinceService $province, SocialsService $socials, SliderService $sliders, ImageService $image){
         parent::__construct();
         $this->middleware(function($request,$next)
         {
@@ -50,6 +52,7 @@ class SiteHomeController extends SiteBaseController
         $this->socials = $socials;
         $this->sliders = $sliders;
         $this->page = $page;
+        $this->image = $image;
         $paramArticle['limit'] = 4;
         $paramArticle['category_id'] = 1;
         $paramArticle['status'] = 1;
@@ -167,6 +170,12 @@ class SiteHomeController extends SiteBaseController
         $article = $this->article->search($param);
 
         return view('site.home.journeys')->with('article', $article)->with('data', $data);
+    }
+
+    public function imageAlbum(){
+        $images = $this->image->getAll();
+
+        return view('site.home.album_image')->with('images', $images)->with('locate', $this->locales->current());
     }
 
     public function customer_care(){

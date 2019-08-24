@@ -12,5 +12,6 @@ return [
     'article' => 'Tin tức',
     'about_us' => 'Về chúng tôi',
     'gastation' => 'Đại lý vé tàu',
-    'ticket_location' => 'Điểm bán vé'
+    'ticket_location' => 'Điểm bán vé',
+    'album_image' => 'Album ảnh'
 ];

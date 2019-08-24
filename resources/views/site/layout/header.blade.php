@@ -77,6 +77,8 @@
                             </li>
                             <li @if($currentRoute == 'site.home.regulations') class="active" @endif><a href="{{ route('site.home.regulations') }}">@lang('header.regulations')</a>
                             </li>
+                            <li @if($currentRoute == 'site.home.image') class="active" @endif><a href="{{ route('site.home.image') }}">@lang('header.album_image')</a>
+                            </li>
                             <li @if($currentRoute == 'site.home.contact') class="active" @endif><a href="{{ route('site.home.contact') }}">@lang('header.contact')</a>
                             </li>
                             <li class="hideSubIcon">

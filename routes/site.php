@@ -18,6 +18,7 @@ Route::post('sendContact', 'SiteHomeController@sendContact')->name('home.sendCon
 Route::get('booking', 'SiteHomeController@booking')->name('home.booking');
 Route::post('booking', 'SiteHomeController@postBooking')->name('home.postBooking');
 Route::get('about', 'SiteHomeController@about')->name('home.about');
+Route::get('image', 'SiteHomeController@imageAlbum')->name('home.image');
 Route::get('journeys_fare', 'SiteHomeController@journeysFare')->name('home.journeys_fare');
 Route::get('regulations', 'SiteHomeController@regulations')->name('home.regulations');
 Route::get('regulations/download/{name}', 'SiteHomeController@downloadFile')->name('home.downloadFile');
