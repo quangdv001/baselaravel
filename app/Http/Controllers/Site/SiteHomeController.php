@@ -65,7 +65,7 @@ class SiteHomeController extends Controller
         $latestProjects = $this->project->search($data);
         $latestRoom = $this->room->search($data);
         $promotionNews = $this->article->latestByType(1);
-        $partners = $this->article->latestByType(4);
+        $partners = $this->article->latestByType(2);
         $districts = $this->room->listPluck();
         $pagesFooter = $this->manager->getAll();
         $socialFooter = $this->footer->getAll();
