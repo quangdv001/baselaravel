@@ -22,7 +22,7 @@
         <ul class="list-head">
             @foreach ($lastestLaws as $key=>$item)
                 @if ($key > 2)
-                    <li><a class="title" href="{{ route('site.home.showDetail', ['slugCategory' => $item->category->slug, 'slugDetail' => $item->slug]) }}">@if (strlen(strip_tags($item->title)) > 100) {!! mb_substr(strip_tags($item->title), 0, mb_strpos(strip_tags($item->title), ' ', 100)) !!}... @else {!! $item->title !!} @endif</a><span class="meta-info-item"> <i class="far fa-clock"></i> {{$item->created_at->diffForHumans() }}</span></li>
+                    <li><a class="title" href="{{ route('site.home.showDetail', ['slugCategory' => $item->category->slug, 'slugDetail' => $item->slug]) }}">@if (strlen(strip_tags($item->title)) > 150) {!! mb_substr(strip_tags($item->title), 0, mb_strpos(strip_tags($item->title), ' ', 150)) !!}... @else {!! $item->title !!} @endif</a></li>
                 @endif
             @endforeach
         </ul>
