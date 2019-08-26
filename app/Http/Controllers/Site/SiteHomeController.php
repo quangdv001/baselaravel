@@ -58,7 +58,8 @@ class SiteHomeController extends Controller
 
         // 
         $data = ['limit' => 10];
-        $lastestLaws = $this->law->search($data);
+        $dataSearchLaw = ['limit' => 10, 'random' => 1];
+        $lastestLaws = $this->law->search($dataSearchLaw);
         $lastestArticle = $this->article->latestByType(1, 10);
         $lastestLand = $this->land->search($data);
         $lastestExchange = $this->exchange->search($data);

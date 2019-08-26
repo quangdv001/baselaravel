@@ -40,6 +40,8 @@ class LawService
         }
         if (isset($data['sortBy']) && $data['sortBy'] != '') {
             $query = $query->orderBy($data['sortBy'], isset($data['sortOrder']) ? $data['sortOrder'] : 'DESC');
+        } elseif (isset($data['random']) && $data['random'] == 1) {
+            $query = $query->inRandomOrder();
         } else {
             $query = $query->orderBy('id', 'DESC');
         }
