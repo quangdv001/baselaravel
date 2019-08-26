@@ -22,7 +22,7 @@
       @if (isset($horizontalAdvertise))
       <div class="section-gap">
         <div class="container">
-          <a href="#linkbanner"><img src="{{ $horizontalAdvertise[0]['img'] }}" alt=""  style="width:100%; max-width:100%; max-height: 120px" class="mx-auto d-block" srcset=""></a>
+          <a href="@if (isset($horizontalAdvertise[0]['url'])){{ $horizontalAdvertise[0]['url'] }} @else # @endif"><img src="{{ $horizontalAdvertise[0]['img'] }}" alt=""  style="width:100%; max-width:100%; max-height: 120px" class="mx-auto d-block" srcset=""></a>
         </div>
       </div>
       @endif
