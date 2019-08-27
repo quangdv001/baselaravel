@@ -19,27 +19,47 @@
       @include('site.layouts.partners', ['partners'=>$partners])
       {{-- END PARTNERS --}}
       <!-- FOOTER BANNER ADD -->
-      @if (isset($horizontalAdvertise))
+      @if (isset($horizontalAdvertise) && count($horizontalAdvertise) > 0)
       <div class="section-gap">
         <div class="container">
-          <a href="@if (isset($horizontalAdvertise[0]['url'])){{ $horizontalAdvertise[0]['url'] }} @else # @endif"><img src="{{ $horizontalAdvertise[0]['img'] }}" alt=""  style="width:100%; max-width:100%; max-height: 120px" class="mx-auto d-block" srcset=""></a>
+          <div class="fullads-carousel owl-carousel owl-theme">
+            @foreach ($horizontalAdvertise as $item)
+    
+            <a class="item" href="@if (isset($item['url'])){{ $item['url'] }} @else # @endif"><img src="{{ $item['img'] }}" alt=""  style="width:100%; max-width:100%; max-height: 120px" class="mx-auto d-block" srcset=""></a>
+        
+            @endforeach</div> <!-- /.ads-carousel -->
         </div>
       </div>
       @endif
-      <!-- END FOOTER BANNER ADD -->
-        {{-- <div class="section-gap banner-text" style="    background: #ccc url(https://syntec-numerique.fr/sites/default/files/styles/medium/public/Image/finance-syntec-02-02-2017-2.jpg?itok=sXt3wLLF) no-repeat center top / 100% 600%;">
-          <div class="container">
-            <div class="block-title">
-              <h2 class="title">Lorem Ipsum chỉ đơn giản là một đoạn văn bản giả</h2>
-            </div>
-            <p class="text-block">Lorem Ipsum chỉ đơn giản là một đoạn văn bản giả, được dùng vào việc trình bày và dàn trang phục vụ cho in ấn. Được dùng vào việc trình bày và dàn trang phục vụ cho in ấn.</p>
-          </div>
-        </div> --}}
       </div>
       {{-- FOOTER --}}
       @include('site.layouts.footer')
       {{-- END FOOTER --}}
     </div>
     @include('site.layouts.js')
+    <script>
+    $(function () {
+        $(".fullads-carousel").owlCarousel({
+          loop: true,
+          dots: false,
+          autoplay: true,
+          nav: true,
+          navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
+          margin: 20,
+          autoplayTimeout: 3000,
+          responsive: {
+              0: {
+                  items: 1
+              },
+              480: {
+                  items: 1
+              },
+              768: {
+                  items: 1
+              }
+          }
+      });      
+    });
+    </script>
   </body>
 </html>

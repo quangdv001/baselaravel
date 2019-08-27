@@ -74,7 +74,6 @@ class SiteHomeController extends Controller
         $data['position'] = 1;
         $verticalAdvertise = $this->advertise->search($data);
         $data['position'] = 2;
-        $data['limit'] = 1;
         $horizontalAdvertise = $this->advertise->search($data);
         $this->currentRoute = Route::current()->getName();
         $listSocial = [];

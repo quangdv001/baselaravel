@@ -153,6 +153,26 @@ arguments[4][2][0].apply(exports,arguments)
 "use strict";
 
 jQuery(document).ready(function ($) {
+	$(".ads-carousel").owlCarousel({
+        loop: true,
+        dots: false,
+        autoplay: true,
+        nav: true,
+        navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
+        margin: 20,
+        autoplayTimeout: 3000,
+        responsive: {
+            0: {
+                items: 1
+            },
+            480: {
+                items: 1
+            },
+            768: {
+                items: 1
+            }
+        }
+    });
     $(".partners-carousel").owlCarousel({
         loop: true,
         dots: false,
