@@ -1,13 +1,15 @@
 
-@if($partners)
+@if(isset($exchangePartnerAdvertise) && count($exchangePartnerAdvertise) > 0)
     <div class="section-partners">
         <div class="container">
             <div class="row justify-content-md-center">
             <div class="col-sm-12"><br>
                 <div class="partners">
                 <div class="partners-carousel owl-carousel owl-theme">
-                    @foreach ($partners as $item)
-                        <a class="partner-item" href="#partner"><img src="{{ $item->img }}" alt="#{{ $item->title }}"/></a>
+                    @foreach ($exchangePartnerAdvertise as $item)
+                    @if (isset($item['img'])) 
+                        <a class="partner-item landscape_image" href="#partner"><img src="{{ $item['img'] }}" alt="{{ $item['title'] }}"/></a>
+                    @endif
                     @endforeach
                 </div>
                 </div><br>

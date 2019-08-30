@@ -70,7 +70,9 @@ class SiteHomeController extends Controller
         $districts = $this->room->listPluck();
         $pagesFooter = $this->manager->getAll();
         $socialFooter = $this->footer->getAll();
-        
+        $exchangesMerge = json_decode(json_encode($lastestExchange), true);
+        $partnersMerge = json_decode(json_encode($partners), true);
+        $exchangePartnerAdvertise = array_merge($exchangesMerge['data'], $partnersMerge['data']);
         $data['position'] = 1;
         $verticalAdvertise = $this->advertise->search($data);
         $data['position'] = 2;
@@ -96,6 +98,7 @@ class SiteHomeController extends Controller
         View::share('latestRoom', $latestRoom);
         View::share('promotionNews', $promotionNews);
         View::share('partners', $partners);
+        View::share('exchangePartnerAdvertise', $exchangePartnerAdvertise);
         View::share('districts', $districts);
         View::share('verticalAdvertise', $verticalAdvertise);
         View::share('horizontalAdvertise', $horizontalAdvertise);

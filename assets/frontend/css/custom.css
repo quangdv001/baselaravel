@@ -2,3 +2,7 @@ ul.list-head {
     max-height: 400px;
     overflow: auto;
 }
+.search-form select{
+    -moz-appearance: menulist;
+    -webkit-appearance: menulist;
+}

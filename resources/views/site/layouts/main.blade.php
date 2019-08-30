@@ -16,7 +16,7 @@
       <div class="main">
         @yield('content')
       {{-- PARTNERS --}}
-      @include('site.layouts.partners', ['partners'=>$partners])
+      @include('site.layouts.partners', ['partners'=>$partners, 'exchangePartnerAdvertise' => $exchangePartnerAdvertise])
       {{-- END PARTNERS --}}
       <!-- FOOTER BANNER ADD -->
       @if (isset($horizontalAdvertise) && count($horizontalAdvertise) > 0)
