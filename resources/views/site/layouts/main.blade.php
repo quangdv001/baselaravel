@@ -16,7 +16,7 @@
       <div class="main">
         @yield('content')
       {{-- PARTNERS --}}
-      @include('site.layouts.partners', ['partners'=>$partners, 'exchangePartnerAdvertise' => $exchangePartnerAdvertise])
+      @include('site.layouts.partners', ['categoryExchange'=>$categoryExchange, 'exchangePartnerAdvertise' => $exchangePartnerAdvertise])
       {{-- END PARTNERS --}}
       <!-- FOOTER BANNER ADD -->
       @if (isset($horizontalAdvertise) && count($horizontalAdvertise) > 0)
@@ -25,7 +25,7 @@
           <div class="fullads-carousel owl-carousel owl-theme">
             @foreach ($horizontalAdvertise as $item)
     
-            <a class="item" href="@if (isset($item['url'])){{ $item['url'] }} @else # @endif"><img src="{{ $item['img'] }}" alt=""  style="width:100%; max-width:100%; max-height: 120px" class="mx-auto d-block" srcset=""></a>
+            <a class="item" target="_blank" href="@if (isset($item['url'])){{ $item['url'] }} @else # @endif"><img src="{{ $item['img'] }}" alt=""  style="width:100%; max-width:100%; max-height: 120px" class="mx-auto d-block" srcset=""></a>
         
             @endforeach</div> <!-- /.ads-carousel -->
         </div>

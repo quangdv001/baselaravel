@@ -17,7 +17,7 @@
   @include('site.components.latestNews')
   @if (isset($verticalAdvertise) && count($verticalAdvertise) > 0)
     @foreach ($verticalAdvertise as $advertise)
-      <div class="row"><a href="@if (isset($advertise['url'])){{ $advertise['url'] }} @else # @endif"><img src="{{ $advertise['img'] }}" alt="" width="100%" height="auto" /></a></div>
+      <div class="row"><a href="@if (isset($advertise['url'])){{ $advertise['url'] }} @else # @endif" target="_blank"><img src="{{ $advertise['img'] }}" alt="" width="100%" height="auto" /></a></div>
     @endforeach
   @endif
 </div>
