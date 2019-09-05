@@ -146,7 +146,7 @@ class SiteHomeController extends Controller
             return view('site.category.index')
                 ->with('category', (object)['type'=>4,'slug'=>'for-rents', 'name'=>'Cho thuê'])
                 ->with('data', $article);
-        } elseif (in_array($slug, ['huong-dan', 'tai-lieu', 'chinh-sach', 'ho-tro', 'dieu-khoan-thoa-thuan'])) {
+        } elseif (in_array($slug, ['gioi-thieu', 'huong-dan', 'tai-lieu', 'chinh-sach', 'ho-tro', 'dieu-khoan-thoa-thuan'])) {
             $article = $this->manager->getBySlug($slug);
             return view('site.managerpage.index')
                 ->with('data', $article);
