@@ -13,20 +13,25 @@
               <div class="col-sm-3">
               @if(sizeof($pagesFooter) > 0)
                 <ul class="list-group list-group-flush">
-                  @foreach($pagesFooter as $v)
+                  @foreach($pagesFooter as $k => $v)
+                  @if ($k < 4)
                   <li><a href="{{ route('site.home.category',['slugDetail' => $v->slug]) }}">{{ $v->title}}</a></li>
+                  @endif
                   @endforeach
                 </ul>
               @endif
               </div>
               <div class="col-sm-3">
-                <ul class="list-group list-group-flush">
-                  <li><a href="#link">Hướng dẫn</a></li>
-                  <li><a href="#link">Tài liệu</a></li>
-                  <li><a href="#link">Chính sách</a></li>
-                  <li><a href="#link">Hỗ trợ</a></li>
-                </ul>
-              </div>
+                @if(sizeof($pagesFooter) > 0)
+                  <ul class="list-group list-group-flush">
+                    @foreach($pagesFooter as $k => $v)
+                    @if ($k > 3)
+                    <li><a href="{{ route('site.home.category',['slugDetail' => $v->slug]) }}">{{ $v->title}}</a></li>
+                    @endif
+                    @endforeach
+                  </ul>
+                @endif
+                </div>
               <div class="col-sm-3">
                 <ul class="list-group list-group-flush">
                   <li><a href="tell:{{$listSocial['phone']}}"><i class="material-icons">phone_in_talk</i> {{$listSocial['phone']}}</a></li>
