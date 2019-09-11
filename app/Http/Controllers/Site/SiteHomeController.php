@@ -141,12 +141,17 @@ class SiteHomeController extends Controller
     }
 
     public function showList($slug){
+        $listSlug = $this->manager->getAll();
+        $arrSlug = [];
+        foreach($listSlug as $item) {
+            array_push($arrSlug, $item['slug']);
+        }
         if ($slug == 'for-rents') {
             $article = $this->room->search(['limit'=>10]);
             return view('site.category.index')
                 ->with('category', (object)['type'=>4,'slug'=>'for-rents', 'name'=>'Cho thuê'])
                 ->with('data', $article);
-        } elseif (in_array($slug, ['gioi-thieu', 'huong-dan', 'tai-lieu', 'chinh-sach', 'ho-tro', 'dieu-khoan-thoa-thuan'])) {
+        } elseif (in_array($slug, $arrSlug)) {
             $article = $this->manager->getBySlug($slug);
             return view('site.managerpage.index')
                 ->with('data', $article);
