@@ -10,7 +10,9 @@
             <div class="row">
             <div class="col rent-attribute"><strong>Giá :</strong><span> {{ $item->price }} triệu</span></div>
             <div class="col rent-attribute"><strong>Diện tích :</strong><span> {{ $item->acreage }} m²</span></div>
-            <div class="col rent-attribute"><strong>Quận/huyện :</strong><span> {{ $districts[$item->district_id] }}</span></div>
+            @if (isset($item->district_id) && isset($districts) && $districts[$item->district_id])
+                <div class="col rent-attribute"><strong>Quận/huyện :</strong><span> {{ $districts[$item->district_id] }}</span></div>
+            @endif
             </div>
             <div class="post-meta-container"><span class="post-meta-item"><i class="far fa-clock"></i> {{$item->created_at->diffForHumans() }}</span><span class="post-meta-item"><i class="fa fa-user-check"></i><a href="#admin"> {{ $item->admin_name_c }}</a></span></div>
         </div>
