@@ -75,6 +75,7 @@ class SiteHomeController extends Controller
         $exchangePartnerAdvertise = array_merge($exchangesMerge['data'], $partnersMerge['data']);
         $categoryExchange = $this->category->getBySlug('moi-gioi-san-giao-dich');
         $data['position'] = 1;
+        $data['status'] = 1;
         $verticalAdvertise = $this->advertise->search($data);
         $data['position'] = 2;
         $horizontalAdvertise = $this->advertise->search($data);

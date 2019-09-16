@@ -1,4 +1,6 @@
-@if (count($lastestLaws) > 0)
+<br>
+<img class="img-fluid" style="margin-top:-6px; margin-bottom: 14px" src="{{ asset('public/assets/frontend/images/location.jpg') }}" alt="" srcset="">
+{{-- @if (count($lastestLaws) > 0)
     <div class="row">                      
         <div class="slide-owl-carousel owl-carousel owl-theme"> 
                   
@@ -30,4 +32,4 @@
 @else
     <h3 class="module-title"><a href="#">Tin Heading</a></h3>
     <div class="content">Không có bài viết</div>
-@endif
+@endif --}}
