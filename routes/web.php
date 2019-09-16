@@ -14,7 +14,7 @@
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::view('/manage/{any}', 'welcome')->where('any', '.*');
+Route::view('/dashboard/{any}', 'manages.index')->where('any', '.*');
 
 Route::namespace('Admin')->name('admin.')->group(function () {
     require_once('admin.php');
