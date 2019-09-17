@@ -20,7 +20,7 @@
                   <h2 class="title solid-color text-uppercase"><span>Tin cho thuê</span></h2>
                 </div>
                 <div class="pull-right" style="padding-top:6px;">
-                  <div class="btn btn-raised btn-primary btn-sm">Đăng tin</div>
+                <a href="{{ route('site.home.usercreate') }}" class="btn btn-raised btn-primary btn-sm">Đăng tin</a>
                 </div>
               </div> <!-- / .heading-block -->
               <div class="list-post">

@@ -358,6 +358,11 @@ class SiteHomeController extends Controller
     }
 
     public function userCreate() {
-        return view('site.room.create_post');
+        $category = (object) [
+            'slug' =>'dang-tin',
+            'name' => 'Đăng tin'
+        ];
+        return view('site.room.create_post')
+            ->with('category', $category);
     }
 }

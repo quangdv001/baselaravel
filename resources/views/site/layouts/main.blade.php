@@ -7,6 +7,7 @@
     <title>@yield('title')</title>
     <!-- Bootstrap fonts and icons-->
     @include('site.layouts.css')
+    @yield('stylesheets')
   </head>
   <body>       
     <div class="page home">
@@ -61,5 +62,6 @@
       });      
     });
     </script>
+    @yield('scripts')
   </body>
 </html>
