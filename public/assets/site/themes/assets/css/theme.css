@@ -3058,6 +3058,166 @@ footer.dark .copyright,
   min-width: 220px;
   font-weight: 400;
 }
+<<<<<<< HEAD
+=======
+/* menubar-wrapper */
+.menubar-wrapper {
+  background: #f5b251;
+}
+.menubar-wrapper ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.menubar-wrapper ul > li {
+  display: inline-block;
+}
+.menubar-wrapper ul > li > a,
+.menubar-wrapper ul > li > span {
+  color: #fff;
+  display: block;
+  padding: 6px 12px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: large;
+}
+.menubar-wrapper ul > li > a:hover,
+.menubar-wrapper ul > li > span:hover {
+  color: #65a0b0;
+}
+.support-float {
+  white-space: nowrap;
+  color: #fff;
+  margin: 15px 0 5px;
+  padding-left: 65px;
+  position: relative;
+}
+.support-float a:hover {
+  color: #65a0b0;
+}
+.support-float i {
+  position: absolute;
+  left: 15px;
+  top: 0;
+  display: block;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  font-size: 50px;
+  border-radius: 3px;
+  float: left;
+}
+.support-float h1,
+.support-float h2,
+.support-float h3,
+.support-float h4,
+.support-float h5,
+.support-float h6 {
+  font-size: .95rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+.support-float .hotline {
+  font-weight: bold;
+  color: #3c3c3c;
+}
+/* SHOP CART */
+.section-shopcart-page {
+  min-height: 80vh;
+}
+.shopcart-panel {
+  max-width: 100%;
+  display: block;
+  margin: auto;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  padding-top: 0;
+  border: 1px solid #eaeaea;
+}
+.shopcart-panel .block-title {
+  margin: 0;
+  display: block;
+  background: #65a0b0;
+}
+.shopcart-panel .block-title .title {
+  margin: 0;
+  color: #fff;
+  padding: 15px;
+}
+.shopcart-panel .table thead th {
+  color: #65a0b0;
+}
+.shopcart-panel .btn {
+  text-transform: none;
+  border-radius: 20px;
+}
+.button-bordered {
+  display: inline-block;
+  padding: 15px 30px;
+  text-transform: uppercase;
+  text-align: center;
+  border: 2px solid #65a0b0;
+  border-radius: 4px;
+  margin-top: 15px;
+  font-weight: 600;
+  transition: all ease .3s;
+}
+.button-bordered i {
+  margin-left: 0px;
+  transition: all ease .3s;
+}
+.button-bordered:hover {
+  background-color: #65a0b0;
+  border: 2px solid #65a0b0;
+  color: #fff;
+}
+.button-bordered:hover i {
+  margin-left: 15px;
+}
+/* LAP DU TOAN */
+.section-app-page {
+  min-height: 80vh;
+}
+.bordered-radius-item {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.08);
+  border: 1px solid #eaeaea;
+  background: #fff;
+  display: block;
+  border-radius: 100%;
+  line-height: 30px;
+}
+.app-panel .table thead th {
+  color: #fff;
+  background: #f5b251;
+}
+.app-panel .table th,
+.app-panel .table td {
+  vertical-align: middle;
+}
+.app-panel .table tr:last-child {
+  background: rgba(101, 160, 176, 0.1);
+}
+.app-panel .btn {
+  text-transform: none;
+  border-radius: 20px;
+}
+.app-panel .card-item {
+  text-align: left;
+  background: #fff;
+  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.08);
+  padding: 15px;
+  border-radius: 2px;
+}
+.app-panel .card-item .title {
+  font-weight: 700;
+}
+>>>>>>> 06fad78134e451f54e774aeb728781b3b87ed922
 .btn.btn-sm {
   border-radius: 3px;
   padding: 5px 10px;
@@ -3257,7 +3417,7 @@ footer.dark .copyright,
 }
 .service-blog:hover,
 .service-blog:focus,
-.service-blog:active {
+.service-blog.active {
   background: #f5b251;
   -webkit-transform: scale(1.1);
       -ms-transform: scale(1.1);

@@ -54,6 +54,11 @@ Route::middleware(['auth.admin'])->prefix('admin')->group(function () {
     Route::post('product/getCreate/{id?}', 'AdminProductController@postCreate')->name('product.postCreate');
     Route::get('product/remove/{id?}', 'AdminProductController@remove')->name('product.remove');
 
+    Route::get('material', 'AdminMaterialController@index')->name('material.getList');
+    Route::get('material/getCreate/{id?}', 'AdminMaterialController@getCreate')->name('material.getCreate');
+    Route::post('material/getCreate/{id?}', 'AdminMaterialController@postCreate')->name('material.postCreate');
+    Route::get('material/remove/{id?}', 'AdminMaterialController@remove')->name('material.remove');
+
     Route::get('order', 'AdminOrderController@index')->name('order.getList');
     Route::get('order/{id}', 'AdminOrderController@show')->name('order.show');
     Route::post('order/{id}', 'AdminOrderController@updateStatus')->name('order.updateStatus');

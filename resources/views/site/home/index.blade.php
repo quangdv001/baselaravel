@@ -4,7 +4,7 @@ Trang chủ
 @endsection
 @section('content')
 <div class="section-dark"
-    style="background: #ccc url(public/assets/site/themes/assets/images/slide-bg.png) center top /auto 100%;margin-bottom: 15px;">
+style="background: #ccc url({{ asset('public/assets/site/themes/assets/images/slide-bg.png') }}) center top /auto 100%;margin-bottom: 15px;">
     <div class="container">
         <div class="row align-items-center cover-slide justify-content-md-center">
             <div class="col-sm-12">
@@ -19,7 +19,7 @@ Trang chủ
                     @foreach($category as $v)
                     @if($v->type == 0)
                     <div class="col-12 col-sm-3">
-                        <a class="block service-blog text-center active" href="{{ strval($v->url) != '' ? url(strval($v->url)) : '#' }}">
+                        <a class="block service-blog text-center" href="{{ strval($v->url) != '' ? url(strval($v->url)) : '#' }}">
                             <div class="cover-icon"><img src="{{ $v->img }}" alt=""/>
                             </div>
                             <div class="title">
@@ -28,7 +28,7 @@ Trang chủ
                         </div>
                     @elseif($v->type == 1)
                     <div class="col-12 col-sm-3">
-                            <a class="block service-blog text-center active" href="{{ route('site.article.list',['id' => $v->id, 'slug' => $v->slug]) }}">
+                            <a class="block service-blog text-center" href="{{ route('site.article.index',['id' => $v->id, 'slug' => $v->slug]) }}">
                                 <div class="cover-icon"><img src="{{ $v->img }}" alt=""/>
                                 </div>
                                 <div class="title">
@@ -37,7 +37,16 @@ Trang chủ
                             </div>
                     @elseif($v->type == 2)
                     <div class="col-12 col-sm-3">
-                            <a class="block service-blog text-center active" href="{{ route('site.product.list',['id' => $v->id, 'slug' => $v->slug]) }}">
+                            <a class="block service-blog text-center" href="{{ route('site.product.list',['id' => $v->id, 'slug' => $v->slug]) }}">
+                                <div class="cover-icon"><img src="{{ $v->img }}" alt=""/>
+                                </div>
+                                <div class="title">
+                                  <h3><span>{{ $v->name }}</span></h3>
+                                </div></a>
+                            </div>
+                    @elseif($v->type == 3)
+                    <div class="col-12 col-sm-3">
+                            <a class="block service-blog text-center" href="{{ route('site.article.list',['id' => $v->id, 'slug' => $v->slug]) }}">
                                 <div class="cover-icon"><img src="{{ $v->img }}" alt=""/>
                                 </div>
                                 <div class="title">
@@ -123,7 +132,7 @@ Trang chủ
                         <h2 class="title solid-color text-uppercase"><span>Dự án đã {{ $v->name }}</span></h2>
                     </div>
                     <div class="block-view-more pull-right"><a class="view-more"
-                            href="{{ route('site.article.list',['id' => $v->id, 'slug' => $v->slug]) }}">Xem thêm <i
+                            href="{{ route('site.article.index',['id' => $v->id, 'slug' => $v->slug]) }}">Xem thêm <i
                                 class="fa fa-angle-double-right"></i></a></div>
                 </div>
                 @if(sizeof($v->article) > 0)

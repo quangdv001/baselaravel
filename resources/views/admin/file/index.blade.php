@@ -25,7 +25,7 @@ Media
                                     <i class="mdi mdi-upload icon-picture"></i>
                                 </label>
 
-                                <input id="file-input" type="file" onchange="init.handleFile(this.files)" />
+                                <input id="file-input" type="file" multiple onchange="init.handleFile(this.files)" />
                             </div>
                             <ul class="list-img">
                                 @if(sizeof($data) > 0)

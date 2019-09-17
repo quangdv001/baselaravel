@@ -50,6 +50,7 @@ Chi tiết đơn hàng
                                     <p>{{ $data->orderInfo->name }}</p>
                                     <p>{{ $data->orderInfo->email }}</p>
                                     <p>{{ $data->orderInfo->phone }}</p>
+                                    <p>@if($customer && $customer->status == 1) <span class="badge badge-success">Đã kích hoạt</span> @else <span class="badge badge-danger">Chưa kích hoạt</span> @endif</p>
                                 </div>
                             </div>
                         </div>

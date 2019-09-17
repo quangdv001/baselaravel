@@ -61,4 +61,10 @@ Trang Đăng Nhập
             </div>
         </div>
     </div>
+</div>
+@endsection
+@section('custom_js')
+<script>
+
+</script>
 @endsection

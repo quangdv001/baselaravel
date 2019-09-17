@@ -130,6 +130,24 @@
                 </ul>
             </li>
             @endif
+            {{-- @if(auth('admin')->user()->can('admin-pms', 'admin.user.getList'))
+            <li class="nav-item nav-dropdown @if(in_array($currentRoute,['admin.material.getList'])) open @endif">
+                <a class="nav-link nav-dropdown-toggle" href="#">
+                    <i class="nav-icon icon-people"></i>Loại vật liệu</a>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a class="nav-link @if(in_array($currentRoute,['admin.material.getList'])) active @endif" href="{{ route('admin.material.getList') }}">
+                            <i class="nav-icon "></i> Danh sách</a>
+                    </li>
+                    @if(auth('admin')->user()->can('admin-pms', 'admin.material.getCreate'))
+                    <li class="nav-item">
+                        <a class="nav-link @if(in_array($currentRoute,['admin.material.getCreate'])) active @endif" href="{{ route('admin.material.getCreate') }}">
+                            <i class="nav-icon "></i> Thêm mới</a>
+                    </li>
+                    @endif
+                </ul>
+            </li>
+            @endif --}}
         </ul>
     </nav>
     <button class="sidebar-minimizer brand-minimizer" type="button"></button>

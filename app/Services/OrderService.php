@@ -101,4 +101,33 @@ class OrderService
         return $this->order->orderBy('id', 'DESC')->get();
     }
 
+    public function createOrderInfo($data)
+    {
+        try {
+            DB::beginTransaction();
+            $admin = $this->orderInfo;
+            foreach ($data as $key => $value) {
+                $admin->$key = $value;
+            }
+            $admin->save();
+            DB::commit();
+            return $admin;
+        } catch (Exception  $e) {
+            DB::rollBack();
+            throw $e;
+        }
+    }
+
+    public function createOrderDetail($data){
+        try {
+            DB::beginTransaction();
+            $admin = $this->orderDetail->insert($data);
+            DB::commit();
+            return true;
+        } catch (Exception  $e) {
+            DB::rollBack();
+            throw $e;
+        }
+    }
+
 }

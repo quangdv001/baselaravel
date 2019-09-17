@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+
+<!-- Slider home--><!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -15,7 +16,7 @@
     <link rel="stylesheet" href="./assets/css/theme.css" type="text/css">
   </head>
   <body>       
-    <div class="page category">
+    <div class="page page-content">
       <div class="header-layout">
         <div class="header fix-top">
           <div class="container">
@@ -38,9 +39,21 @@
                 <!-- NAVIGATION -->
                 <div class="navigation nav-right">
                   <ul>
-                    <li><a href="./index.html"><span class="material-icons _isMobile">vpn_key</span><span>&nbsp;Đăng nhập</span></a>
+                    <li><a href="./login.html"><span class="material-icons _isMobile">vpn_key</span><span>&nbsp;Đăng nhập</span></a>
                     </li>
-                    <li><a href="./index.html"><span class="material-icons _isMobile">person_add</span><span>&nbsp;Đăng ký</span></a>
+                    <li><a href="./register.html"><span class="material-icons _isMobile">person_add</span><span>&nbsp;Đăng ký</span></a>
+                    </li>
+                    <li class="cart-product"><a href="./gio_hang.html"><i class="material-icons">shopping_cart</i>&nbsp;&nbsp;<span class="cart-count">3</span><span class="isMobile">&nbsp;Giỏ hàng</span></a>
+                      <ul>
+                        <li><span><div class="cart-product-thumb"><img src="https://afrafurniture.com/wp-content/uploads/2019/02/toli-2-chair-1-550x550.jpg"/></div><div class="cart-product-title">Sản phẩm ghế thiết kế đặc biệt</div><div class="cart-product-price">336.000 đ</div></span>
+                        </li>
+                        <li><span><div class="cart-product-thumb"><img src="https://afrafurniture.com/wp-content/uploads/2019/02/toli-2-armchair-1-80x80.jpg"/></div><div class="cart-product-title">Ghế</div><div class="cart-product-price">16.000 đ</div></span>
+                        </li>
+                        <li class="cart-total-row"><span><div class="cart-product-total">TỔNG: </div><div class="cart-product-price">16.000 đ</div></span>
+                        </li>
+                        <li class="text-center btn btn-primary"><a href="./gio_hang.html"><i class="material-icons">local_grocery_store</i><span class="_isMobile">&nbsp;Thanh toán</span></a>
+                        </li>
+                      </ul>
                     </li>
                   </ul>
                 </div>
@@ -60,41 +73,33 @@
                 <div class="sevices-title-large">CHO NHỮNG THÀNH CÔNG NỐI TIẾP VỀ SAU</div>
               </div>
               <div class="row services-blog">
-                <div class="col-12 col-sm-3">
-                  <div class="block service-blog text-center active">
+                <div class="col-12 col-sm-3"><a class="block service-blog text-center active" href="./thietke.html">
                     <div class="cover-icon"><img src="./assets/images/icon-design.png" alt=""/>
                     </div>
                     <div class="title">
-                      <h3><a href="project.html">THIẾT KẾ</a></h3>
-                    </div>
-                  </div>
+                      <h3><span>THIẾT KẾ</span></h3>
+                    </div></a>
                 </div>
-                <div class="col-12 col-sm-3">
-                  <div class="block service-blog text-center">
+                <div class="col-12 col-sm-3"><a class="block service-blog text-center" href="./thi_cong.html">
                     <div class="cover-icon"><img src="./assets/images/consumer-products.png" alt=""/>
                     </div>
                     <div class="title">
-                      <h3><a href="#0">THI CÔNG</a></h3>
-                    </div>
-                  </div>
+                      <h3><span>THI CÔNG</span></h3>
+                    </div></a>
                 </div>
-                <div class="col-12 col-sm-3">
-                  <div class="block service-blog text-center">
+                <div class="col-12 col-sm-3"><a class="block service-blog text-center" href="./lap_du_toan.html">
                     <div class="cover-icon"><img src="./assets/images/icon-solution.png" alt=""/>
                     </div>
                     <div class="title">
-                      <h3><a href="#0">LẬP DỰ TOÁN</a></h3>
-                    </div>
-                  </div>
+                      <h3><span>LẬP DỰ TOÁN</span></h3>
+                    </div></a>
                 </div>
-                <div class="col-12 col-sm-3">
-                  <div class="block service-blog text-center">
+                <div class="col-12 col-sm-3"><a class="block service-blog text-center" href="./quan_ly_don_hang.html">
                     <div class="cover-icon"><img src="./assets/images/icon-tracking.png" alt=""/>
                     </div>
                     <div class="title">
-                      <h3><a href="#0">THEO DÕI ĐƠN HÀNG</a></h3>
-                    </div>
-                  </div>
+                      <h3><span>THEO DÕI ĐƠN HÀNG</span></h3>
+                    </div></a>
                 </div>
               </div>
             </div>
@@ -102,10 +107,30 @@
         </div>
       </div>
       <div class="main">
-        <div class="section">
-          <div class="container text-center">
-            <div class="block-title underline">
-              <h1 class="title solid-color text-uppercase"><span>Đối tác của chúng tôi            </span></h1>
+        <div class="section section-subpage">
+          <div class="container">
+            <div class="text-center">
+              <div class="block-title underline">
+                <h1 class="title solid-color text-uppercase"><span>Quản lý đơn hàng của bạn</span></h1>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-5">
+                <div class="form tracking_form">
+                  <div class="row">
+                    <div class="col-12">
+                      <label>Vui lòng nhập mã đơn hàng để có thể xem chi tiết</label>
+                    </div>
+                    <div class="col-12 form-group relative-panel">
+                      <input class="form-control" placeholder="Nhập mã đơn hàng...">
+                      <button class="btn btn-primary btn-submit">Kiểm tra</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="tracking-panel row"><img style="max-width:560px;margin:auto;" src="./assets/images/building-bg.png" alt=""></div>
+              </div>
             </div>
           </div>
         </div>

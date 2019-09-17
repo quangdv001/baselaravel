@@ -59,7 +59,10 @@
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect2">Loại</label>
                                         <select class="form-control" name="type" id="exampleFormControlSelect2">
-                                            <option value="1">m3</option>
+                                            <option value="0" @if(isset($data->type) && $data->type == 0) selected
+                                                    @endif>chiếc</option>
+                                            <option value="1" @if(isset($data->type) && $data->type == 1) selected
+                                                    @endif>md</option>
                                             <option value="2" @if(isset($data->type) && $data->type == 2) selected
                                                 @endif>m2</option>
                                         </select>
@@ -102,9 +105,9 @@
                                         @endif
                                     </div>
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Vật liệu</label>
+                                        <label>Chất liệu</label>
                                         <input type="text" class="form-control material" name="material"
                                             placeholder="Vật liệu"
                                             value="{{ isset($data->material) ? $data->material : old('material') }}">
@@ -113,6 +116,68 @@
                                         @endif
                                     </div>
                                 </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Bảo hành</label>
+                                        <input type="text" class="form-control guarantee" name="guarantee"
+                                            placeholder="Bảo hành"
+                                            value="{{ isset($data->guarantee) ? $data->guarantee : old('guarantee') }}">
+                                        @if($errors->has('guarantee'))
+                                        <p class="text-danger">{{ $errors->first('guarantee') }}</p>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Phong cách</label>
+                                        <input type="text" class="form-control style" name="style"
+                                            placeholder="Phong cách"
+                                            value="{{ isset($data->style) ? $data->style : old('style') }}">
+                                        @if($errors->has('style'))
+                                        <p class="text-danger">{{ $errors->first('style') }}</p>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label>Kích thước</label>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                    <input type="number" class="form-control width" name="width"
+                                                    placeholder="Dài"
+                                                    value="{{ isset($data->width) ? $data->width : old('width') }}">
+                                            </div>
+                                            <div class="col-md-4">
+                                                    <input type="number" class="form-control depth" name="depth"
+                                                    placeholder="Rộng"
+                                                    value="{{ isset($data->depth) ? $data->depth : old('depth') }}">
+                                            </div>
+                                            <div class="col-md-4">
+                                                    <input type="number" class="form-control height" name="height"
+                                                    placeholder="Cao"
+                                                    value="{{ isset($data->height) ? $data->height : old('height') }}">
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                        
+                                    </div>
+                                </div>
+                                {{-- <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect2">Loại vật liệu</label>
+                                        <select class="form-control" name="material_id" id="exampleFormControlSelect2">
+                                                <option value="0">Mời chọn</option>
+                                            @if(sizeof($material) > 0)
+                                            @foreach($material as $v)
+                                            <option value="{{ $v->id }}">{{ $v->name }}</option>
+                                            @endforeach
+                                            @endif
+                                        </select>
+                                    </div>
+                                </div> --}}
+                                
+                                
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
@@ -121,7 +186,8 @@
                                         <input type="hidden" name="img" class="img"
                                             value="{{isset($data->img) ? $data->img : old('img')}}">
                                         <br>
-                                        <a href="javascript:void(0)" class="btn btn-info btn-select-file">Chọn ảnh</a>
+                                        <a href="javascript:void(0)" class="btn btn-info btn-select-file">Chọn
+                                            ảnh</a>
                                         <div class="bl-img-show mt-4">
                                             <img src="{{ isset($data->img) ? $data->img : old('img') }}"
                                                 class="img-show" width="90" height="90" alt="">
@@ -143,8 +209,9 @@
                                                 @foreach($productImg as $v)
                                                 <li class="list-inline-item mb-2 position-relative">
                                                     <a href="javascript:void(0)"
-                                                        class="btn-rm-img-item position-absolute" style="right: 0"><i
-                                                            class="fa fa-times text-danger" aria-hidden="true"></i></a>
+                                                        class="btn-rm-img-item position-absolute"
+                                                        style="right: 0"><i class="fa fa-times text-danger"
+                                                            aria-hidden="true"></i></a>
                                                     <img src="{{ $v }}" width="90" height="90" alt="">
                                                     <input type="hidden" name="product_img[]" class="product_img"
                                                         value="{{ $v }}">
@@ -163,22 +230,19 @@
                                 <textarea class="form-control ckeditor" name="description" id="editor2"
                                     rows="5">{{ isset($data->description) ? $data->description : old('description') }}</textarea>
                             </div>
-
-
-                        </div>
-                        <div class="card-footer">
-                            <button class="btn btn-sm btn-primary has-spinner" type="submit">
-                                <i class="fa fa-dot-circle-o"></i> {{ $id > 0 ? 'Cập nhật' : 'Tạo mới' }}</button>
-                            <button class="btn btn-sm btn-danger" type="reset">
-                                <i class="fa fa-ban"></i> Reset</button>
+                            <div class="card-footer">
+                                <button class="btn btn-sm btn-primary has-spinner" type="submit">
+                                    <i class="fa fa-dot-circle-o"></i> {{ $id > 0 ? 'Cập nhật' : 'Tạo mới' }}</button>
+                                <button class="btn btn-sm btn-danger" type="reset">
+                                    <i class="fa fa-ban"></i> Reset</button>
+                            </div>
                         </div>
                     </div>
+                    <!-- /.col-->
                 </div>
-                <!-- /.col-->
+                <!-- /.row-->
             </div>
-            <!-- /.row-->
         </div>
-    </div>
 </form>
 @endsection
 @section('custom_js')

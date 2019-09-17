@@ -75,13 +75,13 @@ Danh sách danh mục
                                 <input type="text" class="form-control url" name="url" placeholder="URL" value="">
                             </div>
                         </div>
-                        {{-- <div class="form-group row">
-                            <label class="col-md-3 col-form-label">Class name</label>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Mô tả</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control class_name" name="class_name"
-                                    placeholder="Tên Class" value="">
+                                <textarea class="form-control description" name="description" id="exampleTextarea1"
+                                    rows="2"></textarea>
                             </div>
-                        </div> --}}
+                        </div>
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label" for="select1">Loại</label>
                             <div class="col-md-9">
@@ -89,6 +89,7 @@ Danh sách danh mục
                                     <option value="0">Theo url</option>
                                     <option value="1">Tin tức</option>
                                     <option value="2">Sản phẩm</option>
+                                    <option value="3">Danh mục</option>
                                 </select>
                             </div>
                         </div>

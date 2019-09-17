@@ -10,18 +10,21 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
 use App\Mail\Contact;
 use Illuminate\Support\Facades\Mail;
+use App\Services\OrderService;
 
 class SiteHomeController extends SiteBaseController
 {
     private $category;
     private $article;
-    protected $currentRoute;
+    private $order;
     
     // For only this view
-    public function __construct(CategoryService $category, ArticleService $article){
+    public function __construct(CategoryService $category, ArticleService $article, OrderService $order){
+        parent::__construct();
         $this->category = $category;
         $this->article = $article;
-        $category = $this->category->getAll();
+        $this->order = $order;
+        $category = $this->category->getByParentId(0);
         View::share('category', $category);
     }
 
@@ -50,5 +53,18 @@ class SiteHomeController extends SiteBaseController
         $res['success'] = 1;
         $res['mess'] = 'Gửi thành công';
         return response()->json($res);
+    }
+
+    public function order(){
+        return view('site.home.order');
+    }
+
+    public function orderDetail(Request $request){
+        $id = $request->input('id', 0);
+        $order = $this->order->getById($id);
+        // dd($order);
+        return view('site.home.orderDetail')
+        ->with('id', $id)
+        ->with('data', $order);
     }
 }
