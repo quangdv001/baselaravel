@@ -9,3 +9,4 @@
 <link rel="stylesheet" href="{{ asset('public/assets/admin/plugins/buttonloader/buttonLoader.css') }}">
 @yield('lib_css')
 @yield('custom_css')
+<!-- Bootstrap fonts and icons-->

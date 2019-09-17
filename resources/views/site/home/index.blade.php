@@ -4,7 +4,7 @@ Trang chủ
 @endsection
 @section('content')
 <div class="section-dark"
-    style="background: #ccc url(./assets/images/slide-bg.png) center top /auto 100%;margin-bottom: 15px;">
+    style="background: #ccc url(public/assets/site/themes/assets/images/slide-bg.png) center top /auto 100%;margin-bottom: 15px;">
     <div class="container">
         <div class="row align-items-center cover-slide justify-content-md-center">
             <div class="col-sm-12">
