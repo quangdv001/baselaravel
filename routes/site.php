@@ -11,5 +11,6 @@ Route::get('logout', 'SiteAuthController@logout')->name('auth.logout');
 
 Route::get('/', 'SiteHomeController@index')->name('home.index');
 Route::get('tim-kiem', 'SiteHomeController@search')->name('home.search');
+Route::get('dang-tin', 'SiteHomeController@userCreate')->name('home.usercreate');
 Route::get('{slug}', 'SiteHomeController@showList')->name('home.category');
 Route::get('{slugCategory}/{slugDetail}', 'SiteHomeController@showDetail')->name('home.showDetail');

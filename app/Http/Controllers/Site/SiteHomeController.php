@@ -356,4 +356,8 @@ class SiteHomeController extends Controller
         ->with('params', $params);
 
     }
+
+    public function userCreate() {
+        return view('site.room.create_post');
+    }
 }
