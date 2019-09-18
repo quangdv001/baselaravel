@@ -5,7 +5,9 @@
           <div class="col-sm-4">
             <div><a class="title"><img src="{{ asset('assets/images/logo.png') }}" alt="Kênh thông tin dự án, giao dịch bất động sản trên toàn quốc." style="max-width: 175px;"/></a></div><br/>
             <div>
-              <p>{{$listSocial['description-logo']}}</p>
+              @if ($listSocial['description-logo'])
+                <p>{{$listSocial['description-logo']}}</p>                  
+              @endif
             </div>
           </div>
           <div class="col-sm-8">

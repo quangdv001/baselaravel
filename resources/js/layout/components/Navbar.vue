@@ -20,6 +20,7 @@
       <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
         <div class="avatar-wrapper">
           <img :src="avatar+'/128'" class="user-avatar">
+          <span>{{ me.name }}</span>
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown">
@@ -68,11 +69,18 @@ export default {
   computed: {
     ...mapGetters([
       'sidebar',
+      'me',
       'name',
       'avatar',
       'device',
       'userId',
     ]),
+  },
+  mounted() {
+    const me = this.$store.dispatch('me/getInfo').me;
+    setTimeout(() => {
+      console.log('me', this.me)
+    }, 1000)
   },
   methods: {
     toggleSideBar() {

@@ -1,6 +1,7 @@
 <?php
 
 Route::get('/', 'MyHomeController@index')->name('home.index');
+Route::get('/me', 'MyHomeController@me')->name('home.me');
 
 Route::get('motel/search', 'MyMotelController@index')->name('motel.index');
 Route::get('motel/show/{id}', 'MyMotelController@show')->name('motel.show');
