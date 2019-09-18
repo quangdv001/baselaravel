@@ -13,15 +13,15 @@ Vue.use(Router);
 import Layout from '@/layout';
 
 /* Router for modules */
-import elementUiRoutes from './modules/element-ui';
-import componentRoutes from './modules/components';
-import chartsRoutes from './modules/charts';
-import tableRoutes from './modules/table';
-import adminRoutes from './modules/admin';
-import nestedRoutes from './modules/nested';
-import errorRoutes from './modules/error';
-import excelRoutes from './modules/excel';
-import permissionRoutes from './modules/permission';
+// import elementUiRoutes from './modules/element-ui';
+// import componentRoutes from './modules/components';
+// import chartsRoutes from './modules/charts';
+// import tableRoutes from './modules/table';
+// import adminRoutes from './modules/admin';
+// import nestedRoutes from './modules/nested';
+// import errorRoutes from './modules/error';
+// import excelRoutes from './modules/excel';
+// import permissionRoutes from './modules/permission';
 
 /**
  * Sub-menu only appear when children.length>=1
@@ -91,7 +91,154 @@ export const constantRoutes = [
         meta: { title: 'dashboard', icon: 'dashboard', noCache: false },
       },
     ],
+
   },
+
+    // list
+    {
+      path: '/nha-tro',
+      component: Layout,
+      name: 'NhaTro',
+      meta: {
+        icon: 'chart',
+        title: 'Nhà trọ',
+        roles: ['admin', 'all']
+      },
+      redirect: '/nha-tro/index',
+      hidden: false,
+      children: [
+        {
+          path: 'index',
+          component: () => import('@/views/nhatro/index'),
+          name: 'Quản lý nhà trọ',
+          meta: { title: 'Quản lý nhà trọ', icon: 'chart', noCache: true }
+        }
+      ]
+    },
+    {
+      path: '/phong-tro',
+      component: Layout,
+      name: 'PhongTro',
+      meta: {
+        icon: 'people',
+        title: 'Phòng trọ',
+        roles: ['admin', 'all']
+      },
+      redirect: '/phong-tro/index',
+      hidden: false,
+      children: [
+        {
+          path: 'index',
+          component: () => import('@/views/phongtro/index'),
+          name: 'Quản lý phòng trọ',
+          meta: { title: 'Quản lý phòng trọ', icon: 'people', noCache: true }
+        }
+      ]
+    },
+    {
+      path: '/newpost',
+      component: Layout,
+      name: 'PhongTro',
+      meta: {
+        icon: 'guide',
+        title: 'Phòng trọ - Đăng bài',
+        roles: ['admin', 'all']
+      },
+      redirect: '/newpost/index',
+      hidden: false,
+      children: [
+        {
+          path: 'index',
+          component: () => import('@/views/newpost/index'),
+          name: 'Quản lý bài đăng phòng trọ',
+          meta: { title: 'Quản lý bài đăng phòng trọ', icon: 'guide', noCache: true }
+        }
+      ]
+    },
+    {
+      path: '/dich-vu',
+      component: Layout,
+      name: 'Dichvu',
+      meta: {
+        icon: 'shopping',
+        title: 'Dịch vụ',
+        roles: ['admin', 'all']
+      },
+      redirect: '/dich-vu/index',
+      hidden: false,
+      children: [
+        {
+          path: 'index',
+          component: () => import('@/views/dichvu/index'),
+          name: 'Quản lý dịch vụ',
+          meta: { title: 'Quản lý dịch vụ', icon: 'shopping', noCache: true }
+        }
+      ]
+    },
+  
+    {
+      path: '/hop-dong',
+      component: Layout,
+      name: 'HopDong',
+      meta: {
+        icon: 'excel',
+        title: 'Hợp đồng',
+        roles: ['admin', 'all']
+      },
+      redirect: '/hop-dong/index',
+      hidden: false,
+      children: [
+        {
+          path: 'index',
+          component: () => import('@/views/hopdong/index'),
+          name: 'Quản lý hợp đồng',
+          meta: { title: 'Quản lý hợp đồng', icon: 'excel', noCache: true }
+        }
+      ]
+    },
+  
+    {
+      path: '/hoa-don',
+      component: Layout,
+      name: 'HoaDon',
+      meta: {
+        icon: 'table',
+        title: 'Hóa đơn',
+        roles: ['admin', 'all']
+      },
+      redirect: '/hoa-don/index',
+      hidden: false,
+      children: [
+        {
+          path: 'index',
+          component: () => import('@/views/hoadon/index'),
+          name: 'Quản lý hóa đơn',
+          meta: { title: 'Quản lý hóa đơn', icon: 'table', noCache: true }
+        }
+      ]
+    },
+  
+    {
+      path: '/user',
+      component: Layout,
+      name: 'User',
+      meta: {
+        icon: 'peoples',
+        title: 'User',
+        roles: ['admin']
+      },
+      redirect: '/user/index',
+      hidden: false,
+      children: [
+        {
+          path: 'index',
+          component: () => import('@/views/user/index'),
+          name: 'Quản lý tài khoản',
+          meta: { title: 'Quản lý tài khoản', icon: 'peoples', noCache: true }
+        }
+      ]
+    },
+    // end list
   // {
   //   path: '/documentation',
   //   component: Layout,
@@ -121,151 +268,7 @@ export const constantRoutes = [
   // elementUiRoutes,
 ];
 
-export const asyncRoutes = [
-  {
-    path: '/nha-tro',
-    component: Layout,
-    name: 'NhaTro',
-    meta: {
-      icon: 'chart',
-      title: 'Nhà trọ',
-      roles: ['admin', 'all']
-    },
-    redirect: '/nha-tro/index',
-    hidden: false,
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/nhatro/index'),
-        name: 'Quản lý nhà trọ',
-        meta: { title: 'Quản lý nhà trọ', icon: 'chart', noCache: true }
-      }
-    ]
-  },
-  {
-    path: '/phong-tro',
-    component: Layout,
-    name: 'PhongTro',
-    meta: {
-      icon: 'people',
-      title: 'Phòng trọ',
-      roles: ['admin', 'all']
-    },
-    redirect: '/phong-tro/index',
-    hidden: false,
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/phongtro/index'),
-        name: 'Quản lý phòng trọ',
-        meta: { title: 'Quản lý phòng trọ', icon: 'people', noCache: true }
-      }
-    ]
-  },
-  {
-    path: '/newpost',
-    component: Layout,
-    name: 'PhongTro',
-    meta: {
-      icon: 'guide',
-      title: 'Phòng trọ - Đăng bài',
-      roles: ['admin', 'all']
-    },
-    redirect: '/newpost/index',
-    hidden: false,
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/newpost/index'),
-        name: 'Quản lý bài đăng phòng trọ',
-        meta: { title: 'Quản lý bài đăng phòng trọ', icon: 'guide', noCache: true }
-      }
-    ]
-  },
-  {
-    path: '/dich-vu',
-    component: Layout,
-    name: 'Dichvu',
-    meta: {
-      icon: 'shopping',
-      title: 'Dịch vụ',
-      roles: ['admin', 'all']
-    },
-    redirect: '/dich-vu/index',
-    hidden: false,
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/dichvu/index'),
-        name: 'Quản lý dịch vụ',
-        meta: { title: 'Quản lý dịch vụ', icon: 'shopping', noCache: true }
-      }
-    ]
-  },
-
-  {
-    path: '/hop-dong',
-    component: Layout,
-    name: 'HopDong',
-    meta: {
-      icon: 'excel',
-      title: 'Hợp đồng',
-      roles: ['admin', 'all']
-    },
-    redirect: '/hop-dong/index',
-    hidden: false,
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/hopdong/index'),
-        name: 'Quản lý hợp đồng',
-        meta: { title: 'Quản lý hợp đồng', icon: 'excel', noCache: true }
-      }
-    ]
-  },
-
-  {
-    path: '/hoa-don',
-    component: Layout,
-    name: 'HoaDon',
-    meta: {
-      icon: 'table',
-      title: 'Hóa đơn',
-      roles: ['admin', 'all']
-    },
-    redirect: '/hoa-don/index',
-    hidden: false,
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/hoadon/index'),
-        name: 'Quản lý hóa đơn',
-        meta: { title: 'Quản lý hóa đơn', icon: 'table', noCache: true }
-      }
-    ]
-  },
-
-  {
-    path: '/user',
-    component: Layout,
-    name: 'User',
-    meta: {
-      icon: 'peoples',
-      title: 'User',
-      roles: ['admin']
-    },
-    redirect: '/user/index',
-    hidden: false,
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/user/index'),
-        name: 'Quản lý tài khoản',
-        meta: { title: 'Quản lý tài khoản', icon: 'peoples', noCache: true }
-      }
-    ]
-  },
-];
+export const asyncRoutes = []
 
 // export const asyncRoutes = [
 //   permissionRoutes,
@@ -364,7 +367,8 @@ export const asyncRoutes = [
 // ];
 
 const createRouter = () => new Router({
-  // mode: 'history', // require service support
+  // mode: 'abstract',
+  mode: 'hash', // require service support
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRoutes,
 });

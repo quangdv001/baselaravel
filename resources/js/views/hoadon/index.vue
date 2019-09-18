@@ -164,10 +164,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.app-container {
-  margin: 80px auto;
-  max-width: 80% !important;
-}
+
 
 .group-button {
   display: flex;

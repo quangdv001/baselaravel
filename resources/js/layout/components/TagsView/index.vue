@@ -1,7 +1,21 @@
 <template>
   <div id="tags-view-container" class="tags-view-container">
     <scroll-pane ref="scrollPane" class="tags-view-wrapper">
-      <router-link
+      
+      <!-- Start menu main -->
+      <div class="main-menu-header">
+        <div class="content-wrapper">
+          <span class="menu-item">
+            <hamburger id="hamburger-container" :is-active="sidebar.opened" class="menu-item-hamburger hamburger-container" @toggleClick="toggleSideBar" />
+          </span>
+          <a v-for="menu in menuMain" :key="menu.name" class="menu-item" :class="{active: $route.path.indexOf(menu.path) === 0}">
+            <router-link :to="menu.path"><svg-icon style="margin-right: 10px;" :icon-class="menu.icon"/>{{ menu.name }}</router-link>
+          </a>
+        </div>
+      </div>
+      <!-- end menu main -->
+
+      <!-- <router-link
         v-for="tag in visitedViews"
         ref="tag"
         :key="tag.path"
@@ -14,7 +28,7 @@
       >
         {{ generateTitle(tag.title) }}
         <span v-if="!tag.meta.affix" class="el-icon-close" @click.prevent.stop="closeSelectedTag(tag)" />
-      </router-link>
+      </router-link> -->
     </scroll-pane>
     <ul v-show="visible" :style="{left:left+'px',top:top+'px'}" class="contextmenu">
       <li @click="refreshSelectedTag(selectedTag)">
@@ -35,12 +49,14 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import ScrollPane from './ScrollPane';
+import Hamburger from '@/components/Hamburger';
 import { generateTitle } from '@/utils/i18n';
 import path from 'path';
 
 export default {
-  components: { ScrollPane },
+  components: { ScrollPane, Hamburger },
   data() {
     return {
       visible: false,
@@ -48,9 +64,49 @@ export default {
       left: 0,
       selectedTag: {},
       affixTags: [],
+      menuMain: [
+        {
+          icon: 'chart',
+          path: '/nha-tro/index',
+          name: 'Nhà trọ'
+        },
+        {
+          icon: 'people',
+          path: '/phong-tro/index',
+          name: 'Phòng trọ'
+        },
+        {
+          icon: 'shopping',
+          path: '/dich-vu/index',
+          name: 'Dịch vụ'
+        },
+        {
+          icon: 'excel',
+          path: '/hop-dong/index',
+          name: 'Hợp đồng'
+        },
+        {
+          icon: 'table',
+          path: '/hoa-don/index',
+          name: 'Hóa đơn'
+        },
+        {
+          icon: 'peoples',
+          path: '/user/index',
+          name: 'Khách hàng'
+        },
+        {
+          icon: 'guide',
+          path: '/newpost/index',
+          name: 'Bài đăng'
+        }
+      ],
     };
   },
   computed: {
+    ...mapGetters([
+      'sidebar',
+    ]),
     visitedViews() {
       return this.$store.state.tagsView.visitedViews;
     },
@@ -76,6 +132,9 @@ export default {
     this.addTags();
   },
   methods: {
+    toggleSideBar() {
+      this.$store.dispatch('app/toggleSideBar');
+    },
     generateTitle, // generateTitle by vue-i18n
     isActive(route) {
       return route.path === this.$route.path;
@@ -197,8 +256,39 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~@/styles/mixin.scss";
+@import "~@/styles/variables.scss";
+#hamburger-container {
+    display: inline-block;
+}
+.main-menu-header {
+    padding: 0px;
+    background: $primaryColor;
+    .menu-item-hamburger {
+      color: #fff;
+      fill: #fff;
+      font-weight: 700;
+      font-size: small;
+      line-height: 48px;
+      height: 48px;
+      padding: 0 15px;
+      display: inline-block;
+    }
+    .menu-item {
+      color: #fff;
+      font-weight: 500;
+      font-size: medium;
+      line-height: 60px;
+      height: 60px;
+      padding: 0 40px;
+      display: inline-block;
+      &:hover, &.active {
+        border-bottom: 2px solid #8ccdff;
+      }
+    }
+  }
 .tags-view-container {
-  height: 34px;
+  height: 58px;
   width: 100%;
   background: #fff;
   border-bottom: 1px solid #d8dce5;

@@ -7,16 +7,6 @@
         <navbar />
         <tags-view v-if="needTagsView" />
       </div>
-      <!-- Start menu main -->
-      <div class="main-menu-header">
-        <div class="content-wrapper">
-          <!-- <hamburger id="hamburger-container" :is-active="sidebar.opened" class="menu-item-hamburger hamburger-container" @toggleClick="toggleSideBar" /> -->
-          <a v-for="menu in menuMain" :key="menu.name" class="menu-item" :class="{active: $route.path.indexOf(menu.path) === 0}">
-            <router-link :to="menu.path"><svg-icon style="margin-right: 10px;" :icon-class="menu.icon"/>{{ menu.name }}</router-link>
-          </a>
-        </div>
-      </div>
-      <!-- end menu main -->
       <app-main />
       <right-panel v-if="showSettings">
         <settings />
@@ -60,45 +50,7 @@ export default {
     },
   },
   data() {
-    return {
-      menuMain: [
-        {
-          icon: 'chart',
-          path: '/nha-tro/index',
-          name: 'Nhà trọ'
-        },
-        {
-          icon: 'people',
-          path: '/phong-tro/index',
-          name: 'Phòng trọ'
-        },
-        {
-          icon: 'shopping',
-          path: '/dich-vu/index',
-          name: 'Dịch vụ'
-        },
-        {
-          icon: 'excel',
-          path: '/hop-dong/index',
-          name: 'Hợp đồng'
-        },
-        {
-          icon: 'table',
-          path: '/hoa-don/index',
-          name: 'Hóa đơn'
-        },
-        {
-          icon: 'peoples',
-          path: '/user/index',
-          name: 'Khách hàng'
-        },
-        {
-          icon: 'guide',
-          path: '/newpost/index',
-          name: 'Bài đăng'
-        }
-      ]
-    }
+    return {}
   },
   methods: {
     handleClickOutside() {
