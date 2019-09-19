@@ -79,7 +79,7 @@ export default {
   mounted() {
     const me = this.$store.dispatch('me/getInfo').me;
     setTimeout(() => {
-      console.log('me', this.me)
+      console.log('me', this.me.me)
     }, 1000)
   },
   methods: {
