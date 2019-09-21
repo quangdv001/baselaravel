@@ -160,7 +160,7 @@
 
 
         $(document).on('click', '.btn-append-img', function () {
-            init.openFileModal(callbackCkeditor);
+            init.openFileModal(callbackCkeditor, true);
         });
 
         $('.title').keyup(function () {
@@ -180,8 +180,14 @@
     }
 
     var callbackCkeditor = function (data) {
-        img = "<img src='" + data.url + "'/>";
-        CKEDITOR.instances.editor2.insertHtml(img);
+        html = '';
+        console.log(data);
+        if (data.length > 0) {
+            data.forEach(function (value, index) {
+                html += "<img src='" + value + "'/>";
+            })
+        }
+        CKEDITOR.instances.editor2.insertHtml(html);
     }
 
     var callbackMultiple = function (data) {
