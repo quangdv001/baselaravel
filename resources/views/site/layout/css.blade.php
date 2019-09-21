@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="{{ asset('public/assets/site/themes/assets/css/theme.css') }}" type="text/css">
 <link rel="stylesheet" href="{{ asset('public/assets/admin/plugins/buttonloader/buttonLoader.css') }}">
 <link rel="stylesheet" href="{{ asset('public/assets/admin/plugins/waitme/waitMe.min.css') }}">
+<link rel="stylesheet" href="{{ asset('public/assets/site/themes/assets/css/custom.css') }}" type="text/css">
 @yield('lib_css')
 @yield('custom_css')
 <!-- Bootstrap fonts and icons-->
