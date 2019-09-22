@@ -8,7 +8,7 @@
                 <div class="partners-carousel owl-carousel owl-theme">
                     @foreach ($exchangePartnerAdvertise as $item)
                     @if (isset($item['img'])) 
-                        <a class="partner-item landscape_image" href="{{ route('site.home.showDetail',['slugCategory' => $categoryExchange['slug'], 'slugDetail' => $item['slug']]) }}"><img src="{{ $item['img'] }}" alt="{{ $item['title'] }}"/></a>
+                        <a class="partner-item landscape_image" href="{{ route('site.home.showDetail',['slugCategory' => $categoryExchange->slug, 'slugDetail' => $item['slug']]) }}"><img src="{{ $item['img'] }}" alt="{{ $item['title'] }}"/></a>
                     @endif
                     @endforeach
                 </div>

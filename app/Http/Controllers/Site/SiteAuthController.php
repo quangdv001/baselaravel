@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Site;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Site\RegisterRequest;
 use App\Services\UserService;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Log;
@@ -22,7 +23,7 @@ class SiteAuthController extends Controller
         return view('site.auth.register');
     }
 
-    public function postRegister(Request $request){
+    public function postRegister(RegisterRequest $request){
         $data = $request->only('email', 'password', 'phone', 'name', 'address', 'avatar');
         $data['password'] = bcrypt($data['password']);
         $res = $this->user->create($data);

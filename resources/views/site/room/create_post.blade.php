@@ -14,6 +14,8 @@
 <div class="section-main">
     <div class="container main-wrapper">
         <h1 class="page-title"><span>Tạo tin mới</a></h1>
+        <form method="POST" enctype="multipart/form-data">
+        @csrf
         <div class="row">
             <div class="col-sm-9 border-sm-right">
                 <div class="detail-post">
@@ -32,52 +34,10 @@
                                 @endif
                             </div>
                         </div>
-                        {{-- <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Slug</label> 
-                                <input type="text" class="form-control_n slug" name="slug" placeholder="Slug"
-                                    value="">
-                                @if($errors->has('slug'))
-                                <p class="text-danger">{{ $errors->first('slug') }}</p>
-                                @endif
-                            </div>
-                        </div> --}}
-                        {{-- <div class="col-md-12"><div class="form-group">
-                                <label for="tag">TAG</label>
-                                <input type="text" name="tag" class="form-control_n form-control_n-lg" id="tag"
-                                    placeholder="tag" value="{{ $listTag ? $listTag : old('tag') }}">
-                            </div> <div class="form-group">
-                                <label for="exampleTextarea1">Meta</label>
-                                <textarea class="form-control_n" name="meta" id="exampleTextarea1"
-                                    rows="2">{{ isset($data->meta) ? $data->meta : old('meta') }}</textarea>
-                            </div> 
-                        </div> --}}
-                        {{-- <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect2">Trạng thái</label>
-                                <select class="form-control_n" name="status" id="exampleFormControlSelect2">
-                                    <option value="1">Hoạt động</option>
-                                    <option value="0" @if(isset($data->status) && $data->status == 0) selected
-                                        @endif>Ngừng hoạt
-                                        động</option>
-                                </select>
-                            </div>
-                        </div> --}}
-                        {{-- <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect2">Chọn danh mục</label>
-                                <select class="form-control_n" name="category_id" id="exampleFormControlSelect2">
-                                    {!! $html !!}
-                                </select>
-                                @if($errors->has('category_id'))
-                                <p class="text-danger">{{ $errors->first('category_id') }}</p>
-                                @endif
-                            </div>
-                        </div> --}}
                         <div class="col-md-3">
                             <div class="form-group">
                                 {{-- <label>Giá</label> --}}
-                                <input type="text" class="form-control_n price" name="price" placeholder="Giá"
+                                <input type="number" class="form-control_n price" name="price" placeholder="Giá"
                                     value="">
                                     @if($errors->has('price'))
                                 <p class="text-danger">{{ $errors->first('price') }}</p>
@@ -87,7 +47,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 {{-- <label>Diện tích</label> --}}
-                                <input type="text" class="form-control_n acreage" name="acreage" placeholder="Diện tích"
+                                <input type="number" class="form-control_n acreage" name="acreage" placeholder="Diện tích"
                                     value="">
                                     @if($errors->has('acreage'))
                                 <p class="text-danger">{{ $errors->first('acreage') }}</p>
@@ -113,7 +73,7 @@
                                 <label for="">Chọn Tỉnh/Thành phố</label>
                                 <input type="hidden" class="province" value="0">
                                 <select class="form-control_n province_id select2" name="province_id">
-                                    <option></option>
+                                    <option>Mời chọn</option>
                                 </select>
                             </div>
                         </div>
@@ -122,7 +82,7 @@
                                 <label for="">Chọn Quận/Huyện</label>
                                 <input type="hidden" class="district" value="0">
                                 <select class="form-control_n district_id select2" name="district_id">
-                                    <option></option>
+                                    <option>Mời chọn</option>
                                 </select>
                             </div>
                         </div>
@@ -131,7 +91,7 @@
                                 <label for="">Chọn Phường xã</label>
                                 <input type="hidden" class="ward" value="0">
                                 <select class="form-control_n ward_id select2" name="ward_id">
-                                    <option></option>
+                                    <option>Mời chọn</option>
                                 </select>
                             </div>
                         </div>
@@ -145,12 +105,13 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Ảnh</label>
-                                <input type="hidden" name="img" class="img"
-                                    value="">
                                 <br>
-                                <a href="javascript:void(0)" class="btn btn-info btn-select-file">Chọn ảnh</a>
-                                {{-- <div class="bl-img-show mt-4">
-                                    <img src="{{ isset($data->img) ? $data->img : old('img') }}" class="img-show"
+                                <input type="file" name="img" class="img"
+                                    >
+                                <br>
+                                {{-- <a href="javascript:void(0)" class="btn btn-info btn-select-file">Chọn ảnh</a>
+                                <div class="bl-img-show mt-4">
+                                    <img src="" class="img-show"
                                         width="90" height="90" alt="">
                                 </div> --}}
                             </div>
@@ -186,6 +147,7 @@
                 @include('site.layouts.sidebar')
             </div> <!-- sidebar -->
         </div>
+        </form>
     </div>
 </div>
 @endsection
@@ -213,9 +175,6 @@
 } */
 </style>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet">  
-<script>
-    var $ = {}; $.noty = {};
-    </script>
 @endsection
 @section('scripts')
 <style>
@@ -223,23 +182,12 @@
     z-index: 9999; 
 }
 </style>
-<script src="{{ asset('assets/admin/js/location.js') }}"></script>
+<script src="{{ asset('assets/frontend/js/location.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-<script src="{{ asset('assets/admin/js/init.js') }}"></script>
-<script src="{{ asset('js/admin.js') }}"></script>
+<script src="{{ asset('assets/frontend/js/init.js') }}"></script>
+{{-- <script src="{{ asset('js/admin.js') }}"></script> --}}
 <script>
     $(document).ready(function () {
-        // $('#tag').selectize({
-        //     plugins: ['remove_button'],
-        //     delimiter: ',',
-        //     persist: false,
-        //     create: function (input) {
-        //         return {
-        //             value: input,
-        //             text: input
-        //         }
-        //     }
-        // });
         $('.select2').select2({
             placeholder: 'Mời chọn'
         });

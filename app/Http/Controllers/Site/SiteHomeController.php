@@ -18,6 +18,8 @@ use App\Services\AdvertiseService;
 use Illuminate\Support\Facades\Route;
 use App\Services\ProvinceService;
 use App\Service\Extend\TelegramService;
+use App\Http\Requests\Admin\RoomRequest;
+use Illuminate\Support\Facades\Storage;
 
 class SiteHomeController extends Controller
 {
@@ -364,5 +366,50 @@ class SiteHomeController extends Controller
         ];
         return view('site.room.create_post')
             ->with('category', $category);
+    }
+
+    public function userPostCreate(RoomRequest $request) {
+        $user = auth()->user();
+        $data = $request->only('title', 'slug', 'short_description', 'description', 'price', 'acreage', 'direction', 'province_id', 'district_id', 'ward_id', 'address');
+        $file = $request->file('img');
+        $time = time();
+        $path = $time.'-'.$file->getClientOriginalName();
+        Storage::putFileAs(
+            'upload/files', $file, $path
+        );
+        $data['img'] = Storage::url('upload/files/'.$path);
+        $data['status'] = 2;
+        $data['category_id'] = 14;
+        $data['user_id_c'] = $user->id;
+        $data['user_name_c'] = $user->name;
+        $res = $this->room->create($data);
+            if($res){
+                $mess = 'Tạo phòng trọ thành công';
+            }
+        return view('site.home.index');
+    }
+
+    public function loadProvince($select = 0){
+        $province = $this->province->getProvincePluck();
+        $res['success'] = 1;
+        $res['mess'] = 'Lấy dữ liệu thành công!';
+        $res['html'] = view('admin.province.optionProvince')->with('province', $province)->with('select', $select)->render();
+        return response()->json($res);
+    }
+
+    public function loadDistrict($id, $select = 0){
+        $district = $this->province->getDistrictByProvince($id);
+        $res['success'] = 1;
+        $res['mess'] = 'Lấy dữ liệu thành công!';
+        $res['html'] = view('admin.province.optionDistrict')->with('district', $district)->with('select', $select)->render();
+        return response()->json($res);
+    }
+
+    public function loadWard($id, $select = 0){
+        $ward = $this->province->getWardByDistrict($id);
+        $res['success'] = 1;
+        $res['mess'] = 'Lấy dữ liệu thành công!';
+        $res['html'] = view('admin.province.optionWard')->with('ward', $ward)->with('select', $select)->render();
+        return response()->json($res);
     }
 }
