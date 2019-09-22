@@ -5,6 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>@yield('title')</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Bootstrap fonts and icons-->
     @include('site.layouts.css')
     @yield('stylesheets')
@@ -38,6 +39,8 @@
       {{-- END FOOTER --}}
     </div>
     @include('site.layouts.js')
+    <input type="hidden" class="success_message" value="{{ session()->has('success_message') ? session('success_message') : '' }}">
+    <input type="hidden" class="error_message" value="{{ session()->has('error_message') ? session('error_message') : '' }}">
     <script>
     $(function () {
         $(".fullads-carousel").owlCarousel({

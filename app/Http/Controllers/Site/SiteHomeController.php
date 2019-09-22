@@ -386,7 +386,7 @@ class SiteHomeController extends Controller
             if($res){
                 $mess = 'Tạo phòng trọ thành công';
             }
-        return view('site.home.index');
+        return redirect()->route('site.home.index')->with('success', 'Chờ admin Duyệt');
     }
 
     public function loadProvince($select = 0){
