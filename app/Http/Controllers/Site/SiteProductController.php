@@ -26,11 +26,18 @@ class SiteProductController extends SiteBaseController
     }
 
     public function index($id, $slug){
+        $cate = $this->category->getById($id);
+        if ($id == 3) {
+            $listCategoriesChild = $this->category->getByParentId($id);
+            return view('site.product.categories')
+            ->with('cate', $cate)
+            ->with('listCateChild', $listCategoriesChild);
+        }
         $param['category_id'] = $id;
         $param['limit'] = 12;
         $param['sortBy'] = 'id';
         $product = $this->product->search($param);
-        $cate = $this->category->getById($id);
+        
         return view('site.product.index')
         ->with('cate', $cate)
         ->with('data', $product);
