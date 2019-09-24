@@ -73,17 +73,16 @@
         @if(sizeof($data) > 0)
         <div class="row">
             @foreach($data as $v)
-            
             <div class="col-md-4">
-              <div class="block block-media-top">
-                <div class="row">
-                <div class="col-12"><a class="cover-image landscape_image" href="{{ route('site.article.detail',['id' => $v->id, 'slug' => $v->slug]) }}"><img src="{{ $v->img }}" alt="{{ $v->title }}"></a></div>
-                  <div class="col-12 text-left block-content">
-                    <h3><a class="title" href="{{ route('site.article.detail',['id' => $v->id, 'slug' => $v->slug]) }}">{{ $v->title }}</a></h3>
-                    <div class="desciption">{!! str_limit($v->short_description, 100) !!}</div><a class="readmore button-border" href="{{ route('site.article.detail',['id' => $v->id, 'slug' => $v->slug]) }}">Xem chi tiết <i class="readmore-icon material-icons">arrow_forward</i></a>
+                <div class="block block-media-top">
+                  <div class="row">
+                    <div class="col-12"><a class="cover-image landscape_image" href="{{ route('site.article.detail',['id' => $v->id, 'slug' => $v->slug]) }}"><img src="{{ $v->img }}" alt="{{ $v->title }}"></a></div>
+                    <div class="col-12 text-left block-content">
+                      <h3><a class="title" href="{{ route('site.article.detail',['id' => $v->id, 'slug' => $v->slug]) }}">{{ $v->title }}</a></h3>
+                      <a class="readmore button-border" href="{{ route('site.article.detail',['id' => $v->id, 'slug' => $v->slug]) }}">Xem chi tiết <i class="readmore-icon material-icons">arrow_forward</i></a>
+                    </div>
                   </div>
                 </div>
-              </div>
             </div>
             @endforeach
         </div>
@@ -93,13 +92,6 @@
             <div class="d-flex justify-content-center">
                 {{ $data->links() }}
             </div>
-          {{-- <ul class="pagination justify-content-center">
-            <li class="page-item"><a class="page-link" href="#">Trước</a></li>
-            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">Tiếp</a></li>
-          </ul> --}}
         </nav>
       </div>
     </div>
