@@ -15,41 +15,43 @@ Trang Đăng Nhập
                                     <h1 class="title text-uppercase">Đăng ký tài khoản</h1>
                                     <p>* Đăng ký tài khoản chỉ dành cho nhà thầu và các đơn vị thiết kế</p>
                                 </div>
-                                <form>
+                                <form method="POST" id="formRegister">
+                                    @csrf
                                     <div class="form-group row justify-content-center">
                                         <label class="col-auto col-form-label icon-form-label"><span class="material-icons">mail_outline</span><span class="isMobile">Email</span></label>
                                         <div class="col">
-                                            <input class="form-control" placeholder="Nhập email...">
+                                            <input class="form-control" name="email" placeholder="Nhập email...">
                                         </div>
                                     </div>
                                     <div class="form-group row justify-content-center">
                                         <label class="col-auto col-form-label icon-form-label"><span class="material-icons">person</span><span class="isMobile">Username</span></label>
                                         <div class="col">
-                                            <input class="form-control" placeholder="Nhập username...">
+                                            <input class="form-control" name="name" placeholder="Nhập username...">
                                         </div>
                                     </div>
                                     <div class="form-group row justify-content-center">
                                         <label class="col-auto col-form-label icon-form-label"><span class="material-icons">phone_in_talk</span><span class="isMobile">Điện thoại</span></label>
                                         <div class="col">
-                                            <input class="form-control" placeholder="Nhập số điện thoại...">
+                                            <input class="form-control" name="phone" placeholder="Nhập số điện thoại...">
                                         </div>
                                     </div>
                                     <div class="form-group row justify-content-center">
                                         <label class="col-auto col-form-label icon-form-label"><span class="material-icons">vpn_key</span><span class="isMobile">Mật khẩu</span></label>
                                         <div class="col">
-                                            <input class="form-control" type="password" placeholder="Nhập mật khẩu...">
+                                            <input class="form-control" id="password" name="password" type="password" placeholder="Nhập mật khẩu...">
                                         </div>
                                     </div>
                                     <div class="form-group row justify-content-center">
                                         <label class="col-auto col-form-label icon-form-label"><span class="material-icons">vpn_key</span><span class="isMobile">Nhập lại mật khẩu</span></label>
                                         <div class="col">
-                                            <input class="form-control" type="password" placeholder="Nhập mật khẩu...">
+                                            <input class="form-control" id="repassword" type="password" placeholder="Nhập lại mật khẩu...">
+                                            <span id="message"></span>
                                         </div>
                                     </div>
                                     <div class="form-group row justify-content-center">
                                         <div class="col">
                                             <div>
-                                                <button class="btn btn-primary" type="submit">Đăng ký</button>
+                                                <button class="btn btn-primary" type="button" id="register">Đăng ký</button>
                                             </div>
                                         </div>
                                     </div>
@@ -65,6 +67,22 @@ Trang Đăng Nhập
 @endsection
 @section('custom_js')
 <script>
+    $(document).ready(function() {
+        $('#password, #repassword').on('keyup', function () {
+            if ($('#password').val() == $('#repassword').val()) {
+                $('#message').html('Matching').css('color', 'green');
+            } else {
+                $('#message').html('Not Matching').css('color', 'red');
+            }
+        });
 
+        $('#register').on('click', function () {
+            if ($('#password').val() == $('#repassword').val() & $('#password').val() != '') {
+                $('#formRegister').submit();
+            } else {
+                $('#message').html('Not Matching').css('color', 'red');
+            }
+        })
+    })
 </script>
 @endsection

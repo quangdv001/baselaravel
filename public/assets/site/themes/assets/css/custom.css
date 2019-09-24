@@ -50,4 +50,13 @@
     .cover-slide {
         min-height: calc(100vh - 136px);
     }
+    
+    .header-layout .navigation > ul > li > ul > li  a,
+    .header-layout .navigation > ul > li > ul > li  span {
+        color: #666;
+    }
+    .header-layout .navigation > ul > li > ul > li.btn-primary a,
+    .header-layout .navigation > ul > li > ul > li.btn-primary span {
+        color: #fff;
+    }
 }
