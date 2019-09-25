@@ -5,7 +5,7 @@
       <!-- Start menu main -->
       <div class="main-menu-header">
         <div class="content-wrapper">
-          <span class="menu-item">
+          <span class="menu-item hamburger">
             <hamburger id="hamburger-container" :is-active="sidebar.opened" class="menu-item-hamburger hamburger-container" @toggleClick="toggleSideBar" />
           </span>
           <a v-for="menu in menuMain" :key="menu.name" class="menu-item" :class="{active: $route.path.indexOf(menu.path) === 0}">
@@ -30,7 +30,7 @@
         <span v-if="!tag.meta.affix" class="el-icon-close" @click.prevent.stop="closeSelectedTag(tag)" />
       </router-link> -->
     </scroll-pane>
-    <ul v-show="visible" :style="{left:left+'px',top:top+'px'}" class="contextmenu">
+    <!-- <ul v-show="visible" :style="{left:left+'px',top:top+'px'}" class="contextmenu">
       <li @click="refreshSelectedTag(selectedTag)">
         {{ $t('tagsView.refresh') }}
       </li>
@@ -44,7 +44,7 @@
       <li @click="closeAllTags(selectedTag)">
         {{ $t('tagsView.closeAll') }}
       </li>
-    </ul>
+    </ul> -->
   </div>
 </template>
 
@@ -177,19 +177,19 @@ export default {
       return false;
     },
     moveToCurrentTag() {
-      const tags = this.$refs.tag;
-      this.$nextTick(() => {
-        for (const tag of tags) {
-          if (tag.to.path === this.$route.path) {
-            this.$refs.scrollPane.moveToTarget(tag);
-            // when query is different then update
-            if (tag.to.fullPath !== this.$route.fullPath) {
-              this.$store.dispatch('tagsView/updateVisitedView', this.$route);
-            }
-            break;
-          }
-        }
-      });
+      // const tags = this.$refs.tag;
+      // this.$nextTick(() => {
+      //   for (const tag of tags) {
+      //     if (tag.to.path === this.$route.path) {
+      //       this.$refs.scrollPane.moveToTarget(tag);
+      //       // when query is different then update
+      //       if (tag.to.fullPath !== this.$route.fullPath) {
+      //         this.$store.dispatch('tagsView/updateVisitedView', this.$route);
+      //       }
+      //       break;
+      //     }
+      //   }
+      // });
     },
     refreshSelectedTag(view) {
       this.$store.dispatch('tagsView/delCachedView', view).then(() => {

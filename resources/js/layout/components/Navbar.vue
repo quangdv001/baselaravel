@@ -1,8 +1,10 @@
 <template>
   <div class="navbar">
     <!-- <hamburger id="hamburger-container" :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" /> -->
-
-    <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
+    <div class="header_logo_pc">
+      <img src="/assets/images/logo_app.png" alt="chk">
+    </div>
+    <!-- <breadcrumb id="breadcrumb-container" class="breadcrumb-container" /> -->
 
     <div class="right-menu">
       <template v-if="device!=='mobile'">
@@ -15,15 +17,15 @@
         </el-tooltip> -->
 
         <!-- <lang-select class="right-menu-item hover-effect" /> -->
+        <div class="right-menu-item"><span>Xin chào <strong class="username">{{ me.userInfo.name }}</strong></span></div>
       </template>
 
       <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
         <div class="avatar-wrapper">
-          <img :src="avatar+'/128'" class="user-avatar">
-          <span>{{ me.name }}</span>
+          <img  v-if="avatar" :src="avatar+'/128'" class="user-avatar">
           <i class="el-icon-caret-bottom" />
         </div>
-        <el-dropdown-menu slot="dropdown">
+        <el-dropdown-menu slot="dropdown"> 
           <router-link to="/">
             <el-dropdown-item>
               {{ $t('navbar.dashboard') }}
@@ -77,18 +79,20 @@ export default {
     ]),
   },
   mounted() {
-    const me = this.$store.dispatch('me/getInfo').me;
-    setTimeout(() => {
-      console.log('me', this.me.me)
-    }, 1000)
+    this.$store.dispatch('me/getInfo').then(res => {
+      console.log('res', this.me)
+      if (!res) window.location.href = "/login"; 
+    });
+    
   },
   methods: {
     toggleSideBar() {
       this.$store.dispatch('app/toggleSideBar');
     },
-    async logout() {
-      await this.$store.dispatch('user/logout');
-      this.$router.push(`/login?redirect=${this.$route.fullPath}`);
+    async logout() { 
+      window.location.href = '/logout';
+      // await this.$store.dispatch('user/logout');
+      // this.$router.push(`/login?redirect=${this.$route.fullPath}`);
     },
   },
 };
@@ -137,9 +141,18 @@ export default {
       display: inline-block;
       padding: 0 8px;
       height: 100%;
-      font-size: 18px;
+      font-size: 12px;
       color: #5a5e66;
       vertical-align: text-bottom;
+      .username {
+        max-width: 120px;
+        max-height: 50px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: inline-block;
+        vertical-align: middle;
+        margin-top: -1px;
+      }
 
       &.hover-effect {
         cursor: pointer;
@@ -169,7 +182,7 @@ export default {
           cursor: pointer;
           position: absolute;
           right: -20px;
-          top: 25px;
+          top: 14px;
           font-size: 12px;
         }
       }

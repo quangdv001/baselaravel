@@ -3,11 +3,11 @@
     <div v-if="user">
       <el-row :gutter="24">
 
-        <el-col :span="6" :xs="24">
+        <!-- <el-col :span="6" :xs="24">
           <user-card :user="user" />
-        </el-col>
+        </el-col> -->
 
-        <el-col :span="18" :xs="24">
+        <el-col :span="24" :xs="24">
           <el-card style="margin-bottom:20px;">
             <div slot="header" class="clearfix">
               <span>NHÀ TRỌ</span>
@@ -232,7 +232,23 @@ export default {
       'avatar'
     ])
   },
+  mounted () { this.getApi() },
+  watch: {
+    '$route': {
+      handler: function(nextValue) {
+        const { path } = nextValue
+        if (path === "/nha-tro/index") {
+          this.getApi();
+        }
+      },
+      deep: true,
+      immediate: true
+    }
+  },
   methods: {
+    getApi() {
+      console.log('get api')
+    },
     onSubmit() {},
     handleChangeActions(items) {
       const { type } = items
@@ -252,10 +268,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.app-container {
-  margin: 80px auto;
-  max-width: 80% !important;
-}
 
 .filter-container {
   display: flex;

@@ -204,3 +204,39 @@
     }
   }
 }
+
+.header_logo {
+  padding: 6px 8px;
+  background: #fff;
+  height: 50px;
+  img {
+    height: auto;
+  }
+}
+.header_logo_pc {
+  padding: 6px 8px;
+  background: #fff;
+  height: 50px; 
+}
+.menu-item {  
+  background-color: $primaryColor;
+}
+@media (min-width: 768px) {
+  #app {
+    .header_logo_pc {
+      display: inline-block;
+    }
+    .menu-item.hamburger { display: none; }
+    .sidebar-container {
+      display: none;
+      height: 50px;
+      width: 160px !important;
+    }
+    .hideSidebar  .main-container {
+      margin-left: 0;
+    }
+    .fixed-header {
+      width: calc(100% - 0px) !important;
+    }
+  }
+}
