@@ -71,17 +71,25 @@
     </div>
 </div>
 <div class="main">
+
+    @include('site.layout.elements.media-content', [
+        'title'=> $data->title,
+        'content' => $data->short_description,
+        'image' => $data->image
+        ])
+    
+    
     <div class="section section-subpage">
         <div class="container">
             <div class="text-center">
                 <div class="block-title">
-                    <h1 class="title solid-color text-uppercase"><span>{{ $data->title }}</span></h1>
+                    {{-- <h1 class="title solid-color text-uppercase"><span>{{ $data->title }}</span></h1>
+                    <h4>{!! $data->short_description !!}</h4> --}}
                 </div>
                 {!! $data->description !!}
             </div>
         </div>
-    </div>
-    <div class="section section-gellary">
+    </div><div class="section section-gellary">
         <div class="container text-center">
             <div class="main-carousel owl-carousel owl-theme">
                 <a class="item" href="#"><img src="{{ $data->img }}" alt=""></a>
