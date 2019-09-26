@@ -75,7 +75,7 @@
     @include('site.layout.elements.media-content', [
         'title'=> $data->title,
         'content' => $data->short_description,
-        'image' => $data->image
+        'image' => $data->img
         ])
     
     
