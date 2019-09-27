@@ -1,15 +1,15 @@
-<footer class="footer dark">
+<footer class="footer dark" style="background: #ccc url(http://homefun.local/public/assets/site/themes/assets/images/beautiful-wood-texture-vector-background.jpg) center top /auto 100%;">
   <div class="footer-main">
     <div class="container">
       <div class="row">
         <div class="col-sm-5">
-          <div><a class="title"><img src="{{ asset('public/assets/site/themes/assets/images/logo3.png') }}" alt="" style="max-width: 300px;margin-top: -30px;"/></a></div><br/>
+          <div><a class="title"><img src="{{ asset('public/assets/site/themes/assets/images/logo-gohay-white.png') }}" alt="" style="max-width: 300px;margin-top: -30px;"/></a></div><br/>
           <div>
             <ul class="list-group list-group-flush">
-              <li><a href="#address:">Showroom: Số 99 Đường Lê Đức Thọ - Phường Mỹ Đình 1 - Quận Nam Từ Liêm - TP. Hà Nội</a></li>
-              <li><a href="tell:123 456 789"><i class="material-icons">phone_in_talk</i> Hotline: 123 456 789</a></li>
-              <li><a href="tell:123 456 798"><i class="material-icons">phone_in_talk</i> Điện thoại: 123 456 798</a></li>
-              <li><a href="mailto:email@domail.com"><i class="material-icons">mail_outline</i> Email: email@domail.com</a></li>
+              <li><a href="#">Địa chỉ: 151 Vương Thừa Vũ, Q.Thanh Xuân, Hà Nội.</a></li>
+              <li><a href="#">Xưởng sản xuất: Khu xưởng gỗ Bến đò ngang, Ninh Sở, Thanh Trì, HN.</a></li>
+              <li><a href="tell:0936 88 11 05"><i class="material-icons">phone_in_talk</i> Hotline: 0936 88 11 05</a></li>
+              <li><a href="mailto:gohay.vn@gmail.com"><i class="material-icons">mail_outline</i> Email: gohay.vn@gmail.com</a></li>
             </ul>
           </div>
           <div>
@@ -57,6 +57,6 @@
     </div>
   </div>
   <div class="container">
-    <div class="copyright">&copy; Copyright 2019. - Website dịch vụ.</div>
+    <div class="copyright">&copy; @Copyright-2019 GOHAY.</div>
   </div>
 </footer>

@@ -40,7 +40,7 @@ class SiteArticleController extends SiteBaseController
         $cate = $this->category->getById($article->category_id);
         $param['category_id'] = $article->category_id;
         $param['except'] = $id;
-        $param['limit'] = 1;
+        $param['limit'] = 4;
         $param['sortBy'] = 'id';
         $relateArticle = $this->article->search($param);
         return view('site.article.detail')

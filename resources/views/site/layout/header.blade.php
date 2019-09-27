@@ -6,18 +6,18 @@
                     <!-- NAVIGATION -->
                     <div class="navigation nav-left">
                         <ul>
-                            <li><a href="tell: 123456789"><i class="material-icons">phone_in_talk</i><span
-                                        class="_isMobile">&nbsp;012 345 678</span></a>
+                            <li><a href="tell: 0936 88 11 05"><i class="material-icons">phone_in_talk</i><span
+                                        class="_isMobile">&nbsp;0936 88 11 05</span></a>
                             </li>
-                            <li><a href="tell: 123456789"><i class="material-icons">mail_outline</i><span
-                                        class="_isMobile">&nbsp;homefun@gmail.com</span></a>
+                            <li><a href="mailto:gohay.vn@gmail.com"><i class="material-icons">mail_outline</i><span
+                                        class="_isMobile">&nbsp;gohay.vn@gmail.com</span></a>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-sm-auto col-12">
                     <h3 class="logo" id="logo"><a href="{{ route('site.home.index') }}"><img
-                                src="{{ asset('public/assets/site/themes/assets/images/logo2.png') }}"></a></h3>
+                                src="{{ asset('public/assets/site/themes/assets/images/logo-gohay.png') }}"></a></h3>
                 </div>
                 <div class="col align-self-center text-right zero-height-sx">
                     <!-- NAVIGATION -->
