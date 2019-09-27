@@ -1,4 +1,4 @@
-<footer class="footer dark" style="background: #ccc url(http://homefun.local/public/assets/site/themes/assets/images/beautiful-wood-texture-vector-background.jpg) center top /auto 100%;">
+<footer class="footer dark" style="background: #ccc url(/public/assets/site/themes/assets/images/beautiful-wood-texture-vector-background.jpg) center top /auto 100%;">
   <div class="footer-main">
     <div class="container">
       <div class="row">
