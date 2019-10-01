@@ -58,8 +58,8 @@ class SiteHomeController extends Controller
         $socialMenu = $this->category->getMenu($categories, 3);
         $headerCenterMenu = $this->category->getMenu($categories, 4);
 
-        // 
-        $data = ['limit' => 10];
+        //
+        $data = ['status' => 1, 'limit' => 10]; 
         $dataSearchLaw = ['limit' => 10, 'random' => 1];
         $lastestLaws = $this->law->search($dataSearchLaw);
         $lastestArticle = $this->article->latestByType(1, 10);
@@ -76,8 +76,7 @@ class SiteHomeController extends Controller
         $partnersMerge = json_decode(json_encode($partners), true);
         $exchangePartnerAdvertise = array_merge($exchangesMerge['data'], $partnersMerge['data']);
         $categoryExchange = $this->category->getBySlug('moi-gioi-san-giao-dich');
-        $data['position'] = 1;
-        $data['status'] = 1;
+        $data = ['status' => 1, 'position' => 1, 'limit' => 6];
         $verticalAdvertise = $this->advertise->search($data);
         $data['position'] = 2;
         $horizontalAdvertise = $this->advertise->search($data);
@@ -386,7 +385,7 @@ class SiteHomeController extends Controller
             if($res){
                 $mess = 'Tạo phòng trọ thành công';
             }
-        return redirect()->route('site.home.index')->with('success', 'Chờ admin Duyệt');
+        return view('site.home.index');
     }
 
     public function loadProvince($select = 0){
