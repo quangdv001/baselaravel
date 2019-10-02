@@ -14,10 +14,14 @@ export function show(id) {
     // params: query,
   });
 }
-export function create(query) {
+export function create(data) {
   return request({
     url: '/my/motel/create',
     method: 'post',
-    params: query,
+    // params: data,
+    data: {
+      'name' : 'test', 'address': 'test add', 'description' : 'test des'
+    } || data
   });
 }
+

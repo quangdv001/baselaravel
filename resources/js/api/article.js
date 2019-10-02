@@ -37,3 +37,11 @@ export function updateArticle(data) {
     data,
   });
 }
+
+export function upload(data) {
+  return request({
+    url: '/my/article/uploadImage',
+    method: 'post',
+    data: data
+  });
+}

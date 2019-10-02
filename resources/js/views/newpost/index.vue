@@ -66,10 +66,15 @@
                 </el-col>
                 <el-col :span="12">
                   <el-form-item label="ĐĂNG ẢNH * :">
-                    <el-upload max-width="100%" class="upload-demo" drag action="https://jsonplaceholder.typicode.com/posts/" :on-preview="handlePreview" :on-remove="handleRemove" multiple>
+                    <input ref="uploadFile" type="file" @change="handleUpload">
+                    <!-- <el-upload max-width="100%" class="upload-demo" drag
+                    action="http://local.vccloud.vn:8000/my/article/uploadImage"
+                    :on-preview="handlePreview"
+                    :on-remove="handleRemove"
+                    @on-change="handleUpload">
                       <i class="el-icon-upload"></i>
                       <div class="el-upload__text">Drop file here or <em>click to upload</em></div>
-                    </el-upload>
+                    </el-upload> -->
                   </el-form-item>
                 </el-col>
               </el-row>
@@ -90,6 +95,7 @@
 </template>
 
 <script>
+import { upload } from '@/api/article'
 import { mapGetters } from 'vuex'
 import UserCard from '@/views/profile/components/UserCard'
 
@@ -126,6 +132,16 @@ export default {
     ])
   },
   methods: {
+    async handleUpload() {      
+      const file = this.$refs.uploadFile.files
+      console.log('file_', file)
+      var form_data = new FormData();
+      //thêm files vào trong form data
+      form_data.append('file', file[0]);
+      const urlImage = await upload(form_data)
+      console.log('upload', file, urlImage)
+
+    },
     handleRemove(file, fileList) {
       console.log(file, fileList)
     },

@@ -14,7 +14,7 @@
             </div>
             <div class="filter-container">
               <!-- Thêm mới -->
-              <el-button style="border-color: #b3d8ff !important;" plain round class="filter-item" type="default" icon="el-icon-plus" size="mini">
+              <el-button @click="dialogFormNewPost = true" style="border-color: #b3d8ff !important;" plain round class="filter-item" type="default" icon="el-icon-plus" size="mini">
                 Thêm mới
               </el-button>
 
@@ -157,7 +157,7 @@
               </el-form>
               <span slot="footer" class="dialog-footer">
                 <el-button type="info" icon="el-icon-circle-close" @click="dialogFormNewPost = false" plain>Hủy bỏ</el-button>
-                <el-button type="primary" icon="el-icon-check" @click="dialogFormNewPost = false" plain>Đồng ý</el-button>
+                <el-button type="primary" icon="el-icon-check" @click="createMotel" plain>Đồng ý</el-button>
               </span>
             </el-dialog>
           </el-card>
@@ -168,6 +168,7 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
+import { fetchList, create } from '@/api/motel'
 import UserCard from '@/views/profile/components/UserCard'
 
 export default {
@@ -232,7 +233,9 @@ export default {
       'avatar'
     ])
   },
-  mounted () { this.getApi() },
+  mounted () {
+    this.getApi()
+    },
   watch: {
     '$route': {
       handler: function(nextValue) {
@@ -246,8 +249,15 @@ export default {
     }
   },
   methods: {
-    getApi() {
-      console.log('get api')
+    async getApi() {
+      const data = await fetchList()
+      console.log('get api', data)
+    },
+    createMotel() {
+      console.log('tạo nhà trọ')
+      create().then(res => {
+        console.log(res)
+      })
     },
     onSubmit() {},
     handleChangeActions(items) {

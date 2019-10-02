@@ -37,6 +37,7 @@ class MyMotelController extends MyBaseController
         $res['success'] = 0;
         $res['mess'] = 'Có lỗi xảy ra!';
         if($data){
+            $res['mess'] = 'Thành công';
             $res['success'] = 1;
             $res['data'] = $data;
         }

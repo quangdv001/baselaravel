@@ -86,12 +86,15 @@ class MyArticleController extends MyBaseController
         return response()->json($res);
     }
 
-    public function uploadFile(Request $request){
+    public function uploadImage(Request $request){
+        logger(2);
         $file = $request->file('file');
+        logger($request->all());
         $time = time();
         // $data['folder_id'] = 0;
         // $data['name'] = $file->getClientOriginalName();
         $data['path'] = $time.'-'.$file->getClientOriginalName();
+        logger($data['path']);
         // $data['type'] = $file->getClientOriginalExtension();
         Storage::putFileAs(
             'upload/files', $file, $data['path']

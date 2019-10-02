@@ -17,6 +17,7 @@ class MyHomeController extends MyBaseController
     }
 
     public function me(){
+        logger(1);
         $user = auth()->user();
         $res['success'] = 1;
         $res['data'] = $user;
