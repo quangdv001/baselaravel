@@ -15,13 +15,30 @@ export function show(id) {
   });
 }
 export function create(data) {
+  if (data)
   return request({
     url: '/my/motel/create',
     method: 'post',
-    // params: data,
-    data: {
-      'name' : 'test', 'address': 'test add', 'description' : 'test des'
-    } || data
+    data:  data // { name, address, description  }
   });
+}
+export function edit(data) {
+  if (data && data.id) {
+    return request({
+      url: '/my/motel/update/' + data.id,
+      method: 'post',
+      data:  data // { name, address, description  }
+    });
+  }
+}
+
+export function remove(id) {
+  if (id) {
+    return request({
+      url: '/my/motel/remove',
+      method: 'post',
+      data:  { id: id }
+    });
+  }
 }
 

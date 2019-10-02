@@ -1,21 +1,53 @@
 // set function parseTime,formatTime to filter
 export { parseTime, formatTime } from '@/utils';
 
+export function convertToDatetime(date) {
+  const d = new Date(date)
+  let month = '' + (d.getMonth() + 1)
+  let day = '' + d.getDate()
+  const year = d.getFullYear()
+  let hour = '' + d.getHours()
+  let minute = '' + d.getMinutes()
+  let second = '' + d.getSeconds()
+
+  if (month.length < 2) month = '0' + month
+  if (day.length < 2) day = '0' + day
+  if (hour.length < 2) hour = '0' + hour
+  if (minute.length < 2) minute = '0' + minute
+  if (second.length < 2) second = '0' + second
+
+  return [hour, minute, second].join(':') + ' ' + [day, month, year].join('/')
+}
+export function convertToDate(date) {
+  const d = new Date(date)
+  let month = '' + (d.getMonth() + 1)
+  let day = '' + d.getDate()
+  const year = d.getFullYear()
+
+  if (month.length < 2) month = '0' + month
+  if (day.length < 2) day = '0' + day
+
+  return [day, month, year].join('/')
+}
+
 export function pluralize(time, label) {
+  if (time < 1) {
+    return 'Vừa tạo';
+  }
   if (time === 1) {
     return time + label;
   }
-  return time + label + 's';
+  return time + label + '';
 }
 
 export function timeAgo(time) {
   const between = Date.now() / 1000 - Number(time);
   if (between < 3600) {
-    return pluralize(~~(between / 60), ' minute');
+    return pluralize(~~(between / 60), ' phút');
   } else if (between < 86400) {
-    return pluralize(~~(between / 3600), ' hour');
+    return pluralize(~~(between / 3600), ' giờ');
   } else {
-    return pluralize(~~(between / 86400), ' day');
+    return pluralize(~~(between / 86400), ' ngày');
   }
 }
 

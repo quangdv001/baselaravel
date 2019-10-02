@@ -1,10 +1,9 @@
 <template>
   <div class="app-container">
-    <div v-if="user">
+    <div>
       <el-row :gutter="24">
-
         <!-- <el-col :span="6" :xs="24">
-          <user-card :user="user" />
+          <user-card v-if="user" :user="user" />
         </el-col> -->
 
         <el-col :span="24" :xs="24">
@@ -19,12 +18,21 @@
               </el-button>
 
               <!-- Xóa nhiều -->
-              <el-button class="filter-item" style="border-color: #fbc4c4 !important; box-shadow: 0px 1px 5px 0px rgb(251, 196, 196) !important;" type="default" icon="el-icon-delete" size="mini" plain round>
+              <el-button
+              class="filter-item"
+              @click="handleRemove(null, 'multiple-delete')"
+              style="border-color: #fbc4c4 !important; box-shadow: 0px 1px 5px 0px rgb(251, 196, 196) !important;"
+              type="default" icon="el-icon-delete"
+              size="mini"
+              plain round>
                 Xóa nhiều
               </el-button>
             </div>
 
-            <el-table :data="tableData" border fit style="width: 100%">
+            <el-table
+              :data="tableData"
+              border fit style="width: 100%"
+              @selection-change="handleSelectionChange">
               <el-table-column width="65px" align="center">
                 <template slot-scope="scope">
                   <i v-if="scope.row._changing" class="el-icon-loading" />
@@ -34,8 +42,8 @@
                         <i class="el-icon-setting" />
                       </el-button>
                       <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item :command="{ type: 'edit' }">Sửa</el-dropdown-item>
-                        <el-dropdown-item :command="{ type: 'newpost' }">Đăng bài</el-dropdown-item>
+                        <el-dropdown-item :command="{ type: 'edit', data: scope.row }">Sửa</el-dropdown-item>
+                        <!-- <el-dropdown-item :command="{ type: 'newpost' }">Đăng bài</el-dropdown-item> -->
                       </el-dropdown-menu>
                     </el-dropdown>
                   </div>
@@ -44,21 +52,18 @@
 
               <el-table-column type="selection" width="45"/>
 
-              <el-table-column property="from" label="Địa chỉ" width="203">
-                <template slot-scope="scope">{{ scope.row.from }}</template>
+              <el-table-column property="name" label="Tên" width="203">
+                <template slot-scope="scope">{{ scope.row.name }}</template>
               </el-table-column>
 
-              <el-table-column property="area" label="Diện tích" width="203" show-overflow-tooltip>
-                <template slot-scope="scope">{{ scope.row.area }}</template>
+              <el-table-column property="address" label="Địa chỉ">
+                <template slot-scope="scope">{{ scope.row.address }}</template>
               </el-table-column>
 
-              <el-table-column property="start_date" label="Thuê ngày" width="203" show-overflow-tooltip>
-              </el-table-column>
-
-              <el-table-column property="end_date" label="Đến ngày" width="203" show-overflow-tooltip>
-              </el-table-column>
-
-              <el-table-column property="phone" label="Số điện thoại" width="203" show-overflow-tooltip>
+              <el-table-column property="created_at" label="Ngày tạo" width="203" show-overflow-tooltip>
+                <template slot-scope="scope">
+                  <span v-if="scope && scope.row.created_at">{{ new Date(scope.row.created_at) | convertToDate }}</span>
+                </template>
               </el-table-column>
 
               <el-table-column width="55">
@@ -68,96 +73,109 @@
               </el-table-column>
 
               <el-table-column width="55">
-                <el-button type="danger" size="small" circle>
-                  <i class="el-icon-delete" />
-                </el-button>
+                <template slot-scope="scope">
+                  <el-button type="danger" size="small" @click="handleRemove(scope.row)" circle>
+                    <i class="el-icon-delete" />
+                  </el-button>
+                </template>
               </el-table-column>
             </el-table>
 
-            <el-dialog title="NHÀ TRỌ - CHỈNH SỬA" :visible.sync="dialogFormVisible">
-              <el-form ref="form" :model="form" label-width="120px">
-                <el-row :gutter="20">
-                  <el-col :span="12">
-                    <el-form-item label="Địa chỉ">
-                      <el-input v-model="form.add" :disabled="true"/>
-                    </el-form-item>
-                  </el-col>
-                  <el-col :span="12">
-                    <el-form-item label="SĐT">
-                      <el-input v-model="form.phone" :disabled="false"/>
-                    </el-form-item>
-                  </el-col>
-                </el-row>
-                <el-row :gutter="20">
-                  <el-col :span="12">
-                    <el-form-item label="Diện tích">
-                      <el-input v-model="form.dientich" :disabled="false"/>
-                    </el-form-item>
-                  </el-col>
-                  <el-col :span="12">
-                    <el-form-item label="Mô tả">
-                      <el-input v-model="form.description" :disabled="false"/>
-                    </el-form-item>
-                  </el-col>
-                </el-row>
-                <el-form-item label="Thuê từ">
-                  <el-date-picker
-                    v-model="form.date1"
-                    type="date"
-                    placeholder="Chọn ngày"
-                  />
-                </el-form-item>
-                <el-form-item label="Đến ngày">
-                  <el-date-picker
-                    v-model="form.date2"
-                    type="date"
-                    placeholder="Chọn ngày"
-                  />
-                </el-form-item>
-              </el-form>
+            <el-dialog title="NHÀ TRỌ - XÓA" :visible.sync="dialogConfirmRemove">
+              <el-alert
+                title="Xác nhận xóa"
+                type="error" 
+                show-icon>
+                <template slot>
+                  <span v-if="toRemove.length === 1">Bạn có muốn xóa nhà trọ: <strong>{{toRemove[0].name}}</strong> không?</span>
+                  <div v-else-if="toRemove.length > 1">
+                    <p>Bạn có muốn xóa những nhà trọ sau không?</p>
+                    <ul>
+                      <li v-for="item in toRemove" :key="'remove-' + item.id">{{ item.name }}</li>
+                    </ul>
+                  </div>
+                </template>
+              </el-alert>
               <span slot="footer" class="dialog-footer">
-                <el-button type="info" @click="dialogFormVisible = false" icon="el-icon-circle-close" plain>Hủy bỏ</el-button>
-                <el-button type="primary" @click="dialogFormVisible = false" icon="el-icon-check" plain>Đồng ý</el-button>
+                <el-button type="info" @click="isRemoveMultiple = dialogConfirmRemove = false" icon="el-icon-circle-close" plain>Hủy bỏ</el-button>
+                <el-button v-if="!isRemoveMultiple" type="primary" @click="removeMotel(toRemove[0].id)" icon="el-icon-check" plain>Đồng ý</el-button>
+                <el-button v-else type="primary" @click="multipleRemovalMotel" icon="el-icon-check" plain>Đồng ý</el-button>
               </span>
             </el-dialog>
 
-            <el-dialog title="NHÀ TRỌ - ĐĂNG BÀI" :visible.sync="dialogFormNewPost">
-              <el-form ref="form" :model="form" label-width="150px">
+            <el-dialog title="NHÀ TRỌ - CHỈNH SỬA" :visible.sync="dialogFormVisible">
+              <el-form ref="form" :model="formEdit" label-width="120px">
                 <el-row :gutter="20">
-                  <el-col :span="12">
-                    <el-form-item label="Tiêu đề bài đăng * :">
-                      <input type="text" v-model="form.add" :disabled="false"/>
+                  <el-col :span="24">
+                    <el-form-item label="Tên">
+                      <el-input
+                        v-if="formEdit"
+                        v-model="formEdit.name"
+                        :disabled="false"/>
                     </el-form-item>
                   </el-col>
-                  <el-col :span="12">
-                    <el-form-item label="Số điện thoại * :">
-                      <input type="text" v-model="form.phone" :disabled="false"/>
+
+                  <el-col :span="24">
+                    <el-form-item label="Địa chỉ">
+                      <el-input
+                        v-if="formEdit"
+                        v-model="formEdit.address"
+                        :disabled="true"/>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row :gutter="20">
-                  <el-col :span="12">
-                    <el-form-item label="Diện tích nhà trọ * :">
-                      <input type="text" v-model="form.dientich" :disabled="false"/>
-                    </el-form-item>
-                  </el-col>
-                  <el-col :span="12">
-                    <el-form-item label="Mô tả * :">
-                      <input type="text" v-model="form.description" :disabled="false"/>
+                  <el-col :span="24">
+                    <el-form-item label="Mô tả">
+                      <el-input v-if="formEdit"
+                        v-model="formEdit.description"
+                        type="textarea"
+                        :rows="2"
+                        :disabled="false"/>
                     </el-form-item>
                   </el-col>
                 </el-row>
+              </el-form>
+              <span slot="footer" class="dialog-footer">
+                <el-button type="info" @click="dialogFormVisible = false" icon="el-icon-circle-close" plain>Hủy bỏ</el-button>
+                <el-button type="primary" @click="editMotel" icon="el-icon-check" plain>Đồng ý</el-button>
+              </span>
+            </el-dialog>
+
+            <el-dialog title="NHÀ TRỌ - TẠO MỚI" :visible.sync="dialogFormNewPost">
+              <el-form ref="form" :model="formCreate" label-width="150px">
                 <el-row :gutter="20">
-                  <el-col :span="12">
-                    <el-form-item label="Địa chỉ * :">
-                      <input type="text" v-model="form.description" :disabled="false"/>
+                  <el-col :span="24">
+                    <el-form-item label="Tên">
+                      <el-input
+                        v-model="formCreate.name"
+                        :disabled="false"/>
                     </el-form-item>
                   </el-col>
+
+                  <el-col :span="24">
+                    <el-form-item label="Địa chỉ">
+                      <el-input
+                        v-model="formCreate.address"
+                        :disabled="false"/>
+                    </el-form-item>
+                  </el-col>
+
+                  <el-col :span="24">
+                    <el-form-item label="Mô tả">
+                      <el-input
+                        v-model="formCreate.description"
+                        type="textarea"
+                        :rows="2"
+                        :disabled="false"/>
+                    </el-form-item>
+                  </el-col>
+
                 </el-row>
               </el-form>
               <span slot="footer" class="dialog-footer">
                 <el-button type="info" icon="el-icon-circle-close" @click="dialogFormNewPost = false" plain>Hủy bỏ</el-button>
-                <el-button type="primary" icon="el-icon-check" @click="createMotel" plain>Đồng ý</el-button>
+                <el-button type="primary" icon="el-icon-check" @click="createMotel" plain>Tạo mới</el-button>
               </span>
             </el-dialog>
           </el-card>
@@ -168,7 +186,7 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
-import { fetchList, create } from '@/api/motel'
+import { fetchList, create, edit, remove } from '@/api/motel'
 import UserCard from '@/views/profile/components/UserCard'
 
 export default {
@@ -180,52 +198,13 @@ export default {
     return {
       dialogFormVisible: false,
       dialogFormNewPost: false,
-      items: [],
-      user: {
-        name: 'username',
-        role: 'admin|user',
-        email: 'user@test.com',
-        avatar: this.avatar
-      },
-      form: {
-        add: 'Số 123, ngõ 4, Quận 3',
-        phone: '0234.123.456',
-        dientich: '40 m2',
-        description: 'Phòng mới xây',
-        date1: '',
-        date2: ''
-      },
-      tableData: [{
-        from: 'Số 3, ngách 12, ngõ 67 đường Nguyễn Trãi',
-        area: '40m2',
-        phone: '0971064367',
-        start_date: '12/02/2018',
-        end_date: '12/02/2019'
-      }, {
-        from: 'Số 4, ngách 12, ngõ 67 đường Nguyễn Trãi',
-        area: '40m2',
-        phone: '0971064367',
-        start_date: '12/02/2018',
-        end_date: '12/02/2019'
-      }, {
-        from: 'Số 5, ngách 12, ngõ 67 đường Nguyễn Trãi',
-        area: '40m2',
-        phone: '0971064367',
-        start_date: '12/02/2018',
-        end_date: '12/02/2019'
-      }, {
-        from: 'Số 6, ngách 12, ngõ 67 đường Nguyễn Trãi',
-        area: '40m2',
-        phone: '0971064367',
-        start_date: '12/02/2018',
-        end_date: '12/02/2019'
-      }, {
-        from: 'Số 73, ngách 12, ngõ 67 đường Nguyễn Trãi',
-        area: '40m2',
-        phone: '0971064367',
-        start_date: '12/02/2018',
-        end_date: '12/02/2019'
-      }]
+      dialogConfirmRemove: false,
+      toRemove: [{ id: 0, name: null }],
+      formEdit: null, // { address,  description, id, name }
+      formCreate: { name: '', address: '', description: ''},
+      tableData: [],
+      multipleSelection: [],
+      isRemoveMultiple: false
     }
   },
   computed: {
@@ -250,23 +229,106 @@ export default {
   },
   methods: {
     async getApi() {
-      const data = await fetchList()
-      console.log('get api', data)
+      const data = await fetchList().then(res => {        
+        console.log('get api', res)
+        if (res && res.success) {
+          this.tableData = (res.data && res.data.data) || []
+        }
+      })
+    },
+    handleSelectionChange(val) {
+      this.multipleSelection = val;
+    },
+    createDataForm(obj) {
+      if (null == obj || "object" != typeof obj) return obj
+      const copy = obj.constructor()
+      for (const attr in obj) {
+        if (obj.hasOwnProperty(attr) && obj[attr]) copy[attr] = obj[attr]
+      }
+      return copy
+    },
+    updateTableData(row) {
+      this.tableData = this.tableData.map(item => {
+        if (item.id === row.id) return row
+        return item
+      })
+    },
+    editMotel() {
+      console.log('sửa nhà trọ')
+      const editForm = this.createDataForm(this.formEdit)
+      edit(editForm).then(res => {
+        console.log(res, this.tableData)
+        this.dialogFormVisible = false
+        if (res.success) {
+          this.updateTableData(res.data)
+        }
+      })
     },
     createMotel() {
       console.log('tạo nhà trọ')
-      create().then(res => {
+      create(this.formCreate).then(res => {
         console.log(res)
+        this.dialogFormNewPost = false
+        if (res.success) {
+          this.tableData.unshift(res.data)
+        }
       })
+    },
+    handleRemove(row, action) {
+      if (action && action === 'multiple-delete') {
+        if (this.multipleSelection.length > 1)  {
+          this.dialogConfirmRemove = true
+          this.toRemove = this.multipleSelection
+          this.isRemoveMultiple = true
+        } else {
+          this.$notify.error({
+            title: 'Lỗi',
+            message: 'Bạn chưa chọn mục xóa!'
+          })
+          return false
+        }
+      } else {
+        console.log(row)
+        this.dialogConfirmRemove = true
+        this.toRemove = [row]
+      }
+    },
+    removeMotel(id) {
+      if (!id) return
+      remove(id).then(res => {
+        console.log(res)
+        this.dialogConfirmRemove = false
+        if (res.success) {
+          this.tableData = this.tableData.filter(item => (item.id !== id))
+        }
+      })
+      
+      this.toRemove = []
+    },
+    multipleRemovalMotel() {
+      console.log('multipleRemovalMotel')
+      this.toRemove.forEach(element => {
+        this.removeMotel(element.id)
+      })
+      this.isRemoveMultiple = false
+      this.multipleSelection = []
+      this.toRemove = []
     },
     onSubmit() {},
     handleChangeActions(items) {
-      const { type } = items
+      const { type, data } = items
+      console.log(items)
       switch (type) {
         case 'edit':
+          this.formEdit = data
           this.dialogFormVisible = true
           break
-        case 'newpost':
+        case 'create':
+          this.formCreate = {
+            name: '',
+            address: '',
+            description: ''
+          }
           this.dialogFormNewPost = true
           break
         default:
