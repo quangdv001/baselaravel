@@ -26,6 +26,9 @@ class ArticleService
         if (isset($data['title']) && $data['title'] != '') {
             $query = $query->where('title', 'like', '%' . $data['title'] . '%');
         }
+        if (isset($data['user_id_c']) && $data['user_id_c'] > 0) {
+            $query = $query->where('user_id_c', $data['user_id_c']);
+        }
         if (isset($data['user_name_c']) && $data['user_name_c'] != '') {
             $query = $query->where('user_name_c', 'like', '%' . $data['user_name_c'] . '%');
         }

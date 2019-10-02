@@ -117,7 +117,7 @@ Danh sách phòng trọ
                                     {{ isset($listCategories[$v->category_id]) ? $listCategories[$v->category_id] : 'Chưa chọn danh mục'  }}
                                 </td>
                                 <td>
-                                    {{ $v->status == 1 ? 'Hoạt động' : 'Không hoạt động' }}
+                                    {{ $v->status == 1 ? 'Hoạt động' : ($v->status == 2 ? 'Chưa duyệt' : 'Không hoạt động')  }}
                                 </td>
                                 <td>
                                     {{ $v->admin_name_c }}

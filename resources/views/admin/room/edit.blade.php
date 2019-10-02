@@ -48,6 +48,8 @@
                                 <label for="exampleFormControlSelect2">Trạng thái</label>
                                 <select class="form-control" name="status" id="exampleFormControlSelect2">
                                     <option value="1">Hoạt động</option>
+                                    <option value="2" @if(isset($data->status) && $data->status == 2) selected
+                                        @endif>Chưa duyệt</option>
                                     <option value="0" @if(isset($data->status) && $data->status == 0) selected
                                         @endif>Ngừng hoạt
                                         động</option>

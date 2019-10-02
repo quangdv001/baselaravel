@@ -66,7 +66,6 @@ class Kernel extends HttpKernel
         'guest.admin' => \App\Http\Middleware\GuestAdmin::class,
         'auth.site' => \App\Http\Middleware\AuthSite::class,
         'guest.site' => \App\Http\Middleware\GuestSite::class,
-        'auth.my' => \App\Http\Middleware\AuthMy::class,
     ];
 
     /**

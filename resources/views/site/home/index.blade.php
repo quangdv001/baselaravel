@@ -15,9 +15,14 @@
         <div class="row">
           <div class="col-sm-8 border-sm-right">
             <div class="block">
-              <div class="block-title underline">
-                <h2 class="title solid-color text-uppercase"><span>Tin cho thuê</span></h2>
-              </div>
+              <div class="heading-block">
+                <div class="block-title underline">
+                  <h2 class="title solid-color text-uppercase"><span>Tin cho thuê</span></h2>
+                </div>
+                <div class="pull-right" style="padding-top:6px;">
+                  <a href="{{ route('site.home.usercreate') }}" class="btn btn-raised btn-primary btn-sm">Đăng tin</a>
+                </div>
+              </div> <!-- / .heading-block -->
               <div class="list-post">
                   @if (count($latestRoom) > 0)
                       @foreach ($latestRoom as $item)

@@ -19,12 +19,12 @@
                         @endif
                     </div>
                     <div class="form-group">
-                        <label>Nội dung</label>
-                        <input type="text" class="form-control slug" name="value" placeholder="value"
-                            value="{{ isset($data->value) ? $data->value : old('value') }}">
+                        <label for="editor1">Nội dung</label>
                         @if($errors->has('value'))
                         <p class="text-danger">{{ $errors->first('value') }}</p>
                         @endif
+                        <textarea class="form-control ckeditor" name="value" id="editor1"
+                            rows="5">{{ isset($data->value) ? $data->value : old('value') }}</textarea>
                     </div>
                     <button type="submit"
                         class="btn btn-success mr-2 has-spinner">{{ $id > 0 ? 'Cập nhật' : 'Tạo mới' }}</button>

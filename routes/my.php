@@ -80,6 +80,15 @@ Route::post('bill/service/update/{id}', 'MyBillController@updateBillService')->n
 Route::post('bill/service/duplicate', 'MyBillController@duplicate')->name('bill.service.duplicate');
 Route::post('bill/service/remove', 'MyBillController@removeBillService')->name('bill.service.remove');
 
+Route::get('article/search', 'MyArticleController@index')->name('article.index');
+Route::get('article/show/{id}', 'MyArticleController@show')->name('article.show');
+Route::post('article/create', 'MyArticleController@create')->name('article.create');
+Route::post('article/update/{id}', 'MyArticleController@update')->name('article.update');
+// Route::post('article/duplicate', 'MyArticleController@duplicate')->name('motel.duplicate');
+Route::post('article/remove', 'MyArticleController@remove')->name('article.remove');
+Route::post('article/uploadImage', 'MyArticleController@uploadImage')->name('article.uploadImage');
+Route::get('article/getCategory', 'MyArticleController@getCategory')->name('article.getCategory');
+
 
 
 

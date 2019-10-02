@@ -11,5 +11,11 @@ Route::get('logout', 'SiteAuthController@logout')->name('auth.logout');
 
 Route::get('/', 'SiteHomeController@index')->name('home.index');
 Route::get('tim-kiem', 'SiteHomeController@search')->name('home.search');
+Route::get('dang-tin', 'SiteHomeController@userCreate')->name('home.usercreate')->middleware('auth.site');
+Route::post('dang-tin', 'SiteHomeController@userPostCreate')->name('home.userpostcreate')->middleware('auth.site');
 Route::get('{slug}', 'SiteHomeController@showList')->name('home.category');
 Route::get('{slugCategory}/{slugDetail}', 'SiteHomeController@showDetail')->name('home.showDetail');
+
+Route::get('province/loadProvince/{select?}', 'SiteHomeController@loadProvince')->name('ward.loadProvince');
+Route::get('province/loadDistrict/{id}/{select?}', 'SiteHomeController@loadDistrict')->name('ward.loadDistrict');
+Route::get('province/loadWard/{id}/{select?}', 'SiteHomeController@loadWard')->name('ward.loadWard');

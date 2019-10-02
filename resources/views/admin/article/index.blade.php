@@ -45,6 +45,7 @@ Danh sách bài viết
                                 <option @if($status == -1) selected @endif value="-1">Mời chọn</option>
                                     <option @if($status == 1) selected @endif value="1">Hoạt động</option>
                                     <option @if($status == 0) selected @endif value="0">Ngừng hoạt động</option>
+                                    <option @if($status == 2) selected @endif value="2">Chưa duyệt</option>
                                 </select>
                             </div>
                         </div>
@@ -115,7 +116,7 @@ Danh sách bài viết
                                     {{ isset($listCategories[$v->category_id]) ? $listCategories[$v->category_id] : 'Chưa chọn danh mục'  }}
                                 </td>
                                 <td>
-                                    {{ $v->status == 1 ? 'Hoạt động' : 'Không hoạt động' }}
+                                    {{ $v->status == 1 ? 'Hoạt động' : ($v->status == 2 ? 'Chưa duyệt' : 'Không hoạt động')  }}
                                 </td>
                                 <td>
                                     {{ $v->type == 1 ? 'Tin tức' : ($v->type == 2 ? 'Luật pháp' :  ($v->type == 3 ? 'Dự án nhà đất' : 'Đối tác')) }}

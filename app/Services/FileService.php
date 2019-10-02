@@ -66,7 +66,7 @@ class FileService
         }
     }
 
-    public function updateFile($file, $data)
+    public function updateFile($file, $data, $admin, $user)
     {
         try {
             DB::beginTransaction();
