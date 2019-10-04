@@ -5,9 +5,7 @@
           <div class="col-sm-4">
             <div><a class="title"><img src="{{ asset('assets/images/logo.png') }}" alt="Kênh thông tin dự án, giao dịch bất động sản trên toàn quốc." style="max-width: 175px;"/></a></div><br/>
             <div>
-              @if ($listSocial['description-logo'])
-                <p>{{$listSocial['description-logo']}}</p>                  
-              @endif
+              <p>@if (isset($listSocial['description-logo'])) {{$listSocial['description-logo']}} @endif</p>
             </div>
           </div>
           <div class="col-sm-8">
@@ -36,21 +34,21 @@
                 </div>
               <div class="col-sm-3">
                 <ul class="list-group list-group-flush">
-                  <li><a href="tell:{{$listSocial['phone']}}"><i class="material-icons">phone_in_talk</i> {{$listSocial['phone']}}</a></li>
-                  <li><a href="tell:{{$listSocial['phone']}}"><i class="material-icons">phone_in_talk</i> {{$listSocial['phone']}}</a></li>
-                  <li><a href="mailto:{{$listSocial['email']}}"><i class="material-icons">mail_outline</i> {{$listSocial['email']}}</a></li>
+                  <li><a href="tell:@if (isset($listSocial['phone'])) {{$listSocial['phone']}} @endif"><i class="material-icons">phone_in_talk</i>@if (isset($listSocial['phone'])) {{$listSocial['phone']}} @endif</a></li>
+                  <li><a href="tell:@if (isset($listSocial['phone'])) {{$listSocial['phone']}} @endif"><i class="material-icons">phone_in_talk</i>@if (isset($listSocial['phone'])) {{$listSocial['phone']}} @endif</a></li>
+                  <li><a href="mailto:@if (isset($listSocial['email'])) {{$listSocial['email']}} @endif"><i class="material-icons">mail_outline</i>@if (isset($listSocial['email'])) {{$listSocial['email']}} @endif</a></li>
                 </ul>
               </div>
               <div class="col-sm-3">
                 <div>
                   <p>Liên kết mạng xã hội:</p>
-                  <div class="social-icon"><a href="{{$listSocial['facebook']}}"><i class="fab fa-facebook-f"></i></a>
+                  <div class="social-icon"><a href="@if (isset($listSocial['facebook'])) {{$listSocial['facebook']}} @endif"><i class="fab fa-facebook-f"></i></a>
                   </div>
-                  <div class="social-icon"><a href="{{$listSocial['google_plus']}}"><i class="fab fa-google-plus-g"></i></a>
+                  <div class="social-icon"><a href="@if (isset($listSocial['google_plus'])) {{$listSocial['google_plus']}} @endif"><i class="fab fa-google-plus-g"></i></a>
                   </div>
-                  <div class="social-icon"><a href="{{$listSocial['twitter']}}"><i class="fab fa-twitter"></i></a>
+                  <div class="social-icon"><a href="@if (isset($listSocial['twitter'])) {{$listSocial['twitter']}} @endif"><i class="fab fa-twitter"></i></a>
                   </div>
-                  <div class="social-icon"><a href="{{$listSocial['youtube']}}"><i class="fab fa-youtube"></i></a>
+                  <div class="social-icon"><a href="@if (isset($listSocial['youtube'])) {{$listSocial['youtube']}} @endif"><i class="fab fa-youtube"></i></a>
                   </div>
                 </div>
               </div>
