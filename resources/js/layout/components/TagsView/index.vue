@@ -262,6 +262,8 @@ export default {
     display: inline-block;
 }
 .main-menu-header {
+    display: flex;
+    justify-content: center;
     padding: 0px;
     background: $primaryColor;
     .menu-item-hamburger {

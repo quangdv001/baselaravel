@@ -1012,3 +1012,7 @@ aside a:hover {
 .multiselect--active {
   z-index: 1000 !important;
 }
+
+#app .main-container {
+  margin-left: 0 !important;
+}

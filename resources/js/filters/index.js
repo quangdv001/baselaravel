@@ -76,3 +76,17 @@ export function toThousandFilter(num) {
 export function uppercaseFirst(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
+
+export function formatMoney(number, floatNumber = false) {
+  number = parseFloat(number.toString().match(/^-?\d+\.?\d{0,2}/))
+  // Seperates the components of the number
+  let components = (Math.floor(number * 100) / 100).toString().split('.')
+  if (number < 0) {
+    components = components = (Math.floor(Math.abs(number) * 100) / 100 * -1).toString().split('.')
+  }
+  // Comma-fies the first part
+  components[0] = components[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+  // Combines the two sections
+  if (!floatNumber) return components[0]
+  return components.join(',')
+}

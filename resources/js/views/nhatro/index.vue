@@ -1,10 +1,9 @@
 <template>
   <div class="app-container">
-    <div>
+    <Loading v-if="initing"/>
+
+    <div class="content" v-else>
       <el-row :gutter="24">
-        <!-- <el-col :span="6" :xs="24">
-          <user-card v-if="user" :user="user" />
-        </el-col> -->
 
         <el-col :span="24" :xs="24">
           <el-card style="margin-bottom:20px;">
@@ -21,8 +20,7 @@
               <el-button
               class="filter-item"
               @click="handleRemove(null, 'multiple-delete')"
-              style="border-color: #fbc4c4 !important; box-shadow: 0px 1px 5px 0px rgb(251, 196, 196) !important;"
-              type="default" icon="el-icon-delete"
+              type="danger" icon="el-icon-delete"
               size="mini"
               plain round>
                 Xóa nhiều
@@ -52,7 +50,7 @@
 
               <el-table-column type="selection" width="45"/>
 
-              <el-table-column property="name" label="Tên" width="203">
+              <el-table-column property="name" label="Tên">
                 <template slot-scope="scope">{{ scope.row.name }}</template>
               </el-table-column>
 
@@ -60,7 +58,13 @@
                 <template slot-scope="scope">{{ scope.row.address }}</template>
               </el-table-column>
 
-              <el-table-column property="created_at" label="Ngày tạo" width="203" show-overflow-tooltip>
+              <el-table-column property="description" label="Mô tả">
+                <template slot-scope="scope">
+                  <span v-if="scope && scope.row.description">{{ scope.row.description }}</span>
+                </template>
+              </el-table-column>
+
+              <el-table-column property="created_at" label="Ngày tạo" width="203">
                 <template slot-scope="scope">
                   <span v-if="scope && scope.row.created_at">{{ new Date(scope.row.created_at) | convertToDate }}</span>
                 </template>
@@ -80,6 +84,18 @@
                 </template>
               </el-table-column>
             </el-table>
+
+            <div class="pagination-container" v-if="pagination.total">
+              <el-pagination
+                @current-change="handleCurrentChange"
+                background
+                :current-page.sync="pagination.current_page"
+                layout="prev, pager, next"
+                :page-size="pagination.per_page"
+                :total="pagination.total"
+                :disabled="loading">
+              </el-pagination>
+            </div>
 
             <el-dialog title="NHÀ TRỌ - XÓA" :visible.sync="dialogConfirmRemove">
               <el-alert
@@ -107,7 +123,12 @@
               <el-form ref="form" :model="formEdit" label-width="120px">
                 <el-row :gutter="20">
                   <el-col :span="24">
-                    <el-form-item label="Tên">
+                    <el-form-item
+                      label="Tên"
+                      prop="name"
+                      :rules="[
+                        { required: true, message: 'Vui lòng nhập tên nhà trọ !', trigger: 'blur' }
+                      ]">
                       <el-input
                         v-if="formEdit"
                         v-model="formEdit.name"
@@ -116,17 +137,27 @@
                   </el-col>
 
                   <el-col :span="24">
-                    <el-form-item label="Địa chỉ">
+                    <el-form-item
+                      label="Địa chỉ"
+                      prop="address"
+                      :rules="[
+                        { required: true, message: 'Vui lòng nhập địa chỉ nhà trọ !', trigger: 'blur' }
+                      ]">
                       <el-input
                         v-if="formEdit"
                         v-model="formEdit.address"
-                        :disabled="true"/>
+                        :disabled="false"/>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row :gutter="20">
                   <el-col :span="24">
-                    <el-form-item label="Mô tả">
+                    <el-form-item
+                      label="Mô tả"
+                      prop="description"
+                      :rules="[
+                        { required: true, message: 'Vui lòng nhập mô tả nhà trọ !', trigger: 'blur' }
+                      ]">
                       <el-input v-if="formEdit"
                         v-model="formEdit.description"
                         type="textarea"
@@ -146,7 +177,12 @@
               <el-form ref="form" :model="formCreate" label-width="150px">
                 <el-row :gutter="20">
                   <el-col :span="24">
-                    <el-form-item label="Tên">
+                    <el-form-item
+                      label="Tên"
+                      prop="name"
+                      :rules="[
+                        { required: true, message: 'Vui lòng nhập tên nhà trọ !', trigger: 'blur' }
+                      ]">
                       <el-input
                         v-model="formCreate.name"
                         :disabled="false"/>
@@ -154,7 +190,12 @@
                   </el-col>
 
                   <el-col :span="24">
-                    <el-form-item label="Địa chỉ">
+                    <el-form-item
+                      label="Địa chỉ"
+                      prop="address"
+                      :rules="[
+                        { required: true, message: 'Vui lòng nhập tên địa chỉ nhà trọ !', trigger: 'blur' }
+                      ]">
                       <el-input
                         v-model="formCreate.address"
                         :disabled="false"/>
@@ -162,7 +203,12 @@
                   </el-col>
 
                   <el-col :span="24">
-                    <el-form-item label="Mô tả">
+                    <el-form-item
+                      label="Mô tả"
+                      prop="description"
+                      :rules="[
+                        { required: true, message: 'Vui lòng nhập mô tả nhà trọ !', trigger: 'blur' }
+                      ]">
                       <el-input
                         v-model="formCreate.description"
                         type="textarea"
@@ -175,7 +221,8 @@
               </el-form>
               <span slot="footer" class="dialog-footer">
                 <el-button type="info" icon="el-icon-circle-close" @click="dialogFormNewPost = false" plain>Hủy bỏ</el-button>
-                <el-button type="primary" icon="el-icon-check" @click="createMotel" plain>Tạo mới</el-button>
+                <el-button type="primary" icon="el-icon-refresh" @click="resetForm('form')" plain>Đặt lại</el-button>
+                <el-button type="success" icon="el-icon-check" @click="createMotel" plain>Tạo mới</el-button>
               </span>
             </el-dialog>
           </el-card>
@@ -186,41 +233,50 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
-import { fetchList, create, edit, remove } from '@/api/motel'
-import UserCard from '@/views/profile/components/UserCard'
+import {  create, edit, remove } from '@/api/motel'
+import Loading from '@/components/Loading'
+
+const defaultCreate = { name: '', address: '', description: '' }
 
 export default {
   name: 'Nhatro',
   components: {
-    UserCard
+    Loading
   },
   data() {
     return {
+      initing: false,
       dialogFormVisible: false,
       dialogFormNewPost: false,
       dialogConfirmRemove: false,
       toRemove: [{ id: 0, name: null }],
       formEdit: null, // { address,  description, id, name }
-      formCreate: { name: '', address: '', description: ''},
+      formCreate: JSON.parse(JSON.stringify(defaultCreate)),
       tableData: [],
       multipleSelection: [],
+      pagination: {
+        current_page: 1,
+        per_page: 30,
+        total: 0
+      },
       isRemoveMultiple: false
     }
   },
   computed: {
     ...mapGetters([
-      'avatar'
+      'avatar',
+      'motels'
     ])
   },
   mounted () {
     this.getApi()
-    },
+  },
   watch: {
     '$route': {
       handler: function(nextValue) {
         const { path } = nextValue
         if (path === "/nha-tro/index") {
-          this.getApi();
+          this.getApi()
         }
       },
       deep: true,
@@ -228,16 +284,19 @@ export default {
     }
   },
   methods: {
-    async getApi() {
-      const data = await fetchList().then(res => {        
-        console.log('get api', res)
-        if (res && res.success) {
-          this.tableData = (res.data && res.data.data) || []
-        }
+    handleCurrentChange(val) {
+      this.pagination.current_page = val
+      this.getApi(val)
+    },
+    async getApi(current_page) {
+      this.initing = true
+      const data = await this.$store.dispatch('motel/FetchList', current_page).then(res => {
+        this.tableData = res
+        this.initing = false
       })
     },
     handleSelectionChange(val) {
-      this.multipleSelection = val;
+      this.multipleSelection = val
     },
     createDataForm(obj) {
       if (null == obj || "object" != typeof obj) return obj
@@ -254,41 +313,77 @@ export default {
       })
     },
     editMotel() {
-      console.log('sửa nhà trọ')
-      const editForm = this.createDataForm(this.formEdit)
-      edit(editForm).then(res => {
-        console.log(res, this.tableData)
-        this.dialogFormVisible = false
-        if (res.success) {
-          this.updateTableData(res.data)
+      this.$refs['form'].validate(valid => {
+        if (valid) {
+          const editForm = this.createDataForm(this.formEdit)
+          edit(editForm).then(res => {
+            this.dialogFormVisible = false
+            if (res.success) {
+              this.updateTableData(res.data)
+            }
+            this.$notify.success({
+              title: 'Thành công',
+              message: 'Dữ liệu được sửa thành công !',
+              duration: 4000
+            })
+          })
+          .catch(_err => {
+            console.log(_err)
+            this.$notify.error({
+              title: 'Lỗi',
+              message: 'Đang gặp sự cố, vui lòng báo hệ thống xử lý!',
+              duration: 4000
+            })
+          })
+        } else {
+          return false
         }
       })
     },
     createMotel() {
-      console.log('tạo nhà trọ')
-      create(this.formCreate).then(res => {
-        console.log(res)
-        this.dialogFormNewPost = false
-        if (res.success) {
-          this.tableData.unshift(res.data)
+      this.$refs['form'].validate(valid => {
+        if (valid) {
+          create(this.formCreate).then(res => {
+            this.formCreate = JSON.parse(JSON.stringify(defaultCreate))
+            this.dialogFormNewPost = false
+            if (res.success) {
+              this.tableData.unshift(res.data)
+            }
+            this.$notify.success({
+              title: 'Thành công',
+              message: 'Dữ liệu tạo mới thành công !',
+              duration: 4000
+            })
+          })
+          .catch(_err => {
+            console.log(_err)
+            this.initing = false
+            this.$notify.error({
+              title: 'Lỗi',
+              message: 'Đang gặp sự cố, vui lòng báo hệ thống xử lý!',
+              duration: 4000
+            })
+          })
+        } else {
+          return false
         }
       })
     },
     handleRemove(row, action) {
       if (action && action === 'multiple-delete') {
-        if (this.multipleSelection.length > 1)  {
+        if (this.multipleSelection.length > 0)  {
           this.dialogConfirmRemove = true
           this.toRemove = this.multipleSelection
           this.isRemoveMultiple = true
         } else {
           this.$notify.error({
             title: 'Lỗi',
-            message: 'Bạn chưa chọn mục xóa!'
+            message: 'Bạn chưa chọn mục xóa!',
+            duration: 4000
           })
           return false
         }
       } else {
-        console.log(row)
         this.dialogConfirmRemove = true
         this.toRemove = [row]
       }
@@ -296,17 +391,28 @@ export default {
     removeMotel(id) {
       if (!id) return
       remove(id).then(res => {
-        console.log(res)
         this.dialogConfirmRemove = false
         if (res.success) {
           this.tableData = this.tableData.filter(item => (item.id !== id))
         }
+        this.$notify.success({
+          title: 'Thành công',
+          message: 'Mục bạn chọn đã được xóa !',
+          duration: 4000
+        })
       })
-      
+      .catch(_err => {
+        console.log(_err)
+        this.initing = false
+        this.$notify.error({
+          title: 'Lỗi',
+          message: 'Đang gặp sự cố, vui lòng báo hệ thống xử lý!',
+          duration: 4000
+        })
+      })
       this.toRemove = []
     },
     multipleRemovalMotel() {
-      console.log('multipleRemovalMotel')
       this.toRemove.forEach(element => {
         this.removeMotel(element.id)
       })
@@ -317,7 +423,6 @@ export default {
     onSubmit() {},
     handleChangeActions(items) {
       const { type, data } = items
-      console.log(items)
       switch (type) {
         case 'edit':
           this.formEdit = data
@@ -334,12 +439,19 @@ export default {
         default:
           break
       }
+    },
+    resetForm(form) {
+      this.$refs[form].resetFields()
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.pagination-container {
+  display: flex;
+  justify-content: flex-end;
+}
 
 .filter-container {
   display: flex;
