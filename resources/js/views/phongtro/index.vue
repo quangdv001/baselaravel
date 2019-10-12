@@ -208,7 +208,7 @@
                   :rules="[
                     { required: true, message: 'Vui lòng nhập tầng của phòng trọ !', trigger: 'blur' }
                   ]">
-                  <el-input v-if="formEdit" v-model="formEdit.floor" :disabled="false"/>
+                  <el-input v-if="formEdit" v-model="formEdit.floor" :disabled="false"></el-input>
                 </el-form-item>
 
                 <el-form-item
@@ -244,7 +244,15 @@
                   :rules="[
                     { required: true, message: 'Vui lòng chọn trạng thái phòng trọ !', trigger: 'blur' }
                   ]">
-                  <el-input v-if="formEdit" @keyup.native="handleAmountInput" v-model="formEdit.price" :disabled="false"></el-input>
+                  <!-- <el-input v-if="formEdit" v-model="formEdit.status" :disabled="false"></el-input> -->
+                  <el-select v-if="formEdit" v-model="formEdit.status">
+                    <el-option
+                      v-for="item in optionStatus"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value">
+                    </el-option>
+                  </el-select>
                 </el-form-item>
 
                 <el-form-item
@@ -257,13 +265,13 @@
                 </el-form-item>
               </el-form>
               <div slot="footer" class="dialog-footer">
-                <el-button type="info" icon="el-icon-circle-close" plain @click="dialogFormNewPost = false">
+                <el-button type="info" icon="el-icon-circle-close" plain @click="dialogFormEditPost = false">
                   Hủy bỏ
                 </el-button>
                 <el-button type="primary" icon="el-icon-refresh" plain @click="resetForm('dataForm')">
                   Đặt lại
                 </el-button>
-                <el-button type="success" icon="el-icon-check" plain @click="createRent">
+                <el-button type="success" icon="el-icon-check" plain @click="editMotel">
                   Đồng ý
                 </el-button>
               </div>
@@ -279,7 +287,7 @@ import { fetchList, create, edit, remove } from '@/api/rent'
 import { mapGetters } from 'vuex'
 import Loading from '@/components/Loading'
 
-const defaultCreate = { name: '', floor: '', max: '', motel_id: '', price: '', description: '' }
+const defaultCreate = { name: '', floor: '', max: '', motel_id: '', price: '', description: '', status: '' }
 
 export default {
   name: 'Phongtro',
@@ -288,6 +296,20 @@ export default {
   },
   data() {
     return {
+      optionStatus: [
+        {
+          value: -1,
+          label: 'Ngừng hoạt động'
+        },
+        {
+          value: 0,
+          label: 'Đang bảo trì'
+        },
+        {
+          value: 1,
+          label: 'Đang hoạt động'
+        }
+      ],
       initing: false,
       changing: false,
       dialogConfirmRemove: false,
@@ -304,12 +326,7 @@ export default {
       'rents'
     ])
   },
-  watch: {
-    'createForm.price': () => {
-      this.handleAmountInput()
-    }
-  },
-  mounted () {
+  created () {
     this.getApi()
   },
   watch: {
@@ -322,6 +339,9 @@ export default {
       },
       deep: true,
       immediate: true
+    },
+    'createForm.price': () => {
+      this.handleAmountInput()
     }
   },
   methods: {
@@ -355,6 +375,7 @@ export default {
       this.$refs['dataForm'].validate(valid => {
         if (valid) {
           const editForm = this.createDataForm(this.formEdit)
+          console.log(editForm)
           edit(editForm).then(res => {
             this.dialogFormEditPost = false
             if (res.success) {
@@ -439,7 +460,10 @@ export default {
         case 'create':
           this.createForm = {
             name: '',
-            address: '',
+            floor: '',
+            max: '',
+            motel_id: '',
+            price: '',
             description: ''
           }
           this.dialogFormNewPost = true
@@ -464,7 +488,6 @@ export default {
 .bordered {
   border-color: #b3d8ff !important;
 }
- 
 
 .filter-container {
   display: flex;

@@ -1,13 +1,9 @@
 <template>
   <div class="app-container">
-    <div v-if="user">
+    <Loading v-if="initing"/>
+    <div class="content" v-else>
       <el-row :gutter="24">
-
-        <el-col :span="6" :xs="24">
-          <user-card :user="user" />
-        </el-col>
-
-        <el-col :span="18" :xs="24">
+        <el-col :span="24" :xs="24">
           <el-card style="margin-bottom:20px;">
             <div slot="header" class="clearfix">
               <span>HỢP ĐỒNG</span>
@@ -90,7 +86,7 @@
               <el-button
                 class="filter-item"
                 style="border-color: #fbc4c4 !important; box-shadow: 0px 1px 5px 0px rgb(251, 196, 196) !important;"
-                type="default"
+                type="danger"
                 icon="el-icon-delete"
                 size="mini"
                 plain
@@ -131,7 +127,11 @@
               </el-col>
             </div>
 
-            <el-table :data="tableData" border fit style="width: 100%">
+            <el-table
+              :data="tableData"
+              border fit
+              style="width: 100%"
+              @selection-change="handleSelectionChange">
               <el-table-column width="65px" align="center">
                 <template slot-scope="scope">
                   <i v-if="scope.row._changing" class="el-icon-loading" />
@@ -148,17 +148,25 @@
                   </div>
                 </template>
               </el-table-column>
-              <el-table-column label="Tên dịch vụ" width="203">
-                <template slot-scope="scope">{{ scope.row.date }}</template>
+              <el-table-column label="Tên dịch vụ">
+                <template></template>
               </el-table-column>
 
-              <el-table-column property="address" label="Tên phòng" width="203" show-overflow-tooltip />
+              <el-table-column property="address" label="Tên phòng">
+                <template></template>
+              </el-table-column>
 
-              <el-table-column property="address" label="Đơn giá cố định" width="203" show-overflow-tooltip />
+              <el-table-column property="address" label="Đơn giá cố định">
+                <template></template>
+              </el-table-column>
 
-              <el-table-column property="address" label="Đơn vị" width="203" show-overflow-tooltip />
+              <el-table-column property="address" label="Đơn vị">
+                <template></template>
+              </el-table-column>
 
-              <el-table-column property="address" label="Mô tả" width="203" show-overflow-tooltip />
+              <el-table-column property="address" label="Mô tả"> 
+                <template></template>
+              </el-table-column>
             </el-table>
           </el-card>
         </el-col>
@@ -169,60 +177,20 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import UserCard from '@/views/profile/components/UserCard'
+import Loading from '@/components/Loading'
 const defaultFormThead = ['setroom', 'default']
 
 export default {
-  name: 'Phongtro',
+  name: 'Hopdong',
   components: {
-    UserCard
+    Loading
   },
   data() {
     return {
-      user: {
-        name: 'username',
-        role: 'admin|user',
-        email: 'user@test.com',
-        avatar: this.avatar
-      },
+      initing: false,
+      loading: false,
       checkboxVal: defaultFormThead,
-      listQuery: {
-        page: 1,
-        limit: 20,
-        importance: undefined,
-        title: undefined,
-        type: undefined,
-        sort: '+id'
-      },
-      tableData: [{
-        date: '2016-05-03',
-        name: 'Tom',
-        address: 'No. 189, Grove St, Los Angeles'
-      }, {
-        date: '2016-05-02',
-        name: 'Tom',
-        address: 'No. 189, Grove St, Los Angeles'
-      }, {
-        date: '2016-05-04',
-        name: 'Tom',
-        address: 'No. 189, Grove St, Los Angeles'
-      }, {
-        date: '2016-05-01',
-        name: 'Tom',
-        address: 'No. 189, Grove St, Los Angeles'
-      }, {
-        date: '2016-05-08',
-        name: 'Tom',
-        address: 'No. 189, Grove St, Los Angeles'
-      }, {
-        date: '2016-05-06',
-        name: 'Tom',
-        address: 'No. 189, Grove St, Los Angeles'
-      }, {
-        date: '2016-05-07',
-        name: 'Tom',
-        address: 'No. 189, Grove St, Los Angeles'
-      }]
+      tableData: []
     }
   },
   computed: {

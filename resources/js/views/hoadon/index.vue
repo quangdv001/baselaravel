@@ -1,13 +1,11 @@
 <template>
   <div class="app-container">
-    <div v-if="user">
+    <Loading v-if="initing"/>
+
+    <div class="content" v-else>
       <el-row :gutter="24">
 
-        <el-col :span="6" :xs="24">
-          <user-card :user="user" />
-        </el-col>
-
-        <el-col :span="18" :xs="24">
+        <el-col :span="24" :xs="24">
           <el-card style="margin-bottom:20px;">
             <div slot="header" class="clearfix">
               <span>HÓA ĐƠN</span>
@@ -24,26 +22,30 @@
               </el-col>
             </div>
 
-            <el-table :data="tableData" border style="width: 100%">
-              <el-table-column property="service" label="Tên dịch vụ" width="213">
-                <template slot-scope="scope">{{ scope.row.service }}</template>
+            <el-table
+              :data="tableData"
+              border fit
+              style="width: 100%"
+              @selection-change="handleSelectionChange">
+              <el-table-column property="service" label="Tên dịch vụ">
+                <template></template>
               </el-table-column>
 
-              <el-table-column property="unit" label="Đơn vị" width="213" show-overflow-tooltip>
-                <template slot-scope="scope">{{ scope.row.unit }}</template>
+              <el-table-column property="unit" label="Đơn vị">
+                <template></template>
               </el-table-column>
 
-              <el-table-column property="price" label="Đơn giá(vnđ)" width="213" show-overflow-tooltip>
-                <template slot-scope="scope">{{ scope.row.price }}</template>
+              <el-table-column property="price" label="Đơn giá(vnđ)">
+                <template></template>
               </el-table-column>
 
-              <el-table-column property="amount" label="Số lượng" width="213" show-overflow-tooltip>
-                <template slot-scope="scope">{{ scope.row.amount }}</template>
+              <el-table-column property="amount" label="Số lượng">
+                <template></template>
               </el-table-column>
 
-              <el-table-column property="intomoney" label="Thành tiền" width="213" show-overflow-tooltip>
-                <template slot-scope="scope">
-                  <el-input :placeholder="scope.row.intomoney" :disabled="true" />
+              <el-table-column property="intomoney" label="Thành tiền">
+                <template>
+                  <el-input placeholder="" :disabled="true" />
                 </template>
               </el-table-column>
             </el-table>
@@ -96,60 +98,18 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import UserCard from '@/views/profile/components/UserCard'
+import Loading from '@/components/Loading'
 
 export default {
   name: 'Hoadon',
   components: {
-    UserCard
+    Loading
   },
   data() {
     return {
-      user: {
-        name: 'username',
-        role: 'admin|user',
-        email: 'user@test.com',
-        avatar: this.avatar
-      },
-      form: {
-        add: 'Số 123, ngõ 4, Quận 3',
-        phone: '0234.123.456',
-        dientich: '40 m2',
-        description: 'Phòng mới xây',
-        date1: '',
-        date2: ''
-      },
-      tableData: [{
-        service: 'Tiền nhà',
-        unit: 'Phòng',
-        price: '2.500.000',
-        amount: '1',
-        intomoney: '2.500.000'
-      }, {
-        service: 'Tiền điện',
-        unit: 'Số(kWh)',
-        price: '4.000',
-        amount: '30',
-        intomoney: '72.000'
-      }, {
-        service: 'Tiền nước',
-        unit: 'Người',
-        price: '70.000',
-        amount: '2',
-        intomoney: '140.000'
-      }, {
-        service: 'Xe máy',
-        unit: 'Phòng',
-        price: '100.000',
-        amount: '1',
-        intomoney: '100.000'
-      }, {
-        service: 'Vệ sinh',
-        unit: 'Chiếc',
-        price: '10.000',
-        amount: '1',
-        intomoney: '10.000'
-      }]
+      initing: false,
+      loading: false,
+      tableData: []
     }
   },
   computed: {
@@ -158,7 +118,10 @@ export default {
     ])
   },
   methods: {
-    onSubmit() {}
+    onSubmit() {},
+    handleSelectionChange(val) {
+      this.multipleSelection = val
+    }
   }
 }
 </script>
