@@ -290,9 +290,9 @@ export default {
       this.pagination.current_page = val
       this.getApi(val)
     },
-    async getApi(current_page) {
+    async getApi(current_page = 1, limit = 10) {
       this.initing = true
-      const data = await this.$store.dispatch('motel/FetchList', current_page).then(res => {
+      const data = await this.$store.dispatch('motel/FetchList', {current_page, limit}).then(res => {
         this.tableData = res.data && res.data.data
         this.initing = false
         const api_current_page = res.data.current_page

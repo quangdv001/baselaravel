@@ -23,9 +23,9 @@ const mutations = {
 }
 
 const actions = {
-  FetchList({ commit }, current_page) {
+  FetchList({ commit }, { current_page, limit }) {
     return new Promise((resolve, reject) => {
-    fetchList(current_page)
+    fetchList(current_page, limit)
       .then(res => {
         if (res && res.success) {
           const data = (res.data && res.data.data) || []

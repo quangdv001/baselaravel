@@ -1,8 +1,9 @@
 import request from '@/utils/request';
 
-export function fetchList(current_page = 1) {
+export function fetchList(current_page = 1, limit = 10) {
+  const queries = 'page=' + current_page +  '&limit=' + limit
   return request({
-    url: `/my/motel/search?page=${current_page}`,
+    url: `/my/motel/search?${queries}`,
     method: 'get'
   })
 }
