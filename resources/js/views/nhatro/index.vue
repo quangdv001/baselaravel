@@ -71,9 +71,11 @@
               </el-table-column>
 
               <el-table-column width="55">
-                <el-button type="info" size="small" circle>
-                  <i class="el-icon-upload2" />
-                </el-button>
+                <template slot-scope="scope">
+                  <el-button type="info" size="small" @click="handleChangeActions({type: 'edit', data: scope.row})" circle>
+                    <i class="el-icon-upload2" />
+                  </el-button>
+                </template>
               </el-table-column>
 
               <el-table-column width="55">
@@ -93,7 +95,7 @@
                 layout="prev, pager, next"
                 :page-size="pagination.per_page"
                 :total="pagination.total"
-                :disabled="loading">
+                :disabled="initing">
               </el-pagination>
             </div>
 
@@ -256,7 +258,7 @@ export default {
       multipleSelection: [],
       pagination: {
         current_page: 1,
-        per_page: 30,
+        per_page: 0,
         total: 0
       },
       isRemoveMultiple: false
@@ -291,9 +293,25 @@ export default {
     async getApi(current_page) {
       this.initing = true
       const data = await this.$store.dispatch('motel/FetchList', current_page).then(res => {
-        this.tableData = res
+        this.tableData = res.data && res.data.data
         this.initing = false
+        const api_current_page = res.data.current_page
+        const total = res.data.total
+        const per_page = res.data.per_page
+        this.updatePagination(api_current_page, total, per_page);
       })
+      return data
+    },
+    updatePagination (
+      current_page = this.pagination.current_page,
+      total = this.pagination.total,
+      per_page = this.pagination.per_page) {
+      const updatedPagination = {
+        current_page
+      }
+      total && (updatedPagination.total = total)
+      per_page && (updatedPagination.per_page = per_page)
+      this.pagination = JSON.parse(JSON.stringify(updatedPagination))
     },
     handleSelectionChange(val) {
       this.multipleSelection = val

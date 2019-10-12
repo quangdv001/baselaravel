@@ -1,10 +1,9 @@
 import request from '@/utils/request';
 
-export function fetchList(query, current_page = 1) {
+export function fetchList(current_page = 1) {
   return request({
     url: `/my/motel/search?page=${current_page}`,
-    method: 'get',
-    params: query,
+    method: 'get'
   })
 }
 export function show(id) {
