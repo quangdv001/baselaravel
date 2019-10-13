@@ -42,6 +42,24 @@
                                 <textarea class="form-control" name="meta" id="exampleTextarea1"
                                     rows="2">{{ isset($data->meta) ? $data->meta : old('meta') }}</textarea>
                             </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect2">Loại sản phẩm</label>
+                                <select class="form-control is_combo" name="is_combo" >
+                                    <option value="0">Thường</option>
+                                    <option value="1" @if(isset($data->status) && $data->status == 1) selected
+                                        @endif>Combo</option>
+                                </select>
+                            </div>
+                            <div class="form-group group_product_combo">
+                                <label for="exampleFormControlSelect2">Sản phẩm combo</label>
+                                <select class="form-control product_combo" name="product_combo[]"  multiple="multiple">
+                                    @if(sizeof($productCombo) > 0)
+                                        @foreach($productCombo as $v)
+                                            <option value="{{ $v->id }}" @if(in_array($v->id, $arrProductCombo)) selected @endif>#{{ $v->id }} - {{ $v->title }}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                            </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -258,6 +276,25 @@
                     text: input
                 }
             }
+        });
+
+        if($('.is_combo').val() == 1){
+            $('.group_product_combo').slideDown();
+        } else {
+            $('.group_product_combo').slideUp();
+        }
+
+        $('.is_combo').change(function(){
+            if($(this).val() == 1){
+                $('.group_product_combo').slideDown();
+            } else {
+                $('.group_product_combo').slideUp();
+            }
+        })
+
+        $('.product_combo').select2({
+            placeholder: 'Select an option',
+            // tags: true
         });
 
         $(document).on('click', '.btn-select-file', function () {

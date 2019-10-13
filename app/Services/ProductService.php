@@ -12,16 +12,19 @@ namespace App\Services;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use App\Models\Product;
+use App\Models\ProductCombo;
 use App\Models\ProductImg;
 
 class ProductService
 {
     private $product;
     private $productImg;
-    public function __construct(Product $product, ProductImg $productImg)
+    private $combo;
+    public function __construct(Product $product, ProductImg $productImg, ProductCombo $combo)
     {
         $this->product = $product;
         $this->productImg = $productImg;
+        $this->combo = $combo;
     }
 
     public function search($data){
@@ -120,5 +123,33 @@ class ProductService
 
     public function getImg($id){
         return $this->productImg->where('product_id', $id)->pluck('img');
+    }
+
+    public function getProductCombo(){
+        return $this->product->where('is_combo', 0)->get();
+    }
+
+    public function getCombo($id){
+        return $this->combo->where('combo_id', $id)->with('product')->get();
+    }
+
+    public function createCombo($id, $data){
+        try {
+            DB::beginTransaction();
+            $this->combo->where('combo_id', $id)->delete();
+            $params = [];
+            if(sizeof($data) > 0){
+                foreach($data as $k => $v){
+                    $params[$k]['combo_id'] = $id;
+                    $params[$k]['product_id'] = $v;
+                }
+                $this->combo->insert($params);
+            }
+            DB::commit();
+            return true;
+        } catch (Exception  $e) {
+            DB::rollBack();
+            throw $e;
+        }
     }
 }

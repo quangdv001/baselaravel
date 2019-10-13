@@ -40,39 +40,81 @@ class SiteCartController extends SiteBaseController
     public function add($id, Request $request){
         $product = $this->product->getById($id);
         // return response($product);
-        $content = Cart::content();
+        
         $res['success'] = 0;
         if($product){
-            $check = 0;
-            foreach($content as $v){
-                if($v->id == $id){
-                    $check = 1;
+            $content = Cart::content();
+            if($product->is_combo == 0){
+                $check = 0;
+                foreach($content as $v){
+                    if($v->id == $id){
+                        $check = 1;
+                    }
+                }
+                
+                if($check == 0){
+                    Cart::add([
+                        'id' => $product->id, 
+                        'name' => $product->title, 
+                        'qty' => 1, 
+                        'price' => $product->price, 
+                        'weight' => 1, 
+                        'options' => ['img' => $product->img, 
+                                    'category' => $product->category->name, 
+                                    'type' => $product->type, 
+                                    'width' => $product->width, 
+                                    'depth' => $product->depth, 
+                                    'height' => $product->height
+                                    ]
+                        ]);
+                    $count = Cart::count();
+                    $content = Cart::content();
+                    $res['success'] = 1;
+                    $res['mess'] = 'Thêm sản phẩm vào giỏ hàng thành công';
+                    $res['html'] = view('site.cart.cart')->with('data', $content)->with('count', $count)->render();
+                } else {
+                    $res['mess'] = 'Sản phẩm đã có trong giỏ hàng';
+                }
+            } else {
+                $productCombo = $this->product->getCombo($product->id);
+                if(sizeof($productCombo) > 0){
+                    foreach($productCombo as $prods){
+                        $content = Cart::content();
+                        $prod = $prods->product;
+                        $check = 0;
+                        foreach($content as $v){
+                            if($v->id == $id){
+                                $check = 1;
+                            }
+                        }
+                        
+                        if($check == 0){
+                            Cart::add([
+                                'id' => $prod->id, 
+                                'name' => $prod->title, 
+                                'qty' => 1, 
+                                'price' => $prod->price, 
+                                'weight' => 1, 
+                                'options' => ['img' => $prod->img, 
+                                            'category' => $prod->category->name, 
+                                            'type' => $prod->type, 
+                                            'width' => $prod->width, 
+                                            'depth' => $prod->depth, 
+                                            'height' => $prod->height
+                                            ]
+                                ]);
+                            $count = Cart::count();
+                            $content = Cart::content();
+                            $res['success'] = 1;
+                            $res['mess'] = 'Thêm sản phẩm vào giỏ hàng thành công';
+                            $res['html'] = view('site.cart.cart')->with('data', $content)->with('count', $count)->render();
+                        } else {
+                            $res['mess'] = 'Sản phẩm đã có trong giỏ hàng';
+                        }
+                    }
                 }
             }
             
-            if($check == 0){
-                Cart::add([
-                    'id' => $product->id, 
-                    'name' => $product->title, 
-                    'qty' => 1, 
-                    'price' => $product->price, 
-                    'weight' => 1, 
-                    'options' => ['img' => $product->img, 
-                                'category' => $product->category->name, 
-                                'type' => $product->type, 
-                                'width' => $product->width, 
-                                'depth' => $product->depth, 
-                                'height' => $product->height
-                                ]
-                    ]);
-                $count = Cart::count();
-                $content = Cart::content();
-                $res['success'] = 1;
-                $res['mess'] = 'Thêm sản phẩm vào giỏ hàng thành công';
-                $res['html'] = view('site.cart.cart')->with('data', $content)->with('count', $count)->render();
-            } else {
-                $res['mess'] = 'Sản phẩm đã có trong giỏ hàng';
-            }
         }
         
         return response()->json($res);

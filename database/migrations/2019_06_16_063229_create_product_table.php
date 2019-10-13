@@ -21,6 +21,7 @@ class CreateProductTable extends Migration
             $table->string('img')->nullable();
             $table->integer('category_id')->nullable();
             $table->integer('price')->nullable()->default(0);
+            $table->smallInteger('is_combo')->default(0);
             $table->smallInteger('type')->default(1);
             $table->smallInteger('status')->default(1);
             $table->string('color')->nullable();
