@@ -17,7 +17,8 @@ class MyMotelController extends MyBaseController
 
     public function index(Request $request){
         $params['user_id'] = $this->user->id;
-        $params['limit'] = $request->only('limit');
+        $request = $request->only('limit');
+        $params['limit'] = $request['limit'];
         $data = $this->motel->search($params);
         $res['success'] = 1;
         $res['data'] = $data;

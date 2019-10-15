@@ -33,17 +33,34 @@
               </el-button>
 
               <!-- Xuất excel -->
-              <el-button class="bordered filter-item" type="default" icon="el-icon-download" size="mini" plain round>
+              <el-button style="margin-right: 10px;" class="bordered filter-item" type="default" icon="el-icon-download" size="mini" plain round>
                 Xuất excel
               </el-button>
 
+              <el-row>
+                <div :class="{'show': showInputSearch}" class="header-search">
+                  <el-select
+                    ref="headerSearchSelect"
+                    v-model="search"
+                    filterable
+                    default-first-option
+                    remote
+                    placeholder="Tìm kiếm phòng"
+                    class="header-search-select"
+                    @change="changeShowInputSearch"
+                  >
+                    <el-option v-for="item in options" :key="item.path" :value="item" :label="item.title.join(' > ')" />
+                  </el-select>
+                </div>
+              </el-row>
+
               <!-- Tìm kiếm -->
-              <el-button class="bordered filter-item" type="default" icon="el-icon-search" size="mini" plain round>
+              <el-button @click.stop="clickShowInputSearch" class="bordered filter-item" type="default" icon="el-icon-search" size="mini" plain round>
                 Tìm kiếm
               </el-button>
 
               <!-- Xóa nhiều -->
-              <el-button class="bordered filter-item" type="danger" icon="el-icon-delete" size="mini" plain round>
+              <el-button @click="handleRemove(null, 'multiple-delete')" class="bordered filter-item" type="danger" icon="el-icon-delete" size="mini" plain round>
                 Xóa nhiều
               </el-button>
             </div>
@@ -101,9 +118,9 @@
 
               <el-table-column property="status" label="Trạng thái">
                 <template slot-scope="scope">
-                  <el-tag type="info" effect="dark" v-if="scope.row.status === -1">Ngừng hoạt động</el-tag>
-                  <el-tag type="warning" effect="dark" v-else-if="scope.row.status === 0">Đang bảo trì</el-tag>
-                  <el-tag type="success" effect="dark" v-else-if="scope.row.status === 1">Đang hoạt động</el-tag>
+                  <el-tag type="info" effect="dark" v-if="scope.row.status === 1">Ngừng hoạt động</el-tag>
+                  <el-tag type="warning" effect="dark" v-else-if="scope.row.status === 2">Đang bảo trì</el-tag>
+                  <el-tag type="success" effect="dark" v-else-if="scope.row.status === 3">Đang hoạt động</el-tag>
                 </template>
               </el-table-column>
 
@@ -121,6 +138,41 @@
                 </template>
               </el-table-column>
             </el-table>
+
+            <div class="pagination-container" v-if="pagination.total">
+              <el-pagination
+                @current-change="handleCurrentChange"
+                background
+                :current-page.sync="pagination.current_page"
+                layout="prev, pager, next"
+                :page-size="pagination.per_page"
+                :total="pagination.total"
+                :disabled="initing">
+              </el-pagination>
+            </div>
+
+            <el-dialog title="PHÒNG TRỌ - XÓA" :visible.sync="dialogConfirmRemove">
+              <el-alert
+                title="Xác nhận xóa"
+                type="error" 
+                show-icon
+                :closable="false">
+                <template slot>
+                  <span v-if="toRemove.length === 1">Bạn có muốn xóa phòng trọ: <strong>{{toRemove[0].name}}</strong> không?</span>
+                  <div v-else-if="toRemove.length > 1">
+                    <p>Bạn có muốn xóa những phòng trọ sau không?</p>
+                    <ul>
+                      <li v-for="item in toRemove" :key="'remove-' + item.id">{{ item.name }}</li>
+                    </ul>
+                  </div>
+                </template>
+              </el-alert>
+              <span slot="footer" class="dialog-footer">
+                <el-button type="info" @click="isRemoveMultiple = dialogConfirmRemove = false" icon="el-icon-circle-close" plain>Hủy bỏ</el-button>
+                <el-button v-if="!isRemoveMultiple" type="primary" @click="removeRent(toRemove[0].id)" icon="el-icon-check" plain>Đồng ý</el-button>
+                <el-button v-else type="primary" @click="multipleRemovalRent" icon="el-icon-check" plain>Đồng ý</el-button>
+              </span>
+            </el-dialog>
 
             <el-dialog title="PHÒNG TRỌ - TẠO MỚI" :visible.sync="dialogFormNewPost">
               <el-form ref="dataForm" :model="createForm" label-position="left" label-width="150px">
@@ -166,7 +218,7 @@
                   :rules="[
                     { required: true, message: 'Vui lòng nhập số tiền tương ứng !', trigger: 'blur' }
                   ]">
-                  <el-input @keyup.native="handleAmountInput" v-model="createForm.price" :disabled="false"></el-input>
+                  <el-input @keyup.native="handleAmountInput" v-model="createForm.price" :disabled="false" :maxlength="10"></el-input>
                 </el-form-item>
 
                 <el-form-item
@@ -235,7 +287,7 @@
                   :rules="[
                     { required: true, message: 'Vui lòng nhập số tiền tương ứng !', trigger: 'blur' }
                   ]">
-                  <el-input v-if="formEdit" @keyup.native="handleAmountInput" v-model="formEdit.price" :disabled="false"></el-input>
+                  <el-input v-if="formEdit" @keyup.native="handleAmountInput" v-model="formEdit.price" :disabled="false" :maxlength="10"></el-input>
                 </el-form-item>
 
                 <el-form-item
@@ -244,7 +296,6 @@
                   :rules="[
                     { required: true, message: 'Vui lòng chọn trạng thái phòng trọ !', trigger: 'blur' }
                   ]">
-                  <!-- <el-input v-if="formEdit" v-model="formEdit.status" :disabled="false"></el-input> -->
                   <el-select v-if="formEdit" v-model="formEdit.status">
                     <el-option
                       v-for="item in optionStatus"
@@ -271,7 +322,7 @@
                 <el-button type="primary" icon="el-icon-refresh" plain @click="resetForm('dataForm')">
                   Đặt lại
                 </el-button>
-                <el-button type="success" icon="el-icon-check" plain @click="editMotel">
+                <el-button type="success" icon="el-icon-check" plain @click="editRent">
                   Đồng ý
                 </el-button>
               </div>
@@ -298,26 +349,37 @@ export default {
     return {
       optionStatus: [
         {
-          value: -1,
+          value: 1,
           label: 'Ngừng hoạt động'
         },
         {
-          value: 0,
+          value: 2,
           label: 'Đang bảo trì'
         },
         {
-          value: 1,
+          value: 3,
           label: 'Đang hoạt động'
         }
       ],
       initing: false,
       changing: false,
-      dialogConfirmRemove: false,
       dialogFormEditPost: false,
+      dialogConfirmRemove: false,
+      toRemove: [{ id: 0, name: null }],
+      multipleSelection: [],
+      isRemoveMultiple: false,
       createForm: JSON.parse(JSON.stringify(defaultCreate)),
       formEdit: null,
       dialogFormNewPost: false,
-      tableData: []
+      tableData: [],
+      search: '',
+      options: [],
+      showInputSearch: false,
+      pagination: {
+        current_page: 1,
+        per_page: 0,
+        total: 0
+      }
     }
   },
   computed: {
@@ -326,7 +388,7 @@ export default {
       'rents'
     ])
   },
-  created () {
+  mounted () {
     this.getApi()
   },
   watch: {
@@ -342,16 +404,61 @@ export default {
     },
     'createForm.price': () => {
       this.handleAmountInput()
+    },
+    showInputSearch(value) {
+      if (value) {
+        document.body.addEventListener('click', this.close);
+      } else {
+        document.body.removeEventListener('click', this.close);
+      }
     }
   },
   methods: {
-    async getApi() {
-      this.initing = true
-      const data = await this.$store.dispatch('rent/FetchList').then(res => {   
-        this.tableData = res
-        this.initing = false
-        console.log(res)
+    clickShowInputSearch() {
+      this.showInputSearch = !this.showInputSearch
+      if (this.showInputSearch) {
+        this.$refs.headerSearchSelect && this.$refs.headerSearchSelect.focus()
+      }
+    },
+    closeShowInputSearch() {
+      this.$refs.headerSearchSelect && this.$refs.headerSearchSelect.blur()
+      this.options = []
+      this.showInputSearch = false
+    },
+    changeShowInputSearch(val) {
+      this.$router.push(val.path)
+      this.search = ''
+      this.options = []
+      this.$nextTick(() => {
+        this.showInputSearch = false
       })
+    },
+    handleCurrentChange(val) {
+      this.pagination.current_page = val
+      this.getApi(val)
+    },
+    async getApi(current_page = 1, limit = 10) {
+      this.initing = true
+      const data = await this.$store.dispatch('rent/FetchList', { current_page, limit }).then(res => {
+        this.tableData = res.data && res.data.data
+        this.initing = false
+        const api_current_page = res.data.current_page
+        const total = res.data.total
+        const per_page = res.data.per_page
+        this.updatePagination(api_current_page, total, per_page)
+      })
+      return data
+    },
+    updatePagination (
+      current_page = this.pagination.current_page,
+      total = this.pagination.total,
+      per_page = this.pagination.per_page) {
+      const updatedPagination = {
+        current_page
+      }
+      total && (updatedPagination.total = total)
+      per_page && (updatedPagination.per_page = per_page)
+      this.pagination = JSON.parse(JSON.stringify(updatedPagination))
     },
     onSubmit() {},
     handleSelectionChange(val) {
@@ -371,11 +478,10 @@ export default {
         return item
       })
     },
-    editMotel() {
+    editRent() {
       this.$refs['dataForm'].validate(valid => {
         if (valid) {
           const editForm = this.createDataForm(this.formEdit)
-          console.log(editForm)
           edit(editForm).then(res => {
             this.dialogFormEditPost = false
             if (res.success) {
@@ -405,7 +511,6 @@ export default {
         if (valid) {
           this.createForm.price = parseInt(this.createForm.price.replace(/,/g, ''))
           create(this.createForm).then(res => {
-            console.log(res)
             this.createForm = JSON.parse(JSON.stringify(defaultCreate))
             this.dialogFormNewPost = false
             if (res.success) {
@@ -450,6 +555,38 @@ export default {
         this.toRemove = [row]
       }
     },
+    removeRent(id) {
+      if (!id) return
+      remove(id).then(res => {
+        this.dialogConfirmRemove = false
+        if (res.success) {
+          this.tableData = this.tableData.filter(item => (item.id !== id))
+        }
+        this.$notify.success({
+          title: 'Thành công',
+          message: 'Mục bạn chọn đã được xóa !',
+          duration: 4000
+        })
+      })
+      .catch(_err => {
+        console.log(_err)
+        this.initing = false
+        this.$notify.error({
+          title: 'Lỗi',
+          message: 'Đang gặp sự cố, vui lòng báo hệ thống xử lý!',
+          duration: 4000
+        })
+      })
+      this.toRemove = []
+    },
+    multipleRemovalRent() {
+      this.toRemove.forEach(element => {
+        this.removeRent(element.id)
+      })
+      this.isRemoveMultiple = false
+      this.multipleSelection = []
+      this.toRemove = []
+    },
     handleChangeActions(items) {
       const { type, data } = items
       switch (type) {
@@ -485,8 +622,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.bordered {
-  border-color: #b3d8ff !important;
+.pagination-container {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .filter-container {
@@ -496,5 +634,43 @@ export default {
 
 .el-button--mini.is-round:hover {
   box-shadow: 0px 1px 5px 0px rgb(179, 216, 255) !important;
+}
+.header-search {
+  font-size: 0 !important;
+
+  .search-icon {
+    cursor: pointer;
+    font-size: 18px;
+    vertical-align: middle;
+  }
+
+  .header-search-select {
+    font-size: 18px;
+    transition: width 0.2s;
+    width: 0;
+    overflow: hidden;
+    background: transparent;
+    border-radius: 0;
+    display: inline-block;
+    vertical-align: middle;
+
+    /deep/ .el-input__inner {
+      border-radius: 0;
+      border: 0;
+      padding-left: 0;
+      padding-right: 0;
+      box-shadow: none !important;
+      border-bottom: 1px solid #d9d9d9;
+      vertical-align: middle;
+    }
+  }
+
+  &.show {
+    .header-search-select {
+      width: 210px;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+  }
 }
 </style>

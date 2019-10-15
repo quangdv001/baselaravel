@@ -19,6 +19,8 @@ class MyRentController extends MyBaseController
     public function index(Request $request){
         $params['motel_id'] = $request->input('motel_id', 0);
         $params['user_id'] = $this->user->id;
+        $request = $request->only('limit');
+        $params['limit'] = $request['limit'];
         $data = $this->rent->search($params);
         $res['success'] = 1;
         $res['data'] = $data;

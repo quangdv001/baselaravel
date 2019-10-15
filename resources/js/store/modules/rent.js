@@ -23,20 +23,19 @@ const mutations = {
 }
 
 const actions = {
-  FetchList({ commit }) {
+  FetchList({ commit }, { current_page, limit }) {
     return new Promise((resolve, reject) => {
-    fetchList()
+    fetchList(current_page, limit)
       .then(res => {
         if (res && res.success) {
           const data = (res.data && res.data.data) || []
           commit('SET_RENT', data)
-          resolve(data)
+          resolve(res)
         } else {
           throw res
         }
       })
       .catch(error => {
-        console.warn(error)
         reject(error)
       })
     })

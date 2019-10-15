@@ -102,7 +102,8 @@
             <el-dialog title="NHÀ TRỌ - XÓA" :visible.sync="dialogConfirmRemove">
               <el-alert
                 title="Xác nhận xóa"
-                type="error" 
+                type="error"
+                :closable="false"
                 show-icon>
                 <template slot>
                   <span v-if="toRemove.length === 1">Bạn có muốn xóa nhà trọ: <strong>{{toRemove[0].name}}</strong> không?</span>
@@ -292,13 +293,13 @@ export default {
     },
     async getApi(current_page = 1, limit = 10) {
       this.initing = true
-      const data = await this.$store.dispatch('motel/FetchList', {current_page, limit}).then(res => {
+      const data = await this.$store.dispatch('motel/FetchList', { current_page, limit }).then(res => {
         this.tableData = res.data && res.data.data
         this.initing = false
         const api_current_page = res.data.current_page
         const total = res.data.total
         const per_page = res.data.per_page
-        this.updatePagination(api_current_page, total, per_page);
+        this.updatePagination(api_current_page, total, per_page)
       })
       return data
     },
