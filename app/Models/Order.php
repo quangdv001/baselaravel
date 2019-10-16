@@ -19,7 +19,7 @@ class Order extends Model
 
     public function orderDetail()
     {
-        return $this->hasMany('App\Models\OrderDetail');
+        return $this->hasOne('App\Models\OrderDetail');
     }
 
 }

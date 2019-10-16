@@ -58,31 +58,32 @@
         </div>
     </div>
     <div class="form-services-layout">
-        <form class="form form-services">
+        <form action="" class="form form-services form-contact">
+            @csrf
             <div class="container">
                 <div class="row">
                     <div class="form-group col-md-4">
                         <label class="bmd-label-floating" for="item-form-0">Họ tên</label>
-                        <input class="form-control" type="text" placeholder="Nhập họ tên" id="item-form-0" /><span
+                        <input class="form-control" name="name" type="text" placeholder="Nhập họ tên" id="item-form-0" /><span
                             class="float-icon"><i class="material-icons">person</i></span>
                     </div>
                     <div class="form-group col-md-4">
                         <label class="bmd-label-floating" for="item-form-1">Email</label>
-                        <input class="form-control" type="text" placeholder="Nhâp email" id="item-form-1" /><span
+                        <input class="form-control" name="email" type="text" placeholder="Nhâp email" id="item-form-1" /><span
                             class="float-icon"><i class="material-icons">mail</i></span>
                     </div>
                     <div class="form-group col-md-4">
                         <label class="bmd-label-floating" for="item-form-2">Số điện thoại</label>
-                        <input class="form-control" type="text" placeholder="Nhập số điện thoại"
+                        <input class="form-control" name="phone" type="text" placeholder="Nhập số điện thoại"
                             id="item-form-2" /><span class="float-icon"><i class="material-icons">phone</i></span>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="bmd-label-floating" for="item-form-3">Thông điệp</label>
-                        <textarea class="form-control" type="textarea" name="note" rows="6" placeholder="Nhập thông tin"
+                        <textarea class="form-control" type="textarea" name="content" rows="6" placeholder="Nhập thông tin"
                             id="item-form-3"></textarea>
                     </div>
                     <div class="col-12">
-                        <button class="btn btn-primary text-uppercase" type="submit">Gửi thông tin</button>
+                        <button class="btn btn-primary text-uppercase has-spinner" type="submit">Gửi thông tin</button>
                     </div>
                 </div>
             </div>
@@ -92,4 +93,40 @@
 
 @endsection
 @section('custom_js')
+<script>
+$(document).ready(function () {
+    $(".form-contact").submit(function (e) {
+
+        //prevent Default functionality
+        e.preventDefault();
+        console.log(1);
+        //get the action-url of the form
+        var actionurl = BASE_URL + '/sendContact';
+
+        //do your own request an handle the results
+        $.ajax({
+            url: actionurl,
+            type: 'post',
+            // dataType: 'application/json',
+            data: $(".form-contact").serialize(),
+            beforeSend: function () {
+                $('.has-spinner').buttonLoader('start');
+            },
+            success: function (res) {
+                $('.has-spinner').buttonLoader('stop');
+                if (res.success == 1) {
+                    init.notyPopup(res.mess, 'success');
+                } else {
+                    init.notyPopup('Có lỗi xảy ra', 'error');
+                }
+            },
+            error: function (res) {
+                $('.has-spinner').buttonLoader('stop');
+                init.notyPopup('Có lỗi xảy ra', 'error');
+            }
+        });
+
+    });
+})
+</script>
 @endsection

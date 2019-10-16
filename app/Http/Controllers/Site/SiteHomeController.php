@@ -19,6 +19,7 @@ use App\Services\SliderService;
 use App\Services\PageService;
 use App\Services\ImageService;
 use App\Http\Requests\Site\BookingRequest;
+use App\Mail\OrderNew;
 use Illuminate\Support\Facades\Storage;
 
 class SiteHomeController extends SiteBaseController
@@ -146,7 +147,9 @@ class SiteHomeController extends SiteBaseController
             $resOrderDetail = $this->order->createOrderDetail($orderDetail);
             $resOrderInfo = $this->order->createOrderInfo($orderInfo);
         }
-        return redirect()->route('site.home.index')->with('success_message', 'Đặt vé thành công!');
+        $mail = env('MAIL_ADMIN', 'quangdv001@gmail.com');
+        Mail::to($mail)->send(new OrderNew($resOrder));
+        return redirect()->back()->with('success_message', 'Đặt vé thành công!');
     }
     
     public function about(){

@@ -14,7 +14,7 @@ class BookingRequest extends FormRequest
      */
     public function authorize()
     {
-        return auth('admin')->check();
+        return true;
     }
 
     /**
