@@ -18,6 +18,7 @@ use App\Models\LawTag;
 use App\Models\ProjectTag;
 use App\Models\LandTag;
 use App\Models\ExchangeTag;
+use App\Models\TaxTag;
 
 class TagService
 {
@@ -28,8 +29,10 @@ class TagService
     private $project_tag;
     private $land_tag;
     private $exchange_tag;
+    private $tax_tag;
     public function __construct(ArticleTag $article_tag, Tag $tag, RoomTag $roomTag, LawTag $law_tag,
-                                ProjectTag $project_tag, LandTag $landTag, ExchangeTag $exchangeTag)
+                                ProjectTag $project_tag, LandTag $landTag, ExchangeTag $exchangeTag,
+                                TaxTag $taxTag)
     {
         $this->article_tag = $article_tag;
         $this->tag = $tag;
@@ -38,6 +41,7 @@ class TagService
         $this->project_tag = $project_tag;
         $this->land_tag = $landTag;
         $this->exchange_tag = $exchangeTag;
+        $this->tax_tag = $taxTag;
     }
 
     public function createTag($listTag)
@@ -123,6 +127,23 @@ class TagService
         }
     }
 
+    public function createTaxTag($data)
+    {
+        try {
+            DB::beginTransaction();
+            $taxTag = new TaxTag();
+            foreach ($data as $key => $value) {
+                $taxTag->$key = $value;
+            }
+            $taxTag->save();
+            DB::commit();
+            return $taxTag;
+        } catch (Exception  $e) {
+            DB::rollBack();
+            throw $e;
+        }
+    }
+
     public function createProjectTag($data)
     {
         try {
@@ -179,6 +200,10 @@ class TagService
         return $this->law_tag->where('article_id', $id)->get();
     }
 
+    public function getTaxTagByTaxId($id){
+        return $this->tax_tag->where('article_id', $id)->get();
+    }
+
     public function getProjectTagByProjectId($id){
         return $this->project_tag->where('article_id', $id)->get();
     }
@@ -223,6 +248,18 @@ class TagService
             $lawTag = $this->law_tag->where('article_id', $id)->delete();
             DB::commit();
             return $lawTag;
+        } catch (Exception  $e) {
+            DB::rollBack();
+            throw $e;
+        }
+    }
+
+    public function removeTaxTag($id){
+        try {
+            DB::beginTransaction();
+            $taxTag = $this->law_tag->where('article_id', $id)->delete();
+            DB::commit();
+            return $taxTag;
         } catch (Exception  $e) {
             DB::rollBack();
             throw $e;

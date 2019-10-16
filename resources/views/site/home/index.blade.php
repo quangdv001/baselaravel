@@ -36,7 +36,8 @@
             @include('site.home.mainFooter')
           </div>
           <div class="col-sm-4">
-            @include('site.components.latestBlock', ['moduleTitle'=>'Đô Thị', 'type'=>'thumb', 'news'=>$latestProjects])
+            @include('site.components.latestBlock', ['moduleTitle'=>'Đô Thị', 'type'=>'thumb', 'news'=>$latestProjects,
+                                                      'moduleTitle2'=> 'Cách Tính Thuế Đất', 'type'=>'thumb', 'tax'=>$lastestTaxLand])
           </div>
         </div>
       </div>
