@@ -129,6 +129,13 @@ class SiteHomeController extends SiteBaseController
         $orderDetail = $request->only('start_id', 'end_id', 'qty', 'start_time', 'end_time');
         $orderInfo = $request->only('note', 'name', 'email', 'phone', 'address');
         $orderDetail['is_round_trip'] = (int) $request->input('is_round_trip', 0);
+        if ($orderDetail['is_round_trip'] == 1) {
+            $this->validate($request, [
+                'end_time' => 'required',
+            ], [
+                'end_time.required' => 'Mời chọn ngày về (please choose return date! thank you!)',
+            ]);
+        }
         $orderDetail['start_name'] = $province[$orderDetail['start_id']];
         $orderDetail['end_name'] = $province[$orderDetail['end_id']];
         $orderDetail['start_time'] = strtotime($orderDetail['start_time']);

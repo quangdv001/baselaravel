@@ -28,7 +28,6 @@ class BookingRequest extends FormRequest
             'name' => 'required',
             'email' => 'required|email',
             'start_time' => 'required',
-            'end_time' => 'required',
             'start_id' => 'required',
             'end_id' => 'required',
             'qty' => 'required',
@@ -43,15 +42,14 @@ class BookingRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Mời nhập tên',
-            'start_time.required' => 'Mời chọn ngày đi',
-            'end_time.required' => 'Mời chọn ngày về',
-            'start_id.required' => 'Mời chọn điểm đi',
-            'end_id.required' => 'Mời chọn điểm đến',
-            'qty.required' => 'Mời nhập số lượng người',
-            'phone.required' => 'Mời nhập SĐT',
-            'email.required' => 'Mời nhập Email',
-            'email.email'  => 'Email sai định dạng',
+            'name.required' => 'Mời nhập tên(please insert your Name. Thank you!)',
+            'start_time.required' => 'Mời chọn ngày đi(please select Departure date. Thank you!)',
+            'start_id.required' => 'Mời chọn điểm đi(please select your departure point. Thank you!)',
+            'end_id.required' => 'Mời chọn điểm đến(please select your departure point. Thank you!)',
+            'qty.required' => 'Mời nhập số lượng người(please insert numbers of people. Thank you!)',
+            'phone.required' => 'Mời nhập SĐT(please insert your telephone number. Thank you!)',
+            'email.required' => 'Mời nhập Email(please insert your email. Thank you!)',
+            'email.email'  => 'Email sai định dạng(Email incorrect!)',
         ];
     }
 }
