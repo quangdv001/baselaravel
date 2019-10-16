@@ -28,6 +28,6 @@ class OrderNew extends Mailable
      */
     public function build()
     {
-        return $this->subject('Đơn hàng mới từ Home Fun')->view('emails.orders.new');
+        return $this->subject('Đơn hàng mới từ Livitrans')->view('emails.orders.new');
     }
 }

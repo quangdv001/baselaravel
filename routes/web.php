@@ -1,7 +1,10 @@
 <?php
+
+use App\Mail\Contact;
 use App\Models\Order;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OrderNew;
+use App\User;
 use Illuminate\Support\Facades\App;
 
 /*
