@@ -108,9 +108,14 @@
                                                 </div>
                                                 <div class="form-group col-md-4">
                                                     <label class="bmd-label-floating" for="item-form-6">@lang('home.note')</label>
-                                                    <input class="form-control" type="text" id="item-form-6" name="note"
-                                                        value="{{ isset($data['note']) ? $data['note'] : old('note') }}" /><span
-                                                        class="float-icon"><i
+                                                    <select class="form-control" name="train_no">
+                                                        @if(sizeof($train_no) > 0)
+                                                        @foreach($train_no as $k => $v)
+                                                        <option value="{{ $v }}" @if(isset($data['train_no']) &&
+                                                            $data['train_no']==$k) selected @endif>{{ $v }}</option>
+                                                        @endforeach
+                                                        @endif
+                                                    </select><span class="float-icon"><i
                                                             class="material-icons">event_seat</i></span>
                                                 </div>
                                             </div>
@@ -155,7 +160,7 @@
                                                         <div class="form-group col-md-12">
                                                         <label class="bmd-label-floating" for="item-form-4">Thông
                                                             điệp</label>
-                                                        <textarea class="form-control" type="textarea" rows="6"
+                                                        <textarea class="form-control" name="note" type="textarea" rows="6"
                                                             placeholder="Nhập thông tin" id="item-form-4"></textarea>
                                                     </div>
                                                     </div>

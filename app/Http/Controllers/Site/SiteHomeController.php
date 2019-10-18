@@ -61,6 +61,8 @@ class SiteHomeController extends SiteBaseController
         $special_article = $this->article->search($paramArticle);
         $list_sliders = $this->sliders->getAll();
         $social_links = $this->socials->getAll();
+        $train_no = ['SE1', 'SE3', 'SE19', 'SE2', 'SE4', 'SE20',
+                     'SP1', 'SP2', 'SNT1', 'SNT2', 'SE22', 'SE21'];
         $locale = session('locale');
         $list_page = $this->page->getAllByLocale($locale);
         $social = [];
@@ -77,6 +79,7 @@ class SiteHomeController extends SiteBaseController
         View::share('social', $social);
         View::share('list_sliders', $list_sliders);
         View::share('list_page', $list_page);
+        View::share('train_no', $train_no);
     }
 
     public function index(){
@@ -112,22 +115,25 @@ class SiteHomeController extends SiteBaseController
     }
 
     public function booking(Request $request){
-        // dd($request->all());
-        $data = $request->only('start_id', 'end_id', 'qty', 'start_time', 'end_time', 'note', 'is_round_trip');
-        // $data['is_round_trip'] = (int) $request->input('is_round_trip', 0);
+        $data = $request->only('start_id', 'end_id', 'qty', 'start_time', 'end_time', 'train_no', 'is_round_trip');
+        $train_no = ['SE1', 'SE3', 'SE19', 'SE2', 'SE4', 'SE20',
+                     'SP1', 'SP2', 'SNT1', 'SNT2', 'SE22', 'SE21'];
         $province = $this->province->getProvincePluck();
         $paramArticle['limit'] = 6;
         $paramArticle['category_id'] = 1;
         $paramArticle['status'] = 1;
         $paramArticle['orderBy'] = 'id';
         $article = $this->article->search($paramArticle);
-        return view('site.home.booking')->with('data', $data)->with('article', $article)->with('province', $province);
+        return view('site.home.booking')->with('data', $data)
+                                        ->with('article', $article)
+                                        ->with('province', $province)
+                                        ->with('train_no', $train_no);
     }
 
     public function postBooking(BookingRequest $request){
         $province = $this->province->getProvincePluck()->toArray();
         $order = $request->only('payment_method');
-        $orderDetail = $request->only('start_id', 'end_id', 'qty', 'start_time', 'end_time');
+        $orderDetail = $request->only('start_id', 'end_id', 'qty', 'start_time', 'end_time', 'train_no');
         $orderInfo = $request->only('note', 'name', 'email', 'phone', 'address');
         $orderDetail['is_round_trip'] = (int) $request->input('is_round_trip', 0);
         if ($orderDetail['is_round_trip'] == 1) {
@@ -136,11 +142,12 @@ class SiteHomeController extends SiteBaseController
             ], [
                 'end_time.required' => 'Mời chọn ngày về (please choose return date! thank you!)',
             ]);
+            $orderDetail['end_time'] = strtotime($orderDetail['end_time']);
         }
         $orderDetail['start_name'] = $province[$orderDetail['start_id']];
         $orderDetail['end_name'] = $province[$orderDetail['end_id']];
         $orderDetail['start_time'] = strtotime($orderDetail['start_time']);
-        $orderDetail['end_time'] = strtotime($orderDetail['end_time']);
+        
         $resOrder = $this->order->create($order);
         if($resOrder){
             $orderDetail['order_id'] = $orderInfo['order_id'] = $resOrder->id;
@@ -149,7 +156,7 @@ class SiteHomeController extends SiteBaseController
         }
         $mail = env('MAIL_ADMIN', 'quangdv001@gmail.com');
         Mail::to($mail)->send(new OrderNew($resOrder));
-        return redirect()->back()->with('success_message', 'Đặt vé thành công!');
+        return redirect()->back()->with('success_message', 'Create ticket success! We will connect to you to confirm. Thanks!');
     }
     
     public function about(){

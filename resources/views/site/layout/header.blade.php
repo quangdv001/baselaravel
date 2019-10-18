@@ -225,8 +225,13 @@
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label class="bmd-label-floating" for="item-form-6" >@lang('home.note')</label>
-                                        <input class="form-control" type="text" id="item-form-6" name="note"/><span
-                                            class="float-icon"><i class="material-icons">event_seat</i></span>
+                                        <select class="form-control" name="train_no">
+                                          @if(sizeof($train_no) > 0)
+                                            @foreach($train_no as $k => $v)
+                                              <option value="{{ $k }}">{{ $v }}</option>
+                                            @endforeach
+                                          @endif
+                                        </select><span class="float-icon"><i class="material-icons">event_seat</i></span>
                                     </div>
                                     <div class="col-12 text-right">
                                         <button class="btn btn-primary text-uppercase" type="submit">@lang('home.search')</button>
