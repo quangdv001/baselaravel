@@ -50,6 +50,8 @@
 
               <el-table-column type="selection" width="45"/>
 
+              <el-table-column label="STT" type="index" />
+
               <el-table-column property="name" label="Tên">
                 <template slot-scope="scope">{{ scope.row.name }}</template>
               </el-table-column>
@@ -362,11 +364,12 @@ export default {
     createMotel() {
       this.$refs['form'].validate(valid => {
         if (valid) {
-          create(this.formCreate).then(res => {
+          this.$store.dispatch('motel/Create', this.formCreate).then(res => {
             this.formCreate = JSON.parse(JSON.stringify(defaultCreate))
             this.dialogFormNewPost = false
             if (res.success) {
               this.tableData.unshift(res.data)
+              this.tableData.pop()
             }
             this.$notify.success({
               title: 'Thành công',
@@ -409,10 +412,11 @@ export default {
     },
     removeMotel(id) {
       if (!id) return
-      remove(id).then(res => {
+      this.$store.dispatch('motel/Remove', id).then(res => {
         this.dialogConfirmRemove = false
         if (res.success) {
           this.tableData = this.tableData.filter(item => (item.id !== id))
+          this.getApi(this.pagination.current_page)
         }
         this.$notify.success({
           title: 'Thành công',

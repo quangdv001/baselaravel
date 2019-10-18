@@ -1,6 +1,6 @@
 import request from '@/utils/request';
 
-export function fetchList(current_page = 1, limit = 10) {
+export function fetchList(current_page = 1, limit = 30) {
   const queries = 'page=' + current_page +  '&limit=' + limit
   return request({
     url: `/my/rent/search?${queries}`,
@@ -19,7 +19,7 @@ export function create(data) {
   return request({
     url: `/my/rent/create`,
     method: 'post',
-    data:  data // { name, address, description  }
+    data:  data // { 'name', 'floor', 'max', 'motel_id', 'price', 'description'  }
   })
 }
 export function edit(data) {
@@ -27,7 +27,7 @@ export function edit(data) {
     return request({
       url: `/my/rent/update/` + data.id,
       method: 'post',
-      data:  data // { name, address, description  }
+      data:  data // { 'name', 'floor', 'max', 'motel_id', 'price', 'description'  }
     })
   }
 }

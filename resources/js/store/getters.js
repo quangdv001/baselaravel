@@ -16,6 +16,9 @@ const getters = {
   permission_routes: state => state.permission.routes,
   addRoutes: state => state.permission.addRoutes,
   motels: state => state.motel.list,
+  services: state => state.service.list,
+  contracts: state => state.contract.list,
+  renters: state => state.renter.list,
   rents: state => state.rent.list
 };
 export default getters;
