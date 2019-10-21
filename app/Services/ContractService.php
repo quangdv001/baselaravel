@@ -131,7 +131,7 @@ class ContractService
     }
 
     public function getById($id){
-        return $this->contract->find($id);
+        return $this->contract->with(['rent' ,'renter', 'service'])->find($id);
     }
     public function getByIdContractRenter($id){
         return $this->contractRenter->find($id);
