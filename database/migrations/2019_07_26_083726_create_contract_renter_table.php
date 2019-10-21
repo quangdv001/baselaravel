@@ -15,12 +15,8 @@ class CreateContractRenterTable extends Migration
     {
         Schema::create('contract_renter', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('phone');
-            $table->string('email');
-            $table->bigInteger('user_id');
+            $table->bigInteger('contract_id');
             $table->bigInteger('renter_id');
-            $table->smallInteger('status')->default(1);
             $table->timestamps();
         });
     }
