@@ -121,6 +121,13 @@
                 </template>
               </el-table-column>
 
+              <el-table-column property="status" label="Trạng thái" width="150">
+                <template slot-scope="scope">
+                  <el-tag type="info" effect="dark" v-if="!scope.row.status">Hết hiệu lực</el-tag>
+                  <el-tag type="success" effect="dark" v-else>Hiệu lực</el-tag>
+                </template>
+              </el-table-column>
+
               <el-table-column width="55">
                 <template slot-scope="scope">
                   <el-button type="info" size="small" @click="handleChangeActions({type: 'edit', data: scope.row})" circle>
@@ -332,13 +339,13 @@ const defaultCreate = {
     name: '',
     note: '',
     deposits: 0,
-    duration: '',
-    payment_period: '',
-    start: '',
-    end: '',
+    duration: 0,
+    payment_period: 0,
+    start: new Date(),
+    end: new Date(),
     status: 1,
-    user_id: '',
-    rent_id: ''
+    user_id: 0,
+    rent_id: 0
 }
 
 const checkPrice = (rule, _value, callback) => {
@@ -364,7 +371,8 @@ const checkPrice = (rule, _value, callback) => {
 
 const ruleForm = {
   name: [{ required: true, message: 'Vui lòng nhập tên!', trigger: 'blur' }],
-  note: [{ required: true, message: 'Vui lòng nhập tên!', trigger: 'blur' }],
+  note: [{ required: true, message: 'Vui lòng nhập ghi chú!', trigger: 'blur' }],
+  duration: [{ required: true, message: 'Vui lòng thời hạn!', trigger: 'blur' }],
   deposits: [{ validator: checkPrice, trigger: 'blur' }],
   payment_period: [{ validator: checkPrice, trigger: 'blur' }]
 }
@@ -489,7 +497,6 @@ export default {
       }, 300)
     },
     onDateTimeChange(e) {
-      console.log(e)
       this.formCreate.start = new Date(this.dateTimeRange[0]).getTime() / 1000
       this.formCreate.end = new Date(this.dateTimeRange[1]).getTime() / 1000
     },
@@ -526,13 +533,15 @@ export default {
           .catch(_err => {
             console.warn(_err)
             this.isEdit = false
+            this.handleClose()
             this.$notify.error({
               title: 'Lỗi',
               message: 'Đang gặp sự cố, vui lòng báo hệ thống xử lý!',
               duration: 4000
             })
           })
-        } else {
+        } else {          
+          this.handleClose()
           return false
         }
       })
@@ -547,6 +556,7 @@ export default {
               if (this.tableData.length === 0) tableData.push(res.data)
               else if (!this.tableData.some(item => item.id === res.data.id)) {
                 tableData.unshift(res.data)
+                debugger
                 if (this.tableData && this.tableData.length > this.pagination.per_page) this.tableData.pop()
               }
             }

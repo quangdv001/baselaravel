@@ -320,7 +320,7 @@
   </div>
 </template>
 <script>
-import { fetchList } from '@/api/rent'
+import { fetchList } from '@/api/motel'
 import { mapGetters } from 'vuex'
 import Loading from '@/components/Loading'
 
@@ -328,10 +328,12 @@ const unitOptions  = [{
   value: 'thang',
   label: 'Tháng'
 }]
+
+// 'name', 'floor', 'max', 'motel_id', 'price', 'description'
 const defaultCreate = {
     name: '',
-    note: '',
-    deposits: 0,
+    description: '',
+    floor: 0,
     duration: '',
     payment_period: '',
     start: '',
@@ -364,8 +366,8 @@ const checkPrice = (rule, _value, callback) => {
 
 const ruleForm = {
   name: [{ required: true, message: 'Vui lòng nhập tên!', trigger: 'blur' }],
-  note: [{ required: true, message: 'Vui lòng nhập tên!', trigger: 'blur' }],
-  deposits: [{ validator: checkPrice, trigger: 'blur' }],
+  description: [{ required: true, message: 'Vui lòng nhập mô tả!', trigger: 'blur' }],
+  floor: [{ validator: checkPrice, trigger: 'blur' }],
   payment_period: [{ validator: checkPrice, trigger: 'blur' }]
 }
 const LABEL = {
@@ -381,7 +383,7 @@ export default {
     return {
       renterOptions: [],
       renterLoading: false,
-      renterList: [
+      motelList: [
         {id: 0, name: 'Bên B'}
       ],
       PAGE_TITLE: 'KHÁCH TRỌ',
@@ -414,7 +416,7 @@ export default {
   },
   mounted () {
     this.getApi()
-    this.getRenterList()
+    this.getmotelList()
   },
   watch: {
     '$route': {
@@ -429,7 +431,7 @@ export default {
     }
   },
   methods: {
-    getRenterList() {
+    getmotelList() {
       fetchList(1, 250).then(res => {
         if (res && res.data && res.data.data && res.data.data.length > 0)
         this.renterOptions = res.data.data
@@ -440,7 +442,7 @@ export default {
           this.renterLoading = true
           setTimeout(() => {
             this.renterLoading = false
-            this.renterOptions = this.renterList.filter(item => {
+            this.renterOptions = this.motelList.filter(item => {
               return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1
             });
           }, 200)
