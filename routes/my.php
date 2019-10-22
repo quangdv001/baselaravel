@@ -9,6 +9,10 @@ Route::get('/', 'MyHomeController@index')->name('home.index');
 Route::get('/me', 'MyHomeController@me')->name('home.me');
 
 // Nhà trọ
+Route::get('/testGet', 'MyHomeController@testGet')->name('home.index');
+Route::get('/testPost', 'MyHomeController@testPost')->name('home.index');
+
+
 Route::get('motel/search', 'MyMotelController@index')->name('motel.index');
 Route::get('motel/show/{id}', 'MyMotelController@show')->name('motel.show');
 Route::post('motel/create', 'MyMotelController@create')->name('motel.create');
