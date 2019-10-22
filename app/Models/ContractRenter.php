@@ -9,6 +9,6 @@ class ContractRenter extends Model
 {
     protected $table = 'contract_renter';
     protected $fillable = [
-        'name', 'phone', 'email', 'user_id', 'renter_id', 'status'
+        'contract_id', 'renter_id'
     ];
 }

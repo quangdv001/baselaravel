@@ -15,4 +15,12 @@ class MyHomeController extends MyBaseController
     public function index(){
         return abort(404);
     }
+
+    public function testGet(){
+        
+    }
+
+    public function testPost(){
+        return view('testPost');
+    }
 }

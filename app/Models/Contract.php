@@ -12,9 +12,14 @@ class Contract extends Model
         'name', 'note', 'deposits', 'duration', 'payment_period', 'start', 'end', 'status', 'user_id', 'rent_id'
     ];
 
+    public function rent()
+    {
+        return $this->belongsTo('App\Models\Rent');
+    }
+
     public function renter()
     {
-        return $this->hasOne('App\Models\Renter');
+        return $this->belongsToMany('App\Models\Renter');
     }
     
     public function service()
