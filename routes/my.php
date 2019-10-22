@@ -12,6 +12,7 @@ Route::get('/me', 'MyHomeController@me')->name('home.me');
 Route::get('/testGet', 'MyHomeController@testGet')->name('home.index');
 Route::get('/testPost', 'MyHomeController@testPost')->name('home.index');
 
+
 Route::get('motel/search', 'MyMotelController@index')->name('motel.index');
 Route::get('motel/show/{id}', 'MyMotelController@show')->name('motel.show');
 Route::post('motel/create', 'MyMotelController@create')->name('motel.create');
@@ -103,7 +104,3 @@ Route::post('article/remove', 'MyArticleController@remove')->name('article.remov
 Route::post('article/uploadImage', 'MyArticleController@uploadImage')->name('article.uploadImage');
 // Danh mục
 Route::get('article/getCategory', 'MyArticleController@getCategory')->name('article.getCategory');
-
-
-
-

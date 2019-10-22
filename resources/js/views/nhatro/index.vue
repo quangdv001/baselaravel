@@ -101,7 +101,7 @@
               </el-pagination>
             </div>
 
-            <el-dialog title="NHÀ TRỌ - XÓA" :visible.sync="dialogConfirmRemove">
+            <el-dialog :close-on-click-modal="false" :close-on-press-escape="false" title="NHÀ TRỌ - XÓA" :visible.sync="dialogConfirmRemove">
               <el-alert
                 title="Xác nhận xóa"
                 type="error"
@@ -124,7 +124,7 @@
               </span>
             </el-dialog>
 
-            <el-dialog title="NHÀ TRỌ - CHỈNH SỬA" :visible.sync="dialogFormVisible">
+            <el-dialog :close-on-click-modal="false" :close-on-press-escape="false" title="NHÀ TRỌ - CHỈNH SỬA" :visible.sync="dialogFormVisible">
               <el-form ref="form" :model="formEdit" label-width="120px">
                 <el-row :gutter="20">
                   <el-col :span="24">
@@ -178,7 +178,7 @@
               </span>
             </el-dialog>
 
-            <el-dialog title="NHÀ TRỌ - TẠO MỚI" :visible.sync="dialogFormNewPost">
+            <el-dialog :close-on-click-modal="false" :close-on-press-escape="false" title="NHÀ TRỌ - TẠO MỚI" :visible.sync="dialogFormNewPost">
               <el-form ref="form" :model="formCreate" label-width="150px">
                 <el-row :gutter="20">
                   <el-col :span="24">
