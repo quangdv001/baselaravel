@@ -27,7 +27,7 @@
         <img :src="errGif" width="313" height="428" alt="Girl has dropped her ice cream.">
       </el-col>
     </el-row>
-    <el-dialog :visible.sync="dialogVisible" title="Casual look">
+    <el-dialog :close-on-click-modal="false" :close-on-press-escape="false" :visible.sync="dialogVisible" title="Casual look">
       <img :src="ewizardClap" class="pan-img">
     </el-dialog>
   </div>

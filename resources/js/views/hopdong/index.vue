@@ -157,7 +157,7 @@
               </el-pagination>
             </div>
 
-            <el-dialog :title="PAGE_TITLE + ' - XÓA'" :visible.sync="dialogConfirmRemove">
+            <el-dialog :close-on-click-modal="false" :close-on-press-escape="false" :title="PAGE_TITLE + ' - XÓA'" :visible.sync="dialogConfirmRemove">
               <el-alert
                 title="Xác nhận xóa"
                 type="error"

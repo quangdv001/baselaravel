@@ -60,7 +60,7 @@
 
     <pagination v-show="total>0" :total="total" :page.sync="query.page" :limit.sync="query.limit" @pagination="getList" />
 
-    <el-dialog :visible.sync="dialogPermissionVisible" :title="'Edit Permissions - ' + currentUser.name">
+    <el-dialog :close-on-click-modal="false" :close-on-press-escape="false" :visible.sync="dialogPermissionVisible" :title="'Edit Permissions - ' + currentUser.name">
       <div v-if="currentUser.name" v-loading="dialogPermissionLoading" class="form-container">
         <div class="permissions-container">
           <div class="block">
@@ -90,7 +90,7 @@
       </div>
     </el-dialog>
 
-    <el-dialog :title="'Create new user'" :visible.sync="dialogFormVisible">
+    <el-dialog :close-on-click-modal="false" :close-on-press-escape="false" :title="'Create new user'" :visible.sync="dialogFormVisible">
       <div v-loading="userCreating" class="form-container">
         <el-form ref="userForm" :rules="rules" :model="newUser" label-position="left" label-width="150px" style="max-width: 500px;">
           <el-form-item :label="$t('user.role')" prop="role">
