@@ -235,6 +235,25 @@
                 </div>
             </li>
         @endif
+        @if(auth('admin')->user()->can('admin-pms', 'admin.tax.getList'))
+            <li class="nav-item @if(in_array($currentRoute,['admin.tax.getList','admin.tax.getCreate'])) active @endif">
+                <a class="nav-link" data-toggle="collapse" href="#ui-basic12" aria-expanded="false" aria-controls="ui-basic">
+                    <i class="menu-icon mdi mdi-home-variant"></i>
+                    <span class="menu-title">Cách tính thuế đất</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse @if(in_array($currentRoute,['admin.tax.getList','admin.tax.getCreate'])) show @endif" id="ui-basic12">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item">
+                            <a class="nav-link @if(in_array($currentRoute,['admin.tax.getList'])) active @endif" href="{{ route('admin.tax.getList') }}">Danh sách bài viết</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @if(in_array($currentRoute,['admin.tax.getCreate'])) active @endif" href="{{ route('admin.tax.getCreate') }}">Tạo bài bài viết</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        @endif
         @if(auth('admin')->user()->can('admin-pms', 'admin.advertise.getList'))
             <li class="nav-item @if(in_array($currentRoute,['admin.advertise.getList','admin.advertise.getCreate'])) active @endif">
                 <a class="nav-link" data-toggle="collapse" href="#ui-basic9" aria-expanded="false" aria-controls="ui-basic">

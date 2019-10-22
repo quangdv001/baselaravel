@@ -39,7 +39,7 @@ class ContractService
         } else {
             $query = $query->orderBy('id', 'DESC');
         }
-        $admin = $query->with(['renter', 'service'])->paginate(isset($data['limit']) ? (int)$data['limit'] : 30);
+        $admin = $query->with(['rent' ,'renter', 'service'])->paginate(isset($data['limit']) ? (int)$data['limit'] : 30);
         return $admin;
     }
 
@@ -114,12 +114,12 @@ class ContractService
         $law = $this->contract->find($id);
         $law->delete();
     }
-    public function removeContractRenter($id){
-        $law = $this->contractRenter->find($id);
+    public function removeContractRenter($data){
+        $law = $this->contractRenter->where('contract_id', $data['contract_id'])->where('renter_id', $data['renter_id'])->first();
         $law->delete();
     }
-    public function removeContractService($id){
-        $law = $this->contractService->find($id);
+    public function removeContractService($data){
+        $law = $this->contractService->where('contract_id', $data['contract_id'])->where('renter_id', $data['renter_id'])->first();
         $law->delete();
     }
 
@@ -131,7 +131,7 @@ class ContractService
     }
 
     public function getById($id){
-        return $this->contract->find($id);
+        return $this->contract->with(['rent' ,'renter', 'service'])->find($id);
     }
     public function getByIdContractRenter($id){
         return $this->contractRenter->find($id);
