@@ -151,7 +151,7 @@
               </el-pagination>
             </div>
 
-            <el-dialog title="PHÒNG TRỌ - XÓA" :visible.sync="dialogConfirmRemove">
+            <el-dialog :close-on-click-modal="false" :close-on-press-escape="false" title="PHÒNG TRỌ - XÓA" :visible.sync="dialogConfirmRemove">
               <el-alert
                 title="Xác nhận xóa"
                 type="error" 
@@ -174,7 +174,7 @@
               </span>
             </el-dialog>
 
-            <el-dialog title="PHÒNG TRỌ - TẠO MỚI" :visible.sync="dialogFormNewPost">
+            <el-dialog :close-on-click-modal="false" :close-on-press-escape="false" title="PHÒNG TRỌ - TẠO MỚI" :visible.sync="dialogFormNewPost">
               <el-form ref="dataForm" :model="createForm" label-position="left" label-width="150px">
                 <el-form-item
                   label="Tên"
@@ -218,7 +218,7 @@
                   :rules="[
                     { required: true, message: 'Vui lòng nhập số tiền tương ứng !', trigger: 'blur' }
                   ]">
-                  <el-input @keyup.native="handleAmountInput" v-model="createForm.price" :disabled="false" :maxlength="10"></el-input>
+                  <el-input @keyup.native="handleAmountInput" v-model="createForm.price" :disabled="false" :maxlength="15"></el-input>
                 </el-form-item>
 
                 <el-form-item
@@ -243,7 +243,7 @@
               </div>
             </el-dialog>
 
-            <el-dialog title="PHÒNG TRỌ - CHỈNH SỬA" :visible.sync="dialogFormEditPost">
+            <el-dialog :close-on-click-modal="false" :close-on-press-escape="false" title="PHÒNG TRỌ - CHỈNH SỬA" :visible.sync="dialogFormEditPost">
               <el-form ref="dataForm" :model="formEdit" label-position="left" label-width="150px">
                 <el-form-item
                   label="Tên"
@@ -287,7 +287,7 @@
                   :rules="[
                     { required: true, message: 'Vui lòng nhập số tiền tương ứng !', trigger: 'blur' }
                   ]">
-                  <el-input v-if="formEdit" @keyup.native="handleAmountInput" v-model="formEdit.price" :disabled="false" :maxlength="10"></el-input>
+                  <el-input v-if="formEdit" @keyup.native="handleAmountInput" v-model="formEdit.price" :disabled="false" :maxlength="15"></el-input>
                 </el-form-item>
 
                 <el-form-item
@@ -401,9 +401,6 @@ export default {
       },
       deep: true,
       immediate: true
-    },
-    'createForm.price': () => {
-      this.handleAmountInput()
     },
     showInputSearch(value) {
       if (value) {
