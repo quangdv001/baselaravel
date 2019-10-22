@@ -27,7 +27,7 @@ class ProjectRequest extends FormRequest
             'title' => 'required',
             'short_description' => 'required',
             'description' => 'required',
-            'slug' => 'required|unique:article,slug,'.$this->id,
+            'slug' => 'required|unique:project,slug,'.$this->id,
         ];
     }
 

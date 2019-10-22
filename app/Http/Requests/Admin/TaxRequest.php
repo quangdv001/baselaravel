@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ExchangeRequest extends FormRequest
+class TaxRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,7 +27,7 @@ class ExchangeRequest extends FormRequest
             'title' => 'required',
             'short_description' => 'required',
             'description' => 'required',
-            'slug' => 'required|unique:exchange,slug,'.$this->id,
+            'slug' => 'required|unique:tax,slug,'.$this->id,
         ];
     }
 

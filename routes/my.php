@@ -9,6 +9,9 @@ Route::get('/', 'MyHomeController@index')->name('home.index');
 Route::get('/me', 'MyHomeController@me')->name('home.me');
 
 // Nhà trọ
+Route::get('/testGet', 'MyHomeController@testGet')->name('home.index');
+Route::get('/testPost', 'MyHomeController@testPost')->name('home.index');
+
 Route::get('motel/search', 'MyMotelController@index')->name('motel.index');
 Route::get('motel/show/{id}', 'MyMotelController@show')->name('motel.show');
 Route::post('motel/create', 'MyMotelController@create')->name('motel.create');
@@ -36,18 +39,18 @@ Route::post('contract/create', 'MyContractController@create')->name('contract.cr
 Route::post('contract/update/{id}', 'MyContractController@update')->name('contract.update');
 Route::post('contract/duplicate', 'MyContractController@duplicate')->name('contract.duplicate');
 Route::post('contract/remove', 'MyContractController@remove')->name('contract.remove');
-// Hợp đồng người thuê
-Route::get('contract/renter/search', 'MyContractController@index')->name('contract.renter.index');
+
+// Route::get('contract/renter/search', 'MyContractController@index')->name('contract.renter.index');
 Route::get('contract/renter/show/{id}', 'MyContractController@showRenter')->name('contract.renter.show');
 Route::post('contract/renter/create', 'MyContractController@createContractRenter')->name('contract.renter.create');
-Route::post('contract/renter/update/{id}', 'MyContractController@updateContractRenter')->name('contract.renter.update');
+// Route::post('contract/renter/update/{id}', 'MyContractController@updateContractRenter')->name('contract.renter.update');
 Route::post('contract/renter/duplicate', 'MyContractController@duplicate')->name('contract.renter.duplicate');
 Route::post('contract/renter/remove', 'MyContractController@removeContractRenter')->name('contract.renter.remove');
-// Hợp đồng dịch vụ
-Route::get('contract/service/search', 'MyContractController@index')->name('contract.service.index');
+
+// Route::get('contract/service/search', 'MyContractController@index')->name('contract.service.index');
 Route::get('contract/service/show/{id}', 'MyContractController@showService')->name('contract.service.show');
 Route::post('contract/service/create', 'MyContractController@createContractService')->name('contract.service.create');
-Route::post('contract/service/update/{id}', 'MyContractController@updateContractService')->name('contract.service.update');
+// Route::post('contract/service/update/{id}', 'MyContractController@updateContractService')->name('contract.service.update');
 Route::post('contract/service/duplicate', 'MyContractController@duplicate')->name('contract.service.duplicate');
 Route::post('contract/service/remove', 'MyContractController@removeContractSerivce')->name('contract.service.remove');
 // Dịch vụ

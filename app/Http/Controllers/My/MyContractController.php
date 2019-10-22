@@ -49,7 +49,7 @@ class MyContractController extends MyBaseController
     }
 
     public function create(Request $request){
-        $params = $request->only('name', 'note', 'deposits', 'duration', 'payment_period', 'start', 'end', 'status', 'user_id', 'rent_id');
+        $params = $request->only('name', 'note', 'deposits', 'duration', 'payment_period', 'start', 'end', 'status', 'user_id', 'rent_id', 'renter_id');
         $params['user_id'] = $this->user->id;
         $params['status'] = 1;
         $data = $this->contract->create($params);
@@ -63,7 +63,7 @@ class MyContractController extends MyBaseController
     }
 
     public function createContractRenter(Request $request){
-        $params = $request->only('name', 'note', 'deposits', 'duration', 'payment_period', 'start', 'end', 'status', 'user_id', 'rent_id');
+        $params = $request->only('contract_id', 'renter_id');
         $params['user_id'] = $this->user->id;
         $params['status'] = 1;
         $data = $this->contract->create($params);
@@ -77,7 +77,7 @@ class MyContractController extends MyBaseController
     }
 
     public function createContractService(Request $request){
-        $params = $request->only('name', 'note', 'deposits', 'duration', 'payment_period', 'start', 'end', 'status', 'user_id', 'rent_id');
+        $params = $request->only('contract_id', 'service_id');
         $params['user_id'] = $this->user->id;
         $params['status'] = 1;
         $data = $this->contract->create($params);
@@ -117,36 +117,6 @@ class MyContractController extends MyBaseController
         }
         return response()->json($res);
     }
-    public function updateContractRenter(Request $request, $id){
-        $params = $request->only('name', 'note', 'deposits', 'duration', 'payment_period', 'start', 'end', 'status', 'user_id', 'rent_id');
-        $params['user_id'] = $this->user->id;
-        $motel = $this->contract->getById($id);
-        $res['success'] = 0;
-        $res['mess'] = 'Có lỗi xảy ra!';
-        if($motel){
-            $data = $this->contract->updateContractRenter($motel, $params);
-            if($data){
-                $res['success'] = 1;
-                $res['data'] = $data;
-            }
-        }
-        return response()->json($res);
-    }
-    public function updateContractService(Request $request, $id){
-        $params = $request->only('name', 'note', 'deposits', 'duration', 'payment_period', 'start', 'end', 'status', 'user_id', 'rent_id');
-        $params['user_id'] = $this->user->id;
-        $motel = $this->contract->getById($id);
-        $res['success'] = 0;
-        $res['mess'] = 'Có lỗi xảy ra!';
-        if($motel){
-            $data = $this->contract->updateContractService($motel, $params);
-            if($data){
-                $res['success'] = 1;
-                $res['data'] = $data;
-            }
-        }
-        return response()->json($res);
-    }
 
     public function remove(Request $request){
         $id = $request->input('id', 0);
@@ -156,15 +126,15 @@ class MyContractController extends MyBaseController
         return response()->json($res);
     }
     public function removeContractRenter(Request $request){
-        $id = $request->input('id', 0);
-        $data = $this->contract->removeContractRenter($id);
+        $params = $request->only('contract_id', 'renter_id');
+        $data = $this->contract->removeContractRenter($params);
         $res['success'] = 1;
         $res['data'] = $data;
         return response()->json($res);
     }
     public function removeContractService(Request $request){
-        $id = $request->input('id', 0);
-        $data = $this->contract->removeContractService($id);
+        $params = $request->only('contract_id', 'renter_id');
+        $data = $this->contract->removeContractService($params);
         $res['success'] = 1;
         $res['data'] = $data;
         return response()->json($res);

@@ -15,6 +15,7 @@ use App\Services\FooterService;
 use App\Services\LandService;
 use App\Services\ExchangeService;
 use App\Services\AdvertiseService;
+use App\Services\TaxService;
 use Illuminate\Support\Facades\Route;
 use App\Services\ProvinceService;
 use App\Service\Extend\TelegramService;
@@ -27,6 +28,7 @@ class SiteHomeController extends Controller
     private $article;
     private $law;
     private $project;
+    private $tax;
     protected $currentRoute;
     // For only this view
     private $roomService;
@@ -40,7 +42,7 @@ class SiteHomeController extends Controller
     private $advertise;
     public function __construct(CategoryService $category, ArticleService $article, RoomService $room, 
     ProvinceService $province, LawService $law, ProjectService $project, ManagerService $manager, FooterService $footer,
-    LandService $land, ExchangeService $exchange, AdvertiseService $advertise){
+    LandService $land, ExchangeService $exchange, AdvertiseService $advertise, TaxService $tax){
         $this->category = $category;
         $this->article = $article;
         $this->law = $law;
@@ -52,6 +54,7 @@ class SiteHomeController extends Controller
         $this->exchange = $exchange;
         $this->room = $room;
         $this->advertise = $advertise;
+        $this->tax = $tax;
         $categories = $this->category->getAll();
         $mainMenu = $this->category->getMenu($categories, 1);
         $topMenu = $this->category->getMenu($categories, 2);
@@ -66,7 +69,8 @@ class SiteHomeController extends Controller
         $lastestLand = $this->land->search($data);
         $lastestExchange = $this->exchange->search($data);
         $latestProjects = $this->project->search($data);
-        $latestRoom = $this->room->search($data);
+        $lastestRoom = $this->room->search($data);
+        $lastestTaxLand = $this->tax->search($data);
         $promotionNews = $this->article->latestByType(1);
         $partners = $this->article->latestByType(2);
         $districts = $this->room->listPluck();
@@ -98,7 +102,7 @@ class SiteHomeController extends Controller
         View::share('lastestArticle', $lastestArticle);
         View::share('latestProjects', $latestProjects);
         View::share('lastestExchange', $lastestExchange);
-        View::share('latestRoom', $latestRoom);
+        View::share('latestRoom', $lastestRoom);
         View::share('promotionNews', $promotionNews);
         View::share('partners', $partners);
         View::share('exchangePartnerAdvertise', $exchangePartnerAdvertise);
@@ -106,6 +110,7 @@ class SiteHomeController extends Controller
         View::share('districts', $districts);
         View::share('verticalAdvertise', $verticalAdvertise);
         View::share('horizontalAdvertise', $horizontalAdvertise);
+        View::share('lastestTaxLand', $lastestTaxLand);
         //Footer
         View::share('pagesFooter', $pagesFooter);
         View::share('listSocial', $listSocial);

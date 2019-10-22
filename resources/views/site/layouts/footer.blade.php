@@ -52,6 +52,9 @@
                   </div>
                 </div>
               </div>
+              <div class="col-sm-3">
+                <a href="http://online.gov.vn/HomePage/WebsiteDisplay.aspx?DocId=58966"><img alt="" title="" src="http://online.gov.vn/seals/7VEdC9rVwETYuKoysAIXcg==.jpgx" /></a>
+              </div>
             </div>
           </div>
         </div>

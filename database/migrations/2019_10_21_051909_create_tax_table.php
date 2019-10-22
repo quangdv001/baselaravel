@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateContractRenterTable extends Migration
+class CreateTaxTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class CreateContractRenterTable extends Migration
      */
     public function up()
     {
-        Schema::create('contract_renter', function (Blueprint $table) {
+        Schema::create('tax', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('contract_id');
-            $table->bigInteger('renter_id');
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ class CreateContractRenterTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('contract_renter');
+        Schema::dropIfExists('tax');
     }
 }

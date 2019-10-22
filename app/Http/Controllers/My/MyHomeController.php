@@ -23,4 +23,12 @@ class MyHomeController extends MyBaseController
         $res['data'] = $user;
         return response()->json($res, 200);
     }
+    
+    public function testGet(){
+        
+    }
+
+    public function testPost(){
+        return view('testPost');
+    }
 }

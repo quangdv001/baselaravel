@@ -83,5 +83,10 @@ Route::middleware(['auth.admin'])->prefix('admin')->group(function () {
     Route::get('exchange/getCreate/{id?}', 'AdminExchangeController@getCreate')->name('exchange.getCreate');
     Route::post('exchange/getCreate/{id?}', 'AdminExchangeController@postCreate')->name('exchange.postCreate');
     Route::get('exchange/remove/{id?}', 'AdminExchangeController@remove')->name('exchange.remove');
+
+    Route::get('tax', 'AdminTaxController@index')->name('tax.getList');
+    Route::get('tax/getCreate/{id?}', 'AdminTaxController@getCreate')->name('tax.getCreate');
+    Route::post('tax/getCreate/{id?}', 'AdminTaxController@postCreate')->name('tax.postCreate');
+    Route::get('tax/remove/{id?}', 'AdminTaxController@remove')->name('tax.remove');
 });
 

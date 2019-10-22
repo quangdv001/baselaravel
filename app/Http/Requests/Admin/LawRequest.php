@@ -27,7 +27,7 @@ class LawRequest extends FormRequest
             'title' => 'required',
             'short_description' => 'required',
             'description' => 'required',
-            'slug' => 'required|unique:article,slug,'.$this->id,
+            'slug' => 'required|unique:law,slug,'.$this->id,
         ];
     }
 
