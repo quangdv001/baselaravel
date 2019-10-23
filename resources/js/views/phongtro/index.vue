@@ -213,6 +213,22 @@
                 </el-form-item>
 
                 <el-form-item
+                  label="Trạng thái"
+                  prop="status"
+                  :rules="[
+                    { required: true, message: 'Vui lòng chọn trạng thái phòng trọ !', trigger: 'blur' }
+                  ]">
+                  <el-select v-model="createForm.status">
+                    <el-option
+                      v-for="item in optionStatus"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value">
+                    </el-option>
+                  </el-select>
+                </el-form-item>
+
+                <el-form-item
                   label="Thành tiền"
                   prop="price"
                   :rules="[
@@ -507,7 +523,9 @@ export default {
       this.$refs['dataForm'].validate(valid => {
         if (valid) {
           this.createForm.price = parseInt(this.createForm.price.replace(/,/g, ''))
+          console.log(this.createForm)
           create(this.createForm).then(res => {
+            console.log(res)
             this.createForm = JSON.parse(JSON.stringify(defaultCreate))
             this.dialogFormNewPost = false
             if (res.success) {
