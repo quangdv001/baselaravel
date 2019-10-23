@@ -8,7 +8,7 @@
         <el-col :span="24" :xs="24">
           <el-card style="margin-bottom:20px;">
             <div slot="header" class="clearfix">
-              <span>NHÀ TRỌ</span>
+              <span>{{ PAGE_TITLE }}</span>
             </div>
             <div class="filter-container">
               <!-- Thêm mới -->
@@ -101,16 +101,20 @@
               </el-pagination>
             </div>
 
-            <el-dialog :close-on-click-modal="false" :close-on-press-escape="false" title="NHÀ TRỌ - XÓA" :visible.sync="dialogConfirmRemove">
+            <el-dialog
+            :close-on-click-modal="false"
+            :close-on-press-escape="false"
+            :title="PAGE_TITLE + ' - XÓA'"
+            :visible.sync="dialogConfirmRemove">
               <el-alert
                 title="Xác nhận xóa"
                 type="error"
                 :closable="false"
                 show-icon>
                 <template slot>
-                  <span v-if="toRemove.length === 1">Bạn có muốn xóa nhà trọ: <strong>{{toRemove[0].name}}</strong> không?</span>
+                  <span v-if="toRemove.length === 1">Bạn có muốn xóa {{ PAGE_TITLE.toLowerCase() }}: <strong>{{toRemove[0].name}}</strong> không?</span>
                   <div v-else-if="toRemove.length > 1">
-                    <p>Bạn có muốn xóa những nhà trọ sau không?</p>
+                    <p>Bạn có muốn xóa những {{ PAGE_TITLE.toLowerCase() }} sau không?</p>
                     <ul>
                       <li v-for="item in toRemove" :key="'remove-' + item.id">{{ item.name }}</li>
                     </ul>
@@ -119,75 +123,24 @@
               </el-alert>
               <span slot="footer" class="dialog-footer">
                 <el-button type="info" @click="isRemoveMultiple = dialogConfirmRemove = false" icon="el-icon-circle-close" plain>Hủy bỏ</el-button>
-                <el-button v-if="!isRemoveMultiple" type="primary" @click="removeMotel(toRemove[0].id)" icon="el-icon-check" plain>Đồng ý</el-button>
-                <el-button v-else type="primary" @click="multipleRemovalMotel" icon="el-icon-check" plain>Đồng ý</el-button>
+                <el-button v-if="!isRemoveMultiple" type="primary" @click="removeItem(toRemove[0].id)" icon="el-icon-check" plain>Đồng ý</el-button>
+                <el-button v-else type="primary" @click="multipleRemovalItem" icon="el-icon-check" plain>Đồng ý</el-button>
               </span>
             </el-dialog>
 
-            <el-dialog :close-on-click-modal="false" :close-on-press-escape="false" title="NHÀ TRỌ - CHỈNH SỬA" :visible.sync="dialogFormVisible">
-              <el-form ref="form" :model="formEdit" label-width="120px">
+            <el-dialog 
+              :before-close="handleClosePopup"
+              :close-on-click-modal="false"
+              :close-on-press-escape="false"
+              :title="PAGE_TITLE + ' - ' + formTitle.toUpperCase() "
+              :visible.sync="dialogFormNewPost">
+              <el-form ref="form" :model="formCreate" :rules="rules" label-width="150px">
                 <el-row :gutter="20">
                   <el-col :span="24">
                     <el-form-item
                       label="Tên"
                       prop="name"
-                      :rules="[
-                        { required: true, message: 'Vui lòng nhập tên nhà trọ !', trigger: 'blur' }
-                      ]">
-                      <el-input
-                        v-if="formEdit"
-                        v-model="formEdit.name"
-                        :disabled="false"/>
-                    </el-form-item>
-                  </el-col>
-
-                  <el-col :span="24">
-                    <el-form-item
-                      label="Địa chỉ"
-                      prop="address"
-                      :rules="[
-                        { required: true, message: 'Vui lòng nhập địa chỉ nhà trọ !', trigger: 'blur' }
-                      ]">
-                      <el-input
-                        v-if="formEdit"
-                        v-model="formEdit.address"
-                        :disabled="false"/>
-                    </el-form-item>
-                  </el-col>
-                </el-row>
-                <el-row :gutter="20">
-                  <el-col :span="24">
-                    <el-form-item
-                      label="Mô tả"
-                      prop="description"
-                      :rules="[
-                        { required: true, message: 'Vui lòng nhập mô tả nhà trọ !', trigger: 'blur' }
-                      ]">
-                      <el-input v-if="formEdit"
-                        v-model="formEdit.description"
-                        type="textarea"
-                        :rows="2"
-                        :disabled="false"/>
-                    </el-form-item>
-                  </el-col>
-                </el-row>
-              </el-form>
-              <span slot="footer" class="dialog-footer">
-                <el-button type="info" @click="dialogFormVisible = false" icon="el-icon-circle-close" plain>Hủy bỏ</el-button>
-                <el-button type="primary" @click="editMotel" icon="el-icon-check" plain>Đồng ý</el-button>
-              </span>
-            </el-dialog>
-
-            <el-dialog :close-on-click-modal="false" :close-on-press-escape="false" title="NHÀ TRỌ - TẠO MỚI" :visible.sync="dialogFormNewPost">
-              <el-form ref="form" :model="formCreate" label-width="150px">
-                <el-row :gutter="20">
-                  <el-col :span="24">
-                    <el-form-item
-                      label="Tên"
-                      prop="name"
-                      :rules="[
-                        { required: true, message: 'Vui lòng nhập tên nhà trọ !', trigger: 'blur' }
-                      ]">
+                      >
                       <el-input
                         v-model="formCreate.name"
                         :disabled="false"/>
@@ -198,9 +151,7 @@
                     <el-form-item
                       label="Địa chỉ"
                       prop="address"
-                      :rules="[
-                        { required: true, message: 'Vui lòng nhập tên địa chỉ nhà trọ !', trigger: 'blur' }
-                      ]">
+                      >
                       <el-input
                         v-model="formCreate.address"
                         :disabled="false"/>
@@ -211,9 +162,7 @@
                     <el-form-item
                       label="Mô tả"
                       prop="description"
-                      :rules="[
-                        { required: true, message: 'Vui lòng nhập mô tả nhà trọ !', trigger: 'blur' }
-                      ]">
+                      >
                       <el-input
                         v-model="formCreate.description"
                         type="textarea"
@@ -227,7 +176,7 @@
               <span slot="footer" class="dialog-footer">
                 <el-button type="info" icon="el-icon-circle-close" @click="dialogFormNewPost = false" plain>Hủy bỏ</el-button>
                 <el-button type="primary" icon="el-icon-refresh" @click="resetForm('form')" plain>Đặt lại</el-button>
-                <el-button type="success" icon="el-icon-check" @click="createMotel" plain>Tạo mới</el-button>
+                <el-button type="success" icon="el-icon-check" @click="handleSubmit" plain>{{ formTitle }}</el-button>
               </span>
             </el-dialog>
           </el-card>
@@ -241,7 +190,28 @@ import { mapGetters } from 'vuex'
 import {  create, edit, remove } from '@/api/motel'
 import Loading from '@/components/Loading'
 
+const LABEL = {
+  name: 'Nhatro',
+  title: 'NHÀ TRỌ',
+  model: 'motel',
+  slug: 'nha-tro',
+  edit: 'Sửa',
+  create: 'Tạo mới'
+}
+
 const defaultCreate = { name: '', address: '', description: '' }
+
+const rules = {
+  name: [
+    { required: true, message: 'Vui lòng nhập tên!', trigger: 'blur' }
+  ],
+  address: [
+    { required: true, message: 'Vui lòng nhập tên địa chỉ!', trigger: 'blur' }
+  ],
+  description: [
+    { required: true, message: 'Vui lòng nhập mô tả!', trigger: 'blur' }
+  ]
+}
 
 export default {
   name: 'Nhatro',
@@ -250,6 +220,9 @@ export default {
   },
   data() {
     return {
+      rules,
+      PAGE_TITLE: LABEL.title,
+      formTitle: LABEL.create,
       initing: false,
       dialogFormVisible: false,
       dialogFormNewPost: false,
@@ -280,7 +253,7 @@ export default {
     '$route': {
       handler: function(nextValue) {
         const { path } = nextValue
-        if (path === "/nha-tro/index") {
+        if (path === `/${LABEL.slug}/index`) {
           this.getApi()
         }
       },
@@ -295,7 +268,7 @@ export default {
     },
     async getApi(current_page = 1, limit = 10) {
       this.initing = true
-      const data = await this.$store.dispatch('motel/FetchList', { current_page, limit }).then(res => {
+      const data = await this.$store.dispatch(LABEL.model + '/FetchList', { current_page, limit }).then(res => {
         this.tableData = res.data && res.data.data
         this.initing = false
         const api_current_page = res.data.current_page
@@ -319,28 +292,18 @@ export default {
     handleSelectionChange(val) {
       this.multipleSelection = val
     },
-    createDataForm(obj) {
-      if (null == obj || "object" != typeof obj) return obj
-      const copy = obj.constructor()
-      for (const attr in obj) {
-        if (obj.hasOwnProperty(attr) && obj[attr]) copy[attr] = obj[attr]
-      }
-      return copy
+    handleSubmit() {
+      this.formTitle === LABEL.edit ? this.editItem() : this.createItem()
     },
-    updateTableData(row) {
-      this.tableData = this.tableData.map(item => {
-        if (item.id === row.id) return row
-        return item
-      })
-    },
-    editMotel() {
+    editItem() {
       this.$refs['form'].validate(valid => {
         if (valid) {
-          const editForm = this.createDataForm(this.formEdit)
-          edit(editForm).then(res => {
-            this.dialogFormVisible = false
+          this.$store.dispatch(LABEL.model + '/Edit', this.formCreate).then(res => {
             if (res.success) {
-              this.updateTableData(res.data)
+              this.tableData = this.tableData.map(item => {
+                if (item.id === res.data.id) return res.data
+                return item
+              })
             }
             this.$notify.success({
               title: 'Thành công',
@@ -359,17 +322,24 @@ export default {
         } else {
           return false
         }
+        this.handleClosePopup()
       })
     },
-    createMotel() {
+    createItem() {
       this.$refs['form'].validate(valid => {
         if (valid) {
-          this.$store.dispatch('motel/Create', this.formCreate).then(res => {
-            this.formCreate = JSON.parse(JSON.stringify(defaultCreate))
-            this.dialogFormNewPost = false
+          const tableData = JSON.parse(JSON.stringify(this.tableData))
+          this.$store.dispatch(LABEL.model + '/Create', this.formCreate).then(res => {
             if (res.success) {
-              this.tableData.unshift(res.data)
-              this.tableData.pop()
+              if (tableData && tableData.length === 0) tableData.push(res.data)
+              else {
+                if (!tableData.some(item => item.id === res.data.id)) { tableData.unshift(res.data) }
+                const isRemoveEnd = tableData.length > this.pagination.per_page
+                if (isRemoveEnd) {
+                  ++this.pagination.total
+                  tableData.pop()
+                }
+              }
             }
             this.$notify.success({
               title: 'Thành công',
@@ -386,10 +356,22 @@ export default {
               duration: 4000
             })
           })
-        } else {
+          
+          this.tableData = tableData          
+          this.handleClosePopup()
+        } else {          
+          this.handleClosePopup()
           return false
         }
       })
+    },
+    handleClosePopup() {      
+      setTimeout(() => {
+        this.formTitle = LABEL.create
+        this.formCreate = JSON.parse(JSON.stringify(defaultCreate))
+        this.dialogFormNewPost = false
+        this.resetForm()
+      }, 400)
     },
     handleRemove(row, action) {
       if (action && action === 'multiple-delete') {
@@ -410,9 +392,9 @@ export default {
         this.toRemove = [row]
       }
     },
-    removeMotel(id) {
+    removeItem(id) {
       if (!id) return
-      this.$store.dispatch('motel/Remove', id).then(res => {
+      this.$store.dispatch(LABEL.model + '/Remove', id).then(res => {
         this.dialogConfirmRemove = false
         if (res.success) {
           this.tableData = this.tableData.filter(item => (item.id !== id))
@@ -425,7 +407,7 @@ export default {
         })
       })
       .catch(_err => {
-        console.log(_err)
+        console.warn(_err)
         this.initing = false
         this.$notify.error({
           title: 'Lỗi',
@@ -435,36 +417,33 @@ export default {
       })
       this.toRemove = []
     },
-    multipleRemovalMotel() {
+    multipleRemovalItem() {
       this.toRemove.forEach(element => {
-        this.removeMotel(element.id)
+        this.removeItem(element.id)
       })
       this.isRemoveMultiple = false
       this.multipleSelection = []
       this.toRemove = []
     },
-    onSubmit() {},
     handleChangeActions(items) {
       const { type, data } = items
       switch (type) {
         case 'edit':
-          this.formEdit = data
-          this.dialogFormVisible = true
+          this.formTitle = LABEL.edit
+          this.formCreate = JSON.parse(JSON.stringify(data))
+          this.dialogFormNewPost = true
           break
         case 'create':
-          this.formCreate = {
-            name: '',
-            address: '',
-            description: ''
-          }
+          this.formTitle = LABEL.create
+          this.formCreate = JSON.parse(JSON.stringify(defaultCreate))
           this.dialogFormNewPost = true
           break
         default:
           break
       }
     },
-    resetForm(form) {
-      this.$refs[form].resetFields()
+    resetForm() {
+      this.$refs['form'].resetFields()
     }
   }
 }

@@ -4,19 +4,17 @@
 
     <div class="content" v-else>
       <el-row :gutter="24">
+
         <el-col :span="24" :xs="24">
           <el-card style="margin-bottom:20px;">
             <div slot="header" class="clearfix">
-              <span>PHÒNG TRỌ</span>
+              <span>{{ PAGE_TITLE }}</span>
             </div>
-
             <div class="filter-container">
               <!-- Thêm mới -->
-              <el-button class="bordered filter-item" plain round type="default" icon="el-icon-plus" size="mini"
-              @click="dialogFormNewPost = true">
+              <el-button @click="dialogFormNewPost = true" style="border-color: #b3d8ff !important;" plain round class="filter-item" type="default" icon="el-icon-plus" size="mini">
                 Thêm mới
               </el-button>
-
               <!-- Xuất hóa đơn -->
               <el-button class="bordered filter-item" type="default" icon="el-icon-printer" size="mini" plain round>
                 Xuất hóa đơn
@@ -33,34 +31,30 @@
               </el-button>
 
               <!-- Xuất excel -->
-              <el-button style="margin-right: 10px;" class="bordered filter-item" type="default" icon="el-icon-download" size="mini" plain round>
+              <el-button
+              style="margin-right: 10px;"
+              class="bordered filter-item"
+              type="default"
+              icon="el-icon-download"
+              size="mini"
+              @click="handleExportExcel"
+              plain
+              round>
                 Xuất excel
               </el-button>
 
-              <el-row>
-                <div :class="{'show': showInputSearch}" class="header-search">
-                  <el-select
-                    ref="headerSearchSelect"
-                    v-model="search"
-                    filterable
-                    default-first-option
-                    remote
-                    placeholder="Tìm kiếm phòng"
-                    class="header-search-select"
-                    @change="changeShowInputSearch"
-                  >
-                    <el-option v-for="item in options" :key="item.path" :value="item" :label="item.title.join(' > ')" />
-                  </el-select>
-                </div>
-              </el-row>
-
               <!-- Tìm kiếm -->
-              <el-button @click.stop="clickShowInputSearch" class="bordered filter-item" type="default" icon="el-icon-search" size="mini" plain round>
+              <el-button class="bordered filter-item" type="default" icon="el-icon-search" size="mini" plain round>
                 Tìm kiếm
               </el-button>
 
               <!-- Xóa nhiều -->
-              <el-button @click="handleRemove(null, 'multiple-delete')" class="bordered filter-item" type="danger" icon="el-icon-delete" size="mini" plain round>
+              <el-button
+              class="filter-item"
+              @click="handleRemove(null, 'multiple-delete')"
+              type="danger" icon="el-icon-delete"
+              size="mini"
+              plain round>
                 Xóa nhiều
               </el-button>
             </div>
@@ -71,20 +65,24 @@
               @selection-change="handleSelectionChange">
               <el-table-column width="65px" align="center">
                 <template slot-scope="scope">
-                  <i v-if="scope.row.changing" class="el-icon-loading" />
-                  <el-dropdown trigger="click" @command="handleChangeActions">
-                    <el-button type="info" size="small" plain>
-                      <i class="el-icon-setting" />
-                    </el-button>
-                    <el-dropdown-menu slot="dropdown">
-                      <el-dropdown-item :command="{ type: 'edit', data: scope.row }">Sửa</el-dropdown-item>
-                      <el-dropdown-item>Trạng thái</el-dropdown-item>
-                    </el-dropdown-menu>
-                  </el-dropdown>
+                  <i v-if="scope.row._changing" class="el-icon-loading" />
+                  <div v-else>
+                    <el-dropdown trigger="click" @command="handleChangeActions">
+                      <el-button type="info" size="small" plain>
+                        <i class="el-icon-setting" />
+                      </el-button>
+                      <el-dropdown-menu slot="dropdown">
+                        <el-dropdown-item :command="{ type: 'edit', data: scope.row }">Sửa</el-dropdown-item>
+                        <!-- <el-dropdown-item :command="{ type: 'newpost' }">Đăng bài</el-dropdown-item> -->
+                      </el-dropdown-menu>
+                    </el-dropdown>
+                  </div>
                 </template>
               </el-table-column>
 
-              <el-table-column type="selection"></el-table-column>
+              <el-table-column type="selection" width="45"/>
+
+              <el-table-column label="STT" type="index" />
 
               <el-table-column property="floor" label="Tầng">
                 <template slot-scope="scope">
@@ -124,9 +122,11 @@
                 </template>
               </el-table-column>
 
-              <el-table-column property="description" label="Mô tả">
+              <el-table-column width="55">
                 <template slot-scope="scope">
-                  <span>{{ scope.row.description }}</span>
+                  <el-button type="info" size="small" @click="handleChangeActions({type: 'edit', data: scope.row})" circle>
+                    <i class="el-icon-upload2" />
+                  </el-button>
                 </template>
               </el-table-column>
 
@@ -151,16 +151,20 @@
               </el-pagination>
             </div>
 
-            <el-dialog :close-on-click-modal="false" :close-on-press-escape="false" title="PHÒNG TRỌ - XÓA" :visible.sync="dialogConfirmRemove">
+            <el-dialog
+            :close-on-click-modal="false"
+            :close-on-press-escape="false"
+            :title="PAGE_TITLE + ' - XÓA'"
+            :visible.sync="dialogConfirmRemove">
               <el-alert
                 title="Xác nhận xóa"
-                type="error" 
-                show-icon
-                :closable="false">
+                type="error"
+                :closable="false"
+                show-icon>
                 <template slot>
-                  <span v-if="toRemove.length === 1">Bạn có muốn xóa phòng trọ: <strong>{{toRemove[0].name}}</strong> không?</span>
+                  <span v-if="toRemove.length === 1">Bạn có muốn xóa {{ PAGE_TITLE.toLowerCase() }}: <strong>{{toRemove[0].name}}</strong> không?</span>
                   <div v-else-if="toRemove.length > 1">
-                    <p>Bạn có muốn xóa những phòng trọ sau không?</p>
+                    <p>Bạn có muốn xóa những {{ PAGE_TITLE.toLowerCase() }} sau không?</p>
                     <ul>
                       <li v-for="item in toRemove" :key="'remove-' + item.id">{{ item.name }}</li>
                     </ul>
@@ -169,163 +173,96 @@
               </el-alert>
               <span slot="footer" class="dialog-footer">
                 <el-button type="info" @click="isRemoveMultiple = dialogConfirmRemove = false" icon="el-icon-circle-close" plain>Hủy bỏ</el-button>
-                <el-button v-if="!isRemoveMultiple" type="primary" @click="removeRent(toRemove[0].id)" icon="el-icon-check" plain>Đồng ý</el-button>
-                <el-button v-else type="primary" @click="multipleRemovalRent" icon="el-icon-check" plain>Đồng ý</el-button>
+                <el-button v-if="!isRemoveMultiple" type="primary" @click="removeItem(toRemove[0].id)" icon="el-icon-check" plain>Đồng ý</el-button>
+                <el-button v-else type="primary" @click="multipleRemovalItem" icon="el-icon-check" plain>Đồng ý</el-button>
               </span>
             </el-dialog>
 
-            <el-dialog :close-on-click-modal="false" :close-on-press-escape="false" title="PHÒNG TRỌ - TẠO MỚI" :visible.sync="dialogFormNewPost">
-              <el-form ref="dataForm" :model="createForm" label-position="left" label-width="150px">
+            <el-dialog 
+              :before-close="handleClosePopup"
+              :close-on-click-modal="false"
+              :close-on-press-escape="false"
+              :title="PAGE_TITLE + ' - ' + formTitle.toUpperCase() "
+              :visible.sync="dialogFormNewPost">
+              <el-form ref="form" :model="formCreate" :rules="rules" label-position="left" label-width="150px">
                 <el-form-item
                   label="Tên"
                   prop="name"
-                  :rules="[
-                    { required: true, message: 'Vui lòng nhập tên phòng trọ !', trigger: 'blur' }
-                  ]">
-                  <el-input v-model="createForm.name" :disabled="false"></el-input>
+                  >
+                  <el-input v-model="formCreate.name" :disabled="false"></el-input>
                 </el-form-item>
 
                 <el-form-item
                   label="Tầng"
-                  prop="floor"
-                  :rules="[
-                    { required: true, message: 'Vui lòng nhập tầng của phòng trọ !', trigger: 'blur' }
-                  ]">
-                  <el-input v-model="createForm.floor" :disabled="false"/>
+                  prop="floor">
+                  <el-input v-model="formCreate.floor" :disabled="false"/>
                 </el-form-item>
 
                 <el-form-item
                   label="Số lượng tối đa"
-                  prop="max"
-                  :rules="[
-                    { required: true, message: 'Vui lòng nhập số lượng người tối đa trong phòng !', trigger: 'blur' }
-                  ]">
-                  <el-input v-model="createForm.max" :disabled="false"></el-input>
+                  prop="max">
+                  <el-input v-model="formCreate.max" :disabled="false"></el-input>
                 </el-form-item>
 
                 <el-form-item
                   label="ID phòng"
                   prop="motel_id"
-                  :rules="[
-                    { required: true, message: 'Vui lòng nhập id phòng !', trigger: 'blur' }
-                  ]">
-                  <el-input v-model="createForm.motel_id" :disabled="false"></el-input>
-                </el-form-item>
-
-                <el-form-item
-                  label="Thành tiền"
-                  prop="price"
-                  :rules="[
-                    { required: true, message: 'Vui lòng nhập số tiền tương ứng !', trigger: 'blur' }
-                  ]">
-                  <el-input @keyup.native="handleAmountInput" v-model="createForm.price" :disabled="false" :maxlength="15"></el-input>
-                </el-form-item>
-
-                <el-form-item
-                  label="Mô tả"
-                  prop="description"
-                  :rules="[
-                    { required: true, message: 'Vui lòng nhập mô tả phòng trọ !', trigger: 'blur' }
-                  ]">
-                  <el-input v-model="createForm.description" :autosize="{ minRows: 2, maxRows: 4}" type="textarea"/>
-                </el-form-item>
-              </el-form>
-              <div slot="footer" class="dialog-footer">
-                <el-button type="info" icon="el-icon-circle-close" plain @click="dialogFormNewPost = false">
-                  Hủy bỏ
-                </el-button>
-                <el-button type="primary" icon="el-icon-refresh" plain @click="resetForm('dataForm')">
-                  Đặt lại
-                </el-button>
-                <el-button type="success" icon="el-icon-check" plain @click="createRent">
-                  Đồng ý
-                </el-button>
-              </div>
-            </el-dialog>
-
-            <el-dialog :close-on-click-modal="false" :close-on-press-escape="false" title="PHÒNG TRỌ - CHỈNH SỬA" :visible.sync="dialogFormEditPost">
-              <el-form ref="dataForm" :model="formEdit" label-position="left" label-width="150px">
-                <el-form-item
-                  label="Tên"
-                  prop="name"
-                  :rules="[
-                    { required: true, message: 'Vui lòng nhập tên phòng trọ !', trigger: 'blur' }
-                  ]">
-                  <el-input v-if="formEdit" v-model="formEdit.name" :disabled="false"></el-input>
-                </el-form-item>
-
-                <el-form-item
-                  label="Tầng"
-                  prop="floor"
-                  :rules="[
-                    { required: true, message: 'Vui lòng nhập tầng của phòng trọ !', trigger: 'blur' }
-                  ]">
-                  <el-input v-if="formEdit" v-model="formEdit.floor" :disabled="false"></el-input>
-                </el-form-item>
-
-                <el-form-item
-                  label="Số lượng tối đa"
-                  prop="max"
-                  :rules="[
-                    { required: true, message: 'Vui lòng nhập số lượng người tối đa trong phòng !', trigger: 'blur' }
-                  ]">
-                  <el-input v-if="formEdit" v-model="formEdit.max" :disabled="false"></el-input>
-                </el-form-item>
-
-                <el-form-item
-                  label="ID phòng"
-                  prop="motel_id"
-                  :rules="[
-                    { required: true, message: 'Vui lòng nhập id phòng !', trigger: 'blur' }
-                  ]">
-                  <el-input v-if="formEdit" v-model="formEdit.motel_id" :disabled="false"></el-input>
-                </el-form-item>
-
-                <el-form-item
-                  label="Thành tiền"
-                  prop="price"
-                  :rules="[
-                    { required: true, message: 'Vui lòng nhập số tiền tương ứng !', trigger: 'blur' }
-                  ]">
-                  <el-input v-if="formEdit" @keyup.native="handleAmountInput" v-model="formEdit.price" :disabled="false" :maxlength="15"></el-input>
-                </el-form-item>
-
-                <el-form-item
-                  label="Trạng thái"
-                  prop="status"
-                  :rules="[
-                    { required: true, message: 'Vui lòng chọn trạng thái phòng trọ !', trigger: 'blur' }
-                  ]">
-                  <el-select v-if="formEdit" v-model="formEdit.status">
+                  >
+                  <!-- <el-input v-model="formCreate.motel_id" :disabled="false"></el-input> -->
+                  <el-select
+                    v-model="formCreate.motel_id"
+                    _multiple
+                    filterable
+                    remote
+                    reserve-keyword
+                    placeholder="Nhập tên"
+                    :remote-method="remoteMethod"
+                    :loading="motelLoading">
                     <el-option
-                      v-for="item in optionStatus"
-                      :key="item.value"
-                      :label="item.label"
-                      :value="item.value">
+                      v-for="item in motelOptions"
+                      :key="item.id"
+                      :label="item.name"
+                      :value="item.id">                            
+                      <span style="float: left">{{ item.name }}</span>
+                      <span style="float: right; color: #8492a6; font-size: 13px">{{ item.id }}</span>
                     </el-option>
                   </el-select>
                 </el-form-item>
 
                 <el-form-item
+                  label="Trạng thái"
+                  prop="motel_id"
+                  >
+                  <el-select v-model="formCreate.status" placeholder="Select">
+                  <el-option
+                    v-for="item in statusArray"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                    <span style="float: left">{{ item.label }}</span>
+                    <span style="float: right; color: #8492a6; font-size: 13px">{{ item.value }}</span>
+                  </el-option>
+                </el-select>
+                </el-form-item>
+
+                <el-form-item
+                  label="Thành tiền"
+                  prop="price"
+                  >
+                  <el-input @keyup.native="handleAmountInput" v-model="formCreate.price" :disabled="false" :maxlength="8"></el-input>
+                </el-form-item>
+
+                <el-form-item
                   label="Mô tả"
-                  prop="description"
-                  :rules="[
-                    { required: true, message: 'Vui lòng nhập mô tả phòng trọ !', trigger: 'blur' }
-                  ]">
-                  <el-input v-if="formEdit" v-model="formEdit.description" :autosize="{ minRows: 2, maxRows: 4}" type="textarea"/>
+                  prop="description">
+                  <el-input v-model="formCreate.description" :autosize="{ minRows: 2, maxRows: 4}" type="textarea"/>
                 </el-form-item>
               </el-form>
-              <div slot="footer" class="dialog-footer">
-                <el-button type="info" icon="el-icon-circle-close" plain @click="dialogFormEditPost = false">
-                  Hủy bỏ
-                </el-button>
-                <el-button type="primary" icon="el-icon-refresh" plain @click="resetForm('dataForm')">
-                  Đặt lại
-                </el-button>
-                <el-button type="success" icon="el-icon-check" plain @click="editRent">
-                  Đồng ý
-                </el-button>
-              </div>
+              <span slot="footer" class="dialog-footer">
+                <el-button type="info" icon="el-icon-circle-close" @click="dialogFormNewPost = false" plain>Hủy bỏ</el-button>
+                <el-button type="primary" icon="el-icon-refresh" @click="resetForm('form')" plain>Đặt lại</el-button>
+                <el-button type="success" icon="el-icon-check" @click="handleSubmit" plain>{{ formTitle }}</el-button>
+              </span>
             </el-dialog>
           </el-card>
         </el-col>
@@ -334,57 +271,146 @@
   </div>
 </template>
 <script>
-import { fetchList, create, edit, remove } from '@/api/rent'
 import { mapGetters } from 'vuex'
+import {  create, edit, remove } from '@/api/motel'
 import Loading from '@/components/Loading'
 
-const defaultCreate = { name: '', floor: '', max: '', motel_id: '', price: '', description: '', status: '' }
+const LABEL = {
+  name: 'Phongtro',
+  title: 'PHÒNG TRỌ',
+  model: 'rent',
+  slug: 'phong-tro',
+  edit: 'Sửa',
+  create: 'Tạo mới'
+}
+
+
+const CUSTOMIZE = {
+  status: [
+    { value: 1, label: 'Ngừng hoạt động'},
+    { value: 2, label: 'Đang bảo trì'},
+    { value: 3, label: 'Đang hoạt động'}
+  ],
+  formatPrice (price) {
+    let res = price
+    res = price ? parseFloat(price.toString().replace(/,/g, '')) : 0
+    return res
+  },
+  exportExcel: (list) => {
+    const formatJson = (filterVal, jsonData) => {
+      return jsonData.map(v => filterVal.map(j => {
+        if (j === 'status') {
+          if (v[j] === 1) return 'Ngừng hoạt động'
+          else if (v[j] === 2) return 'Đang bảo trì'
+          else return 'Đang hoạt động'
+        } else if (j === 'timestamp') {
+          return parseTime(v[j])
+        } else {
+          return v[j]
+        }
+      }))
+    }
+
+    import('@/vendor/Export2Excel').then(excel => {
+      const tHeader = ['Tên', 'Trạng thái', 'Tầng', 'Giá']
+      const filterVal = ['name', 'status', 'floor', 'price']
+      const data = formatJson(filterVal, list) // list
+      excel.export_json_to_excel({
+        header: tHeader, //Header Required
+        data, //Specific data Required
+        filename: 'excel-list', //Optional
+        autoWidth: true, //Optional
+        bookType: 'xlsx' //Optional
+      })
+    })
+  }
+}
+
+
+const defaultCreate = {
+  name: '',
+  motel_id: '',
+  status: 1,
+  max: null,
+  floor: null,
+  price: null,
+  description: ''
+}
+
+
+const checkPrice = (rule, _value, callback) => {
+  const value = parseFloat(_value)
+  if (value === 0) return callback()
+  if (!value) {
+    return callback(new Error('Phải là số lớn hơn hoặc bằng 0'))
+  }
+  setTimeout(() => {
+    if (!Number.isInteger(value)) {
+      callback(new Error('Vui lòng nhập số'))
+    } else {
+      if (value <= 0 ) {
+        callback(new Error('Vui lòng nhập số lớn hơn hoặc bằng 0'))
+      } else if (value > 10000000000) {
+        callback(new Error('Vui lòng nhập số nhỏ hơn 10 tỷ'))
+      } else {
+        callback()
+      }
+    }
+  }, 1000)
+}
+
+const rules = {
+  name: [
+    { required: true, message: `Vui lòng nhập tên ${LABEL.title.toLowerCase()}!`, trigger: 'blur' }
+  ],
+  motel_id: [{ required: true, message: `Vui lòng nhập id ${LABEL.title.toLowerCase()} !`, trigger: 'blur' }],
+  max : [{ required: true, message: `Vui lòng nhập số lượng người tối đa trong ${LABEL.title.toLowerCase()} !`, trigger: 'blur' }],
+  floor: [
+    { required: true, message: `Vui lòng nhập tầng của ${LABEL.title.toLowerCase()} !`, trigger: 'blur' }
+  ],
+  price: [
+    { validator: checkPrice, message: 'Vui lòng nhập số tiền tương ứng !', trigger: 'blur' }
+  ],
+  description: [
+    { required: true, message: 'Vui lòng nhập mô tả!', trigger: 'blur' }
+  ]
+}
 
 export default {
-  name: 'Phongtro',
+  name: LABEL.name,
   components: {
     Loading
   },
   data() {
     return {
-      optionStatus: [
-        {
-          value: 1,
-          label: 'Ngừng hoạt động'
-        },
-        {
-          value: 2,
-          label: 'Đang bảo trì'
-        },
-        {
-          value: 3,
-          label: 'Đang hoạt động'
-        }
-      ],
+      motelLoading: false,
+      motelList: [],
+      motelOptions: [],
+      statusArray: CUSTOMIZE.status,
+      rules,
+      PAGE_TITLE: LABEL.title,
+      formTitle: LABEL.create,
       initing: false,
-      changing: false,
-      dialogFormEditPost: false,
+      dialogFormVisible: false,
+      dialogFormNewPost: false,
       dialogConfirmRemove: false,
       toRemove: [{ id: 0, name: null }],
-      multipleSelection: [],
-      isRemoveMultiple: false,
-      createForm: JSON.parse(JSON.stringify(defaultCreate)),
-      formEdit: null,
-      dialogFormNewPost: false,
+      formEdit: null, // { address,  description, id, name }
+      formCreate: JSON.parse(JSON.stringify(defaultCreate)),
       tableData: [],
-      search: '',
-      options: [],
-      showInputSearch: false,
+      multipleSelection: [],
       pagination: {
         current_page: 1,
         per_page: 0,
         total: 0
-      }
+      },
+      isRemoveMultiple: false
     }
   },
   computed: {
     ...mapGetters([
       'avatar',
+      'motels',
       'rents'
     ])
   },
@@ -395,40 +421,39 @@ export default {
     '$route': {
       handler: function(nextValue) {
         const { path } = nextValue
-        if (path === "/phong-tro/index") {
+        if (path === `/${LABEL.slug}/index`) {
           this.getApi()
         }
       },
       deep: true,
       immediate: true
-    },
-    showInputSearch(value) {
-      if (value) {
-        document.body.addEventListener('click', this.close);
-      } else {
-        document.body.removeEventListener('click', this.close);
-      }
     }
   },
   methods: {
-    clickShowInputSearch() {
-      this.showInputSearch = !this.showInputSearch
-      if (this.showInputSearch) {
-        this.$refs.headerSearchSelect && this.$refs.headerSearchSelect.focus()
+    remoteMethod(query) {
+      if (query !== '') {
+        this.motelLoading = true        
+          //get motel list
+        this.$store.dispatch('motel/FetchList', { name: query}).then(res => {
+          if (res.data && res.data.data) {
+            this.motelList = res.data.data || []
+            this.motelLoading = false
+            this.motelOptions = this.motelList.filter(item => {
+              return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1
+            })
+          }
+        })
+      } else {
+        this.motelOptions = []
       }
     },
-    closeShowInputSearch() {
-      this.$refs.headerSearchSelect && this.$refs.headerSearchSelect.blur()
-      this.options = []
-      this.showInputSearch = false
+    handleExportExcel() {
+      CUSTOMIZE.exportExcel(this.tableData)
     },
-    changeShowInputSearch(val) {
-      this.$router.push(val.path)
-      this.search = ''
-      this.options = []
-      this.$nextTick(() => {
-        this.showInputSearch = false
-      })
+    handleAmountInput() {
+      let num = this.formCreate.price.replace(/[^\d]+/g, '')
+      num = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+      this.formCreate.price = num
     },
     handleCurrentChange(val) {
       this.pagination.current_page = val
@@ -436,7 +461,7 @@ export default {
     },
     async getApi(current_page = 1, limit = 10) {
       this.initing = true
-      const data = await this.$store.dispatch('rent/FetchList', { current_page, limit }).then(res => {
+      const data = await this.$store.dispatch(LABEL.model + '/FetchList', { current_page, limit }).then(res => {
         this.tableData = res.data && res.data.data
         this.initing = false
         const api_current_page = res.data.current_page
@@ -457,32 +482,21 @@ export default {
       per_page && (updatedPagination.per_page = per_page)
       this.pagination = JSON.parse(JSON.stringify(updatedPagination))
     },
-    onSubmit() {},
     handleSelectionChange(val) {
       this.multipleSelection = val
     },
-    createDataForm(obj) {
-      if (null == obj || "object" != typeof obj) return obj
-      const copy = obj.constructor()
-      for (const attr in obj) {
-        if (obj.hasOwnProperty(attr) && obj[attr]) copy[attr] = obj[attr]
-      }
-      return copy
+    handleSubmit() {
+      this.formTitle === LABEL.edit ? this.editItem() : this.createItem()
     },
-    updateTableData(row) {
-      this.tableData = this.tableData.map(item => {
-        if (item.id === row.id) return row
-        return item
-      })
-    },
-    editRent() {
-      this.$refs['dataForm'].validate(valid => {
+    editItem() {
+      this.$refs['form'].validate(valid => {
         if (valid) {
-          const editForm = this.createDataForm(this.formEdit)
-          edit(editForm).then(res => {
-            this.dialogFormEditPost = false
+          this.$store.dispatch(LABEL.model + '/Edit', {...this.formCreate, price: CUSTOMIZE.formatPrice(this.formCreate.price) }).then(res => {
             if (res.success) {
-              this.updateTableData(res.data)
+              this.tableData = this.tableData.map(item => {
+                if (item.id === res.data.id) return res.data
+                return item
+              })
             }
             this.$notify.success({
               title: 'Thành công',
@@ -501,17 +515,24 @@ export default {
         } else {
           return false
         }
+        this.handleClosePopup()
       })
     },
-    createRent() {
-      this.$refs['dataForm'].validate(valid => {
+    createItem() {
+      this.$refs['form'].validate(valid => {
         if (valid) {
-          this.createForm.price = parseInt(this.createForm.price.replace(/,/g, ''))
-          create(this.createForm).then(res => {
-            this.createForm = JSON.parse(JSON.stringify(defaultCreate))
-            this.dialogFormNewPost = false
+          const tableData = JSON.parse(JSON.stringify(this.tableData))
+          this.$store.dispatch(LABEL.model + '/Create', {...this.formCreate, price: CUSTOMIZE.formatPrice(this.formCreate.price) }).then(res => {
             if (res.success) {
-              this.tableData.unshift(res.data)
+              if (tableData && tableData.length === 0) tableData.push(res.data)
+              else {
+                if (!tableData.some(item => item.id === res.data.id)) { tableData.unshift(res.data) }
+                const isRemoveEnd = tableData.length > this.pagination.per_page
+                if (isRemoveEnd) {
+                  ++this.pagination.total
+                  tableData.pop()
+                }
+              }
             }
             this.$notify.success({
               title: 'Thành công',
@@ -528,10 +549,22 @@ export default {
               duration: 4000
             })
           })
-        } else {
+          
+          this.tableData = tableData          
+          this.handleClosePopup()
+        } else {          
+          this.handleClosePopup()
           return false
         }
       })
+    },
+    handleClosePopup() {      
+      setTimeout(() => {
+        this.formTitle = LABEL.create
+        this.formCreate = JSON.parse(JSON.stringify(defaultCreate))
+        this.dialogFormNewPost = false
+        this.resetForm()
+      }, 400)
     },
     handleRemove(row, action) {
       if (action && action === 'multiple-delete') {
@@ -552,12 +585,13 @@ export default {
         this.toRemove = [row]
       }
     },
-    removeRent(id) {
+    removeItem(id) {
       if (!id) return
-      remove(id).then(res => {
+      this.$store.dispatch(LABEL.model + '/Remove', id).then(res => {
         this.dialogConfirmRemove = false
         if (res.success) {
           this.tableData = this.tableData.filter(item => (item.id !== id))
+          this.getApi(this.pagination.current_page)
         }
         this.$notify.success({
           title: 'Thành công',
@@ -566,7 +600,7 @@ export default {
         })
       })
       .catch(_err => {
-        console.log(_err)
+        console.warn(_err)
         this.initing = false
         this.$notify.error({
           title: 'Lỗi',
@@ -576,9 +610,9 @@ export default {
       })
       this.toRemove = []
     },
-    multipleRemovalRent() {
+    multipleRemovalItem() {
       this.toRemove.forEach(element => {
-        this.removeRent(element.id)
+        this.removeItem(element.id)
       })
       this.isRemoveMultiple = false
       this.multipleSelection = []
@@ -588,31 +622,21 @@ export default {
       const { type, data } = items
       switch (type) {
         case 'edit':
-          this.formEdit = data
-          this.dialogFormEditPost = true
+          this.formTitle = LABEL.edit
+          this.formCreate = JSON.parse(JSON.stringify(data))
+          this.dialogFormNewPost = true
           break
         case 'create':
-          this.createForm = {
-            name: '',
-            floor: '',
-            max: '',
-            motel_id: '',
-            price: '',
-            description: ''
-          }
+          this.formTitle = LABEL.create
+          this.formCreate = JSON.parse(JSON.stringify(defaultCreate))
           this.dialogFormNewPost = true
           break
         default:
           break
       }
     },
-    handleAmountInput() {
-      let num = this.createForm.price.replace(/[^\d]+/g, '')
-      num = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-      this.createForm.price = num
-    },
-    resetForm(dataForm) {
-      this.$refs[dataForm].resetFields()
+    resetForm() {
+      this.$refs['form'].resetFields()
     }
   }
 }
@@ -631,6 +655,12 @@ export default {
 
 .el-button--mini.is-round:hover {
   box-shadow: 0px 1px 5px 0px rgb(179, 216, 255) !important;
+}
+
+input[type=text] {
+  border: none;
+  border-bottom: 1px solid #dcdfe6;
+  outline: none;
 }
 .header-search {
   font-size: 0 !important;

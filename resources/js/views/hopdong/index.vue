@@ -445,16 +445,16 @@ export default {
     },
     remoteMethod(query) {
       if (query !== '') {
-          this.renterLoading = true
-          setTimeout(() => {
-            this.renterLoading = false
-            this.renterOptions = this.renterList.filter(item => {
-              return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1
-            });
-          }, 200)
-        } else {
-          this.renterOptions = []
-        }
+        this.renterLoading = true
+        setTimeout(() => {
+          this.renterLoading = false
+          this.renterOptions = this.renterList.filter(item => {
+            return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1
+          });
+        }, 200)
+      } else {
+        this.renterOptions = []
+      }
     },
     handleCurrentChange(val) {
       this.pagination.current_page = val

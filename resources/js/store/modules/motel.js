@@ -1,11 +1,11 @@
 import { fetchList, create, edit, remove } from '@/api/motel'
 
-function updateList(motel, list) {
+function updateList(object, list) {
   let isUpdate = false
   const _list = list.map(item => {
-    if (item.id === motel.id) {
+    if (item.id === object.id) {
       isUpdate = true
-      return motel
+      return object
     } else {
       return item
     }
@@ -41,9 +41,9 @@ const mutations = {
 }
 
 const actions = {
-  FetchList({ commit }, { current_page, limit }) {
+  FetchList({ commit }, { current_page, limit , name}) {
     return new Promise((resolve, reject) => {
-    fetchList(current_page, limit)
+    fetchList(current_page, limit, name)
       .then(res => {
         if (res && res.success) {
           const data = (res.data && res.data.data) || []
@@ -58,9 +58,9 @@ const actions = {
       })
     })
   },
-  Create({ commit }, { name, address, description }) {
+  Create({ commit }, dataForm) {
     return new Promise((resolve, reject) => {
-    create({ name, address, description })
+    create(dataForm)
       .then(res => {
         if (res && res.success) {
           const data = (res && res.data) || false
@@ -75,9 +75,9 @@ const actions = {
       })
     })
   },
-  Edit({ commit }, { name, address, description }) {
+  Edit({ commit }, dataForm) {
     return new Promise((resolve, reject) => {
-    edit({ name, address, description })
+    edit(dataForm)
       .then(res => {
         if (res && res.success) {
           const data = (res && res.data) || false
