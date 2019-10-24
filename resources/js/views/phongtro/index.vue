@@ -12,7 +12,7 @@
             </div>
             <div class="filter-container">
               <!-- Thêm mới -->
-              <el-button @click="dialogFormNewPost = true" style="border-color: #b3d8ff !important;" plain round class="filter-item" type="default" icon="el-icon-plus" size="mini">
+              <el-button @click="dialogFormNewPost = true" plain round class="filter-item" type="default" icon="el-icon-plus" size="mini">
                 Thêm mới
               </el-button>
               <!-- Xuất hóa đơn -->
@@ -32,7 +32,6 @@
 
               <!-- Xuất excel -->
               <el-button
-              style="margin-right: 10px;"
               class="bordered filter-item"
               type="default"
               icon="el-icon-download"
