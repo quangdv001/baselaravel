@@ -20,6 +20,7 @@ const getters = {
   contracts: state => state.contract.list,
   renters: state => state.renter.list,
   rents: state => state.rent.list,
-  articles: state => state.article.list
+  articles: state => state.article.list,
+  bills: state => state.bill.list
 };
 export default getters;
