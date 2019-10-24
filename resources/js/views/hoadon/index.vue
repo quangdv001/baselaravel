@@ -270,14 +270,14 @@ const CUSTOMIZE = {
   }
 }
 
-// 'title', 'slug', 'meta', 'type', 'short_description', 'description', 'status', 'category_id', 'img', 'file_path'
+// 'motel_name', 'rent_name', 'name', 'note', 'other_price', 'service_price', 'debit_price', 'discount_price', 'total_price', 'status', 'user_id', 'rent_id', 'motel_id'
 const defaultCreate = {
     title: '',
     slug: '',
     meta: '',
     type: '',
     short_description: '',
-    description: '',
+    note: '',
     status: '',
     category_id: '',
     img: '',
@@ -287,7 +287,7 @@ const defaultCreate = {
 const rules = {
   title: [{ required: true, message: 'Vui lòng nhập tiêu đề!', trigger: 'blur' }],
   slug: [{ required: true, message: 'Không được để trống slug!', trigger: 'blur' }],
-  description: [{ required: true, message: 'Vui lòng nhập mô tả!', trigger: 'blur' }
+  note: [{ required: true, message: 'Vui lòng nhập ghi chú!', trigger: 'blur' }
   ], price: [{ validator: checkPrice, trigger: 'blur' }
   ], fixed_price: [{ validator: checkPrice, trigger: 'blur' }
   ]
