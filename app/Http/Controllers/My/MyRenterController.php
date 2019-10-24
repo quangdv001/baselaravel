@@ -34,9 +34,8 @@ class MyRenterController extends MyBaseController
     }
 
     public function create(Request $request){
-        $params = $request->only('name', 'floor', 'max', 'motel_id', 'price', 'description');
+        $params = $request->only('name', 'id_number', 'id_time', 'id_place', 'status', 'phone', 'email', 'gender', 'address');
         $params['user_id'] = $this->user->id;
-        $params['status'] = 1;
         $data = $this->renter->create($params);
         $res['success'] = 0;
         $res['mess'] = 'Có lỗi xảy ra!';
