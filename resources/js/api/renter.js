@@ -8,7 +8,7 @@ export function fetchList(current_page = 1, limit = 30) {
   })
 }
 
-export function search(current_page = 1, keyword = 10) {
+export function search(current_page = 1, keyword = '') {
   const queries = 'page=' + current_page +  '&name=' + keyword
   return request({
     url: `/my/renter/search?${queries}`,
@@ -27,7 +27,7 @@ export function create(data) {
   return request({
     url: `/my/renter/create`,
     method: 'post',
-    data:  data // { 'name', 'floor', 'max', 'motel_id', 'price', 'description'  }
+    data:  data 
   })
 }
 export function edit(data) {
@@ -35,7 +35,7 @@ export function edit(data) {
     return request({
       url: `/my/renter/update/` + data.id,
       method: 'post',
-      data:  data // { 'name', 'floor', 'max', 'motel_id', 'price', 'description'  }
+      data:  data 
     })
   }
 }

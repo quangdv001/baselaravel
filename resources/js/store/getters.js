@@ -19,6 +19,7 @@ const getters = {
   services: state => state.service.list,
   contracts: state => state.contract.list,
   renters: state => state.renter.list,
-  rents: state => state.rent.list
+  rents: state => state.rent.list,
+  articles: state => state.article.list
 };
 export default getters;
