@@ -43,7 +43,7 @@ export function edit(data) {
 export function remove(id) {
   if (id) {
     return request({
-      url: `/my/contract/remove`,
+      url: `/my/renter/remove`,
       method: 'post',
       data:  { id: id }
     })

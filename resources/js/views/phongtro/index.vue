@@ -521,17 +521,8 @@ export default {
     createItem() {
       this.$refs['form'].validate(valid => {
         if (valid) {
-<<<<<<< HEAD
           const tableData = JSON.parse(JSON.stringify(this.tableData))
           this.$store.dispatch(LABEL.model + '/Create', {...this.formCreate, price: CUSTOMIZE.formatPrice(this.formCreate.price) }).then(res => {
-=======
-          this.createForm.price = parseInt(this.createForm.price.replace(/,/g, ''))
-          console.log(this.createForm)
-          create(this.createForm).then(res => {
-            console.log(res)
-            this.createForm = JSON.parse(JSON.stringify(defaultCreate))
-            this.dialogFormNewPost = false
->>>>>>> e0fb2e4d43b2424f2b43e9407cef083290cc59d4
             if (res.success) {
               if (tableData && tableData.length === 0) tableData.push(res.data)
               else {

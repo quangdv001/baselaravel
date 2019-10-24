@@ -1,4 +1,26 @@
 import { pluralize } from '@/filters';
+
+export function checkPrice (rule, _value, callback) {
+  const value = parseFloat(_value)
+  if (value === 0) return callback()
+  if (!value) {
+    return callback(new Error('Phải là số lớn hơn hoặc bằng 0'))
+  }
+  setTimeout(() => {
+    if (!Number.isInteger(value)) {
+      callback(new Error('Vui lòng nhập số'))
+    } else {
+      if (value <= 0 ) {
+        callback(new Error('Vui lòng nhập số lớn hơn hoặc bằng 0'))
+      } else if (value > 10000000000) {
+        callback(new Error('Vui lòng nhập số nhỏ hơn 10 tỷ'))
+      } else {
+        callback()
+      }
+    }
+  }, 1000)
+}
+
 export function parseTime(time, cFormat) {
   if (arguments.length === 0) {
     return null;

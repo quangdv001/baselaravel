@@ -15,54 +15,22 @@
               <el-button @click="dialogFormNewPost = true" style="border-color: #b3d8ff !important;" plain round class="filter-item" type="default" icon="el-icon-plus" size="mini">
                 Thêm mới
               </el-button>
+              
               <!-- Xuất excel -->
               <el-button
-                class="filter-item"
-                style="border-color: #b3d8ff !important;"
-                type="default"
-                icon="el-icon-printer"
-                size="mini"
-                plain
-                round
-              >
+              style="margin-right: 10px;"
+              class="bordered filter-item"
+              type="default"
+              icon="el-icon-download"
+              size="mini"
+              @click="handleExportExcel"
+              plain
+              round>
                 Xuất excel
               </el-button>
 
-              <!-- Đánh dấu xóa -->
-              <el-button
-                class="filter-item"
-                style="border-color: #b3d8ff !important;"
-                type="default"
-                icon="el-icon-check"
-                size="mini"
-                plain
-                round
-              >
-                Đánh dấu xóa
-              </el-button>
-
-              <!-- Hủy đánh dấu -->
-              <el-button
-                class="filter-item"
-                style="border-color: #b3d8ff !important;"
-                type="default"
-                icon="el-icon-upload2"
-                size="mini"
-                plain
-                round
-              >
-                Hủy đánh dấu
-              </el-button>
-
-              <el-button
-                class="filter-item"
-                style="border-color: #b3d8ff !important;"
-                type="default"
-                icon="el-icon-search"
-                size="mini"
-                plain
-                round
-              >
+              <!-- Tìm kiếm -->
+              <el-button class="bordered filter-item" type="default" icon="el-icon-search" size="mini" plain round>
                 Tìm kiếm
               </el-button>
 
@@ -157,18 +125,22 @@
               </el-pagination>
             </div>
 
-            <el-dialog :close-on-click-modal="false" :close-on-press-escape="false" :title="PAGE_TITLE + ' - XÓA'" :visible.sync="dialogConfirmRemove">
+            <el-dialog
+            :close-on-click-modal="false"
+            :close-on-press-escape="false"
+            :title="PAGE_TITLE + ' - XÓA'"
+            :visible.sync="dialogConfirmRemove">
               <el-alert
                 title="Xác nhận xóa"
                 type="error"
                 :closable="false"
                 show-icon>
                 <template slot>
-                  <span v-if="toRemove.length === 1">Bạn có muốn xóa {{ PAGE_TITLE.toLowerCase() }}: <strong>{{toRemove[0].title}}</strong> không?</span>
+                  <span v-if="toRemove.length === 1">Bạn có muốn xóa {{ PAGE_TITLE.toLowerCase() }}: <strong>{{toRemove[0].name}}</strong> không?</span>
                   <div v-else-if="toRemove.length > 1">
-                    <p>Bạn có muốn xóa những mục sau không?</p>
+                    <p>Bạn có muốn xóa những {{ PAGE_TITLE.toLowerCase() }} sau không?</p>
                     <ul>
-                      <li v-for="item in toRemove" :key="'remove-' + item.id">{{ item.title }}</li>
+                      <li v-for="item in toRemove" :key="'remove-' + item.id">{{ item.name }}</li>
                     </ul>
                   </div>
                 </template>
@@ -180,11 +152,13 @@
               </span>
             </el-dialog>
 
-            <el-dialog
-              :title="PAGE_TITLE + ' - ' + formLabel.toUpperCase()"
-              :visible.sync="dialogFormNewPost"
-              :before-close="handleClose">
-              <el-form ref="form" :model="formCreate" :rules="ruleForm" label-position="top">
+            <el-dialog 
+              :before-close="handleClosePopup"
+              :close-on-click-modal="false"
+              :close-on-press-escape="false"
+              :title="PAGE_TITLE + ' - ' + formTitle.toUpperCase() "
+              :visible.sync="dialogFormNewPost">
+              <el-form ref="form" :model="formCreate" :rules="rules" label-position="left" label-width="150px">
                 <el-row :gutter="20">
                   <el-col :span="24">
                     <el-form-item
@@ -267,7 +241,7 @@
                   </el-col>
 
                   <el-col :span="16">
-                    <el-form-item label="Bên B" prop="rent_id">
+                    <el-form-item label="Tên phòng" prop="rent_id">
                       <el-select
                           v-model="formCreate.rent_id"
                           _multiple
@@ -315,9 +289,9 @@
                 </el-row>
               </el-form>
               <span slot="footer" class="dialog-footer">
-                <el-button type="info" icon="el-icon-circle-close" @click="handleClose" plain>Hủy bỏ</el-button>
+                <el-button type="info" icon="el-icon-circle-close" @click="dialogFormNewPost = false" plain>Hủy bỏ</el-button>
                 <el-button type="primary" icon="el-icon-refresh" @click="resetForm('form')" plain>Đặt lại</el-button>
-                <el-button type="success" icon="el-icon-check" @click="handleSubmit" plain>{{ formLabel }}</el-button>
+                <el-button type="success" icon="el-icon-check" @click="handleSubmit" plain>{{ formTitle }}</el-button>
               </span>
             </el-dialog>
           </el-card>
@@ -327,9 +301,46 @@
   </div>
 </template>
 <script>
-import { fetchList } from '@/api/rent'
 import { mapGetters } from 'vuex'
+import {  create, edit, remove } from '@/api/motel'
 import Loading from '@/components/Loading'
+
+const LABEL = {
+  name: 'HopDong',
+  title: 'HỢP ĐỒNG',
+  model: 'contract',
+  slug: 'hop-dong',
+  edit: 'Sửa',
+  create: 'Tạo mới'
+}
+
+
+const CUSTOMIZE = {
+  exportExcel: (list) => {
+    const formatJson = (filterVal, jsonData) => {
+      return jsonData.map(v => filterVal.map(j => {
+        if (j === 'timestamp') {
+          return parseTime(v[j])
+        } else {
+          return v[j]
+        }
+      }))
+    }
+
+    import('@/vendor/Export2Excel').then(excel => {
+      const tHeader = ['Tên dịch vụ', 'Giá', 'Mô tả']
+      const filterVal = ['name', 'price', 'description']
+      const data = formatJson(filterVal, list) // list
+      excel.export_json_to_excel({
+        header: tHeader, //Header Required
+        data, //Specific data Required
+        filename: 'excel-list', //Optional
+        autoWidth: true, //Optional
+        bookType: 'xlsx' //Optional
+      })
+    })
+  }
+}
 
 const unitOptions  = [{
   value: 'thang',
@@ -338,14 +349,14 @@ const unitOptions  = [{
 const defaultCreate = {
     name: '',
     note: '',
-    deposits: 0,
-    duration: 0,
-    payment_period: 0,
+    deposits: null,
+    duration: null,
+    payment_period: null,
     start: new Date(),
     end: new Date(),
     status: 1,
-    user_id: 0,
-    rent_id: 0
+    user_id: null,
+    rent_id: null
 }
 
 const checkPrice = (rule, _value, callback) => {
@@ -369,41 +380,35 @@ const checkPrice = (rule, _value, callback) => {
   }, 1000)
 }
 
-const ruleForm = {
+const rules = {
   name: [{ required: true, message: 'Vui lòng nhập tên!', trigger: 'blur' }],
   note: [{ required: true, message: 'Vui lòng nhập ghi chú!', trigger: 'blur' }],
   duration: [{ required: true, message: 'Vui lòng thời hạn!', trigger: 'blur' }],
   deposits: [{ validator: checkPrice, trigger: 'blur' }],
   payment_period: [{ validator: checkPrice, trigger: 'blur' }]
 }
-const LABEL = {
-  create : 'Tạo mới',
-  edit: 'Sửa'
-}
 export default {
-  name: 'HopDong',
+  name: LABEL.name,
   components: {
     Loading
   },
   data() {
     return {
-      renterOptions: [],
-      renterLoading: false,
-      renterList: [
-        {id: 0, name: 'Bên B'}
-      ],
-      PAGE_TITLE: 'HỢP ĐỒNG',
       dateTimeRange: [],
+      unitOptions,
+      renterLoading: false,
+      renterList: [],
+      renterOptions: [],
+      rules,
+      PAGE_TITLE: LABEL.title,
+      formTitle: LABEL.create,
       initing: false,
-      isEdit: false,
       dialogFormVisible: false,
       dialogFormNewPost: false,
       dialogConfirmRemove: false,
-      toRemove: [{ id: 0, title: null }],
-      unitOptions,
-      formLabel: LABEL.create,
+      toRemove: [{ id: 0, name: null }],
+      formEdit: null, // { address,  description, id, name }
       formCreate: JSON.parse(JSON.stringify(defaultCreate)),
-      ruleForm,
       tableData: [],
       multipleSelection: [],
       pagination: {
@@ -422,13 +427,12 @@ export default {
   },
   mounted () {
     this.getApi()
-    this.getRenterList()
   },
   watch: {
     '$route': {
       handler: function(nextValue) {
         const { path } = nextValue
-        if (path === "/hop-dong/index") {
+        if (path === `/${LABEL.slug}/index`) {
           this.getApi()
         }
       },
@@ -437,45 +441,50 @@ export default {
     }
   },
   methods: {
-    getRenterList() {
-      fetchList(1, 250).then(res => {
-        if (res && res.data && res.data.data && res.data.data.length > 0)
-        this.renterOptions = res.data.data
-      })
-    },
     remoteMethod(query) {
       if (query !== '') {
-        this.renterLoading = true
-        setTimeout(() => {
-          this.renterLoading = false
-          this.renterOptions = this.renterList.filter(item => {
-            return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1
-          });
-        }, 200)
+        this.renterLoading = true        
+          //get motel list
+        this.$store.dispatch('rent/FetchList', { limit: 255, name: query}).then(res => {
+          if (res.data && res.data.data) {
+            this.renterList = res.data.data || []
+            this.renterLoading = false
+            this.renterOptions = this.renterList.filter(item => {
+              return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1
+            })
+          }
+        })
       } else {
         this.renterOptions = []
       }
+    },
+    onDateTimeChange(e) {
+      this.formCreate.start = new Date(this.dateTimeRange[0]).getTime() / 1000
+      this.formCreate.end = new Date(this.dateTimeRange[1]).getTime() / 1000
+    },
+    handleExportExcel() {
+      CUSTOMIZE.exportExcel(this.tableData)
+    },
+    handleAmountInput() {
+      let num = this.formCreate.price.replace(/[^\d]+/g, '')
+      num = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+      this.formCreate.price = num
     },
     handleCurrentChange(val) {
       this.pagination.current_page = val
       this.getApi(val)
     },
     async getApi(current_page = 1, limit = 10) {
-      try { 
-        this.initing = true
-        const data = await this.$store.dispatch('contract/FetchList', { current_page, limit }).then(res => {
-          this.tableData = res.data && res.data.data
-          this.initing = false
-          const api_current_page = res.data.current_page
-          const total = res.data.total
-          const per_page = res.data.per_page
-          this.updatePagination(api_current_page, total, per_page)
-        })
-        return data
-      } catch (error) {
+      this.initing = true
+      const data = await this.$store.dispatch(LABEL.model + '/FetchList', { current_page, limit }).then(res => {
+        this.tableData = res.data && res.data.data
         this.initing = false
-        console.warn(error)
-      }
+        const api_current_page = res.data.current_page
+        const total = res.data.total
+        const per_page = res.data.per_page
+        this.updatePagination(api_current_page, total, per_page)
+      })
+      return data
     },
     updatePagination (
       current_page = this.pagination.current_page,
@@ -488,37 +497,19 @@ export default {
       per_page && (updatedPagination.per_page = per_page)
       this.pagination = JSON.parse(JSON.stringify(updatedPagination))
     },
-    handleClose() {      
-      this.dialogFormNewPost = false
-      this.formCreate = JSON.parse(JSON.stringify(defaultCreate))
-      this.$refs['form'].clearValidate()
-      setTimeout(() => {
-        this.formLabel = LABEL.create
-      }, 300)
-    },
-    onDateTimeChange(e) {
-      this.formCreate.start = new Date(this.dateTimeRange[0]).getTime() / 1000
-      this.formCreate.end = new Date(this.dateTimeRange[1]).getTime() / 1000
-    },
     handleSelectionChange(val) {
       this.multipleSelection = val
     },
     handleSubmit() {
-      if (this.formLabel === LABEL.create) {
-        this.createItem()
-      } else this.editItem()
+      this.formTitle === LABEL.edit ? this.editItem() : this.createItem()
     },
     editItem() {
-      if (this.isEdit) return
-      this.isEdit = true
       this.$refs['form'].validate(valid => {
         if (valid) {
-          const editForm = this.formCreate
-          this.$store.dispatch('contract/Edit', editForm).then(res => {
+          this.$store.dispatch(LABEL.model + '/Edit', this.formCreate).then(res => {
             if (res.success) {
-              const row = res.data
               this.tableData = this.tableData.map(item => {
-                if (item.id === row.id) return row
+                if (item.id === res.data.id) return res.data
                 return item
               })
             }
@@ -527,52 +518,9 @@ export default {
               message: 'Dữ liệu được sửa thành công !',
               duration: 4000
             })
-            this.handleClose()
-            this.isEdit = false
           })
           .catch(_err => {
-            console.warn(_err)
-            this.isEdit = false
-            this.handleClose()
-            this.$notify.error({
-              title: 'Lỗi',
-              message: 'Đang gặp sự cố, vui lòng báo hệ thống xử lý!',
-              duration: 4000
-            })
-          })
-        } else {          
-          this.handleClose()
-          return false
-        }
-      })
-    },
-    createItem() {
-      if (this.isEdit) return
-      this.isEdit = true
-      this.$refs['form'].validate(valid => {
-        if (valid) {
-          this.$store.dispatch('contract/Create', this.formCreate).then(res => {
-            if (res.success) {
-              if (this.tableData.length === 0) tableData.push(res.data)
-              else if (!this.tableData.some(item => item.id === res.data.id)) {
-                tableData.unshift(res.data)
-                debugger
-                if (this.tableData && this.tableData.length > this.pagination.per_page) this.tableData.pop()
-              }
-            }
-            this.$notify.success({
-              title: 'Thành công',
-              message: 'Dữ liệu tạo mới thành công !',
-              duration: 4000
-            })
-
-            this.formCreate = JSON.parse(JSON.stringify(defaultCreate))
-            this.isEdit = false
-            this.handleClose()
-          })
-          .catch(_err => {
-            console.warn(_err)
-            this.isEdit = false
+            console.log(_err)
             this.$notify.error({
               title: 'Lỗi',
               message: 'Đang gặp sự cố, vui lòng báo hệ thống xử lý!',
@@ -582,9 +530,56 @@ export default {
         } else {
           return false
         }
+        this.handleClosePopup()
       })
-      
-      this.dialogFormNewPost && (this.dialogFormNewPost = false)
+    },
+    createItem() {
+      this.$refs['form'].validate(valid => {
+        if (valid) {
+          const tableData = JSON.parse(JSON.stringify(this.tableData))
+          this.$store.dispatch(LABEL.model + '/Create', this.formCreate).then(res => {
+            if (res.success) {
+              if (tableData && tableData.length === 0) tableData.push(res.data)
+              else {
+                if (!tableData.some(item => item.id === res.data.id)) { tableData.unshift(res.data) }
+                const isRemoveEnd = tableData.length > this.pagination.per_page
+                if (isRemoveEnd) {
+                  ++this.pagination.total
+                  tableData.pop()
+                }
+              }
+            }
+            this.$notify.success({
+              title: 'Thành công',
+              message: 'Dữ liệu tạo mới thành công !',
+              duration: 4000
+            })
+          })
+          .catch(_err => {
+            console.log(_err)
+            this.initing = false
+            this.$notify.error({
+              title: 'Lỗi',
+              message: 'Đang gặp sự cố, vui lòng báo hệ thống xử lý!',
+              duration: 4000
+            })
+          })
+          
+          this.tableData = tableData          
+          this.handleClosePopup()
+        } else {          
+          this.handleClosePopup()
+          return false
+        }
+      })
+    },
+    handleClosePopup() {      
+      setTimeout(() => {
+        this.formTitle = LABEL.create
+        this.formCreate = JSON.parse(JSON.stringify(defaultCreate))
+        this.dialogFormNewPost = false
+        this.resetForm()
+      }, 400)
     },
     handleRemove(row, action) {
       if (action && action === 'multiple-delete') {
@@ -607,7 +602,7 @@ export default {
     },
     removeItem(id) {
       if (!id) return
-      this.$store.dispatch('contract/Remove', id).then(res => {
+      this.$store.dispatch(LABEL.model + '/Remove', id).then(res => {
         this.dialogConfirmRemove = false
         if (res.success) {
           this.tableData = this.tableData.filter(item => (item.id !== id))
@@ -621,7 +616,7 @@ export default {
       })
       .catch(_err => {
         console.warn(_err)
-        this.isEdit = false
+        this.initing = false
         this.$notify.error({
           title: 'Lỗi',
           message: 'Đang gặp sự cố, vui lòng báo hệ thống xử lý!',
@@ -642,12 +637,12 @@ export default {
       const { type, data } = items
       switch (type) {
         case 'edit':
-          this.formLabel = LABEL.edit
+          this.formTitle = LABEL.edit
           this.formCreate = JSON.parse(JSON.stringify(data))
           this.dialogFormNewPost = true
           break
         case 'create':
-          this.formLabel = LABEL.create
+          this.formTitle = LABEL.create
           this.formCreate = JSON.parse(JSON.stringify(defaultCreate))
           this.dialogFormNewPost = true
           break
@@ -655,8 +650,8 @@ export default {
           break
       }
     },
-    resetForm(form) {
-      this.$refs[form].resetFields()
+    resetForm() {
+      this.$refs['form'].resetFields()
     }
   }
 }
@@ -682,9 +677,42 @@ input[type=text] {
   border-bottom: 1px solid #dcdfe6;
   outline: none;
 }
-.date {
-  & /deep/  .el-range-editor {
-    width: 100%;
+.header-search {
+  font-size: 0 !important;
+
+  .search-icon {
+    cursor: pointer;
+    font-size: 18px;
+    vertical-align: middle;
+  }
+
+  .header-search-select {
+    font-size: 18px;
+    transition: width 0.2s;
+    width: 0;
+    overflow: hidden;
+    background: transparent;
+    border-radius: 0;
+    display: inline-block;
+    vertical-align: middle;
+
+    /deep/ .el-input__inner {
+      border-radius: 0;
+      border: 0;
+      padding-left: 0;
+      padding-right: 0;
+      box-shadow: none !important;
+      border-bottom: 1px solid #d9d9d9;
+      vertical-align: middle;
+    }
+  }
+
+  &.show {
+    .header-search-select {
+      width: 210px;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
   }
 }
 </style>

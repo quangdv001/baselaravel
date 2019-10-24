@@ -15,54 +15,22 @@
               <el-button @click="dialogFormNewPost = true" style="border-color: #b3d8ff !important;" plain round class="filter-item" type="default" icon="el-icon-plus" size="mini">
                 Thêm mới
               </el-button>
+              
               <!-- Xuất excel -->
               <el-button
-                class="filter-item"
-                style="border-color: #b3d8ff !important;"
-                type="default"
-                icon="el-icon-printer"
-                size="mini"
-                plain
-                round
-              >
+              style="margin-right: 10px;"
+              class="bordered filter-item"
+              type="default"
+              icon="el-icon-download"
+              size="mini"
+              @click="handleExportExcel"
+              plain
+              round>
                 Xuất excel
               </el-button>
 
-              <!-- Đánh dấu xóa -->
-              <el-button
-                class="filter-item"
-                style="border-color: #b3d8ff !important;"
-                type="default"
-                icon="el-icon-check"
-                size="mini"
-                plain
-                round
-              >
-                Đánh dấu xóa
-              </el-button>
-
-              <!-- Hủy đánh dấu -->
-              <el-button
-                class="filter-item"
-                style="border-color: #b3d8ff !important;"
-                type="default"
-                icon="el-icon-upload2"
-                size="mini"
-                plain
-                round
-              >
-                Hủy đánh dấu
-              </el-button>
-
-              <el-button
-                class="filter-item"
-                style="border-color: #b3d8ff !important;"
-                type="default"
-                icon="el-icon-search"
-                size="mini"
-                plain
-                round
-              >
+              <!-- Tìm kiếm -->
+              <el-button class="bordered filter-item" type="default" icon="el-icon-search" size="mini" plain round>
                 Tìm kiếm
               </el-button>
 
@@ -105,15 +73,22 @@
                 <template slot-scope="scope">{{ scope.row.name }}</template>
               </el-table-column>
 
-              <!-- <el-table-column property="deposits" label="Đặt cọc">
-                <template slot-scope="scope">{{ scope.row.deposits | formatMoney }} vnđ</template>
+              <el-table-column property="gender" label="Giới tính">
+                <template slot-scope="scope">{{ genderOptions[scope.row.gender] }}</template>
               </el-table-column>
 
-              <el-table-column property="note" label="Ghi chú">
+              <el-table-column property="status" label="Trạng thái">
                 <template slot-scope="scope">
-                  <span v-if="scope && scope.row.note">{{ scope.row.note }}</span>
+                  <el-tag type="info" effect="dark" v-if="!scope.row.status">Tắt</el-tag>
+                  <el-tag type="success" effect="dark" v-else>Bật</el-tag>
                 </template>
-              </el-table-column> -->
+              </el-table-column>
+
+              <el-table-column property="description" label="Mô tả">
+                <template slot-scope="scope">
+                  <span v-if="scope && scope.row.description">{{ scope.row.description }}</span>
+                </template>
+              </el-table-column>
 
               <el-table-column property="created_at" label="Ngày tạo" width="203">
                 <template slot-scope="scope">
@@ -150,18 +125,22 @@
               </el-pagination>
             </div>
 
-            <el-dialog :title="PAGE_TITLE + ' - XÓA'" :visible.sync="dialogConfirmRemove">
+            <el-dialog
+            :close-on-click-modal="false"
+            :close-on-press-escape="false"
+            :title="PAGE_TITLE + ' - XÓA'"
+            :visible.sync="dialogConfirmRemove">
               <el-alert
                 title="Xác nhận xóa"
                 type="error"
                 :closable="false"
                 show-icon>
                 <template slot>
-                  <span v-if="toRemove.length === 1">Bạn có muốn xóa {{ PAGE_TITLE.toLowerCase() }}: <strong>{{toRemove[0].title}}</strong> không?</span>
+                  <span v-if="toRemove.length === 1">Bạn có muốn xóa {{ PAGE_TITLE.toLowerCase() }}: <strong>{{toRemove[0].name}}</strong> không?</span>
                   <div v-else-if="toRemove.length > 1">
-                    <p>Bạn có muốn xóa những mục sau không?</p>
+                    <p>Bạn có muốn xóa những {{ PAGE_TITLE.toLowerCase() }} sau không?</p>
                     <ul>
-                      <li v-for="item in toRemove" :key="'remove-' + item.id">{{ item.title }}</li>
+                      <li v-for="item in toRemove" :key="'remove-' + item.id">{{ item.name }}</li>
                     </ul>
                   </div>
                 </template>
@@ -173,15 +152,17 @@
               </span>
             </el-dialog>
 
-            <el-dialog
-              :title="PAGE_TITLE + ' - ' + formLabel.toUpperCase()"
-              :visible.sync="dialogFormNewPost"
-              :before-close="handleClose">
-              <el-form ref="form" :model="formCreate" :rules="ruleForm" label-position="top">
+            <el-dialog 
+              :before-close="handleClosePopup"
+              :close-on-click-modal="false"
+              :close-on-press-escape="false"
+              :title="PAGE_TITLE + ' - ' + formTitle.toUpperCase() "
+              :visible.sync="dialogFormNewPost">
+              <el-form ref="form" :model="formCreate" :rules="rules" label-position="left" label-width="150px">
                 <el-row :gutter="20">
                   <el-col :span="24">
                     <el-form-item
-                      :label="'Tên ' + PAGE_TITLE.toLowerCase()"
+                      label="Tên khách hàng"
                       prop="name">
                       <el-input
                         v-model="formCreate.name"
@@ -189,78 +170,48 @@
                     </el-form-item>
                   </el-col>
 
-                  <el-col :span="12">
-                    <el-form-item
-                      label="Thời hạn thanh toán"
-                      prop="payment_period">
-                      <el-input
-                        v-model="formCreate.payment_period"
-                        type="number"
-                        :min="0"
-                        :disabled="false" />
-                    </el-form-item>
-                  </el-col>
-
-                  <el-col :span="12">
-                    <el-form-item
-                      label="Đơn vị"
-                      prop="unit">                       
-                        <el-select v-model="unitOptions[0].value" placeholder="Select">
-                            <el-option
-                            v-for="item in unitOptions"
-                            :key="item.value"
-                            :label="item.label"
-                            :value="item.value">
-                            </el-option>
-                        </el-select>
-                    </el-form-item>
-                  </el-col>
-
-                  <el-col :span="12">
-                    <el-form-item
-                      label="Đặt cọc (vnđ)"
-                      prop="deposits">
-                      <el-input
-                        v-model="formCreate.deposits"
-                        type="number"
-                        :min="0"
-                        :disabled="false" />
-                    </el-form-item>
-                  </el-col>
-
-                  <el-col :span="12">
-                    <el-form-item
-                      label="Thời gian hiệu lực"
-                      prop="duration">
-                      <el-input
-                        v-model="formCreate.duration"
-                        type="number"
-                        :min="0"
-                        :disabled="false" />
-                    </el-form-item>
-                  </el-col>
-
                   <el-col :span="24">
                     <el-form-item
-                      class="date"
-                      :label="'Thời gian ' + PAGE_TITLE.toLowerCase()"
-                      prop="date">
-                      <el-date-picker
-                        width="100%"
-                        size="large"
-                        @change="onDateTimeChange"
-                        v-model="dateTimeRange"
-                        type="daterange"
-                        format="dd-MM-yyyy"
-                        range-separator="-"
-                        start-placeholder="Ngày bắt đầu"
-                        end-placeholder="Ngày hết hạn">
-                      </el-date-picker>
+                      label="Số CMTND"
+                      prop="id_number">
+                      <el-input
+                        v-model="formCreate.id_number"
+                        :disabled="false"/>
                     </el-form-item>
                   </el-col>
 
+                  <el-col :span="12">
+                    <el-form-item
+                      label="Email"
+                      prop="email">
+                      <el-input
+                        v-model="formCreate.email"
+                        :disabled="false"/>
+                    </el-form-item>
+                  </el-col>
+                  <el-col :span="12">
+                    <el-form-item
+                      label="Phone"
+                      prop="phone">
+                      <el-input
+                        v-model="formCreate.phone"
+                        :disabled="false"/>
+                    </el-form-item>
+                  </el-col>
+
+                  <!-- gender -->
                   <el-col :span="16">
-                    <el-form-item label="Bên B" prop="rent_id">
+                    <el-form-item label="Giới tính" prop="gender">
+                      <el-radio-group v-model="formCreate.gender">
+                        <el-radio :label="1">{{ genderOptions[1] }}</el-radio>
+                        <el-radio :label="2">{{ genderOptions[2] }}</el-radio>
+                        <el-radio :label="0">{{ genderOptions[0] }}</el-radio>
+                      </el-radio-group>
+                    </el-form-item>
+                  </el-col>
+
+                  <!-- <el-col :span="16">
+                    <el-form-item label="Phòng" prop="rent_id">
                       <el-select
                           v-model="formCreate.rent_id"
                           _multiple
@@ -269,9 +220,9 @@
                           reserve-keyword
                           placeholder="Nhập tên"
                           :remote-method="remoteMethod"
-                          :loading="renterLoading">
+                          :loading="rentLoading">
                           <el-option
-                            v-for="item in renterOptions"
+                            v-for="item in rentOptions"
                             :key="item.id"
                             :label="item.name"
                             :value="item.id">                            
@@ -280,10 +231,10 @@
                           </el-option>
                         </el-select>
                     </el-form-item>
-                  </el-col>
+                  </el-col> -->
 
                   <el-col :span="8">
-                    <el-form-item label="Trạng thái" prop="status">
+                    <el-form-item label="Trạng thái" prop="status" label-width="90px">
                       <el-switch 
                       v-model="formCreate.status"
                       active-color="#13ce66"
@@ -293,12 +244,33 @@
                     </el-form-item>
                   </el-col>
 
+                  <el-col :span="12">
+                    <el-form-item
+                      label="Id - địa chỉ"
+                      prop="id_place">
+                      <el-input
+                        v-model="formCreate.id_place"
+                        type="text"
+                        :disabled="false"/>
+                    </el-form-item>
+                  </el-col>
+                  <el-col :span="12">
+                    <el-form-item
+                      label="Id - thời gian"
+                      prop="id_time">
+                      <el-input
+                        v-model="formCreate.id_time"
+                        type="text"
+                        :disabled="false"/>
+                    </el-form-item>
+                  </el-col>
+
                   <el-col :span="24">
                     <el-form-item
-                      label="Ghi chú"
-                      prop="note">
+                      label="Địa chỉ"
+                      prop="address">
                       <el-input
-                        v-model="formCreate.note"
+                        v-model="formCreate.address"
                         type="textarea"
                         :rows="2"
                         :disabled="false"/>
@@ -308,9 +280,9 @@
                 </el-row>
               </el-form>
               <span slot="footer" class="dialog-footer">
-                <el-button type="info" icon="el-icon-circle-close" @click="handleClose" plain>Hủy bỏ</el-button>
+                <el-button type="info" icon="el-icon-circle-close" @click="dialogFormNewPost = false" plain>Hủy bỏ</el-button>
                 <el-button type="primary" icon="el-icon-refresh" @click="resetForm('form')" plain>Đặt lại</el-button>
-                <el-button type="success" icon="el-icon-check" @click="handleSubmit" plain>{{ formLabel }}</el-button>
+                <el-button type="success" icon="el-icon-check" @click="handleSubmit" plain>{{ formTitle }}</el-button>
               </span>
             </el-dialog>
           </el-card>
@@ -320,84 +292,117 @@
   </div>
 </template>
 <script>
-import { fetchList } from '@/api/motel'
 import { mapGetters } from 'vuex'
 import Loading from '@/components/Loading'
+import { checkPrice } from '@/utils';
 
-const unitOptions  = [{
-  value: 'thang',
-  label: 'Tháng'
-}]
+const LABEL = {
+  name: 'KhachHang',
+  title: 'KHÁCH HÀNG',
+  model: 'renter',
+  slug: 'user',
+  edit: 'Sửa',
+  create: 'Tạo mới'
+}
+
+
+const CUSTOMIZE = {
+  genderOptions: ['Bí mật', 'Nam', 'Nữ'],
+  unitOptions: [{
+    value: 'vnd',
+    label: 'VNĐ'
+  }, {
+    value: 'm2',
+    label: 'M2'
+  }, {
+    value: 'thang',
+    label: 'Tháng'
+  }],
+  exportExcel: (list) => {
+    const formatJson = (filterVal, jsonData) => {
+      return jsonData.map(v => filterVal.map(j => {
+        if (j === 'timestamp') {
+          return parseTime(v[j])
+        } else {
+          return v[j]
+        }
+      }))
+    }
+
+    import('@/vendor/Export2Excel').then(excel => {
+      const tHeader = ['Tên Khách hàng', 'Ngày tạo', 'Mô tả']
+      const filterVal = ['name', 'created_at', 'description']
+      const data = formatJson(filterVal, list) // list
+      excel.export_json_to_excel({
+        header: tHeader, //Header Required
+        data, //Specific data Required
+        filename: 'excel-list', //Optional
+        autoWidth: true, //Optional
+        bookType: 'xlsx' //Optional
+      })
+    })
+  }
+}
+
 
 // 'name', 'floor', 'max', 'motel_id', 'price', 'description'
+// name
+// phone
+// email
+// id_number
+// id_place
+// id_time
+// address
+// user_id
+// status
 const defaultCreate = {
     name: '',
-    description: '',
-    floor: 0,
-    duration: '',
-    payment_period: '',
-    start: '',
-    end: '',
-    status: 1,
-    user_id: '',
-    rent_id: ''
+    id_number: '',
+    phone: null,
+    email: null,
+    gender: 0,
+    id_place: '1',
+    id_time: '12',
+    address: '',
+    status: 1
 }
 
-const checkPrice = (rule, _value, callback) => {
-  const value = parseFloat(_value)
-  if (value === 0) return callback()
-  if (!value) {
-    return callback(new Error('Phải là số lớn hơn hoặc bằng 0'))
-  }
-  setTimeout(() => {
-    if (!Number.isInteger(value)) {
-      callback(new Error('Vui lòng nhập số'))
-    } else {
-      if (value <= 0 ) {
-        callback(new Error('Vui lòng nhập số lớn hơn hoặc bằng 0'))
-      } else if (value > 10000000000) {
-        callback(new Error('Vui lòng nhập số nhỏ hơn 10 tỷ'))
-      } else {
-        callback()
-      }
-    }
-  }, 1000)
-}
-
-const ruleForm = {
+const rules = {
   name: [{ required: true, message: 'Vui lòng nhập tên!', trigger: 'blur' }],
-  description: [{ required: true, message: 'Vui lòng nhập mô tả!', trigger: 'blur' }],
-  floor: [{ validator: checkPrice, trigger: 'blur' }],
+  id_number: [{ required: true, message: 'Vui lòng nhập số CMTND hoặc CCCD!', trigger: 'blur' }],
+  id_time: [{ required: true, message: 'Vui lòng nhập thời gian CMTND hoặc CCCD!', trigger: 'blur' }],
+  email: [
+    { required: true, message: 'Vui lòng nhập email!', trigger: 'blur' },
+    { type: 'email', message: 'Vui lòng nhập đúng định dạng email', trigger: ['blur', 'change'] }
+  ],
+  phone: [{ required: true, message: 'Vui lòng nhập SĐT!', trigger: 'blur' }],
+  id_place: [{ required: true, message: 'Vui lòng nhập khu vực!', trigger: 'blur' }],
+  address: [{ required: true, message: 'Vui lòng nhập mô tả!', trigger: 'blur' }],
   payment_period: [{ validator: checkPrice, trigger: 'blur' }]
 }
-const LABEL = {
-  create : 'Tạo mới',
-  edit: 'Sửa'
-}
+
 export default {
-  name: 'Renter',
+  name: LABEL.name,
   components: {
     Loading
   },
   data() {
     return {
-      renterOptions: [],
-      renterLoading: false,
-      motelList: [
-        {id: 0, name: 'Bên B'}
-      ],
-      PAGE_TITLE: 'KHÁCH TRỌ',
-      dateTimeRange: [],
+      rentLoading: false,
+      rentOptions: [],
+      rentList: [],
+      genderOptions: CUSTOMIZE.genderOptions,
+      unitOptions: CUSTOMIZE.unitOptions,
+      rules,
+      PAGE_TITLE: LABEL.title,
+      formTitle: LABEL.create,
       initing: false,
-      isEdit: false,
       dialogFormVisible: false,
       dialogFormNewPost: false,
       dialogConfirmRemove: false,
-      toRemove: [{ id: 0, title: null }],
-      unitOptions,
-      formLabel: LABEL.create,
+      toRemove: [{ id: 0, name: null }],
+      formEdit: null, // { address,  description, id, name }
       formCreate: JSON.parse(JSON.stringify(defaultCreate)),
-      ruleForm,
       tableData: [],
       multipleSelection: [],
       pagination: {
@@ -411,18 +416,18 @@ export default {
   computed: {
     ...mapGetters([
       'avatar',
-      'renters'
+      'rents',
+      'motels'
     ])
   },
   mounted () {
     this.getApi()
-    this.getmotelList()
   },
   watch: {
     '$route': {
       handler: function(nextValue) {
         const { path } = nextValue
-        if (path === "/user/index") {
+        if (path === `/${LABEL.slug}/index`) {
           this.getApi()
         }
       },
@@ -431,45 +436,47 @@ export default {
     }
   },
   methods: {
-    getmotelList() {
-      fetchList(1, 250).then(res => {
-        if (res && res.data && res.data.data && res.data.data.length > 0)
-        this.renterOptions = res.data.data
-      })
-    },
     remoteMethod(query) {
       if (query !== '') {
-          this.renterLoading = true
-          setTimeout(() => {
-            this.renterLoading = false
-            this.renterOptions = this.motelList.filter(item => {
+        this.rentLoading = true        
+          //get motel list
+        this.$store.dispatch('rent/FetchList', { name: query}).then(res => {
+          if (res.data && res.data.data) {
+            this.rentList = res.data.data || []
+            this.rentLoading = false
+            this.rentOptions = this.rentList.filter(item => {
               return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1
-            });
-          }, 200)
-        } else {
-          this.renterOptions = []
-        }
+            })
+          }
+        })
+      } else {
+        this.rentOptions = []
+      }
+    },
+    handleExportExcel() {
+      CUSTOMIZE.exportExcel(this.tableData)
+    },
+    handleAmountInput() {
+      let num = this.formCreate.price.replace(/[^\d]+/g, '')
+      num = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+      this.formCreate.price = num
     },
     handleCurrentChange(val) {
       this.pagination.current_page = val
       this.getApi(val)
     },
     async getApi(current_page = 1, limit = 10) {
-      try { 
-        this.initing = true
-        const data = await this.$store.dispatch('renter/FetchList', { current_page, limit }).then(res => {
-          this.tableData = res.data && res.data.data
-          this.initing = false
-          const api_current_page = res.data.current_page
-          const total = res.data.total
-          const per_page = res.data.per_page
-          this.updatePagination(api_current_page, total, per_page)
-        })
-        return data
-      } catch (error) {
+      this.initing = true
+      const data = await this.$store.dispatch(LABEL.model + '/FetchList', { current_page, limit }).then(res => {
+        this.tableData = res.data && res.data.data
         this.initing = false
-        console.warn(error)
-      }
+        const api_current_page = res.data.current_page
+        const total = res.data.total
+        const per_page = res.data.per_page
+        this.updatePagination(api_current_page, total, per_page)
+      })
+      if (this.initing) this.initing = false
+      return data
     },
     updatePagination (
       current_page = this.pagination.current_page,
@@ -482,38 +489,19 @@ export default {
       per_page && (updatedPagination.per_page = per_page)
       this.pagination = JSON.parse(JSON.stringify(updatedPagination))
     },
-    handleClose() {      
-      this.dialogFormNewPost = false
-      this.formCreate = JSON.parse(JSON.stringify(defaultCreate))
-      this.$refs['form'].clearValidate()
-      setTimeout(() => {
-        this.formLabel = LABEL.create
-      }, 300)
-    },
-    onDateTimeChange(e) {
-      console.log(e)
-      this.formCreate.start = new Date(this.dateTimeRange[0]).getTime() / 1000
-      this.formCreate.end = new Date(this.dateTimeRange[1]).getTime() / 1000
-    },
     handleSelectionChange(val) {
       this.multipleSelection = val
     },
     handleSubmit() {
-      if (this.formLabel === LABEL.create) {
-        this.createItem()
-      } else this.editItem()
+      this.formTitle === LABEL.edit ? this.editItem() : this.createItem()
     },
     editItem() {
-      if (this.isEdit) return
-      this.isEdit = true
       this.$refs['form'].validate(valid => {
         if (valid) {
-          const editForm = this.formCreate
-          this.$store.dispatch('renter/Edit', editForm).then(res => {
+          this.$store.dispatch(LABEL.model + '/Edit', this.formCreate).then(res => {
             if (res.success) {
-              const row = res.data
               this.tableData = this.tableData.map(item => {
-                if (item.id === row.id) return row
+                if (item.id === res.data.id) return res.data
                 return item
               })
             }
@@ -522,12 +510,9 @@ export default {
               message: 'Dữ liệu được sửa thành công !',
               duration: 4000
             })
-            this.handleClose()
-            this.isEdit = false
           })
           .catch(_err => {
-            console.warn(_err)
-            this.isEdit = false
+            console.log(_err)
             this.$notify.error({
               title: 'Lỗi',
               message: 'Đang gặp sự cố, vui lòng báo hệ thống xử lý!',
@@ -537,19 +522,23 @@ export default {
         } else {
           return false
         }
+        this.handleClosePopup()
       })
     },
     createItem() {
-      if (this.isEdit) return
-      this.isEdit = true
       this.$refs['form'].validate(valid => {
         if (valid) {
-          this.$store.dispatch('renter/Create', this.formCreate).then(res => {
+          const tableData = JSON.parse(JSON.stringify(this.tableData))
+          this.$store.dispatch(LABEL.model + '/Create', this.formCreate).then(res => {
             if (res.success) {
-              if (this.tableData.length === 0) tableData.push(res.data)
-              else if (!this.tableData.some(item => item.id === res.data.id)) {
-                tableData.unshift(res.data)
-                if (this.tableData && this.tableData.length > this.pagination.per_page) this.tableData.pop()
+              if (tableData && tableData.length === 0) tableData.push(res.data)
+              else {
+                if (!tableData.some(item => item.id === res.data.id)) { tableData.unshift(res.data) }
+                const isRemoveEnd = tableData.length > this.pagination.per_page
+                if (isRemoveEnd) {
+                  ++this.pagination.total
+                  tableData.pop()
+                }
               }
             }
             this.$notify.success({
@@ -557,26 +546,32 @@ export default {
               message: 'Dữ liệu tạo mới thành công !',
               duration: 4000
             })
-
-            this.formCreate = JSON.parse(JSON.stringify(defaultCreate))
-            this.isEdit = false
-            this.handleClose()
           })
           .catch(_err => {
-            console.warn(_err)
-            this.isEdit = false
+            console.log(_err)
+            this.initing = false
             this.$notify.error({
               title: 'Lỗi',
               message: 'Đang gặp sự cố, vui lòng báo hệ thống xử lý!',
               duration: 4000
             })
           })
-        } else {
+          
+          this.tableData = tableData          
+          this.handleClosePopup()
+        } else {          
+          this.handleClosePopup()
           return false
         }
       })
-      
-      this.dialogFormNewPost && (this.dialogFormNewPost = false)
+    },
+    handleClosePopup() {      
+      setTimeout(() => {
+        this.formTitle = LABEL.create
+        this.formCreate = JSON.parse(JSON.stringify(defaultCreate))
+        this.dialogFormNewPost = false
+        this.resetForm()
+      }, 400)
     },
     handleRemove(row, action) {
       if (action && action === 'multiple-delete') {
@@ -599,7 +594,7 @@ export default {
     },
     removeItem(id) {
       if (!id) return
-      this.$store.dispatch('renter/Remove', id).then(res => {
+      this.$store.dispatch(LABEL.model + '/Remove', id).then(res => {
         this.dialogConfirmRemove = false
         if (res.success) {
           this.tableData = this.tableData.filter(item => (item.id !== id))
@@ -613,7 +608,7 @@ export default {
       })
       .catch(_err => {
         console.warn(_err)
-        this.isEdit = false
+        this.initing = false
         this.$notify.error({
           title: 'Lỗi',
           message: 'Đang gặp sự cố, vui lòng báo hệ thống xử lý!',
@@ -634,12 +629,12 @@ export default {
       const { type, data } = items
       switch (type) {
         case 'edit':
-          this.formLabel = LABEL.edit
+          this.formTitle = LABEL.edit
           this.formCreate = JSON.parse(JSON.stringify(data))
           this.dialogFormNewPost = true
           break
         case 'create':
-          this.formLabel = LABEL.create
+          this.formTitle = LABEL.create
           this.formCreate = JSON.parse(JSON.stringify(defaultCreate))
           this.dialogFormNewPost = true
           break
@@ -647,8 +642,8 @@ export default {
           break
       }
     },
-    resetForm(form) {
-      this.$refs[form].resetFields()
+    resetForm() {
+      this.$refs['form'].resetFields()
     }
   }
 }
@@ -674,9 +669,42 @@ input[type=text] {
   border-bottom: 1px solid #dcdfe6;
   outline: none;
 }
-.date {
-  & /deep/  .el-range-editor {
-    width: 100%;
+.header-search {
+  font-size: 0 !important;
+
+  .search-icon {
+    cursor: pointer;
+    font-size: 18px;
+    vertical-align: middle;
+  }
+
+  .header-search-select {
+    font-size: 18px;
+    transition: width 0.2s;
+    width: 0;
+    overflow: hidden;
+    background: transparent;
+    border-radius: 0;
+    display: inline-block;
+    vertical-align: middle;
+
+    /deep/ .el-input__inner {
+      border-radius: 0;
+      border: 0;
+      padding-left: 0;
+      padding-right: 0;
+      box-shadow: none !important;
+      border-bottom: 1px solid #d9d9d9;
+      vertical-align: middle;
+    }
+  }
+
+  &.show {
+    .header-search-select {
+      width: 210px;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
   }
 }
 </style>
