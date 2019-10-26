@@ -83,9 +83,9 @@
                 </template>
               </el-table-column>
 
-              <el-table-column property="description" label="Mô tả">
+              <el-table-column property="address" label="Địa chỉ">
                 <template slot-scope="scope">
-                  <span v-if="scope && scope.row.description">{{ scope.row.description }}</span>
+                  <span v-if="scope && scope.row.address">{{ scope.row.address }}</span>
                 </template>
               </el-table-column>
 
@@ -374,9 +374,11 @@ const rules = {
     { required: true, message: 'Vui lòng nhập email!', trigger: 'blur' },
     { type: 'email', message: 'Vui lòng nhập đúng định dạng email', trigger: ['blur', 'change'] }
   ],
+  status: [{ required: true, message: 'Vui lòng chọn trạng thái!', trigger: 'blur' }],
+  gender: [{ required: true, message: 'Vui lòng chọn giới tính!', trigger: 'blur' }],
   phone: [{ required: true, message: 'Vui lòng nhập SĐT!', trigger: 'blur' }],
   id_place: [{ required: true, message: 'Vui lòng nhập khu vực!', trigger: 'blur' }],
-  address: [{ required: true, message: 'Vui lòng nhập mô tả!', trigger: 'blur' }],
+  address: [{ required: true, message: 'Vui lòng nhập địa chỉ!', trigger: 'blur' }],
   payment_period: [{ validator: checkPrice, trigger: 'blur' }]
 }
 
@@ -558,8 +560,7 @@ export default {
           
           this.tableData = tableData          
           this.handleClosePopup()
-        } else {          
-          this.handleClosePopup()
+        } else {
           return false
         }
       })

@@ -157,7 +157,7 @@
               :close-on-press-escape="false"
               :title="PAGE_TITLE + ' - ' + formTitle.toUpperCase() "
               :visible.sync="dialogFormNewPost">
-              <el-form ref="form" :model="formCreate" :rules="rules" label-position="left" label-width="150px">
+              <el-form ref="form" :model="formCreate" :rules="rules" label-position="left" label-width="160px">
                 <el-row :gutter="20">
                   <el-col :span="24">
                     <el-form-item
@@ -185,7 +185,7 @@
                     <el-form-item
                       label="Đơn vị"
                       prop="unit">                       
-                        <el-select v-model="unitOptions[0].value" placeholder="Select">
+                        <el-select v-model="unitOptions.value" placeholder="Select">
                             <el-option
                             v-for="item in unitOptions"
                             :key="item.value"
@@ -344,6 +344,9 @@ const CUSTOMIZE = {
 const unitOptions  = [{
   value: 'thang',
   label: 'Tháng'
+}, {
+  value: 'nam',
+  label: 'Năm'
 }]
 const defaultCreate = {
     name: '',
@@ -381,10 +384,14 @@ const checkPrice = (rule, _value, callback) => {
 
 const rules = {
   name: [{ required: true, message: 'Vui lòng nhập tên!', trigger: 'blur' }],
+  unit: [{ required: true, message: `Vui lòng chọn giá trị hợp đồng!`, trigger: 'blur' }],
   note: [{ required: true, message: 'Vui lòng nhập ghi chú!', trigger: 'blur' }],
   duration: [{ required: true, message: 'Vui lòng thời hạn!', trigger: 'blur' }],
-  deposits: [{ validator: checkPrice, trigger: 'blur' }],
-  payment_period: [{ validator: checkPrice, trigger: 'blur' }]
+  deposits: [{ required: true, validator: checkPrice, trigger: 'blur' }],
+  payment_period: [{ required: true, validator: checkPrice, trigger: 'blur' }],
+  date: [{ required: true, message: 'Vui lòng chọn thời gian hợp đồng!', trigger: 'blur' }],
+  rent_id: [{ required: true, message: 'Vui lòng nhập tên phòng!', trigger: 'blur' }],
+  status: [{ required: true, message: 'Vui lòng chọn trạng thái hợp đồng!', trigger: 'blur' }]
 }
 export default {
   name: LABEL.name,
@@ -566,8 +573,7 @@ export default {
           
           this.tableData = tableData          
           this.handleClosePopup()
-        } else {          
-          this.handleClosePopup()
+        } else {
           return false
         }
       })

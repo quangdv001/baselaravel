@@ -134,7 +134,7 @@
               :close-on-press-escape="false"
               :title="PAGE_TITLE + ' - ' + formTitle.toUpperCase() "
               :visible.sync="dialogFormNewPost">
-              <el-form ref="form" :model="formCreate" :rules="rules" label-width="150px">
+              <el-form ref="form" :model="formCreate" :rules="rules" label-position="left" label-width="150px">
                 <el-row :gutter="20">
                   <el-col :span="24">
                     <el-form-item
@@ -359,8 +359,7 @@ export default {
           
           this.tableData = tableData          
           this.handleClosePopup()
-        } else {          
-          this.handleClosePopup()
+        } else {
           return false
         }
       })

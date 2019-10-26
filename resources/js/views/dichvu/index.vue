@@ -18,7 +18,6 @@
               
               <!-- Xuất excel -->
               <el-button
-              style="margin-right: 10px;"
               class="bordered filter-item"
               type="default"
               icon="el-icon-download"
@@ -322,11 +321,10 @@ const checkPrice = (rule, _value, callback) => {
 }
 
 const rules = {
-  title: [{ required: true, message: 'Vui lòng nhập tiêu đề!', trigger: 'blur' }
-  ], description: [{ required: true, message: 'Vui lòng nhập mô tả!', trigger: 'blur' }
-  ], price: [{ validator: checkPrice, trigger: 'blur' }
-  ], fixed_price: [{ validator: checkPrice, trigger: 'blur' }
-  ]
+  title: [{ required: true, message: 'Vui lòng nhập tiêu đề!', trigger: 'blur' }],
+  description: [{ required: true, message: 'Vui lòng nhập mô tả!', trigger: 'blur' }],
+  price: [{ required: true, validator: checkPrice, trigger: 'blur' }],
+  fixed_price: [{ required: true, validator: checkPrice, trigger: 'blur' }]
 }
 
 export default {

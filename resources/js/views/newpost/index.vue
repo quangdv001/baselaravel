@@ -286,10 +286,9 @@ const defaultCreate = {
 const rules = {
   title: [{ required: true, message: 'Vui lòng nhập tiêu đề!', trigger: 'blur' }],
   slug: [{ required: true, message: 'Không được để trống slug!', trigger: 'blur' }],
-  description: [{ required: true, message: 'Vui lòng nhập mô tả!', trigger: 'blur' }
-  ], price: [{ validator: checkPrice, trigger: 'blur' }
-  ], fixed_price: [{ validator: checkPrice, trigger: 'blur' }
-  ]
+  short_description: [{ required: true, message: 'Vui lòng viết mô tả!', trigger: 'blur' }],
+  img: [{ required: true, message: 'Vui lòng chọn hình ảnh!', trigger: 'blur' }],
+  description: [{ required: true, message: 'Vui lòng nhập nội dung!', trigger: 'blur' }]
 }
 
 export default {
@@ -456,8 +455,7 @@ export default {
           
           this.tableData = tableData          
           this.handleClosePopup()
-        } else {          
-          this.handleClosePopup()
+        } else {
           return false
         }
       })

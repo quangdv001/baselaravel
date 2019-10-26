@@ -16,7 +16,7 @@
                 Thêm mới
               </el-button>
               <!-- Xuất hóa đơn -->
-              <el-button class="bordered filter-item" type="default" icon="el-icon-printer" size="mini" plain round>
+              <el-button @click="dialogConfirmBill = true" class="bordered filter-item" type="default" icon="el-icon-printer" size="mini" plain round>
                 Xuất hóa đơn
               </el-button>
 
@@ -103,7 +103,7 @@
 
               <el-table-column property="price" label="Đơn giá">
                 <template slot-scope="scope">
-                  <span>{{ scope.row.price | formatMoney }}</span>
+                  <span>{{ scope.row.price | formatMoney }} vnđ</span>
                 </template>
               </el-table-column>
 
@@ -177,6 +177,76 @@
               </span>
             </el-dialog>
 
+            <el-dialog
+            :close-on-click-modal="false"
+            :close-on-press-escape="false"
+            :title="PAGE_TITLE + ' - HÓA ĐƠN'"
+            width="60%"
+            :visible.sync="dialogConfirmBill">
+              <el-table
+                :data="tableData"
+                border fit
+                style="width: 100%">
+                <el-table-column property="service" label="Tên dịch vụ">
+                  <template></template>
+                </el-table-column>
+
+                <el-table-column property="unit" label="Đơn vị">
+                  <template></template>
+                </el-table-column>
+
+                <el-table-column property="price" label="Đơn giá(vnđ)">
+                  <template></template>
+                </el-table-column>
+
+                <el-table-column property="amount" label="Số lượng">
+                  <template></template>
+                </el-table-column>
+
+                <el-table-column property="intomoney" label="Thành tiền">
+                  <template slot-scope="scope">
+                    <input
+                      class="ipMoney"
+                      :value="scope.row.intomoney" 
+                      @keydown="(e) => handleChangeInToMoney(scope.row.id, e.target.value)">
+                  </template>
+                </el-table-column>
+              </el-table>
+
+              <div class="filter-container" style="margin-top: 40px;">
+                <el-row class="group-left">
+                  <div style="margin-bottom: 20px;">
+                    <span style="margin-right: 10px">Dư / nợ (mới) : </span>
+                    <span class="dottedGroup">0</span>
+                  </div>
+                  <div style="margin-bottom: 20px;">
+                    <span style="margin-right: 10px">Dư / nợ (cũ) : </span>
+                    <span class="dottedGroup">0</span>
+                  </div>
+                  <div>
+                    <span style="margin-right: 10px">Chi phí khác : </span>
+                    <span class="dottedGroup">0</span>
+                  </div>
+                </el-row>
+
+                <el-row class="group-right">
+                  <div style="margin-bottom: 20px;">
+                    <span style="margin-right: 10px">Tổng tiền dịch vụ : </span>
+                    <span class="dottedGroup">850.000</span>
+                  </div>
+                  <div>
+                    <span style="margin-right: 10px">Thành tiền : </span>
+                    <span class="dottedGroup">2.922.000</span>
+                  </div>
+                </el-row>
+              </div>
+
+              <span slot="footer" class="dialog-footer">
+                <el-button type="info" icon="el-icon-circle-close" @click="dialogConfirmBill = false" plain>Hủy bỏ</el-button>
+                <el-button type="success" icon="el-icon-check" @click="dialogConfirmBill = false" plain>{{ formTitle }}</el-button>
+              </span>
+            </el-dialog>
+
             <el-dialog 
               :before-close="handleClosePopup"
               :close-on-click-modal="false"
@@ -207,7 +277,6 @@
                   label="ID phòng"
                   prop="motel_id"
                   >
-                  <!-- <el-input v-model="formCreate.motel_id" :disabled="false"></el-input> -->
                   <el-select
                     v-model="formCreate.motel_id"
                     _multiple
@@ -359,20 +428,12 @@ const checkPrice = (rule, _value, callback) => {
 }
 
 const rules = {
-  name: [
-    { required: true, message: `Vui lòng nhập tên ${LABEL.title.toLowerCase()}!`, trigger: 'blur' }
-  ],
+  name: [{ required: true, message: `Vui lòng nhập tên ${LABEL.title.toLowerCase()}!`, trigger: 'blur' }],
   motel_id: [{ required: true, message: `Vui lòng nhập id ${LABEL.title.toLowerCase()} !`, trigger: 'blur' }],
   max : [{ required: true, message: `Vui lòng nhập số lượng người tối đa trong ${LABEL.title.toLowerCase()} !`, trigger: 'blur' }],
-  floor: [
-    { required: true, message: `Vui lòng nhập tầng của ${LABEL.title.toLowerCase()} !`, trigger: 'blur' }
-  ],
-  price: [
-    { validator: checkPrice, message: 'Vui lòng nhập số tiền tương ứng !', trigger: 'blur' }
-  ],
-  description: [
-    { required: true, message: 'Vui lòng nhập mô tả!', trigger: 'blur' }
-  ]
+  floor: [{ required: true, message: `Vui lòng nhập tầng của ${LABEL.title.toLowerCase()} !`, trigger: 'blur' }],
+  price: [{ required: true, validator: checkPrice, message: 'Vui lòng nhập số tiền tương ứng !', trigger: 'blur' }],
+  description: [{ required: true, message: 'Vui lòng nhập mô tả!', trigger: 'blur' }]
 }
 
 export default {
@@ -390,9 +451,12 @@ export default {
       PAGE_TITLE: LABEL.title,
       formTitle: LABEL.create,
       initing: false,
+      ipFocus: false,
       dialogFormVisible: false,
       dialogFormNewPost: false,
       dialogConfirmRemove: false,
+      dialogConfirmBill: false,
+      importPriceBill: '',
       toRemove: [{ id: 0, name: null }],
       formEdit: null, // { address,  description, id, name }
       formCreate: JSON.parse(JSON.stringify(defaultCreate)),
@@ -429,6 +493,9 @@ export default {
     }
   },
   methods: {
+    handleChangeInToMoney(id, text) {
+      console.log(id, text)
+    },
     remoteMethod(query) {
       if (query !== '') {
         this.motelLoading = true        
@@ -551,8 +618,7 @@ export default {
           
           this.tableData = tableData          
           this.handleClosePopup()
-        } else {          
-          this.handleClosePopup()
+        } else {
           return false
         }
       })
@@ -697,6 +763,57 @@ input[type=text] {
       margin-left: 10px;
       margin-right: 10px;
     }
+  }
+}
+
+.group-button {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.item-check-status {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.dottedDate {
+  border-bottom: 2px dashed #606266;
+}
+
+.dottedGroup {
+  border-bottom: 1px dashed #606266;
+}
+
+.group-left {
+  display: block;
+  white-space: nowrap;
+}
+
+.group-right {
+  display: block;
+  padding-left: 40%;
+  transform: translateY(-20px);
+  margin: auto;
+  white-space: nowrap;
+}
+
+.ipMoney {
+  background-color: #fff;
+  background-image: none;
+  border-radius: 4px;
+  border: 1px solid #dcdfe6;
+  box-sizing: border-box;
+  color: #606266;
+  display: inline-block;
+  font-size: inherit;
+  height: 40px;
+  line-height: 40px;
+  outline: none;
+  padding: 0 15px;
+
+  &:hover {
+    outline: none;
+    border-color: #409eff;
   }
 }
 </style>
