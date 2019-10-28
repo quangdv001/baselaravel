@@ -185,13 +185,13 @@
                     <el-form-item
                       label="Đơn vị"
                       prop="unit">                       
-                        <el-select v-model="unitOptions.value" placeholder="Select">
-                            <el-option
-                            v-for="item in unitOptions"
-                            :key="item.value"
-                            :label="item.label"
-                            :value="item.value">
-                            </el-option>
+                        <el-select v-model="unitOptions[0].value" placeholder="Select">
+                          <el-option
+                          v-for="item in unitOptions"
+                          :key="item.value"
+                          :label="item.label"
+                          :value="item.value">
+                          </el-option>
                         </el-select>
                     </el-form-item>
                   </el-col>
@@ -202,8 +202,8 @@
                       prop="deposits">
                       <el-input
                         v-model="formCreate.deposits"
-                        type="number"
-                        :min="0"
+                        @keyup.native="handleAmountInput"
+                        :maxlength="8"
                         :disabled="false" />
                     </el-form-item>
                   </el-col>
@@ -242,23 +242,23 @@
                   <el-col :span="16">
                     <el-form-item label="Tên phòng" prop="rent_id">
                       <el-select
-                          v-model="formCreate.rent_id"
-                          _multiple
-                          filterable
-                          remote
-                          reserve-keyword
-                          placeholder="Nhập tên"
-                          :remote-method="remoteMethod"
-                          :loading="renterLoading">
-                          <el-option
-                            v-for="item in renterOptions"
-                            :key="item.id"
-                            :label="item.name"
-                            :value="item.id">                            
-                            <span style="float: left">{{ item.name }}</span>
-                            <span style="float: right; color: #8492a6; font-size: 13px">{{ item.id }}</span>
-                          </el-option>
-                        </el-select>
+                        v-model="formCreate.rent_id"
+                        _multiple
+                        filterable
+                        remote
+                        reserve-keyword
+                        placeholder="Nhập tên"
+                        :remote-method="remoteMethod"
+                        :loading="renterLoading">
+                        <el-option
+                          v-for="item in renterOptions"
+                          :key="item.id"
+                          :label="item.name"
+                          :value="item.id">                            
+                          <span style="float: left">{{ item.name }}</span>
+                          <span style="float: right; color: #8492a6; font-size: 13px">{{ item.id }}</span>
+                        </el-option>
+                      </el-select>
                     </el-form-item>
                   </el-col>
 
@@ -315,6 +315,11 @@ const LABEL = {
 
 
 const CUSTOMIZE = {
+  formatPrice (deposits) {
+    let res = deposits
+    res = deposits ? parseFloat(deposits.toString().replace(/,/g, '')) : 0
+    return res
+  },
   exportExcel: (list) => {
     const formatJson = (filterVal, jsonData) => {
       return jsonData.map(v => filterVal.map(j => {
@@ -344,9 +349,6 @@ const CUSTOMIZE = {
 const unitOptions  = [{
   value: 'thang',
   label: 'Tháng'
-}, {
-  value: 'nam',
-  label: 'Năm'
 }]
 const defaultCreate = {
     name: '',
@@ -384,12 +386,10 @@ const checkPrice = (rule, _value, callback) => {
 
 const rules = {
   name: [{ required: true, message: 'Vui lòng nhập tên!', trigger: 'blur' }],
-  unit: [{ required: true, message: `Vui lòng chọn giá trị hợp đồng!`, trigger: 'blur' }],
   note: [{ required: true, message: 'Vui lòng nhập ghi chú!', trigger: 'blur' }],
-  duration: [{ required: true, message: 'Vui lòng thời hạn!', trigger: 'blur' }],
+  duration: [{ required: true, message: 'Vui lòng nhập thời hạn!', trigger: 'blur' }],
   deposits: [{ required: true, validator: checkPrice, trigger: 'blur' }],
   payment_period: [{ required: true, validator: checkPrice, trigger: 'blur' }],
-  date: [{ required: true, message: 'Vui lòng chọn thời gian hợp đồng!', trigger: 'blur' }],
   rent_id: [{ required: true, message: 'Vui lòng nhập tên phòng!', trigger: 'blur' }],
   status: [{ required: true, message: 'Vui lòng chọn trạng thái hợp đồng!', trigger: 'blur' }]
 }
@@ -472,9 +472,9 @@ export default {
       CUSTOMIZE.exportExcel(this.tableData)
     },
     handleAmountInput() {
-      let num = this.formCreate.price.replace(/[^\d]+/g, '')
+      let num = this.formCreate.deposits.replace(/[^\d]+/g, '')
       num = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-      this.formCreate.price = num
+      this.formCreate.deposits = num
     },
     handleCurrentChange(val) {
       this.pagination.current_page = val
@@ -543,7 +543,7 @@ export default {
       this.$refs['form'].validate(valid => {
         if (valid) {
           const tableData = JSON.parse(JSON.stringify(this.tableData))
-          this.$store.dispatch(LABEL.model + '/Create', this.formCreate).then(res => {
+          this.$store.dispatch(LABEL.model + '/Create', {...this.formCreate, deposits: CUSTOMIZE.formatPrice(this.formCreate.deposits) }).then(res => {
             if (res.success) {
               if (tableData && tableData.length === 0) tableData.push(res.data)
               else {
