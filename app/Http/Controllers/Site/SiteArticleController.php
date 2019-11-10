@@ -70,7 +70,6 @@ class SiteArticleController extends SiteBaseController
         $param['sortBy'] = 'id';
         $article = $this->article->search($param);
         $cate = $this->category->getById($id);
-        dd($cate);
         return view('site.article.index')
         ->with('cate', $cate)
         ->with('data', $article);
