@@ -26,7 +26,7 @@
                     <div class="row">
                         <div class="col">
                             <div class="detail-post">
-                                <h1 class="page-title"><a href="#">@lang('home.livitrans_company')</a>
+                            <h1 class="page-title"><a href="#">{{ $data->title }}</a>
                                 </h1>
                                 <div class="news-post">
                                     {!! $data->content !!}

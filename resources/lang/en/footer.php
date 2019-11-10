@@ -12,7 +12,7 @@ return [
     'contact_2' => 'Shipping policy',
     'contact_3' => 'Payment Guide',
     'contact_4' => 'Regulations',
-    'contact_5' => 'customer care',
+    'contact_5' => 'Customer Care',
     'sitemap' => 'SITEMAP',
     'sitemap_1' => 'About Us',
     'sitemap_2' => 'Booking Tickets',

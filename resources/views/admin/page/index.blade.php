@@ -94,10 +94,10 @@ Danh sách Trang
                                             <a href="{{ route('admin.page.getCreate', ['locale' => 'vi', 'id' => $v->id]) }}"
                                                 class="text-warning"><i class="fa fa-pencil-square-o icon-sm"
                                                     aria-hidden="true"></i></a>
-                                            -
+                                            {{-- -
                                             <a href="{{ route('admin.page.remove', ['id' => $v->id]) }}" onclick="return confirm('Bạn chắc muốn xóa chứ?')"
                                                 class="text-warning"><i class="fa fa-trash-o icon-sm"
-                                                    aria-hidden="true"></i></a>
+                                                    aria-hidden="true"></i></a> --}}
                                         </td>
                                     </tr>
                                     @endforeach

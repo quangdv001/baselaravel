@@ -163,11 +163,12 @@ class SiteHomeController extends SiteBaseController
         $param['category_id'] = 1;
         $param['limit'] = 5;
         $param['sortBy'] = 'id';
-        if($this->locales->current() == 'en') {
-            $data = $this->page->getBySlug('about-us');
-        } else{
-            $data = $this->page->getBySlug('ve-chung-toi');
-        }
+        $data = $this->page->getById(3);
+        // if($this->locales->current() == 'en') {
+        //     $data = $this->page->getBySlug('about-us');
+        // } else{
+        //     $data = $this->page->getBySlug('ve-chung-toi');
+        // }
         
         $article = $this->article->search($param);
 
@@ -199,11 +200,12 @@ class SiteHomeController extends SiteBaseController
         $param['category_id'] = 1;
         $param['limit'] = 5;
         $param['sortBy'] = 'id';
-        if($this->locales->current() == 'en') {
-            $data = $this->page->getBySlug('customer-care');
-        } else{
-            $data = $this->page->getBySlug('cham-soc-khac-hang');
-        }
+        $data = $this->page->getById(7);
+        // if($this->locales->current() == 'en') {
+        //     $data = $this->page->getBySlug('customer-care');
+        // } else{
+        //     $data = $this->page->getBySlug('cham-soc-khac-hang');
+        // }
         
         $article = $this->article->search($param);
 
@@ -214,11 +216,11 @@ class SiteHomeController extends SiteBaseController
         $param['category_id'] = 1;
         $param['limit'] = 5;
         $param['sortBy'] = 'id';
-        if($this->locales->current() == 'en') {
-            $data = $this->page->getBySlug('faqs');
-        } else{
-            $data = $this->page->getBySlug('hoi-dap');
-        }
+        $data = $this->page->getById(4);
+        // if($this->locales->current() == 'en') {
+        // } else{
+        //     $data = $this->page->getBySlug('hoi-dap');
+        // }
         
         $article = $this->article->search($param);
 
@@ -229,11 +231,12 @@ class SiteHomeController extends SiteBaseController
         $param['category_id'] = 1;
         $param['limit'] = 5;
         $param['sortBy'] = 'id';
-        if($this->locales->current() == 'en') {
-            $data = $this->page->getBySlug('shipping-policy');
-        } else{
-            $data = $this->page->getBySlug('chinh-sach-van-chuyen');
-        }
+        $data = $this->page->getById(5);
+        // if($this->locales->current() == 'en') {
+        //     $data = $this->page->getBySlug('shipping-policy');
+        // } else{
+        //     $data = $this->page->getBySlug('chinh-sach-van-chuyen');
+        // }
         
         $article = $this->article->search($param);
 
@@ -244,11 +247,12 @@ class SiteHomeController extends SiteBaseController
         $param['category_id'] = 1;
         $param['limit'] = 5;
         $param['sortBy'] = 'id';
-        if($this->locales->current() == 'en') {
-            $data = $this->page->getBySlug('payment-guide');
-        } else{
-            $data = $this->page->getBySlug('huong-dan-thanh-toan');
-        }
+        $data = $this->page->getById(6);
+        // if($this->locales->current() == 'en') {
+        //     $data = $this->page->getBySlug('payment-guide');
+        // } else{
+        //     $data = $this->page->getBySlug('huong-dan-thanh-toan');
+        // }
         
         $article = $this->article->search($param);
 
