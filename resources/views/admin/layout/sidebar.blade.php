@@ -186,6 +186,24 @@
                 </ul>
             </li>
             @endif
+            @if(auth('admin')->user()->can('admin-pms', 'admin.regulation.getList'))
+            <li class="nav-item nav-dropdown @if(in_array($currentRoute,['admin.regulation.getList', 'admin.regulation.getCreate'])) open @endif">
+                <a class="nav-link nav-dropdown-toggle" href="#">
+                    <i class="nav-icon icon-present"></i>Quy định</a>
+                <ul class="nav-dropdown-items"age>
+                    <li class="nav-item">
+                        <a class="nav-link @if(in_array($currentRoute,['admin.regulation.getList'])) active @endif" href="{{ route('admin.regulation.getList') }}">
+                            <i class="nav-icon "></i> Danh sách</a>
+                    </li>
+                    @if(auth('admin')->user()->can('admin-pms', 'admin.regulation.getCreate'))
+                    <li class="nav-item">
+                        <a class="nav-link @if(in_array($currentRoute,['admin.regulation.getCreate'])) active @endif" href="{{ route('admin.regulation.getCreate') }}">
+                            <i class="nav-icon "></i> Thêm mới</a>
+                    </li>
+                    @endif
+                </ul>
+            </li>
+            @endif
         </ul>
     </nav>
     <button class="sidebar-minimizer brand-minimizer" type="button"></button>

@@ -20,6 +20,8 @@ use App\Services\PageService;
 use App\Services\ImageService;
 use App\Http\Requests\Site\BookingRequest;
 use App\Mail\OrderNew;
+use App\Services\FileService;
+use App\Services\RegulationService;
 use Illuminate\Support\Facades\Storage;
 
 class SiteHomeController extends SiteBaseController
@@ -33,10 +35,13 @@ class SiteHomeController extends SiteBaseController
     private $sliders;
     private $page;
     private $image;
+    private $regulation;
+    private $file;
     
     // For only this view
-    public function __construct(CategoryService $category, ArticleService $article, OrderService $order, PageService $page,
-                                Locales $locales, ProvinceService $province, SocialsService $socials, SliderService $sliders, ImageService $image){
+    public function __construct(CategoryService $category, ArticleService $article, OrderService $order, PageService $page,Locales $locales, 
+    ProvinceService $province, SocialsService $socials, SliderService $sliders, ImageService $image, RegulationService $regulation, FileService $file)
+    {
         parent::__construct();
         $this->middleware(function($request,$next)
         {
@@ -54,6 +59,8 @@ class SiteHomeController extends SiteBaseController
         $this->sliders = $sliders;
         $this->page = $page;
         $this->image = $image;
+        $this->regulation = $regulation;
+        $this->file = $file;
         $paramArticle['limit'] = 4;
         $paramArticle['category_id'] = 1;
         $paramArticle['status'] = 1;
@@ -264,12 +271,13 @@ class SiteHomeController extends SiteBaseController
         $param['limit'] = 5;
         $param['sortBy'] = 'id';
         $article = $this->article->search($param);
-        
-        return view('site.home.regulations')->with('data', $article);
+        $files = $this->regulation->getAll();
+        return view('site.home.regulations')->with('data', $article)->with('files', $files);
     }
 
-    public function downloadFile($name){
-        return Storage::download('upload/pdf/'.$name, $name);
+    public function downloadFile($id){
+        $file = $this->file->getFileById($id);
+        return Storage::download('upload/files/'.$file->path, $file->name);
     }
 
     public function gastation(){

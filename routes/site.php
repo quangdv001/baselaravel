@@ -21,7 +21,7 @@ Route::get('about', 'SiteHomeController@about')->name('home.about');
 Route::get('image', 'SiteHomeController@imageAlbum')->name('home.image');
 Route::get('journeys_fare', 'SiteHomeController@journeysFare')->name('home.journeys_fare');
 Route::get('regulations', 'SiteHomeController@regulations')->name('home.regulations');
-Route::get('regulations/download/{name}', 'SiteHomeController@downloadFile')->name('home.downloadFile');
+Route::get('regulations/download/{id}', 'SiteHomeController@downloadFile')->name('home.downloadFile');
 Route::get('gastation', 'SiteHomeController@gastation')->name('home.gastation');
 Route::get('ticketLocation', 'SiteHomeController@ticketLocation')->name('home.ticketLocation');
 Route::get('faqs', 'SiteHomeController@faqs')->name('home.faqs');

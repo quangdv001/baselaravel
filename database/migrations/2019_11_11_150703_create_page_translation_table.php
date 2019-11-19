@@ -13,16 +13,16 @@ class CreatePageTranslationTable extends Migration
      */
     public function up()
     {
-        Schema::create('page_translation', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->bigIncrements('page_id');
-            $table->string('locale')
-            $table->string('title')
-            $table->string('slug')->nullable();
-            $table->string('meta')->nullable();
-            $table->text('description')->nullable();
-            $table->timestamps();
-        });
+        // Schema::create('page_translation', function (Blueprint $table) {
+        //     $table->bigIncrements('id');
+        //     $table->bigIncrements('page_id');
+        //     $table->string('locale');
+        //     $table->string('title');
+        //     $table->string('slug')->nullable();
+        //     $table->string('meta')->nullable();
+        //     $table->text('description')->nullable();
+        //     $table->timestamps();
+        // });
     }
 
     /**

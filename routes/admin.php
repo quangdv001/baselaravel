@@ -85,5 +85,10 @@ Route::middleware(['auth.admin'])->prefix('admin')->group(function () {
     Route::get('image/getCreate/{id?}', 'AdminImageController@getCreate')->name('image.getCreate');
     Route::post('image/getCreate/{id?}', 'AdminImageController@postCreate')->name('image.postCreate');
     Route::get('image/remove/{id?}', 'AdminImageController@remove')->name('image.remove');
+
+    Route::get('regulation', 'AdminRegulationController@index')->name('regulation.getList');
+    Route::get('regulation/getCreate/{id?}', 'AdminRegulationController@getCreate')->name('regulation.getCreate');
+    Route::post('regulation/getCreate/{id?}', 'AdminRegulationController@postCreate')->name('regulation.postCreate');
+    Route::get('regulation/remove/{id?}', 'AdminRegulationController@remove')->name('regulation.remove');
 });
 

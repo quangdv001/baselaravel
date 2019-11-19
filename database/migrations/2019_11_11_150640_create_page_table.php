@@ -13,15 +13,15 @@ class CreatePageTable extends Migration
      */
     public function up()
     {
-        Schema::create('page', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->smallInteger('status')->nullable()->default(1);
-            $table->integer('admin_id_c')->nullable()->default(0);
-            $table->string('admin_name_c')->nullable();
-            $table->integer('admin_id_u')->nullable()->default(0);
-            $table->string('admin_name_u')->nullable();
-            $table->timestamps();
-        });
+        // Schema::create('page', function (Blueprint $table) {
+        //     $table->bigIncrements('id');
+        //     $table->smallInteger('status')->nullable()->default(1);
+        //     $table->integer('admin_id_c')->nullable()->default(0);
+        //     $table->string('admin_name_c')->nullable();
+        //     $table->integer('admin_id_u')->nullable()->default(0);
+        //     $table->string('admin_name_u')->nullable();
+        //     $table->timestamps();
+        // });
     }
 
     /**

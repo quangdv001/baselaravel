@@ -30,18 +30,22 @@
                             <div class="col">
                                 <div class="list-post row">
                                     <div class="news-post line-bottom download-item">
-                                        <div class="news-post-content">
-                                            <h2 class="post-title title"><i class="icon-download fa fa-file-pdf"
-                                                    aria-hidden="true"></i><a href="#link">Lorem Ipsum là gì, Tại sao
-                                                    lại sử dụng nó</a></h2>
-                                            <div class="post-meta-container">
-                                                <div class="span post-meta-item"><i class="far fa-clock"></i>
-                                                    Th3-27/10/2015</div>
-                                            </div><a class="download-icon pull-right"
-                                                href="{{ route('site.home.downloadFile', 'Ky-thuat-dong-hang-Container.pdf')  }}"><i
-                                                    class="fa fa-download" aria-hidden="true"></i><span>Tải
-                                                    file</span></a>
-                                        </div>
+                                        @if(sizeof($files) > 0)
+                                            @foreach($files as $file) 
+                                            
+                                            <div class="news-post-content">
+                                                <h2 class="post-title title"><i class="icon-download fa fa-file-pdf"
+                                                        aria-hidden="true"></i><a href="{{ route('site.home.downloadFile', $file->file_id)  }}">{{ $file->name }}</a></h2>
+                                                <div class="post-meta-container">
+                                                    <div class="span post-meta-item"><i class="far fa-clock"></i>
+                                                        {{ $file->created_at->format('d/m/Y') }}</div>
+                                                </div><a class="download-icon pull-right"
+                                                    href="{{ route('site.home.downloadFile', $file->file_id)  }}"><i
+                                                        class="fa fa-download" aria-hidden="true"></i><span>Tải
+                                                        file</span></a>
+                                            </div>
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </div>
                             </div>
