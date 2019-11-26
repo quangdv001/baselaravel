@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProductComboTable extends Migration
+class CreateRoomImgTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateProductComboTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_combo', function (Blueprint $table) {
+        Schema::create('room_img', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->BigInteger('combo_id');
-            $table->BigInteger('product_id');
+            $table->integer('room_id');
+            $table->string('img')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateProductComboTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_combo');
+        Schema::dropIfExists('room_img');
     }
 }

@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProductImg extends Model
+class RoomImg extends Model
 {
-    protected $table = 'product_img';
+    protected $table = 'room_img';
     protected $fillable = [
-        'product_id', 'img'
+        'room_id', 'img'
     ];
 }
