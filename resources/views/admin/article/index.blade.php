@@ -21,54 +21,59 @@ Danh sách Bài viết
                     <div class="card-body">
                         <form class="forms-sample" action="">
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="exampleInputName1">Id</label>
+                                        <input type="text" class="form-control" id="" name="id"
+                                            placeholder="Tiêu đề" value="{{ old('id') }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="exampleInputName1">Tiêu đề</label>
-                                        <input type="text" class="form-control" id="exampleInputName1" name="title"
+                                        <input type="text" class="form-control" id="" name="title"
                                             placeholder="Tiêu đề" value="{{ old('title') }}">
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="exampleInputName1">Tên admin</label>
-                                        <input type="text" class="form-control" id="exampleInputName1"
+                                        <input type="text" class="form-control" id=""
                                             placeholder="Tên admin" name="admin_name_c"
                                             value="{{ old('admin_name_c') }}">
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="exampleInputName1">Tên người dùng</label>
-                                        <input type="text" class="form-control" id="exampleInputName1"
+                                        <input type="text" class="form-control" id=""
                                             placeholder="Tên user" name="user_name_c" value="{{ old('user_name_c') }}">
                                     </div>
                                 </div>
-                                {{-- <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="exampleFormControlSelect2">Loại bài viết</label>
-                                        <select class="form-control" name="type" id="exampleFormControlSelect2">
-                                            <option @if(old('type')==-1) selected @endif value="-1">Mời chọn</option>
-                                            <option @if(old('type')==1) selected @endif value="0">Tin tức</option>
-                                            <option @if(old('type')==2) selected @endif value="1">Luật pháp</option>
-                                            <option @if(old('type')==3) selected @endif value="2">Dự án</option>
-                                            <option @if(old('type')==4) selected @endif value="3">Đối tác</option>
+                                        <label for="exampleFormControlSelect2">Danh mục</label>
+                                        <select class="form-control" name="category_id" id="exampleFormControlSelect2">
+                                            <option value="0">Mời chọn</option>
+                                            {!! $html !!}
                                         </select>
                                     </div>
-                                </div> --}}
-                                <div class="col-md-4">
+                                </div>
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect3">Trạng thái</label>
                                         <select class="form-control" name="status" id="exampleFormControlSelect3">
-                                            <option @if(old('status')==-1) selected @endif value="-1">Mời chọn</option>
-                                            <option @if(old('status')==1) selected @endif value="1">Hoạt động</option>
-                                            <option @if(old('status')==0) selected @endif value="0">Ngừng hoạt động
+                                            <option @if(old('status') == 1) selected @endif value="1">Hoạt động</option>
+                                            <option @if(old('status') == 0) selected @endif value="0">Ngừng hoạt động
+                                            <option @if(old('status') == null || old('status') == -1) selected @endif value="-1">Mời chọn</option>
                                             </option>
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-success mr-2 mt-4">Tìm kiếm</button>
+                                        <label for="" class="">&nbsp;</label>
+                                        <button type="submit" class="btn btn-success mr-2 d-block">Tìm kiếm</button>
                                     </div>
                                 </div>
                             </div>
@@ -135,7 +140,7 @@ Danh sách Bài viết
                                             {{ isset($listCategories[$v->category_id]) ? $listCategories[$v->category_id] : 'Chưa chọn danh mục'  }}
                                         </td>
                                         <td>
-                                            {{ $v->status == 1 ? 'Hoạt động' : 'Không hoạt động' }}
+                                            {!! $v->status == 1 ? '<span class="badge badge-success">Hoạt động</span>' : '<span class="badge badge-danger">Không hoạt động</span>' !!}
                                         </td>
                                         {{-- <td>
                                             {{ $v->type == 1 ? 'Tin tức' : ($v->type == 2 ? 'Luật pháp' :  ($v->type == 3 ? 'Dự án nhà đất' : 'Đối tác')) }}
@@ -150,12 +155,12 @@ Danh sách Bài viết
                                             {{ $v->created_at->format('H:i:s d/m/Y') }}
                                         </td>
                                         <td>
-                                            <a href="{{ route('admin.article.getCreate', ['id' => $v->id]) }}"
+                                            <a href="{{ route('admin.article.getCreate', ['type' => $v->type, 'id' => $v->id]) }}"
                                                 class="text-warning"><i class="fa fa-pencil-square-o icon-sm"
                                                     aria-hidden="true"></i></a>
                                             -
-                                            <a href="{{ route('admin.article.remove', ['id' => $v->id]) }}"
-                                                class="text-warning"><i class="fa fa-trash-o icon-sm"
+                                            <a href="{{ route('admin.article.remove', ['type' => $v->type, 'id' => $v->id]) }}"
+                                                class="text-danger"><i class="fa fa-trash-o icon-sm"
                                                     aria-hidden="true"></i></a>
                                         </td>
                                     </tr>

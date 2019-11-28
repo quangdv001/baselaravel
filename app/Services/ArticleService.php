@@ -26,6 +26,9 @@ class ArticleService
 
     public function search($data){
         $query = $this->article;
+        if (isset($data['id']) && $data['id'] > 0) {
+            $query = $query->where('id', $data['id']);
+        }
         if (isset($data['title']) && $data['title'] != '') {
             $query = $query->where('title', 'like', '%' . $data['title'] . '%');
         }
@@ -38,7 +41,7 @@ class ArticleService
         if (isset($data['status']) && $data['status'] > -1) {
             $query = $query->where('status', $data['status']);
         }
-        if (isset($data['category_id']) && $data['category_id'] > -1) {
+        if (isset($data['category_id']) && $data['category_id'] > 0) {
             $query = $query->where('category_id', $data['category_id']);
         }
         if (isset($data['except']) && $data['except'] > 0) {
@@ -101,7 +104,10 @@ class ArticleService
 
     public function remove($id){
         $article = $this->article->find($id);
-        $article->delete();
+        if($article){
+            $article->delete();
+        }
+        return true;
     }
 
     public function getById($id){

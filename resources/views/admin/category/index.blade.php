@@ -64,12 +64,6 @@ Danh sách danh mục
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 col-form-label">Slug</label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control slug" name="slug" placeholder="Slug" value="">
-                            </div>
-                        </div>
-                        <div class="form-group row">
                             <label class="col-md-3 col-form-label">URL</label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control url" name="url" placeholder="URL" value="">
@@ -86,10 +80,9 @@ Danh sách danh mục
                             <label class="col-md-3 col-form-label" for="select1">Loại</label>
                             <div class="col-md-9">
                                 <select class="form-control type" id="exampleFormControlSelect3">
-                                    <option value="0">Theo url</option>
-                                    <option value="1">Tin tức</option>
-                                    <option value="2">Sản phẩm</option>
-                                    <option value="3">Danh mục</option>
+                                    @foreach($arrType as $k => $v) 
+                                    <option value="{{ $k }}">{{ $v }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -185,7 +178,7 @@ Danh sách danh mục
         $('.btn-update').click(function () {
             var id = $('.id').val();
             var name = $('.name').val();
-            var slug = $('.slug').val();
+            // var slug = $('.slug').val();
             var img = $('.img').val();
             var description = $('.description').val();
             var status = $('.status').val();
@@ -201,7 +194,7 @@ Danh sách danh mục
                 status: status,
                 type: type,
                 url: urll,
-                slug: slug,
+                // slug: slug,
                 class_name: class_name,
             };
             var obj = $(this);
@@ -232,7 +225,7 @@ Danh sách danh mục
                     $('.img').val(res.data.img);
                     $('.img-show').attr('src', res.data.img);
                     $('.url').val(res.data.url);
-                    $('.slug').val(res.data.slug);
+                    // $('.slug').val(res.data.slug);
                     $('.description').val(res.data.description);
                     $('.status').val(res.data.status);
                     $('.type').val(res.data.type);
@@ -278,11 +271,11 @@ Danh sách danh mục
             init.openFileModal(callback);
         });
 
-        $('.name').keyup(function () {
-            var val = $(this).val();
-            var slug = init.makeSlug(val);
-            $('.slug').val(slug);
-        })
+        // $('.name').keyup(function () {
+        //     var val = $(this).val();
+        //     var slug = init.makeSlug(val);
+        //     $('.slug').val(slug);
+        // })
     });
     var callback = function (data) {
         $('.img').val(data.url);

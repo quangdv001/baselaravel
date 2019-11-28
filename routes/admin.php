@@ -33,10 +33,10 @@ Route::middleware(['auth.admin'])->prefix('admin')->group(function () {
     Route::get('province/loadDistrict/{id}/{select?}', 'AdminProvinceController@loadDistrict')->name('ward.loadDistrict');
     Route::get('province/loadWard/{id}/{select?}', 'AdminProvinceController@loadWard')->name('ward.loadWard');
 
-    Route::get('article', 'AdminArticleController@index')->name('article.getList');
-    Route::get('article/getCreate/{id?}', 'AdminArticleController@getCreate')->name('article.getCreate');
-    Route::post('article/getCreate/{id?}', 'AdminArticleController@postCreate')->name('article.postCreate');
-    Route::get('article/remove/{id?}', 'AdminArticleController@remove')->name('article.remove');
+    Route::get('article/{type}', 'AdminArticleController@index')->name('article.getList');
+    Route::get('article/getCreate/{type}/{id?}', 'AdminArticleController@getCreate')->name('article.getCreate');
+    Route::post('article/getCreate/{type}/{id?}', 'AdminArticleController@postCreate')->name('article.postCreate');
+    Route::get('article/remove/{type}/{id?}', 'AdminArticleController@remove')->name('article.remove');
 
     Route::get('room', 'AdminRoomController@index')->name('room.getList');
     Route::get('room/getCreate/{id?}', 'AdminRoomController@getCreate')->name('room.getCreate');
@@ -48,20 +48,6 @@ Route::middleware(['auth.admin'])->prefix('admin')->group(function () {
     Route::post('file/removeFile/{id}', 'AdminFileController@removeFile')->name('file.removeFile');
     Route::get('file/downloadFile/{id}', 'AdminFileController@downloadFile')->name('file.downloadFile');
     Route::get('file/openFileModal', 'AdminFileController@openFileModal')->name('file.openFileModal');
-
-    Route::get('product', 'AdminProductController@index')->name('product.getList');
-    Route::get('product/getCreate/{id?}', 'AdminProductController@getCreate')->name('product.getCreate');
-    Route::post('product/getCreate/{id?}', 'AdminProductController@postCreate')->name('product.postCreate');
-    Route::get('product/remove/{id?}', 'AdminProductController@remove')->name('product.remove');
-
-    Route::get('material', 'AdminMaterialController@index')->name('material.getList');
-    Route::get('material/getCreate/{id?}', 'AdminMaterialController@getCreate')->name('material.getCreate');
-    Route::post('material/getCreate/{id?}', 'AdminMaterialController@postCreate')->name('material.postCreate');
-    Route::get('material/remove/{id?}', 'AdminMaterialController@remove')->name('material.remove');
-
-    Route::get('order', 'AdminOrderController@index')->name('order.getList');
-    Route::get('order/{id}', 'AdminOrderController@show')->name('order.show');
-    Route::post('order/{id}', 'AdminOrderController@updateStatus')->name('order.updateStatus');
 
     Route::get('user', 'AdminUserController@index')->name('user.getList');
     Route::post('user/updateStatus/{id}', 'AdminUserController@updateStatus')->name('user.updateStatus');

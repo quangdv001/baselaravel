@@ -32,7 +32,7 @@
                                     @endif
                                 </div>
                             </div>
-
+                            @if($id==0)
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label" for="password-input">Mật khẩu</label>
                                 <div class="col-md-9">
@@ -43,6 +43,7 @@
                                     @endif
                                 </div>
                             </div>
+                            @endif
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label">Họ tên</label>
                                 <div class="col-md-9">

@@ -142,4 +142,50 @@ class CategoryService
         return $this->category->where('slug',$slug)->first();
     }
 
+    public function get($condition)
+    {
+        $query = $this->category;
+        foreach ($condition as $key => $value) {
+            if (is_array($value)) {
+                $query = $query->whereIn($key, $value);
+            } else {
+                $query = $query->where($key, $value);
+            }
+        }
+        $data = $query->get();
+        return $data;
+    }
+
+    public function first($condition)
+    {
+        $query = $this->category;
+        foreach ($condition as $key => $value) {
+            if (is_array($value)) {
+                $query = $query->whereIn($key, $value);
+            } else {
+                $query = $query->where($key, $value);
+            }
+        }
+        $data = $query->first();
+        return $data;
+    }
+
+    public function list($condition, $field, $key = '')
+    {
+        $query = $this->category;
+        foreach ($condition as $k => $value) {
+            if (is_array($value)) {
+                $query = $query->whereIn($k, $value);
+            } else {
+                $query = $query->where($k, $value);
+            }
+        }
+        if ($key != '') {
+            $data = $query->pluck($field, $key);
+        } else {
+            $data = $query->pluck($field);
+        }
+        return $data;
+    }
+
 }

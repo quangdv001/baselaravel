@@ -16,8 +16,6 @@ class CreateRoomTable extends Migration
         Schema::create('room', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
-            $table->string('slug')->unique();
-            $table->string('meta')->nullable();
             $table->string('img')->nullable();
             $table->string('type_name')->nullable();
             $table->integer('acreage')->nullable()->default(0);

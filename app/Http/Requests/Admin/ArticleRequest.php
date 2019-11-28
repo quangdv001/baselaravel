@@ -13,7 +13,7 @@ class ArticleRequest extends FormRequest
      */
     public function authorize()
     {
-        return auth('admin')->check();
+        return auth('admin')->check() || auth()->check();
     }
 
     /**
@@ -25,7 +25,7 @@ class ArticleRequest extends FormRequest
     {
         return [
             'title' => 'required',
-            // 'slug' => 'required|unique:article,slug,'.$this->id,
+            'description' => 'required',
         ];
     }
 
@@ -38,7 +38,7 @@ class ArticleRequest extends FormRequest
     {
         return [
             'title.required' => 'Tên bài viết không được rỗng',
-            // 'slug.unique' => 'Slug đã tồn tại',
+            'description.required' => 'Mô tả bài viết không được rỗng',
         ];
     }
 }

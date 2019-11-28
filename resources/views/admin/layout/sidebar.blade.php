@@ -11,7 +11,7 @@
             <li class="nav-title">Tài khoản</li>
             @if(auth('admin')->user()->can('admin-pms', 'admin.account.getList'))
             <li class="nav-item nav-dropdown @if(in_array($currentRoute,['admin.account.getList', 'admin.account.getCreate'])) open @endif">
-                <a class="nav-link nav-dropdown-toggle" href="#">
+                <a class="nav-link nav-dropdown-toggle" href="javascript:void(0);">
                     <i class="nav-icon icon-user"></i>Tài khoản</a>
                 <ul class="nav-dropdown-items">
                     <li class="nav-item">
@@ -29,7 +29,7 @@
             @endif
             @if(auth('admin')->user()->can('admin-pms', 'admin.permission.getList'))
             <li class="nav-item nav-dropdown @if(in_array($currentRoute,['admin.permission.getList', 'admin.permission.getCreate'])) open @endif">
-                <a class="nav-link nav-dropdown-toggle" href="#">
+                <a class="nav-link nav-dropdown-toggle" href="javascript:void(0);">
                     <i class="nav-icon icon-key"></i> Phân quyền</a>
                 <ul class="nav-dropdown-items">
                     <li class="nav-item">
@@ -48,7 +48,7 @@
             <li class="nav-title">Nội dung</li>
             @if(auth('admin')->user()->can('admin-pms', 'admin.category.getList'))
             <li class="nav-item nav-dropdown @if(in_array($currentRoute,['admin.category.getList'])) open @endif">
-                <a class="nav-link nav-dropdown-toggle" href="#">
+                <a class="nav-link nav-dropdown-toggle" href="javascript:void(0);">
                     <i class="nav-icon icon-list"></i>Danh mục</a>
                 <ul class="nav-dropdown-items">
                     <li class="nav-item">
@@ -58,9 +58,29 @@
                 </ul>
             </li>
             @endif
+            @if(auth('admin')->user()->can('admin-pms', 'admin.province.getList'))
+            <li class="nav-item nav-dropdown @if(in_array($currentRoute,['admin.province.getList', 'admin.district.getList', 'admin.ward.getList'])) open @endif">
+                <a class="nav-link nav-dropdown-toggle" href="#">
+                    <i class="nav-icon icon-location-pin"></i>Tỉnh thành</a>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a class="nav-link @if(in_array($currentRoute,['admin.province.getList'])) active @endif" href="{{ route('admin.province.getList') }}">
+                            <i class="nav-icon "></i> Tỉnh/Thành</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @if(in_array($currentRoute,['admin.district.getList'])) active @endif" href="{{ route('admin.district.getList') }}">
+                            <i class="nav-icon "></i> Quận/Huyện</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @if(in_array($currentRoute,['admin.ward.getList'])) active @endif" href="{{ route('admin.ward.getList') }}">
+                            <i class="nav-icon "></i> Phường/Xã</a>
+                    </li>
+                </ul>
+            </li>
+            @endif
             @if(auth('admin')->user()->can('admin-pms', 'admin.file.getList'))
             <li class="nav-item nav-dropdown @if(in_array($currentRoute,['admin.file.getList'])) open @endif">
-                <a class="nav-link nav-dropdown-toggle" href="#">
+                <a class="nav-link nav-dropdown-toggle" href="javascript:void(0);">
                     <i class="nav-icon icon-picture"></i>Media</a>
                 <ul class="nav-dropdown-items">
                     <li class="nav-item">
@@ -71,56 +91,117 @@
             </li>
             @endif
             @if(auth('admin')->user()->can('admin-pms', 'admin.article.getList'))
-            <li class="nav-item nav-dropdown @if(in_array($currentRoute,['admin.article.getList','admin.article.getCreate'])) open @endif">
-                <a class="nav-link nav-dropdown-toggle" href="#">
-                    <i class="nav-icon icon-book-open"></i>Bài viết</a>
+            <li class="nav-item nav-dropdown @if(in_array($currentRoute,['admin.article.getList','admin.article.getCreate']) && $currentParams['type'] == 1) open @endif">
+                <a class="nav-link nav-dropdown-toggle" href="javascript:void(0);">
+                    <i class="nav-icon icon-layers"></i>Nhà đất</a>
                 <ul class="nav-dropdown-items">
                     <li class="nav-item">
-                        <a class="nav-link @if(in_array($currentRoute,['admin.article.getList'])) active @endif" href="{{ route('admin.article.getList') }}">
+                        <a class="nav-link @if(in_array($currentRoute,['admin.article.getList']) && $currentParams['type'] == 1) active @endif" href="{{ route('admin.article.getList', 1) }}">
                             <i class="nav-icon "></i> Danh sách</a>
                     </li>
                     @if(auth('admin')->user()->can('admin-pms', 'admin.article.getCreate'))
                     <li class="nav-item">
-                        <a class="nav-link @if(in_array($currentRoute,['admin.article.getCreate'])) active @endif" href="{{ route('admin.article.getCreate') }}">
+                        <a class="nav-link @if(in_array($currentRoute,['admin.article.getCreate']) && $currentParams['type'] == 1) active @endif" href="{{ route('admin.article.getCreate', ['type' => 1]) }}">
                             <i class="nav-icon "></i> Thêm mới</a>
                     </li>
                     @endif
                 </ul>
             </li>
             @endif
-            @if(auth('admin')->user()->can('admin-pms', 'admin.product.getList'))
-            <li class="nav-item nav-dropdown @if(in_array($currentRoute,['admin.product.getList','admin.product.getCreate'])) open @endif">
-                <a class="nav-link nav-dropdown-toggle" href="#">
-                    <i class="nav-icon icon-trophy"></i>Sản phẩm</a>
+            @if(auth('admin')->user()->can('admin-pms', 'admin.article.getList'))
+            <li class="nav-item nav-dropdown @if(in_array($currentRoute,['admin.article.getList','admin.article.getCreate']) && $currentParams['type'] == 2) open @endif">
+                <a class="nav-link nav-dropdown-toggle" href="javascript:void(0);">
+                    <i class="nav-icon icon-people"></i>Sàn giao dịch</a>
                 <ul class="nav-dropdown-items">
                     <li class="nav-item">
-                        <a class="nav-link @if(in_array($currentRoute,['admin.product.getList'])) active @endif" href="{{ route('admin.product.getList') }}">
+                        <a class="nav-link @if(in_array($currentRoute,['admin.article.getList']) && $currentParams['type'] == 2) active @endif" href="{{ route('admin.article.getList', 2) }}">
                             <i class="nav-icon "></i> Danh sách</a>
                     </li>
-                    @if(auth('admin')->user()->can('admin-pms', 'admin.product.getCreate'))
+                    @if(auth('admin')->user()->can('admin-pms', 'admin.article.getCreate'))
                     <li class="nav-item">
-                        <a class="nav-link @if(in_array($currentRoute,['admin.product.getCreate'])) active @endif" href="{{ route('admin.product.getCreate') }}">
+                        <a class="nav-link @if(in_array($currentRoute,['admin.article.getCreate']) && $currentParams['type'] == 2) active @endif" href="{{ route('admin.article.getCreate', ['type' => 2]) }}">
                             <i class="nav-icon "></i> Thêm mới</a>
                     </li>
                     @endif
                 </ul>
             </li>
             @endif
-            @if(auth('admin')->user()->can('admin-pms', 'admin.order.getList'))
-            <li class="nav-item nav-dropdown @if(in_array($currentRoute,['admin.order.getList'])) open @endif">
-                <a class="nav-link nav-dropdown-toggle" href="#">
-                    <i class="nav-icon icon-present"></i>Đơn hàng</a>
+            @if(auth('admin')->user()->can('admin-pms', 'admin.article.getList'))
+            <li class="nav-item nav-dropdown @if(in_array($currentRoute,['admin.article.getList','admin.article.getCreate']) && $currentParams['type'] == 3) open @endif">
+                <a class="nav-link nav-dropdown-toggle" href="javascript:void(0);">
+                    <i class="nav-icon icon-plane"></i>Đô thị</a>
                 <ul class="nav-dropdown-items">
                     <li class="nav-item">
-                        <a class="nav-link @if(in_array($currentRoute,['admin.order.getList'])) active @endif" href="{{ route('admin.order.getList') }}">
+                        <a class="nav-link @if(in_array($currentRoute,['admin.article.getList']) && $currentParams['type'] == 3) active @endif" href="{{ route('admin.article.getList', 3) }}">
                             <i class="nav-icon "></i> Danh sách</a>
                     </li>
+                    @if(auth('admin')->user()->can('admin-pms', 'admin.article.getCreate'))
+                    <li class="nav-item">
+                        <a class="nav-link @if(in_array($currentRoute,['admin.article.getCreate']) && $currentParams['type'] == 3) active @endif" href="{{ route('admin.article.getCreate', ['type' => 3]) }}">
+                            <i class="nav-icon "></i> Thêm mới</a>
+                    </li>
+                    @endif
                 </ul>
             </li>
             @endif
+            @if(auth('admin')->user()->can('admin-pms', 'admin.article.getList'))
+            <li class="nav-item nav-dropdown @if(in_array($currentRoute,['admin.article.getList','admin.article.getCreate']) && $currentParams['type'] == 4) open @endif">
+                <a class="nav-link nav-dropdown-toggle" href="javascript:void(0);">
+                    <i class="nav-icon icon-book-open"></i>Tin tức</a>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a class="nav-link @if(in_array($currentRoute,['admin.article.getList']) && $currentParams['type'] == 4) active @endif" href="{{ route('admin.article.getList', 4) }}">
+                            <i class="nav-icon "></i> Danh sách</a>
+                    </li>
+                    @if(auth('admin')->user()->can('admin-pms', 'admin.article.getCreate'))
+                    <li class="nav-item">
+                        <a class="nav-link @if(in_array($currentRoute,['admin.article.getCreate']) && $currentParams['type'] == 4) active @endif" href="{{ route('admin.article.getCreate', ['type' => 4]) }}">
+                            <i class="nav-icon "></i> Thêm mới</a>
+                    </li>
+                    @endif
+                </ul>
+            </li>
+            @endif
+            @if(auth('admin')->user()->can('admin-pms', 'admin.article.getList'))
+            <li class="nav-item nav-dropdown @if(in_array($currentRoute,['admin.article.getList','admin.article.getCreate']) && $currentParams['type'] == 5) open @endif">
+                <a class="nav-link nav-dropdown-toggle" href="javascript:void(0);">
+                    <i class="nav-icon icon-notebook"></i>Pháp lý</a>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a class="nav-link @if(in_array($currentRoute,['admin.article.getList']) && $currentParams['type'] == 5) active @endif" href="{{ route('admin.article.getList', 5) }}">
+                            <i class="nav-icon "></i> Danh sách</a>
+                    </li>
+                    @if(auth('admin')->user()->can('admin-pms', 'admin.article.getCreate'))
+                    <li class="nav-item">
+                        <a class="nav-link @if(in_array($currentRoute,['admin.article.getCreate']) && $currentParams['type'] == 5) active @endif" href="{{ route('admin.article.getCreate', ['type' => 5]) }}">
+                            <i class="nav-icon "></i> Thêm mới</a>
+                    </li>
+                    @endif
+                </ul>
+            </li>
+            @endif
+            @if(auth('admin')->user()->can('admin-pms', 'admin.room.getList'))
+            <li class="nav-item nav-dropdown @if(in_array($currentRoute,['admin.room.getList','admin.room.getCreate'])) open @endif">
+                <a class="nav-link nav-dropdown-toggle" href="javascript:void(0);">
+                    <i class="nav-icon icon-home"></i>Cho thuê</a>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a class="nav-link @if(in_array($currentRoute,['admin.room.getList'])) active @endif" href="{{ route('admin.room.getList') }}">
+                            <i class="nav-icon "></i> Danh sách</a>
+                    </li>
+                    @if(auth('admin')->user()->can('admin-pms', 'admin.room.getCreate'))
+                    <li class="nav-item">
+                        <a class="nav-link @if(in_array($currentRoute,['admin.room.getCreate'])) active @endif" href="{{ route('admin.room.getCreate') }}">
+                            <i class="nav-icon "></i> Thêm mới</a>
+                    </li>
+                    @endif
+                </ul>
+            </li>
+            @endif
+           
             @if(auth('admin')->user()->can('admin-pms', 'admin.user.getList'))
             <li class="nav-item nav-dropdown @if(in_array($currentRoute,['admin.user.getList'])) open @endif">
-                <a class="nav-link nav-dropdown-toggle" href="#">
+                <a class="nav-link nav-dropdown-toggle" href="javascript:void(0);">
                     <i class="nav-icon icon-people"></i>Khách hàng</a>
                 <ul class="nav-dropdown-items">
                     <li class="nav-item">
@@ -130,24 +211,6 @@
                 </ul>
             </li>
             @endif
-            {{-- @if(auth('admin')->user()->can('admin-pms', 'admin.user.getList'))
-            <li class="nav-item nav-dropdown @if(in_array($currentRoute,['admin.material.getList'])) open @endif">
-                <a class="nav-link nav-dropdown-toggle" href="#">
-                    <i class="nav-icon icon-people"></i>Loại vật liệu</a>
-                <ul class="nav-dropdown-items">
-                    <li class="nav-item">
-                        <a class="nav-link @if(in_array($currentRoute,['admin.material.getList'])) active @endif" href="{{ route('admin.material.getList') }}">
-                            <i class="nav-icon "></i> Danh sách</a>
-                    </li>
-                    @if(auth('admin')->user()->can('admin-pms', 'admin.material.getCreate'))
-                    <li class="nav-item">
-                        <a class="nav-link @if(in_array($currentRoute,['admin.material.getCreate'])) active @endif" href="{{ route('admin.material.getCreate') }}">
-                            <i class="nav-icon "></i> Thêm mới</a>
-                    </li>
-                    @endif
-                </ul>
-            </li>
-            @endif --}}
         </ul>
     </nav>
     <button class="sidebar-minimizer brand-minimizer" type="button"></button>

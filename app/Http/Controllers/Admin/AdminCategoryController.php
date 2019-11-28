@@ -10,6 +10,15 @@ use App\Services\CategoryService;
 class AdminCategoryController extends AdminBaseController
 {
     protected $category;
+    private $arrType = [
+        0 => 'Theo Url',
+        1 => 'Nhà đất',
+        2 => 'Sàn giao dịch',
+        3 => 'Đô thị',
+        4 => 'Tin tức',
+        5 => 'Pháp lý',
+        5 => 'Cho thuê',
+    ];
     public function __construct(CategoryService $categoryService)
     {
         parent::__construct();
@@ -23,12 +32,12 @@ class AdminCategoryController extends AdminBaseController
         $category = $this->category->getAll();
         $html = $this->showCategories($category, 0, '');
         return view('admin.category.index')
+            ->with('arrType', $this->arrType)
             ->with('html', $html);
     }
 
     public function create(Request $request){
         $data['name'] = 'New Category';
-        $data['slug'] = str_random(10);
         $data['status'] = 1;
         $data['position'] = 0;
         $category = $this->category->create($data);
@@ -45,7 +54,7 @@ class AdminCategoryController extends AdminBaseController
     }
 
     public function update(Request $request, $id){
-        $data = $request->only('name', 'img', 'description', 'url', 'status', 'type', 'class_name', 'slug');
+        $data = $request->only('name', 'img', 'description', 'url', 'status', 'type', 'class_name');
         $category = $this->category->getById($id);
         $res['success'] = 0;
         $res['mess'] = 'Có lỗi xảy ra!';
