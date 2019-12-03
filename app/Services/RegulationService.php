@@ -68,4 +68,8 @@ class RegulationService
         return $this->image->where('status', 1)->orderBy('id', 'DESC')->with('file')->get();
     }
 
+    public function listAll(){
+        return $this->image->orderBy('id', 'DESC')->with('file')->get();
+    }
+
 }

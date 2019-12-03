@@ -74,7 +74,10 @@
                                             value="{{isset($data->img) ? $data->img : old('img')}}">
                                         <br>
                                         <a href="javascript:void(0)" class="btn btn-info btn-select-file">Chọn ảnh</a>
-                                        <div class="bl-img-show mt-4">
+                                        <div class="bl-img-show mt-4 position-relative @if(!isset($data->img) || !$data->img) d-none @endif wrap-main-img" style="width: 90px">
+                                            <a href="javascript:void(0)"
+                                                class="btn-rm-img-main position-absolute" style="right: 0"><i
+                                                    class="fa fa-times text-danger" aria-hidden="true"></i></a>
                                             <img src="{{ isset($data->img) ? $data->img : old('img') }}"
                                                 class="img-show" width="90" height="90" alt="">
                                         </div>
@@ -181,10 +184,15 @@
         $(document).on('click', '.btn-rm-img-item', function () {
             $(this).parent().remove();
         })
+        $(document).on('click', '.btn-rm-img-main', function () {
+            $('.img').val('');
+            $('.wrap-main-img').addClass('d-none');
+        })
     });
     var callback = function (data) {
         $('.img').val(data.url);
         $('.img-show').attr('src', data.url);
+        $('.wrap-main-img').removeClass('d-none');
     }
 
     var callbackCkeditor = function (data) {

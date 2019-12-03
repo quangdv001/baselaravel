@@ -26,7 +26,7 @@ class AdminRegulationController extends AdminBaseController
             return redirect()->route('admin.home.dashboard')->with('error_message','Bạn không có quyền vào trang này!');
         }
 
-        $image = $this->image->getAll();
+        $image = $this->image->listAll();
 
         return view('admin.regulation.index')
             ->with('data', $image);
