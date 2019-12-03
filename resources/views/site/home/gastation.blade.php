@@ -84,4 +84,4 @@
 @endsection
 @section('custom_js')
 @endsection
-@include('site.layout.sidebar')
+

@@ -55,7 +55,7 @@ Trang chủ
                                 </div>
                                 <div class="feature-box-info">
                                     <h4 class="feature-title">@lang('home.about')</h4>
-                                    <p class="mb-4">@lang('home.about_content_1')</p>
+                                    <p class="mb-4">{{ $social['about'] }}</p>
                                 </div>
                             </div>
                             <div class="feature-box">
@@ -64,7 +64,7 @@ Trang chủ
                                 </div>
                                 <div class="feature-box-info">
                                     <h4 class="feature-title">@lang('home.about_title_2')</h4>
-                                    <p class="mb-4">@lang('home.about_content_2')</p>
+                                    <p class="mb-4">{{ $social['motto'] }}</p>
                                 </div>
                             </div>
                             <div class="feature-box">
@@ -73,14 +73,14 @@ Trang chủ
                                 </div>
                                 <div class="feature-box-info">
                                     <h4 class="feature-title">@lang('home.about_title_3')</h4>
-                                    <p class="mb-4">@lang('home.about_content_3')</p>
+                                    <p class="mb-4">{{ $social['desire'] }}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="embed-responsive embed-responsive-16by9">
-                            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/B4DxGWddOrE?rel=0"
+                            <iframe class="embed-responsive-item" src="{{ $social['introduce-video'] }}"
                                 allowfullscreen></iframe>
                         </div>
                     </div>
@@ -105,7 +105,7 @@ Trang chủ
                             <div class="title">
                                 <h3><span>@lang('home.service_title_1')</span></h3>
                             </div>
-                            <p>@lang('home.service_content_1')</p>
+                            <p>{{ $social['booking'] }}</p>
                         </a>
                     </div>
                     <div class="col-12 col-sm-4"><a class="block service-blog text-center" href="./single.html">
@@ -114,7 +114,7 @@ Trang chủ
                             <div class="title">
                                 <h3><span>@lang('home.service_title_2')</span></h3>
                             </div>
-                            <p>@lang('home.service_content_2')</p></span>
+                            <p>{{ $social['deposit'] }}</p></span>
                         </a>
                     </div>
                     <div class="col-12 col-sm-4"><a class="block service-blog text-center" href="./single.html">
@@ -123,7 +123,7 @@ Trang chủ
                             <div class="title">
                                 <h3><span>@lang('home.service_title_3')</span></h3>
                             </div>
-                            <p>@lang('home.service_content_3')</p>
+                            <p>{{ $social['slings'] }}</p>
                         </a>
                     </div>
                 </div>

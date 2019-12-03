@@ -29,7 +29,7 @@
                                 <h1 class="page-title"><a href="#">@lang('home.livitrans_company')</a>
                                 </h1>
                                 <div class="news-post">
-                                    <div class="post-sapo">@lang('home.livitrans_about')</div>
+                                    <div class="post-sapo">{!! $data->meta !!}</div>
                                     {!! $data->content !!}
                                 </div>
                             </div>
