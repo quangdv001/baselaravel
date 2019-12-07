@@ -86,6 +86,14 @@ Danh sách danh mục
                                 </select>
                             </div>
                         </div>
+                        <div class="form-group pages" style="display:none;">
+                            <label class="col-md-3 col-form-label" for="">Chọn Trang nội dung</label>
+                            <div class="col-md-9">
+                                <select class="form-control article_id select2" name="article_id">
+                                    <option></option>
+                                </select>
+                            </div>
+                        </div>
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label" for="select1">Trạng thái</label>
                             <div class="col-md-9">
@@ -225,7 +233,7 @@ Danh sách danh mục
                     $('.img').val(res.data.img);
                     $('.img-show').attr('src', res.data.img);
                     $('.url').val(res.data.url);
-                    // $('.slug').val(res.data.slug);
+                    $('.article_id').val(res.data.article_id);
                     $('.description').val(res.data.description);
                     $('.status').val(res.data.status);
                     $('.type').val(res.data.type);
@@ -270,6 +278,16 @@ Danh sách danh mục
         $(document).on('click', '.btn-select-file', function () {
             init.openFileModal(callback);
         });
+        $(document).on('change', '.type', function(){
+            if($(this).val() == 7){
+                $('.pages').show();
+                var selectPage = $('.page').val();
+                page.loadPages(selectPage);
+            } else {
+                $('.pages').hide();
+                var selectPage = 0;
+            }
+        })
 
         // $('.name').keyup(function () {
         //     var val = $(this).val();
@@ -280,6 +298,24 @@ Danh sách danh mục
     var callback = function (data) {
         $('.img').val(data.url);
         $('.img-show').attr('src', data.url);
+    }
+
+    var page = {
+        preload: function(){
+        var html = '<option></option>';
+        return html;
+        },
+        loadPages: function(selectProvince){
+            var url = BASE_URL + '/admin/article/loadPages/' + selectProvince;
+            $('.page').html(this.preload);
+            $.get(url, function(res){
+                if(res.success == 1){
+                    $('.page').append(res.html);
+                } else {
+                    init.notyPopup(res.mess,'error');
+                }
+            });
+        },
     }
 
 </script>

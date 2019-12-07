@@ -11,21 +11,18 @@ namespace App\Services;
 
 use Exception;
 use Illuminate\Support\Facades\DB;
-use App\Models\Article;
-use App\Models\ArticleImg;
+use App\Models\Page;
 
-class ArticleService
+class PageService
 {
-    private $article;
-    private $articleImg;
-    public function __construct(Article $article, ArticleImg $articleImg)
+    private $page;
+    public function __construct(Page $page)
     {
-        $this->article = $article;
-        $this->articleImg = $articleImg;
+        $this->page = $page;
     }
 
     public function search($data){
-        $query = $this->article;
+        $query = $this->page;
         if (isset($data['id']) && $data['id'] > 0) {
             $query = $query->where('id', $data['id']);
         }
@@ -59,21 +56,12 @@ class ArticleService
         return $admin;
     }
 
-    // NA
-    public function findArticleBySlug($slug){
-        $query = null;
-        if (isset($slug) && $slug != '') {
-            $query = $this->article->where('slug', $slug)->first();
-        }
-        return $query;
-    }
-    // END NA
 
     public function create($data)
     {
         try {
             DB::beginTransaction();
-            $admin = $this->article;
+            $admin = $this->page;
             foreach ($data as $key => $value) {
                 $admin->$key = $value;
             }
@@ -103,7 +91,7 @@ class ArticleService
     }
 
     public function remove($id){
-        $article = $this->article->find($id);
+        $article = $this->page->find($id);
         if($article){
             $article->delete();
         }
@@ -111,56 +99,17 @@ class ArticleService
     }
 
     public function getById($id){
-        return $this->article->find($id);
+        return $this->page->find($id);
     }
 
     public function getAll(){
-        return $this->article->orderBy('id', 'DESC')->get();
-    }
-    public function test(){
-        return 1;
+        return $this->page->orderBy('id', 'DESC')->get();
     }
 
-    public function getBySlug($slug){
-        return $this->article->where('slug',$slug)->where('status', 1)->first();
-    }
-
-    public function getListByCategory($category, $limit = 10){
-        return $this->article->where('category_id', $category->id)->where('type', $category->type)->where('status',1)->orderBy('id','DESC')->paginate($limit);
-    }
-
-    public function getRelate($categoryId, $slug, $limit){
-        return $this->article->where('category_id', $categoryId)->where('slug', '!=', $slug)->where('status',1)->orderBy('id','DESC')->paginate($limit);
-    }
-
-    public function createArticleImg($id, $data){
-        
-        try {
-            DB::beginTransaction();
-            $this->articleImg->where('article_id', $id)->delete();
-            $dataImg = [];
-            if(sizeof($data) > 0){
-                foreach($data as $k => $v){
-                    $dataImg[$k]['article_id'] = $id;
-                    $dataImg[$k]['img'] = $v;
-                }
-            }
-            $this->articleImg->insert($dataImg);
-            DB::commit();
-            return true;
-        } catch (Exception  $e) {
-            DB::rollBack();
-            throw $e;
-        }
-    }
-
-    public function getArticleImg($id){
-        return $this->articleImg->where('article_id', $id)->pluck('img');
-    }
 
     public function get($condition)
     {
-        $query = $this->article;
+        $query = $this->page;
         foreach ($condition as $key => $value) {
             if (is_array($value)) {
                 $query = $query->whereIn($key, $value);
@@ -174,7 +123,7 @@ class ArticleService
 
     public function first($condition)
     {
-        $query = $this->article;
+        $query = $this->page;
         foreach ($condition as $key => $value) {
             if (is_array($value)) {
                 $query = $query->whereIn($key, $value);
@@ -188,7 +137,7 @@ class ArticleService
 
     public function list($condition, $field, $key = '')
     {
-        $query = $this->article;
+        $query = $this->page;
         foreach ($condition as $k => $value) {
             if (is_array($value)) {
                 $query = $query->whereIn($k, $value);

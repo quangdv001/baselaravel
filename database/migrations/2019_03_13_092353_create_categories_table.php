@@ -24,6 +24,7 @@ class CreateCategoriesTable extends Migration
             $table->smallInteger('status')->nullable()->default(1);
             $table->integer('parent_id')->nullable()->default(0);
             $table->integer('position')->nullable()->default(0);
+            $table->bigInteger('article_id')->nullable()->default(0);
             $table->timestamps();
         });
     }

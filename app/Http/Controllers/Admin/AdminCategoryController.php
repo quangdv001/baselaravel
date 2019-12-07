@@ -17,7 +17,8 @@ class AdminCategoryController extends AdminBaseController
         3 => 'Đô thị',
         4 => 'Tin tức',
         5 => 'Pháp lý',
-        5 => 'Cho thuê',
+        6 => 'Cho thuê',
+        7 => 'Trang nội dung',
     ];
     public function __construct(CategoryService $categoryService)
     {
@@ -54,7 +55,7 @@ class AdminCategoryController extends AdminBaseController
     }
 
     public function update(Request $request, $id){
-        $data = $request->only('name', 'img', 'description', 'url', 'status', 'type', 'class_name');
+        $data = $request->only('name', 'img', 'description', 'url', 'status', 'type', 'class_name', 'article_id');
         $category = $this->category->getById($id);
         $res['success'] = 0;
         $res['mess'] = 'Có lỗi xảy ra!';

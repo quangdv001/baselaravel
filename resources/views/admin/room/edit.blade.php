@@ -1,6 +1,6 @@
 @extends('admin.layout.main')
 @section('title')
-{{ $id > 0 ? 'Cập nhật bài viết' : 'Tạo bài viết' }}
+{{ $id > 0 ? 'Cập nhật cho thuê' : 'Tạo cho thuê' }}
 @endsection
 @section('content')
 <ol class="breadcrumb">
@@ -8,7 +8,7 @@
     <li class="breadcrumb-item">
         <a href="#">Admin</a>
     </li>
-    <li class="breadcrumb-item active">Dashboard</li>
+    <li class="breadcrumb-item active">Cho thuê</li>
 </ol>
 
 <form class="forms-sample" action="" method="post">
@@ -58,8 +58,80 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    
+                                    <div class="form-group">
+                                        <label>Loại</label>
+                                        <input type="text" class="form-control type" name="type_name" placeholder="Loại"
+                                            value="{{ isset($data->type_name) ? $data->type_name : old('type_name') }}">
+                                        @if($errors->has('type_name'))
+                                        <p class="text-danger">{{ $errors->first('type_name') }}</p>
+                                        @endif
+                                    </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Diện tích</label>
+                                        <input type="number" class="form-control acreage" name="acreage" placeholder="Loại"
+                                            value="{{ isset($data->acreage) ? $data->acreage : old('acreage') }}">
+                                        @if($errors->has('acreage'))
+                                        <p class="text-danger">{{ $errors->first('acreage') }}</p>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Hướng</label>
+                                        <input type="text" class="form-control direction" name="direction" placeholder="Hướng"
+                                            value="{{ isset($data->direction) ? $data->direction : old('direction') }}">
+                                        @if($errors->has('direction'))
+                                        <p class="text-danger">{{ $errors->first('direction') }}</p>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Giá</label>
+                                        <input type="number" class="form-control price" name="price" placeholder="Giá"
+                                            value="{{ isset($data->price) ? $data->price : old('price') }}">
+                                        @if($errors->has('price'))
+                                        <p class="text-danger">{{ $errors->first('price') }}</p>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Địa chỉ</label>
+                                        <input type="text" class="form-control title" name="address" placeholder="Địa chỉ"
+                                            value="{{ isset($data->address) ? $data->address : old('address') }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="">Chọn Tỉnh/Thành phố</label>
+                                        <input type="hidden" class="province" value="{{ isset($data->province_id) ? $data->province_id : 0 }}">
+                                        <select class="form-control province_id select2" name="province_id">
+                                            <option></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="">Chọn Quận/Huyện</label>
+                                        <input type="hidden" class="district" value="{{ isset($data->district_id) ? $data->district_id : 0 }}">
+                                        <select class="form-control district_id select2" name="district_id">
+                                            <option></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="">Chọn Phường xã</label>
+                                        <input type="hidden" class="ward" value="{{ isset($data->ward_id) ? $data->ward_id : 0 }}">
+                                        <select class="form-control ward_id select2" name="ward_id">
+                                            <option></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Ảnh</label>
@@ -87,9 +159,9 @@
                                                     <a href="javascript:void(0)"
                                                         class="btn-rm-img-item position-absolute" style="right: 0"><i
                                                             class="fa fa-times text-danger" aria-hidden="true"></i></a>
-                                                    <img src="{{ $v }}" width="90" height="90" alt="">
+                                                    <img src="{{ $v->img }}" width="90" height="90" alt="">
                                                     <input type="hidden" name="article_img[]" class="article_img"
-                                                        value="{{ $v }}">
+                                                        value="{{ $v->img }}">
                                                 </li>
                                                 @endforeach
                                                 @endif
@@ -131,6 +203,9 @@
     </div>
 </form>
 @endsection
+@section('lib_js')
+<script src="{{ asset('public/assets/admin/js/location.js') }}"></script>
+@endsection
 @section('custom_js')
 <script>
     $(document).ready(function () {
@@ -145,7 +220,9 @@
                 }
             }
         });
-
+        $('.select2').select2({
+            placeholder: 'Mời chọn'
+        });
         $(document).on('click', '.btn-select-file', function () {
             init.openFileModal(callback);
         });

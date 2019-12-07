@@ -30,7 +30,9 @@ class AdminRoomController extends AdminBaseController
         $dataS = $request->only('id', 'title','type','status','user_name_c','admin_name_c');
         $dataS['limit'] = 10;
         $room = $this->room->search($dataS);
-        $listCategories = $this->category->listPluck();
+        $category = $this->category->get(['type' => 6]);
+        $listCategories = $category->pluck('name', 'id')->toArray();
+        
 
         return view('admin.room.index')
             ->with('data', $room)
@@ -41,16 +43,18 @@ class AdminRoomController extends AdminBaseController
         if (Gate::forUser($this->user)->denies('admin-pms', $this->currentRoute)) {
             return redirect()->route('admin.home.dashboard')->with('error_message','Bạn không có quyền vào trang này!');
         }
-        $article = $tagItem = [];
+        $article = $articleImg = [];
         if($id > 0){
             $article = $this->room->getById($id);
+            $articleImg = $article->images;
         }
 
-        $category = $this->category->getAll();
+        $category = $this->category->get(['type' => 6])->toArray();
         $html = $this->category->generateOptionSelect($category, 0, $article ? $article->category_id : 0, '');
         return view('admin.room.edit')
             ->with('id', $id)
             ->with('html', $html)
+            ->with('articleImg', $articleImg)
             ->with('data', $article);
     }
 
@@ -60,7 +64,7 @@ class AdminRoomController extends AdminBaseController
         }
         $data = $request->only('title', 'type_name', 'short_description', 'description', 'price', 'acreage', 'direction', 'province_id', 
                                 'district_id', 'ward_id', 'address', 'status', 'category_id', 'img', 'tag', 'file_path');
-        
+        $articleImg = $request->input('article_img', []);
         $mess = '';
         if($id == 0){
             $data['admin_id_c'] = $this->user->id;
@@ -68,6 +72,7 @@ class AdminRoomController extends AdminBaseController
             
             $res = $this->room->create($data);
             if($res){
+                $this->room->createArticleImg($res->id, $articleImg);
                 $mess = 'Tạo phòng trọ thành công';
             }
         } else {
@@ -76,6 +81,7 @@ class AdminRoomController extends AdminBaseController
             $data['admin_name_u'] = $this->user->username;
             $res = $this->room->update($article, $data);
             if($res){
+                $this->room->createArticleImg($res->id, $articleImg);
                 $mess = 'Cập nhật phòng trọ thành công';
             }
         }

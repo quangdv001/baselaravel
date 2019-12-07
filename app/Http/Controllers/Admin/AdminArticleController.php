@@ -19,6 +19,7 @@ class AdminArticleController extends AdminBaseController
         3 => 'Đô thị',
         4 => 'Tin tức',
         5 => 'Pháp lý',
+        7 => 'Trang nội dung',
     ];
     public function __construct(ArticleService $article, CategoryService $category)
     {
@@ -53,7 +54,7 @@ class AdminArticleController extends AdminBaseController
         $listTag = '';
         if($id > 0){
             $article = $this->article->getById($id);
-            $articleImg = $this->article->getArticleImg($id);
+            $articleImg = $article->images;
         }
 
         $category = $this->category->get(['type' => $type])->toArray();
@@ -102,6 +103,14 @@ class AdminArticleController extends AdminBaseController
         $this->article->remove($id);
         $mess = 'Xóa bài viết thành công';
         return redirect()->route('admin.article.getList', $type)->with('success_message', $mess);
+    }
+
+    public function loadPages($select = 0){
+        $province = $this->article->list(['type' => 7], 'title', 'id');
+        $res['success'] = 1;
+        $res['mess'] = 'Lấy dữ liệu thành công!';
+        $res['html'] = view('admin.province.optionProvince')->with('province', $province)->with('select', $select)->render();
+        return response()->json($res);
     }
 
     public function getByType($type = null) {

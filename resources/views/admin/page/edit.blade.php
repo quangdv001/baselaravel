@@ -1,6 +1,6 @@
 @extends('admin.layout.main')
 @section('title')
-{{ $id > 0 ? 'Cập nhật bài viết' : 'Tạo bài viết' }}
+{{ $id > 0 ? 'Cập nhật Trang nội dung' : 'Tạo trang nội dung' }}
 @endsection
 @section('content')
 <ol class="breadcrumb">
@@ -8,7 +8,7 @@
     <li class="breadcrumb-item">
         <a href="#">Admin</a>
     </li>
-    <li class="breadcrumb-item active">Dashboard</li>
+    <li class="breadcrumb-item active">Page</li>
 </ol>
 
 <form class="forms-sample" action="" method="post">
@@ -44,66 +44,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="exampleFormControlSelect2">Chọn danh mục</label>
-                                        <select class="form-control" name="category_id" id="exampleFormControlSelect2">
-                                            <option value="0">Mời chọn</option>
-                                            {!! $html !!}
-                                        </select>
-                                        @if($errors->has('category_id'))
-                                        <p class="text-danger">{{ $errors->first('category_id') }}</p>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Ảnh</label>
-                                        <input type="hidden" name="img" class="img"
-                                            value="{{isset($data->img) ? $data->img : old('img')}}">
-                                        <br>
-                                        <a href="javascript:void(0)" class="btn btn-info btn-select-file">Chọn ảnh</a>
-                                        <div class="bl-img-show mt-4">
-                                            <img src="{{ isset($data->img) ? $data->img : old('img') }}"
-                                                class="img-show" width="90" height="90" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="form-group">
-                                        <label>Ảnh thêm</label>
-                                        <br>
-                                        <a href="javascript:void(0)" class="btn btn-info btn-select-multi-file">Chọn
-                                            ảnh</a>
-                                        <div class="bl-img-show mt-4">
-                                            <ul class="list-inline list-img-article">
-                                                @if(sizeof($articleImg) > 0)
-                                                @foreach($articleImg as $v)
-                                                <li class="list-inline-item mb-2 position-relative">
-                                                    <a href="javascript:void(0)"
-                                                        class="btn-rm-img-item position-absolute" style="right: 0"><i
-                                                            class="fa fa-times text-danger" aria-hidden="true"></i></a>
-                                                    <img src="{{ $v->img }}" width="90" height="90" alt="">
-                                                    <input type="hidden" name="article_img[]" class="article_img"
-                                                        value="{{ $v->img }}">
-                                                </li>
-                                                @endforeach
-                                                @endif
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="col-md-12">
-
-                                    <div class="form-group">
-                                        <label for="editor1">Mô tả ngắn</label>
-                                        <textarea class="form-control ckeditor" name="short_description" id="editor1"
-                                            rows="2">{{ isset($data->short_description) ? $data->short_description : old('short_description') }}</textarea>
-                                    </div>
                                     <div class="form-group">
                                         <label for="editor2">Mô tả</label>
                                         <br>

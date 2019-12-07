@@ -38,6 +38,12 @@ Route::middleware(['auth.admin'])->prefix('admin')->group(function () {
     Route::post('article/getCreate/{type}/{id?}', 'AdminArticleController@postCreate')->name('article.postCreate');
     Route::get('article/remove/{type}/{id?}', 'AdminArticleController@remove')->name('article.remove');
 
+    Route::get('page', 'AdminPageController@index')->name('page.getList');
+    Route::get('page/getCreate/{id?}', 'AdminPageController@getCreate')->name('page.getCreate');
+    Route::post('page/getCreate/{id?}', 'AdminPageController@postCreate')->name('page.postCreate');
+    Route::get('page/remove/{id?}', 'AdminPageController@remove')->name('page.remove');
+    Route::get('page/loadPages/{select?}', 'AdminPageController@loadPages')->name('page.loadProvince');
+
     Route::get('room', 'AdminRoomController@index')->name('room.getList');
     Route::get('room/getCreate/{id?}', 'AdminRoomController@getCreate')->name('room.getCreate');
     Route::post('room/getCreate/{id?}', 'AdminRoomController@postCreate')->name('room.postCreate');

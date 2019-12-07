@@ -198,6 +198,25 @@
                 </ul>
             </li>
             @endif
+
+            @if(auth('admin')->user()->can('admin-pms', 'admin.article.getList'))
+            <li class="nav-item nav-dropdown @if(in_array($currentRoute,['admin.page.getList','admin.page.getCreate'])) open @endif">
+                <a class="nav-link nav-dropdown-toggle" href="javascript:void(0);">
+                    <i class="nav-icon icon-docs"></i>Trang nội dung</a>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a class="nav-link @if(in_array($currentRoute,['admin.page.getList'])) active @endif" href="{{ route('admin.page.getList') }}">
+                            <i class="nav-icon "></i> Danh sách</a>
+                    </li>
+                    @if(auth('admin')->user()->can('admin-pms', 'admin.page.getCreate'))
+                    <li class="nav-item">
+                        <a class="nav-link @if(in_array($currentRoute,['admin.page.getCreate'])) active @endif" href="{{ route('admin.page.getCreate') }}">
+                            <i class="nav-icon "></i> Thêm mới</a>
+                    </li>
+                    @endif
+                </ul>
+            </li>
+            @endif
            
             @if(auth('admin')->user()->can('admin-pms', 'admin.user.getList'))
             <li class="nav-item nav-dropdown @if(in_array($currentRoute,['admin.user.getList'])) open @endif">

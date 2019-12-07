@@ -12,13 +12,16 @@ namespace App\Services;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use App\Models\Room;
+use App\Models\RoomImg;
 
 class RoomService
 {
     private $room;
-    public function __construct(Room $room)
+    private $roomImg;
+    public function __construct(Room $room, RoomImg $roomImg)
     {
         $this->room = $room;
+        $this->roomImg = $roomImg;
     }
 
     public function search($data){
@@ -61,6 +64,27 @@ class RoomService
             $admin->save();
             DB::commit();
             return $admin;
+        } catch (Exception  $e) {
+            DB::rollBack();
+            throw $e;
+        }
+    }
+
+    public function createArticleImg($id, $data){
+        
+        try {
+            DB::beginTransaction();
+            $this->roomImg->where('room_id', $id)->delete();
+            $dataImg = [];
+            if(sizeof($data) > 0){
+                foreach($data as $k => $v){
+                    $dataImg[$k]['room_id'] = $id;
+                    $dataImg[$k]['img'] = $v;
+                }
+            }
+            $this->roomImg->insert($dataImg);
+            DB::commit();
+            return true;
         } catch (Exception  $e) {
             DB::rollBack();
             throw $e;
