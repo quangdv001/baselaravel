@@ -1,0 +1,107 @@
+mixin post-meta
+  .post-meta-container
+    span.post-meta-item
+      i.far.fa-clock
+      |  Th3-27/10/2015
+    //- span.post-meta-item
+    //-   i.fa.fa-eye
+    //-   |  201
+    span.post-meta-item
+      i.fa.fa-user-check
+      a(href='#admin')  Admin
+mixin forrent-post(className = 'line-bottom', _post)
+  -
+    var post =  _post || {
+        heading: 'h2',
+        image: null,
+        title: 'Lorem Ipsum là gì, Tại sao lại sử dụng nó?',
+        link: './single.html',
+        //- description: 'Lorem Ipsum chỉ đơn giản là một đoạn văn bản giả, được dùng vào việc trình bày và dàn trang phục vụ cho in ấn.'
+      }
+  .forrent-post(class=className)
+    - var isMeta = true
+    .post-content
+      if !post.detail && post.image
+        a.news-post-image-link(href=post.link)
+          figure.image-container
+            .featured-image-overlay
+              span.featured-image-icon
+                i.fa.fa-camera
+            img.img-responsive(src=post.image, alt='title alt')
+      if post.title
+        if post.heading === 'h2'
+          h2.post-title.title
+            a.news-post-link(href=post.link)!=post.title
+        else if isMeta
+          h3.post-title.title
+            a.news-post-link(href=post.link)!=post.title
+        else 
+          .post-title.title
+            i.list-icon.fas.fa-circle
+            a.news-post-link(href=post.link)!=post.title
+      if true
+        .row
+          div.col.rent-attribute
+            strong Giá :
+            span  525 triệu
+          div.col.rent-attribute
+            strong Diện tích :
+            span  83 m²
+          div.col.rent-attribute
+            strong Quận/huyện :
+            span  Phú Xuyên
+
+      if isMeta
+        +post-meta
+      if !post.detail && post.description
+        p.post-desc
+          !=post.description
+        if !post.detail
+        span.read-more-button
+              a(href=post.link) Xem tiếp...
+mixin news-post(className, _post)
+  .news-post(class=(className || ''))
+    -
+      var isMeta = className && (className.toString().indexOf('list-style-post') === -1)
+      var post =  _post || {
+        heading: 'h2',
+        image: 'https://cafebiz.cafebizcdn.vn/zoom/260_163/2019/2/25/httpchannelvcmediavnprupload156201902img20190225102942161-1551065755100211648411.jpg',
+        title: 'Lorem Ipsum là gì, Tại sao lại sử dụng nó?',
+        link: './single.html',
+        description: 'Lorem Ipsum chỉ đơn giản là một đoạn văn bản giả, được dùng vào việc trình bày và dàn trang phục vụ cho in ấn. Lorem Ipsum đã được sử dụng như một văn bản chuẩn.'
+      }
+    if post.detail && post.description
+      +post-meta
+      .post-sapo!=post.description
+    if !post.detail && post.image
+      a.news-post-image-link(href=post.link)
+        figure.image-container
+          .featured-image-overlay
+            span.featured-image-icon
+              i.fa.fa-camera
+          img.img-responsive(src=post.image, alt='title alt')
+    .news-post-content
+      if post.title
+        if post.heading === 'h2'
+          h2.post-title.title
+            a.news-post-link(href=post.link)!=post.title
+        else if isMeta
+          h3.post-title.title
+            a.news-post-link(href=post.link)!=post.title
+        else 
+          .post-title.title
+            i.list-icon.fas.fa-circle
+            a.news-post-link(href=post.link)!=post.title
+        if isMeta
+          +post-meta
+      if !post.detail && post.description
+        p.post-desc
+          !=post.description
+        if !post.detail
+          span.read-more-button
+            a(href=post.link) Xem tiếp...
+      if post.detail
+        -for(var i =0; i<5; i++)
+          p.detail-content!=post.detail
+        .pull-right
+          strong Nguyễn Author

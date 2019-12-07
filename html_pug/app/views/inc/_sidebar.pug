@@ -1,0 +1,68 @@
+mixin block-data(title = 'Giá vàng')
+    h3.module-title
+            a(href="#")=title
+    -
+        var head = ['Giá vàng Phú Quý', 'EximBank', 'VietinBank', 'TechcomBank', 'EUR (Eur)', 'Bitcoin', 'Xăng RON 95-IV'];
+        var banks = ['Mua', 'Bán']
+    .table-tygia.row(style="white-space: nowrap")
+        //- .col-xs-12
+            .row
+                .tab-group
+                    <a class="btn btn-default button-tab btn-primary" href="#" role="button">Mua tiền mặt</a>
+                    <a class="btn btn-default button-tab" href="#" role="button">Chuyển khoản</a>
+                    <a class="btn btn-default button-tab" href="#" role="button">Bán ra</a>
+        .col-6(style="padding-right: 0;")
+                .table-responsive
+                    table.table.table-bordered
+                        thead
+                            tr
+                                th &nbsp;
+                        tbody
+                            each item in head
+                                tr
+                                    th=item
+        .col-6(style="padding-left: 0;")
+                .table-responsive
+                    table.table.table-bordered
+                        thead
+                            tr
+                                each item in banks
+                                    th=item
+                        tbody
+                            each item, i in head
+                                tr
+                                    each bitem, index in banks
+                                        td
+                                            span=parseInt(23.150 * i + index)
+mixin sidebar
+    //- +block-data
+    //- +block-data('Giá vàng thế giới')
+    //- //- +block-data('VÀNG SJC TẠI MỘT SỐ NGÂN HÀNG')
+    //- +block-data('TIỀN ẢO')
+    .list-post-aside.sticky-top(style="top: 60px;")
+        a(href="#", style="display:block")
+            .row
+                img(src="https://file4.batdongsan.com.vn/2019/03/12/RUFz0fap/20190312163851-0eab.jpg", alt="", width="100%", height='369px')
+        h3.module-title
+            a(href="#") Tin nổi bật
+        -
+            var _postThumb = {
+                image: 'https://bit.ly/2ESxuyd',
+                title: 'Lorem Ipsum là gì, Tại sao lại sử dụng nó?',
+                link: '/single.html'
+            }
+            var _postList = {
+                title: 'Lorem Ipsum là gì, Tại sao lại sử dụng nó?',
+                link: '/single.html'
+            }
+        +news-post('line-bottom  small-post', _postThumb)
+        -for(var i = 0; i<4 ; i++)
+            +news-post('line-bottom list-style-post small-post', _postList)
+    h3.module-title
+            a(href="#") Dự án nổi bật
+    .list-course
+        .row
+            -for(var i = 1; i<4 ; i++)
+                .col
+                    +course-post(i)
+    //-+block-data('Giá vàng thế giới')

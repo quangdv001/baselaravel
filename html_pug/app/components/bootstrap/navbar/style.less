@@ -1,0 +1,123 @@
+
+ @nav-link-color: #666;
+.navbar-brand {
+    padding: 0;
+    img {
+        width: 167px;
+        transition: all ease .3s;
+    }
+}
+.sticky {
+    transition: all ease .3s;
+}
+.sticky.is-sticky {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    background-color: fade(#fff, 99);
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1);
+    .navbar-brand img { max-width: 120px !important; }
+    // .navbar-nav >li >.nav-link {
+    //     color: #fff;
+    //     &::before { 
+    //         background-color: #fff; 
+    //     }
+    // }
+}
+
+.navbar {
+    box-shadow: none;
+    padding: 0;
+    a {
+        color:  @nav-link-color;
+        &:hover {
+            color: @primary-color;
+        }
+    }
+    .nav-item.active .nav-link{
+        color: @primary-color;
+    }
+    .dropdown-menu {
+        .dropdown-item {
+            padding: 6px 12px;
+            min-height: 25px;
+            font-size: 14px;
+        }
+    }
+    .nav-link {
+        position: relative;
+        padding: 6px 15px;
+        font-weight: 500;
+        &::before {
+            content: ' ';
+            display: block;
+            position: absolute;
+            bottom: 0;
+            left: 0;;
+            right: 0;
+            margin: auto;
+            width: 0;
+            height: 1px;
+            background-color: @primary-color;
+            transition: all ease .3s;
+        }
+    }
+    .active .nav-link, .nav-link:hover {
+        &::before{
+            width: 100%;
+        }
+    }
+}
+
+.navbar.navbar-side {
+    .navbar-toggler {
+        position: relative;
+        z-index: 1004;
+    }
+    .collapsing {
+        height: 100%;
+    }
+    .collapse {
+        display: block;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        overflow: auto;
+    }
+}
+
+// hover dropdown 
+@media (min-width: 991px) {
+    .dropdown>.dropdown-menu {
+        transition: all ease .3s;
+        display: block; 
+        margin: 0;
+    }
+    .dropdown:hover>.dropdown-menu {
+        opacity: 1;
+        transform: scale(1);
+    }
+    .dropdown>.dropdown-toggle:active {
+        /*Without this, clicking will make it sticky*/
+        pointer-events: none;
+    }
+}
+
+
+@media (min-width: 768px) {
+    .navbar{
+        padding: 15px 0;
+    }
+    .sticky.is-sticky .navbar {
+        padding: 0;
+    }
+}
+@media (max-width: 768px) {
+    .navbar-brand img{
+        width: 140px !important;
+    }
+}

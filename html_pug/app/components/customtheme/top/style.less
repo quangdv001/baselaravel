@@ -1,0 +1,52 @@
+@boder: 1px solid fade(#333, 10);
+
+.top {
+    .clearfix;
+    width: 100%;
+    &, a {
+        color: fade(#333, 80);
+        font-size: 12px;
+        line-height: 20px;
+    }
+    .top-element {
+        display: inline-block;
+        border-right: @boder;
+        &:first-child {
+            border-left: @boder;
+        }
+    }
+    .material-icons {
+        top: 2px;
+    }
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        li {
+            display: inline-block;
+            >span, >a {
+                display: inline-block;
+                padding: 6px 12px;
+                &.separate {
+                    padding: 0;
+                    line-height: 18px;
+                    min-height: 18px;
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 1px;
+                    border-right: @boder;
+                }
+            }
+            .btn {
+                border-radius: 15px;
+                padding: 4px 12px;
+                vertical-align: middle;
+                display: inline-block;
+                margin-top: 2.5px;
+            }
+        }
+    }
+    p {
+        margin: 0;
+    }
+}

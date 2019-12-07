@@ -1,0 +1,25 @@
+mixin tabs
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" aria-expanded="true" href="#tablink_1">Active</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" aria-expanded="false" href="#tablink_2">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" aria-expanded="false" href="#tablink_3">Link</a>
+                </li>
+            </ul>
+            .tab-content
+                #tablink_1.tab-pane.active
+                    .row
+                        .col
+                            +home_services
+                #tablink_2.tab-pane
+                    .row
+                        .col
+                            +home_services
+                #tablink_3.tab-pane
+                    .row
+                        .col
+                            p tab content 3

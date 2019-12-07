@@ -1,0 +1,141 @@
+mixin social-icon(type, className)
+    - var icon = 'exclamation-triangle'
+    case type
+        when 'face'
+        when 'facebook'
+            - icon = 'fab fa-facebook-f'
+            - break
+        when 'google'
+        when 'google-plus'
+            - icon = 'fab fa-google-plus-g'
+            - break
+        when 'youtube'
+            - icon = 'fab fa-youtube'
+            - break
+        when 'twitter'
+            - icon = 'fab fa-twitter'
+            - break
+        default
+            - icon = 'exclamation-triangle'
+    div.social-icon(class=className ? className : '')
+        a
+            i(class=icon)
+        if block
+                block
+mixin header-highlight(type, className)
+    -
+        var data = [
+            {
+                iconClass: 'material-icons', iconText: 'important_devices',
+                title: '10 tỷ doanh thu', description: 'Lorem Ipsum chỉ đơn giản là một đoạn văn bản giả'
+            },
+            {
+                iconClass: 'material-icons', iconText: 'verified_user',
+                title: '90 triệu người sử dụng', description: 'Lorem Ipsum chỉ đơn giản là một đoạn văn bản giả'
+            },
+            {
+                iconClass: 'material-icons', iconText: 'card_giftcard',
+                title: '20.000.000 giải thưởng', description: 'Lorem Ipsum chỉ đơn giản là một đoạn văn bản giả'
+            },
+            {
+                iconClass: 'material-icons', iconText: 'important_devices',
+                title: '50.000.000 người sử dụng', description: 'Lorem Ipsum chỉ đơn giản là một đoạn văn bản giả'
+            }
+        ]
+    .header-highlight
+        .owl-carousel.owl-theme.headerlight-carousel
+            -for(i=0; i<(data.length); i++)
+                .block(class=(i === 11112) ? "active" : '')
+                    .title
+                        h3
+                            a
+                                i.icon(class=data[i].iconClass)!= data[i].iconText || ''
+                                != data[i].title
+                    p.description!=data[i].description
+mixin ourteam
+    .ourteam.owl-carousel.team-carousel
+        -for(i=0; i<6; i++)
+                    .block.gray-block.text-center(class=(i === 11112) ? "active" : '', style="padding-top:15px;")
+                        .team-avatar
+                            img(src="http://s-media-cache-ak0.pinimg.com/736x/dc/79/b4/dc79b48426375522a4a607f0437142b3.jpg", alt="")
+                        .title
+                            h3: a Mr. Johnyhard
+                        small Chief Technology Officer
+                        p.quote-block " Lorem Ipsum chỉ đơn giản là một đoạn văn bản giả, được dùng vào việc trình bày và dàn trang phục vụ cho in ấn. "
+                        //- +social-icon('face', 'light-bg')
+                        //- +social-icon('google', 'light-bg')
+                        //- +social-icon('twitter', 'light-bg')
+                        //- button.float-button.btn.btn-info.bmd-btn-fab.bmd-btn-icon(class=(i === 2) ? "active" : '')
+                            i.material-icons more_horiz
+        if block
+            block
+mixin specialpost
+    .ourteam.owl-carousel.specialpost-carousel
+        -for(i=0; i<6; i++)
+                    .block.gray-block.text-center(class=(i === 11112) ? "active" : '', style="padding-top:15px;")
+                        .cover-image
+                            img(src="./assets/images/services_03.png", alt="")
+                        .title
+                            h4 Tiêu đề Lorem Ipsum chỉ 
+                        p Lorem Ipsum chỉ đơn giản là một đoạn văn bản giả, được dùng vào việc trình bày và dàn trang phục vụ cho in ấn. 
+mixin course-post(i)
+    .block.gray-block(class=(i === 6) ? "active" : '')
+        .cover-image
+            if (i===0)
+                img(src="./assets/images/services_01.png", alt="")
+            else if (i===1)
+                img(src="./assets/images/services_02.png", alt="")
+            else if (i===2)
+                img(src="./assets/images/services_03.png", alt="")
+            else
+                img(src="./assets/images/services_02.png", alt="")
+        .title
+            if (i===0 || i===6)
+                h3
+                    a(href="project-detail.html") Dự án title
+            else if (i===1)
+                h3
+                    a(href="project-detail.html") Dự án title 2
+            else
+                h3
+                    a(href="project-detail.html") Dự án title 3
+            .meta-info
+                a(href="#0").meta-info-item Dự án
+                span.meta-info-item 22 Dự án
+        //- p Lorem Ipsum chỉ đơn giản là một đoạn văn bản giả, được dùng vào việc trình bày và dàn trang phục vụ cho in ấn.
+        a.btn.btn-raised.btn-md.btn-brand(href="#0")
+            i.inc-icon.inc-play 
+            span Xem chi tiết
+        .block-info
+            a(href="project.html").meta-info-item Dự án
+            span.meta-info-item 22 Dự án
+mixin service-post(i)
+    .block.gray-block.text-center(class=(i === 0) ? "active" : '')
+        .cover-icon
+            if (i===0)
+                img(src="./assets/images/student-hat.png", alt="")
+            else if (i===1)
+                img(src="./assets/images/consumer-products.png", alt="")
+            else
+                img(src="./assets/images/social-icon.png", alt="")
+        .title
+            if (i===0)
+                h3
+                    a(href="project.html") DỰ ÁN
+            else if (i===1)
+                h3
+                    a(href="#0") SẢN PHẨM
+            else
+                h3
+                    a(href="#0") CỘNG ĐỒNG
+        p Lorem Ipsum chỉ đơn giản là một đoạn văn bản giả, được dùng vào việc trình bày và dàn trang phục vụ cho in ấn.
+        a.btn.btn-raised.btn-md.btn-brand(href="#0")
+            i.inc-icon.inc-play 
+            span Tham gia
+mixin home_services
+    .home_services
+        .pro-services-carousel.owl-carousel.owl-theme
+            -for(i=0; i<4; i++)
+                +service-post(i)
+        if block
+            block

@@ -1,0 +1,100 @@
+[24-May-2019 09:21:29 UTC] PHP Warning:  require(/home/chkvietn/public_html/vendor/autoload.php): failed to open stream: No such file or directory in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:21:29 UTC] PHP Fatal error:  require(): Failed opening required '/home/chkvietn/public_html/vendor/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:21:32 UTC] PHP Warning:  require(/home/chkvietn/public_html/vendor/autoload.php): failed to open stream: No such file or directory in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:21:32 UTC] PHP Fatal error:  require(): Failed opening required '/home/chkvietn/public_html/vendor/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:22:06 UTC] PHP Warning:  require(/home/chkvietn/public_html/vendor/autoload.php): failed to open stream: No such file or directory in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:22:06 UTC] PHP Fatal error:  require(): Failed opening required '/home/chkvietn/public_html/vendor/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:22:11 UTC] PHP Warning:  require(/home/chkvietn/public_html/vendor/autoload.php): failed to open stream: No such file or directory in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:22:11 UTC] PHP Fatal error:  require(): Failed opening required '/home/chkvietn/public_html/vendor/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:22:57 UTC] PHP Warning:  require(/home/chkvietn/public_html/vendor/autoload.php): failed to open stream: No such file or directory in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:22:57 UTC] PHP Fatal error:  require(): Failed opening required '/home/chkvietn/public_html/vendor/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:23:12 UTC] PHP Warning:  require(/home/chkvietn/public_html/vendor/autoload.php): failed to open stream: No such file or directory in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:23:12 UTC] PHP Fatal error:  require(): Failed opening required '/home/chkvietn/public_html/vendor/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:26:33 UTC] PHP Warning:  require(/home/chkvietn/public_html/vendor/autoload.php): failed to open stream: No such file or directory in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:26:33 UTC] PHP Fatal error:  require(): Failed opening required '/home/chkvietn/public_html/vendor/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:27:08 UTC] PHP Warning:  require(/home/chkvietn/public_html/vendor/autoload.php): failed to open stream: No such file or directory in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:27:08 UTC] PHP Fatal error:  require(): Failed opening required '/home/chkvietn/public_html/vendor/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:27:14 UTC] PHP Warning:  require(/home/chkvietn/public_html/vendor/autoload.php): failed to open stream: No such file or directory in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:27:14 UTC] PHP Fatal error:  require(): Failed opening required '/home/chkvietn/public_html/vendor/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:27:15 UTC] PHP Warning:  require(/home/chkvietn/public_html/vendor/autoload.php): failed to open stream: No such file or directory in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:27:15 UTC] PHP Fatal error:  require(): Failed opening required '/home/chkvietn/public_html/vendor/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:27:17 UTC] PHP Warning:  require(/home/chkvietn/public_html/vendor/autoload.php): failed to open stream: No such file or directory in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:27:17 UTC] PHP Fatal error:  require(): Failed opening required '/home/chkvietn/public_html/vendor/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:27:18 UTC] PHP Warning:  require(/home/chkvietn/public_html/vendor/autoload.php): failed to open stream: No such file or directory in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:27:18 UTC] PHP Fatal error:  require(): Failed opening required '/home/chkvietn/public_html/vendor/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:27:18 UTC] PHP Warning:  require(/home/chkvietn/public_html/vendor/autoload.php): failed to open stream: No such file or directory in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:27:18 UTC] PHP Fatal error:  require(): Failed opening required '/home/chkvietn/public_html/vendor/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:27:19 UTC] PHP Warning:  require(/home/chkvietn/public_html/vendor/autoload.php): failed to open stream: No such file or directory in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:27:19 UTC] PHP Fatal error:  require(): Failed opening required '/home/chkvietn/public_html/vendor/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:27:20 UTC] PHP Warning:  require(/home/chkvietn/public_html/vendor/autoload.php): failed to open stream: No such file or directory in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:27:20 UTC] PHP Fatal error:  require(): Failed opening required '/home/chkvietn/public_html/vendor/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:27:21 UTC] PHP Warning:  require(/home/chkvietn/public_html/vendor/autoload.php): failed to open stream: No such file or directory in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:27:21 UTC] PHP Fatal error:  require(): Failed opening required '/home/chkvietn/public_html/vendor/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:27:21 UTC] PHP Warning:  require(/home/chkvietn/public_html/vendor/autoload.php): failed to open stream: No such file or directory in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:27:21 UTC] PHP Fatal error:  require(): Failed opening required '/home/chkvietn/public_html/vendor/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:27:22 UTC] PHP Warning:  require(/home/chkvietn/public_html/vendor/autoload.php): failed to open stream: No such file or directory in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:27:22 UTC] PHP Fatal error:  require(): Failed opening required '/home/chkvietn/public_html/vendor/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:27:23 UTC] PHP Warning:  require(/home/chkvietn/public_html/vendor/autoload.php): failed to open stream: No such file or directory in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:27:23 UTC] PHP Fatal error:  require(): Failed opening required '/home/chkvietn/public_html/vendor/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:27:25 UTC] PHP Warning:  require(/home/chkvietn/public_html/vendor/autoload.php): failed to open stream: No such file or directory in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:27:25 UTC] PHP Fatal error:  require(): Failed opening required '/home/chkvietn/public_html/vendor/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:27:26 UTC] PHP Warning:  require(/home/chkvietn/public_html/vendor/autoload.php): failed to open stream: No such file or directory in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:27:26 UTC] PHP Fatal error:  require(): Failed opening required '/home/chkvietn/public_html/vendor/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:27:29 UTC] PHP Warning:  require(/home/chkvietn/public_html/vendor/autoload.php): failed to open stream: No such file or directory in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:27:29 UTC] PHP Fatal error:  require(): Failed opening required '/home/chkvietn/public_html/vendor/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:28:48 UTC] PHP Warning:  require(/home/chkvietn/public_html/vendor/autoload.php): failed to open stream: No such file or directory in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:28:48 UTC] PHP Fatal error:  require(): Failed opening required '/home/chkvietn/public_html/vendor/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:29:51 UTC] PHP Warning:  require(/home/chkvietn/public_html/vendor/autoload.php): failed to open stream: No such file or directory in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:29:51 UTC] PHP Fatal error:  require(): Failed opening required '/home/chkvietn/public_html/vendor/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:29:54 UTC] PHP Warning:  require(/home/chkvietn/public_html/vendor/autoload.php): failed to open stream: No such file or directory in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:29:54 UTC] PHP Fatal error:  require(): Failed opening required '/home/chkvietn/public_html/vendor/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:30:01 UTC] PHP Warning:  require(/home/chkvietn/public_html/vendor/autoload.php): failed to open stream: No such file or directory in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:30:01 UTC] PHP Fatal error:  require(): Failed opening required '/home/chkvietn/public_html/vendor/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:31:06 UTC] PHP Warning:  require(/home/chkvietn/public_html/vendor/autoload.php): failed to open stream: No such file or directory in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:31:06 UTC] PHP Fatal error:  require(): Failed opening required '/home/chkvietn/public_html/vendor/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:31:09 UTC] PHP Warning:  require(/home/chkvietn/public_html/vendor/autoload.php): failed to open stream: No such file or directory in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:31:09 UTC] PHP Fatal error:  require(): Failed opening required '/home/chkvietn/public_html/vendor/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:39:34 UTC] PHP Warning:  require(/home/chkvietn/public_htmlvendor/autoload.php): failed to open stream: No such file or directory in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 09:39:34 UTC] PHP Fatal error:  require(): Failed opening required '/home/chkvietn/public_htmlvendor/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 10:57:07 UTC] PHP Warning:  require(/home/chkvietn/public_html/vendor/autoload.php): failed to open stream: No such file or directory in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 10:57:07 UTC] PHP Fatal error:  require(): Failed opening required '/home/chkvietn/public_html/vendor/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 12:57:31 UTC] PHP Warning:  require(/home/chkvietn/public_html/vendor/autoload.php): failed to open stream: No such file or directory in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 12:57:31 UTC] PHP Fatal error:  require(): Failed opening required '/home/chkvietn/public_html/vendor/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 12:57:33 UTC] PHP Warning:  require(/home/chkvietn/public_html/vendor/autoload.php): failed to open stream: No such file or directory in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 12:57:33 UTC] PHP Fatal error:  require(): Failed opening required '/home/chkvietn/public_html/vendor/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 13:10:35 UTC] PHP Warning:  require(/home/chkvietn/public_html./vendor/autoload.php): failed to open stream: No such file or directory in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 13:10:35 UTC] PHP Fatal error:  require(): Failed opening required '/home/chkvietn/public_html./vendor/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 13:10:37 UTC] PHP Warning:  require(/home/chkvietn/public_html./vendor/autoload.php): failed to open stream: No such file or directory in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 13:10:37 UTC] PHP Fatal error:  require(): Failed opening required '/home/chkvietn/public_html./vendor/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 13:10:40 UTC] PHP Warning:  require(/home/chkvietn/public_html./vendor/autoload.php): failed to open stream: No such file or directory in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 13:10:40 UTC] PHP Fatal error:  require(): Failed opening required '/home/chkvietn/public_html./vendor/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 13:10:54 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function dd() in /home/chkvietn/public_html/index.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/chkvietn/public_html/index.php on line 9
+[24-May-2019 13:10:55 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function dd() in /home/chkvietn/public_html/index.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/chkvietn/public_html/index.php on line 9
+[24-May-2019 13:10:55 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function dd() in /home/chkvietn/public_html/index.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/chkvietn/public_html/index.php on line 9
+[24-May-2019 13:11:44 UTC] PHP Warning:  require(/home/chkvietn/public_html./vendor/autoload.php): failed to open stream: No such file or directory in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 13:11:44 UTC] PHP Fatal error:  require(): Failed opening required '/home/chkvietn/public_html./vendor/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 13:16:25 UTC] PHP Warning:  require(/home/chkvietn/public_html./vendor/autoload.php): failed to open stream: No such file or directory in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 13:16:25 UTC] PHP Fatal error:  require(): Failed opening required '/home/chkvietn/public_html./vendor/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 13:16:26 UTC] PHP Warning:  require(/home/chkvietn/public_html./vendor/autoload.php): failed to open stream: No such file or directory in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 13:16:26 UTC] PHP Fatal error:  require(): Failed opening required '/home/chkvietn/public_html./vendor/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 13:16:26 UTC] PHP Warning:  require(/home/chkvietn/public_html./vendor/autoload.php): failed to open stream: No such file or directory in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 13:16:26 UTC] PHP Fatal error:  require(): Failed opening required '/home/chkvietn/public_html./vendor/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 13:16:26 UTC] PHP Warning:  require(/home/chkvietn/public_html./vendor/autoload.php): failed to open stream: No such file or directory in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 13:16:26 UTC] PHP Fatal error:  require(): Failed opening required '/home/chkvietn/public_html./vendor/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 13:16:26 UTC] PHP Warning:  require(/home/chkvietn/public_html./vendor/autoload.php): failed to open stream: No such file or directory in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 13:16:26 UTC] PHP Fatal error:  require(): Failed opening required '/home/chkvietn/public_html./vendor/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 13:16:26 UTC] PHP Warning:  require(/home/chkvietn/public_html./vendor/autoload.php): failed to open stream: No such file or directory in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 13:16:26 UTC] PHP Fatal error:  require(): Failed opening required '/home/chkvietn/public_html./vendor/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 13:16:26 UTC] PHP Warning:  require(/home/chkvietn/public_html./vendor/autoload.php): failed to open stream: No such file or directory in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 13:16:26 UTC] PHP Fatal error:  require(): Failed opening required '/home/chkvietn/public_html./vendor/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 13:17:52 UTC] PHP Warning:  require(/home/chkvietn/public_html./vendor/autoload.php): failed to open stream: No such file or directory in /home/chkvietn/public_html/index.php on line 24
+[24-May-2019 13:17:52 UTC] PHP Fatal error:  require(): Failed opening required '/home/chkvietn/public_html./vendor/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/chkvietn/public_html/index.php on line 24

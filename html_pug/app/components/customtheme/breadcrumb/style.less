@@ -1,0 +1,21 @@
+.breadcrumb {
+    background-color: transparent;
+    margin-bottom: 0;
+}
+.breadcrumb-wrapper {
+    background: #f1f1f1;
+    font-size: small;
+    i {
+        margin-right: 5px;
+    }
+    a {
+        color: #333;
+        &:hover {
+            text-decoration: none;
+            color: @primary-color;
+        }
+    }
+}
+.breadcrumb-dot .breadcrumb-item+.breadcrumb-item::before {
+    content: "•";
+}

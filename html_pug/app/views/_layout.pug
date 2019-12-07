@@ -1,0 +1,45 @@
+include ../components/index
+include inc/_index
+block variables
+    -var classPage = 'layout-default'
+    -var localUrl = '.'
+doctype html
+html
+    head
+        meta(charset='utf-8')
+        meta(http-equiv="x-ua-compatible", content="ie=edge")
+        meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+        block title
+            title= title
+        // Bootstrap fonts and icons
+        //- link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons')
+        link(rel='stylesheet', href=localUrl+'/assets/libs/font-roboto/style.css')
+        link(rel='stylesheet', href=localUrl+'/assets/libs/material-design-icons/css/material-icons.min.css')
+        link(rel='stylesheet', href=localUrl+'/assets/libs/fontawesome5/css/all.css')
+        //- link(rel='stylesheet', href=localUrl+'/assets/libs/bootstrap/css/bootstrap.min.css', type='text/css')
+        link(rel='stylesheet', href=localUrl+'/assets/libs/bootstrap-material/css/bootstrap-material-design.min.css', type='text/css')
+        //- // Owl Carousel
+        link(rel='stylesheet', href=localUrl+'/assets/libs/owlcarousel2/assets/owl.carousel.min.css', type='text/css')
+        link(rel='stylesheet', href=localUrl+'/assets/libs/owlcarousel2/assets/owl.theme.default.min.css', type='text/css')
+        block stylesheet
+        
+        link(rel='stylesheet', href=localUrl+'/assets/css/theme.css', type='text/css')
+    body        
+        .page(class=classPage)
+            block body
+                block header
+                block main
+                block footer
+        != LRScript
+        script(src=localUrl+'/assets/libs/jquery/jquery-3.2.1.min.js')
+        //- script(src=localUrl+'/assets/libs/modernizr.js')
+        script(src=localUrl+'/assets/libs/popper/umd/popper.js')
+        //- script(src=localUrl+'/assets/libs/snackbarjs/snackbar.min.js')
+        //- script(src=localUrl+'/assets/libs/bootstrap/js/bootstrap.min.js')
+        script(src=localUrl+'/assets/libs/bootstrap-material/js/bootstrap-material-design.min.js')
+        //- Owl Carousel
+        script(src=localUrl+'/assets/libs/owlcarousel2/owl.carousel.min.js')
+        script(src=localUrl+'/assets/libs/slimScroll/jquery.slimscroll.min.js', type='text/javascript')
+        block scripts
+        script(src=localUrl+'/js/main.js')
+

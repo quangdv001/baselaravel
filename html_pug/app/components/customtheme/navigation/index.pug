@@ -1,0 +1,32 @@
+mixin child(item)
+    a(href=item.url)!= item.title
+mixin navigation(className, _arrayMenu)
+    if !className
+        -var className = 'navigation'
+    -
+        var defaultMenu = [
+            { title:'Trang chủ', className: 'active', url:'/' },
+            { title:'Giới thiệu', className: '', url:'./single.html' },
+            { title:'Hướng dẫn', className: '', url:'/category.html' ,
+            child: [
+                { title:'Khuyến mãi', className: '', url:'/category.html' },
+                { title:'Hướng dẫn', className: '', url:'/category.html' },
+                { title:'Tin tức', className: '', url:'/category.html' },
+                { title:'Liên hệ', className: '', url:'/single.html' }
+            ] },
+            { title:'Liên hệ', className: '', url:'/single.html' },
+            
+        ]        
+    -var menu = _arrayMenu || defaultMenu
+    
+    // NAVIGATION 
+    div(class=className)
+        ul
+            each item in menu
+                li(class=item.className, id=item.id)
+                    +child(item)
+                    if (item.child)
+                        ul
+                            each childitem in item.child
+                                li(class=childitem.className, id=childitem.id)
+                                    +child(childitem)

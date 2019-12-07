@@ -1,0 +1,36 @@
+mixin top
+    .top
+        .top-element
+            ul
+                li
+                    span
+                        strong 
+                            i.material-icons phone_in_talk
+                            | &nbsp;
+                        a(href="#link") 0981908099&nbsp;
+                        //- span - &nbsp;
+                        //- a(href="#link") 0123.456.798&nbsp;
+                li
+                    span.separate
+                li
+                    span
+                        strong
+                            i.material-icons send
+                            | &nbsp;
+                        a(href="#link") Hỗ trợ&nbsp;
+                //- li
+                    span.separate
+                //- li
+                    div.search-form
+                        form.form
+                            input.search-input(type="text", placeholder="Nhập từ khóa...")
+                            button.search-button
+                                <i class="fas fa-search"></i>
+        .pull-right
+            ul
+                //- li
+                    button.btn.btn-raised.btn-primary.btn-sm( type="button") Đăng ký
+                li: +social-icon('face')
+                li: +social-icon('google')
+                li: +social-icon('youtube')
+                li: +social-icon('twitter')

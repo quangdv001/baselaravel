@@ -1,0 +1,14 @@
+mixin pagination(className='')
+    nav(aria-label='Page navigation')
+        ul.pagination(class=className)
+            li.page-item
+                a.page-link(href='#') Trước
+            li.page-item.active
+                a.page-link(href='#') 1
+            li.page-item
+                a.page-link(href='#') 2
+            li.page-item
+                a.page-link(href='#') 3
+            li.page-item
+                a.page-link(href='#') Tiếp
+

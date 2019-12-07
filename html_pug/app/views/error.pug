@@ -1,0 +1,9 @@
+extends _layout
+block append variables
+    -var classPage= "Error page"
+block title
+    title= title
+block header
+    header(style="text-align: center; padding: 15px;"): h1=status
+block main
+    p(style="text-align: center; padding: 15px;")=message

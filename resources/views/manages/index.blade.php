@@ -19,20 +19,20 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png"> --}}
-    {{-- <link rel="manifest" href="/favicon/manifest.json"> --}}
+    {{-- <link rel="manifest" href="/public/favicon/manifest.json"> --}}
     <meta name="msapplication-TileColor" content="#ffffff">
     {{-- <meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png"> --}}
     <meta name="theme-color" content="#ffffff">
-    <link href="{{ mix('css/app.css') }}" type="text/css" rel="stylesheet" />
+    <link href="/public{{ mix('/css/app.css') }}" type="text/css" rel="stylesheet" />
 </head>
 <body>
     <div id="app">
         <app></app>
     </div>
 
-    <script src=/static/tinymce4.7.5/tinymce.min.js></script>
-    <script src="{{ mix('js/vendor.js') }}"></script>
-    <script src="{{ mix('js/manifest.js') }}"></script>
-    <script src="{{ mix('js/app.js') }}"></script>
+    <script src=/public/static/tinymce4.7.5/tinymce.min.js></script>
+    <script src="/public{{ mix('/js/vendor.js') }}"></script>
+    <script src="/public{{ mix('/js/manifest.js') }}"></script>
+    <script src="/public{{ mix('/js/app.js') }}"></script>
 </body>
 </html>

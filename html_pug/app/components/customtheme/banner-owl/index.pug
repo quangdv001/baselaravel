@@ -1,0 +1,18 @@
+mixin banner-owl(_data)
+    -
+        var data = _data || [
+            {
+                image: './assets/images/services_01.png',
+                beforeTitle: 'category name',
+                title: 'Title banner',
+                description: 'Content banner text description.'
+            }
+        ]
+    .banner-owl
+        .banner-owl-carousel.owl-carousel.owl-theme
+            each item in data
+                a.item(href="#banner-item")
+                    img.cover-item(src=item.image, alt=item.title)
+                    //-.detail-item
+                            span.title!=item.beforeTitle
+                            span.title!=item.title

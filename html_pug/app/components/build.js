@@ -1,0 +1,6 @@
+var carousel= require('./customtheme/slide-owl/index.js')
+var navigation= require('./customtheme/navigation/index.js')
+var navigation= require('./customtheme/commons/index.js')
+var navigation= require('./customtheme/partners/index.js')
+var navigation= require('./customtheme/breadcrumb/index.js')
+var navigation= require('./customtheme/pagination/index.js')

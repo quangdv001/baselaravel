@@ -1,0 +1,56 @@
+@backtotop-bg: #2196f3;
+@backtotop-color: #fff;
+.backtotop {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    display: block;
+    width: 30px;
+    height: 30px;
+    // background-color:@backtotop-bg;
+    border-radius: 100%;
+    font-size: 10px;
+    // color: @backtotop-color;
+    line-height: 30px;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    &::before,
+    &::after {
+        content: '';
+        display: block;
+        width: 10px;
+        height: 1px;
+        background: @backtotop-color;
+        position: absolute;
+        top: 35%;
+        left: 0;
+        right: 0;
+        margin: auto;
+        transition: all ease .3s;
+    }
+    &>span {
+        opacity: 0;
+    }
+    &:hover {
+        &::before, &::after {
+            top: 30%;
+        }
+    }
+
+    transition: all ease .3s;
+    opacity: 0;
+    bottom: 0px;
+    &.is-visible {
+        bottom: 15px;
+        opacity: 1;
+        & {
+            &::before {
+                transform: rotate(45deg) translateX(4px);
+            }
+            &::after {
+                transform: rotate(-45deg) translateX(-4px);
+            }
+        }
+    }
+}

@@ -1,0 +1,31 @@
+mixin navbar
+    nav.navbar.navbar-expand-lg(style="background-color: transparent;")
+        a.navbar-brand(href='#')
+            img(src='./assets/images/logo.png', alt='logo', style='max-width: 221px;')
+        button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarText', aria-controls='navbarText', aria-expanded='false', aria-label='Toggle navigation')
+            span.navbar-toggler-icon
+        #navbarText.collapse.navbar-collapse
+            ul.nav.navbar-nav.mr-auto
+                li.nav-item.active
+                    a.nav-link(href='index.html') Trang chủ 
+                    span.sr-only (current)
+                li.nav-item
+                    a.nav-link(href='category.html') Tin tức
+                li.nav-item.dropdown
+                    a#navbarDropdown.nav-link.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                        | Dropdown
+                    .dropdown-menu(aria-labelledby='navbarDropdown')
+                        a.dropdown-item(href='#') Action
+                        a.dropdown-item(href='#') Another action
+                        .dropdown-divider
+                        a.dropdown-item(href='#') Something else here
+                li.nav-item
+                    a.nav-link(href='#') Pricing
+            span.navbar-text
+                button.btn.btn-raised.btn-success.btn-sm( type="button")
+                    i.material-icons perm_identity
+                    | Đăng ký
+                span &nbsp;
+                button.btn.btn-raised.btn-info.btn-sm( type="button") 
+                    i.material-icons lock
+                    | Đăng nhập

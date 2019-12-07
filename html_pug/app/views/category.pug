@@ -1,0 +1,81 @@
+extends index
+block append variables
+    -var classPage= "category"
+block title
+    title= title || 'undefinedtitle'
+block main
+    div.main
+        .breadcrumb-wrapper
+            .container
+                .row
+                    +breadcrumb
+        .section-main
+            .container.main-wrapper          
+                h1.page-title
+                    a(href="#") Tin tức 
+                .row
+                    .col-sm-9.border-sm-right
+                        //-.col-auto
+                            .div-padding-stiky
+                            div.sticky-top(style="padding-top: 55px;")
+                                div.radius-social
+                                    +social-icon('face')
+                                div.radius-social
+                                    +social-icon('google')
+                        .row.main-head
+                            .col-sm-9.border-sm-right
+                                div.row
+                                    +slide-owl
+                                .row
+                                    ul.list-head
+                                        -for(var i = 0; i<4 ; i++)
+                                            li
+                                                a.title(href="#") Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào năm kế tiếp
+                                                span.meta-info-item 
+                                                    i.far.fa-clock
+                                                    |  Th3-27/10/2015
+                            .col-sm-3
+                                .block-title.underline
+                                    h2.title.solid-color.text-uppercase: span Tư vấn luật
+                                div.row
+                                    ul.list-head
+                                        -for(var i = 0; i<4 ; i++)
+                                            li
+                                                a.title(href="#")
+                                                    span
+                                                        i.far.fa-clock
+                                                    span &nbsp;Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào năm kế tiếp
+                        .list-post
+                                -for(var i = 0; i<10 ; i++)
+                                    +news-post('line-bottom')
+                        +pagination
+                    .col-sm-3.sidebar
+                        +sidebar
+        //-.section-gap
+            .block-title.text-center
+                h2.title-underline KIẾN THỨC CẦN BIẾT
+                p Những kinh nghiệm vay và cho vay
+            .container
+                .row
+                    .col
+                        +home_news
+        //-.section-gap.bg-gray-top
+            .block-title.text-center
+                h2.title-underline ĐĂNG KÝ NGAY
+                p Tham gia cùng chúng tôi ngay hôm nay
+            .container
+                    .row
+                        .col-sm-6
+                            +post-register({type:'1', title: 'Bạn cần vay vốn?'})
+                        .col-sm-6
+                            +post-register({type:'2', title: 'Bạn cần cho vay?'})
+        //-.section.transform-bottom
+            .container
+                .row
+                    .col.block
+                        +ourpartner
+block footer
+    +footer
+block stylesheet
+block scripts
+        

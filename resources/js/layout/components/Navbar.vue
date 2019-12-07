@@ -2,7 +2,7 @@
   <div class="navbar">
     <!-- <hamburger id="hamburger-container" :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" /> -->
     <div class="header_logo_pc">
-      <img src="/assets/images/logo_app.png" alt="chk">
+      <img src="/public/assets/images/logo_app.png" alt="chk">
     </div>
     <!-- <breadcrumb id="breadcrumb-container" class="breadcrumb-container" /> -->
 

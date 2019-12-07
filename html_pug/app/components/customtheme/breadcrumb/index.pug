@@ -1,0 +1,12 @@
+mixin breadcrumb
+    ol.breadcrumb.breadcrumb-dot
+        li.breadcrumb-item
+            i.material-icons home
+            a(href='index.html', title='Trang chủ')
+                | Trang chủ
+        li.breadcrumb-item
+            a(href='#sublink', title='Title link')
+                | Sub page
+        li.breadcrumb-item.active
+            span
+                | Current page

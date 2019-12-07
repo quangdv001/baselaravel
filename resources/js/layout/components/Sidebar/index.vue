@@ -1,7 +1,7 @@
 <template>
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <div class="header_logo">
-        <img src="/assets/images/logo_app.png" alt="chk">
+        <img src="/public/assets/images/logo_app.png" alt="chk">
       </div>
       <el-menu
         :show-timeout="200"

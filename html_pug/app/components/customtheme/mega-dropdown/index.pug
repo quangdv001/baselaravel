@@ -1,0 +1,235 @@
+mixin mega-dropdown
+    .mega-dropdown
+      a.cd-dropdown-trigger.dropdown-is-active(href='#0') 
+        i.material-icons(style="font-size:18px;margin-right:8px; vertical-align: middle;line-height: 15px;") menu 
+        | DANH MỤC
+      nav.cd-dropdown.dropdown-is-active
+        h2 DANH MỤC
+        a.cd-close(href='#0') Đóng
+        ul.cd-dropdown-content
+          //- li
+            form.cd-search
+              input(type='search', placeholder='Search...')
+          li.has-children
+            a(href='#') <span class="fa fa-box gray-icon"></span> Clothing
+            ul.cd-secondary-dropdown.is-hidden
+              li.go-back
+                a(href='#0') Danh mục
+              li.see-all
+                a(href='#') All Clothing
+              //-li.has-children
+                a(href='#') Accessories
+                ul.is-hidden
+                  li.go-back
+                    a(href='#0') Clothing
+                  li.see-all
+                    a(href='#') All Accessories
+                  li.has-children
+                    a(href='#0') Beanies
+                    ul.is-hidden
+                      li.go-back
+                        a(href='#0') Accessories
+                      li.see-all
+                        a(href='#') All Benies
+                      li
+                        a(href='#') Caps & Hats
+                      li
+                        a(href='#') Gifts
+                      li
+                        a(href='#') Scarves & Snoods
+                  li.has-children
+                    a(href='#0') Caps & Hats
+                    ul.is-hidden
+                      li.go-back
+                        a(href='#0') Accessories
+                      li.see-all
+                        a(href='#') All Caps & Hats
+                      li
+                        a(href='#') Beanies
+                      li
+                        a(href='#') Caps
+                      li
+                        a(href='#') Hats
+                  li
+                    a(href='#') Glasses
+                  li
+                    a(href='#') Gloves
+                  li
+                    a(href='#') Jewellery
+                  li
+                    a(href='#') Scarves
+              //-li.has-children
+                a(href='#') Bottoms
+                ul.is-hidden
+                  li.go-back
+                    a(href='#0') Clothing
+                  li.see-all
+                    a(href='#') All Bottoms
+                  li
+                    a(href='#') Casual Trousers
+                  li.has-children
+                    a(href='#0') Jeans
+                    ul.is-hidden
+                      li.go-back
+                        a(href='#0') Bottoms
+                      li.see-all
+                        a(href='#') All Jeans
+                      li
+                        a(href='#') Ripped
+                      li
+                        a(href='#') Skinny
+                      li
+                        a(href='#') Slim
+                      li
+                        a(href='#') Straight
+                  li
+                    a(href='#0') Leggings
+                  li
+                    a(href='#0') Shorts
+              li.has-children
+                a(href='#') Jackets
+                ul.is-hidden
+                  li.go-back
+                    a(href='#0') Clothing
+                  li.see-all
+                    a(href='#') All Jackets
+                  li
+                    a(href='#') Blazers
+                  li
+                    a(href='#') Bomber jackets
+                  li
+                    a(href='#') Denim Jackets
+                  li
+                    a(href='#') Duffle Coats
+                  li
+                    a(href='#') Leather Jackets
+                  li
+                    a(href='#') Parkas
+              li.has-children
+                a(href='#') Tops
+                ul.is-hidden
+                  li.go-back
+                    a(href='#0') Clothing
+                  li.see-all
+                    a(href='#') All Tops
+                  li
+                    a(href='#') Cardigans
+                  li
+                    a(href='#') Coats
+                  li
+                    a(href='#') Polo Shirts
+                  li
+                    a(href='#') Shirts
+                  li.has-children
+                    a(href='#0') T-Shirts
+                    ul.is-hidden
+                      li.go-back
+                        a(href='#0') Tops
+                      li.see-all
+                        a(href='#') All T-shirts
+                      li
+                        a(href='#') Plain
+                      li
+                        a(href='#') Print
+                      li
+                        a(href='#') Striped
+                      li
+                        a(href='#') Long sleeved
+                  li
+                    a(href='#') Vests
+            // .cd-secondary-dropdown
+            // .has-children
+            li.has-children
+              a(href='#') <span class="fa fa-bowling-ball gray-icon"></span> Gallery
+              ul.cd-dropdown-gallery.is-hidden
+                li.go-back
+                  a(href='#0') Menu
+                li.see-all
+                  a(href='#') Browse Gallery
+                //-li
+                  a.cd-dropdown-item(href='#')
+                    img(src='https://www.ok259.vn/upload/public/3a75dd1fe89ddc5f3a19d19b9a3003a2.jpg', alt='Product Image')
+                    h3 Product #1
+                //-li
+                  a.cd-dropdown-item(href='#')
+                    img(src='https://www.ok259.vn/upload/public/3a75dd1fe89ddc5f3a19d19b9a3003a2.jpg', alt='Product Image')
+                    h3 Product #2
+                li
+                  a.cd-dropdown-item(href='#')
+                    img(src='https://www.ok259.vn/upload/public/3a75dd1fe89ddc5f3a19d19b9a3003a2.jpg', alt='Product Image')
+                    h3 Product #3
+                li
+                  a.cd-dropdown-item(href='#')
+                    img(src='https://www.ok259.vn/upload/public/3a75dd1fe89ddc5f3a19d19b9a3003a2.jpg', alt='Product Image')
+                    h3 Product #4
+              // .cd-dropdown-gallery
+              // .has-children
+              li.has-children
+                a(href='#') <span class="fa fa-asterisk gray-icon"></span> Services
+                ul.cd-dropdown-icons.is-hidden
+                  li.go-back
+                    a(href='#0') Menu
+                  li.see-all
+                    a(href='#') Browse Services
+                  li
+                    a.cd-dropdown-item.item-1(href='#')
+                      h3 Service #1
+                      p This is the item description
+                  li
+                    a.cd-dropdown-item.item-2(href='#')
+                      h3 Service #2
+                      p This is the item description
+                  li
+                    a.cd-dropdown-item.item-3(href='#')
+                      h3 Service #3
+                      p This is the item description
+                  li
+                    a.cd-dropdown-item.item-4(href='#')
+                      h3 Service #4
+                      p This is the item description
+                  li
+                    a.cd-dropdown-item.item-5(href='#')
+                      h3 Service #5
+                      p This is the item description
+                  li
+                    a.cd-dropdown-item.item-6(href='#')
+                      h3 Service #6
+                      p This is the item description
+                  //- li
+                    a.cd-dropdown-item.item-7(href='#')
+                      h3 Service #7
+                      p This is the item description
+                  //- li
+                    a.cd-dropdown-item.item-8(href='#')
+                      h3 Service #8
+                      p This is the item description
+                  //- li
+                    a.cd-dropdown-item.item-9(href='#')
+                      h3 Service #9
+                      p This is the item description
+                  //- li
+                    a.cd-dropdown-item.item-10(href='#')
+                      h3 Service #10
+                      p This is the item description
+                  //- li
+                    a.cd-dropdown-item.item-11(href='#')
+                      h3 Service #11
+                      p This is the item description
+                  //- li
+                    a.cd-dropdown-item.item-12(href='#')
+                      h3 Service #12
+                      p This is the item description
+                // .cd-dropdown-icons
+                // .has-children
+                //- li.cd-divider Divider
+                li
+                  a(href='#') <span class="fa fa-arrow-alt-circle-right gray-icon"></span> Page 1
+                li
+                  a(href='#') <span class="fa fa-arrow-alt-circle-right gray-icon"></span> Page 2
+                li
+                  a(href='#') <span class="fa fa-arrow-alt-circle-right gray-icon"></span> Page 3
+                //-li
+                  a(href='#') Page 4
+        // .cd-dropdown-content
+        // .cd-dropdown
+    // .cd-dropdown-wrapper

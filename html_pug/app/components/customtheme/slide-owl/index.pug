@@ -1,0 +1,38 @@
+mixin slide-owl(type="not_gallery",_data)
+    -
+        var data = _data || [
+            {
+                image: './assets/images/slide_01.jpg',
+                title: 'Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào năm kế tiếp',
+                description: 'Cột giá nhà phố tăng cao ngất ngưỡng không chỉ do tình trạng sốt đất dẫn đến giá ảo.'
+            },
+            {
+                image: './assets/images/slide_01.jpg',
+                title: 'Tin 2 Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào năm kế tiếp',
+                description: 'Cột giá nhà phố tăng cao ngất ngưỡng không chỉ do tình trạng sốt đất dẫn đến giá ảo.'
+            },
+            {
+                image: './assets/images/slide_01.jpg',
+                title: 'Tin 3 Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào năm kế tiếp',
+                description: 'Cột giá nhà phố tăng cao ngất ngưỡng không chỉ do tình trạng sốt đất dẫn đến giá ảo.'
+            }
+        ]
+    .slide-owl-carousel.owl-carousel.owl-theme
+            if (type === 'gallery')
+                each item in data
+                    .landscape_image
+                                img(src=item.image, alt=item.title)
+            else
+                each item in data
+                    a.block(href="#item")
+                        .cover-item
+                            .landscape_image
+                                img(src=item.image, alt=item.title)
+                        .detail-item
+                                div.title!=item.title
+                                .meta-info
+                                    span.meta-info-item Tin tức
+                                    span.meta-info-item
+                                        i.far.fa-clock
+                                        |  Th3-27/10/2015
+                                .short-description!= item.description

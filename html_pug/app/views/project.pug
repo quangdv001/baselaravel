@@ -1,0 +1,77 @@
+extends index
+block append variables
+    -var classPage= "category"
+block title
+    title= title || 'undefinedtitle'
+block main
+    div.main
+        .breadcrumb-wrapper
+            .container
+                .row
+                    +breadcrumb
+        .section-main
+            .container            
+                h1.page-title
+                    a(href="#") DỰ ÁN
+                .row
+                    .col-sm
+                        .row
+                            //-.col-auto
+                                .div-padding-stiky
+                                div.sticky-top(style="padding-top: 70px;")
+                                    div.radius-social
+                                        +social-icon('face')
+                                    div.radius-social
+                                        +social-icon('google')
+                            .col.list-course
+                                .main-head.project-hot(style="background:#fff; padding-top:15px;")
+                                    //- .col-sm-3.border-sm-right
+                                    //-     .block-title.underline
+                                    //-         h2.title.solid-color.text-uppercase: span Tư vấn luật
+                                    //-     div.row
+                                    //-         ul.list-head
+                                    //-             -for(var i = 0; i<4 ; i++)
+                                    //-                 li
+                                    //-                     a.title(href="#")
+                                    //-                         span
+                                    //-                             i.far.fa-clock
+                                    //-                         span &nbsp;Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào năm kế tiếp
+                                    //- .col-sm-9
+                                    //-     div.row
+                                    +slide-owl('', [
+                                            {
+                                                image: 'https://revoland.vn/wp-content/uploads/2017/07/d95d1cae65bc84e2ddad-Copy.jpg',
+                                                title: 'HAMUBAY PHAN THIẾT',
+                                                description: 'Cột giá nhà phố tăng cao ngất ngưỡng không chỉ do tình trạng sốt đất dẫn đến giá ảo.'
+                                            },
+                                            {
+                                                image: 'https://revoland.vn/wp-content/uploads/2017/07/0d81b09dcb7a2b24726b.jpg',
+                                                title: 'Tin 2 HAMUBAY PHAN THIẾT',
+                                                description: 'Cột giá nhà phố tăng cao ngất ngưỡng không chỉ do tình trạng sốt đất dẫn đến giá ảo.'
+                                            },
+                                            {
+                                                image: 'https://revoland.vn/wp-content/uploads/2017/07/d830a12cdacb3a9563da.jpg',
+                                                title: 'Tin 3 HAMUBAY PHAN THIẾT',
+                                                description: 'Cột giá nhà phố tăng cao ngất ngưỡng không chỉ do tình trạng sốt đất dẫn đến giá ảo.'
+                                            }
+                                        ])
+                                        //- .row
+                                            ul.list-head
+                                                -for(var i = 0; i<4 ; i++)
+                                                    li
+                                                        a.title(href="#") Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào năm kế tiếp
+                                                        span.meta-info-item 
+                                                            i.far.fa-clock
+                                                            |  Th3-27/10/2015
+                                .row
+                                    -for(var i = 1; i<10 ; i++)
+                                        .col-sm-4
+                                            +course-post(i)
+                        +pagination('justify-content-center')
+                    //- .col-sm-auto.sidebar.width-sm-320px
+                        +sidebar
+block footer
+    +footer
+block stylesheet
+block scripts
+        

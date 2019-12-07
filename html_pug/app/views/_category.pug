@@ -1,0 +1,94 @@
+extends _layout
+block append variables
+    -var classPage= "category"
+block title
+    title= title || 'undefinedtitle'
+block header
+    header.subpage
+        .top-layout
+            .container
+                +top
+        .navbar-layout(data-toggle="sticky-onscroll")
+            .container
+                +navbar
+        //-.slider-layout
+            .container
+                +carousel
+    //-div.translate-top
+            .container
+                .block.block-higher.block-radius
+                    +header-highlight
+block main
+    div.main
+        .breadcrumb-wrapper
+            .container
+                .row
+                    +breadcrumb
+        .section-main
+            .container            
+                h1.page-title
+                    a(href="#") Tin tức
+                .row
+                    .col-sm-8.border-sm-right
+                            //-.col-auto
+                                .div-padding-stiky
+                                div.sticky-top(style="padding-top: 55px;")
+                                    div.radius-social
+                                        +social-icon('face')
+                                    div.radius-social
+                                        +social-icon('google')
+                            .col
+                                .list-post
+                                    -for(var i = 0; i<10 ; i++)
+                                        +news-post('line-bottom transform-hover')
+                        +pagination
+                    .col-sm-4.sidebar
+                        a.banner-add(href="#banner")
+                            img(src="http://adi.admicro.vn/adt/adn/2018/10/300x2-adx5bb48fba328c6.jpg", alt="banner title")
+                        .list-post-aside
+                            h3.module-title
+                                a(href="#") Tin nổi bật
+                            -
+                                var _postThumb = {
+                                    image: 'https://bit.ly/2ESxuyd',
+                                    title: 'Lorem Ipsum là gì, Tại sao lại sử dụng nó?',
+                                    link: './single.html'
+                                }
+                                var _postList = {
+                                    title: 'Lorem Ipsum là gì, Tại sao lại sử dụng nó?',
+                                    link: './single.html'
+                                }
+                            +news-post('line-bottom small-post', _postThumb)
+                            -for(var i = 0; i<4 ; i++)
+                                +news-post('line-bottom small-post', _postList)
+                        .div-padding-stiky
+                        a.banner-add.sticky-top(href="#banner")
+                            img(src="http://adi.admicro.vn/adt/adn/2018/10/300x2-adx5bd33c405c632.jpg", alt="banner title")
+        //-.section-gap
+            .block-title.text-center
+                h2.title-underline KIẾN THỨC CẦN BIẾT
+                p Những kinh nghiệm vay và cho vay
+            .container
+                .row
+                    .col
+                        +home_news
+        //-.section-gap.bg-gray-top
+            .block-title.text-center
+                h2.title-underline ĐĂNG KÝ NGAY
+                p Tham gia cùng chúng tôi ngay hôm nay
+            .container
+                    .row
+                        .col-sm-6
+                            +post-register({type:'1', title: 'Bạn cần vay vốn?'})
+                        .col-sm-6
+                            +post-register({type:'2', title: 'Bạn cần cho vay?'})
+        //-.section.transform-bottom
+            .container
+                .row
+                    .col.block
+                        +ourpartner
+block footer
+    +footer
+block stylesheet
+block scripts
+        

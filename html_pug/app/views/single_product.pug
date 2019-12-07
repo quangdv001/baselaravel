@@ -1,0 +1,112 @@
+extends index
+block append variables
+    -var classPage= "category"
+block title
+    title= title || 'undefinedtitle'
+block main
+    div.main
+        .breadcrumb-wrapper
+            .container
+                .row
+                    +breadcrumb
+        .section-main
+            .container.main-wrapper         
+                h1.page-title
+                    a(href="#") Lorem Ipsum là gì, Tại sao lại sử dụng nó?
+                .row
+                    .col-sm-9.border-sm-right
+                        .row.main-head
+                            .col-sm-8.border-sm-right
+                                div
+                                    br
+                                    +slide-owl('gallery')
+                            .col-sm-4
+                                br
+                                .row
+                                    ul.list-head
+                                        li
+                                            span.title(href="#") Dự án:
+                                            span Khu đô thị ABC
+                                        li
+                                            span.title(href="#") Diện tích:
+                                            span 320 m2
+                                        li
+                                            span.title(href="#") Loại hình:
+                                            span Đất thổ cư
+                                        li
+                                            span.title(href="#") Hướng:
+                                            span Đông nam
+                                        li
+                                            span.title(href="#") Địa chỉ:
+                                            span 12 ngõ 6 đường Đinh Tiên Hoàn
+                                        li
+                                            span.title Huyện:
+                                            span Phú Xuyên
+                                        li
+                                            span.title Quận:
+                                            span Thường Tính
+                                        li
+                                            span.title TP:
+                                            span Hà nội
+                                        li
+                                                span.title Ngày đăng:
+                                                span
+                                                    i.far.fa-clock
+                                                    |  Th3-27/10/2015
+                        .detail-post
+                                -
+                                    var _postDetail = {
+                                        image: 'https://bit.ly/2ESxuyd',
+                                        link: '/single.html',
+                                        description: 'Lorem Ipsum chỉ đơn giản là một đoạn văn bản giả, được dùng vào việc trình bày và dàn trang phục vụ cho in ấn. Lorem Ipsum đã được sử dụng như một văn bản chuẩn',
+                                        detail: 'Chúng ta vẫn biết rằng, làm việc với một đoạn văn bản dễ đọc và rõ nghĩa dễ gây rối trí và cản trở việc tập trung vào yếu tố trình bày văn bản. Lorem Ipsum có ưu điểm hơn so với đoạn văn bản chỉ gồm nội dung kiểu "Nội dung, nội dung, nội dung" là nó khiến văn bản giống thật hơn, bình thường hơn. Nhiều phần mềm thiết kế giao diện web và dàn trang ngày nay đã sử dụng Lorem Ipsum làm đoạn văn bản giả, và nếu bạn thử tìm các đoạn "Lorem ipsum" trên mạng thì sẽ khám phá ra nhiều trang web hiện vẫn đang trong quá trình xây dựng. Có nhiều phiên bản khác nhau đã xuất hiện, đôi khi do vô tình, nhiều khi do cố ý.'
+                                    }
+                                -for(var i = 0; i<1 ; i++)
+                                    +news-post('', _postDetail)
+                        .list-post-aside
+                        h3.module-title
+                            a(href="#") Dự án Liên quan
+                        -
+                            var _postThumb = {
+                                image: 'https://bit.ly/2ESxuyd',
+                                title: 'Lorem Ipsum là gì, Tại sao lại sử dụng nó?',
+                                link: '/single.html'
+                            }
+                            //- var _postList = {
+                            //-     title: 'Lorem Ipsum là gì, Tại sao lại sử dụng nó?',
+                            //-     link: '/single.html'
+                            //- }
+                        //- +news-post('line-bottom small-post', _postThumb)
+                        -for(var i = 0; i<5 ; i++)
+                            //- +news-post('line-bottom list-style-post small-post', _postList)
+                            +news-post('line-bottom small-post', _postThumb)
+                    .col-sm-3.sidebar
+                        +sidebar
+        //-.section-gap
+            .block-title.text-center
+                h2.title-underline KIẾN THỨC CẦN BIẾT
+                p Những kinh nghiệm vay và cho vay
+            .container
+                .row
+                    .col
+                        +home_news
+        //- .section-gap.bg-gray-top
+            .block-title.text-center
+                h2.title-underline ĐĂNG KÝ NGAY
+                p Tham gia cùng chúng tôi ngay hôm nay
+            .container
+                    .row
+                        .col-sm-6
+                            +post-register({type:'1', title: 'Bạn cần vay vốn?'})
+                        .col-sm-6
+                            +post-register({type:'2', title: 'Bạn cần cho vay?'})
+        //-.section.transform-bottom
+            .container
+                .row
+                    .col.block
+                        +ourpartner
+block footer
+    +footer
+block stylesheet
+block scripts
+        

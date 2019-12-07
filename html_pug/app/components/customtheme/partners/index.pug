@@ -1,0 +1,6 @@
+mixin partners
+    .partners
+        .partners-carousel.owl-carousel.owl-theme
+            -for(var i = 0; i<9; i++)
+                a.partner-item(href="#partner")
+                    img(src="./assets/images/partners/p1.jpg", alt="#{i}")

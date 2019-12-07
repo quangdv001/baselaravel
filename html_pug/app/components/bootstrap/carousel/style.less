@@ -1,0 +1,73 @@
+.carousel-icon-next {
+    max-width: 256px;
+    max-height: 256px;
+    background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMS4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDQ3Ny4xNzUgNDc3LjE3NSIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNDc3LjE3NSA0NzcuMTc1OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgd2lkdGg9IjEyOHB4IiBoZWlnaHQ9IjEyOHB4Ij4KPGc+Cgk8cGF0aCBkPSJNMzYwLjczMSwyMjkuMDc1bC0yMjUuMS0yMjUuMWMtNS4zLTUuMy0xMy44LTUuMy0xOS4xLDBzLTUuMywxMy44LDAsMTkuMWwyMTUuNSwyMTUuNWwtMjE1LjUsMjE1LjUgICBjLTUuMyw1LjMtNS4zLDEzLjgsMCwxOS4xYzIuNiwyLjYsNi4xLDQsOS41LDRjMy40LDAsNi45LTEuMyw5LjUtNGwyMjUuMS0yMjUuMUMzNjUuOTMxLDI0Mi44NzUsMzY1LjkzMSwyMzQuMjc1LDM2MC43MzEsMjI5LjA3NXogICAiIGZpbGw9IiNjY2NjY2MiLz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K);
+}
+.carousel-icon-prev {
+    max-width: 256px;
+    max-height: 256px;
+    background-image: url('data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCAxMjkgMTI5IiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCAxMjkgMTI5IiB3aWR0aD0iMjU2cHgiIGhlaWdodD0iMjU2cHgiPgogIDxnPgogICAgPHBhdGggZD0ibTg4LjYsMTIxLjNjMC44LDAuOCAxLjgsMS4yIDIuOSwxLjJzMi4xLTAuNCAyLjktMS4yYzEuNi0xLjYgMS42LTQuMiAwLTUuOGwtNTEtNTEgNTEtNTFjMS42LTEuNiAxLjYtNC4yIDAtNS44cy00LjItMS42LTUuOCwwbC01NCw1My45Yy0xLjYsMS42LTEuNiw0LjIgMCw1LjhsNTQsNTMuOXoiIGZpbGw9IiNjY2NjY2MiLz4KICA8L2c+Cjwvc3ZnPgo=');
+}
+.carousel {
+    background: transparent;
+    img {
+        max-width: 80%;
+    }
+    .carousel-control-next {
+        .carousel-control-next-icon {
+            .carousel-icon-next;
+            transition: all ease .3s;
+            border-radius: 100%;
+        }
+        &:hover .carousel-control-next-icon {
+            background-color: fade(#fff, 10);
+            background-size: 50% 50%;
+            padding: 20px;
+            box-shadow: 1px 2px 10px -1px rgba(0,0,0,.3);    
+        }
+    }
+    .carousel-control-prev {
+        .carousel-control-prev-icon {
+            .carousel-icon-prev;
+            transition: all ease .3s;
+            border-radius: 100%;
+        }
+        &:hover .carousel-control-prev-icon {
+            background-color: fade(#fff, 10);
+            background-size: 50% 50%;
+            padding: 20px;
+            box-shadow: 1px 2px 10px -1px rgba(0,0,0,.3);    
+        }
+    }
+    .carousel-indicators li {
+        width: 8px;
+        height: 8px;
+        border-radius: 100%;
+        transition: all ease .3s;
+        &.active {
+            width: 14px;
+            height: 14px;
+            transform: translateY(-3px);
+        }
+    }
+}
+.slide-caption {
+    padding: 15px;
+    &,a { color: #fff; }
+    h2,h3,h4 {
+        font-size: 1.813rem;
+        font-weight: 200;
+    }
+}
+
+.carousel {
+    @media screen and (min-width: 768px) {
+        padding: 30px 15px;
+        .carousel-control-prev {
+            left: -120px; 
+        }
+        .carousel-control-next {
+            right: -120px; 
+        }
+    }
+}
