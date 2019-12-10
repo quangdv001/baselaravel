@@ -18,6 +18,6 @@ class AuthMy
         if(auth()->check()){
             return $next($request);
         }
-        return response()->json(['success' => 0, 'mess' => 'Unauthorize'], 401);
+        return response()->json(['success' => -1, 'mess' => 'Unauthorize'], 401);
     }
 }

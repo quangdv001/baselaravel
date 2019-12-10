@@ -61,7 +61,7 @@
                         <ul>
                             <li><a href="./category.html">Thông tin</a>
                             </li>
-                            <li><a href="./category.html">Cá nhân</a>
+                            <li><a href="./dashboard/index.html">Quản lý khu trọ</a>
                             </li>
                             <li><a href="./category.html">Tài khoản</a>
                             </li>

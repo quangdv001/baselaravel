@@ -20,9 +20,9 @@ class MyArticleController extends MyBaseController
         $this->category = $category;
     }
 
-    public function index(Request $request){
+    public function index(Request $request){        
         $params['user_id_c'] = $this->user->id;
-        $data = $this->motel->search($params);
+        $data = $this->article->search($params);
         $res['success'] = 1;
         $res['data'] = $data;
         return response()->json($res);
@@ -38,7 +38,7 @@ class MyArticleController extends MyBaseController
     public function create(Request $request){
         $params = $request->only('title', 'slug', 'meta', 'type', 'short_description', 'description', 'status', 'category_id', 'img', 'file_path');
         $params['user_id_c'] = $this->user->id;
-        $params['user_id_name'] = $this->user->name;
+        $params['user_name_c'] = $this->user->name;
         $data = $this->article->create($params);
         $res['success'] = 0;
         $res['mess'] = 'Có lỗi xảy ra!';
@@ -64,7 +64,7 @@ class MyArticleController extends MyBaseController
     public function update(Request $request, $id){
         $params = $request->only('title', 'slug', 'meta', 'type', 'short_description', 'description', 'status', 'category_id', 'img', 'file_path');
         $params['user_id_c'] = $this->user->id;
-        $params['user_id_name'] = $this->user->name;
+        $params['user_name_c'] = $this->user->name;
         $motel = $this->article->getById($id);
         $res['success'] = 0;
         $res['mess'] = 'Có lỗi xảy ra!';
@@ -86,12 +86,15 @@ class MyArticleController extends MyBaseController
         return response()->json($res);
     }
 
-    public function uploadFile(Request $request){
+    public function uploadImage(Request $request){
+        logger(2);
         $file = $request->file('file');
+        logger($request->all());
         $time = time();
         // $data['folder_id'] = 0;
         // $data['name'] = $file->getClientOriginalName();
         $data['path'] = $time.'-'.$file->getClientOriginalName();
+        logger($data['path']);
         // $data['type'] = $file->getClientOriginalExtension();
         Storage::putFileAs(
             'upload/files', $file, $data['path']

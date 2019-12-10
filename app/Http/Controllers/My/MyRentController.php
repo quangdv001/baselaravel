@@ -19,6 +19,8 @@ class MyRentController extends MyBaseController
     public function index(Request $request){
         $params['motel_id'] = $request->input('motel_id', 0);
         $params['user_id'] = $this->user->id;
+        $request = $request->only('limit');
+        $params['limit'] = $request['limit'];
         $data = $this->rent->search($params);
         $res['success'] = 1;
         $res['data'] = $data;
@@ -33,9 +35,9 @@ class MyRentController extends MyBaseController
     }
 
     public function create(Request $request){
-        $params = $request->only('name', 'floor', 'max', 'motel_id', 'price', 'description');
+        $params = $request->only('name', 'floor', 'max', 'motel_id', 'price', 'description', 'status');
         $params['user_id'] = $this->user->id;
-        $params['status'] = 1;
+        // $params['status'] = 1;
         $data = $this->rent->create($params);
         $res['success'] = 0;
         $res['mess'] = 'Có lỗi xảy ra!';
