@@ -238,11 +238,13 @@
     top: 3px;
     border-color: transparent  transparent transparent transparent;
   }
-  .nav-right.navigation ul > li > ul {
+  .nav-right.navigation ul > li > ul,
+  .pull-right .navigation ul > li > ul {
     left: auto;
     right: 0;
   }
-  .nav-right.navigation ul > li ul:before {
+  .nav-right.navigation ul > li ul:before,
+  .pull-right .navigation ul > li ul:before {
     left: auto;
     right: 20px;
   }
@@ -1358,6 +1360,12 @@ a:hover {
 .header-layout {
   background: #fff;
 }
+@media (min-width: 768px) {
+  .header-layout {
+    position: relative;
+    z-index: 99999;
+  }
+}
 @media (max-width: 768px) {
   .header-layout {
     text-align: center;
@@ -1374,12 +1382,12 @@ a:hover {
   text-transform: uppercase;
   font-weight: bold;
   font-size: 13px;
-  padding: 9px 15px;
+  padding: 9px 10px;
 }
 @media (min-width: 768px) {
   .navi-layout {
     position: relative;
-    z-index: 9999;
+    z-index: 1024;
     background: #016833;
     /* FF3.6-15 */
     /* Chrome10-25,Safari5.1-6 */
@@ -1402,6 +1410,56 @@ a:hover {
     color: #fff;
     background: #f15b29;
   }
+}
+.nav-right > ul > li .fa {
+  font-size: .65em;
+  line-height: 2;
+  vertical-align: middle;
+  display: inline-block;
+}
+.navigation > ul > li.btn-wrapper {
+  padding: 0;
+  background: transparent;
+  margin-right: 4px;
+}
+.navigation > ul > li.btn-wrapper a {
+  border-radius: 4px;
+  border: 1px solid #eaeaea;
+  background: #eaeaea;
+  padding: 6px 12px;
+}
+.navigation > ul > li.btn-wrapper.btn-primary > a {
+  border: 1px solid #016833;
+  background: #016833;
+  color: #ffffff;
+}
+.navigation > ul > li.btn-wrapper.btn-success > a {
+  border: 1px solid #8BC34A;
+  background: #8BC34A;
+  color: #ffffff;
+}
+.navigation > ul > li.btn-wrapper {
+  padding: 0;
+  background: transparent;
+  margin-right: 4px;
+}
+.navigation > ul > li.btn-wrapper button {
+  border-radius: 4px;
+  border: 1px solid #eaeaea;
+  background: #eaeaea;
+  padding: 6px 12px;
+  display: inline-block;
+  font-size: .85em;
+}
+.navigation > ul > li.btn-wrapper button.btn-primary {
+  border: 1px solid #016833;
+  background: #016833;
+  color: #ffffff;
+}
+.navigation > ul > li.btn-wrapper button.btn-success {
+  border: 1px solid #8BC34A;
+  background: #8BC34A;
+  color: #ffffff;
 }
 .section-main {
   padding-bottom: 30px;
@@ -2041,6 +2099,84 @@ footer .title.divider-bottom::before,
   height: 18px;
   display: inline-block;
   vertical-align: middle;
+}
+.form-panel-layout {
+  max-width: 100%;
+  display: block;
+  margin: auto;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+}
+.login-panel,
+.register-panel {
+  display: block;
+  min-height: 120px;
+  padding: 60px 30px 0;
+  text-align: center;
+  transition: all ease .3s;
+}
+.login-panel .title,
+.register-panel .title {
+  font-size: x-large;
+  text-indent: -1px;
+  color: #f15b29;
+  font-weight: 700;
+  letter-spacing: -1.4px;
+}
+.login-panel .icon-form-label,
+.register-panel .icon-form-label {
+  background: #016833;
+  color: #fff;
+  width: 30px;
+  max-width: 30px;
+  height: 30px;
+  display: inline-block;
+  border-radius: 100%;
+  text-align: center;
+  overflow: hidden;
+  padding: 0;
+  line-height: 30px;
+}
+.login-panel .helper-link,
+.register-panel .helper-link,
+.login-panel label,
+.register-panel label {
+  font-size: small;
+  color: #016833;
+  vertical-align: middle;
+}
+.login-panel .helper-link + a:hover,
+.register-panel .helper-link + a:hover,
+.login-panel label + a:hover,
+.register-panel label + a:hover {
+  color: #f15b29;
+}
+.login-panel .helper-link,
+.register-panel .helper-link {
+  padding: 20px 0;
+  display: inline-block;
+}
+.login-panel .form,
+.register-panel .form {
+  margin: 50px 0;
+}
+.login-panel .form-group,
+.register-panel .form-group {
+  margin: 15px 0 30px;
+}
+.login-panel .btn,
+.register-panel .btn {
+  border-radius: 20px;
+  min-width: 220px;
+  font-weight: 400;
+}
+.login-panel .btn.btn-primary,
+.register-panel .btn.btn-primary {
+  background-color: #016833;
+  color: #fff;
+  border-color: #016833;
 }
 .btn.btn-sm {
   border-radius: 3px;

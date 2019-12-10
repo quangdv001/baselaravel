@@ -1,47 +1,4 @@
 extends _layout
-mixin banner
-        div(style="background: #145189 url(https://beto.vn/ver2/images/2018/home/BanerHome.jpg) repeat-x center top / 100% 100%;padding: 40px 0;margin-top: 5px;")
-        //-+carousel
-mixin tygianganhang
-    -
-        var head = ['USD (Đô La Mỹ)', 'EUR (Eur)', 'GBP (Bảng Anh)', 'JPY (Yên Nhật)', 'CNY (Nhân Dân Tệ)', 'KRW (Hàn Quốc)', 'TWD (Tân Đài Tệ)', 'RUB (Rúp Nga)', 'SGD (Đô La Singapore)', 'CAD (Đô La Canada)', 'HKD (Đô La Hồng Kông)'];
-        var banks = ['Vietcombank', 'VietinBank', 'SacomBank', 'Techcombank', 'BIDV', 'HSBC']
-    .tygianganhang.row
-        .col-12
-            .row
-                .tab-group
-                    <a class="btn btn-default button-tab btn-primary" href="#" role="button">Mua tiền mặt</a>
-                    <a class="btn btn-default button-tab" href="#" role="button">Chuyển khoản</a>
-                    <a class="btn btn-default button-tab" href="#" role="button">Bán ra</a>
-        .col-6.col-sm-3
-            .row
-                .table-responsive
-                    table.table.table-bordered
-                        thead
-                            tr
-                                th Mã ngoại tệ
-                        tbody(style='background: #f3f3f3;')
-                            each item in head
-                                tr
-                                    th=item
-        .col-6.col-sm-9
-            .row
-                .table-responsive
-                    table.table.table-bordered
-                        thead
-                            tr
-                                each item in banks
-                                    th
-                                        span
-                                            i.icon-xs(class="icon-" + item.toLowerCase())
-                                            span=item
-                        tbody
-                            each item, i in head
-                                tr
-                                    each bitem, index in banks
-                                        td
-                                            span=parseInt(23.150 * i + index)
-
 block append variables
     -var classPage= "home"
 block stylesheet
@@ -49,6 +6,57 @@ block stylesheet
 block title
     title= title
 block header
+    -
+        var defaultHeadmenu = [{ title:'Hỗ trợ', className: '', url:'./single.html' ,
+            child:[
+                { title:'Khuyến mãi', className: '', url:'./category.html' },
+                { title:'Chính sách', className: '', url:'./category.html' },
+            ]
+        }]
+        var defaultMenu = [
+            { title:'<i class="fa fa-home"></i><span class="isMobile">&nbsp;Trang chủ</span>', className: 'active', url:'./index.html' },
+            { title:'Giới thiệu', className: '', url:'./category.html' },
+            { title:'Nhà đất Hà nội', className: '', url:'./category.html' ,
+                child: [
+                { title:'Bán nhà đất Hà Nội', className: '', url:'./category.html' },
+                { title:'Cho Thuê xưởng Hà Nội', className: '', url:'./category.html' },
+                { title:'Dự án khu vực Hà Nội', className: '', url:'./single.html' }
+            ]},
+            { title:'Môi giới - Sàn giao dịch', className: 'mega-menu three-items-menu', url:'./project.html' },
+            //- { title:'Nhà Môi Giới – Doanh Nghiệp', className: 'mega-menu', url:'./category.html' ,
+            //-     child: [
+            //-     { title:'Khuyến mãi', className: '', url:'./category.html' },
+            //-     { title:'Tin tức', className: '', url:'./category.html' },
+            //-     { title:'Liên hệ', className: '', url:'./single.html' },
+            //-     { title:'Chuyên mục', className: '', url:'./category.html' }
+            //- ]},
+            { title:'Cho thuê', className: '', url:'./category-forent.html' },
+            { title:'GREENMARKET', className: '', url:'./category-forent.html' },
+            { title:'Đô thị', className: '', url:'./category.html',
+                child: [
+                { title:'Đô thị mới', className: '', url:'./category.html' },
+                { title:'Đô thị vệ tinh', className: '', url:'./category.html' }
+            ]},
+            { title:'Tin tức', className: '', url:'./category.html' },
+            { title:'Trợ giúp pháp lý', className: '', url:'./category.html' ,
+                child: [
+                { title:'Thủ tục hành chính', className: '', url:'./category.html' },
+                { title:'Công chứng', className: '', url:'./category.html' },
+                { title:'Luật', className: '', url:'./category.html' }
+            ]},
+            { title:'Liên hệ', className: '', url:'./single.html' },
+            //- { title:'Đăng nhập', className: 'pull-right', url:'./single.html' }
+        ]    
+        var rightMenu = [
+            { title:'<i class="fa fa-user"></i> Đăng nhập', modal: 'login-panel', className: 'btn-wrapper btn-success', classSpan: 'btn btn-success', url:'./' },
+            { title:'<i class="fa fa-lock"></i> Đăng ký', modal: 'register-panel', className: 'btn-wrapper btn-primary', classSpan: 'btn btn-primary', url:'./' },
+            { title:'Tài khoản', className: '', url:'./', child: [
+                { title:'Thông tin', className: '', url:'./category.html' },
+                { title:'Quản lý khu trọ', className: '', url:'./category.html' },
+                { title:'Tài khoản', className: '', url:'./category.html' },
+                { title:'Thoát', className: '', url:'./single.html' }
+            ] }                            
+        ] 
     header
         .top-layout
             .container
@@ -70,114 +78,10 @@ block header
                                 button.search-button
                                     <i class="fas fa-search"></i>
                     .col.align-self-center
-                        -
-                            var defaultHeadmenu = [
-                                { title:'Khuyến mãi', className: '', url:'./category.html' },
-                                { title:'Tin tức', className: '', url:'./category.html' },
-                                { title:'Liên hệ', className: '', url:'./single.html' },
-                                { title:'<i class="fas fa-award"></i><span class="isMobile">&nbsp;Giỏ hàng</span>', className: '', url:'./index.html' }
-                            ]
-                        +navigation('navigation nav-top', defaultHeadmenu)
-                        //-+banner
-                        //-.row
-                            .col-sm-8
-                                .widget-block.head-news-block
-                                    .block-title
-                                        span Tin mới
-                                    .block-content
-                                        -
-                                            var headnews = [
-                                                { link: '#', title: '<span class="date">07:36</span> Tỷ giá ngoại tệ ngày 25/2'},
-                                                { link: '#', title: '<span class="date">09:32</span> Xu hướng tăng lãi suất ngân hàng trong năm 2019'},
-                                                { link: '#', title: '<span class="date">10:22</span> Top ngân hàng dân gửi tiết kiệm nhiều nhất'},
-                                                { link: '#', title: '<span class="date">11:14</span> Lãi suất tiền gửi online của SCB đạt mức 8,65%/năm trong tháng 2/2019'},
-                                                { link: '#', title: '<span class="date">07:36</span> Tỷ giá ngoại tệ ngày 25/2'},
-                                                { link: '#', title: '<span class="date">09:32</span> Xu hướng tăng lãi suất ngân hàng trong năm 2019'},
-                                                { link: '#', title: '<span class="date">10:22</span> Top ngân hàng dân gửi tiết kiệm nhiều nhất'},
-                                                { link: '#', title: '<span class="date">11:14</span> Lãi suất tiền gửi online của SCB đạt mức 8,65%/năm trong tháng 2/2019'}
-                                            ]
-                                        ul.headwidget-scroll
-                                            each item in headnews
-                                                li
-                                                    a(href=item.link)
-                                                        //- i.material-icons.list-style fiber_manual_record
-                                                        !=item.title
-                            .col-sm-4
-                                .widget-block.vn-hnx-block
-                                    .block-title
-                                        .row
-                                            span.col-6 VN-Index: 
-                                            span.col-6 HNX-Index: 
-                                        .block-content
-                                            ul.headwidget-scroll
-                                                    li
-                                                        span
-                                                            img(src="./assets/images/services_01.png", alt="")
+                        +navigation('navigation nav-right', rightMenu)
         nav.navi-layout.fix-top
             .container 
                 -
-                    var defaultMenu = [
-                        { title:'<i class="fa fa-home"></i><span class="isMobile">&nbsp;Trang chủ</span>', className: 'active', url:'./index.html' },
-                        { title:'Giới thiệu', className: '', url:'./category.html' ,
-                            child: [
-                            { title:'Khuyến mãi', className: '', url:'./category.html' },
-                            { title:'Tin tức', className: '', url:'./category.html' },
-                            { title:'Liên hệ', className: '', url:'./single.html' }
-                        ]},
-                       { title:'Nhà đất', className: 'mega-menu three-items-menu', url:'./project.html' ,
-                            child: [
-                            { title:'Bán nhà đất Hà Nội', className: '', url:'./project.html' },
-                            { title:'Cho Thuê xưởng Hà Nội', className: '', url:'./project.html' },
-                            { title:'Dự án khu vực Hà Nội', className: '', url:'./single.html' },
-                            { title:'Đấu Giá QSD đất Hà Nội', className: '', url:'./project.html' },
-                            { title:'Khuyến mãi', className: '', url:'./project.html' },
-                            { title:'Tin tức', className: '', url:'./project.html' },
-                            { title:'Liên hệ', className: '', url:'./single.html' },
-                            { title:'Khuyến mãi', className: '', url:'./project.html' },
-                            { title:'Chuyên mục', className: '', url:'./project.html' }
-                        ]},
-                        { title:'Nhà Môi Giới – Doanh Nghiệp', className: 'mega-menu', url:'./category.html' ,
-                            child: [
-                            { title:'Khuyến mãi', className: '', url:'./category.html' },
-                            { title:'Tin tức', className: '', url:'./category.html' },
-                            { title:'Liên hệ', className: '', url:'./single.html' },
-                            { title:'Chuyên mục', className: '', url:'./category.html' }
-                        ]},
-                        { title:'Đô thị mới', className: '', url:'./category.html' ,
-                            child: [
-                            { title:'Khuyến mãi', className: '', url:'./category.html' },
-                            { title:'Tin tức', className: '', url:'./category.html' },
-                            { title:'Liên hệ', className: '', url:'./single.html' }
-                        ]},
-                        { title:'Cho thuê', className: '', url:'./category-forent.html' ,
-                            child: [
-                            { title:'Khuyến mãi', className: '', url:'./category.html' },
-                            { title:'Tin tức', className: '', url:'./category.html' },
-                            { title:'Liên hệ', className: '', url:'./single.html' }
-                        ]},
-                        { title:'Tin tức', className: '', url:'./category.html' ,
-                            child: [
-                            { title:'Khuyến mãi', className: '', url:'./category.html' },
-                            { title:'Tin tức', className: '', url:'./category.html' },
-                            { title:'Liên hệ', className: '', url:'./single.html' }
-                        ]},
-                        { title:'Trợ giúp', className: '', url:'./category.html' ,
-                            child: [
-                            { title:'Thủ tục hành chính', className: '', url:'./category.html' },
-                            { title:'Công chứng', className: '', url:'./category.html' },
-                            { title:'Tư vấn Luật', className: '', url:'./category.html' }
-                        ]},
-                        { title:'Liên hệ', className: '', url:'./single.html' },
-                        //- { title:'Đăng nhập', className: 'pull-right', url:'./single.html' }
-                    ]    
-                    var rightMenu = [
-                        { title:'Tài khoản', className: '', url:'./', child: [
-                            { title:'Thông tin', className: '', url:'./category.html' },
-                            { title:'Cá nhân', className: '', url:'./category.html' },
-                            { title:'Tài khoản', className: '', url:'./category.html' },
-                            { title:'Thoát', className: '', url:'./single.html' }
-                        ] }                            
-                    ] 
                 //- h3#logo.logo
                     a(href="index.html")
                         img(src="./assets/images/logo.png")
@@ -187,7 +91,7 @@ block header
                             +navigation('navigation nav-left', defaultMenu)
                     .col.align-self-end
                         .pull-right
-                            +navigation('navigation nav-right', rightMenu)
+                            +navigation('navigation nav-top', defaultHeadmenu)
 block main
     //- .slider-layout(style="background: #145189 url(./assets/images/slide-bg.jpg) no-repeat center top / 100% auto;padding: 60px 0;")
     //-         .container
@@ -202,10 +106,10 @@ block main
                         .row.main-head
                             .col-sm-3.border-sm-right
                                 .block-title.underline
-                                    h2.title.solid-color.text-uppercase: span Tư vấn luật
+                                    h2.title.solid-color.text-uppercase: span Nhà đất hà nội
                                 div.row
                                     ul.list-head
-                                        -for(var i = 0; i<4 ; i++)
+                                        -for(var i = 0; i<10 ; i++)
                                             li
                                                 a.title(href="#")
                                                     span
@@ -216,7 +120,7 @@ block main
                                     +slide-owl
                                 .row
                                     ul.list-head
-                                        -for(var i = 0; i<4 ; i++)
+                                        -for(var i = 0; i<7 ; i++)
                                             li
                                                 a.title(href="#") Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào năm kế tiếp
                                                 span.meta-info-item 
@@ -238,26 +142,26 @@ block main
                                                 title: 'Lorem Ipsum là gì, Tại sao lại sử dụng nó?',
                                                 link: './single_product.html'
                                             }
-                                        -for(var i = 0; i<2 ; i++)
+                                        -for(var i = 0; i<15 ; i++)
                                             //- +news-post('line-bottom')
                                             +forrent-post('line-bottom', rent_post)
-                                        -for(var i = 0; i<8 ; i++)
-                                            //- +news-post('line-bottom')
-                                            +forrent-post('line-bottom', rent_post_text)
-                                .block
-                                    .block-title.underline
-                                        h2.title.text-uppercase Dự án mới
-                                    .list-course
-                                        .row
-                                            -for(var i = 1; i<4 ; i++)
-                                                .col-sm-4
-                                                    +course-post(i)
+                                        //- -for(var i = 0; i<8 ; i++)
+                                        //-     //- +news-post('line-bottom')
+                                        //-     +forrent-post('line-bottom', rent_post_text)
+                                //- .block
+                                //-     .block-title.underline
+                                //-         h2.title.text-uppercase Dự án mới
+                                //-     .list-course
+                                //-         .row
+                                //-             -for(var i = 1; i<4 ; i++)
+                                //-                 .col-sm-4
+                                //-                     +course-post(i)
                             .col-sm-4
                                 .block
                                     .block-title
                                         .module-title.solid-color
-                                            a(href="#") Tiêu điểm
-                                        -for(var i = 0; i<4 ; i++)
+                                            a(href="#") Đô thị
+                                        -for(var i = 0; i<10 ; i++)
                                             +news-post('line-bottom small-post', {                                                
                                                 image: './assets/images/services_02.png',
                                                 title: 'Lorem Ipsum là gì, Tại sao lại sử dụng nó?',
@@ -266,14 +170,15 @@ block main
                                 .block
                                     .block-title
                                         .module-title.solid-color
-                                            a(href="#") Khác
-                                        -for(var i = 0; i<4 ; i++)
-                                            +news-post('line-bottom list-style-post small-post', {
+                                            a(href="#") Cách tính thuế đất
+                                        -for(var i = 0; i<6 ; i++)
+                                            +news-post('line-bottom small-post', {                                     
+                                                image: './assets/images/services_02.png',
                                                 title: 'Lorem Ipsum là gì, Tại sao lại sử dụng nó?',
                                                 link: './single.html'
                                             })
-                                a(href="#", style="display:block")
-                                    img(src="https://file4.batdongsan.com.vn/2019/03/18/RUFz0fap/20190318111542-274f.jpg", alt="", width="100%", height="630px")
+                                //- a(href="#", style="display:block")
+                                //-     img(src="https://file4.batdongsan.com.vn/2019/03/18/RUFz0fap/20190318111542-274f.jpg", alt="", width="100%", height="630px")
                     .col-sm-3.sidebar
                         +sidebar
         .section-partners
@@ -285,9 +190,10 @@ block main
                         br
         .section-gap.banner-text(style="    background: #ccc url(https://syntec-numerique.fr/sites/default/files/styles/medium/public/Image/finance-syntec-02-02-2017-2.jpg?itok=sXt3wLLF) no-repeat center top / 100% 600%;")
             .container
-                .block-title
-                    h2.title Lorem Ipsum chỉ đơn giản là một đoạn văn bản giả
-                p.text-block Lorem Ipsum chỉ đơn giản là một đoạn văn bản giả, được dùng vào việc trình bày và dàn trang phục vụ cho in ấn. Được dùng vào việc trình bày và dàn trang phục vụ cho in ấn.
+                +banner-slide
+                //- .block-title
+                //-     h2.title Lorem Ipsum chỉ đơn giản là một đoạn văn bản giả
+                //- p.text-block Lorem Ipsum chỉ đơn giản là một đoạn văn bản giả, được dùng vào việc trình bày và dàn trang phục vụ cho in ấn. Được dùng vào việc trình bày và dàn trang phục vụ cho in ấn.
 block footer
     +footer
 block stylesheet

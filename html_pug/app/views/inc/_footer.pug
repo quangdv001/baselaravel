@@ -1,6 +1,6 @@
 mixin footer(data)
     -
-        var footerLogo = (data && data.footerLogo) || "./assets/images/logo-white.png"
+        var footerLogo = (data && data.footerLogo) || "./assets/images/logo.png"
         var slogan = (data && data.slogan) || 'Kênh thông tin dự án, giao dịch bất động sản trên toàn quốc.'
         var footerAbout = (data && data.footerList) ||  [
             {title:'Hướng dẫn', link: '#link'},
@@ -28,7 +28,13 @@ mixin footer(data)
                             h3.title.divider-bottom Giới thiệu
                         br
                         div
-                            p!=slogan
+                            //- p!=slogan
+                            <ul>
+                                <li style="text-align:center"><span style="font-size:14px"><strong>Công ty cổ phần Đo đạc Bản đồ và Thiết kế Xây dựng CHK Việt Nam</strong> Giấy chứng nhận<strong> ĐKKD số 0106944960</strong> do Phòng ĐKKD -&nbsp;Sở KHĐT Thành phố Hà Nội cấp lần đầu ngày 20/08/2015.</span></li>
+                                <li style="text-align:center"><span style="font-size:12px"><strong>Địa chỉ</strong>: Tiểu khu Thao Chính, Thị Trấn Phú Xuyên, Huyện Phú Xuyên, Thành phố Hà Nội, Việt Nam.</span></li>
+                                <li style="text-align:center"><strong>Số điện thoại</strong>: 0977835699</li>
+                                <li style="text-align:center"><strong>Email</strong>: congtychk@gmail.com</li>
+                            </ul>
                     .col-sm-8
                             .row
                                 div.col-sm-3
@@ -40,6 +46,7 @@ mixin footer(data)
                                                 a(href=item.link)
                                                     //- i.material-icons.list-style fiber_manual_record
                                                     !=item.title
+                                    <a href="http://online.gov.vn/HomePage/WebsiteDisplay.aspx?DocId=58966"><img alt="" title="" src="http://online.gov.vn/seals/7VEdC9rVwETYuKoysAIXcg==.jpgx"></a>
                                 div.col-sm-3
                                     //- div
                                         h3.title.divider-bottom Giới thiệu
@@ -67,4 +74,70 @@ mixin footer(data)
                                         +social-icon('twitter')
                                         +social-icon('youtube')
         .container
-            .copyright &copy; Copyright 2019. TYGIA.VN - Website thông tin dự án, giao dịch bất động sản.
+            .copyright &copy; Copyright 2019. CHKVIETNAM.VN - Website thông tin dự án, giao dịch bất động sản.
+    .modal.fade(id="login-panel" tabindex="-1" role="dialog" aria-labelledby="modal-panel-label" aria-hidden="true")
+            // LOGIN
+            .modal-dialog.login-panel
+                .modal-content
+                    .modal-body
+                        .header
+                            h3#modal-panel-label.title.text-uppercase Đăng nhập tài khoản
+                        form.form
+                            .form-group.row.justify-content-center
+                                label.col-auto.col-form-label.icon-form-label
+                                    span.material-icons person
+                                    span.isMobile Email
+                                .col: input.form-control(placeholder="Nhập email...")
+                            .form-group.row.justify-content-center
+                                label.col-auto.col-form-label.icon-form-label
+                                    span.material-icons vpn_key
+                                    span.isMobile Mật khẩu
+                                .col: input.form-control(type="password", placeholder="Nhập mật khẩu...")
+                            .form-group.row.justify-content-center
+                                .col
+                                    div
+                                        button.btn.btn-primary(type="submit") Đăng nhập
+                                    //- .form-check.helper-link
+                                        input.form-check-input(type="checkbox")
+                                        label.form-check-label Ghi nhớ
+                                    div
+                                        a.helper-link(href="./reset-password.html") Quên mật khẩu? 
+                                    //- a.helper-link(href="./register.html") Bạn chưa có tài khoản, <strong>ĐĂNG KÝ</strong>? 
+    .modal.fade(id="register-panel" tabindex="-1" role="dialog" aria-labelledby="modal-register-label" aria-hidden="true")
+            // REGISTER
+            .modal-dialog.login-panel
+                .modal-content
+                    .modal-body
+                        .header
+                            h3#modal-register-label.title.text-uppercase Đăng ký tài khoản
+                            p * Đăng ký tài khoản cho phép đăng thông tin dự án, giao dịch bất động sản.
+                        form
+                            .form-group.row.justify-content-center
+                                label.col-auto.col-form-label.icon-form-label
+                                    span.material-icons mail_outline
+                                    span.isMobile Email
+                                .col: input.form-control(placeholder="Nhập email...")
+                            .form-group.row.justify-content-center
+                                label.col-auto.col-form-label.icon-form-label
+                                    span.material-icons person
+                                    span.isMobile Username
+                                .col: input.form-control(placeholder="Nhập username...")
+                            .form-group.row.justify-content-center
+                                label.col-auto.col-form-label.icon-form-label
+                                    span.material-icons phone_in_talk
+                                    span.isMobile Điện thoại
+                                .col: input.form-control(placeholder="Nhập số điện thoại...")
+                            .form-group.row.justify-content-center
+                                label.col-auto.col-form-label.icon-form-label
+                                    span.material-icons vpn_key
+                                    span.isMobile Mật khẩu
+                                .col: input.form-control(type="password", placeholder="Nhập mật khẩu...")
+                            .form-group.row.justify-content-center
+                                label.col-auto.col-form-label.icon-form-label
+                                    span.material-icons vpn_key
+                                    span.isMobile Nhập lại mật khẩu
+                                .col: input.form-control(type="password", placeholder="Nhập mật lại khẩu...")
+                            .form-group.row.justify-content-center
+                                .col
+                                    div
+                                        button.btn.btn-primary(type="submit") Đăng ký

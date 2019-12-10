@@ -1,5 +1,8 @@
 mixin child(item)
-    a(href=item.url)!= item.title
+    if (item.modal)
+        button(class=item.classSpan, data-toggle="modal", data-target="#" + item.modal)!= item.title
+    else
+        a(href=item.url)!= item.title
 mixin navigation(className, _arrayMenu)
     if !className
         -var className = 'navigation'

@@ -1,3 +1,9 @@
+mixin banner-slide
+    .banner-slide
+        .slide-owl-carousel.owl-carousel.owl-theme
+            -for(i=1; i<3; i++)
+                a(href="#link")
+                    img(src="/assets/images/banners/" + i +".png", alt=i, style="height: 120px")
 mixin social-icon(type, className)
     - var icon = 'exclamation-triangle'
     case type
