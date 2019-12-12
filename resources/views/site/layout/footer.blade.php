@@ -1,62 +1,74 @@
-<footer class="footer dark" style="background: #ccc url(/public/assets/site/themes/assets/images/beautiful-wood-texture-vector-background.jpg) center top /auto 100%;">
-  <div class="footer-main">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-5">
-          <div><a class="title"><img src="{{ asset('public/assets/site/themes/assets/images/logo-gohay-white.png') }}" alt="" style="max-width: 300px;margin-top: -30px;"/></a></div><br/>
-          <div>
-            <ul class="list-group list-group-flush">
-              <li><a href="#">Địa chỉ: 151 Vương Thừa Vũ, Q.Thanh Xuân, Hà Nội.</a></li>
-              <li><a href="#">Xưởng sản xuất: Khu xưởng gỗ Bến đò ngang, Ninh Sở, Thanh Trì, HN.</a></li>
-              <li><a href="tell:0936 88 11 05"><i class="material-icons">phone_in_talk</i> Hotline: 0936 88 11 05</a></li>
-              <li><a href="mailto:gohay.vn@gmail.com"><i class="material-icons">mail_outline</i> Email: gohay.vn@gmail.com</a></li>
-            </ul>
-          </div>
-          <div>
-            <p></p>
-            <div class="social-icon"><a><i class="fab fa-facebook-f"></i></a>
+<footer class="footer">
+    <div class="footer-main">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div><a class="title"><img src="./assets/images/logo.png"
+                                alt="Kênh thông tin dự án, giao dịch bất động sản trên toàn quốc."
+                                style="max-width: 175px;" /></a></div><br />
+                    <div>
+                        <ul>
+                            <li style="text-align:center"><span style="font-size:14px"><strong>Công ty cổ phần Đo đạc
+                                        Bản đồ và Thiết kế Xây dựng CHK Việt Nam</strong> Giấy chứng nhận<strong> ĐKKD
+                                        số 0106944960</strong> do Phòng ĐKKD -&nbsp;Sở KHĐT Thành phố Hà Nội cấp lần đầu
+                                    ngày 20/08/2015.</span></li>
+                            <li style="text-align:center"><span style="font-size:12px"><strong>Địa chỉ</strong>: Tiểu
+                                    khu Thao Chính, Thị Trấn Phú Xuyên, Huyện Phú Xuyên, Thành phố Hà Nội, Việt
+                                    Nam.</span></li>
+                            <li style="text-align:center"><strong>Số điện thoại</strong>: 0977835699</li>
+                            <li style="text-align:center"><strong>Email</strong>: congtychk@gmail.com</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <ul class="list-group list-group-flush">
+                                <li><a href="#link">Hướng dẫn</a></li>
+                                <li><a href="#link">Tài liệu</a></li>
+                                <li><a href="#link">Chính sách</a></li>
+                                <li><a href="#link">Hỗ trợ</a></li>
+                            </ul><a href="http://online.gov.vn/HomePage/WebsiteDisplay.aspx?DocId=58966"><img alt=""
+                                    title="" src="http://online.gov.vn/seals/7VEdC9rVwETYuKoysAIXcg==.jpgx"></a>
+                        </div>
+                        <div class="col-sm-3">
+                            <ul class="list-group list-group-flush">
+                                <li><a href="#link">Hướng dẫn</a></li>
+                                <li><a href="#link">Tài liệu</a></li>
+                                <li><a href="#link">Chính sách</a></li>
+                                <li><a href="#link">Hỗ trợ</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-3">
+                            <ul class="list-group list-group-flush">
+                                <li><a href="tell:123 456 789"><i class="material-icons">phone_in_talk</i> 123 456
+                                        789</a></li>
+                                <li><a href="tell:123 456 798"><i class="material-icons">phone_in_talk</i> 123 456
+                                        798</a></li>
+                                <li><a href="mailto:email@domail.com"><i class="material-icons">mail_outline</i>
+                                        email@domail.com</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-3">
+                            <div>
+                                <p>Liên kết mạng xã hội:</p>
+                                <div class="social-icon"><a><i class="fab fa-facebook-f"></i></a>
+                                </div>
+                                <div class="social-icon"><a><i class="fab fa-google-plus-g"></i></a>
+                                </div>
+                                <div class="social-icon"><a><i class="fab fa-twitter"></i></a>
+                                </div>
+                                <div class="social-icon"><a><i class="fab fa-youtube"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="social-icon"><a><i class="fab fa-google-plus-g"></i></a>
-            </div>
-            <div class="social-icon"><a><i class="fab fa-twitter"></i></a>
-            </div>
-            <div class="social-icon"><a><i class="fab fa-youtube"></i></a>
-            </div>
-          </div>
         </div>
-        <div class="col-sm-7">
-          <div class="row">
-            <div class="col-sm-6">
-              <div>
-                <h3 class="title divider-bottom">Dịch vụ khách hàng</h3>
-              </div>
-              <ul class="list-group list-group-flush">
-                <li><a href="#link">FAQs - Hỏi đáp</a></li>
-                <li><a href="#link">Chính sách vận chuyển</a></li>
-                <li><a href="#link">Hướng dẫn thanh toán</a></li>
-                <li><a href="#link">Quy định đổi hàng</a></li>
-                <li><a href="#link">Bảo hành bảo trì</a></li>
-              </ul>
-            </div>
-            <div class="col-sm-6">
-              <div>
-                <h3 class="title divider-bottom">Danh mục sản phẩm</h3>
-              </div>
-              <ul class="list-group list-group-flush">
-                <li><a href="#link">Phòng khách</a></li>
-                <li><a href="#link">Phòng ăn</a></li>
-                <li><a href="#link">Phòng ngủ</a></li>
-                <li><a href="#link">Tủ bếp</a></li>
-                <li><a href="#link">Nội thất văn phòng</a></li>
-              </ul>
-            </div>
-            <div class="col-sm-3"></div>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
-  <div class="container">
-    <div class="copyright">&copy; @Copyright-2019 GOHAY.</div>
-  </div>
+    <div class="container">
+        <div class="copyright">&copy; Copyright 2019. CHKVIETNAM.VN - Website thông tin dự án, giao dịch bất động sản.
+        </div>
+    </div>
 </footer>

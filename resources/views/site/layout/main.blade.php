@@ -4,17 +4,18 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>@yield('title', 'Homefun')</title>
+    <title>@yield('title', 'Trang chủ')</title>
     <link rel="shortcut icon" type="image/png" href="{{ asset('public/assets/site/themes/assets/images/logo2.png') }}"/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Bootstrap fonts and icons-->
     @include('site.layout.css')
   </head>
   <body>       
-    <div class="page home">
-      @include('site.layout.header')
+    <div class="page @yield('class_page', 'home')">
+      @widget('header')
       @yield('content')
-      @include('site.layout.footer')
+      @widget('footer')
+      @include('site.layout.modal')
     </div>
     <input type="hidden" class="success_message" value="{{ session()->has('success_message') ? session('success_message') : '' }}">
     <input type="hidden" class="error_message" value="{{ session()->has('error_message') ? session('error_message') : '' }}">
