@@ -1,101 +1,349 @@
 @extends('site.layout.main')
 @section('title')
-{{ $cate->name }}
+Trang chủ
+@endsection
+@section('class_page')
+category
 @endsection
 @section('content')
-<div class="section-dark"
-    style="background: #ccc url({{ asset('public/assets/site/themes/assets/images/slide-bg.png') }}) center top /auto 100%;margin-bottom: 15px;">
-    <div class="container">
-        <div class="row align-items-center cover-slide justify-content-md-center">
-            <div class="col-sm-12">
-                <div class="text-center">
-                    <div class="block-title">
-                        <h2 class="title sevices-title-nomarl"><span>KHÔNG GIAN SỐNG LÀ ĐẦU TƯ NỀN TẢNG</span></h2>
-                    </div>
-                    <div class="sevices-title-large">CHO NHỮNG THÀNH CÔNG NỐI TIẾP VỀ SAU</div>
-                </div>
-                @if(sizeof($category) > 0)
-                <div class="row services-blog">
-                    @foreach($category as $v)
-                    @if($v->type == 0)
-                    <div class="col-12 col-sm-3">
-                        <a class="block service-blog text-center @if($cate->id == $v->id) active @endif" href="{{ strval($v->url) != '' ? url(strval($v->url)) : '#' }}">
-                            <div class="cover-icon"><img src="{{ $v->img }}" alt=""/>
+<div class="main">
+    <div class="breadcrumb-wrapper">
+        <div class="container">
+            <div class="row">
+                <ol class="breadcrumb breadcrumb-dot">
+                    <li class="breadcrumb-item"><i class="material-icons">home</i><a href="index.html"
+                            title="Trang chủ">Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a href="#sublink" title="Title link">Sub page</a></li>
+                    <li class="breadcrumb-item active"><span>Current page</span></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <div class="section-main">
+        <div class="container main-wrapper">
+            <h1 class="page-title"><a href="#">Tin tức </a></h1>
+            <div class="row">
+                <div class="col-sm-9 border-sm-right">
+                    <div class="row main-head">
+                        <div class="col-sm-9 border-sm-right">
+                            <div class="row">
+                                <div class="slide-owl-carousel owl-carousel owl-theme"><a class="block" href="#item">
+                                        <div class="cover-item">
+                                            <div class="landscape_image"><img src="./assets/images/slide_01.jpg"
+                                                    alt="Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào năm kế tiếp" />
+                                            </div>
+                                        </div>
+                                        <div class="detail-item">
+                                            <div class="title">Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào năm
+                                                kế tiếp</div>
+                                            <div class="meta-info"><span class="meta-info-item">Tin tức</span><span
+                                                    class="meta-info-item"><i class="far fa-clock"></i>
+                                                    Th3-27/10/2015</span></div>
+                                            <div class="short-description">Cột giá nhà phố tăng cao ngất ngưỡng không
+                                                chỉ do tình trạng sốt đất dẫn đến giá ảo.</div>
+                                        </div>
+                                    </a><a class="block" href="#item">
+                                        <div class="cover-item">
+                                            <div class="landscape_image"><img src="./assets/images/slide_01.jpg"
+                                                    alt="Tin 2 Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào năm kế tiếp" />
+                                            </div>
+                                        </div>
+                                        <div class="detail-item">
+                                            <div class="title">Tin 2 Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào
+                                                năm kế tiếp</div>
+                                            <div class="meta-info"><span class="meta-info-item">Tin tức</span><span
+                                                    class="meta-info-item"><i class="far fa-clock"></i>
+                                                    Th3-27/10/2015</span></div>
+                                            <div class="short-description">Cột giá nhà phố tăng cao ngất ngưỡng không
+                                                chỉ do tình trạng sốt đất dẫn đến giá ảo.</div>
+                                        </div>
+                                    </a><a class="block" href="#item">
+                                        <div class="cover-item">
+                                            <div class="landscape_image"><img src="./assets/images/slide_01.jpg"
+                                                    alt="Tin 3 Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào năm kế tiếp" />
+                                            </div>
+                                        </div>
+                                        <div class="detail-item">
+                                            <div class="title">Tin 3 Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào
+                                                năm kế tiếp</div>
+                                            <div class="meta-info"><span class="meta-info-item">Tin tức</span><span
+                                                    class="meta-info-item"><i class="far fa-clock"></i>
+                                                    Th3-27/10/2015</span></div>
+                                            <div class="short-description">Cột giá nhà phố tăng cao ngất ngưỡng không
+                                                chỉ do tình trạng sốt đất dẫn đến giá ảo.</div>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
-                            <div class="title">
-                              <h3><span>{{ $v->name }}</span></h3>
-                            </div></a>
+                            <div class="row">
+                                <ul class="list-head">
+                                    <li><a class="title" href="#">Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào
+                                            năm kế tiếp</a><span class="meta-info-item"> <i class="far fa-clock"></i>
+                                            Th3-27/10/2015</span></li>
+                                    <li><a class="title" href="#">Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào
+                                            năm kế tiếp</a><span class="meta-info-item"> <i class="far fa-clock"></i>
+                                            Th3-27/10/2015</span></li>
+                                    <li><a class="title" href="#">Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào
+                                            năm kế tiếp</a><span class="meta-info-item"> <i class="far fa-clock"></i>
+                                            Th3-27/10/2015</span></li>
+                                    <li><a class="title" href="#">Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào
+                                            năm kế tiếp</a><span class="meta-info-item"> <i class="far fa-clock"></i>
+                                            Th3-27/10/2015</span></li>
+                                </ul>
+                            </div>
                         </div>
-                    @elseif($v->type == 1)
-                    <div class="col-12 col-sm-3">
-                            <a class="block service-blog text-center @if($cate->id == $v->id) active @endif" href="{{ route('site.article.index',['id' => $v->id, 'slug' => $v->slug]) }}">
-                                <div class="cover-icon"><img src="{{ $v->img }}" alt=""/>
-                                </div>
-                                <div class="title">
-                                  <h3><span>{{ $v->name }}</span></h3>
-                                </div></a>
+                        <div class="col-sm-3">
+                            <div class="block-title underline">
+                                <h2 class="title solid-color text-uppercase"><span>Tư vấn luật</span></h2>
                             </div>
-                    @elseif($v->type == 2)
-                    <div class="col-12 col-sm-3">
-                            <a class="block service-blog text-center @if($cate->id == $v->id) active @endif" href="{{ route('site.product.list',['id' => $v->id, 'slug' => $v->slug]) }}">
-                                <div class="cover-icon"><img src="{{ $v->img }}" alt=""/>
-                                </div>
-                                <div class="title">
-                                  <h3><span>{{ $v->name }}</span></h3>
-                                </div></a>
+                            <div class="row">
+                                <ul class="list-head">
+                                    <li><a class="title" href="#"><span><i
+                                                    class="far fa-clock"></i></span><span>&nbsp;Thị trường BĐS chạm đỉnh
+                                                2019 và rơi vào thoái trào năm kế tiếp</span></a></li>
+                                    <li><a class="title" href="#"><span><i
+                                                    class="far fa-clock"></i></span><span>&nbsp;Thị trường BĐS chạm đỉnh
+                                                2019 và rơi vào thoái trào năm kế tiếp</span></a></li>
+                                    <li><a class="title" href="#"><span><i
+                                                    class="far fa-clock"></i></span><span>&nbsp;Thị trường BĐS chạm đỉnh
+                                                2019 và rơi vào thoái trào năm kế tiếp</span></a></li>
+                                    <li><a class="title" href="#"><span><i
+                                                    class="far fa-clock"></i></span><span>&nbsp;Thị trường BĐS chạm đỉnh
+                                                2019 và rơi vào thoái trào năm kế tiếp</span></a></li>
+                                </ul>
                             </div>
-                    @elseif($v->type == 3)
-                    <div class="col-12 col-sm-3">
-                            <a class="block service-blog text-center @if($cate->id == $v->id) active @endif" href="{{ route('site.article.list',['id' => $v->id, 'slug' => $v->slug]) }}">
-                                <div class="cover-icon"><img src="{{ $v->img }}" alt=""/>
-                                </div>
-                                <div class="title">
-                                  <h3><span>{{ $v->name }}</span></h3>
-                                </div></a>
+                        </div>
+                    </div>
+                    <div class="list-post">
+                        <div class="news-post line-bottom"><a class="news-post-image-link" href="./single.html">
+                                <figure class="image-container">
+                                    <div class="featured-image-overlay"><span class="featured-image-icon"><i
+                                                class="fa fa-camera"></i></span></div><img class="img-responsive"
+                                        src="https://cafebiz.cafebizcdn.vn/zoom/260_163/2019/2/25/httpchannelvcmediavnprupload156201902img20190225102942161-1551065755100211648411.jpg"
+                                        alt="title alt" />
+                                </figure>
+                            </a>
+                            <div class="news-post-content">
+                                <h2 class="post-title title"><a class="news-post-link" href="./single.html">Lorem Ipsum
+                                        là gì, Tại sao lại sử dụng nó?</a></h2>
+                                <div class="post-meta-container"><span class="post-meta-item"><i
+                                            class="far fa-clock"></i> Th3-27/10/2015</span><span
+                                        class="post-meta-item"><i class="fa fa-user-check"></i><a href="#admin">
+                                            Admin</a></span></div>
+                                <p class="post-desc">Lorem Ipsum chỉ đơn giản là một đoạn văn bản giả, được dùng vào
+                                    việc trình bày và dàn trang phục vụ cho in ấn. Lorem Ipsum đã được sử dụng như một
+                                    văn bản chuẩn.
+                                </p><span class="read-more-button"><a href="./single.html">Xem tiếp...</a></span>
                             </div>
-                    @endif
-
-                    @endforeach
+                        </div>
+                        <div class="news-post line-bottom"><a class="news-post-image-link" href="./single.html">
+                                <figure class="image-container">
+                                    <div class="featured-image-overlay"><span class="featured-image-icon"><i
+                                                class="fa fa-camera"></i></span></div><img class="img-responsive"
+                                        src="https://cafebiz.cafebizcdn.vn/zoom/260_163/2019/2/25/httpchannelvcmediavnprupload156201902img20190225102942161-1551065755100211648411.jpg"
+                                        alt="title alt" />
+                                </figure>
+                            </a>
+                            <div class="news-post-content">
+                                <h2 class="post-title title"><a class="news-post-link" href="./single.html">Lorem Ipsum
+                                        là gì, Tại sao lại sử dụng nó?</a></h2>
+                                <div class="post-meta-container"><span class="post-meta-item"><i
+                                            class="far fa-clock"></i> Th3-27/10/2015</span><span
+                                        class="post-meta-item"><i class="fa fa-user-check"></i><a href="#admin">
+                                            Admin</a></span></div>
+                                <p class="post-desc">Lorem Ipsum chỉ đơn giản là một đoạn văn bản giả, được dùng vào
+                                    việc trình bày và dàn trang phục vụ cho in ấn. Lorem Ipsum đã được sử dụng như một
+                                    văn bản chuẩn.
+                                </p><span class="read-more-button"><a href="./single.html">Xem tiếp...</a></span>
+                            </div>
+                        </div>
+                        <div class="news-post line-bottom"><a class="news-post-image-link" href="./single.html">
+                                <figure class="image-container">
+                                    <div class="featured-image-overlay"><span class="featured-image-icon"><i
+                                                class="fa fa-camera"></i></span></div><img class="img-responsive"
+                                        src="https://cafebiz.cafebizcdn.vn/zoom/260_163/2019/2/25/httpchannelvcmediavnprupload156201902img20190225102942161-1551065755100211648411.jpg"
+                                        alt="title alt" />
+                                </figure>
+                            </a>
+                            <div class="news-post-content">
+                                <h2 class="post-title title"><a class="news-post-link" href="./single.html">Lorem Ipsum
+                                        là gì, Tại sao lại sử dụng nó?</a></h2>
+                                <div class="post-meta-container"><span class="post-meta-item"><i
+                                            class="far fa-clock"></i> Th3-27/10/2015</span><span
+                                        class="post-meta-item"><i class="fa fa-user-check"></i><a href="#admin">
+                                            Admin</a></span></div>
+                                <p class="post-desc">Lorem Ipsum chỉ đơn giản là một đoạn văn bản giả, được dùng vào
+                                    việc trình bày và dàn trang phục vụ cho in ấn. Lorem Ipsum đã được sử dụng như một
+                                    văn bản chuẩn.
+                                </p><span class="read-more-button"><a href="./single.html">Xem tiếp...</a></span>
+                            </div>
+                        </div>
+                        <div class="news-post line-bottom"><a class="news-post-image-link" href="./single.html">
+                                <figure class="image-container">
+                                    <div class="featured-image-overlay"><span class="featured-image-icon"><i
+                                                class="fa fa-camera"></i></span></div><img class="img-responsive"
+                                        src="https://cafebiz.cafebizcdn.vn/zoom/260_163/2019/2/25/httpchannelvcmediavnprupload156201902img20190225102942161-1551065755100211648411.jpg"
+                                        alt="title alt" />
+                                </figure>
+                            </a>
+                            <div class="news-post-content">
+                                <h2 class="post-title title"><a class="news-post-link" href="./single.html">Lorem Ipsum
+                                        là gì, Tại sao lại sử dụng nó?</a></h2>
+                                <div class="post-meta-container"><span class="post-meta-item"><i
+                                            class="far fa-clock"></i> Th3-27/10/2015</span><span
+                                        class="post-meta-item"><i class="fa fa-user-check"></i><a href="#admin">
+                                            Admin</a></span></div>
+                                <p class="post-desc">Lorem Ipsum chỉ đơn giản là một đoạn văn bản giả, được dùng vào
+                                    việc trình bày và dàn trang phục vụ cho in ấn. Lorem Ipsum đã được sử dụng như một
+                                    văn bản chuẩn.
+                                </p><span class="read-more-button"><a href="./single.html">Xem tiếp...</a></span>
+                            </div>
+                        </div>
+                        <div class="news-post line-bottom"><a class="news-post-image-link" href="./single.html">
+                                <figure class="image-container">
+                                    <div class="featured-image-overlay"><span class="featured-image-icon"><i
+                                                class="fa fa-camera"></i></span></div><img class="img-responsive"
+                                        src="https://cafebiz.cafebizcdn.vn/zoom/260_163/2019/2/25/httpchannelvcmediavnprupload156201902img20190225102942161-1551065755100211648411.jpg"
+                                        alt="title alt" />
+                                </figure>
+                            </a>
+                            <div class="news-post-content">
+                                <h2 class="post-title title"><a class="news-post-link" href="./single.html">Lorem Ipsum
+                                        là gì, Tại sao lại sử dụng nó?</a></h2>
+                                <div class="post-meta-container"><span class="post-meta-item"><i
+                                            class="far fa-clock"></i> Th3-27/10/2015</span><span
+                                        class="post-meta-item"><i class="fa fa-user-check"></i><a href="#admin">
+                                            Admin</a></span></div>
+                                <p class="post-desc">Lorem Ipsum chỉ đơn giản là một đoạn văn bản giả, được dùng vào
+                                    việc trình bày và dàn trang phục vụ cho in ấn. Lorem Ipsum đã được sử dụng như một
+                                    văn bản chuẩn.
+                                </p><span class="read-more-button"><a href="./single.html">Xem tiếp...</a></span>
+                            </div>
+                        </div>
+                        <div class="news-post line-bottom"><a class="news-post-image-link" href="./single.html">
+                                <figure class="image-container">
+                                    <div class="featured-image-overlay"><span class="featured-image-icon"><i
+                                                class="fa fa-camera"></i></span></div><img class="img-responsive"
+                                        src="https://cafebiz.cafebizcdn.vn/zoom/260_163/2019/2/25/httpchannelvcmediavnprupload156201902img20190225102942161-1551065755100211648411.jpg"
+                                        alt="title alt" />
+                                </figure>
+                            </a>
+                            <div class="news-post-content">
+                                <h2 class="post-title title"><a class="news-post-link" href="./single.html">Lorem Ipsum
+                                        là gì, Tại sao lại sử dụng nó?</a></h2>
+                                <div class="post-meta-container"><span class="post-meta-item"><i
+                                            class="far fa-clock"></i> Th3-27/10/2015</span><span
+                                        class="post-meta-item"><i class="fa fa-user-check"></i><a href="#admin">
+                                            Admin</a></span></div>
+                                <p class="post-desc">Lorem Ipsum chỉ đơn giản là một đoạn văn bản giả, được dùng vào
+                                    việc trình bày và dàn trang phục vụ cho in ấn. Lorem Ipsum đã được sử dụng như một
+                                    văn bản chuẩn.
+                                </p><span class="read-more-button"><a href="./single.html">Xem tiếp...</a></span>
+                            </div>
+                        </div>
+                        <div class="news-post line-bottom"><a class="news-post-image-link" href="./single.html">
+                                <figure class="image-container">
+                                    <div class="featured-image-overlay"><span class="featured-image-icon"><i
+                                                class="fa fa-camera"></i></span></div><img class="img-responsive"
+                                        src="https://cafebiz.cafebizcdn.vn/zoom/260_163/2019/2/25/httpchannelvcmediavnprupload156201902img20190225102942161-1551065755100211648411.jpg"
+                                        alt="title alt" />
+                                </figure>
+                            </a>
+                            <div class="news-post-content">
+                                <h2 class="post-title title"><a class="news-post-link" href="./single.html">Lorem Ipsum
+                                        là gì, Tại sao lại sử dụng nó?</a></h2>
+                                <div class="post-meta-container"><span class="post-meta-item"><i
+                                            class="far fa-clock"></i> Th3-27/10/2015</span><span
+                                        class="post-meta-item"><i class="fa fa-user-check"></i><a href="#admin">
+                                            Admin</a></span></div>
+                                <p class="post-desc">Lorem Ipsum chỉ đơn giản là một đoạn văn bản giả, được dùng vào
+                                    việc trình bày và dàn trang phục vụ cho in ấn. Lorem Ipsum đã được sử dụng như một
+                                    văn bản chuẩn.
+                                </p><span class="read-more-button"><a href="./single.html">Xem tiếp...</a></span>
+                            </div>
+                        </div>
+                        <div class="news-post line-bottom"><a class="news-post-image-link" href="./single.html">
+                                <figure class="image-container">
+                                    <div class="featured-image-overlay"><span class="featured-image-icon"><i
+                                                class="fa fa-camera"></i></span></div><img class="img-responsive"
+                                        src="https://cafebiz.cafebizcdn.vn/zoom/260_163/2019/2/25/httpchannelvcmediavnprupload156201902img20190225102942161-1551065755100211648411.jpg"
+                                        alt="title alt" />
+                                </figure>
+                            </a>
+                            <div class="news-post-content">
+                                <h2 class="post-title title"><a class="news-post-link" href="./single.html">Lorem Ipsum
+                                        là gì, Tại sao lại sử dụng nó?</a></h2>
+                                <div class="post-meta-container"><span class="post-meta-item"><i
+                                            class="far fa-clock"></i> Th3-27/10/2015</span><span
+                                        class="post-meta-item"><i class="fa fa-user-check"></i><a href="#admin">
+                                            Admin</a></span></div>
+                                <p class="post-desc">Lorem Ipsum chỉ đơn giản là một đoạn văn bản giả, được dùng vào
+                                    việc trình bày và dàn trang phục vụ cho in ấn. Lorem Ipsum đã được sử dụng như một
+                                    văn bản chuẩn.
+                                </p><span class="read-more-button"><a href="./single.html">Xem tiếp...</a></span>
+                            </div>
+                        </div>
+                        <div class="news-post line-bottom"><a class="news-post-image-link" href="./single.html">
+                                <figure class="image-container">
+                                    <div class="featured-image-overlay"><span class="featured-image-icon"><i
+                                                class="fa fa-camera"></i></span></div><img class="img-responsive"
+                                        src="https://cafebiz.cafebizcdn.vn/zoom/260_163/2019/2/25/httpchannelvcmediavnprupload156201902img20190225102942161-1551065755100211648411.jpg"
+                                        alt="title alt" />
+                                </figure>
+                            </a>
+                            <div class="news-post-content">
+                                <h2 class="post-title title"><a class="news-post-link" href="./single.html">Lorem Ipsum
+                                        là gì, Tại sao lại sử dụng nó?</a></h2>
+                                <div class="post-meta-container"><span class="post-meta-item"><i
+                                            class="far fa-clock"></i> Th3-27/10/2015</span><span
+                                        class="post-meta-item"><i class="fa fa-user-check"></i><a href="#admin">
+                                            Admin</a></span></div>
+                                <p class="post-desc">Lorem Ipsum chỉ đơn giản là một đoạn văn bản giả, được dùng vào
+                                    việc trình bày và dàn trang phục vụ cho in ấn. Lorem Ipsum đã được sử dụng như một
+                                    văn bản chuẩn.
+                                </p><span class="read-more-button"><a href="./single.html">Xem tiếp...</a></span>
+                            </div>
+                        </div>
+                        <div class="news-post line-bottom"><a class="news-post-image-link" href="./single.html">
+                                <figure class="image-container">
+                                    <div class="featured-image-overlay"><span class="featured-image-icon"><i
+                                                class="fa fa-camera"></i></span></div><img class="img-responsive"
+                                        src="https://cafebiz.cafebizcdn.vn/zoom/260_163/2019/2/25/httpchannelvcmediavnprupload156201902img20190225102942161-1551065755100211648411.jpg"
+                                        alt="title alt" />
+                                </figure>
+                            </a>
+                            <div class="news-post-content">
+                                <h2 class="post-title title"><a class="news-post-link" href="./single.html">Lorem Ipsum
+                                        là gì, Tại sao lại sử dụng nó?</a></h2>
+                                <div class="post-meta-container"><span class="post-meta-item"><i
+                                            class="far fa-clock"></i> Th3-27/10/2015</span><span
+                                        class="post-meta-item"><i class="fa fa-user-check"></i><a href="#admin">
+                                            Admin</a></span></div>
+                                <p class="post-desc">Lorem Ipsum chỉ đơn giản là một đoạn văn bản giả, được dùng vào
+                                    việc trình bày và dàn trang phục vụ cho in ấn. Lorem Ipsum đã được sử dụng như một
+                                    văn bản chuẩn.
+                                </p><span class="read-more-button"><a href="./single.html">Xem tiếp...</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            <li class="page-item"><a class="page-link" href="#">Trước</a></li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">Tiếp</a></li>
+                        </ul>
+                    </nav>
                 </div>
-                @endif
+                <div class="col-sm-3 sidebar">
+                    @widget('recentNews')
+                </div>
             </div>
         </div>
     </div>
 </div>
-<div class="main">
-    <div class="section section-subpage">
-      <div class="container">
-        <div class="text-center">
-          <div class="block-title underline">
-            <h1 class="title solid-color text-uppercase"><span>{{ $cate->name }}</span></h1>
-          </div>
-        </div>
-        @if(sizeof($data) > 0)
-        <div class="row">
-            @foreach($data as $v)
-            <div class="col-md-4">
-                <div class="block block-media-top">
-                  <div class="row">
-                    <div class="col-12"><a class="cover-image landscape_image" href="{{ route('site.article.detail',['id' => $v->id, 'slug' => $v->slug]) }}"><img src="{{ $v->img }}" alt="{{ $v->title }}"></a></div>
-                    <div class="col-12 text-left block-content">
-                      <h3><a class="title" href="{{ route('site.article.detail',['id' => $v->id, 'slug' => $v->slug]) }}">{{ $v->title }}</a></h3>
-                      <a class="readmore button-border" href="{{ route('site.article.detail',['id' => $v->id, 'slug' => $v->slug]) }}">Xem chi tiết <i class="readmore-icon material-icons">arrow_forward</i></a>
-                    </div>
-                  </div>
-                </div>
-            </div>
-            @endforeach
-        </div>
-        @endif
-        
-        <nav aria-label="Page navigation">
-            <div class="d-flex justify-content-center">
-                {{ $data->links() }}
-            </div>
-        </nav>
-      </div>
-    </div>
-  </div>
 @endsection
 @section('custom_js')
+
 @endsection

@@ -1,80 +1,77 @@
-<div class="header-layout">
-    <div class="header fix-top">
+<header>
+    <div class="top-layout">
         <div class="container">
             <div class="row">
-                <div class="col align-self-center zero-height-sx">
-                    <!-- NAVIGATION -->
-                    <div class="navigation nav-left">
+                <div class="top">
+                    <div class="top-element">
                         <ul>
-                            <li><a href="tell: 0936 88 11 05"><i class="material-icons">phone_in_talk</i><span
-                                        class="_isMobile">&nbsp;0936 88 11 05</span></a>
+                            <li><span><strong> <i class="material-icons">phone_in_talk</i>&nbsp;</strong><a
+                                        href="#link">0981908099&nbsp;</a></span></li>
+                            <li><span class="separate"></span></li>
+                            <li><span><strong><i class="material-icons">send</i>&nbsp;</strong><a href="#link">Hỗ
+                                        trợ&nbsp;</a></span></li>
+                        </ul>
+                    </div>
+                    <div class="pull-right">
+                        <ul>
+                            <li>
+                                <div class="social-icon"><a><i class="fab fa-facebook-f"></i></a>
+                                </div>
                             </li>
-                            <li><a href="mailto:gohay.vn@gmail.com"><i class="material-icons">mail_outline</i><span
-                                        class="_isMobile">&nbsp;gohay.vn@gmail.com</span></a>
+                            <li>
+                                <div class="social-icon"><a><i class="fab fa-google-plus-g"></i></a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="social-icon"><a><i class="fab fa-youtube"></i></a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="social-icon"><a><i class="fab fa-twitter"></i></a>
+                                </div>
                             </li>
                         </ul>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="header-layout">
+        <div class="container">
+            <div class="row">
                 <div class="col-sm-auto col-12">
-                    <h3 class="logo" id="logo"><a href="{{ route('site.home.index') }}"><img
-                                src="{{ asset('public/assets/site/themes/assets/images/logo-gohay.png') }}"></a></h3>
+                    <h3 class="logo" id="logo"><a href="index.html"><img src="./assets/images/logo.png"></a></h3>
                 </div>
-                <div class="col align-self-center text-right zero-height-sx">
+                <div class="col align-self-center"><span class="search-form">
+                        <form class="form">
+                            <select>
+                                <option value="1">Tin tức</option>
+                            </select>
+                            <input class="search-input" type="text" placeholder="Nhập từ khóa...">
+                            <button class="search-button"><i class="fas fa-search"></i></button>
+                        </form>
+                    </span></div>
+                <div class="col align-self-center">
                     <!-- NAVIGATION -->
                     <div class="navigation nav-right">
                         <ul>
-                            @auth
-                            <li><a href="./index.html"><span class="user-avatar"><img
-                                            src="https://png.pngtree.com/svg/20170920/4ff36bf59e.svg" /></span><span
-                                        class="_isMobile">&nbsp;{{ $user->name ? $user->name : $user->email }}</span></a>
+                            <li class="btn-wrapper btn-success">
+                                <button class="btn btn-success" data-toggle="modal" data-target="#login-panel"><i
+                                        class="fa fa-user"></i> Đăng nhập</button>
+                            </li>
+                            <li class="btn-wrapper btn-primary">
+                                <button class="btn btn-primary" data-toggle="modal" data-target="#register-panel"><i
+                                        class="fa fa-lock"></i> Đăng ký</button>
+                            </li>
+                            <li><a href="./">Tài khoản</a>
                                 <ul>
-                                    <li><a href="#"><i class="material-icons">account_circle</i><span
-                                                class="_isMobile">&nbsp;Thông tin tài khoản</span></a>
+                                    <li><a href="./category.html">Thông tin</a>
                                     </li>
-                                    <li><a href="#"><i class="material-icons">message</i><span
-                                                class="_isMobile">&nbsp;Thông báo</span></a>
+                                    <li><a href="./category.html">Quản lý khu trọ</a>
                                     </li>
-                                    <li><a href="{{ route('site.auth.logout') }}"><i class="material-icons">power_settings_new</i><span
-                                                class="_isMobile">&nbsp;Thoát</span></a>
+                                    <li><a href="./category.html">Tài khoản</a>
                                     </li>
-                                </ul>
-                            </li>
-                            @endauth
-                            @guest
-                            <li><a href="{{ route('site.auth.getLogin') }}"><span
-                                        class="material-icons _isMobile">vpn_key</span><span>&nbsp;Đăng nhập</span></a>
-                            </li>
-                            <li><a href="{{ route('site.auth.getRegister') }}"><span
-                                        class="material-icons _isMobile">person_add</span><span>&nbsp;Đăng ký</span></a>
-                            </li>
-                            @endguest
-                            <li class="cart-product">
-                                <a href="#"><i
-                                        class="material-icons">shopping_cart</i>&nbsp;&nbsp;
-                                        {{-- <span
-                                        class="cart-count">{{ Cart::content()->count() }}</span> --}}
-                                        <span class="isMobile">&nbsp;Giỏ hàng</span></a>
-                                <ul>
-                                    @if(sizeof(Cart::content()) > 0)
-                                        @foreach(Cart::content() as $v)
-                                        <li><span>
-                                                <div class="cart-product-thumb"><img
-                                                src="{{ $v->options->img }}" />
-                                                </div>
-                                                <div class="cart-product-title">{{ $v->name }}</div>
-                                                <div class="cart-product-price">{{ number_format($v->price,0,",",".") }} đ</div>
-                                            </span>
-                                        </li>
-                                        @endforeach
-                                    @endif
-                                    <li class="cart-total-row"><span>
-                                            <div class="cart-product-total">TỔNG: </div>
-                                            <div class="cart-product-price">{{ Cart::subtotal() }} đ</div>
-                                        </span>
-                                    </li>
-                                    <li class="text-center btn btn-primary"><a href="{{ route('site.cart.index') }}"><i
-                                                class="material-icons">local_grocery_store</i><span
-                                                class="_isMobile">&nbsp;Thanh toán</span></a>
+                                    <li><a href="./single.html">Thoát</a>
                                     </li>
                                 </ul>
                             </li>
@@ -84,4 +81,80 @@
             </div>
         </div>
     </div>
-</div>
+    <nav class="navi-layout fix-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-auto">
+                    <div class="row">
+                        <!-- NAVIGATION -->
+                        <div class="navigation nav-left">
+                            <ul>
+                                <li class="active"><a href="./index.html"><i class="fa fa-home"></i><span
+                                            class="isMobile">&nbsp;Trang chủ</span></a>
+                                </li>
+                                <li><a href="./category.html">Giới thiệu</a>
+                                </li>
+                                <li><a href="./category.html">Nhà đất Hà nội</a>
+                                    <ul>
+                                        <li><a href="./category.html">Bán nhà đất Hà Nội</a>
+                                        </li>
+                                        <li><a href="./category.html">Cho Thuê xưởng Hà Nội</a>
+                                        </li>
+                                        <li><a href="./single.html">Dự án khu vực Hà Nội</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="mega-menu three-items-menu"><a href="./project.html">Môi giới - Sàn giao
+                                        dịch</a>
+                                </li>
+                                <li><a href="./category-forent.html">Cho thuê</a>
+                                </li>
+                                <li><a href="./category-forent.html">GREENMARKET</a>
+                                </li>
+                                <li><a href="./category.html">Đô thị</a>
+                                    <ul>
+                                        <li><a href="./category.html">Đô thị mới</a>
+                                        </li>
+                                        <li><a href="./category.html">Đô thị vệ tinh</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a href="./category.html">Tin tức</a>
+                                </li>
+                                <li><a href="./category.html">Trợ giúp pháp lý</a>
+                                    <ul>
+                                        <li><a href="./category.html">Thủ tục hành chính</a>
+                                        </li>
+                                        <li><a href="./category.html">Công chứng</a>
+                                        </li>
+                                        <li><a href="./category.html">Luật</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a href="./single.html">Liên hệ</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col align-self-end">
+                    <div class="pull-right">
+                        <!-- NAVIGATION -->
+                        <div class="navigation nav-top">
+                            <ul>
+                                <li><a href="./single.html">Hỗ trợ</a>
+                                    <ul>
+                                        <li><a href="./category.html">Khuyến mãi</a>
+                                        </li>
+                                        <li><a href="./category.html">Chính sách</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
