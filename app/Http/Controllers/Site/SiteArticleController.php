@@ -33,6 +33,7 @@ class SiteArticleController extends Controller
             $room = $this->room->search($params);
             return view('site.room.index')->with('room', $room)->with('category', $category);
         }
+        abort(404);
     }
 
     public function detail(Request $request, $id, $slug){
