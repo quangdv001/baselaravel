@@ -1,6 +1,6 @@
 @extends('site.layout.main')
 @section('title')
-Trang chủ
+{{ $category->name }}
 @endsection
 @section('class_page')
 category
@@ -11,20 +11,20 @@ category
         <div class="container">
             <div class="row">
                 <ol class="breadcrumb breadcrumb-dot">
-                    <li class="breadcrumb-item"><i class="material-icons">home</i><a href="index.html"
+                    <li class="breadcrumb-item"><i class="material-icons">home</i><a href="{{ route('site.home.index') }}"
                             title="Trang chủ">Trang chủ</a></li>
-                    <li class="breadcrumb-item"><a href="#sublink" title="Title link">Sub page</a></li>
-                    <li class="breadcrumb-item active"><span>Current page</span></li>
+                    {{-- <li class="breadcrumb-item"><a href="#sublink" title="Title link">Sub page</a></li> --}}
+                    <li class="breadcrumb-item active"><span>{{ $category->name }}</span></li>
                 </ol>
             </div>
         </div>
     </div>
     <div class="section-main">
         <div class="container main-wrapper">
-            <h1 class="page-title"><a href="#">Tin tức </a></h1>
+            <h1 class="page-title"><a href="#">{{ $category->name }} </a></h1>
             <div class="row">
                 <div class="col-sm-9 border-sm-right">
-                    <div class="row main-head">
+                    {{-- <div class="row main-head">
                         <div class="col-sm-9 border-sm-right">
                             <div class="row">
                                 <div class="slide-owl-carousel owl-carousel owl-theme"><a class="block" href="#item">
@@ -113,220 +113,34 @@ category
                                 </ul>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
+                    @if(sizeof($article) > 0) 
+
                     <div class="list-post">
-                        <div class="news-post line-bottom"><a class="news-post-image-link" href="./single.html">
+                        @foreach($article as $v)
+                        <div class="news-post line-bottom"><a class="news-post-image-link" href="{{ route('site.article.detail', ['slug' => Str::slug($v->title, '-'), 'id' => $v->id]) }}">
                                 <figure class="image-container">
                                     <div class="featured-image-overlay"><span class="featured-image-icon"><i
                                                 class="fa fa-camera"></i></span></div><img class="img-responsive"
-                                        src="https://cafebiz.cafebizcdn.vn/zoom/260_163/2019/2/25/httpchannelvcmediavnprupload156201902img20190225102942161-1551065755100211648411.jpg"
+                                        src="{{ $v->img }}"
                                         alt="title alt" />
                                 </figure>
                             </a>
                             <div class="news-post-content">
-                                <h2 class="post-title title"><a class="news-post-link" href="./single.html">Lorem Ipsum
-                                        là gì, Tại sao lại sử dụng nó?</a></h2>
+                                <h2 class="post-title title"><a class="news-post-link" href="{{ route('site.article.detail', ['slug' => Str::slug($v->title, '-'), 'id' => $v->id]) }}">{{ $v->title }}</a></h2>
                                 <div class="post-meta-container"><span class="post-meta-item"><i
-                                            class="far fa-clock"></i> Th3-27/10/2015</span><span
+                                            class="far fa-clock"></i> {{ $v->created_at->format('d/m/Y') }}</span><span
                                         class="post-meta-item"><i class="fa fa-user-check"></i><a href="#admin">
-                                            Admin</a></span></div>
-                                <p class="post-desc">Lorem Ipsum chỉ đơn giản là một đoạn văn bản giả, được dùng vào
-                                    việc trình bày và dàn trang phục vụ cho in ấn. Lorem Ipsum đã được sử dụng như một
-                                    văn bản chuẩn.
-                                </p><span class="read-more-button"><a href="./single.html">Xem tiếp...</a></span>
+                                            {{ $v->user_name_c ? $v->user_name_c : $v->admin_name_c }}</a></span></div>
+                                <p class="post-desc">{!! $v->short_description !!}
+                                </p><span class="read-more-button"><a href="{{ route('site.article.detail', ['slug' => Str::slug($v->title, '-'), 'id' => $v->id]) }}">Xem tiếp...</a></span>
                             </div>
                         </div>
-                        <div class="news-post line-bottom"><a class="news-post-image-link" href="./single.html">
-                                <figure class="image-container">
-                                    <div class="featured-image-overlay"><span class="featured-image-icon"><i
-                                                class="fa fa-camera"></i></span></div><img class="img-responsive"
-                                        src="https://cafebiz.cafebizcdn.vn/zoom/260_163/2019/2/25/httpchannelvcmediavnprupload156201902img20190225102942161-1551065755100211648411.jpg"
-                                        alt="title alt" />
-                                </figure>
-                            </a>
-                            <div class="news-post-content">
-                                <h2 class="post-title title"><a class="news-post-link" href="./single.html">Lorem Ipsum
-                                        là gì, Tại sao lại sử dụng nó?</a></h2>
-                                <div class="post-meta-container"><span class="post-meta-item"><i
-                                            class="far fa-clock"></i> Th3-27/10/2015</span><span
-                                        class="post-meta-item"><i class="fa fa-user-check"></i><a href="#admin">
-                                            Admin</a></span></div>
-                                <p class="post-desc">Lorem Ipsum chỉ đơn giản là một đoạn văn bản giả, được dùng vào
-                                    việc trình bày và dàn trang phục vụ cho in ấn. Lorem Ipsum đã được sử dụng như một
-                                    văn bản chuẩn.
-                                </p><span class="read-more-button"><a href="./single.html">Xem tiếp...</a></span>
-                            </div>
-                        </div>
-                        <div class="news-post line-bottom"><a class="news-post-image-link" href="./single.html">
-                                <figure class="image-container">
-                                    <div class="featured-image-overlay"><span class="featured-image-icon"><i
-                                                class="fa fa-camera"></i></span></div><img class="img-responsive"
-                                        src="https://cafebiz.cafebizcdn.vn/zoom/260_163/2019/2/25/httpchannelvcmediavnprupload156201902img20190225102942161-1551065755100211648411.jpg"
-                                        alt="title alt" />
-                                </figure>
-                            </a>
-                            <div class="news-post-content">
-                                <h2 class="post-title title"><a class="news-post-link" href="./single.html">Lorem Ipsum
-                                        là gì, Tại sao lại sử dụng nó?</a></h2>
-                                <div class="post-meta-container"><span class="post-meta-item"><i
-                                            class="far fa-clock"></i> Th3-27/10/2015</span><span
-                                        class="post-meta-item"><i class="fa fa-user-check"></i><a href="#admin">
-                                            Admin</a></span></div>
-                                <p class="post-desc">Lorem Ipsum chỉ đơn giản là một đoạn văn bản giả, được dùng vào
-                                    việc trình bày và dàn trang phục vụ cho in ấn. Lorem Ipsum đã được sử dụng như một
-                                    văn bản chuẩn.
-                                </p><span class="read-more-button"><a href="./single.html">Xem tiếp...</a></span>
-                            </div>
-                        </div>
-                        <div class="news-post line-bottom"><a class="news-post-image-link" href="./single.html">
-                                <figure class="image-container">
-                                    <div class="featured-image-overlay"><span class="featured-image-icon"><i
-                                                class="fa fa-camera"></i></span></div><img class="img-responsive"
-                                        src="https://cafebiz.cafebizcdn.vn/zoom/260_163/2019/2/25/httpchannelvcmediavnprupload156201902img20190225102942161-1551065755100211648411.jpg"
-                                        alt="title alt" />
-                                </figure>
-                            </a>
-                            <div class="news-post-content">
-                                <h2 class="post-title title"><a class="news-post-link" href="./single.html">Lorem Ipsum
-                                        là gì, Tại sao lại sử dụng nó?</a></h2>
-                                <div class="post-meta-container"><span class="post-meta-item"><i
-                                            class="far fa-clock"></i> Th3-27/10/2015</span><span
-                                        class="post-meta-item"><i class="fa fa-user-check"></i><a href="#admin">
-                                            Admin</a></span></div>
-                                <p class="post-desc">Lorem Ipsum chỉ đơn giản là một đoạn văn bản giả, được dùng vào
-                                    việc trình bày và dàn trang phục vụ cho in ấn. Lorem Ipsum đã được sử dụng như một
-                                    văn bản chuẩn.
-                                </p><span class="read-more-button"><a href="./single.html">Xem tiếp...</a></span>
-                            </div>
-                        </div>
-                        <div class="news-post line-bottom"><a class="news-post-image-link" href="./single.html">
-                                <figure class="image-container">
-                                    <div class="featured-image-overlay"><span class="featured-image-icon"><i
-                                                class="fa fa-camera"></i></span></div><img class="img-responsive"
-                                        src="https://cafebiz.cafebizcdn.vn/zoom/260_163/2019/2/25/httpchannelvcmediavnprupload156201902img20190225102942161-1551065755100211648411.jpg"
-                                        alt="title alt" />
-                                </figure>
-                            </a>
-                            <div class="news-post-content">
-                                <h2 class="post-title title"><a class="news-post-link" href="./single.html">Lorem Ipsum
-                                        là gì, Tại sao lại sử dụng nó?</a></h2>
-                                <div class="post-meta-container"><span class="post-meta-item"><i
-                                            class="far fa-clock"></i> Th3-27/10/2015</span><span
-                                        class="post-meta-item"><i class="fa fa-user-check"></i><a href="#admin">
-                                            Admin</a></span></div>
-                                <p class="post-desc">Lorem Ipsum chỉ đơn giản là một đoạn văn bản giả, được dùng vào
-                                    việc trình bày và dàn trang phục vụ cho in ấn. Lorem Ipsum đã được sử dụng như một
-                                    văn bản chuẩn.
-                                </p><span class="read-more-button"><a href="./single.html">Xem tiếp...</a></span>
-                            </div>
-                        </div>
-                        <div class="news-post line-bottom"><a class="news-post-image-link" href="./single.html">
-                                <figure class="image-container">
-                                    <div class="featured-image-overlay"><span class="featured-image-icon"><i
-                                                class="fa fa-camera"></i></span></div><img class="img-responsive"
-                                        src="https://cafebiz.cafebizcdn.vn/zoom/260_163/2019/2/25/httpchannelvcmediavnprupload156201902img20190225102942161-1551065755100211648411.jpg"
-                                        alt="title alt" />
-                                </figure>
-                            </a>
-                            <div class="news-post-content">
-                                <h2 class="post-title title"><a class="news-post-link" href="./single.html">Lorem Ipsum
-                                        là gì, Tại sao lại sử dụng nó?</a></h2>
-                                <div class="post-meta-container"><span class="post-meta-item"><i
-                                            class="far fa-clock"></i> Th3-27/10/2015</span><span
-                                        class="post-meta-item"><i class="fa fa-user-check"></i><a href="#admin">
-                                            Admin</a></span></div>
-                                <p class="post-desc">Lorem Ipsum chỉ đơn giản là một đoạn văn bản giả, được dùng vào
-                                    việc trình bày và dàn trang phục vụ cho in ấn. Lorem Ipsum đã được sử dụng như một
-                                    văn bản chuẩn.
-                                </p><span class="read-more-button"><a href="./single.html">Xem tiếp...</a></span>
-                            </div>
-                        </div>
-                        <div class="news-post line-bottom"><a class="news-post-image-link" href="./single.html">
-                                <figure class="image-container">
-                                    <div class="featured-image-overlay"><span class="featured-image-icon"><i
-                                                class="fa fa-camera"></i></span></div><img class="img-responsive"
-                                        src="https://cafebiz.cafebizcdn.vn/zoom/260_163/2019/2/25/httpchannelvcmediavnprupload156201902img20190225102942161-1551065755100211648411.jpg"
-                                        alt="title alt" />
-                                </figure>
-                            </a>
-                            <div class="news-post-content">
-                                <h2 class="post-title title"><a class="news-post-link" href="./single.html">Lorem Ipsum
-                                        là gì, Tại sao lại sử dụng nó?</a></h2>
-                                <div class="post-meta-container"><span class="post-meta-item"><i
-                                            class="far fa-clock"></i> Th3-27/10/2015</span><span
-                                        class="post-meta-item"><i class="fa fa-user-check"></i><a href="#admin">
-                                            Admin</a></span></div>
-                                <p class="post-desc">Lorem Ipsum chỉ đơn giản là một đoạn văn bản giả, được dùng vào
-                                    việc trình bày và dàn trang phục vụ cho in ấn. Lorem Ipsum đã được sử dụng như một
-                                    văn bản chuẩn.
-                                </p><span class="read-more-button"><a href="./single.html">Xem tiếp...</a></span>
-                            </div>
-                        </div>
-                        <div class="news-post line-bottom"><a class="news-post-image-link" href="./single.html">
-                                <figure class="image-container">
-                                    <div class="featured-image-overlay"><span class="featured-image-icon"><i
-                                                class="fa fa-camera"></i></span></div><img class="img-responsive"
-                                        src="https://cafebiz.cafebizcdn.vn/zoom/260_163/2019/2/25/httpchannelvcmediavnprupload156201902img20190225102942161-1551065755100211648411.jpg"
-                                        alt="title alt" />
-                                </figure>
-                            </a>
-                            <div class="news-post-content">
-                                <h2 class="post-title title"><a class="news-post-link" href="./single.html">Lorem Ipsum
-                                        là gì, Tại sao lại sử dụng nó?</a></h2>
-                                <div class="post-meta-container"><span class="post-meta-item"><i
-                                            class="far fa-clock"></i> Th3-27/10/2015</span><span
-                                        class="post-meta-item"><i class="fa fa-user-check"></i><a href="#admin">
-                                            Admin</a></span></div>
-                                <p class="post-desc">Lorem Ipsum chỉ đơn giản là một đoạn văn bản giả, được dùng vào
-                                    việc trình bày và dàn trang phục vụ cho in ấn. Lorem Ipsum đã được sử dụng như một
-                                    văn bản chuẩn.
-                                </p><span class="read-more-button"><a href="./single.html">Xem tiếp...</a></span>
-                            </div>
-                        </div>
-                        <div class="news-post line-bottom"><a class="news-post-image-link" href="./single.html">
-                                <figure class="image-container">
-                                    <div class="featured-image-overlay"><span class="featured-image-icon"><i
-                                                class="fa fa-camera"></i></span></div><img class="img-responsive"
-                                        src="https://cafebiz.cafebizcdn.vn/zoom/260_163/2019/2/25/httpchannelvcmediavnprupload156201902img20190225102942161-1551065755100211648411.jpg"
-                                        alt="title alt" />
-                                </figure>
-                            </a>
-                            <div class="news-post-content">
-                                <h2 class="post-title title"><a class="news-post-link" href="./single.html">Lorem Ipsum
-                                        là gì, Tại sao lại sử dụng nó?</a></h2>
-                                <div class="post-meta-container"><span class="post-meta-item"><i
-                                            class="far fa-clock"></i> Th3-27/10/2015</span><span
-                                        class="post-meta-item"><i class="fa fa-user-check"></i><a href="#admin">
-                                            Admin</a></span></div>
-                                <p class="post-desc">Lorem Ipsum chỉ đơn giản là một đoạn văn bản giả, được dùng vào
-                                    việc trình bày và dàn trang phục vụ cho in ấn. Lorem Ipsum đã được sử dụng như một
-                                    văn bản chuẩn.
-                                </p><span class="read-more-button"><a href="./single.html">Xem tiếp...</a></span>
-                            </div>
-                        </div>
-                        <div class="news-post line-bottom"><a class="news-post-image-link" href="./single.html">
-                                <figure class="image-container">
-                                    <div class="featured-image-overlay"><span class="featured-image-icon"><i
-                                                class="fa fa-camera"></i></span></div><img class="img-responsive"
-                                        src="https://cafebiz.cafebizcdn.vn/zoom/260_163/2019/2/25/httpchannelvcmediavnprupload156201902img20190225102942161-1551065755100211648411.jpg"
-                                        alt="title alt" />
-                                </figure>
-                            </a>
-                            <div class="news-post-content">
-                                <h2 class="post-title title"><a class="news-post-link" href="./single.html">Lorem Ipsum
-                                        là gì, Tại sao lại sử dụng nó?</a></h2>
-                                <div class="post-meta-container"><span class="post-meta-item"><i
-                                            class="far fa-clock"></i> Th3-27/10/2015</span><span
-                                        class="post-meta-item"><i class="fa fa-user-check"></i><a href="#admin">
-                                            Admin</a></span></div>
-                                <p class="post-desc">Lorem Ipsum chỉ đơn giản là một đoạn văn bản giả, được dùng vào
-                                    việc trình bày và dàn trang phục vụ cho in ấn. Lorem Ipsum đã được sử dụng như một
-                                    văn bản chuẩn.
-                                </p><span class="read-more-button"><a href="./single.html">Xem tiếp...</a></span>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
-                    <nav aria-label="Page navigation">
+                    @endif
+                    {{ $article->links() }}
+                    {{-- <nav aria-label="Page navigation">
                         <ul class="pagination">
                             <li class="page-item"><a class="page-link" href="#">Trước</a></li>
                             <li class="page-item active"><a class="page-link" href="#">1</a></li>
@@ -334,10 +148,10 @@ category
                             <li class="page-item"><a class="page-link" href="#">3</a></li>
                             <li class="page-item"><a class="page-link" href="#">Tiếp</a></li>
                         </ul>
-                    </nav>
+                    </nav> --}}
                 </div>
                 <div class="col-sm-3 sidebar">
-                    @widget('recentNews')
+                    @widget('recent_news')
                 </div>
             </div>
         </div>
