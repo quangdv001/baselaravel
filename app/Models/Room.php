@@ -21,4 +21,14 @@ class Room extends Model
     {
         return $this->hasMany('App\Models\RoomImg');
     }
+
+    public function district(){
+        return $this->belongsTo('App\Models\District', 'district_id', 'district_id');
+    }
+    public function province(){
+        return $this->belongsTo('App\Models\Province', 'province_id', 'province_id');
+    }
+    public function ward(){
+        return $this->belongsTo('App\Models\Ward', 'ward_id', 'ward_id');
+    }
 }

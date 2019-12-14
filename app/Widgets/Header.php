@@ -21,7 +21,7 @@ class Header extends AbstractWidget
     {
         //
 
-        return view('site.layout.header', [
+        return view('widgets.header', [
             'config' => $this->config,
         ]);
     }

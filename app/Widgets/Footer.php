@@ -21,7 +21,7 @@ class Footer extends AbstractWidget
     {
         //
 
-        return view('site.layout.footer', [
+        return view('widgets.footer', [
             'config' => $this->config,
         ]);
     }

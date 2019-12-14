@@ -35,6 +35,9 @@ class RoomService
         if (isset($data['admin_name_c']) && $data['admin_name_c'] != '') {
             $query = $query->where('admin_name_c', 'like', '%' . $data['admin_name_c'] . '%');
         }
+        if (isset($data['category_id']) && $data['category_id'] > 0) {
+            $query = $query->where('category_id', $data['category_id']);
+        }
         if (isset($data['status']) && $data['status'] > -1) {
             $query = $query->where('status', $data['status']);
         }
@@ -120,7 +123,7 @@ class RoomService
         return $this->room->orderBy('id', 'DESC')->get();
     }
 
-    public function getRelate($categoryId, $slug, $limit){
-        return $this->room->where('category_id', $categoryId)->where('slug', '!=', $slug)->where('status',1)->orderBy('id','DESC')->paginate($limit);
+    public function getRelate($categoryId, $id, $limit){
+        return $this->room->where('category_id', $categoryId)->where('id', '!=', $id)->where('status',1)->orderBy('id','DESC')->paginate($limit);
     }
 }

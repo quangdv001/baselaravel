@@ -877,7 +877,7 @@ home
                     </div>
                 </div>
                 <div class="col-sm-3 sidebar">
-                    @widget('recentNews')
+                    @widget('recent_news')
                 </div>
             </div>
         </div>

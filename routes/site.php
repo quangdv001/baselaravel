@@ -7,8 +7,9 @@ Route::get('logout', 'SiteAuthController@logout')->name('auth.logout');
 
 Route::get('/', 'SiteHomeController@index')->name('home.index');
 
-Route::get('danh-muc/{slug}-{id}', 'SiteArticleController@index')->name('article.index');
-Route::get('bai-viet/{slug}-{id}', 'SiteArticleController@detail')->name('article.detail');
+Route::get('danh-muc/{id}/{slug}', 'SiteArticleController@index')->name('article.index');
+Route::get('bai-viet/{id}/{slug}', 'SiteArticleController@detail')->name('article.detail');
+Route::get('cho-thue/{id}/{slug}', 'SiteArticleController@detailRoom')->name('room.detail');
 
 
 
