@@ -55,6 +55,7 @@
                     <!-- NAVIGATION -->
                     <div class="navigation nav-right">
                         <ul>
+                            @if(!auth()->check())
                             <li class="btn-wrapper btn-success">
                                 <button class="btn btn-success" data-toggle="modal" data-target="#login-panel"><i
                                         class="fa fa-user"></i> Đăng nhập</button>
@@ -63,18 +64,20 @@
                                 <button class="btn btn-primary" data-toggle="modal" data-target="#register-panel"><i
                                         class="fa fa-lock"></i> Đăng ký</button>
                             </li>
-                            <li><a href="./">Tài khoản</a>
+                            @else
+                            <li><a href="javascript:void(0);">{{ auth()->user()->name }}</a>
                                 <ul>
-                                    <li><a href="./category.html">Thông tin</a>
+                                    <li><a href="javascript:void(0);">Thông tin</a>
                                     </li>
-                                    <li><a href="./category.html">Quản lý khu trọ</a>
+                                    <li><a href="javascript:void(0);">Quản lý khu trọ</a>
                                     </li>
-                                    <li><a href="./category.html">Tài khoản</a>
+                                    <li><a href="javascript:void(0);">Tài khoản</a>
                                     </li>
-                                    <li><a href="./single.html">Thoát</a>
+                                    <li><a href="{{ route('site.auth.logout') }}">Thoát</a>
                                     </li>
                                 </ul>
                             </li>
+                            @endif
                         </ul>
                     </div>
                 </div>
