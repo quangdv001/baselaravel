@@ -57,5 +57,11 @@ Route::middleware(['auth.admin'])->prefix('admin')->group(function () {
 
     Route::get('user', 'AdminUserController@index')->name('user.getList');
     Route::post('user/updateStatus/{id}', 'AdminUserController@updateStatus')->name('user.updateStatus');
+
+    Route::get('setting-footer', 'AdminSettingFooterController@index')->name('settingFooter.getList');
+    Route::get('setting-footer/{id}', 'AdminSettingFooterController@show')->name('settingFooter.show');
+    Route::post('setting-footer/create', 'AdminSettingFooterController@create')->name('settingFooter.create');
+    Route::post('setting-footer/update/{id}', 'AdminSettingFooterController@update')->name('settingFooter.update');
+    Route::post('setting-footer/updatePosition', 'AdminSettingFooterController@updatePosition')->name('settingFooter.updatePosition');
 });
 
