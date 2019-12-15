@@ -47,4 +47,22 @@ class SiteArticleController extends Controller
         $relate = $this->room->getRelate($room->category->id, $id, 5);
         return view('site.room.detail')->with('room', $room)->with('relate', $relate);
     }
+
+    public function search(Request $request){
+        $request->flash();
+        $type = (int) $request->input('type', 0);
+        $params['title'] = $request->input('name', '');
+        if($type == 0){
+            $params['limit'] = 10;
+            $params['sortBy'] = 'id';
+            $article = $this->article->search($params);
+            return view('site.article.search')->with('article', $article)->with('title', $params['title']);
+        } elseif($type == 1){
+            $params['limit'] = 10;
+            $params['sortBy'] = 'id';
+            $room = $this->room->search($params);
+            return view('site.room.search')->with('room', $room)->with('title', $params['title']);
+        }
+        abort(404);
+    }
 }

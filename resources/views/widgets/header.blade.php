@@ -43,12 +43,13 @@
                     <h3 class="logo" id="logo"><a href="index.html"><img src="./assets/images/logo.png"></a></h3>
                 </div>
                 <div class="col align-self-center"><span class="search-form">
-                        <form class="form">
-                            <select>
-                                <option value="1">Tin tức</option>
+                        <form class="form" action="{{ route('site.article.search') }}">
+                            <select name="type">
+                                <option value="0" @if(old('type') == 0) selected @endif>Tin tức</option>
+                                <option value="1" @if(old('type') == 1) selected @endif>Cho thuê</option>
                             </select>
-                            <input class="search-input" type="text" placeholder="Nhập từ khóa...">
-                            <button class="search-button"><i class="fas fa-search"></i></button>
+                        <input class="search-input" name="name" type="text" placeholder="Nhập từ khóa..." value="{{ old('name') }}">
+                            <button class="search-button" type="submit"><i class="fas fa-search"></i></button>
                         </form>
                     </span></div>
                 <div class="col align-self-center">
@@ -91,7 +92,9 @@
                     <div class="row">
                         <!-- NAVIGATION -->
                         <div class="navigation nav-left">
-                            <ul>
+                            {!! $htmlCategory !!}
+                            
+                            {{-- <ul>
                                 <li class="active"><a href="./index.html"><i class="fa fa-home"></i><span
                                             class="isMobile">&nbsp;Trang chủ</span></a>
                                 </li>
@@ -136,7 +139,7 @@
                                 </li>
                                 <li><a href="./single.html">Liên hệ</a>
                                 </li>
-                            </ul>
+                            </ul> --}}
                         </div>
                     </div>
                 </div>
@@ -144,7 +147,7 @@
                     <div class="pull-right">
                         <!-- NAVIGATION -->
                         <div class="navigation nav-top">
-                            <ul>
+                            {{-- <ul>
                                 <li><a href="./single.html">Hỗ trợ</a>
                                     <ul>
                                         <li><a href="./category.html">Khuyến mãi</a>
@@ -153,7 +156,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                            </ul>
+                            </ul> --}}
                         </div>
                     </div>
                 </div>

@@ -10,6 +10,9 @@ Route::get('/', 'SiteHomeController@index')->name('home.index');
 Route::get('danh-muc/{id}/{slug}', 'SiteArticleController@index')->name('article.index');
 Route::get('bai-viet/{id}/{slug}', 'SiteArticleController@detail')->name('article.detail');
 Route::get('cho-thue/{id}/{slug}', 'SiteArticleController@detailRoom')->name('room.detail');
+Route::get('tim-kiem', 'SiteArticleController@search')->name('article.search');
+
+Route::get('trang/{id}/{slug}', 'SitePageController@index')->name('page.index');
 
 
 
