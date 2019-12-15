@@ -2,30 +2,31 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Services\GeneralInfoService;
 use App\Services\PageService;
 use App\Services\SettingFooterService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\Admin\SettingFooter\UpdateRequest;
-use function PHPSTORM_META\type;
 
 class AdminSettingFooterController extends AdminBaseController
 {
     protected $settingFooterService;
     protected $pageService;
+    protected $generalInfoService;
 
     private $arrType = [
-        SettingFooterService::TYPE_TEXT => 'Text',
-        SettingFooterService::TYPE_SINGLE_PAGE => 'Single page',
-        SettingFooterService::TYPE_SOCIAL => 'Social',
-        SettingFooterService::TYPE_IMAGE => 'Image',
+        SettingFooterService::TYPE_SINGLE_PAGE => 'Trang đơn',
+        SettingFooterService::TYPE_GENERAL_INFO => 'Thông tin chung',
+        SettingFooterService::TYPE_IMAGE => 'Ảnh',
     ];
 
-    public function __construct(SettingFooterService $settingFooterService, PageService $pageService)
+    public function __construct(SettingFooterService $settingFooterService, PageService $pageService,GeneralInfoService $generalInfoService)
     {
         parent::__construct();
         $this->settingFooterService = $settingFooterService;
         $this->pageService = $pageService;
+        $this->generalInfoService = $generalInfoService;
     }
 
     public function index()
@@ -36,15 +37,17 @@ class AdminSettingFooterController extends AdminBaseController
         $list = $this->settingFooterService->get(['sortBy' => 'position', 'sortOrder' => 'ASC']);
         $html = $this->showCategories($list, 0, '');
         $listPage = $this->pageService->get([]);
+        $generalInfo = $this->generalInfoService->get([]);
         return view('admin.setting_footer.index')
             ->with('arrType', $this->arrType)
             ->with('listPage', $listPage)
+            ->with('generalInfo', $generalInfo)
             ->with('html', $html);
     }
 
     public function create()
     {
-        $data['content'] = 'New Category Footer';
+        $data['title'] = 'Tiêu đề';
         $category = $this->settingFooterService->create($data);
         $res['success'] = 0;
         $res['mess'] = 'Có lỗi xảy ra!';
@@ -60,29 +63,7 @@ class AdminSettingFooterController extends AdminBaseController
 
     public function update(UpdateRequest $request, $id)
     {
-        $data = $request->only('content', 'type', 'social', 'img', 'single_page_id', 'status');
-        foreach ($data as $k => &$val) {
-            if(!isset($val)){
-                unset($data[$k]);
-            }
-            if(in_array($k,['type','status','single_page_id'])){
-                $val= (int)$val;
-            }
-        }
-        switch ($data['type']){
-            case SettingFooterService::TYPE_TEXT:
-                unset($data['img'],$data['social'],$data['single_page_id']);
-                break;
-            case SettingFooterService::TYPE_IMAGE:
-                unset($data['social'],$data['single_page_id']);
-                break;
-            case SettingFooterService::TYPE_SINGLE_PAGE:
-                unset($data['img'],$data['social']);
-                break;
-            case SettingFooterService::TYPE_SOCIAL:
-                unset($data['img'],$data['single_page_id']);
-                break;
-        }
+        $data = $request->only('title', 'type','status', 'general_info_id', 'img', 'single_page_id');
         $category = $this->settingFooterService->getById($id);
         $res['success'] = 0;
         $res['mess'] = 'Có lỗi xảy ra!';
@@ -160,7 +141,7 @@ class AdminSettingFooterController extends AdminBaseController
                 $html .= '<li class="dd-item dd3-item" data-id="' . $item['id'] . '"><div class="dd-handle dd3-handle"></div>
                 <div class="dd3-content">
                     <div class="pull-left">
-                        <span class="text-category">' . $item['id'] . '-' . ($item['parent_id'] == 0 ? 'Group' : $item['content']) . '</span>
+                        <span class="text-category">' . $item['id'] . '-' . ($item['parent_id'] == 0 ? 'Group' : $item['title']) . '</span>
                     </div>
                     <div class="pull-right">'
                     . ($item['parent_id'] == 0 ? '' : '<a href="javascript:void(0);" class="text-warning mr-2 btn-edit" data-id="' . $item['id'] . '"><i class="fa fa-pencil-square-o icon-sm" aria-hidden="true"></i></a>') . '

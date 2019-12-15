@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin\SettingFooter;
+namespace App\Http\Requests\Admin\GeneralInfo;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
@@ -26,14 +26,16 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required',
+            'name' => 'required',
             'type' => 'in:0,1,2',
             'status' => 'in:0,1',
-            'single_page_id' => 'required_if:type,0|integer',
-            'general_info_id' => 'required_if:type,1|integer',
+            'content' => 'required_if:type,0',
+            'link' => 'required_if:type,1',
+            'icon' => 'required_if:type,1',
             'img' => 'required_if:type,2',
         ];
     }
+
 
     /**
      * custom ajax request

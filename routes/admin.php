@@ -63,5 +63,10 @@ Route::middleware(['auth.admin'])->prefix('admin')->group(function () {
     Route::post('setting-footer/create', 'AdminSettingFooterController@create')->name('settingFooter.create');
     Route::post('setting-footer/update/{id}', 'AdminSettingFooterController@update')->name('settingFooter.update');
     Route::post('setting-footer/updatePosition', 'AdminSettingFooterController@updatePosition')->name('settingFooter.updatePosition');
+
+    Route::get('general-info', 'AdminGeneralInfoController@index')->name('generalInfo.index');
+    Route::get('general-info/getCreate/{id?}', 'AdminGeneralInfoController@getCreate')->name('generalInfo.getCreate');
+    Route::post('general-info/getCreate/{id?}', 'AdminGeneralInfoController@postCreate')->name('generalInfo.postCreate');
+    Route::get('general-info/remove/{id?}', 'AdminGeneralInfoController@remove')->name('generalInfo.remove');
 });
 

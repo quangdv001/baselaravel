@@ -46,7 +46,7 @@
 
                             </div>
                         </div>
-                        <div class="card-footer">
+                        <div class="card-footer d-none">
                             <button class="btn btn-sm btn-primary btn-save" type="button">
                                 <i class="fa fa-dot-circle-o"></i> Submit
                             </button>
@@ -58,23 +58,21 @@
                         <div class="card-header">
                             <strong>Chi tiết danh mục - <span class="category-id">0</span></strong></div>
                         <div class="card-body">
-
                             <form action="" id="form-edit">
                                 <input type="hidden" name="id" class="id" value="0">
                                 <div class="form-group row">
-                                    <label class="col-md-3 col-form-label">Nội dung danh mục</label>
+                                    <label class="col-md-3 col-form-label">Tiêu đề</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control content" name="content"
-                                               placeholder="Tên danh mục"
-                                               value="">
+                                        <input type="text" class="form-control title" name="title"
+                                               placeholder="Tiêu đề" value="">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-3 col-form-label" for="select1">Trạng thái</label>
                                     <div class="col-md-9">
                                         <select class="form-control status" name="status">
-                                            <option value="1">Hoạt động</option>
-                                            <option value="0">Ngừng hoạt động</option>
+                                            <option value="{{$Service::STATUS_ACTIVE}}">Hoạt động</option>
+                                            <option value="{{$Service::STATUS_NOT_ACTIVE}}">Ngừng hoạt động</option>
                                         </select>
                                     </div>
                                 </div>
@@ -91,11 +89,30 @@
                                 <div class="form-group row pages" style="display:none;">
                                     <label class="col-md-3 col-form-label" for="">Trang nội dung</label>
                                     <div class="col-md-9">
-                                        <select class="form-control single_page_id select2" name="single_page_id">
-                                            @foreach($listPage as $k => $v)
-                                                <option value="{{ $v['id'] }}">{{ $v['title'] }}</option>
-                                            @endforeach
-                                        </select>
+
+                                        @if(count($listPage)>0)
+                                            <select class="form-control single_page_id select2" name="single_page_id">
+                                                @foreach($listPage as $k => $v)
+                                                    <option value="{{ $v['id'] }}">{{ $v['title'] }}</option>
+                                                @endforeach
+                                            </select>
+                                        @else
+                                            <p class="text-danger mt-2"><span>Bạn chưa tạo trang đơn!</span></p>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="form-group row general-info" style="display:none;">
+                                    <label class="col-md-3 col-form-label" for="">Thông tin chung</label>
+                                    <div class="col-md-9">
+                                        @if(count($generalInfo)>0)
+                                            <select class="form-control single_page_id select2" name="general_info_id">
+                                                @foreach($generalInfo as $k => $v)
+                                                    <option value="{{ $v['id'] }}">{{ $v['name'] }}</option>
+                                                @endforeach
+                                            </select>
+                                        @else
+                                            <p class="text-danger mt-2"><span>Bạn chưa tạo thông tin chung!</span></p>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="form-group row image" style="display: none">
@@ -105,54 +122,6 @@
                                         <a href="javascript:void(0)" class="btn btn-info btn-select-file">Chọn ảnh</a>
                                         <div class="bl-img-show mt-4">
                                             <img src="" class="img-show" width="90" height="90" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="social">
-                                    <div class="form-group row mb-1">
-                                        <div class="col-md-3">
-                                            <label class="col-form-label">Social</label>
-                                        </div>
-                                        <div class="col-md-9">
-                                            <a href="javascript:void(0)"
-                                               class="btn btn-outline-primary btn-sm btn-add-social">Thêm social</a>
-                                        </div>
-                                    </div>
-                                    <div class="item-social mb-3">
-                                        <div class="form-group row mb-1">
-                                            <div class="col-md-3">
-                                                <label class="col-form-label ml-3">
-                                                    Tên Social
-                                                </label>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <input type="text" class="form-control" name="social[]['name']"
-                                                       placeholder="Tên social" value="">
-                                            </div>
-                                            <div class="col-md-1">
-                                                <a href="javascript:void(0);"
-                                                   class="text-danger  btn-rm-social">
-                                                    <i class="fa fa-trash icon-sm" aria-hidden="true"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row mb-1">
-                                            <div class="col-md-3">
-                                                <label class="col-form-label ml-3">Link Social</label>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <input type="text" class="form-control" name="social[]['link']"
-                                                       placeholder="Link social" value="">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row mb-1">
-                                            <div class="col-md-3">
-                                                <label class="col-form-label ml-3">Icon Social</label>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <input type="text" class="form-control" name="social[]['icon']"
-                                                       placeholder="Icon social" value="">
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -244,7 +213,7 @@
                     if (res.success == 1) {
                         $('.id').val(res.data.id);
                         $('.category-id').text(res.data.id);
-                        $('.content').val(res.data.content);
+                        $('.title').val(res.data.title);
                         $('.img').val(res.data.img);
                         $('.img-show').attr('src', res.data.img);
                         $('.status').val(res.data.status);
@@ -253,22 +222,27 @@
                         $('.bl-form').show();
                         console.log(res.data.type);
                         switch (res.data.type) {
-                            case {{$Service::TYPE_TEXT}}:
-                                break;
                             case {{$Service::TYPE_SINGLE_PAGE}}:
                                 $('.pages').show();
                                 $('select[name="single_page_id"]').val(res.data.single_page_id);
                                 $('select[name="single_page_id"] option').each(function (i) {
                                     if ($(this).attr('value') == res.data.single_page_id) {
                                         $(this).prop("selected", true);
-                                    }
-                                    else {
+                                    } else {
                                         $(this).prop("selected", false);
                                     }
                                 });
                                 break;
-                            case {{$Service::TYPE_SOCIAL}}:
-
+                            case {{$Service::TYPE_GENERAL_INFO}}:
+                                $('.general-info').show();
+                                $('select[name="general_info_id"]').val(res.data.single_page_id);
+                                $('select[name="general_info_id"] option').each(function (i) {
+                                    if ($(this).attr('value') == res.data.general_info_id) {
+                                        $(this).prop("selected", true);
+                                    } else {
+                                        $(this).prop("selected", false);
+                                    }
+                                });
                                 break;
                             case {{$Service::TYPE_IMAGE}}:
                                 $('.image').show();
@@ -317,25 +291,23 @@
             });
             $(document).on('change', '.type', function () {
                 switch ($(this).val()) {
-                    case '{{$Service::TYPE_TEXT}}':
-                        $('.pages').hide();
-                        $('.image').hide();
-                        break;
                     case '{{$Service::TYPE_SINGLE_PAGE}}':
                         $('.pages').show();
                         $('.image').hide();
+                        $('.general-info').hide();
                         break;
-                    case '{{$Service::TYPE_SOCIAL}}':
-                        $('.image').show();
+                    case '{{$Service::TYPE_GENERAL_INFO}}':
+                        $('.general-info').show();
                         $('.pages').hide();
+                        $('.image').hide();
                         break;
                     case '{{$Service::TYPE_IMAGE}}':
                         $('.image').show();
                         $('.pages').hide();
+                        $('.general-info').hide();
                         break;
                 }
             })
-
         });
         var callback = function (data) {
             $('.img').val(data.url);
@@ -359,41 +331,5 @@
                 });
             },
         }
-
-        $('.btn-add-social').click(function () {
-            let html = '<div class="item-social mb-3">\n' +
-                '<div class="form-group row mb-1">\n' +
-                '<div class="col-md-3">\n' +
-                '<label class="col-form-label ml-3">Tên Social' +
-                '</label>\n' +
-                '</div>\n' +
-                '<div class="col-md-8">\n' +
-                '<input type="text" class="form-control" name="social[][\'name\']" placeholder="Tên social" value="">\n' +
-                '</div>\n' +
-                '<div class="col-md-1">\n' +
-                '<a href="javascript:void(0);" class="text-danger  btn-rm-social">\n' +
-                '<i class="fa fa-trash icon-sm" aria-hidden="true"></i>\n' +
-                '</a>\n' +
-                '</div>\n' +
-                '</div>\n' +
-                '<div class="form-group row mb-1">\n' +
-                '<div class="col-md-3">\n' +
-                '<label class="col-form-label ml-3">Link Social</label>\n' +
-                '</div>\n' +
-                '<div class="col-md-8">\n' +
-                '<input type="text" class="form-control" name="social[][\'link\']" placeholder="Link social" value="">\n' +
-                '</div>\n' +
-                '</div>\n' +
-                '<div class="form-group row mb-1">\n' +
-                '<div class="col-md-3">\n' +
-                '<label class="col-form-label ml-3">Icon Social</label>\n' +
-                '</div>\n' +
-                '<div class="col-md-8">\n' +
-                '<input type="text" class="form-control" name="social[][\'icon\']" placeholder="Icon social" value="">\n' +
-                '</div>\n' +
-                '</div>\n' +
-                '</div>';
-            $('.social').append(html);
-        });
     </script>
 @endsection

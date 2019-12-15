@@ -8,23 +8,22 @@
 
 namespace App\Services;
 
-
-use App\Models\SettingFooter;
+use App\Models\GeneralInfo;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
-class SettingFooterService
+class GeneralInfoService
 {
     private $service;
 
-    const TYPE_SINGLE_PAGE = 0;
-    const TYPE_GENERAL_INFO = 1;
+    const TYPE_TEXT = 0;
+    const TYPE_SOCIAL = 1;
     const TYPE_IMAGE = 2;
 
     const STATUS_NOT_ACTIVE = 0;
     const STATUS_ACTIVE = 1;
 
-    public function __construct(SettingFooter $service)
+    public function __construct(GeneralInfo $service)
     {
         $this->service = $service;
     }
@@ -62,75 +61,9 @@ class SettingFooterService
         }
     }
 
-    public function delete($id)
-    {
-        $child = $this->service->where('parent_id', $id)->get();
-        if (sizeof($child) > 0) {
-            return false;
-        } else {
-            return $this->category->find($id)->delete();
-        }
-    }
-
-    public function updatePosition($data)
-    {
-        try {
-            DB::beginTransaction();
-            foreach ($data as $key => $value) {
-                DB::table('setting_footer')
-                    ->where('id', $value['id'])
-                    ->update(['position' => $value['position'], 'parent_id' => $value['parent_id']]);
-            }
-            DB::commit();
-            return true;
-        } catch (Exception  $e) {
-            DB::rollBack();
-            throw $e;
-        }
-    }
-
     public function getById($id)
     {
         return $this->service->find($id);
-    }
-
-    public function getByParentId($id)
-    {
-        return $this->category->where('parent_id', $id)->get();
-    }
-
-    public function getAll()
-    {
-        return $this->category
-            ->orderBy('position', 'ASC')
-            ->orderBy('id', 'ASC')
-            ->get();
-    }
-
-    public function listPluck()
-    {
-        return $this->category->pluck('name', 'id')->toArray();
-    }
-
-    public function generateOptionSelect($listCategories, $parent_id = 0, $cate_id, $char = '')
-    {
-        $html = '';
-
-        foreach ($listCategories as $key => $item) {
-            // Nếu là chuyên mục con thì hiển thị
-            if ($item['parent_id'] == $parent_id) {
-                $selected = $cate_id == $item['id'] ? 'selected' : '';
-                $html .= '<option value="' . $item['id'] . '" ' . $selected . '>';
-                $html .= $char . $item['name'];
-                $html .= '</option>';
-
-                // Xóa chuyên mục đã lặp
-                unset($listCategories[$key]);
-                // Tiếp tục đệ quy để tìm chuyên mục con của chuyên mục đang lặp
-                $html .= $this->generateOptionSelect($listCategories, $item['id'], $cate_id, $char . '|---');
-            }
-        }
-        return $html;
     }
 
     public function get($data)
@@ -189,5 +122,14 @@ class SettingFooterService
         }
         $data = $query->first();
         return $data;
+    }
+
+    public function remove($id)
+    {
+        $info = $this->service->find($id);
+        if ($info) {
+            $info->delete();
+        }
+        return true;
     }
 }
