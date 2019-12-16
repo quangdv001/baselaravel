@@ -16,7 +16,7 @@ class AdminSettingFooterController extends AdminBaseController
     protected $generalInfoService;
 
     private $arrType = [
-        SettingFooterService::TYPE_SINGLE_PAGE => 'Trang đơn',
+        SettingFooterService::TYPE_SINGLE_PAGE => 'Trang nội dung',
         SettingFooterService::TYPE_GENERAL_INFO => 'Thông tin chung',
         SettingFooterService::TYPE_IMAGE => 'Ảnh',
     ];
