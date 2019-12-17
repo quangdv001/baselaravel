@@ -19,6 +19,8 @@ class AdminCategoryController extends AdminBaseController
         5 => 'Pháp lý',
         6 => 'Cho thuê',
         7 => 'Trang nội dung',
+        8 => 'Cách tính thuế đất',
+        9 => 'Đối tác'
     ];
     public function __construct(CategoryService $categoryService)
     {

@@ -18,114 +18,57 @@ home
                             </div>
                             <div class="row">
                                 <ul class="list-head">
-                                    <li><a class="title" href="#"><span><i
-                                                    class="far fa-clock"></i></span><span>&nbsp;Thị trường BĐS chạm đỉnh
-                                                2019 và rơi vào thoái trào năm kế tiếp</span></a></li>
-                                    <li><a class="title" href="#"><span><i
-                                                    class="far fa-clock"></i></span><span>&nbsp;Thị trường BĐS chạm đỉnh
-                                                2019 và rơi vào thoái trào năm kế tiếp</span></a></li>
-                                    <li><a class="title" href="#"><span><i
-                                                    class="far fa-clock"></i></span><span>&nbsp;Thị trường BĐS chạm đỉnh
-                                                2019 và rơi vào thoái trào năm kế tiếp</span></a></li>
-                                    <li><a class="title" href="#"><span><i
-                                                    class="far fa-clock"></i></span><span>&nbsp;Thị trường BĐS chạm đỉnh
-                                                2019 và rơi vào thoái trào năm kế tiếp</span></a></li>
-                                    <li><a class="title" href="#"><span><i
-                                                    class="far fa-clock"></i></span><span>&nbsp;Thị trường BĐS chạm đỉnh
-                                                2019 và rơi vào thoái trào năm kế tiếp</span></a></li>
-                                    <li><a class="title" href="#"><span><i
-                                                    class="far fa-clock"></i></span><span>&nbsp;Thị trường BĐS chạm đỉnh
-                                                2019 và rơi vào thoái trào năm kế tiếp</span></a></li>
-                                    <li><a class="title" href="#"><span><i
-                                                    class="far fa-clock"></i></span><span>&nbsp;Thị trường BĐS chạm đỉnh
-                                                2019 và rơi vào thoái trào năm kế tiếp</span></a></li>
-                                    <li><a class="title" href="#"><span><i
-                                                    class="far fa-clock"></i></span><span>&nbsp;Thị trường BĐS chạm đỉnh
-                                                2019 và rơi vào thoái trào năm kế tiếp</span></a></li>
-                                    <li><a class="title" href="#"><span><i
-                                                    class="far fa-clock"></i></span><span>&nbsp;Thị trường BĐS chạm đỉnh
-                                                2019 và rơi vào thoái trào năm kế tiếp</span></a></li>
-                                    <li><a class="title" href="#"><span><i
-                                                    class="far fa-clock"></i></span><span>&nbsp;Thị trường BĐS chạm đỉnh
-                                                2019 và rơi vào thoái trào năm kế tiếp</span></a></li>
+                                @if (count($list_article_lands) > 0)
+                                    @foreach ($list_article_lands as $key_lands=>$item_lands)
+                                        <li><a class="title" href="{{ route('site.home.showDetail',['slugCategory' => $item_lands->category->slug, 'slugDetail' => $item_lands->slug]) }}"><span><i
+                                                        class="far fa-clock"></i></span><span>&nbsp;{{ $item->title }}</span></a></li>
+                                    @endforeach
+                                @else
+                                    <li><a class="title" href="javascript:void(0)">Không có bài viết</a></li>
+                                @endif
                                 </ul>
                             </div>
                         </div>
                         <div class="col-sm-9">
+                        @if (count($list_article_laws) > 0)
                             <div class="row">
-                                <div class="slide-owl-carousel owl-carousel owl-theme"><a class="block" href="#item">
-                                        <div class="cover-item">
-                                            <div class="landscape_image"><img src="./assets/images/slide_01.jpg"
-                                                    alt="Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào năm kế tiếp" />
+                                <div class="slide-owl-carousel owl-carousel owl-theme">
+                                @foreach ($list_article_laws as $key_laws=>$item_laws)
+                                    @if ($key <= 2)
+                                        <a class="block" href="{{ route('site.home.showDetail', ['slugCategory' => $item_laws->category->slug, 'slugDetail' => $item_laws->slug]) }}">
+                                            <div class="cover-item">
+                                                <div class="landscape_image"><img alt="{{ $item_laws->title }}" src="{{ $item_laws->img}}" />
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="detail-item">
-                                            <div class="title">Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào năm
-                                                kế tiếp</div>
-                                            <div class="meta-info"><span class="meta-info-item">Tin tức</span><span
-                                                    class="meta-info-item"><i class="far fa-clock"></i>
-                                                    Th3-27/10/2015</span></div>
-                                            <div class="short-description">Cột giá nhà phố tăng cao ngất ngưỡng không
-                                                chỉ do tình trạng sốt đất dẫn đến giá ảo.</div>
-                                        </div>
-                                    </a><a class="block" href="#item">
-                                        <div class="cover-item">
-                                            <div class="landscape_image"><img src="./assets/images/slide_01.jpg"
-                                                    alt="Tin 2 Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào năm kế tiếp" />
+                                            <div class="detail-item">
+                                                <div class="title">{{ $item_laws->title }}</div>
+                                                <div class="meta-info">
+                                                    <span class="meta-info-item"><i class="far fa-clock"></i> {{$item_laws->created_at->diffForHumans() }}</span>
+                                                </div>
+                                                <div class="short-description">>@if (strlen(strip_tags($item_laws->short_description)) > 100) {!! mb_substr(strip_tags($item_laws->short_description), 0, mb_strpos(strip_tags($item_laws->short_description), ' ', 100)) !!}... @else {!! $item_laws->short_description !!} @endif</div>
                                             </div>
-                                        </div>
-                                        <div class="detail-item">
-                                            <div class="title">Tin 2 Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào
-                                                năm kế tiếp</div>
-                                            <div class="meta-info"><span class="meta-info-item">Tin tức</span><span
-                                                    class="meta-info-item"><i class="far fa-clock"></i>
-                                                    Th3-27/10/2015</span></div>
-                                            <div class="short-description">Cột giá nhà phố tăng cao ngất ngưỡng không
-                                                chỉ do tình trạng sốt đất dẫn đến giá ảo.</div>
-                                        </div>
-                                    </a><a class="block" href="#item">
-                                        <div class="cover-item">
-                                            <div class="landscape_image"><img src="./assets/images/slide_01.jpg"
-                                                    alt="Tin 3 Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào năm kế tiếp" />
-                                            </div>
-                                        </div>
-                                        <div class="detail-item">
-                                            <div class="title">Tin 3 Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào
-                                                năm kế tiếp</div>
-                                            <div class="meta-info"><span class="meta-info-item">Tin tức</span><span
-                                                    class="meta-info-item"><i class="far fa-clock"></i>
-                                                    Th3-27/10/2015</span></div>
-                                            <div class="short-description">Cột giá nhà phố tăng cao ngất ngưỡng không
-                                                chỉ do tình trạng sốt đất dẫn đến giá ảo.</div>
-                                        </div>
-                                    </a>
+                                        </a>
+                                    @endif
+                                @endforeach
                                 </div>
                             </div>
                             <div class="row">
                                 <ul class="list-head">
-                                    <li><a class="title" href="#">Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào
-                                            năm kế tiếp</a><span class="meta-info-item"> <i class="far fa-clock"></i>
-                                            Th3-27/10/2015</span></li>
-                                    <li><a class="title" href="#">Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào
-                                            năm kế tiếp</a><span class="meta-info-item"> <i class="far fa-clock"></i>
-                                            Th3-27/10/2015</span></li>
-                                    <li><a class="title" href="#">Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào
-                                            năm kế tiếp</a><span class="meta-info-item"> <i class="far fa-clock"></i>
-                                            Th3-27/10/2015</span></li>
-                                    <li><a class="title" href="#">Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào
-                                            năm kế tiếp</a><span class="meta-info-item"> <i class="far fa-clock"></i>
-                                            Th3-27/10/2015</span></li>
-                                    <li><a class="title" href="#">Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào
-                                            năm kế tiếp</a><span class="meta-info-item"> <i class="far fa-clock"></i>
-                                            Th3-27/10/2015</span></li>
-                                    <li><a class="title" href="#">Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào
-                                            năm kế tiếp</a><span class="meta-info-item"> <i class="far fa-clock"></i>
-                                            Th3-27/10/2015</span></li>
-                                    <li><a class="title" href="#">Thị trường BĐS chạm đỉnh 2019 và rơi vào thoái trào
-                                            năm kế tiếp</a><span class="meta-info-item"> <i class="far fa-clock"></i>
-                                            Th3-27/10/2015</span></li>
+                                @foreach ($lastestLaws as $key_laws=>$item_laws)
+                                    @if ($key > 2)
+                                        <li>
+                                            <a class="title" href="{{ route('site.home.showDetail', ['slugCategory' => $item_laws->category->slug, 'slugDetail' => $item_laws->slug]) }}">
+                                            @if (strlen(strip_tags($item_laws->title)) > 150) {!! mb_substr(strip_tags($item_laws->title), 0, mb_strpos(strip_tags($item_laws->title), ' ', 150)) !!}... @else {!! $item_laws->title !!} @endif
+                                            </a>
+                                        </li>
+                                    @endif
+                                @endforeach
                                 </ul>
                             </div>
+                            @else
+                                <h3 class="module-title"><a href="#">PHÁP LÝ</a></h3>
+                                <div class="content">Không có bài viết</div>
+                        @endif
                         </div>
                     </div>
                     <div class="row">
@@ -135,426 +78,40 @@ home
                                     <h2 class="title solid-color text-uppercase"><span>Tin cho thuê</span></h2>
                                 </div>
                                 <div class="list-post">
-                                    <div class="forrent-post line-bottom">
-                                        <div class="post-content"><a class="news-post-image-link"
-                                                href="./single_product.html">
-                                                <figure class="image-container">
-                                                    <div class="featured-image-overlay"><span
-                                                            class="featured-image-icon"><i
-                                                                class="fa fa-camera"></i></span></div><img
-                                                        class="img-responsive" src="./assets/images/services_02.png"
-                                                        alt="title alt" />
-                                                </figure>
-                                            </a>
-                                            <h3 class="post-title title"><a class="news-post-link"
-                                                    href="./single_product.html">Lorem Ipsum là gì, Tại sao lại sử dụng
-                                                    nó?</a></h3>
-                                            <div class="row">
-                                                <div class="col rent-attribute"><strong>Giá :</strong><span> 525
-                                                        triệu</span></div>
-                                                <div class="col rent-attribute"><strong>Diện tích :</strong><span> 83
-                                                        m²</span></div>
-                                                <div class="col rent-attribute"><strong>Quận/huyện :</strong><span> Phú
-                                                        Xuyên</span></div>
+                                @if (count($list_article_rooms) > 0)
+                                    @foreach ($list_article_rooms as $key_room=>$item_room)
+                                        <div class="forrent-post line-bottom">
+                                            <div class="post-content"><a class="news-post-image-link"
+                                                    href="{{ route('site.home.showDetail',['slugCategory' => $item_room->category->slug, 'slugDetail' => $item_room->slug]) }}">
+                                                    <figure class="image-container">
+                                                        <div class="featured-image-overlay"><span
+                                                                class="featured-image-icon"><i
+                                                                    class="fa fa-camera"></i></span></div><img
+                                                            class="img-responsive" src="{{ $item_room->img }}"
+                                                            alt="{{ $item_room->title }}" />
+                                                    </figure>
+                                                </a>
+                                                <h3 class="post-title title"><a class="news-post-link"
+                                                        href="{{ route('site.home.showDetail',['slugCategory' => $item_room->category->slug, 'slugDetail' => $item_room->slug]) }}">{{ $item_room->title }}</a></h3>
+                                                <div class="row">
+                                                    <div class="col rent-attribute"><strong>Giá :</strong><span> @if($item_room->price) {{ $item_room->price }} @else '--' @endif
+                                                            triệu</span></div>
+                                                    <div class="col rent-attribute"><strong>Diện tích :</strong><span> @if($item_room->acreage) {{ $item_room->acreage }} @else '--' @endif
+                                                            m²</span></div>
+                                                    <div class="col rent-attribute"><strong>Quận/huyện :</strong><span> @if($item_room->district_id) {{ $districts[$item_room->district_id] }} @else '--' @endif</span></div>
+                                                </div>
+                                                <div class="post-meta-container"><span class="post-meta-item"><i
+                                                            class="far fa-clock"></i> {{ $item_room->created_at->diffForHumans() }}</span><span
+                                                        class="post-meta-item"><i class="fa fa-user-check"></i><a
+                                                            href="javascript:void(0)"> {{ $item_room->admin_name_c }} </a></span></div>
                                             </div>
-                                            <div class="post-meta-container"><span class="post-meta-item"><i
-                                                        class="far fa-clock"></i> Th3-27/10/2015</span><span
-                                                    class="post-meta-item"><i class="fa fa-user-check"></i><a
-                                                        href="#admin"> Admin</a></span></div>
                                         </div>
-                                    </div>
+                                    @endforeach
+                                @else
                                     <div class="forrent-post line-bottom">
-                                        <div class="post-content"><a class="news-post-image-link"
-                                                href="./single_product.html">
-                                                <figure class="image-container">
-                                                    <div class="featured-image-overlay"><span
-                                                            class="featured-image-icon"><i
-                                                                class="fa fa-camera"></i></span></div><img
-                                                        class="img-responsive" src="./assets/images/services_02.png"
-                                                        alt="title alt" />
-                                                </figure>
-                                            </a>
-                                            <h3 class="post-title title"><a class="news-post-link"
-                                                    href="./single_product.html">Lorem Ipsum là gì, Tại sao lại sử dụng
-                                                    nó?</a></h3>
-                                            <div class="row">
-                                                <div class="col rent-attribute"><strong>Giá :</strong><span> 525
-                                                        triệu</span></div>
-                                                <div class="col rent-attribute"><strong>Diện tích :</strong><span> 83
-                                                        m²</span></div>
-                                                <div class="col rent-attribute"><strong>Quận/huyện :</strong><span> Phú
-                                                        Xuyên</span></div>
-                                            </div>
-                                            <div class="post-meta-container"><span class="post-meta-item"><i
-                                                        class="far fa-clock"></i> Th3-27/10/2015</span><span
-                                                    class="post-meta-item"><i class="fa fa-user-check"></i><a
-                                                        href="#admin"> Admin</a></span></div>
-                                        </div>
+                                        <span>Không có bài viết</span>
                                     </div>
-                                    <div class="forrent-post line-bottom">
-                                        <div class="post-content"><a class="news-post-image-link"
-                                                href="./single_product.html">
-                                                <figure class="image-container">
-                                                    <div class="featured-image-overlay"><span
-                                                            class="featured-image-icon"><i
-                                                                class="fa fa-camera"></i></span></div><img
-                                                        class="img-responsive" src="./assets/images/services_02.png"
-                                                        alt="title alt" />
-                                                </figure>
-                                            </a>
-                                            <h3 class="post-title title"><a class="news-post-link"
-                                                    href="./single_product.html">Lorem Ipsum là gì, Tại sao lại sử dụng
-                                                    nó?</a></h3>
-                                            <div class="row">
-                                                <div class="col rent-attribute"><strong>Giá :</strong><span> 525
-                                                        triệu</span></div>
-                                                <div class="col rent-attribute"><strong>Diện tích :</strong><span> 83
-                                                        m²</span></div>
-                                                <div class="col rent-attribute"><strong>Quận/huyện :</strong><span> Phú
-                                                        Xuyên</span></div>
-                                            </div>
-                                            <div class="post-meta-container"><span class="post-meta-item"><i
-                                                        class="far fa-clock"></i> Th3-27/10/2015</span><span
-                                                    class="post-meta-item"><i class="fa fa-user-check"></i><a
-                                                        href="#admin"> Admin</a></span></div>
-                                        </div>
-                                    </div>
-                                    <div class="forrent-post line-bottom">
-                                        <div class="post-content"><a class="news-post-image-link"
-                                                href="./single_product.html">
-                                                <figure class="image-container">
-                                                    <div class="featured-image-overlay"><span
-                                                            class="featured-image-icon"><i
-                                                                class="fa fa-camera"></i></span></div><img
-                                                        class="img-responsive" src="./assets/images/services_02.png"
-                                                        alt="title alt" />
-                                                </figure>
-                                            </a>
-                                            <h3 class="post-title title"><a class="news-post-link"
-                                                    href="./single_product.html">Lorem Ipsum là gì, Tại sao lại sử dụng
-                                                    nó?</a></h3>
-                                            <div class="row">
-                                                <div class="col rent-attribute"><strong>Giá :</strong><span> 525
-                                                        triệu</span></div>
-                                                <div class="col rent-attribute"><strong>Diện tích :</strong><span> 83
-                                                        m²</span></div>
-                                                <div class="col rent-attribute"><strong>Quận/huyện :</strong><span> Phú
-                                                        Xuyên</span></div>
-                                            </div>
-                                            <div class="post-meta-container"><span class="post-meta-item"><i
-                                                        class="far fa-clock"></i> Th3-27/10/2015</span><span
-                                                    class="post-meta-item"><i class="fa fa-user-check"></i><a
-                                                        href="#admin"> Admin</a></span></div>
-                                        </div>
-                                    </div>
-                                    <div class="forrent-post line-bottom">
-                                        <div class="post-content"><a class="news-post-image-link"
-                                                href="./single_product.html">
-                                                <figure class="image-container">
-                                                    <div class="featured-image-overlay"><span
-                                                            class="featured-image-icon"><i
-                                                                class="fa fa-camera"></i></span></div><img
-                                                        class="img-responsive" src="./assets/images/services_02.png"
-                                                        alt="title alt" />
-                                                </figure>
-                                            </a>
-                                            <h3 class="post-title title"><a class="news-post-link"
-                                                    href="./single_product.html">Lorem Ipsum là gì, Tại sao lại sử dụng
-                                                    nó?</a></h3>
-                                            <div class="row">
-                                                <div class="col rent-attribute"><strong>Giá :</strong><span> 525
-                                                        triệu</span></div>
-                                                <div class="col rent-attribute"><strong>Diện tích :</strong><span> 83
-                                                        m²</span></div>
-                                                <div class="col rent-attribute"><strong>Quận/huyện :</strong><span> Phú
-                                                        Xuyên</span></div>
-                                            </div>
-                                            <div class="post-meta-container"><span class="post-meta-item"><i
-                                                        class="far fa-clock"></i> Th3-27/10/2015</span><span
-                                                    class="post-meta-item"><i class="fa fa-user-check"></i><a
-                                                        href="#admin"> Admin</a></span></div>
-                                        </div>
-                                    </div>
-                                    <div class="forrent-post line-bottom">
-                                        <div class="post-content"><a class="news-post-image-link"
-                                                href="./single_product.html">
-                                                <figure class="image-container">
-                                                    <div class="featured-image-overlay"><span
-                                                            class="featured-image-icon"><i
-                                                                class="fa fa-camera"></i></span></div><img
-                                                        class="img-responsive" src="./assets/images/services_02.png"
-                                                        alt="title alt" />
-                                                </figure>
-                                            </a>
-                                            <h3 class="post-title title"><a class="news-post-link"
-                                                    href="./single_product.html">Lorem Ipsum là gì, Tại sao lại sử dụng
-                                                    nó?</a></h3>
-                                            <div class="row">
-                                                <div class="col rent-attribute"><strong>Giá :</strong><span> 525
-                                                        triệu</span></div>
-                                                <div class="col rent-attribute"><strong>Diện tích :</strong><span> 83
-                                                        m²</span></div>
-                                                <div class="col rent-attribute"><strong>Quận/huyện :</strong><span> Phú
-                                                        Xuyên</span></div>
-                                            </div>
-                                            <div class="post-meta-container"><span class="post-meta-item"><i
-                                                        class="far fa-clock"></i> Th3-27/10/2015</span><span
-                                                    class="post-meta-item"><i class="fa fa-user-check"></i><a
-                                                        href="#admin"> Admin</a></span></div>
-                                        </div>
-                                    </div>
-                                    <div class="forrent-post line-bottom">
-                                        <div class="post-content"><a class="news-post-image-link"
-                                                href="./single_product.html">
-                                                <figure class="image-container">
-                                                    <div class="featured-image-overlay"><span
-                                                            class="featured-image-icon"><i
-                                                                class="fa fa-camera"></i></span></div><img
-                                                        class="img-responsive" src="./assets/images/services_02.png"
-                                                        alt="title alt" />
-                                                </figure>
-                                            </a>
-                                            <h3 class="post-title title"><a class="news-post-link"
-                                                    href="./single_product.html">Lorem Ipsum là gì, Tại sao lại sử dụng
-                                                    nó?</a></h3>
-                                            <div class="row">
-                                                <div class="col rent-attribute"><strong>Giá :</strong><span> 525
-                                                        triệu</span></div>
-                                                <div class="col rent-attribute"><strong>Diện tích :</strong><span> 83
-                                                        m²</span></div>
-                                                <div class="col rent-attribute"><strong>Quận/huyện :</strong><span> Phú
-                                                        Xuyên</span></div>
-                                            </div>
-                                            <div class="post-meta-container"><span class="post-meta-item"><i
-                                                        class="far fa-clock"></i> Th3-27/10/2015</span><span
-                                                    class="post-meta-item"><i class="fa fa-user-check"></i><a
-                                                        href="#admin"> Admin</a></span></div>
-                                        </div>
-                                    </div>
-                                    <div class="forrent-post line-bottom">
-                                        <div class="post-content"><a class="news-post-image-link"
-                                                href="./single_product.html">
-                                                <figure class="image-container">
-                                                    <div class="featured-image-overlay"><span
-                                                            class="featured-image-icon"><i
-                                                                class="fa fa-camera"></i></span></div><img
-                                                        class="img-responsive" src="./assets/images/services_02.png"
-                                                        alt="title alt" />
-                                                </figure>
-                                            </a>
-                                            <h3 class="post-title title"><a class="news-post-link"
-                                                    href="./single_product.html">Lorem Ipsum là gì, Tại sao lại sử dụng
-                                                    nó?</a></h3>
-                                            <div class="row">
-                                                <div class="col rent-attribute"><strong>Giá :</strong><span> 525
-                                                        triệu</span></div>
-                                                <div class="col rent-attribute"><strong>Diện tích :</strong><span> 83
-                                                        m²</span></div>
-                                                <div class="col rent-attribute"><strong>Quận/huyện :</strong><span> Phú
-                                                        Xuyên</span></div>
-                                            </div>
-                                            <div class="post-meta-container"><span class="post-meta-item"><i
-                                                        class="far fa-clock"></i> Th3-27/10/2015</span><span
-                                                    class="post-meta-item"><i class="fa fa-user-check"></i><a
-                                                        href="#admin"> Admin</a></span></div>
-                                        </div>
-                                    </div>
-                                    <div class="forrent-post line-bottom">
-                                        <div class="post-content"><a class="news-post-image-link"
-                                                href="./single_product.html">
-                                                <figure class="image-container">
-                                                    <div class="featured-image-overlay"><span
-                                                            class="featured-image-icon"><i
-                                                                class="fa fa-camera"></i></span></div><img
-                                                        class="img-responsive" src="./assets/images/services_02.png"
-                                                        alt="title alt" />
-                                                </figure>
-                                            </a>
-                                            <h3 class="post-title title"><a class="news-post-link"
-                                                    href="./single_product.html">Lorem Ipsum là gì, Tại sao lại sử dụng
-                                                    nó?</a></h3>
-                                            <div class="row">
-                                                <div class="col rent-attribute"><strong>Giá :</strong><span> 525
-                                                        triệu</span></div>
-                                                <div class="col rent-attribute"><strong>Diện tích :</strong><span> 83
-                                                        m²</span></div>
-                                                <div class="col rent-attribute"><strong>Quận/huyện :</strong><span> Phú
-                                                        Xuyên</span></div>
-                                            </div>
-                                            <div class="post-meta-container"><span class="post-meta-item"><i
-                                                        class="far fa-clock"></i> Th3-27/10/2015</span><span
-                                                    class="post-meta-item"><i class="fa fa-user-check"></i><a
-                                                        href="#admin"> Admin</a></span></div>
-                                        </div>
-                                    </div>
-                                    <div class="forrent-post line-bottom">
-                                        <div class="post-content"><a class="news-post-image-link"
-                                                href="./single_product.html">
-                                                <figure class="image-container">
-                                                    <div class="featured-image-overlay"><span
-                                                            class="featured-image-icon"><i
-                                                                class="fa fa-camera"></i></span></div><img
-                                                        class="img-responsive" src="./assets/images/services_02.png"
-                                                        alt="title alt" />
-                                                </figure>
-                                            </a>
-                                            <h3 class="post-title title"><a class="news-post-link"
-                                                    href="./single_product.html">Lorem Ipsum là gì, Tại sao lại sử dụng
-                                                    nó?</a></h3>
-                                            <div class="row">
-                                                <div class="col rent-attribute"><strong>Giá :</strong><span> 525
-                                                        triệu</span></div>
-                                                <div class="col rent-attribute"><strong>Diện tích :</strong><span> 83
-                                                        m²</span></div>
-                                                <div class="col rent-attribute"><strong>Quận/huyện :</strong><span> Phú
-                                                        Xuyên</span></div>
-                                            </div>
-                                            <div class="post-meta-container"><span class="post-meta-item"><i
-                                                        class="far fa-clock"></i> Th3-27/10/2015</span><span
-                                                    class="post-meta-item"><i class="fa fa-user-check"></i><a
-                                                        href="#admin"> Admin</a></span></div>
-                                        </div>
-                                    </div>
-                                    <div class="forrent-post line-bottom">
-                                        <div class="post-content"><a class="news-post-image-link"
-                                                href="./single_product.html">
-                                                <figure class="image-container">
-                                                    <div class="featured-image-overlay"><span
-                                                            class="featured-image-icon"><i
-                                                                class="fa fa-camera"></i></span></div><img
-                                                        class="img-responsive" src="./assets/images/services_02.png"
-                                                        alt="title alt" />
-                                                </figure>
-                                            </a>
-                                            <h3 class="post-title title"><a class="news-post-link"
-                                                    href="./single_product.html">Lorem Ipsum là gì, Tại sao lại sử dụng
-                                                    nó?</a></h3>
-                                            <div class="row">
-                                                <div class="col rent-attribute"><strong>Giá :</strong><span> 525
-                                                        triệu</span></div>
-                                                <div class="col rent-attribute"><strong>Diện tích :</strong><span> 83
-                                                        m²</span></div>
-                                                <div class="col rent-attribute"><strong>Quận/huyện :</strong><span> Phú
-                                                        Xuyên</span></div>
-                                            </div>
-                                            <div class="post-meta-container"><span class="post-meta-item"><i
-                                                        class="far fa-clock"></i> Th3-27/10/2015</span><span
-                                                    class="post-meta-item"><i class="fa fa-user-check"></i><a
-                                                        href="#admin"> Admin</a></span></div>
-                                        </div>
-                                    </div>
-                                    <div class="forrent-post line-bottom">
-                                        <div class="post-content"><a class="news-post-image-link"
-                                                href="./single_product.html">
-                                                <figure class="image-container">
-                                                    <div class="featured-image-overlay"><span
-                                                            class="featured-image-icon"><i
-                                                                class="fa fa-camera"></i></span></div><img
-                                                        class="img-responsive" src="./assets/images/services_02.png"
-                                                        alt="title alt" />
-                                                </figure>
-                                            </a>
-                                            <h3 class="post-title title"><a class="news-post-link"
-                                                    href="./single_product.html">Lorem Ipsum là gì, Tại sao lại sử dụng
-                                                    nó?</a></h3>
-                                            <div class="row">
-                                                <div class="col rent-attribute"><strong>Giá :</strong><span> 525
-                                                        triệu</span></div>
-                                                <div class="col rent-attribute"><strong>Diện tích :</strong><span> 83
-                                                        m²</span></div>
-                                                <div class="col rent-attribute"><strong>Quận/huyện :</strong><span> Phú
-                                                        Xuyên</span></div>
-                                            </div>
-                                            <div class="post-meta-container"><span class="post-meta-item"><i
-                                                        class="far fa-clock"></i> Th3-27/10/2015</span><span
-                                                    class="post-meta-item"><i class="fa fa-user-check"></i><a
-                                                        href="#admin"> Admin</a></span></div>
-                                        </div>
-                                    </div>
-                                    <div class="forrent-post line-bottom">
-                                        <div class="post-content"><a class="news-post-image-link"
-                                                href="./single_product.html">
-                                                <figure class="image-container">
-                                                    <div class="featured-image-overlay"><span
-                                                            class="featured-image-icon"><i
-                                                                class="fa fa-camera"></i></span></div><img
-                                                        class="img-responsive" src="./assets/images/services_02.png"
-                                                        alt="title alt" />
-                                                </figure>
-                                            </a>
-                                            <h3 class="post-title title"><a class="news-post-link"
-                                                    href="./single_product.html">Lorem Ipsum là gì, Tại sao lại sử dụng
-                                                    nó?</a></h3>
-                                            <div class="row">
-                                                <div class="col rent-attribute"><strong>Giá :</strong><span> 525
-                                                        triệu</span></div>
-                                                <div class="col rent-attribute"><strong>Diện tích :</strong><span> 83
-                                                        m²</span></div>
-                                                <div class="col rent-attribute"><strong>Quận/huyện :</strong><span> Phú
-                                                        Xuyên</span></div>
-                                            </div>
-                                            <div class="post-meta-container"><span class="post-meta-item"><i
-                                                        class="far fa-clock"></i> Th3-27/10/2015</span><span
-                                                    class="post-meta-item"><i class="fa fa-user-check"></i><a
-                                                        href="#admin"> Admin</a></span></div>
-                                        </div>
-                                    </div>
-                                    <div class="forrent-post line-bottom">
-                                        <div class="post-content"><a class="news-post-image-link"
-                                                href="./single_product.html">
-                                                <figure class="image-container">
-                                                    <div class="featured-image-overlay"><span
-                                                            class="featured-image-icon"><i
-                                                                class="fa fa-camera"></i></span></div><img
-                                                        class="img-responsive" src="./assets/images/services_02.png"
-                                                        alt="title alt" />
-                                                </figure>
-                                            </a>
-                                            <h3 class="post-title title"><a class="news-post-link"
-                                                    href="./single_product.html">Lorem Ipsum là gì, Tại sao lại sử dụng
-                                                    nó?</a></h3>
-                                            <div class="row">
-                                                <div class="col rent-attribute"><strong>Giá :</strong><span> 525
-                                                        triệu</span></div>
-                                                <div class="col rent-attribute"><strong>Diện tích :</strong><span> 83
-                                                        m²</span></div>
-                                                <div class="col rent-attribute"><strong>Quận/huyện :</strong><span> Phú
-                                                        Xuyên</span></div>
-                                            </div>
-                                            <div class="post-meta-container"><span class="post-meta-item"><i
-                                                        class="far fa-clock"></i> Th3-27/10/2015</span><span
-                                                    class="post-meta-item"><i class="fa fa-user-check"></i><a
-                                                        href="#admin"> Admin</a></span></div>
-                                        </div>
-                                    </div>
-                                    <div class="forrent-post line-bottom">
-                                        <div class="post-content"><a class="news-post-image-link"
-                                                href="./single_product.html">
-                                                <figure class="image-container">
-                                                    <div class="featured-image-overlay"><span
-                                                            class="featured-image-icon"><i
-                                                                class="fa fa-camera"></i></span></div><img
-                                                        class="img-responsive" src="./assets/images/services_02.png"
-                                                        alt="title alt" />
-                                                </figure>
-                                            </a>
-                                            <h3 class="post-title title"><a class="news-post-link"
-                                                    href="./single_product.html">Lorem Ipsum là gì, Tại sao lại sử dụng
-                                                    nó?</a></h3>
-                                            <div class="row">
-                                                <div class="col rent-attribute"><strong>Giá :</strong><span> 525
-                                                        triệu</span></div>
-                                                <div class="col rent-attribute"><strong>Diện tích :</strong><span> 83
-                                                        m²</span></div>
-                                                <div class="col rent-attribute"><strong>Quận/huyện :</strong><span> Phú
-                                                        Xuyên</span></div>
-                                            </div>
-                                            <div class="post-meta-container"><span class="post-meta-item"><i
-                                                        class="far fa-clock"></i> Th3-27/10/2015</span><span
-                                                    class="post-meta-item"><i class="fa fa-user-check"></i><a
-                                                        href="#admin"> Admin</a></span></div>
-                                        </div>
-                                    </div>
+                                @endif
                                 </div>
                             </div>
                         </div>
@@ -562,315 +119,61 @@ home
                             <div class="block">
                                 <div class="block-title">
                                     <div class="module-title solid-color"><a href="#">Đô thị</a></div>
-                                    <div class="news-post line-bottom small-post"><a class="news-post-image-link"
-                                            href="./single.html">
-                                            <figure class="image-container">
-                                                <div class="featured-image-overlay"><span class="featured-image-icon"><i
-                                                            class="fa fa-camera"></i></span></div><img
-                                                    class="img-responsive" src="./assets/images/services_02.png"
-                                                    alt="title alt" />
-                                            </figure>
-                                        </a>
-                                        <div class="news-post-content">
-                                            <h3 class="post-title title"><a class="news-post-link"
-                                                    href="./single.html">Lorem Ipsum là gì, Tại sao lại sử dụng nó?</a>
-                                            </h3>
-                                            <div class="post-meta-container"><span class="post-meta-item"><i
-                                                        class="far fa-clock"></i> Th3-27/10/2015</span><span
-                                                    class="post-meta-item"><i class="fa fa-user-check"></i><a
-                                                        href="#admin"> Admin</a></span></div>
+                                    @if (count($list_article_projects) > 0)
+                                        @foreach ($list_article_projects as $key_project=>$item_project)
+                                            <div class="news-post line-bottom small-post"><a class="news-post-image-link"
+                                                    href="{{ route('site.home.showDetail',['slugCategory' =>$item_project->category->slug, 'slugDetail' => $item_project->slug]) }}">
+                                                    <figure class="image-container">
+                                                        <div class="featured-image-overlay"><span class="featured-image-icon"><i
+                                                                    class="fa fa-camera"></i></span></div><img
+                                                            class="img-responsive" src="{{ $item_project->img }}"
+                                                            alt="{{ $item_project->title }}" />
+                                                    </figure>
+                                                </a>
+                                                <div class="news-post-content">
+                                                    <h3 class="post-title title"><a class="news-post-link"
+                                                            href="{{ route('site.home.showDetail',['slugCategory' =>$item_project->category->slug, 'slugDetail' => $item_project->slug]) }}">{{ $item_project->title }}</a>
+                                                    </h3>
+                                                    <div class="post-meta-container"><span class="post-meta-item"><i
+                                                                class="far fa-clock"></i> {{ $item_project->created_at->diffForHumans() }}</span></div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @else
+                                        <div class="news-post line-bottom small-post">
+                                            <span>Không có bài viết</span>
                                         </div>
-                                    </div>
-                                    <div class="news-post line-bottom small-post"><a class="news-post-image-link"
-                                            href="./single.html">
-                                            <figure class="image-container">
-                                                <div class="featured-image-overlay"><span class="featured-image-icon"><i
-                                                            class="fa fa-camera"></i></span></div><img
-                                                    class="img-responsive" src="./assets/images/services_02.png"
-                                                    alt="title alt" />
-                                            </figure>
-                                        </a>
-                                        <div class="news-post-content">
-                                            <h3 class="post-title title"><a class="news-post-link"
-                                                    href="./single.html">Lorem Ipsum là gì, Tại sao lại sử dụng nó?</a>
-                                            </h3>
-                                            <div class="post-meta-container"><span class="post-meta-item"><i
-                                                        class="far fa-clock"></i> Th3-27/10/2015</span><span
-                                                    class="post-meta-item"><i class="fa fa-user-check"></i><a
-                                                        href="#admin"> Admin</a></span></div>
-                                        </div>
-                                    </div>
-                                    <div class="news-post line-bottom small-post"><a class="news-post-image-link"
-                                            href="./single.html">
-                                            <figure class="image-container">
-                                                <div class="featured-image-overlay"><span class="featured-image-icon"><i
-                                                            class="fa fa-camera"></i></span></div><img
-                                                    class="img-responsive" src="./assets/images/services_02.png"
-                                                    alt="title alt" />
-                                            </figure>
-                                        </a>
-                                        <div class="news-post-content">
-                                            <h3 class="post-title title"><a class="news-post-link"
-                                                    href="./single.html">Lorem Ipsum là gì, Tại sao lại sử dụng nó?</a>
-                                            </h3>
-                                            <div class="post-meta-container"><span class="post-meta-item"><i
-                                                        class="far fa-clock"></i> Th3-27/10/2015</span><span
-                                                    class="post-meta-item"><i class="fa fa-user-check"></i><a
-                                                        href="#admin"> Admin</a></span></div>
-                                        </div>
-                                    </div>
-                                    <div class="news-post line-bottom small-post"><a class="news-post-image-link"
-                                            href="./single.html">
-                                            <figure class="image-container">
-                                                <div class="featured-image-overlay"><span class="featured-image-icon"><i
-                                                            class="fa fa-camera"></i></span></div><img
-                                                    class="img-responsive" src="./assets/images/services_02.png"
-                                                    alt="title alt" />
-                                            </figure>
-                                        </a>
-                                        <div class="news-post-content">
-                                            <h3 class="post-title title"><a class="news-post-link"
-                                                    href="./single.html">Lorem Ipsum là gì, Tại sao lại sử dụng nó?</a>
-                                            </h3>
-                                            <div class="post-meta-container"><span class="post-meta-item"><i
-                                                        class="far fa-clock"></i> Th3-27/10/2015</span><span
-                                                    class="post-meta-item"><i class="fa fa-user-check"></i><a
-                                                        href="#admin"> Admin</a></span></div>
-                                        </div>
-                                    </div>
-                                    <div class="news-post line-bottom small-post"><a class="news-post-image-link"
-                                            href="./single.html">
-                                            <figure class="image-container">
-                                                <div class="featured-image-overlay"><span class="featured-image-icon"><i
-                                                            class="fa fa-camera"></i></span></div><img
-                                                    class="img-responsive" src="./assets/images/services_02.png"
-                                                    alt="title alt" />
-                                            </figure>
-                                        </a>
-                                        <div class="news-post-content">
-                                            <h3 class="post-title title"><a class="news-post-link"
-                                                    href="./single.html">Lorem Ipsum là gì, Tại sao lại sử dụng nó?</a>
-                                            </h3>
-                                            <div class="post-meta-container"><span class="post-meta-item"><i
-                                                        class="far fa-clock"></i> Th3-27/10/2015</span><span
-                                                    class="post-meta-item"><i class="fa fa-user-check"></i><a
-                                                        href="#admin"> Admin</a></span></div>
-                                        </div>
-                                    </div>
-                                    <div class="news-post line-bottom small-post"><a class="news-post-image-link"
-                                            href="./single.html">
-                                            <figure class="image-container">
-                                                <div class="featured-image-overlay"><span class="featured-image-icon"><i
-                                                            class="fa fa-camera"></i></span></div><img
-                                                    class="img-responsive" src="./assets/images/services_02.png"
-                                                    alt="title alt" />
-                                            </figure>
-                                        </a>
-                                        <div class="news-post-content">
-                                            <h3 class="post-title title"><a class="news-post-link"
-                                                    href="./single.html">Lorem Ipsum là gì, Tại sao lại sử dụng nó?</a>
-                                            </h3>
-                                            <div class="post-meta-container"><span class="post-meta-item"><i
-                                                        class="far fa-clock"></i> Th3-27/10/2015</span><span
-                                                    class="post-meta-item"><i class="fa fa-user-check"></i><a
-                                                        href="#admin"> Admin</a></span></div>
-                                        </div>
-                                    </div>
-                                    <div class="news-post line-bottom small-post"><a class="news-post-image-link"
-                                            href="./single.html">
-                                            <figure class="image-container">
-                                                <div class="featured-image-overlay"><span class="featured-image-icon"><i
-                                                            class="fa fa-camera"></i></span></div><img
-                                                    class="img-responsive" src="./assets/images/services_02.png"
-                                                    alt="title alt" />
-                                            </figure>
-                                        </a>
-                                        <div class="news-post-content">
-                                            <h3 class="post-title title"><a class="news-post-link"
-                                                    href="./single.html">Lorem Ipsum là gì, Tại sao lại sử dụng nó?</a>
-                                            </h3>
-                                            <div class="post-meta-container"><span class="post-meta-item"><i
-                                                        class="far fa-clock"></i> Th3-27/10/2015</span><span
-                                                    class="post-meta-item"><i class="fa fa-user-check"></i><a
-                                                        href="#admin"> Admin</a></span></div>
-                                        </div>
-                                    </div>
-                                    <div class="news-post line-bottom small-post"><a class="news-post-image-link"
-                                            href="./single.html">
-                                            <figure class="image-container">
-                                                <div class="featured-image-overlay"><span class="featured-image-icon"><i
-                                                            class="fa fa-camera"></i></span></div><img
-                                                    class="img-responsive" src="./assets/images/services_02.png"
-                                                    alt="title alt" />
-                                            </figure>
-                                        </a>
-                                        <div class="news-post-content">
-                                            <h3 class="post-title title"><a class="news-post-link"
-                                                    href="./single.html">Lorem Ipsum là gì, Tại sao lại sử dụng nó?</a>
-                                            </h3>
-                                            <div class="post-meta-container"><span class="post-meta-item"><i
-                                                        class="far fa-clock"></i> Th3-27/10/2015</span><span
-                                                    class="post-meta-item"><i class="fa fa-user-check"></i><a
-                                                        href="#admin"> Admin</a></span></div>
-                                        </div>
-                                    </div>
-                                    <div class="news-post line-bottom small-post"><a class="news-post-image-link"
-                                            href="./single.html">
-                                            <figure class="image-container">
-                                                <div class="featured-image-overlay"><span class="featured-image-icon"><i
-                                                            class="fa fa-camera"></i></span></div><img
-                                                    class="img-responsive" src="./assets/images/services_02.png"
-                                                    alt="title alt" />
-                                            </figure>
-                                        </a>
-                                        <div class="news-post-content">
-                                            <h3 class="post-title title"><a class="news-post-link"
-                                                    href="./single.html">Lorem Ipsum là gì, Tại sao lại sử dụng nó?</a>
-                                            </h3>
-                                            <div class="post-meta-container"><span class="post-meta-item"><i
-                                                        class="far fa-clock"></i> Th3-27/10/2015</span><span
-                                                    class="post-meta-item"><i class="fa fa-user-check"></i><a
-                                                        href="#admin"> Admin</a></span></div>
-                                        </div>
-                                    </div>
-                                    <div class="news-post line-bottom small-post"><a class="news-post-image-link"
-                                            href="./single.html">
-                                            <figure class="image-container">
-                                                <div class="featured-image-overlay"><span class="featured-image-icon"><i
-                                                            class="fa fa-camera"></i></span></div><img
-                                                    class="img-responsive" src="./assets/images/services_02.png"
-                                                    alt="title alt" />
-                                            </figure>
-                                        </a>
-                                        <div class="news-post-content">
-                                            <h3 class="post-title title"><a class="news-post-link"
-                                                    href="./single.html">Lorem Ipsum là gì, Tại sao lại sử dụng nó?</a>
-                                            </h3>
-                                            <div class="post-meta-container"><span class="post-meta-item"><i
-                                                        class="far fa-clock"></i> Th3-27/10/2015</span><span
-                                                    class="post-meta-item"><i class="fa fa-user-check"></i><a
-                                                        href="#admin"> Admin</a></span></div>
-                                        </div>
-                                    </div>
+                                    @endif
                                 </div>
                             </div>
                             <div class="block">
                                 <div class="block-title">
                                     <div class="module-title solid-color"><a href="#">Cách tính thuế đất</a></div>
-                                    <div class="news-post line-bottom small-post"><a class="news-post-image-link"
-                                            href="./single.html">
-                                            <figure class="image-container">
-                                                <div class="featured-image-overlay"><span class="featured-image-icon"><i
-                                                            class="fa fa-camera"></i></span></div><img
-                                                    class="img-responsive" src="./assets/images/services_02.png"
-                                                    alt="title alt" />
-                                            </figure>
-                                        </a>
-                                        <div class="news-post-content">
-                                            <h3 class="post-title title"><a class="news-post-link"
-                                                    href="./single.html">Lorem Ipsum là gì, Tại sao lại sử dụng nó?</a>
-                                            </h3>
-                                            <div class="post-meta-container"><span class="post-meta-item"><i
-                                                        class="far fa-clock"></i> Th3-27/10/2015</span><span
-                                                    class="post-meta-item"><i class="fa fa-user-check"></i><a
-                                                        href="#admin"> Admin</a></span></div>
+                                    @if (count($list_article_tax) > 0)
+                                        @foreach ($list_article_tax as $key_tax=>$item_tax)
+                                            <div class="news-post line-bottom small-post"><a class="news-post-image-link"
+                                                    href="{{ route('site.home.showDetail',['slugCategory' =>$item_tax->category->slug, 'slugDetail' => $item_tax->slug]) }}">
+                                                    <figure class="image-container">
+                                                        <div class="featured-image-overlay"><span class="featured-image-icon"><i
+                                                                    class="fa fa-camera"></i></span></div><img
+                                                            class="img-responsive" src="{{ $item_tax->img }}"
+                                                            alt="{{ $item_tax->title }}" />
+                                                    </figure>
+                                                </a>
+                                                <div class="news-post-content">
+                                                    <h3 class="post-title title"><a class="news-post-link"
+                                                            href="{{ route('site.home.showDetail',['slugCategory' =>$item_tax->category->slug, 'slugDetail' => $item_tax->slug]) }}">{{ $item_tax->title }}</a>
+                                                    </h3>
+                                                    <div class="post-meta-container"><span class="post-meta-item"><i
+                                                                class="far fa-clock"></i> {{ $item_tax->created_at->diffForHumans() }}</span></div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @else
+                                        <div class="news-post line-bottom small-post">
+                                            <span>Không có bài viết</span>
                                         </div>
-                                    </div>
-                                    <div class="news-post line-bottom small-post"><a class="news-post-image-link"
-                                            href="./single.html">
-                                            <figure class="image-container">
-                                                <div class="featured-image-overlay"><span class="featured-image-icon"><i
-                                                            class="fa fa-camera"></i></span></div><img
-                                                    class="img-responsive" src="./assets/images/services_02.png"
-                                                    alt="title alt" />
-                                            </figure>
-                                        </a>
-                                        <div class="news-post-content">
-                                            <h3 class="post-title title"><a class="news-post-link"
-                                                    href="./single.html">Lorem Ipsum là gì, Tại sao lại sử dụng nó?</a>
-                                            </h3>
-                                            <div class="post-meta-container"><span class="post-meta-item"><i
-                                                        class="far fa-clock"></i> Th3-27/10/2015</span><span
-                                                    class="post-meta-item"><i class="fa fa-user-check"></i><a
-                                                        href="#admin"> Admin</a></span></div>
-                                        </div>
-                                    </div>
-                                    <div class="news-post line-bottom small-post"><a class="news-post-image-link"
-                                            href="./single.html">
-                                            <figure class="image-container">
-                                                <div class="featured-image-overlay"><span class="featured-image-icon"><i
-                                                            class="fa fa-camera"></i></span></div><img
-                                                    class="img-responsive" src="./assets/images/services_02.png"
-                                                    alt="title alt" />
-                                            </figure>
-                                        </a>
-                                        <div class="news-post-content">
-                                            <h3 class="post-title title"><a class="news-post-link"
-                                                    href="./single.html">Lorem Ipsum là gì, Tại sao lại sử dụng nó?</a>
-                                            </h3>
-                                            <div class="post-meta-container"><span class="post-meta-item"><i
-                                                        class="far fa-clock"></i> Th3-27/10/2015</span><span
-                                                    class="post-meta-item"><i class="fa fa-user-check"></i><a
-                                                        href="#admin"> Admin</a></span></div>
-                                        </div>
-                                    </div>
-                                    <div class="news-post line-bottom small-post"><a class="news-post-image-link"
-                                            href="./single.html">
-                                            <figure class="image-container">
-                                                <div class="featured-image-overlay"><span class="featured-image-icon"><i
-                                                            class="fa fa-camera"></i></span></div><img
-                                                    class="img-responsive" src="./assets/images/services_02.png"
-                                                    alt="title alt" />
-                                            </figure>
-                                        </a>
-                                        <div class="news-post-content">
-                                            <h3 class="post-title title"><a class="news-post-link"
-                                                    href="./single.html">Lorem Ipsum là gì, Tại sao lại sử dụng nó?</a>
-                                            </h3>
-                                            <div class="post-meta-container"><span class="post-meta-item"><i
-                                                        class="far fa-clock"></i> Th3-27/10/2015</span><span
-                                                    class="post-meta-item"><i class="fa fa-user-check"></i><a
-                                                        href="#admin"> Admin</a></span></div>
-                                        </div>
-                                    </div>
-                                    <div class="news-post line-bottom small-post"><a class="news-post-image-link"
-                                            href="./single.html">
-                                            <figure class="image-container">
-                                                <div class="featured-image-overlay"><span class="featured-image-icon"><i
-                                                            class="fa fa-camera"></i></span></div><img
-                                                    class="img-responsive" src="./assets/images/services_02.png"
-                                                    alt="title alt" />
-                                            </figure>
-                                        </a>
-                                        <div class="news-post-content">
-                                            <h3 class="post-title title"><a class="news-post-link"
-                                                    href="./single.html">Lorem Ipsum là gì, Tại sao lại sử dụng nó?</a>
-                                            </h3>
-                                            <div class="post-meta-container"><span class="post-meta-item"><i
-                                                        class="far fa-clock"></i> Th3-27/10/2015</span><span
-                                                    class="post-meta-item"><i class="fa fa-user-check"></i><a
-                                                        href="#admin"> Admin</a></span></div>
-                                        </div>
-                                    </div>
-                                    <div class="news-post line-bottom small-post"><a class="news-post-image-link"
-                                            href="./single.html">
-                                            <figure class="image-container">
-                                                <div class="featured-image-overlay"><span class="featured-image-icon"><i
-                                                            class="fa fa-camera"></i></span></div><img
-                                                    class="img-responsive" src="./assets/images/services_02.png"
-                                                    alt="title alt" />
-                                            </figure>
-                                        </a>
-                                        <div class="news-post-content">
-                                            <h3 class="post-title title"><a class="news-post-link"
-                                                    href="./single.html">Lorem Ipsum là gì, Tại sao lại sử dụng nó?</a>
-                                            </h3>
-                                            <div class="post-meta-container"><span class="post-meta-item"><i
-                                                        class="far fa-clock"></i> Th3-27/10/2015</span><span
-                                                    class="post-meta-item"><i class="fa fa-user-check"></i><a
-                                                        href="#admin"> Admin</a></span></div>
-                                        </div>
-                                    </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>

@@ -39,6 +39,9 @@ class AdvertiseService
         if (isset($data['type']) && $data['type'] > -1) {
             $query = $query->where('type', $data['type']);
         }
+        if (isset($data['position']) && $data['position'] > 0) {
+            $query = $query->where('position', $data['position']);
+        }
         if (isset($data['sortBy']) && $data['sortBy'] != '') {
             $query = $query->orderBy($data['sortBy'], isset($data['sortOrder']) ? $data['sortOrder'] : 'DESC');
         } else {
