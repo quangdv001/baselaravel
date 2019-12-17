@@ -89,7 +89,6 @@
                                 <div class="form-group row pages" style="display:none;">
                                     <label class="col-md-3 col-form-label" for="">Trang nội dung</label>
                                     <div class="col-md-9">
-
                                         @if(count($listPage)>0)
                                             <select class="form-control single_page_id select2" name="single_page_id">
                                                 @foreach($listPage as $k => $v)

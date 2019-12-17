@@ -80,18 +80,38 @@ Danh sách danh mục
                             <label class="col-md-3 col-form-label" for="select1">Loại</label>
                             <div class="col-md-9">
                                 <select class="form-control type" id="exampleFormControlSelect3">
-                                    @foreach($arrType as $k => $v) 
+                                    @foreach($arrType as $k => $v)
                                     <option value="{{ $k }}">{{ $v }}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group pages" style="display:none;">
-                            <label class="col-md-3 col-form-label" for="">Chọn Trang nội dung</label>
+                        <div class="form-group row news" style="display: none">
+                            <label class="col-md-3 col-form-label" for="">Tin tức</label>
                             <div class="col-md-9">
-                                <select class="form-control article_id select2" name="article_id">
-                                    <option></option>
-                                </select>
+                                @if(count($listPage)>0)
+                                    <select class="form-control select2" name="article_id" id="select-article" style="width: 100%">
+                                        @foreach($listNews as $k => $v)
+                                            <option value="{{ $v['id'] }}">{{ $v['title'] }}</option>
+                                        @endforeach
+                                    </select>
+                                @else
+                                    <p class="text-danger mt-2"><span>Bạn chưa tạo trang tin tức!</span></p>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group row pages" style="display:none;">
+                            <label class="col-md-3 col-form-label" for="">Trang nội dung</label>
+                            <div class="col-md-9">
+                                @if(count($listPage)>0)
+                                    <select class="form-control single_page_id select2" name="single_page_id">
+                                        @foreach($listPage as $k => $v)
+                                            <option value="{{ $v['id'] }}">{{ $v['title'] }}</option>
+                                        @endforeach
+                                    </select>
+                                @else
+                                    <p class="text-danger mt-2"><span>Bạn chưa tạo trang đơn!</span></p>
+                                @endif
                             </div>
                         </div>
                         <div class="form-group row">
@@ -129,6 +149,7 @@ Danh sách danh mục
     </div>
 </div>
 @endsection
+
 @section('custom_js')
 <script>
     $(document).ready(function () {
@@ -238,6 +259,14 @@ Danh sách danh mục
                     $('.status').val(res.data.status);
                     $('.type').val(res.data.type);
                     $('.bl-form').show();
+                    if(res.data.type == 7){
+                        $('.pages').show();
+                        var selectPage = $('.page').val();
+                        page.loadPages(selectPage);
+                    }
+                    else if(res.data.type ==4){
+                        $('.news').show();
+                    }
                 } else {
                     init.notyPopup(res.mess, 'error');
                 }
@@ -281,11 +310,17 @@ Danh sách danh mục
         $(document).on('change', '.type', function(){
             if($(this).val() == 7){
                 $('.pages').show();
+                $('.news').hide();
                 var selectPage = $('.page').val();
                 page.loadPages(selectPage);
-            } else {
+            }
+            else if($(this).val() ==4){
+                $('.news').show();
                 $('.pages').hide();
-                var selectPage = 0;
+            }
+            else {
+                $('.news').hide();
+                $('.pages').hide();
             }
         })
 
@@ -317,6 +352,10 @@ Danh sách danh mục
             });
         },
     }
+
+    $('#select-article').select2({
+        placeholder: 'Mời chọn'
+    });
 
 </script>
 @endsection
