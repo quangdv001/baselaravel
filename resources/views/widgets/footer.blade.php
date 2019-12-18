@@ -31,46 +31,6 @@
                 </div>
                 <div class="col-sm-8">
                     <div class="row">
-{{--                        <div class="col-sm-3">--}}
-{{--                            <ul class="list-group list-group-flush">--}}
-{{--                                <li><a href="#link">Hướng dẫn</a></li>--}}
-{{--                                <li><a href="#link">Tài liệu</a></li>--}}
-{{--                                <li><a href="#link">Chính sách</a></li>--}}
-{{--                                <li><a href="#link">Hỗ trợ</a></li>--}}
-{{--                            </ul>--}}
-{{--                        </div>--}}
-{{--                        <div class="col-sm-3">--}}
-{{--                            <ul class="list-group list-group-flush">--}}
-{{--                                <li><a href="#link">Hướng dẫn</a></li>--}}
-{{--                                <li><a href="#link">Tài liệu</a></li>--}}
-{{--                                <li><a href="#link">Chính sách</a></li>--}}
-{{--                                <li><a href="#link">Hỗ trợ</a></li>--}}
-{{--                            </ul>--}}
-{{--                        </div>--}}
-{{--                        <div class="col-sm-3">--}}
-{{--                            <ul class="list-group list-group-flush">--}}
-{{--                                <li><i class="material-icons">phone_in_talk</i> 123 456--}}
-{{--                                    789--}}
-{{--                                </li>--}}
-{{--                                <li><a href="tell:123 456 798"><i class="material-icons">phone_in_talk</i> 123 456--}}
-{{--                                        798</a></li>--}}
-{{--                                <li><a href="mailto:email@domail.com"><i class="material-icons">mail_outline</i>--}}
-{{--                                        email@domail.com</a></li>--}}
-{{--                            </ul>--}}
-{{--                        </div>--}}
-{{--                        <div class="col-sm-3">--}}
-{{--                            <div>--}}
-{{--                                <p>Liên kết mạng xã hội:</p>--}}
-{{--                                <div class="social-icon"><a><i class="fab fa-facebook-f"></i></a>--}}
-{{--                                </div>--}}
-{{--                                <div class="social-icon"><a><i class="fab fa-google-plus-g"></i></a>--}}
-{{--                                </div>--}}
-{{--                                <div class="social-icon"><a><i class="fab fa-twitter"></i></a>--}}
-{{--                                </div>--}}
-{{--                                <div class="social-icon"><a><i class="fab fa-youtube"></i></a>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
                         @if(!empty($dataFooter))
                             @foreach($dataFooter as $group)
                                 <div class="col-sm-3">
@@ -92,15 +52,15 @@
                                                     @case(3)
                                                     <li><p>{{$item['content']}}</p></li>
                                                     @break
-{{--                                                    @case(4)--}}
-{{--                                                    <li>--}}
-{{--                                                        @foreach($item['social'] as $i)--}}
-{{--                                                            <div class="social-icon">--}}
-{{--                                                                <a>{!!  $i['icon']!!}</a>--}}
-{{--                                                            </div>--}}
-{{--                                                        @endforeach--}}
-{{--4                                                    </li>--}}
-{{--                                                    @break--}}
+                                                    @case(4)
+                                                    <li>
+                                                        @foreach($item['social'] as $i)
+                                                            <div class="social-icon">
+                                                                <a>{!!  $i['icon']!!}</a>
+                                                            </div>
+                                                        @endforeach
+                                                    </li>
+                                                    @break
                                                     @default
                                                 @endswitch
                                             @endforeach

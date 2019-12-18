@@ -120,7 +120,9 @@
                                         @if(count($listSocial)>0)
                                             @foreach($listSocial as $k => $v)
                                                 <input type="checkbox" name="social_id[]"
-                                                       value="{{ $v['id'] }}">{{ $v['name'] }}
+                                                       value="{{ $v['id'] }}" class="mr-3" id="{{$v['id']}}">
+                                                <label for="{{$v['id']}}">{{ $v['name'] }} </label>
+                                                <br>
                                             @endforeach
                                         @else
                                             <p class="text-danger mt-2"><span>Bạn chưa tạo trang đơn!</span></p>
@@ -262,8 +264,8 @@
                             case {{$Service::TYPE_SOCIAL}}:
                                 $('.social').show();
                                 res.data.social.forEach(function (item, index) {
-                                // $('.social input[value=" ' + item + ' "]').prop('checked');
-                                //     console.log($('.social input[value=" ' + item + ' "]').val());
+                                    // $('.social input[value=" ' + item + ' "]').prop('checked');
+                                    //     console.log($('.social input[value=" ' + item + ' "]').val());
                                 });
                                 break;
                         }
