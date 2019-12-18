@@ -16,9 +16,17 @@ class GeneralInfoService
 {
     private $service;
 
-    const TYPE_TEXT = 0;
-    const TYPE_SOCIAL = 1;
-    const TYPE_IMAGE = 2;
+    const TYPE_LOGO = 0;
+    const TYPE_NAME = 1;
+    const TYPE_CERTIFICATE_TEXT = 2;
+    const TYPE_CERTIFICATE_IMAGE = 3;
+    const TYPE_CERTIFICATE_NUMBER = 4;
+    const TYPE_ADDRESS = 5;
+    const TYPE_PHONE_MAIN = 6;
+    const TYPE_PHONE_EXTRA = 7;
+    const TYPE_EMAIL_MAIN = 8;
+    const TYPE_EMAIL_EXTRA = 9;
+    const TYPE_SOCIAL = 10;
 
     const STATUS_NOT_ACTIVE = 0;
     const STATUS_ACTIVE = 1;
@@ -82,6 +90,9 @@ class GeneralInfoService
                         break;
                     case 'in':
                         $query = $query->whereIn($condition['key'], $condition['value']);
+                        break;
+                    case 'notIn':
+                        $query = $query->whereNotIn($condition['key'], $condition['value']);
                         break;
                     default:
                         $query = $query->where($condition['key'], $operation, $condition['value']);

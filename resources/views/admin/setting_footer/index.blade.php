@@ -114,6 +114,19 @@
                                         @endif
                                     </div>
                                 </div>
+                                <div class="form-group row social" style="display:none;">
+                                    <label class="col-md-3 col-form-label" for="">Social</label>
+                                    <div class="col-md-9">
+                                        @if(count($listSocial)>0)
+                                            @foreach($listSocial as $k => $v)
+                                                <input type="checkbox" name="social_id[]"
+                                                       value="{{ $v['id'] }}">{{ $v['name'] }}
+                                            @endforeach
+                                        @else
+                                            <p class="text-danger mt-2"><span>Bạn chưa tạo trang đơn!</span></p>
+                                        @endif
+                                    </div>
+                                </div>
                                 <div class="form-group row image" style="display: none">
                                     <label class="col-md-3 col-form-label" for="select1">Ảnh</label>
                                     <div class="col-md-9">
@@ -246,6 +259,13 @@
                             case {{$Service::TYPE_IMAGE}}:
                                 $('.image').show();
                                 break;
+                            case {{$Service::TYPE_SOCIAL}}:
+                                $('.social').show();
+                                res.data.social.forEach(function (item, index) {
+                                // $('.social input[value=" ' + item + ' "]').prop('checked');
+                                //     console.log($('.social input[value=" ' + item + ' "]').val());
+                                });
+                                break;
                         }
                     } else {
                         init.notyPopup(res.mess, 'error');
@@ -294,16 +314,31 @@
                         $('.pages').show();
                         $('.image').hide();
                         $('.general-info').hide();
+                        $('.social').hide();
                         break;
                     case '{{$Service::TYPE_GENERAL_INFO}}':
                         $('.general-info').show();
                         $('.pages').hide();
                         $('.image').hide();
+                        $('.social').hide();
                         break;
                     case '{{$Service::TYPE_IMAGE}}':
                         $('.image').show();
                         $('.pages').hide();
                         $('.general-info').hide();
+                        $('.social').hide();
+                        break;
+                    case '{{$Service::TYPE_SOCIAL}}':
+                        $('.social').show();
+                        $('.pages').hide();
+                        $('.general-info').hide();
+                        $('.image').hide();
+                        break;
+                    case '{{$Service::TYPE_TEXT}}':
+                        $('.social').hide();
+                        $('.pages').hide();
+                        $('.general-info').hide();
+                        $('.image').hide();
                         break;
                 }
             })

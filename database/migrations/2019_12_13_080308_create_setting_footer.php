@@ -17,6 +17,7 @@ class CreateSettingFooter extends Migration
             $table->bigIncrements('id');
             $table->smallInteger('type')->default(0);
             $table->smallInteger('parent_id')->default(0);
+            $table->string('social_id')->nullable();
             $table->smallInteger('position')->default(0);
             $table->string('title');
             $table->string('img')->nullable();

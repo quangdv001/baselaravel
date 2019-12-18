@@ -19,6 +19,8 @@ class AdminSettingFooterController extends AdminBaseController
         SettingFooterService::TYPE_SINGLE_PAGE => 'Trang nội dung',
         SettingFooterService::TYPE_GENERAL_INFO => 'Thông tin chung',
         SettingFooterService::TYPE_IMAGE => 'Ảnh',
+        SettingFooterService::TYPE_TEXT => 'Text',
+        SettingFooterService::TYPE_SOCIAL => 'Social',
     ];
 
     public function __construct(SettingFooterService $settingFooterService, PageService $pageService,GeneralInfoService $generalInfoService)
@@ -37,10 +39,12 @@ class AdminSettingFooterController extends AdminBaseController
         $list = $this->settingFooterService->get(['sortBy' => 'position', 'sortOrder' => 'ASC']);
         $html = $this->showCategories($list, 0, '');
         $listPage = $this->pageService->get([]);
-        $generalInfo = $this->generalInfoService->get([]);
+        $generalInfo = $this->generalInfoService->get(['conditions'=>[['key'=>'type','value'=>[GeneralInfoService::TYPE_SOCIAL],'operation'=>'notIn']]]);
+        $listSocial = $this->generalInfoService->get(['conditions'=>[['key'=>'type','value'=>GeneralInfoService::TYPE_SOCIAL]]]);
         return view('admin.setting_footer.index')
             ->with('arrType', $this->arrType)
             ->with('listPage', $listPage)
+            ->with('listSocial', $listSocial)
             ->with('generalInfo', $generalInfo)
             ->with('html', $html);
     }
@@ -61,9 +65,12 @@ class AdminSettingFooterController extends AdminBaseController
         return response()->json($res);
     }
 
-    public function update(UpdateRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $data = $request->only('title', 'type','status', 'general_info_id', 'img', 'single_page_id');
+        $data = $request->only('title', 'type','status', 'general_info_id', 'img', 'single_page_id','social_id');
+        if(!empty($data['social_id'])){
+            $data['social_id'] = json_encode($data['social_id']);
+        }
         $category = $this->settingFooterService->getById($id);
         $res['success'] = 0;
         $res['mess'] = 'Có lỗi xảy ra!';
@@ -103,6 +110,9 @@ class AdminSettingFooterController extends AdminBaseController
             $res['success'] = 1;
             $res['mess'] = 'Cập nhật thành công.';
             $res['data'] = $category;
+            if($category->type== SettingFooterService::TYPE_SOCIAL){
+                $res['data']['social'] = json_decode($category->social_id);
+            }
         }
         return response()->json($res);
     }

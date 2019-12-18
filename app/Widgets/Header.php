@@ -21,6 +21,7 @@ class Header extends AbstractWidget
     public function run(CategoryService $categoryService)
     {
         $categories = $categoryService->getAll();
+
         $html = $this->showCategories($categories, 0, '');
         return view('widgets.header', [
             'config' => $this->config,
@@ -42,7 +43,7 @@ class Header extends AbstractWidget
                 unset($categories[$key]);
             }
         }
-        
+
         // BƯỚC 2.2: HIỂN THỊ DANH SÁCH CHUYÊN MỤC CON NẾU CÓ
         if ($cate_child)
         {
@@ -50,7 +51,7 @@ class Header extends AbstractWidget
             foreach ($cate_child as $key => $item)
             {
                 $link = $item->url;
-                
+
                 if($item->type >=1 && $item->type <= 6){
                     $link = route('site.article.index', ['slug' => Str::slug($item->name, '-'), 'id' => $item->id]);
                 } elseif($item->type == 7){
@@ -58,7 +59,7 @@ class Header extends AbstractWidget
                 }
                 // Hiển thị tiêu đề chuyên mục
                 $html .= '<li>'. '<a href="'. $link .'">' . $item['name'] . '</a>';
-                
+
                 // Tiếp tục đệ quy để tìm chuyên mục con của chuyên mục đang lặp
                 $html .= $this->showCategories($categories, $item->id, $char.'');
                 $html .= '</li>';

@@ -57,7 +57,8 @@ class AdminPageController extends AdminBaseController
         if (Gate::forUser($this->user)->denies('admin-pms', $this->currentRoute)) {
             return redirect()->route('admin.home.dashboard')->with('error_message','Bạn không có quyền vào trang này!');
         }
-        $data = $request->only('title', 'description', 'status');
+        $data = $request->only('title', 'description', 'status', 'slug');
+        $data['slug']= trim($data['slug'],'');
         $mess = '';
         if($id == 0){
             $res = $this->page->create($data);

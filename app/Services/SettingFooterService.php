@@ -20,6 +20,8 @@ class SettingFooterService
     const TYPE_SINGLE_PAGE = 0;
     const TYPE_GENERAL_INFO = 1;
     const TYPE_IMAGE = 2;
+    const TYPE_TEXT = 3;
+    const TYPE_SOCIAL = 4;
 
     const STATUS_NOT_ACTIVE = 0;
     const STATUS_ACTIVE = 1;

@@ -26,13 +26,12 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'type' => 'in:0,1,2',
-            'status' => 'in:0,1',
-            'content' => 'required_if:type,0',
-            'link' => 'required_if:type,1',
-            'icon' => 'required_if:type,1',
-            'img' => 'required_if:type,2',
+//            'name' => 'required',
+//            'status' => 'in:0,1',
+//            'content' => 'required_if:type,0',
+//            'link' => 'required_if:type,1',
+//            'icon' => 'required_if:type,1',
+//            'img' => 'required_if:type,2',
         ];
     }
 

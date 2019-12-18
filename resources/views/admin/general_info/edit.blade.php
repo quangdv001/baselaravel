@@ -46,6 +46,7 @@
                                             </select>
                                         </div>
                                     </div>
+                                    @if(!in_array((isset($data->type)?$data->type:-1),array_keys($arrTypeOnly)) )
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Loại</label>
@@ -56,8 +57,9 @@
                                             </select>
                                         </div>
                                     </div>
+                                    @endif
                                     <div
-                                        class="col-md-4 image" {{(isset($data->type) && $data->type == $Service::TYPE_IMAGE)?'':'style=display:none'}}>
+                                        class="col-md-4 image" {{(isset($data->type) && in_array($data->type,[$Service::TYPE_LOGO,$Service::TYPE_CERTIFICATE_IMAGE]))?'':'style=display:none'}}>
                                         <div class="form-group">
                                             <label>Ảnh</label>
                                             <a href="javascript:void(0)"
@@ -100,7 +102,7 @@
                                         </div>
                                     </div>
                                     <div
-                                        class="col-md-12 text" {{isset($data->type)?(($data->type == $Service::TYPE_TEXT)?'':'style=display:none'):''}}>
+                                        class="col-md-12 text" {{isset($data->type)?(!in_array($data->type,[$Service::TYPE_LOGO,$Service::TYPE_CERTIFICATE_IMAGE,$Service::TYPE_SOCIAL])?'':'style=display:none'):''}}>
                                         <div class="form-group">
                                             <p>
                                                 <label for="editor2">Mô tả</label>
@@ -203,20 +205,21 @@
 
         $('select[name="type"]').change(function () {
             switch ($(this).val()) {
-                case '{{$Service::TYPE_TEXT}}':
-                    $('.social').hide();
-                    $('.image').hide();
-                    $('.text').show();
-                    break;
                 case '{{$Service::TYPE_SOCIAL}}':
                     $('.social').show();
                     $('.image').hide();
                     $('.text').hide();
                     break;
-                case '{{$Service::TYPE_IMAGE}}':
+                case '{{$Service::TYPE_LOGO}}':
+                case '{{$Service::TYPE_CERTIFICATE_IMAGE}}':
                     $('.image').show();
                     $('.social').hide();
                     $('.text').hide();
+                    break;
+                default:
+                    $('.social').hide();
+                    $('.image').hide();
+                    $('.text').show();
                     break;
             }
         })

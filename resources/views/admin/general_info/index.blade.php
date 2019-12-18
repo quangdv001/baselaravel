@@ -55,26 +55,18 @@ Danh sách Trang nội dung
                                             {!! $v->status == $Service::STATUS_ACTIVE ? '<span class="badge badge-success">Hoạt động</span>' : '<span class="badge badge-danger">Không hoạt động</span>' !!}
                                         </td>
                                         <td>
-                                            @switch($v->type)
-                                                @case($Service::TYPE_TEXT)
-                                                <span class="badge badge-info">Text</span>
-                                                @break
-                                                @case($Service::TYPE_SOCIAL)
-                                                <span class="badge badge-info">Social</span>
-                                                @break
-                                                @case($Service::TYPE_IMAGE)
-                                                <span class="badge badge-info">Image</span>
-                                                @break
-                                            @endswitch
+                                            {{ $arrType[$v->type] }}
                                         </td>
                                         <td>
                                             <a href="{{ route('admin.generalInfo.getCreate', [ 'id' => $v->id]) }}"
                                                 class="text-warning"><i class="fa fa-pencil-square-o icon-sm"
                                                     aria-hidden="true"></i></a>
+                                            @if(in_array($v->type,array_keys($arrTypeDelete)))
                                             -
                                             <a href="{{ route('admin.generalInfo.remove', [ 'id' => $v->id]) }}"
                                                 class="text-danger"><i class="fa fa-trash-o icon-sm"
                                                     aria-hidden="true"></i></a>
+                                            @endif
                                         </td>
                                     </tr>
                                     @endforeach
