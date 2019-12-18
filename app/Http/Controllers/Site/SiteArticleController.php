@@ -25,7 +25,7 @@ class SiteArticleController extends Controller
         $params['category_id'] = $id;
         $params['limit'] = 10;
         $params['sortBy'] = 'id';
-        if($category->type >= 1 && $category->type <= 5){
+        if($category->type >= 1 && $category->type <= 5 || $category->type > 7 && $category->type < 10){
             $article = $this->article->search($params);
             return view('site.article.index')->with('article', $article)->with('category', $category);
         }

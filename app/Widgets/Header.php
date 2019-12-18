@@ -57,7 +57,12 @@ class Header extends AbstractWidget
 
                 }
                 // Hiển thị tiêu đề chuyên mục
-                $html .= '<li>'. '<a href="'. $link .'">' . $item['name'] . '</a>';
+                if ($item['url'] == '/') {
+                    $html .= '<li>'. '<a href="'. $link .'"><i class="fa fa-home"></i></a>';
+                } else {
+                    $html .= '<li>'. '<a href="'. $link .'">' . $item['name'] . '</a>';
+                }
+                
                 
                 // Tiếp tục đệ quy để tìm chuyên mục con của chuyên mục đang lặp
                 $html .= $this->showCategories($categories, $item->id, $char.'');
