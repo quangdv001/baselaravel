@@ -20,7 +20,7 @@ home
                                 <ul class="list-head">
                                 @if (count($list_article_lands) > 0)
                                     @foreach ($list_article_lands as $key_lands=>$item_lands)
-                                        <li><a class="title" href="{{ route('site.home.showDetail',['slugCategory' => $item_lands->category->slug, 'slugDetail' => $item_lands->slug]) }}"><span><i
+                                        <li><a class="title" href="{{ route('site.article.detail',['slugCategory' => $item_lands->category->slug, 'slugDetail' => $item_lands->slug]) }}"><span><i
                                                         class="far fa-clock"></i></span><span>&nbsp;{{ $item->title }}</span></a></li>
                                     @endforeach
                                 @else
@@ -35,7 +35,7 @@ home
                                 <div class="slide-owl-carousel owl-carousel owl-theme">
                                 @foreach ($list_article_laws as $key_laws=>$item_laws)
                                     @if ($key <= 2)
-                                        <a class="block" href="{{ route('site.home.showDetail', ['slugCategory' => $item_laws->category->slug, 'slugDetail' => $item_laws->slug]) }}">
+                                        <a class="block" href="{{ route('site.article.detail', ['slugCategory' => $item_laws->category->slug, 'slugDetail' => $item_laws->slug]) }}">
                                             <div class="cover-item">
                                                 <div class="landscape_image"><img alt="{{ $item_laws->title }}" src="{{ $item_laws->img}}" />
                                                 </div>
@@ -57,7 +57,7 @@ home
                                 @foreach ($lastestLaws as $key_laws=>$item_laws)
                                     @if ($key > 2)
                                         <li>
-                                            <a class="title" href="{{ route('site.home.showDetail', ['slugCategory' => $item_laws->category->slug, 'slugDetail' => $item_laws->slug]) }}">
+                                            <a class="title" href="{{ route('site.article.detail', ['slugCategory' => $item_laws->category->slug, 'slugDetail' => $item_laws->slug]) }}">
                                             @if (strlen(strip_tags($item_laws->title)) > 150) {!! mb_substr(strip_tags($item_laws->title), 0, mb_strpos(strip_tags($item_laws->title), ' ', 150)) !!}... @else {!! $item_laws->title !!} @endif
                                             </a>
                                         </li>
@@ -82,7 +82,7 @@ home
                                     @foreach ($list_article_rooms as $key_room=>$item_room)
                                         <div class="forrent-post line-bottom">
                                             <div class="post-content"><a class="news-post-image-link"
-                                                    href="{{ route('site.home.showDetail',['slugCategory' => $item_room->category->slug, 'slugDetail' => $item_room->slug]) }}">
+                                                    href="{{ route('site.article.detail',['slugCategory' => $item_room->category->slug, 'slugDetail' => $item_room->slug]) }}">
                                                     <figure class="image-container">
                                                         <div class="featured-image-overlay"><span
                                                                 class="featured-image-icon"><i
@@ -92,7 +92,7 @@ home
                                                     </figure>
                                                 </a>
                                                 <h3 class="post-title title"><a class="news-post-link"
-                                                        href="{{ route('site.home.showDetail',['slugCategory' => $item_room->category->slug, 'slugDetail' => $item_room->slug]) }}">{{ $item_room->title }}</a></h3>
+                                                        href="{{ route('site.article.detail',['slugCategory' => $item_room->category->slug, 'slugDetail' => $item_room->slug]) }}">{{ $item_room->title }}</a></h3>
                                                 <div class="row">
                                                     <div class="col rent-attribute"><strong>Giá :</strong><span> @if($item_room->price) {{ $item_room->price }} @else '--' @endif
                                                             triệu</span></div>
@@ -122,7 +122,7 @@ home
                                     @if (count($list_article_projects) > 0)
                                         @foreach ($list_article_projects as $key_project=>$item_project)
                                             <div class="news-post line-bottom small-post"><a class="news-post-image-link"
-                                                    href="{{ route('site.home.showDetail',['slugCategory' =>$item_project->category->slug, 'slugDetail' => $item_project->slug]) }}">
+                                                    href="{{ route('site.article.detail',['slugCategory' =>$item_project->category->slug, 'slugDetail' => $item_project->slug]) }}">
                                                     <figure class="image-container">
                                                         <div class="featured-image-overlay"><span class="featured-image-icon"><i
                                                                     class="fa fa-camera"></i></span></div><img
@@ -132,7 +132,7 @@ home
                                                 </a>
                                                 <div class="news-post-content">
                                                     <h3 class="post-title title"><a class="news-post-link"
-                                                            href="{{ route('site.home.showDetail',['slugCategory' =>$item_project->category->slug, 'slugDetail' => $item_project->slug]) }}">{{ $item_project->title }}</a>
+                                                            href="{{ route('site.article.detail',['slugCategory' =>$item_project->category->slug, 'slugDetail' => $item_project->slug]) }}">{{ $item_project->title }}</a>
                                                     </h3>
                                                     <div class="post-meta-container"><span class="post-meta-item"><i
                                                                 class="far fa-clock"></i> {{ $item_project->created_at->diffForHumans() }}</span></div>
@@ -152,7 +152,7 @@ home
                                     @if (count($list_article_tax) > 0)
                                         @foreach ($list_article_tax as $key_tax=>$item_tax)
                                             <div class="news-post line-bottom small-post"><a class="news-post-image-link"
-                                                    href="{{ route('site.home.showDetail',['slugCategory' =>$item_tax->category->slug, 'slugDetail' => $item_tax->slug]) }}">
+                                                    href="{{ route('site.article.detail',['slugCategory' =>$item_tax->category->slug, 'slugDetail' => $item_tax->slug]) }}">
                                                     <figure class="image-container">
                                                         <div class="featured-image-overlay"><span class="featured-image-icon"><i
                                                                     class="fa fa-camera"></i></span></div><img
@@ -162,7 +162,7 @@ home
                                                 </a>
                                                 <div class="news-post-content">
                                                     <h3 class="post-title title"><a class="news-post-link"
-                                                            href="{{ route('site.home.showDetail',['slugCategory' =>$item_tax->category->slug, 'slugDetail' => $item_tax->slug]) }}">{{ $item_tax->title }}</a>
+                                                            href="{{ route('site.article.detail',['slugCategory' =>$item_tax->category->slug, 'slugDetail' => $item_tax->slug]) }}">{{ $item_tax->title }}</a>
                                                     </h3>
                                                     <div class="post-meta-container"><span class="post-meta-item"><i
                                                                 class="far fa-clock"></i> {{ $item_tax->created_at->diffForHumans() }}</span></div>
