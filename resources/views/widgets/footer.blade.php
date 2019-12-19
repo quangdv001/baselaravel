@@ -50,7 +50,7 @@
                                                     <li><img src="{{$item['img']}}" alt="" class="w-100"></li>
                                                     @break
                                                     @case(3)
-                                                    <li><p>{{$item['content']}}</p></li>
+                                                    <li><p>{{$item['title']}}</p></li>
                                                     @break
                                                     @case(4)
                                                     <li>

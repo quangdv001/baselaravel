@@ -102,7 +102,7 @@
                                         </div>
                                     </div>
                                     <div
-                                        class="col-md-12 text" {{isset($data->type)?(!in_array($data->type,[$Service::TYPE_LOGO,$Service::TYPE_CERTIFICATE_IMAGE,$Service::TYPE_SOCIAL])?'':''):'style=display:none'}}>
+                                        class="col-md-12 text" {{isset($data->type)?(!in_array($data->type,[$Service::TYPE_LOGO,$Service::TYPE_CERTIFICATE_IMAGE,$Service::TYPE_SOCIAL])?'':'style=display:none'):'style=display:none'}}>
                                         <div class="form-group">
                                             <p>
                                                 <label for="editor2">Mô tả</label>
