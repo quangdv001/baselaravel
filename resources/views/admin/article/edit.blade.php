@@ -44,6 +44,7 @@
                                         </select>
                                     </div>
                                 </div>
+                                @if(!in_array($type, [8, 9]))
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect2">Chọn danh mục</label>
@@ -56,10 +57,11 @@
                                         @endif
                                     </div>
                                 </div>
-
+                                
                                 <div class="col-md-6">
                                     
                                 </div>
+                                @endif
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Ảnh</label>

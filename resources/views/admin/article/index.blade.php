@@ -137,7 +137,13 @@ Danh sách Bài viết
                                             {{ $v->title }}
                                         </td>
                                         <td>
-                                            {{ isset($listCategories[$v->category_id]) ? $listCategories[$v->category_id] : 'Chưa chọn danh mục'  }}
+                                            @if($v->type == 8)
+                                                Nhà đất Hà Nội
+                                            @elseif($v->type == 9)
+                                                Đối tác
+                                            @else
+                                                {{ isset($listCategories[$v->category_id]) ? $listCategories[$v->category_id] : 'Chưa chọn danh mục'  }}
+                                            @endif
                                         </td>
                                         <td>
                                             {!! $v->status == 1 ? '<span class="badge badge-success">Hoạt động</span>' : '<span class="badge badge-danger">Không hoạt động</span>' !!}

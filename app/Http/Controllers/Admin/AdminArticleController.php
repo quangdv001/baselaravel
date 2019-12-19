@@ -65,7 +65,8 @@ class AdminArticleController extends AdminBaseController
             ->with('id', $id)
             ->with('html', $html)
             ->with('articleImg', $articleImg)
-            ->with('data', $article);
+            ->with('data', $article)
+            ->with('type', $type);
     }
 
     public function postCreate(ArticleRequest $request, $type, $id = 0){
