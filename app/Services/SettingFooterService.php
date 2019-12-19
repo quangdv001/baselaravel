@@ -70,7 +70,7 @@ class SettingFooterService
         if (sizeof($child) > 0) {
             return false;
         } else {
-            return $this->category->find($id)->delete();
+            return $this->service->find($id)->delete();
         }
     }
 

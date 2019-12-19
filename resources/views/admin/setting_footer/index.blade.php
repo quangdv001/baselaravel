@@ -278,7 +278,7 @@
             $(document).on('click', '.btn-rm', function (e) {
                 if (confirm('Bạn có chắc muốn xóa danh mục này?')) {
                     var id = $(this).data('id');
-                    var url = BASE_URL + '/admin/category/remove/' + id;
+                    var url = BASE_URL + '/admin/setting-footer/remove/' + id;
                     var obj = $(this);
                     $.get(url, function (res) {
                         if (res.success == 1) {

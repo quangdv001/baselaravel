@@ -119,7 +119,7 @@ class AdminSettingFooterController extends AdminBaseController
 
     public function remove($id)
     {
-        $category = $this->category->delete($id);
+        $category = $this->settingFooterService->delete($id);
         $res['success'] = 0;
         $res['mess'] = 'Mời xóa hoặc di chuyển danh mục con trước!';
         if ($category) {
@@ -189,5 +189,4 @@ class AdminSettingFooterController extends AdminBaseController
         }
         return $data;
     }
-
 }

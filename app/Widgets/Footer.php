@@ -24,7 +24,7 @@ class Footer extends AbstractWidget
     {
         //
         $info = $generalInfoService->get([]);
-        $footer = $settingFooterService->get([])->load('info', 'page')->toArray();
+        $footer = $settingFooterService->get(['sortBy' => 'position', 'sortOrder' => 'ASC'])->load('info', 'page')->toArray();
         $listSocial = $generalInfoService->get(['conditions'=>[['key'=>'type','value'=>GeneralInfoService::TYPE_SOCIAL]]]);
         foreach ($footer as $k=> $item){
             if($item['type']==SettingFooterService::TYPE_SOCIAL){
