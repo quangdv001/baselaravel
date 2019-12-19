@@ -57,5 +57,22 @@ Route::middleware(['auth.admin'])->prefix('admin')->group(function () {
 
     Route::get('user', 'AdminUserController@index')->name('user.getList');
     Route::post('user/updateStatus/{id}', 'AdminUserController@updateStatus')->name('user.updateStatus');
+
+    Route::get('setting-footer', 'AdminSettingFooterController@index')->name('settingFooter.getList');
+    Route::get('setting-footer/{id}', 'AdminSettingFooterController@show')->name('settingFooter.show');
+    Route::post('setting-footer/create', 'AdminSettingFooterController@create')->name('settingFooter.create');
+    Route::post('setting-footer/update/{id}', 'AdminSettingFooterController@update')->name('settingFooter.update');
+    Route::post('setting-footer/updatePosition', 'AdminSettingFooterController@updatePosition')->name('settingFooter.updatePosition');
+    Route::get('setting-footer/remove/{id?}', 'AdminSettingFooterController@remove')->name('settingFooter.remove');
+
+    Route::get('general-info', 'AdminGeneralInfoController@index')->name('generalInfo.index');
+    Route::get('general-info/getCreate/{id?}', 'AdminGeneralInfoController@getCreate')->name('generalInfo.getCreate');
+    Route::post('general-info/getCreate/{id?}', 'AdminGeneralInfoController@postCreate')->name('generalInfo.postCreate');
+    Route::get('general-info/remove/{id?}', 'AdminGeneralInfoController@remove')->name('generalInfo.remove');
+
+    Route::get('advertise', 'AdminAdvertiseController@index')->name('advertise.getList');
+    Route::get('advertise/getCreate/{id?}', 'AdminAdvertiseController@getCreate')->name('advertise.getCreate');
+    Route::post('advertise/getCreate/{id?}', 'AdminAdvertiseController@postCreate')->name('advertise.postCreate');
+    Route::get('advertise/remove/{id?}', 'AdminAdvertiseController@remove')->name('advertise.remove');
 });
 

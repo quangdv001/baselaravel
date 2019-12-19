@@ -16,6 +16,7 @@ class CreatePageTable extends Migration
         Schema::create('page', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
+            $table->string('slug')->unique();
             $table->text('description')->nullable();
             $table->smallInteger('status')->nullable()->default(1);
             $table->timestamps();

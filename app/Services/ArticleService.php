@@ -111,7 +111,7 @@ class ArticleService
     }
 
     public function getById($id){
-        return $this->article->find($id);
+        return $this->article->with('category')->find($id);
     }
 
     public function getAll(){
@@ -129,8 +129,8 @@ class ArticleService
         return $this->article->where('category_id', $category->id)->where('type', $category->type)->where('status',1)->orderBy('id','DESC')->paginate($limit);
     }
 
-    public function getRelate($categoryId, $slug, $limit){
-        return $this->article->where('category_id', $categoryId)->where('slug', '!=', $slug)->where('status',1)->orderBy('id','DESC')->paginate($limit);
+    public function getRelate($categoryId, $id, $limit){
+        return $this->article->where('category_id', $categoryId)->where('id', '!=', $id)->where('status',1)->orderBy('id','DESC')->paginate($limit);
     }
 
     public function createArticleImg($id, $data){

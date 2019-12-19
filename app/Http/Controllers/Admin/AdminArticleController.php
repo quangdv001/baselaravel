@@ -20,6 +20,8 @@ class AdminArticleController extends AdminBaseController
         4 => 'Tin tức',
         5 => 'Pháp lý',
         7 => 'Trang nội dung',
+        8 => 'Cách tính thuế đất',
+        9 => 'Đối tác'
     ];
     public function __construct(ArticleService $article, CategoryService $category)
     {
