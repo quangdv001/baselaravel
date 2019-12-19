@@ -55,7 +55,7 @@ class Header extends AbstractWidget
                 if($item->type >=1 && $item->type <= 6){
                     $link = route('site.article.index', ['slug' => Str::slug($item->name, '-'), 'id' => $item->id]);
                 } elseif($item->type == 7){
-
+                    $link = route('site.page.index', ['slug' => $item->page->slug]);
                 }
                 // Hiển thị tiêu đề chuyên mục
 //                $html .= '<li>'. '<a href="'. $link .'">' . $item['name'] . '</a>';

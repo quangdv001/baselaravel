@@ -12,7 +12,7 @@ Route::get('bai-viet/{id}/{slug}', 'SiteArticleController@detail')->name('articl
 Route::get('cho-thue/{id}/{slug}', 'SiteArticleController@detailRoom')->name('room.detail');
 Route::get('tim-kiem', 'SiteArticleController@search')->name('article.search');
 
-Route::get('trang/{id}/{slug}', 'SitePageController@index')->name('page.index');
+Route::get('trang/{slug}', 'SitePageController@index')->name('page.index');
 
 
 

@@ -11,4 +11,8 @@ class Category extends Model
         'name', 'url', 'img', 'description', 'parent_id', 'position', 'type', 'category_id', 'class_name', 'article_id', 'single_page_id'
     ];
     // protected $dates = ['deleted_at'];
+    public function page()
+    {
+        return $this->belongsTo(Page::class, 'single_page_id');
+    }
 }
