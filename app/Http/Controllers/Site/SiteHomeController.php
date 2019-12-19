@@ -25,19 +25,19 @@ class SiteHomeController extends Controller
 
     public function index(){
         //nhà đất hà nội
-        $list_article_lands = $this->article->search(['category_id'=>1, 'limit'=>9, 'status'=>1]);
+        $list_article_lands = $this->article->search(['type'=>1, 'limit'=>9, 'status'=>1]);
         //môi giới - sàn giao dịch
-        $list_article_exchanges = $this->article->search(['category_id'=> 2, 'limit'=>5, 'status'=>1]);
+        $list_article_exchanges = $this->article->search(['type'=>2, 'limit'=>5, 'status'=>1]);
         //đô thị
-        $list_article_projects = $this->article->search(['category_id'=> 3, 'limit'=>5, 'status'=>1]);
+        $list_article_projects = $this->article->search(['type'=>3, 'limit'=>5, 'status'=>1]);
         //tin tức
-        $list_article_news = $this->article->search(['category_id'=> 4, 'limit'=>10, 'status'=>1]);
+        $list_article_news = $this->article->search(['type'=> 4, 'limit'=>10, 'status'=>1]);
         //pháp lý
-        $list_article_laws = $this->article->search(['category_id'=> 5, 'limit'=>10, 'status'=>1]);
+        $list_article_laws = $this->article->search(['type'=> 5, 'limit'=>10, 'status'=>1]);
         //cách tính thuế đất
-        $list_article_tax = $this->article->search(['category_id'=> 8, 'limit'=>5, 'status'=>1]);
+        $list_article_tax = $this->article->search(['type'=> 8, 'limit'=>5, 'status'=>1]);
         //đối tác
-        $list_partner = $this->article->search(['category_id'=> 10, 'limit'=>5, 'status'=>1]);
+        $list_partner = $this->article->search(['type'=> 9, 'limit'=>5, 'status'=>1]);
         //quảng cáo dọc
         $advertise_vertical = $this->advertise->search(['position'=> 1, 'limit'=>5, 'status'=>1]);
         //quảng cáo ngang

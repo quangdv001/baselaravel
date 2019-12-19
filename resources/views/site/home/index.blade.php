@@ -21,7 +21,7 @@ home
                                 @if (count($list_article_lands) > 0)
                                     @foreach ($list_article_lands as $key_lands=>$item_lands)
                                         <li><a class="title" href="{{ route('site.article.detail',['slugCategory' => $item_lands->category->slug, 'slugDetail' => $item_lands->slug]) }}"><span><i
-                                                        class="far fa-clock"></i></span><span>&nbsp;{{ $item->title }}</span></a></li>
+                                                        class="far fa-clock"></i></span><span>&nbsp;{{ $item_lands->title }}</span></a></li>
                                     @endforeach
                                 @else
                                     <li><a class="title" href="javascript:void(0)">Không có bài viết</a></li>
