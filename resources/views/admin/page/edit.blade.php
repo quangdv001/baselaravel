@@ -34,6 +34,16 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label>Slug</label>
+                                        <input type="text" class="form-control slug" name="slug" placeholder="Slug"
+                                            value="{{ isset($data->slug) ? $data->slug : old('slug') }}">
+                                        @if($errors->has('slug'))
+                                        <p class="text-danger">{{ $errors->first('slug') }}</p>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
                                         <label for="exampleFormControlSelect2">Trạng thái</label>
                                         <select class="form-control" name="status" id="exampleFormControlSelect2">
                                             <option value="1">Hoạt động</option>
