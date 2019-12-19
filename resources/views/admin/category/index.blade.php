@@ -207,7 +207,7 @@ Danh sách danh mục
         $('.btn-update').click(function () {
             var id = $('.id').val();
             var name = $('.name').val();
-            // var slug = $('.slug').val();
+            var single_page_id = $('.single_page_id').val();
             var img = $('.img').val();
             var description = $('.description').val();
             var status = $('.status').val();
@@ -223,7 +223,7 @@ Danh sách danh mục
                 status: status,
                 type: type,
                 url: urll,
-                // slug: slug,
+                single_page_id: single_page_id,
                 class_name: class_name,
             };
             var obj = $(this);
@@ -258,6 +258,7 @@ Danh sách danh mục
                     $('.description').val(res.data.description);
                     $('.status').val(res.data.status);
                     $('.type').val(res.data.type);
+                    $('.single_page_id').val(res.data.single_page_id);
                     $('.bl-form').show();
                     if(res.data.type == 7){
                         $('.pages').show();
