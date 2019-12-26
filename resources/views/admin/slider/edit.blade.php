@@ -56,9 +56,9 @@
                                         <br>
                                         <a href="javascript:void(0)" class="btn btn-info btn-select-file-inside">Chọn ảnh</a>
                                         <div class="bl-img-show mt-4">
-                                            <img src="{{ isset($data->img_inside) ? $data->img_inside : asset('public/assets/site/themes/assets/images/slide-img.png') }}"
+                                            <img src="{{ isset($data->img_inside) ? $data->img_inside : '' }}"
                                                 class="img-show-inside" width="90" height="90" alt="">
-                                            <a href="javascript:void(0)" class="text-danger "><i class="removeImgInside fa fa-trash-o icon-sm"
+                                            <a href="javascript:void(0)" class="text-danger imgInside" {{ isset($data->img_inside) ? '' : 'style=display:none;' }}><i class="removeImgInside fa fa-trash-o icon-sm"
                                                 aria-hidden="true"></i></a>
                                         </div>
                                     </div>
@@ -115,7 +115,8 @@
 
         $('.removeImgInside').click(function (){
             $('.img-inside').val('');
-            $('.img-show-inside').attr('src', "{{ asset('public/assets/site/themes/assets/images/slide-img.png') }}");
+            $('.img-show-inside').attr('src', '');
+            $('.imgInside').hide();
         })
 
         $(document).on('click', '.btn-select-file', function () {
@@ -155,6 +156,7 @@
     var callbackImgInside = function (data) {
         $('.img-inside').val(data.url);
         $('.img-show-inside').attr('src', data.url);
+        $('.imgInside').show();
     }
 
     var callbackCkeditor = function (data) {
