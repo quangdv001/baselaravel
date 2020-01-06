@@ -15,8 +15,6 @@ class CreateBillTable extends Migration
     {
         Schema::create('bill', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('motel_name');
-            $table->string('motel_room_name');
             $table->string('name');
             $table->string('note');
             $table->integer('other_price');

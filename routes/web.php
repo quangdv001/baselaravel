@@ -27,6 +27,10 @@ Route::namespace('Site')->name('site.')->group(function () {
     require_once('site.php');
 });
 
+Route::namespace('My')->name('my.')->group(function () {
+    require_once('my.php');
+});
+
 
 // Route::get('/testMail', function(){
 //     $order = Order::find(1);

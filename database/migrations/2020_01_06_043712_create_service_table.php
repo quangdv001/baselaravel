@@ -15,6 +15,14 @@ class CreateServiceTable extends Migration
     {
         Schema::create('service', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('title');
+            $table->string('unit');
+            $table->integer('price');
+            $table->integer('fixed_price');
+            $table->smallInteger('status')->default(1);
+            $table->smallInteger('has_formula')->default(1);
+            $table->text('description')->nullable();
+            $table->bigInteger('user_id');
             $table->timestamps();
         });
     }
