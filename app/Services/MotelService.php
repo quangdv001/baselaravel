@@ -44,8 +44,8 @@ class MotelService
         if (isset($data['except']) && $data['except'] > 0) {
             $query = $query->where('id', '<>' ,$data['except']);
         }
-        if (isset($data['type']) && $data['type'] > -1) {
-            $query = $query->where('type', $data['type']);
+        if (isset($data['user_id']) && $data['user_id'] > 0) {
+            $query = $query->where('user_id' ,$data['user_id']);
         }
         if (isset($data['sortBy']) && $data['sortBy'] != '') {
             $query = $query->orderBy($data['sortBy'], isset($data['sortOrder']) ? $data['sortOrder'] : 'DESC');

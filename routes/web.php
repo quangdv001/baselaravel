@@ -23,12 +23,12 @@ Route::namespace('Admin')->name('admin.')->group(function () {
     require_once('admin.php');
 });
 
-Route::namespace('Site')->name('site.')->group(function () {
-    require_once('site.php');
+Route::namespace('My')->name('my.')->prefix('my')->group(function () {
+    require_once('my.php');
 });
 
-Route::namespace('My')->name('my.')->group(function () {
-    require_once('my.php');
+Route::namespace('Site')->name('site.')->group(function () {
+    require_once('site.php');
 });
 
 

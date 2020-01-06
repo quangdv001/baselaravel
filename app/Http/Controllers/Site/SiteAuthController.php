@@ -29,7 +29,7 @@ class SiteAuthController extends Controller
         return redirect()->back()->with('error','Tài khoản hoặc mật khẩu sai!');
     }
 
-    public function postRegister(Request $request){
+    public function postRegister(RegisterRequest $request){
         $data = $request->only('email', 'password', 'phone', 'name');
         $data['password'] = bcrypt($data['password']);
         $res = $this->user->create($data);

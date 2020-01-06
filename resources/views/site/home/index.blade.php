@@ -98,7 +98,7 @@ home
                                                             triệu</span></div>
                                                     <div class="col rent-attribute"><strong>Diện tích :</strong><span> @if($item_room->acreage) {{ $item_room->acreage }} @else '--' @endif
                                                             m²</span></div>
-                                                    <div class="col rent-attribute"><strong>Quận/huyện :</strong><span> @if($item_room->district_id) {{ $districts[$item_room->district_id] }} @else '--' @endif</span></div>
+                                                    <div class="col rent-attribute"><strong>Quận/huyện :</strong><span> @if($item_room->district_id) {{ $item_room->district->name }} @else '--' @endif</span></div>
                                                 </div>
                                                 <div class="post-meta-container"><span class="post-meta-item"><i
                                                             class="far fa-clock"></i> {{ $item_room->created_at->diffForHumans() }}</span><span
