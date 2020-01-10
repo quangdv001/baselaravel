@@ -40,7 +40,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-auto col-12">
-                    <h3 class="logo" id="logo"><a href="index.html"><img src="./assets/images/logo.png"></a></h3>
+                    <h3 class="logo" id="logo"><a href="index.html"><img src="{{ asset('public/assets/site/themes/assets/images/logo.png') }}"></a></h3>
                 </div>
                 <div class="col align-self-center"><span class="search-form">
                         <form class="form" action="{{ route('site.article.search') }}">
