@@ -215,6 +215,7 @@ home
                     <a href="{{ $item_adv->url }}">
                         <img src="{{ $item_adv->img}}" alt="1" style="height: 120px" />
                     </a>
+                    @endforeach
                 </div>
             </div>
         </div>
