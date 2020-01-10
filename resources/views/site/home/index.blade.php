@@ -189,37 +189,37 @@ home
         <div class="container">
             <div class="row justify-content-md-center">
                 <div class="col-sm-12"><br>
+                    @if (count($exchangePartner) > 0)
                     <div class="partners">
-                        <div class="partners-carousel owl-carousel owl-theme"><a class="partner-item"
-                                href="#partner"><img src="./assets/images/partners/p1.jpg" alt="#{i}" /></a><a
-                                class="partner-item" href="#partner"><img src="./assets/images/partners/p1.jpg"
-                                    alt="#{i}" /></a><a class="partner-item" href="#partner"><img
-                                    src="./assets/images/partners/p1.jpg" alt="#{i}" /></a><a class="partner-item"
-                                href="#partner"><img src="./assets/images/partners/p1.jpg" alt="#{i}" /></a><a
-                                class="partner-item" href="#partner"><img src="./assets/images/partners/p1.jpg"
-                                    alt="#{i}" /></a><a class="partner-item" href="#partner"><img
-                                    src="./assets/images/partners/p1.jpg" alt="#{i}" /></a><a class="partner-item"
-                                href="#partner"><img src="./assets/images/partners/p1.jpg" alt="#{i}" /></a><a
-                                class="partner-item" href="#partner"><img src="./assets/images/partners/p1.jpg"
-                                    alt="#{i}" /></a><a class="partner-item" href="#partner"><img
-                                    src="./assets/images/partners/p1.jpg" alt="#{i}" /></a>
+                        <div class="partners-carousel owl-carousel owl-theme">
+                            @foreach ($exchangePartner as $key_ex=>$item_ex)
+                                <a class="partner-item" href="{{ route('site.article.detail', ['slug' => Str::slug($item_ex->title, '-'), 'id' => $item_ex->id]) }}">
+                                    <img src="{{ $item_ex->img }}" alt="{{ item_ex->title }}" />
+                                </a>
+                            @endforeach
                         </div>
-                    </div><br>
+                    </div>
+                    <br>
+                    @endif
                 </div>
             </div>
         </div>
     </div>
+    @if count(advertise_horizontal > 0)
     <div class="section-gap banner-text"
         style="    background: #ccc url(https://syntec-numerique.fr/sites/default/files/styles/medium/public/Image/finance-syntec-02-02-2017-2.jpg?itok=sXt3wLLF) no-repeat center top / 100% 600%;">
         <div class="container">
             <div class="banner-slide">
-                <div class="slide-owl-carousel owl-carousel owl-theme"><a href="#link"><img
-                            src="/assets/images/banners/1.png" alt="1" style="height: 120px" /></a><a href="#link"><img
-                            src="/assets/images/banners/2.png" alt="2" style="height: 120px" /></a>
+                <div class="slide-owl-carousel owl-carousel owl-theme">
+                    @foreach ($advertise_horizontal as $key_adv=>$item_adv)
+                    <a href="{{ item_adv->url }}">
+                        <img src="{{ item_adv->img}}" alt="1" style="height: 120px" />
+                    </a>
                 </div>
             </div>
         </div>
     </div>
+    @endif
 </div>
 @endsection
 @section('custom_js')
