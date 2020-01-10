@@ -194,7 +194,7 @@ home
                         <div class="partners-carousel owl-carousel owl-theme">
                             @foreach ($exchangePartner as $key_ex=>$item_ex)
                                 <a class="partner-item" href="{{ route('site.article.detail', ['slug' => Str::slug($item_ex->title, '-'), 'id' => $item_ex->id]) }}">
-                                    <img src="{{ $item_ex->img }}" alt="{{ item_ex->title }}" />
+                                    <img src="{{ $item_ex->img }}" alt="{{ $item_ex->title }}" />
                                 </a>
                             @endforeach
                         </div>
