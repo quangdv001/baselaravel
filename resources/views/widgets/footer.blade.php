@@ -15,17 +15,17 @@
                                 <span style="font-size:14px">
                                     <strong>{{$dataInfo['name']}}</strong>
                                     Giấy chứng nhận
-                                    <strong> ĐKKD số {{$dataInfo['certificate_number']}}</strong>
-                                    do Phòng ĐKKD -&nbsp;{{$dataInfo['certificate_text']}}
+                                    <strong> ĐKKD số {!!$dataInfo['certificate_number']!!}</strong>
+                                    do Phòng ĐKKD -&nbsp;{!!$dataInfo['certificate_text']!!}
                                 </span>
                             </li>
                             <li style="text-align:center">
                                 <span style="font-size:12px"><strong>Địa chỉ</strong>:
-                                    {{$dataInfo['address']}}
+                                    {!! $dataInfo['address'] !!}
                                 </span>
                             </li>
-                            <li style="text-align:center"><strong>Số điện thoại</strong>:{{$dataInfo['phone']}}</li>
-                            <li style="text-align:center"><strong>Email</strong>: {{$dataInfo['email']}}</li>
+                            <li style="text-align:center"><strong>Số điện thoại</strong>:{!! $dataInfo['phone'] !!}</li>
+                            <li style="text-align:center"><strong>Email</strong>: {!! $dataInfo['email'] !!}</li>
                         </ul>
                     </div>
                 </div>
