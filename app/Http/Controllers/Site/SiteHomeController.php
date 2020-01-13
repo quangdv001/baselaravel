@@ -183,7 +183,7 @@ class SiteHomeController extends SiteBaseController
     }
 
     public function journeysFare(){
-        $param['category_id'] = 1;
+        $param['category_id'] = 4;
         $param['limit'] = 5;
         $param['sortBy'] = 'id';
         if($this->locales->current() == 'en') {
