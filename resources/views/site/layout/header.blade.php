@@ -144,7 +144,7 @@
                                             alt="" /></div>
                                     <div class="col-sm slide-caption align-self-center">
                                         <h3><strong>{{ $slider->title }}</strong></h3>
-                                        <h4 @if(!isset($slider->img_inside)) style="padding-bottom: 50px;" @endif >{{ $slider->description }}</h4>
+                                        <h4 @if(!isset($slider->img_inside)) style="padding-bottom: 120px;" @endif >{{ $slider->description }}</h4>
                                     </div>
                                 </div>
                             </div>
