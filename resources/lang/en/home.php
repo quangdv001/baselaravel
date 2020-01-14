@@ -40,5 +40,8 @@ return [
     'gastation' => 'Gastation',
     'ticket_location' => 'Ticket Location',
     'site_links' => 'Site Links',
-    'journeys_fare' => 'Journeys & Fare'
+    'journeys_fare' => 'Journeys & Fare',
+    'cancel_trip' => 'Cancel trip',
+    'bagage' => 'Bagage',
+    'deposit' => 'Deposit',
 ];

@@ -42,5 +42,8 @@ return [
     'gastation' => 'Đại lý vé tàu',
     'ticket_location' => 'Điểm bán vé',
     'site_links' => 'Liên kết Website',
-    'journeys_fare' => 'Hành trình & Giá vé'
+    'journeys_fare' => 'Hành trình & Giá vé',
+    'cancel_trip' => 'Hủy chuyến',
+    'bagage' => 'Gửi hành lý',
+    'deposit' => 'Ký gửi',
 ];

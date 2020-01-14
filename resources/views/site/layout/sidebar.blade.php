@@ -5,9 +5,9 @@
             <li><a href="{{ route('site.home.gastation' )}}"><i class="material-icons list-style">chevron_right</i>@lang('home.gastation')</a></li>
             <li><a href="{{ route('site.home.ticketLocation' )}}"><i
                         class="material-icons list-style">chevron_right</i>@lang('home.ticket_location')</a></li>
-            <li><a href="#"><i class="material-icons list-style">chevron_right</i>Hủy chuyến</a></li>
-            <li><a href="#"><i class="material-icons list-style">chevron_right</i>Gửi hành lý</a></li>
-            <li><a href="#"><i class="material-icons list-style">chevron_right</i>Ký gửi</a></li>
+            <li><a href="#"><i class="material-icons list-style">chevron_right</i>@lang('home.cancel_trip')</a></li>
+            <li><a href="#"><i class="material-icons list-style">chevron_right</i>@lang('home.bagage')</a></li>
+            <li><a href="#"><i class="material-icons list-style">chevron_right</i>@lang('home.deposit')</a></li>
         </ul>
     </div>
 
