@@ -29,6 +29,14 @@
                                 <p class="text-danger">{{ $errors->first('title') }}</p>
                                 @endif
                             </div>
+                            <div class="form-group">
+                                <label>Mô tả</label>
+                                <input type="text" class="form-control title" name="description" placeholder="Mô tả"
+                                    value="{{ isset($data->description) ? $data->description : old('description') }}">
+                                @if($errors->has('description'))
+                                <p class="text-danger">{{ $errors->first('description') }}</p>
+                                @endif
+                            </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">

@@ -46,7 +46,7 @@ class AdminSliderController extends AdminBaseController
         if (Gate::forUser($this->user)->denies('admin-pms', $this->currentRoute)) {
             return redirect()->route('admin.home.dashboard')->with('error_message','Bạn không có quyền vào trang này!');
         }
-        $data = $request->only('title', 'img', 'position', 'status', 'img_inside');
+        $data = $request->only('title', 'description', 'img', 'position', 'status', 'img_inside');
         
         $mess = '';
         if($id == 0){

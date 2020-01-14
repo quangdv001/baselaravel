@@ -140,11 +140,11 @@
                                 data-image="{{ $slider->img }}">
                                 <div class="row">
                                     <div class="col-sm order-last text-center"><img
-                                            src="@if(isset($slider->img_inside)) {{ $slider->img_inside }} @else {{ asset('public/assets/site/themes/assets/images/slide-img.png') }} @endif"
+                                            src="@if(isset($slider->img_inside)) {{ $slider->img_inside }} @endif"
                                             alt="" /></div>
                                     <div class="col-sm slide-caption align-self-center">
-                                        <h3><strong>@lang('home.title_slide_company_1')</strong></h3>
-                                        <h4>@lang('home.title_slide_company_2')</h4>
+                                        <h3><strong>{{ $slider->title }}</strong></h3>
+                                        <h4 @if(!isset($slider->img_inside)) style="padding-bottom: 50px;" @endif >{{ $slider->description }}</h4>
                                     </div>
                                 </div>
                             </div>
