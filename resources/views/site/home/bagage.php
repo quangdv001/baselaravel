@@ -1,12 +1,12 @@
 @extends('site.layout.main')
 @section('title')
-@lang('home.journeys_fare')
+@lang('home.bagage')
 @endsection
 @section('content')
 <div class="main">
     <div class="subpage-cover"
         style="background: #2d71a2 url({{ asset('public/assets/site/themes/assets/images/subpage-cover.jpg') }}) no-repeat center top/ auto 100%">
-        <div class="page-title d-flex align-items-center justify-content-center"><span>@lang('home.journeys_fare')</span></div>
+        <div class="page-title d-flex align-items-center justify-content-center"><span>@lang('home.bagage')</span></div>
     </div>
     <div class="breadcrumb-wrapper">
         <div class="container">
@@ -14,7 +14,7 @@
                 <ol class="breadcrumb breadcrumb-dot">
                     <li class="breadcrumb-item"><i class="material-icons">home</i><a
                             href="{{ route('site.home.index' )}}" title="Trang chủ">@lang('header.home')</a></li>
-                    <li class="breadcrumb-item active"><span>@lang('home.journeys_fare')</span></li>
+                    <li class="breadcrumb-item active"><span>@lang('home.bagage')</span></li>
                 </ol>
             </div>
         </div>

@@ -188,6 +188,39 @@ class SiteHomeController extends SiteBaseController
         return view('site.home.journeys')->with('article', $article)->with('data', $data);
     }
 
+    public function cancelTrip(){
+        $param['category_id'] = 1;
+        $param['limit'] = 5;
+        $param['sortBy'] = 'id';
+        $data = $this->page->getById(12);
+
+        $article = $this->article->search($param);
+
+        return view('site.home.canceltrip')->with('article', $article)->with('data', $data);
+    }
+
+    public function bagage(){
+        $param['category_id'] = 1;
+        $param['limit'] = 5;
+        $param['sortBy'] = 'id';
+        $data = $this->page->getById(13);
+
+        $article = $this->article->search($param);
+
+        return view('site.home.bagage')->with('article', $article)->with('data', $data);
+    }
+
+    public function deposit(){
+        $param['category_id'] = 1;
+        $param['limit'] = 5;
+        $param['sortBy'] = 'id';
+        $data = $this->page->getById(14);
+
+        $article = $this->article->search($param);
+
+        return view('site.home.deposit')->with('article', $article)->with('data', $data);
+    }
+
     public function imageAlbum(){
         $images = $this->image->getAll();
 

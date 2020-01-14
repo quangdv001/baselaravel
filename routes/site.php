@@ -28,6 +28,9 @@ Route::get('faqs', 'SiteHomeController@faqs')->name('home.faqs');
 Route::get('shipping_policy', 'SiteHomeController@shipping_policy')->name('home.shipping_policy');
 Route::get('payment_guide', 'SiteHomeController@payment_guide')->name('home.payment_guide');
 Route::get('customer_care', 'SiteHomeController@customer_care')->name('home.customer_care');
+Route::get('canceltrip', 'SiteHomeController@cancelTrip')->name('home.canceltrip');
+Route::get('bagage', 'SiteHomeController@bagage')->name('home.bagage');
+Route::get('deposit', 'SiteHomeController@deposit')->name('home.deposit');
 
 Route::get('price', 'SiteArticleController@price')->name('home.price');
 Route::get('livitrans', 'SiteArticleController@livitrans')->name('home.livitrans');
