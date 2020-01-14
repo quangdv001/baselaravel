@@ -29,10 +29,10 @@
                                 <h1 class="page-title"><a href="#">@lang('home.livitrans_company')</a>
                                 </h1>
                                 <div class="news-post">
-                                    @if(!isset($article['content']))
+                                    @if(!isset($data['content']))
                                         <div> Không có nội dung</div>
                                     @endif
-                                    {!! $article['content'] !!}
+                                    {!! $data['content'] !!}
                                 </div>
                             </div>
                         </div>

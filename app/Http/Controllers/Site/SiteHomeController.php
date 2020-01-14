@@ -171,11 +171,6 @@ class SiteHomeController extends SiteBaseController
         $param['limit'] = 5;
         $param['sortBy'] = 'id';
         $data = $this->page->getById(3);
-        // if($this->locales->current() == 'en') {
-        //     $data = $this->page->getBySlug('about-us');
-        // } else{
-        //     $data = $this->page->getBySlug('ve-chung-toi');
-        // }
         
         $article = $this->article->search($param);
 
@@ -183,15 +178,11 @@ class SiteHomeController extends SiteBaseController
     }
 
     public function journeysFare(){
-        $param['category_id'] = 4;
+        $param['category_id'] = 1;
         $param['limit'] = 5;
         $param['sortBy'] = 'id';
-        if($this->locales->current() == 'en') {
-            $data = $this->page->getBySlug('journeys-fare');
-        } else{
-            $data = $this->page->getBySlug('hanh-trinh-gia-ve');
-        }
-        
+        $data = $this->page->getById(11);
+
         $article = $this->article->search($param);
 
         return view('site.home.journeys')->with('article', $article)->with('data', $data);
@@ -208,11 +199,6 @@ class SiteHomeController extends SiteBaseController
         $param['limit'] = 5;
         $param['sortBy'] = 'id';
         $data = $this->page->getById(7);
-        // if($this->locales->current() == 'en') {
-        //     $data = $this->page->getBySlug('customer-care');
-        // } else{
-        //     $data = $this->page->getBySlug('cham-soc-khac-hang');
-        // }
         
         $article = $this->article->search($param);
 
