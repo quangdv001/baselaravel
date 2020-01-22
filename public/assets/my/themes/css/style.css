@@ -1,0 +1,181 @@
+
+/* Import fonts from fonts.css file */
+@import url(./fonts.css);
+
+/* css variable file */
+@import url(./partials/_variable.css);
+
+/* Start navigation main-menu */
+.header_app .main-menu .navbar .navbar-brand {
+  padding: 0 2rem 0 5rem;
+}
+
+.header_app .main-menu .navbar .collapse {
+  padding: 0 3rem 0 5rem;
+}
+
+.header_app .main-menu .nav-item .nav-link {
+  font: normal 300 15px / 2px var(--roboto);
+  text-transform: uppercase;
+  font-weight: 300;
+  padding: 0.7rem;
+  color: var(--tile-color)
+}
+/* End navigation */
+
+/* Start navigation main-menu-item */
+
+.header_app .main-menu-item .navbar {
+  padding: 0;
+}
+
+.header_app .main-menu-item .navbar .navbar-brand {
+  padding: 0 2rem 0 5rem;
+}
+
+.header_app .main-menu-item {
+  background-color: var(--primary-color);
+}
+
+.header_app .main-menu-item .nav-item .nav-link {
+  font-family: var(--roboto);
+  font-weight: 300;
+  padding: 1rem;
+}
+
+.header_app .main-menu-item .navbar-nav .active a {
+  color: var(--primary-color);
+  background-color: var(--active-background);
+}
+
+.header_app .main-menu-item .navbar-nav a:hover {
+  color: var(--active-a);
+}
+
+.nav-pills .nav-link, .nav-pills .show>.nav-link {
+  background-color: var(--gradient-color);
+  color: var(--active-a);
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+  background-color: var(--background-active-a);
+}
+/* End navigation main-menu-item */
+
+/* Start site main app */
+
+.site-main .site-body .card .card-header {
+  font-family: var(--roboto);
+  text-transform: uppercase;
+}
+
+.site-main .site-body .card .card-body .gr-btn {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.site-main .site-body .card .avatar-holder {
+  width: 30%;
+  top: 0;
+  height: 30%;
+  border-radius: 50%;
+  background: white;
+  overflow: hidden;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.site-main .site-body .card .avatar-holder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.site-main .site-body .card .title-avatar {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding-top: 0.5rem;
+}
+
+.site-main .site-body .card .title-name-user {
+  text-align: center;
+}
+
+.site-main .site-body .card .table-bordered th {
+  text-align: center;
+}
+
+.site-main .site-body .card .table-bordered th .cycle_pen {
+  padding: 0.4rem;
+  border-radius: 50%;
+  background-color: var(--primary-color2);
+}
+
+.site-main .site-body .card .table-bordered th .cycle_copy {
+  padding: 0.4rem;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+}
+
+.site-main .site-body .card .table-bordered th .cycle_invoice {
+  padding: 0.4rem;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+}
+
+.site-main .site-body .card .table-bordered th .cycle_up {
+  padding: 0.4rem;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+}
+
+.site-main .site-body .card .table-bordered th .cycle_del {
+  padding: 0.4rem;
+  border-radius: 50%;
+  background-color: var(--red-cycle);
+}
+
+.site-main .site-body .card .table-bordered th .cycle_light {
+  padding: 0.4rem;
+  border-radius: 50%;
+  background-color: var(--light-cycle);
+}
+
+.site-main .site-body .card .table-bordered th .fas {
+  text-align: center;
+  width: 1rem;
+  height: 1rem;
+  color: var(--active-a);
+}
+/* End site main app */
+
+/* Css set form modal */
+
+#mdl1, #mdl2, #mdl3, #mdl4 {
+  display: none;
+}
+
+#mdl-room1, #mdl-room2, #mdl-room3, #mdl-room4 {
+  display: none;
+}
+
+#mdl-service1, #mdl-service2 {
+  display: none;
+}
+
+#mdl-admin1, #mdl-admin2, #mdl-admin3 {
+  display: none;
+}
+/* End set form modal */
+.circle-icon {
+  background: #ffc0c0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 30px;
+  vertical-align: middle;
+  padding: 14px;
+}
