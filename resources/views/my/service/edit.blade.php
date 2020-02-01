@@ -1,8 +1,8 @@
 @extends('my.layout.main')
 @section('title')
-@if($id > 0) Chỉnh sửa nhà trọ @else Thêm mới nhà trọ @endif
+@if($id > 0) Chỉnh sửa dịch vụ @else Thêm mới dịch vụ @endif
 @endsection
-@section('menu1')
+@section('menu3')
 active
 @endsection
 @section('content')
@@ -17,27 +17,46 @@ active
                 <div class="col-lg-7 col-md-12">
                     <div class="card border-light mt-5">
                         <div class="card-header">
-                            Nhà trọ - @if($id > 0) chỉnh sửa @else đăng bài @endif
+                            Dịch vụ - @if($id > 0) chỉnh sửa @else đăng bài @endif
                         </div>
                         <div class="card-body">
                             <div class="container">
                                 <form method="POST">
                                     @csrf
+                                    
                                     <div class="row mb-2">
                                         <div class="col">
-                                            <label for="staticFrom" class="col-form-label">Tên nhà trọ * : </label>
-                                        <input type="text" name="name" class="form-control" value="{{ $data ? $data->name : old('name') }}" required>
-                                        @if($errors->has('name'))
-                                        <p class="text-danger">{{ $errors->first('name') }}</p>
+                                            <label for="staticFrom" class="col-form-label">Tên dịch vụ * : </label>
+                                        <input type="text" name="title" class="form-control" value="{{ $data ? $data->title : old('title') }}" required>
+                                        @if($errors->has('title'))
+                                        <p class="text-danger">{{ $errors->first('title') }}</p>
                                         @endif
                                         </div>
                                     </div>
                                     <div class="row mb-2">
                                         <div class="col">
-                                            <label for="staticDes" class="col-form-label">Địa chỉ * : </label>
-                                            <input type="text" name="address" class="form-control" value="{{ $data ? $data->address : old('address') }}" required>
-                                            @if($errors->has('address'))
-                                            <p class="text-danger">{{ $errors->first('address') }}</p>
+                                            <label for="staticFrom" class="col-form-label">đơn vị * : </label>
+                                        <input type="text" name="unit" class="form-control" value="{{ $data ? $data->unit : old('unit') }}" required>
+                                        @if($errors->has('unit'))
+                                        <p class="text-danger">{{ $errors->first('unit') }}</p>
+                                        @endif
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col">
+                                            <label for="staticDes" class="col-form-label">Giá * : </label>
+                                            <input type="number" name="price" class="form-control" value="{{ $data ? $data->price : 0 }}" required>
+                                            @if($errors->has('price'))
+                                            <p class="text-danger">{{ $errors->first('price') }}</p>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col">
+                                            <label for="staticDes" class="col-form-label">Giá cố định * : </label>
+                                            <input type="number" name="fixed_price" class="form-control" value="{{ $data ? $data->fixed_price : 0 }}" required>
+                                            @if($errors->has('fixed_price'))
+                                            <p class="text-danger">{{ $errors->first('fixed_price') }}</p>
                                             @endif
                                         </div>
                                     </div>

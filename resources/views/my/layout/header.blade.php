@@ -50,9 +50,9 @@
               <a
                 class="nav-link @yield('menu1', '')"
                 id="pills-home-tab"
-                data-toggle="pill"
+                {{-- data-toggle="pill" --}}
                 href="{{ route('my.motel.getList') }}"
-                role="tab"
+                {{-- role="tab" --}}
                 aria-controls="nha-tro"
                 aria-selected="true"><i class="fas fa-home mr-2"></i><span>Nhà trọ</span></a>
             </li>
@@ -60,36 +60,36 @@
               <a
                 class="nav-link @yield('menu2', '')"
                 id="pills-room-tab"
-                data-toggle="pill"
-                href="#phong-tro"
-                role="tab"
+                {{-- data-toggle="pill" --}}
+                href="{{ route('my.room.getList') }}"
+                {{-- role="tab" --}}
                 aria-controls="phong-tro"
                 aria-selected="false"><i class="fas fa-address-book mr-2"></i><span>Phòng trọ</span></a>
             </li>
             <li class="nav-item mr-4">
               <a class="nav-link @yield('menu3', '')"
               id="pills-dv-tab"
-              data-toggle="pill"
-              href="#dich-vu"
-              role="tab"
+              {{-- data-toggle="pill" --}}
+              href="{{ route('my.service.getList') }}"
+              {{-- role="tab" --}}
               aria-controls="dich-vu"
               aria-selected="false"><i class="fas fa-subway mr-2"></i><span>Dịch vụ</span></a>
             </li>
             <li class="nav-item mr-4">
               <a  class="nav-link @yield('menu4', '')"
               id="pills-hd-tab"
-              data-toggle="pill"
+              {{-- data-toggle="pill" --}}
               href="#hop-dong"
-              role="tab"
+              {{-- role="tab" --}}
               aria-controls="hop-dong"
               aria-selected="false"><i class="fas fa-file-signature mr-2"></i><span>Hợp đồng</span></a>
             </li>
             <li class="nav-item mr-4">
               <a class="nav-link @yield('menu5', '')"
               id="pills-user-tab"
-              data-toggle="pill"
+              {{-- data-toggle="pill" --}}
               href="#user"
-              role="tab"
+              {{-- role="tab" --}}
               aria-controls="user"
               aria-selected="false"><i class="fas fa-users mr-2"></i><span>User</span></a>
             </li>

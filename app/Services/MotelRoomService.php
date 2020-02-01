@@ -52,7 +52,7 @@ class MotelRoomService
         } else {
             $query = $query->orderBy('id', 'DESC');
         }
-        $admin = $query->paginate(isset($data['limit']) ? (int)$data['limit'] : 30);
+        $admin = $query->with('motel')->paginate(isset($data['limit']) ? (int)$data['limit'] : 30);
         return $admin;
     }
 
@@ -98,7 +98,7 @@ class MotelRoomService
     }
 
     public function getById($id){
-        return $this->repo->with('category')->find($id);
+        return $this->repo->find($id);
     }
 
     public function getAll(){

@@ -11,4 +11,8 @@ class MotelRoom extends Model
         'name', 'floor', 'max', 'price', 'description', 'status', 'motel_id', 'user_id'
     ];
 
+    public function motel(){
+        return $this->belongsTo('App\Models\Motel');
+    }
+
 }

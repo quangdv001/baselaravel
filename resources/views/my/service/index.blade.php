@@ -1,8 +1,8 @@
 @extends('my.layout.main')
 @section('title')
-Danh sách nhà trọ
+Danh sách dịch vụ
 @endsection
-@section('menu1')
+@section('menu3')
 active
 @endsection
 @section('content')
@@ -17,12 +17,12 @@ active
           <div class="col-lg-7 col-md-12">
             <div class="card border-light mt-5">
               <div class="card-header">
-                Nhà trọ
+                Dịch vụ
               </div>
               <div class="card-body">
                 <div id="content-page">
                   <div class="gr-btn mb-4">
-                    <a href="{{ route('my.motel.getCreate') }}" class="btn btn-outline-primary btn-sm mr-2"><i class="fas fa-plus-circle mr-2"></i>Thêm mới</a>
+                    <a href="{{ route('my.service.getCreate') }}" class="btn btn-outline-primary btn-sm mr-2"><i class="fas fa-plus-circle mr-2"></i>Thêm mới</a>
                     {{-- <button type="button" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash mr-2"></i>Xóa nhiều</button> --}}
                   </div>
                   <div class="table-responsive-lg">
@@ -33,10 +33,10 @@ active
                           {{-- <th scope="col"></th> --}}
                           <th scope="col"></th>
                           <th scope="col">Tên</th>
-                          <th scope="col">Địa chỉ</th>
+                          <th scope="col">Đơn vị</th>
+                          <th scope="col">Đơn giá</th>
+                          <th scope="col">Giá cố định</th>
                           <th scope="col">Mô tả</th>
-                          {{-- <th scope="col">Trạng thái</th> --}}
-                          {{-- <th scope="col"></th> --}}
                           <th scope="col"></th>
                         </tr>
                       </thead>
@@ -44,25 +44,22 @@ active
                           @foreach($data as $v)
                           <tr>
                             <th scope="row">
-                            <a href="{{ route('my.motel.getCreate', $v->id) }}"><span
+                            <a href="{{ route('my.service.getCreate', $v->id) }}"><span
                                     class="cycle_pen">
                                     <i class="fas fa-pencil-alt"></i>
                                   </span></a>
+                            <a class="ml-2" href="{{ route('my.service.getCreate', $v->id) }}"><span
+                                    class="cycle_copy">
+                                    <i class="fas fa-pencil-alt"></i>
+                                  </span></a>
                             </th>
-                            <td>{{ $v->name }}</td>
-                            <td>{{ $v->address }}</td>
+                            <td>{{ $v->title }}</td>
+                            <td>{{ $v->unit }}</td>
+                            <td>{{ number_format($v->price) }} đ</td>
+                            <td>{{ number_format($v->fixed_price) }} đ</td>
                             <td>{{ $v->description }}</td>
-                            {{-- <th scope="row">
-                                <a href="">
-
-                                    <span
-                                      class="cycle_up">
-                                      <i class="fas fa-upload"></i>
-                                    </span>
-                                </a>
-                            </th> --}}
                             <th scope="row">
-                            <a onclick="return confirm('Bạn có chắc muốn xóa?')" href="{{ route('my.motel.remove', $v->id) }}">
+                            <a onclick="return confirm('Bạn có chắc muốn xóa?')" href="{{ route('my.service.remove', $v->id) }}">
 
                                     <span
                                       {{-- id="btn_4" --}}
@@ -80,7 +77,7 @@ active
                     </table>
                     {{ $data->links() }}
                     @else
-                    <h4>Chưa có nhà trọ</h4>
+                    <h4>Chưa có dịch vụ</h4>
                     @endif
                   </div>
                 </div>

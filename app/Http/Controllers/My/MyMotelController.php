@@ -26,9 +26,13 @@ class MyMotelController extends Controller
     }
 
     public function getCreate($id = 0){
+        $user = auth()->user();
         $data = [];
         if($id > 0){
-            $data = $this->motel->getById($id);
+            $data = $this->motel->first(['id' =>$id, 'user_id' => $user->id]);
+            if(!$data){
+                return redirect()->route('my.motel.getList');
+            }
         }
         return view('my.motel.edit')
             ->with('id', $id)
@@ -46,18 +50,23 @@ class MyMotelController extends Controller
                 $mess = 'Tạo nhà trọ thành công';
             }
         } else {
-            $article = $this->room->getById($id);
-            $res = $this->room->update($article, $data);
+            $article = $this->motel->getById($id);
+            $res = $this->motel->update($article, $data);
             if($res){
                 $mess = 'Cập nhật nhà trọ thành công';
             }
         }
-        return redirect()->route('admin.motel.getList')->with('success_message', $mess);
+        return redirect()->route('my.motel.getList')->with('success_message', $mess);
     }
 
     public function remove($id = 0){
+        $user = auth()->user();
+        $data = $this->motel->first(['id' =>$id, 'user_id' => $user->id]);
+        if(!$data){
+            return redirect()->route('my.motel.getList');
+        }
         $this->motel->remove($id);
         $mess = 'Xóa thành công';
-        return redirect()->route('admin.motel.getList')->with('success_message', $mess);
+        return redirect()->route('my.motel.getList')->with('success_message', $mess);
     }
 }
