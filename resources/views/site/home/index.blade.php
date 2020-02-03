@@ -54,7 +54,7 @@ home
                             </div>
                             <div class="row">
                                 <ul class="list-head">
-                                @foreach ($lastestLaws as $key_laws=>$item_laws)
+                                @foreach ($list_article_laws as $key_laws=>$item_laws)
                                     @if ($key_laws > 2)
                                         <li>
                                             <a class="title" href="{{ route('site.article.detail', ['slug' => Str::slug($item_laws->title, '-'), 'id' => $item_laws->id]) }}">
