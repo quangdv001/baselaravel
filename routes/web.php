@@ -14,10 +14,11 @@ use App\Mail\OrderNew;
 |
 */
 Auth::routes();
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+use Carbon\Carbon;
+Route::get('/test', function () {
+    return Carbon::now()->endOfDay()->timestamp;
+    return Carbon::now()->startOfDay()->timestamp;
+});
 
 Route::namespace('Admin')->name('admin.')->group(function () {
     require_once('admin.php');

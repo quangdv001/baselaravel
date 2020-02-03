@@ -98,7 +98,7 @@ class MotelService
     }
 
     public function getById($id){
-        return $this->repo->with('category')->find($id);
+        return $this->repo->find($id);
     }
 
     public function getAll(){

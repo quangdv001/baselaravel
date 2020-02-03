@@ -18,6 +18,10 @@ class CreateServiceFormulaTable extends Migration
             $table->bigInteger('service_id');
             $table->bigInteger('user_id');
             $table->string('name');
+            $table->bigInteger('start')->nullable();
+            $table->bigInteger('end')->nullable();
+            $table->smallInteger('type')->default(1);
+            $table->integer('price')->unsigned();
             $table->text('description')->nullable();
             $table->timestamps();
         });

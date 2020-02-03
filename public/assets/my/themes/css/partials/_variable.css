@@ -1,0 +1,28 @@
+
+html, body {
+  margin: 0;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+}
+
+/* CSS variables */
+
+:root {
+  --primary-color: #427cff;
+  --primary-color2: #854fee;
+  --tile-color: #141313;
+  --red-cycle: #dc3545;
+  --light-cycle: #1b1e21;
+  --boder-color: #777777;
+  --boder-color: #201f1f17;
+  --active-a: #ffffff;
+  --background-active-a: #002cff;
+  --active-background: #ffffff75;
+  --gradient-color: linear-gradient(90deg, #4458dc 0%, #854fee 100%);
+  --shadow-color: 0px 10px 25px rgba(135, 104, 238, 0.3);
+  --box-shadow: 0px 10px 30px rgba(57, 56, 61, 0, 205);
+  
+  /* font family variables */
+  --roboto: 'Roboto'
+}
