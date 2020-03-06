@@ -34,7 +34,7 @@ home
                             <div class="row">
                                 <div class="slide-owl-carousel owl-carousel owl-theme">
                                 @foreach ($list_article_laws as $key_laws=>$item_laws)
-                                    @if ($key <= 2)
+                                    @if ($key_laws <= 2)
                                         <a class="block" href="{{ route('site.article.detail', ['slug' => Str::slug($item_laws->title, '-'), 'id' => $item_laws->id]) }}">
                                             <div class="cover-item">
                                                 <div class="landscape_image"><img alt="{{ $item_laws->title }}" src="{{ $item_laws->img}}" />
@@ -54,8 +54,8 @@ home
                             </div>
                             <div class="row">
                                 <ul class="list-head">
-                                @foreach ($lastestLaws as $key_laws=>$item_laws)
-                                    @if ($key > 2)
+                                @foreach ($list_article_laws as $key_laws=>$item_laws)
+                                    @if ($key_laws > 2)
                                         <li>
                                             <a class="title" href="{{ route('site.article.detail', ['slug' => Str::slug($item_laws->title, '-'), 'id' => $item_laws->id]) }}">
                                             @if (strlen(strip_tags($item_laws->title)) > 150) {!! mb_substr(strip_tags($item_laws->title), 0, mb_strpos(strip_tags($item_laws->title), ' ', 150)) !!}... @else {!! $item_laws->title !!} @endif
