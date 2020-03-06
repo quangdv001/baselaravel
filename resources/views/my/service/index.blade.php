@@ -48,7 +48,7 @@ active
                                     class="cycle_pen">
                                     <i class="fas fa-pencil-alt"></i>
                                   </span></a>
-                            <a class="ml-2" href="{{ route('my.service.getCreate', $v->id) }}"><span
+                            <a class="ml-2" href="{{ route('my.formula.getCreate', $v->id) }}"><span
                                     class="cycle_copy">
                                     <i class="fas fa-pencil-alt"></i>
                                   </span></a>

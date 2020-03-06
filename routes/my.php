@@ -14,6 +14,10 @@ Route::middleware(['auth:web'])->group(function () {
     Route::get('service/getCreate/{id?}', 'MyServiceController@getCreate')->name('service.getCreate');
     Route::post('service/getCreate/{id?}', 'MyServiceController@postCreate')->name('service.postCreate');
     Route::get('service/remove/{id?}', 'MyServiceController@remove')->name('service.remove');
+
+    Route::get('formula/getCreate/{id?}', 'MyServiceController@getFormula')->name('formula.getCreate');
+    Route::post('formula/getCreate/{id?}', 'MyServiceController@postFormula')->name('formula.postCreate');
+    Route::get('formula/remove/{id?}', 'MyServiceController@removeFormula')->name('formula.remove');
 });
 
 

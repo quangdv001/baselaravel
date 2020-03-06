@@ -150,4 +150,10 @@ class ServiceFormulaService
         }
         return $data;
     }
+
+    public function insert($data, $id){
+        $this->repo->where('service_id', $id)->delete();
+        $this->repo->insert($data);
+        return true;
+    }
 }

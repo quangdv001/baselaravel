@@ -5,14 +5,16 @@ namespace App\Http\Controllers\My;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\My\ServiceRequest;
+use App\Services\ServiceFormulaService;
 use App\Services\ServiceService;
 
 class MyServiceController extends Controller
 {
-    private $service;
-    public function __construct(ServiceService $service)
+    private $formula;
+    public function __construct(ServiceService $service, ServiceFormulaService $formula)
     {
         $this->service = $service;
+        $this->formula = $formula;
     }
 
     public function index(Request $request){
@@ -69,5 +71,30 @@ class MyServiceController extends Controller
         $this->service->remove($id);
         $mess = 'Xóa thành công';
         return redirect()->route('my.service.getList')->with('success_message', $mess);
+    }
+
+    public function getFormula($id){
+        $user = auth()->user();
+        $service = $this->service->first(['id' => $id, 'user_id' => $user->id]);
+        $data = $this->formula->get(['service_id' => $id, 'user_id' => $user->id]);
+        return view('my.formula.edit')
+            ->with('id', $id)
+            ->with('data', $data);
+    }
+
+    public function postFormula(Request $request, $id){
+        $data = $request->input('data', []);
+        $user = auth()->user();
+        if(sizeof($data) > 0){
+            foreach($data as $k => $v){
+                $data[$k]['user_id'] = $user->id;
+                $data[$k]['service_id'] = $id;
+            }
+        }
+        $res = $this->formula->insert($data, $id);
+        if($res){
+            return redirect()->route('my.service.getList')->with('success_message', 'Cập nhật thành công');
+        }
+        return redirect()->back()->with('error_message', 'Có lỗi xảy ra');
     }
 }
