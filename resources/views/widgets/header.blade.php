@@ -70,7 +70,7 @@
                                 <ul>
                                     <li><a href="javascript:void(0);">Thông tin</a>
                                     </li>
-                                    <li><a href="javascript:void(0);">Quản lý khu trọ</a>
+                                    <li><a href="{{ route('my.motel.getList') }}">Quản lý khu trọ</a>
                                     </li>
                                     <li><a href="javascript:void(0);">Tài khoản</a>
                                     </li>
