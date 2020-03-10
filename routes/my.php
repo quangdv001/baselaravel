@@ -23,6 +23,11 @@ Route::middleware(['auth:web'])->group(function () {
     Route::get('customer/getCreate/{id?}', 'MyCustomerController@getCreate')->name('customer.getCreate');
     Route::post('customer/getCreate/{id?}', 'MyCustomerController@postCreate')->name('customer.postCreate');
     Route::get('customer/remove/{id?}', 'MyCustomerController@remove')->name('customer.remove');
+
+    Route::get('/contract', 'MyContractController@index')->name('contract.getList');
+    Route::get('contract/getCreate/{id?}', 'MyContractController@getCreate')->name('contract.getCreate');
+    Route::post('contract/getCreate/{id?}', 'MyContractController@postCreate')->name('contract.postCreate');
+    Route::get('contract/remove/{id?}', 'MyContractController@remove')->name('contract.remove');
 });
 
 
