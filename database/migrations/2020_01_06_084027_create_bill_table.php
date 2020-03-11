@@ -23,6 +23,7 @@ class CreateBillTable extends Migration
             $table->integer('discount_price');
             $table->integer('total_price');
             $table->smallInteger('status')->default(1);
+            $table->bigInteger('contract_id');
             $table->bigInteger('user_id');
             $table->bigInteger('motel_id');
             $table->bigInteger('motel_room_id');

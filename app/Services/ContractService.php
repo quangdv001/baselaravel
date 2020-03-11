@@ -9,6 +9,7 @@
 namespace App\Services;
 
 use App\Models\Contract;
+use App\Models\ContractService as ModelsContractService;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
@@ -55,7 +56,7 @@ class ContractService
         return $admin;
     }
 
-    public function create($data)
+    public function create($data, $service)
     {
         try {
             DB::beginTransaction();
@@ -64,6 +65,14 @@ class ContractService
                 $admin->$key = $value;
             }
             $admin->save();
+            $arrS = [];
+            if(sizeof($service) > 0){
+                foreach($service as $k => $v){
+                    $arrS[$k]['service_id'] = $v;
+                    $arrS[$k]['contract_id'] = $admin->id;
+                }
+                ModelsContractService::insert($arrS);
+            }
             DB::commit();
             return $admin;
         } catch (Exception  $e) {
@@ -72,7 +81,7 @@ class ContractService
         }
     }
 
-    public function update($admin, $data)
+    public function update($admin, $data, $service)
     {
         try {
             DB::beginTransaction();
@@ -80,6 +89,15 @@ class ContractService
                 $admin->$key = $value;
             }
             $admin->save();
+            $arrS = [];
+            ModelsContractService::where('contract_id', $admin->id)->delete();
+            if(sizeof($service) > 0){
+                foreach($service as $k => $v){
+                    $arrS[$k]['service_id'] = $v;
+                    $arrS[$k]['contract_id'] = $admin->id;
+                }
+                ModelsContractService::insert($arrS);
+            }
             DB::commit();
             return $admin;
         } catch (Exception  $e) {
