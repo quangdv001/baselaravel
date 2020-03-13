@@ -7,6 +7,7 @@ Route::get('admin/logout', 'AdminAuthController@logout')->name('logout');
 Route::middleware(['auth.admin'])->prefix('admin')->group(function () {
     Route::get('/', 'AdminHomeController@index')->name('home.dashboard');
     Route::get('test', 'AdminHomeController@test')->name('home.test');
+    Route::get('export-pdf', 'AdminHomeController@exportPdf');
 
     Route::get('account', 'AdminAccountController@index')->name('account.getList');
     Route::get('account/getCreate/{id?}', 'AdminAccountController@getCreate')->name('account.getCreate');
