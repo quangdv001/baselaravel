@@ -11,4 +11,9 @@ class Service extends Model
         'title', 'unit', 'price', 'fixed_price', 'status', 'has_formula', 'description', 'user_id'
     ];
 
+    public function formula()
+    {
+        return $this->hasOne(ServiceFormula::class);
+    }
+
 }
