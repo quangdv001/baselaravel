@@ -25,7 +25,7 @@ class MyBillController extends Controller
 
     public function getCreate($contractId, $id = 0){
         $user = auth()->user();
-        $contract = $this->contract->first(['id' =>$contractId, 'user_id' => $user->id]);
+        $contract = $this->contract->first(['id' =>$contractId, 'user_id' => $user->id])->load('service');
         $bill = [];
         if($id > 0){
             $bill = $this->bill->first(['id' =>$id, 'user_id' => $user->id]);
@@ -46,10 +46,26 @@ class MyBillController extends Controller
         $service = $request->input('service', []);
         $contract = $this->contract->first(['id' =>$contractId, 'user_id' => $user->id]);
         $services = $this->service->get(['user_id' => $user->id])->load('formula')->keyBy('id');
+        $arrService = [];
         if(sizeof($service) > 0){
             foreach($service as $k => $v){
                 if(isset($services[$k])){
-                    
+                    $arrService[$k]['unit'] = $services[$k]->unit;
+                    $arrService[$k]['status'] = 1;
+                    $arrService[$k]['service_id'] = $k;
+                    $arrService[$k]['user_id'] = 1;
+                                
+                    if($services[$k]->formula){
+                        foreach($services[$k]->formula as $val){
+                            if($v >= $val->start && $v <= $val->end){
+                                $arrService[$k]['price'] = $val->price;
+                                $arrService[$k]['total'] = $val->price*$v['qty'];
+                            }
+                        }
+                    } else {
+                        $arrService[$k]['price'] = $v['price'];
+                        $arrService[$k]['total'] = $v['price']*$v['qty'];
+                    }
                 }
             }
         }
