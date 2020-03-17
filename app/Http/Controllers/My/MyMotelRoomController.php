@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\My;
 
+use App\Services\ContractService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\My\MotelRoomRequest;
@@ -12,10 +13,13 @@ class MyMotelRoomController extends Controller
 {
     private $room;
     private $motel;
-    public function __construct(MotelRoomService $room, MotelService $motel)
+    private $contractService;
+
+    public function __construct(MotelRoomService $room, MotelService $motel,ContractService $contractService)
     {
         $this->room = $room;
         $this->motel = $motel;
+        $this->contractService = $contractService;
     }
     
     public function index(Request $request){
@@ -75,5 +79,13 @@ class MyMotelRoomController extends Controller
         $this->room->remove($id);
         $mess = 'Xóa thành công';
         return redirect()->route('my.room.getList')->with('success_message', $mess);
+    }
+
+    public function editContract($id){
+        $currentContract = $this->contractService->first(['motel_room_id'=>$id,'status' =>1 ]);
+        if(!empty($currentContract)){
+            return redirect()->route('my.contract.getCreate',['id'=>$currentContract->id,'room_id'=>$id]);
+        }
+        return redirect()->route('my.contract.getCreate',['id'=>0,'room_id'=>$id]);
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\My;
 
+use App\Services\MotelRoomService;
+use App\Services\ServiceService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\ContractService;
@@ -11,10 +13,14 @@ class MyContractController extends Controller
 {
     private $contract;
     private $customer;
-    public function __construct(ContractService $contract, CustomerService $customer)
+    private $motelRoom;
+    private $serviceService;
+    public function __construct(ContractService $contract, CustomerService $customer,MotelRoomService $motelRoom,ServiceService $serviceService)
     {
         $this->contract = $contract;
         $this->customer = $customer;
+        $this->motelRoom = $motelRoom;
+        $this->serviceService = $serviceService;
     }
 
     public function index(Request $request){
@@ -23,29 +29,36 @@ class MyContractController extends Controller
         $params['limit'] = 0;
         $params['sortBy'] = 'id';
         $data = $this->contract->search($params);
-        // dd($data);
         return view('my.contract.index')->with('data', $data);
     }
 
     public function getCreate($id = 0){
         $user = auth()->user();
         $data = [];
+        $listRoom = $this->motelRoom->get([]);
+        $listService = $this->serviceService->get([]);
+        $listCustomer = $this->customer->get([]);
         if($id > 0){
             $data = $this->contract->first(['id' =>$id, 'user_id' => $user->id]);
             if(!$data){
                 return redirect()->route('my.contract.getList');
             }
         }
-        $customer = $this->customer->get(['user_id' => $user->id]);
         return view('my.contract.edit')
             ->with('id', $id)
+            ->with('listRoom', $listRoom)
+            ->with('listService', $listService)
+            ->with('listCustomer', $listCustomer)
             ->with('data', $data);
     }
 
     public function postCreate(Request $request, $id = 0){
         $user = auth()->user();
-        $data = $request->only('name', 'note', 'deposits', 'duration', 'payment_period', 'start', 'end', 'status', 'customer_id', 'motel_room_id');
+        $data = $request->only('name', 'note', 'deposits', 'duration', 'payment_period', 'start', 'end', 'status', 'customer_id', 'motel_room_id', 'motel_room_id');
         $service = $request->input('service', []);
+        $data['payment_period'] = strtotime(str_replace('/','-',$data['payment_period']));
+        $data['start'] = strtotime(str_replace('/','-',$data['start']));
+        $data['end'] = strtotime(str_replace('/','-',$data['end']));
         $mess = '';
         if($id == 0){
             $data['user_id'] = $user->id;

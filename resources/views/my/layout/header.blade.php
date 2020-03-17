@@ -79,7 +79,7 @@
               <a  class="nav-link @yield('menu4', '')"
               id="pills-hd-tab"
               {{-- data-toggle="pill" --}}
-              href="#hop-dong"
+              href="{{ route('my.contract.getList') }}"
               {{-- role="tab" --}}
               aria-controls="hop-dong"
               aria-selected="false"><i class="fas fa-file-signature mr-2"></i><span>Hợp đồng</span></a>

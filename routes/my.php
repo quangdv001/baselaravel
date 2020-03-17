@@ -9,6 +9,7 @@ Route::middleware(['auth:web'])->group(function () {
     Route::get('room/getCreate/{id?}', 'MyMotelRoomController@getCreate')->name('room.getCreate');
     Route::post('room/getCreate/{id?}', 'MyMotelRoomController@postCreate')->name('room.postCreate');
     Route::get('room/remove/{id?}', 'MyMotelRoomController@remove')->name('room.remove');
+    Route::get('room/contract/{id}', 'MyMotelRoomController@editContract')->name('room.editContract');
 
     Route::get('service', 'MyServiceController@index')->name('service.getList');
     Route::get('service/getCreate/{id?}', 'MyServiceController@getCreate')->name('service.getCreate');

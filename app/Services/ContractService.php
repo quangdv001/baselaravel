@@ -52,7 +52,7 @@ class ContractService
         } else {
             $query = $query->orderBy('id', 'DESC');
         }
-        $admin = $query->paginate(isset($data['limit']) ? (int)$data['limit'] : 30);
+        $admin = $query->with('room')->with('customer')->paginate(isset($data['limit']) ? (int)$data['limit'] : 30);
         return $admin;
     }
 

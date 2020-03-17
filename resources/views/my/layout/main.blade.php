@@ -18,6 +18,6 @@
 
   <input type="hidden" class="success_message" value="{{ session()->has('success_message') ? session('success_message') : '' }}">
   <input type="hidden" class="error_message" value="{{ session()->has('error_message') ? session('error_message') : '' }}">
-  @include('site.layout.js')
+  @include('my.layout.js')
 </body>
 </html>
