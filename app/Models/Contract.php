@@ -16,9 +16,15 @@ class Contract extends Model
     {
         return $this->belongsTo(Customer::class);
     }
+    public function service()
+    {
+        return $this->hasMany(ContractService::class);
+    }
 
     public function room()
     {
         return $this->belongsTo(MotelRoom::class, 'motel_room_id','id');
     }
+
+
 }
