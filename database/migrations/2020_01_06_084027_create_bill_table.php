@@ -17,6 +17,7 @@ class CreateBillTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('note');
+            $table->integer('room_price');
             $table->integer('other_price');
             $table->integer('service_price');
             $table->integer('debit_price');
@@ -25,8 +26,6 @@ class CreateBillTable extends Migration
             $table->smallInteger('status')->default(1);
             $table->bigInteger('contract_id');
             $table->bigInteger('user_id');
-            $table->bigInteger('motel_id');
-            $table->bigInteger('motel_room_id');
             $table->timestamps();
         });
     }

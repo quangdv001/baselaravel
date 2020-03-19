@@ -23,30 +23,35 @@ class MyBillController extends Controller
         $this->service = $service;
     }
 
-    public function getCreate($contractId, $id = 0){
+    public function index(Request $request){
         $user = auth()->user();
-        $contract = $this->contract->first(['id' =>$contractId, 'user_id' => $user->id])->load('service');
-        $bill = [];
-        if($id > 0){
-            $bill = $this->bill->first(['id' =>$id, 'user_id' => $user->id]);
-            if(!$bill){
-                return redirect()->route('my.contract.getList');
-            }
-        }
-        $customer = $this->customer->get(['user_id' => $user->id]);
-        $service = $this->service->get(['user_id' => $user->id]);
-        return view('my.contract.edit')
-            ->with('id', $id)
-            ->with('bill', $bill);
+        $params['contract_id'] = $request->input('contract_id', 0);
+        $params['user_id'] = $user->id;
+        $params['limit'] = 0;
+        $params['sortBy'] = 'id';
+        $data = $this->bill->search($params);
+        return view('my.bill.index')->with('data', $data);
     }
 
-    public function postCreate(Request $request, $contractId, $id = 0){
+    public function getCreate($contractId){
         $user = auth()->user();
-        // $data = $request->only('name', 'note', 'deposits', 'duration', 'payment_period', 'start', 'end', 'status', 'customer_id', 'motel_room_id');
+        $contract = $this->contract->first(['id' =>$contractId, 'user_id' => $user->id])->load('service');
+        $customer = $this->customer->get(['user_id' => $user->id]);
+        $service = $this->service->get(['user_id' => $user->id]);
+        return view('my.bill.edit')
+            ->with('contract', $contract)
+            ->with('customer', $customer)
+            ->with('service', $service);
+    }
+
+    public function postCreate(Request $request, $contractId){
+        $user = auth()->user();
+        $data = $request->only('name', 'note', 'room_price', 'other_price', 'debit_price', 'discount_price');
         $service = $request->input('service', []);
         $contract = $this->contract->first(['id' =>$contractId, 'user_id' => $user->id]);
         $services = $this->service->get(['user_id' => $user->id])->load('formula')->keyBy('id');
         $arrService = [];
+        $servicePrice = 0;
         if(sizeof($service) > 0){
             foreach($service as $k => $v){
                 if(isset($services[$k])){
@@ -60,29 +65,31 @@ class MyBillController extends Controller
                             if($v >= $val->start && $v <= $val->end){
                                 $arrService[$k]['price'] = $val->price;
                                 $arrService[$k]['total'] = $val->price*$v['qty'];
+                                $servicePrice += $arrService[$k]['total'];
                             }
                         }
                     } else {
                         $arrService[$k]['price'] = $v['price'];
                         $arrService[$k]['total'] = $v['price']*$v['qty'];
+                        $servicePrice += $arrService[$k]['total'];
                     }
                 }
             }
         }
+        $data['service_price'] = $servicePrice;
+        $data['total_price'] = $data['room_price'] + $data['other_price'] + $data['debit_price'] + $data['service_price'] - $data['discount_price'];
         $mess = '';
-        if($id == 0){
-            $data['user_id'] = $user->id;
-            $res = $this->contract->create($data, $service);
-            if($res){
-                $mess = 'Tạo hợp đồng thành công';
-            }
-        } else {
-            $article = $this->contract->getById($id);
-            $res = $this->contract->update($article, $data, $service);
-            if($res){
-                $mess = 'Cập nhật hợp đồng thành công';
-            }
+        $data['user_id'] = $user->id;
+        $res = $this->bill->create($data, $arrService);
+        if($res){
+            $mess = 'Tạo hợp đồng thành công';
         }
-        return redirect()->route('my.contract.getList')->with('success_message', $mess);
+        return redirect()->route('my.bill.detail', $res->id)->with('success_message', $mess);
+    }
+
+    public function detail($id){
+        $user = auth()->user();
+        $bill = $this->bill->getById($id)->load('service');
+        return view('my.bill.detail')->with('bill', $bill)
     }
 }

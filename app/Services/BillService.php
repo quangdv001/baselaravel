@@ -9,36 +9,27 @@
 namespace App\Services;
 
 use App\Models\Bill;
+use App\Models\BillService as ModelsBillService;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
 class BillService
 {
     private $repo;
-    public function __construct(Bill $repo)
+    private $billService;
+    public function __construct(Bill $repo, ModelsBillService $billService)
     {
         $this->repo = $repo;
+        $this->billService = $billService;
     }
 
     public function search($data){
         $query = $this->repo;
-        if (isset($data['id']) && $data['id'] > 0) {
-            $query = $query->where('id', $data['id']);
+        if (isset($data['contract_id']) && $data['contract_id'] > 0) {
+            $query = $query->where('contract_id', $data['contract_id']);
         }
-        if (isset($data['title']) && $data['title'] != '') {
-            $query = $query->where('title', 'like', '%' . $data['title'] . '%');
-        }
-        if (isset($data['user_name_c']) && $data['user_name_c'] != '') {
-            $query = $query->where('user_name_c', 'like', '%' . $data['user_name_c'] . '%');
-        }
-        if (isset($data['admin_name_c']) && $data['admin_name_c'] != '') {
-            $query = $query->where('admin_name_c', 'like', '%' . $data['admin_name_c'] . '%');
-        }
-        if (isset($data['status']) && $data['status'] > -1) {
-            $query = $query->where('status', $data['status']);
-        }
-        if (isset($data['category_id']) && $data['category_id'] > 0) {
-            $query = $query->where('category_id', $data['category_id']);
+        if (isset($data['user_id']) && $data['user_id'] > 0) {
+            $query = $query->where('user_id', $data['user_id']);
         }
         if (isset($data['except']) && $data['except'] > 0) {
             $query = $query->where('id', '<>' ,$data['except']);
@@ -55,7 +46,7 @@ class BillService
         return $admin;
     }
 
-    public function create($data)
+    public function create($data, $service)
     {
         try {
             DB::beginTransaction();
@@ -64,6 +55,12 @@ class BillService
                 $admin->$key = $value;
             }
             $admin->save();
+            if($admin && sizeof($service) > 0){
+                foreach($service as $k => $v){
+                    $service[$k]['bill_id'] = $admin->id;
+                }
+                $this->billService->insert($service);
+            }
             DB::commit();
             return $admin;
         } catch (Exception  $e) {
