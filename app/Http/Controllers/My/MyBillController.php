@@ -89,7 +89,18 @@ class MyBillController extends Controller
 
     public function detail($id){
         $user = auth()->user();
-        $bill = $this->bill->getById($id)->load('service');
-        return view('my.bill.detail')->with('bill', $bill)
+        $bill = $this->bill->first(['id' =>$id, 'user_id' => $user->id])->load('service');
+        return view('my.bill.detail')->with('bill', $bill);
+    }
+
+    public function remove($id = 0){
+        $user = auth()->user();
+        $data = $this->bill->first(['id' =>$id, 'user_id' => $user->id]);
+        if(!$data){
+            return redirect()->route('my.bill.getList');
+        }
+        $this->bill->remove($id);
+        $mess = 'Xóa thành công';
+        return redirect()->route('my.bill.getList')->with('success_message', $mess);
     }
 }

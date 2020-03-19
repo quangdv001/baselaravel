@@ -29,6 +29,12 @@ Route::middleware(['auth:web'])->group(function () {
     Route::get('contract/getCreate/{id?}', 'MyContractController@getCreate')->name('contract.getCreate');
     Route::post('contract/getCreate/{id?}', 'MyContractController@postCreate')->name('contract.postCreate');
     Route::get('contract/remove/{id?}', 'MyContractController@remove')->name('contract.remove');
+
+    Route::get('/bill', 'MyBillController@index')->name('bill.getList');
+    Route::get('bill/getCreate/{id?}', 'MyBillController@getCreate')->name('bill.getCreate');
+    Route::post('bill/getCreate/{id?}', 'MyBillController@postCreate')->name('bill.postCreate');
+    Route::get('bill/remove/{id?}', 'MyBillController@remove')->name('bill.remove');
+    Route::get('bill/detail/{id?}', 'MyBillController@detail')->name('bill.detail');
 });
 
 
