@@ -8,14 +8,14 @@
 
 namespace App\Services;
 
-use App\Models\ContractCustomer;
+use App\Models\Customer;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
-class ContractCustomerService
+class CustomerService
 {
     private $repo;
-    public function __construct(ContractCustomer $repo)
+    public function __construct(Customer $repo)
     {
         $this->repo = $repo;
     }

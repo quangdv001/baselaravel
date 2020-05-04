@@ -20,8 +20,8 @@ class CreateCustomerTable extends Migration
             $table->string('email');
             $table->smallInteger('gender')->default(1);
             $table->string('id_number');
-            $table->string('id_place');
-            $table->integer('id_time');
+            $table->string('id_place')->nullable();
+            $table->integer('id_time')->nullable();
             $table->string('address');
             $table->smallInteger('status')->default(1);
             $table->bigInteger('user_id');

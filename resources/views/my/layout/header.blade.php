@@ -79,7 +79,7 @@
               <a  class="nav-link @yield('menu4', '')"
               id="pills-hd-tab"
               {{-- data-toggle="pill" --}}
-              href="#hop-dong"
+              href="{{ route('my.contract.getList') }}"
               {{-- role="tab" --}}
               aria-controls="hop-dong"
               aria-selected="false"><i class="fas fa-file-signature mr-2"></i><span>Hợp đồng</span></a>
@@ -92,6 +92,15 @@
               {{-- role="tab" --}}
               aria-controls="user"
               aria-selected="false"><i class="fas fa-users mr-2"></i><span>User</span></a>
+            </li>
+            <li class="nav-item mr-4">
+              <a class="nav-link @yield('menu6', '')"
+              id="pills-user-tab"
+              {{-- data-toggle="pill" --}}
+              href="{{ route('my.customer.getList') }}"
+              {{-- role="tab" --}}
+              aria-controls="user"
+              aria-selected="false"><i class="fas fa-users mr-2"></i><span>Khách hàng</span></a>
             </li>
           </ul>
         </div>

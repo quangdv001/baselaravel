@@ -110,41 +110,41 @@ $(function () {
 	navigation('.fa.fa-user.nav-right', '.navigation.nav-right', '.backdrop_nav.nav-right');
 
 	/* FIX TOP */
-	var fixtop = function fixtop(topfix) {
-		var top;
-		if (topfix === undefined) {
-			top = $('.top');
-		} else {
-			top = topfix;
-		}
-		var topPosition = top.offset().top;
+	// var fixtop = function fixtop(topfix) {
+	// 	var top;
+	// 	if (topfix === undefined) {
+	// 		top = $('.top');
+	// 	} else {
+	// 		top = topfix;
+	// 	}
+	// 	var topPosition = top.offset().top;
 
-		var fixed = function fixed() {
-			if (!top.hasClass('isfixed')) {
-				top.addClass('isfixed');
-				$('body').addClass('topfixed');
-			}
-		};
-		var removefixed = function removefixed() {
-			if (top.hasClass('isfixed')) {
-				top.removeClass('isfixed');
-				$('body').removeClass('topfixed');
-			}
-		};
+	// 	var fixed = function fixed() {
+	// 		if (!top.hasClass('isfixed')) {
+	// 			top.addClass('isfixed');
+	// 			$('body').addClass('topfixed');
+	// 		}
+	// 	};
+	// 	var removefixed = function removefixed() {
+	// 		if (top.hasClass('isfixed')) {
+	// 			top.removeClass('isfixed');
+	// 			$('body').removeClass('topfixed');
+	// 		}
+	// 	};
 
-		$(window).on('scroll', function () {
-			if ($(window).width() > 768) {
-				if ($(window).scrollTop() > topPosition) {
-					fixed();
-				} else {
-					removefixed();
-				}
-			} else {
-				removefixed();
-			}
-		});
-	};
-	fixtop($('.fix-top'));
+	// 	$(window).on('scroll', function () {
+	// 		if ($(window).width() > 768) {
+	// 			if ($(window).scrollTop() > topPosition) {
+	// 				fixed();
+	// 			} else {
+	// 				removefixed();
+	// 			}
+	// 		} else {
+	// 			removefixed();
+	// 		}
+	// 	});
+	// };
+	// fixtop($('.fix-top'));
 });
 
 },{}],5:[function(require,module,exports){
@@ -205,7 +205,7 @@ jQuery(document).ready(function ($) {
 'use strict';
 
 (function ($) {
-    $('body').append('<a class="backtotop btn btn-raised btn-primary" href="#0"><span>Top</span></a>');
+    // $('body').append('<a class="backtotop btn btn-raised btn-primary" href="#0"><span>Top</span></a>');
     // browser window scroll (in pixels) after which the "back to top" link is shown
     var offset = 300,
 

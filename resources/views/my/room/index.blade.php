@@ -50,6 +50,11 @@ active
                                     class="cycle_pen">
                                     <i class="fas fa-pencil-alt"></i>
                                   </span></a>
+                              <a href="{{ route('my.room.editContract', ['id'=>$v->id]) }}"><span
+                                    class="cycle_pen">
+                                    <i class="fas fa-pencil-alt"></i>
+                                  </span></a>
+
                             </th>
                             <td>{{ $v->name }}</td>
                             <td>{{ $v->floor }}</td>
