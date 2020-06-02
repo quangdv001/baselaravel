@@ -51,10 +51,10 @@ active
                                     <div class="row mb-2">
                                         <div class="col">
                                             <label for="staticDes" class="col-form-label">Phòng trọ * : </label>
-                                            <select class="form-control select2" name="motel_room_id" id="" {{!empty(request('room_id'))?'disabled':''}}>
+                                            <select class="form-control select2" name="motel_room_id" id="" {{!empty(request('room_id'))?'readonly':''}}>
                                                 @if(!empty($listRoom))
                                                     @foreach($listRoom as $room)
-                                                        <option value="{{$room->id}}">{{$room->name}}</option>
+                                                        <option value="{{$room->id}}" {{ !empty(request('room_id')) && request('room_id') == $room->id ? 'selected' : ''  }}>{{$room->name}}</option>
                                                     @endforeach
                                                 @endif
                                             </select>

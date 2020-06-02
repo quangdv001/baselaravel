@@ -31,27 +31,20 @@ active
                       <thead>
                         <tr>
                           {{-- <th scope="col"></th> --}}
-                          <th scope="col"></th>
+                          <th scope="col">STT</th>
                           <th scope="col">Tên</th>
                           <th scope="col">Đơn vị</th>
                           <th scope="col">Đơn giá</th>
                           <th scope="col">Giá cố định</th>
                           <th scope="col">Mô tả</th>
-                          <th scope="col"></th>
+                          <th scope="col">Tùy chọn</th>
                         </tr>
                       </thead>
                       <tbody>
-                          @foreach($data as $v)
+                          @foreach($data as $k => $v)
                           <tr>
                             <th scope="row">
-                            <a href="{{ route('my.service.getCreate', $v->id) }}"><span
-                                    class="cycle_pen">
-                                    <i class="fas fa-pencil-alt"></i>
-                                  </span></a>
-                            <a class="ml-2" href="{{ route('my.formula.getCreate', $v->id) }}"><span
-                                    class="cycle_copy">
-                                    <i class="fas fa-pencil-alt"></i>
-                                  </span></a>
+                              {{ $k + 1 }}
                             </th>
                             <td>{{ $v->title }}</td>
                             <td>{{ $v->unit }}</td>
@@ -59,16 +52,13 @@ active
                             <td>{{ number_format($v->fixed_price) }} đ</td>
                             <td>{{ $v->description }}</td>
                             <th scope="row">
-                            <a onclick="return confirm('Bạn có chắc muốn xóa?')" href="{{ route('my.service.remove', $v->id) }}">
-
-                                    <span
-                                      {{-- id="btn_4" --}}
-                                      {{-- data-toggle="modal"
-                                      data-target="#modalHouse" --}}
-                                      data-name="Nhà trọ - xóa"
-                                      class="cycle_del">
+                              <a href="{{ route('my.service.getCreate', $v->id) }}" class="btn btn-sm btn-info">
+                                <i class="fas fa-pencil-alt"></i>
+                              </a>
+                        <a  href="{{ route('my.formula.getCreate', $v->id) }}" class="btn btn-sm btn-warning">
+                          <i class="fas fa-calculator"></i></a>
+                            <a onclick="return confirm('Bạn có chắc muốn xóa?')" href="{{ route('my.service.remove', $v->id) }}" class="btn btn-sm btn-danger">
                                       <i class="fas fa-trash-alt"></i>
-                                    </span>
                                 </a>
                             </th>
                           </tr>

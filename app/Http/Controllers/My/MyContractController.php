@@ -54,7 +54,7 @@ class MyContractController extends Controller
 
     public function postCreate(Request $request, $id = 0){
         $user = auth()->user();
-        $data = $request->only('name', 'note', 'deposits', 'duration', 'payment_period', 'start', 'end', 'status', 'customer_id', 'motel_room_id', 'motel_room_id');
+        $data = $request->only('name', 'note', 'deposits', 'duration', 'payment_period', 'start', 'end', 'status', 'customer_id', 'motel_room_id');
         $service = $request->input('service', []);
         $data['payment_period'] = strtotime(str_replace('/','-',$data['payment_period']));
         $data['start'] = strtotime(str_replace('/','-',$data['start']));

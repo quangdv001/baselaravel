@@ -30,24 +30,18 @@ active
                     <table class="table table-bordered">
                       <thead>
                         <tr>
-                          {{-- <th scope="col"></th> --}}
-                          <th scope="col"></th>
+                          <th scope="col">STT</th>
                           <th scope="col">Tên</th>
                           <th scope="col">Địa chỉ</th>
                           <th scope="col">Mô tả</th>
-                          {{-- <th scope="col">Trạng thái</th> --}}
-                          {{-- <th scope="col"></th> --}}
-                          <th scope="col"></th>
+                          <th scope="col">Tùy chọn</th>
                         </tr>
                       </thead>
                       <tbody>
-                          @foreach($data as $v)
+                          @foreach($data as $k => $v)
                           <tr>
                             <th scope="row">
-                            <a href="{{ route('my.motel.getCreate', $v->id) }}"><span
-                                    class="cycle_pen">
-                                    <i class="fas fa-pencil-alt"></i>
-                                  </span></a>
+                              {{ $k + 1 }}
                             </th>
                             <td>{{ $v->name }}</td>
                             <td>{{ $v->address }}</td>
@@ -62,16 +56,15 @@ active
                                 </a>
                             </th> --}}
                             <th scope="row">
-                            <a onclick="return confirm('Bạn có chắc muốn xóa?')" href="{{ route('my.motel.remove', $v->id) }}">
+                              <a href="{{ route('my.motel.getCreate', $v->id) }}" class="btn btn-info btn-sm">
+                              
+                                <i class="fas fa-pencil-alt"></i>
+                              </a>
+                            <a class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc muốn xóa?')" href="{{ route('my.motel.remove', $v->id) }}">
 
-                                    <span
-                                      {{-- id="btn_4" --}}
-                                      {{-- data-toggle="modal"
-                                      data-target="#modalHouse" --}}
-                                      data-name="Nhà trọ - xóa"
-                                      class="cycle_del">
+                                    
                                       <i class="fas fa-trash-alt"></i>
-                                    </span>
+                                    
                                 </a>
                             </th>
                           </tr>

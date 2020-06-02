@@ -23,7 +23,6 @@ class CreateContractTable extends Migration
             $table->integer('start');
             $table->integer('end');
             $table->smallInteger('status')->default(1);
-            $table->bigInteger('customer_id');
             $table->bigInteger('user_id');
             $table->bigInteger('motel_room_id');
             $table->bigInteger('customer_id');

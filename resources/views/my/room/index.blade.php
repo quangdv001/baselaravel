@@ -30,48 +30,35 @@ active
                     <table class="table table-bordered">
                       <thead>
                         <tr>
-                          {{-- <th scope="col"></th> --}}
-                          <th scope="col"></th>
+                         
+                          <th scope="col">STT</th>
                           <th scope="col">Tên</th>
                           <th scope="col">Tầng</th>
                           <th scope="col">Số người</th>
                           <th scope="col">Giá</th>
                           <th scope="col">Nhà</th>
-                          {{-- <th scope="col">Trạng thái</th> --}}
-                          {{-- <th scope="col"></th> --}}
-                          <th scope="col"></th>
+                          <th scope="col">Tùy chọn</th>
                         </tr>
                       </thead>
                       <tbody>
-                          @foreach($data as $v)
+                          @foreach($data as $k => $v)
                           <tr>
-                            <th scope="row">
-                            <a href="{{ route('my.room.getCreate', $v->id) }}"><span
-                                    class="cycle_pen">
-                                    <i class="fas fa-pencil-alt"></i>
-                                  </span></a>
-                              <a href="{{ route('my.room.editContract', ['id'=>$v->id]) }}"><span
-                                    class="cycle_pen">
-                                    <i class="fas fa-pencil-alt"></i>
-                                  </span></a>
-
-                            </th>
+                          <td>{{ $k + 1 }}</td>
                             <td>{{ $v->name }}</td>
                             <td>{{ $v->floor }}</td>
                             <td>{{ $v->max }}</td>
                             <td>{{ number_format($v->price) }} đ</td>
                             <td>{{ $v->motel->name }}</td>
                             <th scope="row">
-                            <a onclick="return confirm('Bạn có chắc muốn xóa?')" href="{{ route('my.room.remove', $v->id) }}">
-
-                                    <span
-                                      {{-- id="btn_4" --}}
-                                      {{-- data-toggle="modal"
-                                      data-target="#modalHouse" --}}
-                                      data-name="Nhà trọ - xóa"
-                                      class="cycle_del">
+                              <a href="{{ route('my.room.getCreate', $v->id) }}" class="btn btn-sm btn-info">
+                                <i class="fas fa-pencil-alt"></i>
+                              </a>
+                          <a href="{{ route('my.room.editContract', ['id'=>$v->id]) }}" class="btn btn-sm btn-warning">
+                            <i class="fas fa-file-contract"></i>
+                              </a>
+                            <a onclick="return confirm('Bạn có chắc muốn xóa?')" href="{{ route('my.room.remove', $v->id) }}" class="btn btn-sm btn-danger">
                                       <i class="fas fa-trash-alt"></i>
-                                    </span>
+                                    
                                 </a>
                             </th>
                           </tr>
