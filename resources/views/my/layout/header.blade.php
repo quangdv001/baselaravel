@@ -85,13 +85,13 @@
               aria-selected="false"><i class="fas fa-file-signature mr-2"></i><span>Hợp đồng</span></a>
             </li>
             <li class="nav-item mr-4">
-              <a class="nav-link @yield('menu5', '')"
+              <a class="nav-link @yield('menu7', '')"
               id="pills-user-tab"
               {{-- data-toggle="pill" --}}
-              href="#user"
+              href="{{ route('my.bill.getList') }}"
               {{-- role="tab" --}}
               aria-controls="user"
-              aria-selected="false"><i class="fas fa-users mr-2"></i><span>User</span></a>
+              aria-selected="false"><i class="fas fa-file-signature mr-2"></i><span>Hóa đơn</span></a>
             </li>
             <li class="nav-item mr-4">
               <a class="nav-link @yield('menu6', '')"
@@ -101,6 +101,15 @@
               {{-- role="tab" --}}
               aria-controls="user"
               aria-selected="false"><i class="fas fa-users mr-2"></i><span>Khách hàng</span></a>
+            </li>
+            <li class="nav-item mr-4">
+              <a class="nav-link @yield('menu5', '')"
+              id="pills-user-tab"
+              {{-- data-toggle="pill" --}}
+              href="#user"
+              {{-- role="tab" --}}
+              aria-controls="user"
+              aria-selected="false"><i class="fas fa-users mr-2"></i><span>User</span></a>
             </li>
           </ul>
         </div>

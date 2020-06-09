@@ -1,8 +1,8 @@
 @extends('my.layout.main')
 @section('title')
-Danh sách khách hàng
+Danh sách hóa đơn
 @endsection
-@section('menu4')
+@section('menu7')
 active
 @endsection
 @section('content')
@@ -13,15 +13,16 @@ active
           <div class="col-lg-3 offset-lg-1 col-md-12">
             @include('my.layout.sidebar')
           </div>
+
           <div class="col-lg-7 col-md-12">
             <div class="card border-light mt-5">
               <div class="card-header">
-                Hợp đồng
+                Hóa đơn
               </div>
               <div class="card-body">
                 <div id="content-page">
                   <div class="gr-btn mb-4">
-                    <a href="{{ route('my.contract.getCreate') }}" class="btn btn-outline-primary btn-sm mr-2"><i class="fas fa-plus-circle mr-2"></i>Thêm mới</a>
+                    {{-- <a href="{{ route('my.bill.getCreate') }}" class="btn btn-outline-primary btn-sm mr-2"><i class="fas fa-plus-circle mr-2"></i>Thêm mới</a> --}}
                     {{-- <button type="button" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash mr-2"></i>Xóa nhiều</button> --}}
                   </div>
                   <div class="table-responsive-lg">
@@ -29,35 +30,37 @@ active
                     <table class="table table-bordered">
                       <thead>
                         <tr>
-                          <th scope="col">Stt</th>
+                          <th scope="col">STT</th>
                           <th scope="col">Tên</th>
-                          <th scope="col">Khách hàng</th>
+                          <th scope="col">Hợp đồng</th>
                           <th scope="col">Phòng</th>
-                          <th scope="col">Thời gian</th>
-                          <th scope="col">Tiền cọc</th>
-                          {{-- <th scope="col"></th> --}}
-                          <th scope="col"></th>
+                          <th scope="col">Tùy chọn</th>
                         </tr>
                       </thead>
                       <tbody>
                           @foreach($data as $k => $v)
-                          <tr class="text-center">
-                            <td>{{ $k + 1 }}</td>
-                            <td>{{ $v->name }}</td>
-                            <td>{{ $v->customer->name }}</td>
-                            <td>{{ $v->room->name }}</td>
-                            <td>{{date('d/m/Y',$v->start).' - '.date('d/m/Y',$v->end)}}</td>
-                            <td>{{ number_format($v->deposits) }}</td>
+                          <tr>
                             <th scope="row">
+                              {{ $k + 1 }}
+                            </th>
+                            <td>{{ $v->name }}</td>
+                            <td>{{ $v->contract_id }}</td>
+                            <td>{{ $v->contract->room->name }}</td>
+                            {{-- <th scope="row">
+                                <a href="">
 
-                              <a class="btn btn-info btn-sm" href="{{ route('my.contract.getCreate', $v->id) }}" title="Sửa hợp đồng">
-                                <i class="fas fa-pencil-alt"></i></a>
-                              <a class="btn btn-warning btn-sm" href="{{ route('my.bill.getCreate', $v->id) }}" title="Tạo hóa đơn">
-                                <i class="fas fa-file-invoice-dollar"></i></a>
-                            <a class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc muốn xóa?')" href="{{ route('my.contract.remove', $v->id) }}">
-                                    
+                                    <span
+                                      class="cycle_up">
+                                      <i class="fas fa-upload"></i>
+                                    </span>
+                                </a>
+                            </th> --}}
+                            <th scope="row">
+                              <a href="{{ route('my.bill.export', $v->id) }}" class="btn btn-warning btn-sm">
+                                <i class="fas fa-file-pdf"></i>
+                              </a>
+                            <a class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc muốn xóa?')" href="{{ route('my.bill.remove', $v->id) }}">
                                       <i class="fas fa-trash-alt"></i>
-                                    
                                 </a>
                             </th>
                           </tr>
@@ -66,7 +69,7 @@ active
                     </table>
                     {{ $data->links() }}
                     @else
-                    <h4>Chưa có hợp đồng</h4>
+                    <h4>Chưa có hóa đơn</h4>
                     @endif
                   </div>
                 </div>
@@ -79,7 +82,7 @@ active
         </div>
       </div>
     </section>
-  </main>
+  </main id="phong-tro">
     <!-- ==============Start Modal House=============== -->
     <div class="modal fade" id="modalHouse" role="dialog">
         <div class="modal-dialog modal-lg">

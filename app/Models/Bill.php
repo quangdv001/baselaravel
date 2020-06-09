@@ -15,4 +15,8 @@ class Bill extends Model
     {
         return $this->hasMany(BillService::class);
     }
+
+    public function contract(){
+        return $this->belongsTo(Contract::class, 'contract_id','id');
+    }
 }
