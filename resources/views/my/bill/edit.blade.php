@@ -43,7 +43,7 @@ active
                                     <div class="row mb-2">
                                         <div class="col">
                                             <label for="staticFrom" class="col-form-label">Giá khác * : </label>
-                                        <input type="text" name="other_price" class="form-control" value="" required>
+                                        <input type="number" name="other_price" class="form-control" value="0" required>
                                         @if($errors->has('other_price'))
                                         <p class="text-danger">{{ $errors->first('other_price') }}</p>
                                         @endif
@@ -52,12 +52,41 @@ active
                                     <div class="row mb-2">
                                         <div class="col">
                                             <label for="staticFrom" class="col-form-label">Tiền giảm giá * : </label>
-                                        <input type="text" name="discount_price" class="form-control" value="" required>
+                                        <input type="number" name="discount_price" class="form-control" value="0" required>
                                         @if($errors->has('discount_price'))
                                         <p class="text-danger">{{ $errors->first('discount_price') }}</p>
                                         @endif
                                         </div>
                                     </div>
+                                    <div class="row mb-2">
+                                        <div class="col">
+                                            <label for="staticFrom" class="col-form-label">Tiền ghi nợ * : </label>
+                                        <input type="number" name="debit_price" class="form-control" value="0" required>
+                                        @if($errors->has('debit_price'))
+                                        <p class="text-danger">{{ $errors->first('debit_price') }}</p>
+                                        @endif
+                                        </div>
+                                    </div>
+                                    <br>
+                                    @if(sizeof($service) > 0)
+                                    <h5>Dịch vụ</h5>
+                                    <div class="list-service">
+                                        <div class="row">
+                                        @foreach($service as $k => $v)
+                                            <div class="col-6">
+                                                <label for="staticFrom" class="col-form-label">{{ $v->title }} : </label>
+                                                <div class="input-group mb-3">
+                                                    <input type="number" name="service[{{$v->id}}]" class="form-control" value="0">
+                                                    <div class="input-group-append">
+                                                    <span class="input-group-text">{{ $v->unit }}</span>
+                                                    </div>
+                                                  </div>
+                                                
+                                            </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                    @endif
                                     <div class="row mt-5">
                                         <div class="col-sm-5 col-auto"></div>
                                         <div class="col ml-2">

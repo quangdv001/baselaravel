@@ -13,7 +13,7 @@ class Service extends Model
 
     public function formula()
     {
-        return $this->hasOne(ServiceFormula::class);
+        return $this->hasMany(ServiceFormula::class);
     }
 
 }
