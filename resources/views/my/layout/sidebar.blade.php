@@ -4,7 +4,7 @@
     <div class="avatar-holder">
       <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1820405/profile/profile-512.jpg?1533058950" alt="Albert Einstein">
     </div>
-    <div class="title-avatar">User Demo</div>
+    <div class="title-avatar">{{ auth()->user()->name }}</div>
     <div class="title-name-user">Actived User</div>
     <ul class="list-group list-group-flush mt-4">
       <li class="list-group-item"><i class="fas fa-book-open mr-2"></i><b>Thông tin</b></li>

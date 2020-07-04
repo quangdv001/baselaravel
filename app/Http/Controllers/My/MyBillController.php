@@ -101,7 +101,7 @@ class MyBillController extends Controller
     public function pdf(Request $request, $id){
         $user = auth()->user();
         $bill = $this->bill->first(['id' =>$id, 'user_id' => $user->id])->load(['billservice.service']);
-        // dd($bill);
+        // dd($bill );
         $pdf = PDF::loadView('my.bill.pdf',  compact('bill'));
         return $pdf->download('Hợp đồng.pdf');
     }
