@@ -11,4 +11,8 @@ class BillService extends Model
         'unit', 'qty', 'price', 'total', 'status', 'bill_id', 'service_id', 'user_id'
     ];
 
+    public function service(){
+        return $this->belongsTo(Service::class);
+    }
+
 }

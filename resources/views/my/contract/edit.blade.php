@@ -1,8 +1,8 @@
 @extends('my.layout.main')
 @section('title')
-@if($id > 0) Chỉnh sửa Khách @else Thêm mới Khách @endif
+@if($id > 0) Chỉnh sửa Hợp đồng @else Thêm mới hợp đồng @endif
 @endsection
-@section('menu6')
+@section('menu4')
 active
 @endsection
 @section('lib_css')
@@ -66,7 +66,7 @@ active
                                             <select class="form-control select2" name="service[]" multiple="multiple">
                                                 @if(!empty($listService))
                                                     @foreach($listService as $service)
-                                                        <option value="{{$service->id}}">{{$service->title}}</option>
+                                                        <option value="{{$service->id}}" @if(in_array($service->id, $arrService)) selected @endif>{{$service->title}}</option>
                                                     @endforeach
                                                 @endif
                                             </select>
@@ -90,7 +90,7 @@ active
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="row mb-2">
+                                    {{-- <div class="row mb-2">
                                         <div class="col">
                                             <label for="staticDes" class="col-form-label">Thời hạn thanh toán * : </label>
                                             <input type="text" name="payment_period" class="form-control date" value="{{ $data ? $data->payment_period : old('payment_period') }}" required>
@@ -98,7 +98,7 @@ active
                                                 <p class="text-danger">{{ $errors->first('payment_period') }}</p>
                                             @endif
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="row mb-2">
                                         <div class="col">
                                             <label for="staticFrom" class="col-form-label">Thời hạn * : </label>
@@ -111,7 +111,7 @@ active
                                     <div class="row mb-2">
                                         <div class="col">
                                             <label for="staticDes" class="col-form-label">Bắt đầu * : </label>
-                                            <input type="text" name="start" class="form-control date" value="{{ $data ? $data->start : old('start') }}" required>
+                                            <input type="text" name="start" class="form-control date" value="{{ $data ? date('d-m-Y', $data->start) : old('start') }}" required>
                                             @if($errors->has('start'))
                                                 <p class="text-danger">{{ $errors->first('start') }}</p>
                                             @endif
@@ -120,7 +120,7 @@ active
                                     <div class="row mb-2">
                                         <div class="col">
                                             <label for="staticDes" class="col-form-label">Kết thúc : </label>
-                                            <input type="text" name="end" class="form-control" readonly value="{{ $data ? $data->end : (!empty( old('end') )?old('end'):date('d/m/Y',strtotime("+1 month") )) }}" required>
+                                            <input type="text" name="end" class="form-control" readonly value="{{ $data ? date('d-m-Y', $data->end) : (!empty( old('end') )?old('end'):date('d/m/Y',strtotime("+1 month") )) }}" required>
                                             @if($errors->has('end'))
                                                 <p class="text-danger">{{ $errors->first('end') }}</p>
                                             @endif
@@ -168,7 +168,7 @@ active
                 minDate:0,
                 singleDatePicker: true,
                 locale: {
-                    format: 'DD/MM/YYYY'
+                    format: 'DD-MM-YYYY'
                 }
             });
             $('.select2').select2();

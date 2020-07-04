@@ -9,7 +9,7 @@ html, body {
 /* CSS variables */
 
 :root {
-  --primary-color: #427cff;
+  --primary-color: #27006e;
   --primary-color2: #854fee;
   --tile-color: #141313;
   --red-cycle: #dc3545;
@@ -17,7 +17,7 @@ html, body {
   --boder-color: #777777;
   --boder-color: #201f1f17;
   --active-a: #ffffff;
-  --background-active-a: #002cff;
+  --background-active-a: #102796;
   --active-background: #ffffff75;
   --gradient-color: linear-gradient(90deg, #4458dc 0%, #854fee 100%);
   --shadow-color: 0px 10px 25px rgba(135, 104, 238, 0.3);

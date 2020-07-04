@@ -25,55 +25,58 @@ active
                     {{-- <a href="{{ route('my.bill.getCreate') }}" class="btn btn-outline-primary btn-sm mr-2"><i class="fas fa-plus-circle mr-2"></i>Thêm mới</a> --}}
                     {{-- <button type="button" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash mr-2"></i>Xóa nhiều</button> --}}
                   </div>
+                  <div class="row mb-3">
+                    <div class="col-6">
+                    <div><b>Tên hóa đơn: </b> {{ $data->name }}</div>
+                    </div>
+                    <div class="col-6">
+                    <div><b>Mã hợp đồng: </b> #MHĐ{{ $data->contract_id }}</div>
+                    </div>
+                  </div>
                   <div class="table-responsive-lg">
-                      @if(sizeof($data) > 0)
+                      @if(sizeof($data->billservice) > 0)
                     <table class="table table-bordered">
                       <thead>
                         <tr>
-                          <th scope="col">STT</th>
-                          <th scope="col">Tên</th>
-                          <th scope="col">Hợp đồng</th>
-                          <th scope="col">Phòng</th>
-                          <th scope="col">Tùy chọn</th>
+                          <th scope="col">Tên dịch vụ</th>
+                          <th scope="col">Đơn vị</th>
+                          <th scope="col">Đơn giá</th>
+                          <th scope="col">Số lượng</th>
+                          <th scope="col">Thành tiền</th>
                         </tr>
                       </thead>
                       <tbody>
-                          @foreach($data as $k => $v)
+                          @foreach($data->billservice as $k => $v)
                           <tr>
                             <th scope="row">
-                              {{ $k + 1 }}
+                              {{ $v->service->title }}
                             </th>
-                            <td>{{ $v->name }}</td>
-                            <td>{{ $v->contract_id }}</td>
-                            <td>{{ $v->contract->room->name }}</td>
-                            {{-- <th scope="row">
-                                <a href="">
-
-                                    <span
-                                      class="cycle_up">
-                                      <i class="fas fa-upload"></i>
-                                    </span>
-                                </a>
-                            </th> --}}
-                            <th scope="row">
-                              <a href="{{ route('my.bill.export', $v->id) }}" class="btn btn-warning btn-sm">
-                                <i class="fas fa-file-pdf"></i>
-                              </a>
-                            <a class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc muốn xóa?')" href="{{ route('my.bill.remove', $v->id) }}">
-                                      <i class="fas fa-trash-alt"></i>
-                                </a>
-                            </th>
+                            <td>{{ $v->unit }}</td>
+                            <td>{{ number_format($v->price) }}đ</td>
+                            <td>{{ number_format($v->qty) }}</td>
+                            <td>{{ number_format($v->total) }}đ</td>
                           </tr>
                           @endforeach
                       </tbody>
                     </table>
-                    {{ $data->links() }}
-                    @else
-                    <h4>Chưa có hóa đơn</h4>
                     @endif
                   </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <div><b>Tiền dịch vụ: </b>{{ number_format($data->service_price) }}đ</div>
+                      <div><b>Chi phí khác: </b>{{ number_format($data->other_price) }}đ</div>
+                      <div><b>Dư nợ cũ: </b>{{ number_format($data->debit_price) }}đ</div>
+                    </div>
+                    <div class="col-6">
+                      <div><b>Khấu trừ: </b>{{ number_format($data->discount_price) }}đ</div>
+                      <div><b>Tổng tiền: </b>{{ number_format($data->total_price) }}đ</div>
+                    </div>
+                  </div>
                 </div>
-                
+                <div class="d-flex justify-content-end">
+                    <a name="" id="" class="btn btn-secondary mr-2" href="#" role="button"><i class="fas fa-long-arrow-alt-left mr-2"></i>Trở về</a>
+                <a name="" id="" class="btn btn-danger" href="{{ route('my.bill.pdf', $data->id) }}" role="button"><i class="fas fa-file-pdf mr-2"></i>Xuất hóa đơn</a>
+                </div>
                 <div id="mdl1"></div>
                 <div id="mdl3"></div>
               </div>
@@ -83,42 +86,7 @@ active
       </div>
     </section>
   </main id="phong-tro">
-    <!-- ==============Start Modal House=============== -->
-    <div class="modal fade" id="modalHouse" role="dialog">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title" id="md-app-name"></h4>
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="far fa-times-circle mr-2"></i>Đóng</button>
-              <button type="button" class="btn btn-primary"><i class="fas fa-check mr-2"></i>Đồng ý</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- End Start Modal House -->
-    
-      <!-- ==========Set Modal Form App House======== -->
-      <div id="mdl2" class="container">
-        <div class="container">
-          <div class="col">
-            Bạn có muốn sao lưu phòng trọ này không ?
-          </div>
-        </div>
-      </div>
-    
-      <div id="mdl4" class="container">
-        <div class="container">
-          <div class="col" style="color: red;">
-            Bạn có muốn xóa nhà trọ này không ?
-          </div>
-        </div>
-      </div>
-      <!-- ==========End Set Modal========== -->
+
 @endsection
 @section('custom_js')
 <script>

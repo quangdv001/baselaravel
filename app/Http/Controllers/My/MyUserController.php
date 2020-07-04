@@ -6,13 +6,14 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\My\MotelRequest;
 use App\Services\CustomerService;
+use App\Services\UserService;
 
 class MyUserController extends Controller
 {
-    private $customer;
-    public function __construct(CustomerService $customer)
+    private $user;
+    public function __construct(UserService $user)
     {
-        $this->customer = $customer;
+        $this->user = $user;
     }
 
     public function index(Request $request){
@@ -25,38 +26,26 @@ class MyUserController extends Controller
         return view('my.customer.index')->with('data', $data);
     }
 
-    public function getCreate($id = 0){
+    public function getCreate(Request $request){
         $user = auth()->user();
         $data = [];
-        if($id > 0){
-            $data = $this->customer->first(['id' =>$id, 'user_id' => $user->id]);
-            if(!$data){
-                return redirect()->route('my.customer.getList');
-            }
-        }
-        return view('my.customer.edit')
-            ->with('id', $id)
-            ->with('data', $data);
+        return view('my.user.edit')
+            ->with('data', $user);
     }
 
-    public function postCreate(Request $request, $id = 0){
+    public function postCreate(Request $request){
         $user = auth()->user();
-        $data = $request->only('name', 'address', 'phone', 'email', 'id_number');
+        $data = $request->only('name', 'phone', 'email', 'id_number', 'address', 'id_place', 'id_time');
+        $data['id_time'] = strtotime($data['id_time']);
         $mess = '';
-        if($id == 0){
-            $data['user_id'] = $user->id;
-            $res = $this->customer->create($data);
-            if($res){
-                $mess = 'Tạo khách hàng thành công';
-            }
-        } else {
-            $article = $this->customer->getById($id);
-            $res = $this->customer->update($article, $data);
-            if($res){
-                $mess = 'Cập nhật khách hàng thành công';
-            }
+        
+        $article = $this->user->getById($user->id);
+        $res = $this->user->update($article, $data);
+        if($res){
+            $mess = 'Cập nhật user thành công';
         }
-        return redirect()->route('my.customer.getList')->with('success_message', $mess);
+        
+        return redirect()->route('my.user.getCreate')->with('success_message', $mess);
     }
 
     public function remove($id = 0){

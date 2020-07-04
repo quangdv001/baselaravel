@@ -41,8 +41,10 @@ class MyCustomerController extends Controller
 
     public function postCreate(Request $request, $id = 0){
         $user = auth()->user();
-        $data = $request->only('name', 'address', 'phone', 'email', 'id_number');
+        $data = $request->only('name', 'address', 'phone', 'email', 'id_number', 'id_place', 'id_time');
+        $data['id_time'] = strtotime($data['id_time']);
         $mess = '';
+        
         if($id == 0){
             $data['user_id'] = $user->id;
             $res = $this->customer->create($data);

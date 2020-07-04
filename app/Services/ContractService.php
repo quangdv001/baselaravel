@@ -23,6 +23,7 @@ class ContractService
 
     public function search($data){
         $query = $this->repo;
+        $time = time();
         if (isset($data['id']) && $data['id'] > 0) {
             $query = $query->where('id', $data['id']);
         }
@@ -35,8 +36,10 @@ class ContractService
         if (isset($data['admin_name_c']) && $data['admin_name_c'] != '') {
             $query = $query->where('admin_name_c', 'like', '%' . $data['admin_name_c'] . '%');
         }
-        if (isset($data['status']) && $data['status'] > -1) {
-            $query = $query->where('status', $data['status']);
+        if (isset($data['room_id']) && $data['room_id'] > 0) {
+            $query = $query->where('motel_room_id', $data['room_id']);
+            $query = $query->where('start', '<=', $time);
+            $query = $query->where('end', '>=', $time);
         }
         if (isset($data['category_id']) && $data['category_id'] > 0) {
             $query = $query->where('category_id', $data['category_id']);
@@ -115,7 +118,7 @@ class ContractService
     }
 
     public function getById($id){
-        return $this->repo->with('category')->find($id);
+        return $this->repo->find($id);
     }
 
     public function getAll(){

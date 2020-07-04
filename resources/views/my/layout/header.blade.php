@@ -106,10 +106,10 @@
               <a class="nav-link @yield('menu5', '')"
               id="pills-user-tab"
               {{-- data-toggle="pill" --}}
-              href="#user"
+              href="{{ route('my.user.getCreate') }}"
               {{-- role="tab" --}}
               aria-controls="user"
-              aria-selected="false"><i class="fas fa-users mr-2"></i><span>User</span></a>
+              aria-selected="false"><i class="fas fa-user mr-2"></i><span>User</span></a>
             </li>
           </ul>
         </div>

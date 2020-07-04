@@ -1,8 +1,8 @@
 @extends('my.layout.main')
 @section('title')
-@if($id > 0) Chỉnh sửa Khách @else Thêm mới Khách @endif
+Chỉnh sửa user
 @endsection
-@section('menu6')
+@section('menu5')
 active
 @endsection
 @section('content')
@@ -17,7 +17,7 @@ active
                 <div class="col-lg-7 col-md-12">
                     <div class="card border-light mt-5">
                         <div class="card-header">
-                            Khách hàng - @if($id > 0) chỉnh sửa @else đăng bài @endif
+                            Chỉnh sửa user
                         </div>
                         <div class="card-body">
                             <div class="container">
@@ -25,7 +25,7 @@ active
                                     @csrf
                                     <div class="row mb-2">
                                         <div class="col">
-                                            <label for="staticFrom" class="col-form-label">Tên khách * : </label>
+                                            <label for="staticFrom" class="col-form-label">Tên * : </label>
                                         <input type="text" name="name" class="form-control" value="{{ $data ? $data->name : old('name') }}" required>
                                         @if($errors->has('name'))
                                         <p class="text-danger">{{ $errors->first('name') }}</p>
@@ -35,7 +35,7 @@ active
                                     <div class="row mb-2">
                                         <div class="col">
                                             <label for="staticFrom" class="col-form-label">SĐT * : </label>
-                                        <input type="text" name="phone" class="form-control" value="{{ $data ? $data->phone : old('phone') }}" required>
+                                        <input type="text" name="phone" class="form-control" pattern="(0)+([0-9]{9})\b" maxlength="10" minlength="10" value="{{ $data ? $data->phone : old('phone') }}" required>
                                         @if($errors->has('phone'))
                                         <p class="text-danger">{{ $errors->first('phone') }}</p>
                                         @endif
@@ -43,13 +43,14 @@ active
                                     </div>
                                     <div class="row mb-2">
                                         <div class="col">
-                                            <label for="staticFrom" class="col-form-label">Email: </label>
-                                        <input type="email" name="email" class="form-control" value="{{ $data ? $data->email : old('email') }}">
+                                            <label for="staticFrom" class="col-form-label">Email *: </label>
+                                        <input type="email" name="email" class="form-control" value="{{ $data ? $data->email : old('email') }}" required>
                                         @if($errors->has('email'))
                                         <p class="text-danger">{{ $errors->first('email') }}</p>
                                         @endif
                                         </div>
                                     </div>
+
                                     <div class="row mb-2">
                                         <div class="col">
                                             <label for="staticFrom" class="col-form-label">Số CMT * : </label>
@@ -61,17 +62,8 @@ active
                                     </div>
                                     <div class="row mb-2">
                                         <div class="col">
-                                            <label for="staticFrom" class="col-form-label">Nơi cấp * : </label>
-                                        <input type="text" name="id_place" class="form-control " value="{{ $data ? $data->id_place : old('id_place') }}" required>
-                                        @if($errors->has('id_place'))
-                                        <p class="text-danger">{{ $errors->first('id_place') }}</p>
-                                        @endif
-                                        </div>
-                                    </div>
-                                    <div class="row mb-2">
-                                        <div class="col">
-                                            <label for="staticFrom" class="col-form-label">Thời gian cấp * : </label>
-                                        <input type="text" name="id_time" class="form-control date" value="{{ $data ? date('d-m-Y', $data->id_time) : old('id_time') }}" required>
+                                            <label for="staticFrom" class="col-form-label">Ngày cấp CMT * : </label>
+                                        <input type="text" name="id_time" class="form-control date" value="{{ $data ? date('d-m-Y',$data->id_time) : old('name') }}" required>
                                         @if($errors->has('id_time'))
                                         <p class="text-danger">{{ $errors->first('id_time') }}</p>
                                         @endif
@@ -79,32 +71,32 @@ active
                                     </div>
                                     <div class="row mb-2">
                                         <div class="col">
-                                            <label for="staticDes" class="col-form-label">Địa chỉ * : </label>
-                                            <input type="text" name="address" class="form-control" value="{{ $data ? $data->address : old('address') }}" required>
-                                            @if($errors->has('address'))
-                                            <p class="text-danger">{{ $errors->first('address') }}</p>
-                                            @endif
+                                            <label for="staticFrom" class="col-form-label">Nơi cấp CMT * : </label>
+                                        <input type="text" name="id_place" class="form-control" value="{{ $data ? $data->id_place : old('id_place') }}" required>
+                                        @if($errors->has('id_place'))
+                                        <p class="text-danger">{{ $errors->first('id_place') }}</p>
+                                        @endif
                                         </div>
                                     </div>
                                     <div class="row mb-2">
                                         <div class="col">
-                                            <label for="staticDes" class="col-form-label">Trạng thái * : </label>
-                                            <select class="form-control" name="status" id="exampleFormControlSelect2">
-                                                <option value="1">Hoạt động</option>
-                                                <option value="0" @if(isset($data->status) && $data->status == 0) selected
-                                                    @endif>Ngừng
-                                                    hoạt
-                                                    động</option>
-                                            </select>
+                                            <label for="staticFrom" class="col-form-label">Địa chỉ * : </label>
+                                        <input type="text" name="address" class="form-control" value="{{ $data ? $data->address : old('address') }}" required>
+                                        @if($errors->has('address'))
+                                        <p class="text-danger">{{ $errors->first('address') }}</p>
+                                        @endif
                                         </div>
                                     </div>
+
+
+                                    
+                                    
                                     <div class="row mt-5">
                                         <div class="col-sm-5 col-auto"></div>
                                         <div class="col ml-2">
-                                        <a href="{{ route('my.customer.getList') }}" class="btn btn-secondary"><i
-                                                    class="far fa-times-circle mr-2"></i>Trở lại</a>
+                                        
                                             <button type="submit" class="btn btn-primary"><i
-                                                    class="fas fa-check mr-2"></i>Đồng ý</button>
+                                                    class="fas fa-check mr-2"></i>Lưu</button>
                                         </div>
                                     </div>
                                 </form>
@@ -118,6 +110,7 @@ active
 </main>
 
 @endsection
+
 @section('lib_css')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />

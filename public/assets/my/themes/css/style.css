@@ -59,6 +59,8 @@
 
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
   background-color: var(--background-active-a);
+  
+  font-weight: 900 !important;
 }
 /* End navigation main-menu-item */
 

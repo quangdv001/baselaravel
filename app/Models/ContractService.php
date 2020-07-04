@@ -11,4 +11,8 @@ class ContractService extends Model
         'contract_id', 'service_id'
     ];
 
+    public function service(){
+        return $this->belongsTo('App\Models\Service');
+    }
+
 }

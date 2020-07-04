@@ -56,7 +56,10 @@ active
                                 </a>
                             </th> --}}
                             <th scope="row">
-                              <a href="{{ route('my.bill.export', $v->id) }}" class="btn btn-warning btn-sm">
+                              <a href="{{ route('my.bill.detail', $v->id) }}" class="btn btn-info btn-sm">
+                                <i class="fas fa-info-circle"></i>
+                              </a>
+                              <a href="{{ route('my.bill.pdf', $v->id) }}" class="btn btn-warning btn-sm">
                                 <i class="fas fa-file-pdf"></i>
                               </a>
                             <a class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc muốn xóa?')" href="{{ route('my.bill.remove', $v->id) }}">

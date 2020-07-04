@@ -50,13 +50,16 @@ active
                             <td>{{ number_format($v->price) }} đ</td>
                             <td>{{ $v->motel->name }}</td>
                             <th scope="row">
-                              <a href="{{ route('my.room.getCreate', $v->id) }}" class="btn btn-sm btn-info">
+                              <a href="{{ route('my.room.getCreate', $v->id) }}" title="Chỉnh sửa phòng trọ" class="btn btn-sm btn-info">
                                 <i class="fas fa-pencil-alt"></i>
                               </a>
-                          <a href="{{ route('my.room.editContract', ['id'=>$v->id]) }}" class="btn btn-sm btn-warning">
+                          <a href="{{ route('my.room.editContract', ['id'=>$v->id]) }}" title="Tạo hợp đồng" class="btn btn-sm btn-warning">
                             <i class="fas fa-file-contract"></i>
                               </a>
-                            <a onclick="return confirm('Bạn có chắc muốn xóa?')" href="{{ route('my.room.remove', $v->id) }}" class="btn btn-sm btn-danger">
+                          <a href="{{ route('my.contract.getList', ['room_id'=>$v->id]) }}" title="Hợp đồng hiện tại" class="btn btn-sm btn-primary">
+                            <i class="fas fa-file-contract"></i>
+                              </a>
+                            <a onclick="return confirm('Bạn có chắc muốn xóa?')" title="Xóa phòng trọ" href="{{ route('my.room.remove', $v->id) }}" class="btn btn-sm btn-danger">
                                       <i class="fas fa-trash-alt"></i>
                                     
                                 </a>

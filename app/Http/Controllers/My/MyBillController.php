@@ -8,7 +8,7 @@ use App\Services\BillService;
 use App\Services\ContractService;
 use App\Services\CustomerService;
 use App\Services\ServiceService;
-
+use Barryvdh\DomPDF\Facade as PDF;
 class MyBillController extends Controller
 {
     private $contract;
@@ -93,8 +93,17 @@ class MyBillController extends Controller
 
     public function detail($id){
         $user = auth()->user();
-        $bill = $this->bill->first(['id' =>$id, 'user_id' => $user->id])->load('service');
-        return view('my.bill.detail')->with('bill', $bill);
+        $data = $this->bill->first(['id' =>$id, 'user_id' => $user->id])->load('billservice.service');
+        // dd($data);
+        return view('my.bill.detail')->with('data', $data);
+    }
+
+    public function pdf(Request $request, $id){
+        $user = auth()->user();
+        $bill = $this->bill->first(['id' =>$id, 'user_id' => $user->id])->load(['billservice.service']);
+        // dd($bill);
+        $pdf = PDF::loadView('my.bill.pdf',  compact('bill'));
+        return $pdf->download('Hợp đồng.pdf');
     }
 
     public function remove($id = 0){

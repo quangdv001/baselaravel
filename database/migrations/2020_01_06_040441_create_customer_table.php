@@ -19,7 +19,7 @@ class CreateCustomerTable extends Migration
             $table->string('phone');
             $table->string('email');
             $table->smallInteger('gender')->default(1);
-            $table->string('id_number');
+            $table->string('id_number')->nullable();
             $table->string('id_place')->nullable();
             $table->integer('id_time')->nullable();
             $table->string('address');

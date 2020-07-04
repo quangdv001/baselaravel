@@ -1,6 +1,6 @@
 @extends('my.layout.main')
 @section('title')
-Danh sách khách hàng
+Danh sách hợp đồng
 @endsection
 @section('menu4')
 active
@@ -54,6 +54,8 @@ active
                                 <i class="fas fa-pencil-alt"></i></a>
                               <a class="btn btn-warning btn-sm" href="{{ route('my.bill.getCreate', $v->id) }}" title="Tạo hóa đơn">
                                 <i class="fas fa-file-invoice-dollar"></i></a>
+                              <a class="btn btn-primary btn-sm" href="{{ route('my.contract.pdf', $v->id) }}" title="Xuất PDF">
+                                <i class="fas fa-file-pdf"></i></a>
                             <a class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc muốn xóa?')" href="{{ route('my.contract.remove', $v->id) }}">
                                     
                                       <i class="fas fa-trash-alt"></i>
