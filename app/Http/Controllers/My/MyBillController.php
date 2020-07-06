@@ -51,30 +51,30 @@ class MyBillController extends Controller
         $contract = $this->contract->first(['id' =>$contractId, 'user_id' => $user->id]);
         $data['room_price'] = $contract->room->price;
         $data['contract_id'] = $contract->id;
-        $services = $this->service->get(['user_id' => $user->id])->load('formula')->keyBy('id');
+        $services = $this->service->get(['user_id' => $user->id])->load('formula')->keyBy('id')->toArray();
         $arrService = [];
         $servicePrice = 0;
         if(sizeof($service) > 0){
             foreach($service as $k => $v){
                 if(isset($services[$k])){
-                    $arrService[$k]['unit'] = $services[$k]->unit;
+                    $arrService[$k]['unit'] = $services[$k]['unit'];
                     $arrService[$k]['status'] = 1;
                     $arrService[$k]['service_id'] = $k;
                     $arrService[$k]['user_id'] = 1;
                                 
-                    if($services[$k]->formula){
-                        foreach($services[$k]->formula as $val){
-                            if($v >= $val->start && $v <= $val->end){
+                    if(sizeof($services[$k]['formula']) > 0){
+                        foreach($services[$k]['formula'] as $val){
+                            if($v >= $val['start'] && $v <= $val['end']){
                                 $arrService[$k]['qty'] = $v;
-                                $arrService[$k]['price'] = $val->price;
-                                $arrService[$k]['total'] = $val->price*$v;
+                                $arrService[$k]['price'] = $val['price'];
+                                $arrService[$k]['total'] = $val['price']*$v;
                                 $servicePrice += $arrService[$k]['total'];
                             }
                         }
                     } else {
-                        $arrService[$k]['price'] = $services[$k]->price;
+                        $arrService[$k]['price'] = $services[$k]['price'];
                         $arrService[$k]['qty'] = $v;
-                        $arrService[$k]['total'] = $services[$k]*$v;
+                        $arrService[$k]['total'] = $services[$k]['price']*$v;
                         $servicePrice += $arrService[$k]['total'];
                     }
                 }
@@ -103,7 +103,7 @@ class MyBillController extends Controller
         $bill = $this->bill->first(['id' =>$id, 'user_id' => $user->id])->load(['billservice.service']);
         // dd($bill );
         $pdf = PDF::loadView('my.bill.pdf',  compact('bill'));
-        return $pdf->download('Hợp đồng.pdf');
+        return $pdf->download('Hóa đơn - #'. $id .'.pdf');
     }
 
     public function remove($id = 0){

@@ -63,18 +63,19 @@ active
                   </div>
                   <div class="row">
                     <div class="col-6">
+                      <div><b>Tiền phòng: </b>{{ number_format($data->room_price) }}đ</div>
                       <div><b>Tiền dịch vụ: </b>{{ number_format($data->service_price) }}đ</div>
                       <div><b>Chi phí khác: </b>{{ number_format($data->other_price) }}đ</div>
-                      <div><b>Dư nợ cũ: </b>{{ number_format($data->debit_price) }}đ</div>
                     </div>
                     <div class="col-6">
+                      <div><b>Dư nợ cũ: </b>{{ number_format($data->debit_price) }}đ</div>
                       <div><b>Khấu trừ: </b>{{ number_format($data->discount_price) }}đ</div>
                       <div><b>Tổng tiền: </b>{{ number_format($data->total_price) }}đ</div>
                     </div>
                   </div>
                 </div>
                 <div class="d-flex justify-content-end">
-                    <a name="" id="" class="btn btn-secondary mr-2" href="#" role="button"><i class="fas fa-long-arrow-alt-left mr-2"></i>Trở về</a>
+                <a name="" id="" class="btn btn-secondary mr-2" href="{{ route('my.bill.getList') }}" role="button"><i class="fas fa-long-arrow-alt-left mr-2"></i>Trở về</a>
                 <a name="" id="" class="btn btn-danger" href="{{ route('my.bill.pdf', $data->id) }}" role="button"><i class="fas fa-file-pdf mr-2"></i>Xuất hóa đơn</a>
                 </div>
                 <div id="mdl1"></div>
