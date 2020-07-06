@@ -85,7 +85,7 @@ class MyContractController extends Controller
         $contract = $this->contract->first(['id' =>$id, 'user_id' => $user->id])->load(['service.service', 'customer']);
         // dd($contract);
         $pdf = PDF::loadView('my.contract.pdf',  compact('contract', 'user'));
-        return $pdf->download('Hợp đồng.pdf');
+        return $pdf->download('Hợp đồng - #'. $id .'.pdf');
     }
 
     public function remove($id = 0){
