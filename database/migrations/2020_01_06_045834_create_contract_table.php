@@ -18,8 +18,8 @@ class CreateContractTable extends Migration
             $table->string('name');
             $table->string('note');
             $table->integer('deposits');
-            $table->integer('duration');
-            $table->integer('payment_period');
+            $table->integer('duration')->nullable();
+            $table->integer('payment_period')->nullable();
             $table->integer('start');
             $table->integer('end');
             $table->smallInteger('status')->default(1);

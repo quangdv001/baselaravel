@@ -99,7 +99,7 @@ active
                                             @endif
                                         </div>
                                     </div> --}}
-                                    <div class="row mb-2">
+                                    {{-- <div class="row mb-2">
                                         <div class="col">
                                             <label for="staticFrom" class="col-form-label">Thời hạn * : </label>
                                         <input type="number" name="duration" class="form-control" value="{{ $data ? $data->duration : (!empty(old('duration')?old('duration'):1)) }}" required>
@@ -107,7 +107,7 @@ active
                                         <p class="text-danger">{{ $errors->first('duration') }}</p>
                                         @endif
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="row mb-2">
                                         <div class="col">
                                             <label for="staticDes" class="col-form-label">Bắt đầu * : </label>
@@ -120,7 +120,7 @@ active
                                     <div class="row mb-2">
                                         <div class="col">
                                             <label for="staticDes" class="col-form-label">Kết thúc : </label>
-                                            <input type="text" name="end" class="form-control" readonly value="{{ $data ? date('d-m-Y', $data->end) : (!empty( old('end') )?old('end'):date('d/m/Y',strtotime("+1 month") )) }}" required>
+                                            <input type="text" name="end" class="form-control date" value="{{ $data ? date('d-m-Y', $data->end) : (!empty( old('end') )?old('end'):date('d/m/Y',strtotime("+1 month") )) }}" required>
                                             @if($errors->has('end'))
                                                 <p class="text-danger">{{ $errors->first('end') }}</p>
                                             @endif
@@ -179,16 +179,16 @@ active
                 editTimeEnd()
             });
         });
-        function editTimeEnd() {
-            let duration = $('input[name="duration"]').val();
-            let valStart = $('input[name="start"]').val();
-            let arrStart = valStart.split("/");
-            valStart = arrStart[1]+"/"+arrStart[0]+"/"+arrStart[2];
-            let start = new Date(valStart);
-            let end  = new Date(start.setMonth(start.getMonth()+parseInt(duration)));
-            let valEnd= (end.getDate()>9?end.getDate():'0'+end.getDate())+ '/'+(end.getMonth()+1>9?end.getMonth()+1:'0'+(end.getMonth()+1))+'/'+end.getFullYear();
-            $('input[name="end"]').val(valEnd);
-        }
+        // function editTimeEnd() {
+        //     let duration = $('input[name="duration"]').val();
+        //     let valStart = $('input[name="start"]').val();
+        //     let arrStart = valStart.split("/");
+        //     valStart = arrStart[1]+"/"+arrStart[0]+"/"+arrStart[2];
+        //     let start = new Date(valStart);
+        //     let end  = new Date(start.setMonth(start.getMonth()+parseInt(duration)));
+        //     let valEnd= (end.getDate()>9?end.getDate():'0'+end.getDate())+ '/'+(end.getMonth()+1>9?end.getMonth()+1:'0'+(end.getMonth()+1))+'/'+end.getFullYear();
+        //     $('input[name="end"]').val(valEnd);
+        // }
     </script>
 @endsection
 
