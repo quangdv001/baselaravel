@@ -8,8 +8,8 @@
     <div class="title-name-user">{{ auth()->user()->email }}</div>
     <ul class="list-group list-group-flush mt-4">
       <li class="list-group-item"><i class="fas fa-book-open mr-2"></i><b>Thông tin</b></li>
-      <li class="list-group-item">Tham gia hệ thống: 15/05/2019</li>
-      <li class="list-group-item">Hạn sử dụng: 15/05/2019</li>
+      <li class="list-group-item">Tham gia hệ thống: {{ auth()->user()->created_at->format('d/m/Y') }}</li>
+      <li class="list-group-item">Hạn sử dụng: {{ date('d/m/Y', auth()->user()->expired_at) }}</li>
     </ul>
 
     {{-- <ul class="list-group list-group-flush mt-1">
