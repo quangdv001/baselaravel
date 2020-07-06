@@ -68,11 +68,11 @@
                             @else
                             <li><a href="javascript:void(0);">{{ auth()->user()->name }}</a>
                                 <ul>
-                                    <li><a href="javascript:void(0);">Thông tin</a>
+                                    {{-- <li><a href="javascript:void(0);">Thông tin</a> --}}
                                     </li>
                                     <li><a href="{{ route('my.motel.getList') }}">Quản lý khu trọ</a>
                                     </li>
-                                    <li><a href="javascript:void(0);">Tài khoản</a>
+                                    {{-- <li><a href="javascript:void(0);">Tài khoản</a> --}}
                                     </li>
                                     <li><a href="{{ route('site.auth.logout') }}">Thoát</a>
                                     </li>

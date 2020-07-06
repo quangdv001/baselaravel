@@ -22,6 +22,7 @@ class CreateCustomerTable extends Migration
             $table->string('id_number')->nullable();
             $table->string('id_place')->nullable();
             $table->integer('id_time')->nullable();
+            $table->integer('expired_at')->nullable();
             $table->string('address');
             $table->smallInteger('status')->default(1);
             $table->bigInteger('user_id');

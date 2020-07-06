@@ -49,27 +49,11 @@ $.noty.defaults = {
 };
 
 $(document).ready(function () {
-
-    // disable button after click
-    // $('.has-spinner').click(function () {
-    //     var btn = $(this);
-    //     $(btn).buttonLoader('start');
-    //     setTimeout(function () {
-    //         $(btn).buttonLoader('stop');
-    //     }, 3000);
-    // });
-
-    //preloader
-    // setTimeout(function () {
-    //     init.hideLoader();
-    // }, 1000);
     
     $('.forms-sample').submit(function () {
         $('.has-spinner').buttonLoader('start');
     });
 
-    // data table
-    // $('.myTable').DataTable();
 
     // show alert after redirect
     var success_message = $('.success_message').val();
@@ -105,6 +89,31 @@ $(document).ready(function () {
     $(document).on('hidden.bs.modal', "#fileModal" , function(){
         $(this).remove();
     });
+
+    $('#form-register').submit(function(e){
+        e.preventDefault();
+        var form = $(this);
+        var url = form.attr('action');
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: form.serialize(), // serializes the form's elements.
+            success: function(res)
+            {
+                if(res.success == 1){
+                    window.location.reload();
+                } else {
+                    init.notyPopup(res.mess, 'error');
+                }
+            },
+            error: function(res) { // if error occured
+                $.each(res.responseJSON.errors, function(key, value){
+                    init.notyPopup(value, 'error');
+                });
+            },
+        });
+    })
 });
 
 var init = {

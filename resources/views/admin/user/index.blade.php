@@ -84,9 +84,10 @@ Danh sách khách hàng
                                         <th>
                                             SĐT
                                         </th>
-                                        <th>
+                                        {{-- <th>
                                             Trạng thái
-                                        </th>
+                                        </th> --}}
+                                        <th>Hạn sử dụng app</th>
                                         <th>
                                             Thời gian tạo
                                         </th>
@@ -110,9 +111,12 @@ Danh sách khách hàng
                                         <td>
                                             {{ $v->phone }}
                                         </td>
-                                        <td>
+                                        {{-- <td>
                                             <span
                                                 class="{{ isset($userBadge[$v->status]) ? $userBadge[$v->status] : 'badge badge-primary' }}">{{ isset($userStatus[$v->status]) ? $userStatus[$v->status] : '--' }}</span>
+                                        </td> --}}
+                                        <td>
+                                            {{ $v->expired_at ? date('H:i:s d-m-Y', $v->expired_at) : '' }}
                                         </td>
                                         <td>
                                             {{ $v->created_at }}

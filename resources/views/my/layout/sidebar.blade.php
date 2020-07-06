@@ -1,17 +1,18 @@
 <div class="card border-light mt-5">
   <div class="card-header">Thông tin tài khoản</div>
   <div class="card-body">
-    <div class="avatar-holder">
-      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1820405/profile/profile-512.jpg?1533058950" alt="Albert Einstein">
+    <div class="avatar-holder text-center">
+      <i class="far fa-user-circle fa-5x"></i>
     </div>
     <div class="title-avatar">{{ auth()->user()->name }}</div>
-    <div class="title-name-user">Actived User</div>
+    <div class="title-name-user">{{ auth()->user()->email }}</div>
     <ul class="list-group list-group-flush mt-4">
       <li class="list-group-item"><i class="fas fa-book-open mr-2"></i><b>Thông tin</b></li>
       <li class="list-group-item">Tham gia hệ thống: 15/05/2019</li>
+      <li class="list-group-item">Hạn sử dụng: 15/05/2019</li>
     </ul>
 
-    <ul class="list-group list-group-flush mt-1">
+    {{-- <ul class="list-group list-group-flush mt-1">
       <li class="list-group-item"><i class="fas fa-file-contract mr-2"></i><b>Nhà thuê</b></li>
       <div class="mt-3">
         <p class="">Phòng trọ sử dụng</p>
@@ -37,6 +38,6 @@
           <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100%</div>
         </div>
       </div>
-    </ul>
+    </ul> --}}
   </div>
 </div>

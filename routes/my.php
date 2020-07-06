@@ -1,5 +1,5 @@
 <?php
-Route::middleware(['auth:web'])->group(function () {
+Route::middleware(['auth:web','auth.my'])->group(function () {
     Route::get('/', 'MyMotelController@index')->name('motel.getList');
     Route::get('motel/getCreate/{id?}', 'MyMotelController@getCreate')->name('motel.getCreate');
     Route::post('motel/getCreate/{id?}', 'MyMotelController@postCreate')->name('motel.postCreate');

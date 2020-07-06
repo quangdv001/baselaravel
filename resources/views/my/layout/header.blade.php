@@ -25,7 +25,7 @@
             </li> --}}
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-user mr-2"></i>{{ auth()->user()->email }}
+                <i class="fas fa-user mr-2"></i>{{ auth()->user()->name }}
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 {{-- <a class="dropdown-item" href="#"><i class="fas fa-address-card mr-2"></i>Thông tin cá nhân</a> --}}

@@ -26,18 +26,20 @@ class SiteAuthController extends Controller
             // Authentication passed...
             return redirect()->intended('/');
         }
-        return redirect()->back()->with('error','Tài khoản hoặc mật khẩu sai!');
+        return redirect()->back()->with('error_message','Tài khoản hoặc mật khẩu sai!');
     }
 
     public function postRegister(RegisterRequest $request){
         $data = $request->only('email', 'password', 'phone', 'name');
         $data['password'] = bcrypt($data['password']);
-        $res = $this->user->create($data);
-        if($res){
-            auth()->login($res, true);
-            return redirect()->route('site.home.index');
+        $data['expired_at'] = time() + 90*86400;
+        $user = $this->user->create($data);
+        $res['success'] = 0;
+        if($user){
+            auth()->login($user, true);
+            $res['success'] = 1;
         }
-        return redirect()->back()->with('error_message','Có lỗi xảy ra!');
+        return response()->json($res);
     }
 
     public function logout(){

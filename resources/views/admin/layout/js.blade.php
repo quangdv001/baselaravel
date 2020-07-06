@@ -3,7 +3,7 @@
 <script src="//stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" ></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.4.0/perfect-scrollbar.min.js"></script>
-<script src="//unpkg.com/@coreui/coreui@2.1.16/dist/js/coreui.min.js"></script>
+<script src="{{ asset('public/assets/admin/js/coreui.min.js') }}"></script>
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/3.0.5/moment.min.js"></script>
 <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>

@@ -336,6 +336,19 @@
                 </ul>
             </li>
             @endif
+
+            @if(auth('admin')->user()->can('admin-pms', 'admin.transaction.getList'))
+            <li class="nav-item nav-dropdown @if(in_array($currentRoute,['admin.user.getList'])) open @endif">
+                <a class="nav-link nav-dropdown-toggle" href="javascript:void(0);">
+                    <i class="nav-icon icon-people"></i>Lịch sử giao dịch</a>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a class="nav-link @if(in_array($currentRoute,['admin.transaction.getList'])) active @endif" href="{{ route('admin.transaction.getList') }}">
+                            <i class="nav-icon "></i> Danh sách</a>
+                    </li>
+                </ul>
+            </li>
+            @endif
         </ul>
     </nav>
     <button class="sidebar-minimizer brand-minimizer" type="button"></button>

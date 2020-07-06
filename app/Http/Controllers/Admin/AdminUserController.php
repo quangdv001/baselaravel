@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Gate;
 use App\Services\CategoryService;
 use App\Services\ProductService;
 use App\Http\Requests\Admin\ProductRequest;
+use App\Services\CustomerService;
 use App\Services\OrderService;
 use App\Services\UserService;
 

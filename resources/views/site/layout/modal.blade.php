@@ -42,7 +42,7 @@
             <h3 class="title text-uppercase" id="modal-register-label">Đăng ký tài khoản</h3>
             <p>* Đăng ký tài khoản cho phép đăng thông tin dự án, giao dịch bất động sản.</p>
           </div>
-        <form method="post" action="{{ route('site.auth.postRegister') }}">
+        <form method="post" action="{{ route('site.auth.postRegister') }}" id="form-register">
           @csrf
             <div class="form-group row justify-content-center">
               <label class="col-auto col-form-label icon-form-label"><span class="material-icons">mail_outline</span><span class="isMobile">Email</span></label>

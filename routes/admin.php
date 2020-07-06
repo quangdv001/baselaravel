@@ -75,5 +75,8 @@ Route::middleware(['auth.admin'])->prefix('admin')->group(function () {
     Route::get('advertise/getCreate/{id?}', 'AdminAdvertiseController@getCreate')->name('advertise.getCreate');
     Route::post('advertise/getCreate/{id?}', 'AdminAdvertiseController@postCreate')->name('advertise.postCreate');
     Route::get('advertise/remove/{id?}', 'AdminAdvertiseController@remove')->name('advertise.remove');
+
+    Route::get('transaction', 'AdminTransactionController@index')->name('transaction.getList');
+    Route::post('transaction/getCreate/{id?}', 'AdminTransactionController@postCreate')->name('transaction.postCreate');
 });
 
